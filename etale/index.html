@@ -1,0 +1,457 @@
+<title>Étale</title>
+<meta name="description" content="Étale vous dit à quelle heure la mer se calme sur votre plage : marée, houle, vent et eau.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&family=Sofia+Sans:ital,wght@0,1..1000;1,1..1000&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,300,0..1,0&display=block">
+<style>
+/* ===== Étale · tokens ===== */
+:root{--et-primary:#183d62;--et-on-primary:#ffffff;--et-primary-container:#d2e4ff;--et-on-primary-container:#002748;--et-secondary:#24686a;--et-on-secondary:#ffffff;--et-secondary-container:#adeef0;--et-on-secondary-container:#004345;--et-signal:#ff6f36;--et-on-signal:#001830;--et-signal-container:#ffe2d9;--et-on-signal-container:#812800;--et-error:#ab276e;--et-on-error:#ffffff;--et-error-container:#ffd9e5;--et-on-error-container:#8c0255;--et-surface:#f9f9fc;--et-on-surface:#001c37;--et-on-surface-variant:#444c54;--et-surface-container-lowest:#ffffff;--et-surface-container-low:#f3f3f6;--et-surface-container:#edeef1;--et-surface-container-high:#e8e8eb;--et-surface-container-highest:#e2e2e5;--et-outline:#707881;--et-outline-variant:#c5cdd7;--et-inverse-surface:#002748;--et-inverse-on-surface:#f0f0f4;--et-inverse-primary:#a7c9f6;--et-water:#a7e8ea;--et-on-water:#003738;--et-scrim:rgb(0 12 24/.4);--et-shadow:0 10px 30px rgb(0 28 55/.16),0 2px 6px rgb(0 28 55/.1);
+  --et-font-wide:'Anybody',ui-sans-serif,system-ui,sans-serif;--et-font-text:'Sofia Sans',ui-sans-serif,system-ui,sans-serif;
+  --et-r-full:999px;--et-r-card:24px;--et-r-sm:12px;--et-r-chip:10px;
+  --et-ease:cubic-bezier(.2,0,0,1);--et-ease-slack:cubic-bezier(.16,1,.3,1);--et-dur:280ms;--et-dur-slow:1400ms;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--et-primary:#a7c9f6;--et-on-primary:#002748;--et-primary-container:#20446a;--et-on-primary-container:#dce9ff;--et-secondary:#91d2d4;--et-on-secondary:#003738;--et-secondary-container:#004f52;--et-on-secondary-container:#adeef0;--et-signal:#ff8254;--et-on-signal:#001830;--et-signal-container:#812800;--et-on-signal-container:#ffe2d9;--et-error:#ffb0cf;--et-on-error:#63003b;--et-error-container:#8c0255;--et-on-error-container:#ffd9e5;--et-surface:#0d141b;--et-on-surface:#e8e8eb;--et-on-surface-variant:#bac2cb;--et-surface-container-lowest:#080f16;--et-surface-container-low:#151c24;--et-surface-container:#192028;--et-surface-container-high:#242b33;--et-surface-container-highest:#2e353e;--et-outline:#89929b;--et-outline-variant:#404850;--et-inverse-surface:#e8e8eb;--et-inverse-on-surface:#002748;--et-inverse-primary:#183d62;--et-water:#004f52;--et-on-water:#adeef0;--et-scrim:rgb(0 0 0/.6);--et-shadow:0 10px 30px rgb(0 0 0/.5);color-scheme:dark}}
+:root[data-theme="dark"]{--et-primary:#a7c9f6;--et-on-primary:#002748;--et-primary-container:#20446a;--et-on-primary-container:#dce9ff;--et-secondary:#91d2d4;--et-on-secondary:#003738;--et-secondary-container:#004f52;--et-on-secondary-container:#adeef0;--et-signal:#ff8254;--et-on-signal:#001830;--et-signal-container:#812800;--et-on-signal-container:#ffe2d9;--et-error:#ffb0cf;--et-on-error:#63003b;--et-error-container:#8c0255;--et-on-error-container:#ffd9e5;--et-surface:#0d141b;--et-on-surface:#e8e8eb;--et-on-surface-variant:#bac2cb;--et-surface-container-lowest:#080f16;--et-surface-container-low:#151c24;--et-surface-container:#192028;--et-surface-container-high:#242b33;--et-surface-container-highest:#2e353e;--et-outline:#89929b;--et-outline-variant:#404850;--et-inverse-surface:#e8e8eb;--et-inverse-on-surface:#002748;--et-inverse-primary:#183d62;--et-water:#004f52;--et-on-water:#adeef0;--et-scrim:rgb(0 0 0/.6);--et-shadow:0 10px 30px rgb(0 0 0/.5);color-scheme:dark}
+
+/* ===== base ===== */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--et-surface);color:var(--et-on-surface);font:400 17px/1.55 var(--et-font-text);font-optical-sizing:auto;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,figure,ul,ol,dl,dd{margin:0}ul,ol{padding:0;list-style:none}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--et-primary);outline-offset:3px;border-radius:6px}
+.ico{font-family:'Material Symbols Outlined';font-weight:300;font-style:normal;font-size:24px;line-height:1;display:inline-block;width:1em;height:1em;overflow:hidden;font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;-webkit-font-feature-settings:'liga';font-feature-settings:'liga';user-select:none;flex:none}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* state layer */
+.sl{position:relative;isolation:isolate;overflow:hidden}
+.sl::after{content:"";position:absolute;inset:0;background:currentColor;opacity:0;transition:opacity 150ms linear;pointer-events:none;border-radius:inherit;z-index:-0}
+@media (hover:hover){.sl:hover::after{opacity:.08}}
+.sl:focus-visible::after{opacity:.1}.sl:active::after{opacity:.12}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:1ms!important;animation-iteration-count:1!important;transition-duration:1ms!important;scroll-behavior:auto!important}}
+
+/* ===== Étale · composants ===== */
+:root{--cta-bg:var(--et-primary);--cta-fg:var(--et-on-primary);--ok-bg:var(--et-water);--ok-fg:var(--et-on-water);--ca:var(--et-primary);--cb:var(--et-water)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--cta-bg:var(--et-primary-container);--cta-fg:var(--et-on-primary-container);--ok-bg:var(--et-secondary);--ok-fg:var(--et-on-secondary);--ca:var(--et-primary-container);--cb:var(--et-secondary)}}
+:root[data-theme="dark"]{--cta-bg:var(--et-primary-container);--cta-fg:var(--et-on-primary-container);--ok-bg:var(--et-secondary);--ok-fg:var(--et-on-secondary);--ca:var(--et-primary-container);--cb:var(--et-secondary)}
+
+.num{font-family:var(--et-font-wide);font-stretch:58%;font-weight:600;font-variant-numeric:tabular-nums;line-height:1;letter-spacing:.005em}
+.lb{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--et-on-surface-variant)}
+
+/* 1 · Marque */
+.mk{font:var(--w,350) var(--s,40px)/1 var(--et-font-wide);font-stretch:150%;color:var(--et-on-surface);display:inline-flex;letter-spacing:.02em;text-decoration:none}
+.mk .e{position:relative}
+.mk .e::before{content:"";position:absolute;top:-.17em;height:var(--t,.075em);background:var(--et-signal);border-radius:1px;left:38%;right:-6%}
+.mk.sm{--s:20px;--w:420;--t:.09em}
+.sym{width:var(--z,56px);height:var(--z,56px);border-radius:30%;background:var(--et-primary);color:var(--et-on-primary);display:inline-grid;place-items:center}
+.sym b{font:400 calc(var(--z,56px)*.54)/1 var(--et-font-wide);font-stretch:150%;position:relative}
+.sym b::before{content:"";position:absolute;left:38%;right:-6%;top:-.17em;height:.08em;background:var(--et-signal)}
+
+/* 2 · Bouton bouée */
+.go{display:inline-flex;align-items:center;gap:14px;min-height:60px;padding:6px 26px 6px 6px;border:0;border-radius:999px;background:var(--cta-bg);color:var(--cta-fg);font:650 18px/1.15 var(--et-font-text);cursor:pointer;text-align:left;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.go .buoy{width:48px;height:48px;border-radius:50%;background:var(--et-signal);color:var(--et-on-signal);display:grid;place-items:center;flex:none;transition:transform 400ms var(--et-ease-slack),background .3s}
+.go:hover .buoy{transform:translateX(4px)}.go:active .buoy{transform:translateX(4px) scale(.92)}
+.go:focus-visible{outline-offset:3px}
+.go.wide{width:100%}.go.wide .lbl{flex:1;text-align:center;padding-right:34px}
+.go[aria-busy=true] .buoy .ico{animation:bob 1.2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-3px)}}
+.go.ok .buoy{background:var(--ok-bg);color:var(--ok-fg)}
+.go:disabled{background:color-mix(in srgb,var(--et-on-surface) 10%,transparent);color:color-mix(in srgb,var(--et-on-surface) 45%,transparent);cursor:not-allowed}
+.go:disabled .buoy{background:color-mix(in srgb,var(--et-on-surface) 14%,transparent);color:inherit}
+.pill{display:inline-flex;align-items:center;height:40px;padding:0 18px;border-radius:999px;background:var(--et-signal);color:var(--et-on-signal);font:700 15px/1 var(--et-font-text);border:0;position:relative;text-decoration:none;cursor:pointer;transition:background .2s;white-space:nowrap}
+.pill::before{content:"";position:absolute;inset:-4px 0}
+.pill:hover{background:color-mix(in srgb,var(--et-signal) 84%,white)}
+.pill:active{background:color-mix(in srgb,var(--et-signal) 72%,white)}
+.lk{display:inline-flex;align-items:center;gap:6px;min-height:48px;color:var(--et-on-surface);font-weight:650;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:5px;text-decoration-color:var(--et-signal)}
+.lk:hover{text-decoration-thickness:3px}
+
+/* 3 · Titre */
+.hero-t{font-family:var(--et-font-wide);color:var(--et-on-surface);line-height:1;margin:0}
+.hero-t .x{display:block;font-size:clamp(60px,19vw,132px);font-weight:520;font-stretch:54%;line-height:.86;letter-spacing:-.005em}
+.hero-t .y{display:block;font-size:clamp(40px,12.4vw,92px);font-weight:300;font-stretch:150%;letter-spacing:-.01em;margin-top:.06em;padding-bottom:.3em;position:relative;white-space:nowrap;width:fit-content;padding-right:22px}
+.hero-t .y::before{content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;background:currentColor;transform-origin:left;animation:line 1.4s .5s var(--et-ease-slack) both}
+.hero-t .y::after{content:"";position:absolute;right:0;bottom:-5.5px;width:12px;height:12px;border-radius:50%;background:var(--et-signal);animation:pop .5s 1.5s var(--et-ease-slack) both}
+.hero-t .w{display:inline-block;animation:calm 1.8s .2s var(--et-ease-slack) both}
+@keyframes calm{from{font-stretch:50%;font-weight:700}}
+@keyframes line{from{transform:scaleX(0)}}
+@keyframes pop{from{transform:scale(0)}}
+
+/* 4 · Carte du jour */
+.day{background:var(--et-surface-container-lowest);border:1px solid var(--et-outline-variant);border-radius:24px;padding:20px 20px 18px}
+.day .hd{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.day .hd p{margin:4px 0 0;font-size:15px;color:var(--et-on-surface-variant)}
+.day .hd .lb{color:var(--et-on-surface)}
+.tag{flex:none;font-size:12px;font-weight:700;letter-spacing:.04em;padding:4px 10px;border-radius:999px;background:var(--et-surface-container-high);color:var(--et-on-surface-variant)}
+.day .win{font-size:clamp(48px,15vw,60px);margin:16px 0 0}
+.day .say{font-size:17px;margin:6px 0 0}.day .say b{font-weight:700}
+.rib{position:relative;height:60px;margin-top:20px;border-bottom:1.5px solid var(--et-on-surface)}
+.rib .w{position:absolute;bottom:0;height:44px;background:var(--et-water);border-radius:6px 6px 0 0;font-size:12px;font-weight:700;color:var(--et-on-surface)}
+.rib .w span{position:absolute;left:calc(100% + 6px);top:2px;white-space:nowrap}
+.rib .w.lo span{top:auto;bottom:2px}
+.rib .w.lo{height:22px;background:color-mix(in srgb,var(--et-water) 70%,transparent);font-weight:600;color:var(--et-on-surface-variant)}
+.rib .now{position:absolute;bottom:-7px;width:13px;height:13px;margin-left:-6.5px;border-radius:50%;background:var(--et-signal);box-shadow:0 0 0 3px var(--et-surface-container-lowest)}
+.rib .now i{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font:700 12px var(--et-font-text);font-style:normal;white-space:nowrap;color:var(--et-on-surface)}
+.day .ax{display:flex;justify-content:space-between;font-size:12px;color:var(--et-on-surface-variant);margin-top:8px;font-variant-numeric:tabular-nums}
+.day .st{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:18px 0 0;padding:0}
+.day .st>div{padding:0 12px;border-left:1px solid var(--et-outline-variant)}.day .st>div:first-child{padding-left:0;border:0}
+.day .st dd{margin:4px 0 0;font-size:28px}.day .st .u{font-size:.62em;font-weight:500;margin-left:2px}
+
+/* 5 · Courbe de marée */
+.tide .rd{display:grid;grid-template-columns:auto auto 1fr;gap:4px 22px;align-items:end;margin-bottom:14px}
+.tide .rd .num{font-size:clamp(36px,11vw,46px)}
+.tide .stt{justify-self:end;align-self:center;display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:999px;font-size:14px;font-weight:650;white-space:nowrap;background:var(--et-surface-container-high);color:var(--et-on-surface);transition:background .3s}
+.tide .stt.on{background:var(--et-signal);color:var(--et-on-signal)}
+.tide .stt .ico{font-size:18px}
+.tide svg{display:block;width:100%;height:auto;overflow:visible;touch-action:pan-y;cursor:ew-resize;border-radius:8px}
+.tide svg:focus{outline:none}.tide svg:focus-visible{outline:3px solid var(--et-primary);outline-offset:6px}
+.tide .ax{font:12px var(--et-font-text);fill:var(--et-on-surface-variant)}
+.tide .sk{font:600 12px var(--et-font-text);fill:var(--et-on-surface);transition:opacity .3s}
+.tide .wa{fill:var(--et-water)}.tide .cr{fill:none;stroke:var(--et-on-water);stroke-width:1.5;opacity:.45}
+.tide .pl{stroke:var(--et-on-surface);stroke-width:3.5;stroke-linecap:round}
+.tide .gd{stroke:var(--et-outline-variant)}
+.tide .hz{stroke:var(--et-on-surface);stroke-width:1.5}
+.tide .nl{stroke:var(--et-on-surface);stroke-dasharray:2 3}
+.tide .by{fill:var(--et-signal);stroke:var(--et-surface);stroke-width:3;transition:r .3s var(--et-ease-slack)}
+.tide svg:active .by,.tide svg:focus-visible .by{r:11}
+.tide .hint{margin:12px 0 0;font-size:14px;color:var(--et-on-surface-variant)}
+
+/* 6 · Règle du froid */
+.cold{padding:22px 20px 18px;border-radius:24px;background:var(--et-surface-container-low)}
+.cold p{margin:0}
+.cold .q{font-size:19px;line-height:1.4}
+.cold .m{font-family:var(--et-font-wide);font-weight:600;font-variant-numeric:tabular-nums;line-height:.9;font-size:clamp(72px,24vw,96px);font-stretch:var(--fs,58%);transition:font-stretch .6s var(--et-ease-slack);margin:2px 0 6px}
+.cold .m small{font-size:.42em;font-weight:400;font-stretch:100%}
+.cold .tk{display:flex;gap:3px;height:28px;align-items:flex-end}
+.cold .tk i{flex:1;height:70%;border-radius:2px;background:var(--et-outline-variant);transition:background .25s}
+.cold .tk i:nth-child(5n){height:100%}
+.cold .tk i.on{background:var(--et-on-surface)}
+.cold .tks{display:flex;justify-content:space-between;font-size:12px;color:var(--et-on-surface-variant);margin-top:4px}
+.cold label{display:block;margin-top:18px}
+.cold input{-webkit-appearance:none;appearance:none;width:100%;height:48px;margin:0;background:none;cursor:pointer}
+.cold input::-webkit-slider-runnable-track{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--ca),var(--cb))}
+.cold input::-moz-range-track{height:8px;border-radius:99px;background:linear-gradient(90deg,var(--ca),var(--cb))}
+.cold input::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;margin-top:-11px;border-radius:50%;background:var(--et-signal);border:3px solid var(--et-surface-container-low);box-shadow:0 0 0 1.5px var(--et-on-surface);transition:transform .3s var(--et-ease-slack)}
+.cold input::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--et-signal);border:3px solid var(--et-surface-container-low);box-shadow:0 0 0 1.5px var(--et-on-surface)}
+.cold input:active::-webkit-slider-thumb{transform:scale(1.15)}
+.cold input:focus{outline:none}.cold input:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 1.5px var(--et-on-surface),0 0 0 6px var(--et-primary)}
+.cold .ends{display:flex;justify-content:space-between;font-size:14px;color:var(--et-on-surface-variant);margin-top:-4px}
+.cold .note{display:flex;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid var(--et-outline-variant);font-size:14px;line-height:1.45;color:var(--et-on-surface-variant)}
+.cold .note .ico{font-size:20px}
+
+/* 7 · Quatre signaux */
+.sig{list-style:none;margin:0;padding:0;border-bottom:1.5px solid var(--et-on-surface)}
+.sig li{display:grid;grid-template-columns:56px 1fr auto;column-gap:14px;align-items:center;padding:18px 0 20px;border-top:1.5px solid var(--et-on-surface)}
+.sig svg{width:56px;height:36px;overflow:visible}
+.sig h3{margin:0;font:330 clamp(22px,7vw,28px)/1 var(--et-font-wide);font-stretch:150%;letter-spacing:.01em}
+.sig .v{font-size:26px}.sig .v small{font-size:.6em;font-weight:500;margin-left:2px}
+.sig p{grid-column:2/4;margin:8px 0 0;font-size:15px;line-height:1.45;color:var(--et-on-surface-variant)}
+.sig b{color:var(--et-on-surface);font-weight:650}
+.gl *{fill:none;stroke:var(--et-on-surface);stroke-width:2;stroke-linecap:round}
+.gl .o{stroke:var(--et-signal);stroke-width:3.5}
+.gl .f{fill:var(--et-signal);stroke:none}
+
+/* 8 · Tarif */
+.price{width:100%;border-collapse:separate;border-spacing:0;font-size:15px;table-layout:fixed}
+.price col.a{width:44%}
+.price th,.price td{padding:13px 6px;border-top:1px solid var(--et-outline-variant);text-align:center;font-weight:400}
+.price tbody th{text-align:left;padding-left:0;font-weight:500}
+.price thead td{border-top:0}
+.price thead th{border-top:0;vertical-align:bottom;padding-top:14px}
+.price .pn{display:block;font:330 18px/1 var(--et-font-wide);font-stretch:135%}
+.price .n{display:block;font-size:40px;margin-top:8px}
+.price .u{display:block;font-size:13px;color:var(--et-on-surface-variant)}
+.price .c{background:var(--et-water);color:var(--et-on-water);border-top-color:color-mix(in srgb,var(--et-on-water) 22%,transparent)}
+.price .c .u{color:inherit}
+.price thead .c{border-radius:20px 20px 0 0;position:relative}
+.price tbody tr:last-child .c{border-radius:0 0 20px 20px}
+.price .ptag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);white-space:nowrap;padding:4px 10px;border-radius:99px;background:var(--et-signal);color:var(--et-on-signal);font:700 11px var(--et-font-text);letter-spacing:.06em;text-transform:uppercase}
+.price .ico{font-size:22px;vertical-align:-5px}
+.price .no{color:var(--et-on-surface-variant)}
+.price-n{margin:14px 0 0;font-size:14px;color:var(--et-on-surface-variant)}
+
+/* 9 · Inscription */
+.sg{padding:24px 20px;border-radius:24px;background:var(--et-surface-container-low)}
+.tf{position:relative}
+.tf input{width:100%;height:60px;padding:22px 16px 6px;border:1.5px solid var(--et-outline);border-radius:16px;background:var(--et-surface-container-lowest);color:var(--et-on-surface);font:500 17px var(--et-font-text);outline:none;transition:border-color .2s}
+.tf label{position:absolute;left:17px;top:19px;font-size:17px;color:var(--et-on-surface-variant);pointer-events:none;transition:all .25s var(--et-ease-slack)}
+.tf input:focus+label,.tf input:not(:placeholder-shown)+label{top:9px;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.tf input:focus{border-color:var(--et-primary);box-shadow:0 0 0 1.5px var(--et-primary)}
+.tf input:focus+label{color:var(--et-primary)}
+.tf.err input{border-color:var(--et-error);box-shadow:0 0 0 1.5px var(--et-error)}.tf.err label{color:var(--et-error)}
+.sup{min-height:22px;margin:6px 0 16px 2px;font-size:14px;color:var(--et-on-surface-variant);display:flex;gap:6px;align-items:center}
+.tf.err+.sup{color:var(--et-error)}.sup .ico{font-size:18px}
+.sg fieldset{border:0;padding:0;margin:0 0 22px;min-width:0}
+.sg legend{padding:0;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px 8px}
+.chip{position:relative;display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 14px;border:1.5px solid var(--et-outline-variant);border-radius:10px;font:600 15px var(--et-font-text);color:var(--et-on-surface);cursor:pointer;background:var(--et-surface-container-lowest);transition:background .2s}
+.chip::before{content:"";position:absolute;inset:-6px 0}
+.chip:hover{background:color-mix(in srgb,var(--et-on-surface) 6%,var(--et-surface-container-lowest))}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip .ico{font-size:18px;width:0;overflow:hidden;margin-right:-6px;transition:width .3s var(--et-ease-slack),margin .3s var(--et-ease-slack)}
+.chip:has(input:checked){background:var(--et-secondary-container);color:var(--et-on-secondary-container);border-color:transparent}
+.chip:has(input:checked) .ico{width:18px;margin-right:0}
+.chip:has(input:focus-visible){outline:3px solid var(--et-primary);outline-offset:2px}
+.done{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:20px;background:var(--et-water);color:var(--et-on-water)}
+.done .ico{font-size:28px}.done b{display:block;font:330 22px/1.1 var(--et-font-wide);font-stretch:140%;margin-bottom:4px}
+.done[hidden]{display:none}
+.dock{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:20;display:flex;align-items:center;gap:12px;padding:8px 8px 8px 20px;border-radius:999px;background:var(--et-inverse-surface);color:var(--et-inverse-on-surface);box-shadow:var(--et-shadow);transform:translateY(150%);transition:transform .6s var(--et-ease-slack);max-width:520px;margin:0 auto}
+.dock.on{transform:none}
+.dock p{margin:0;flex:1;font-size:14px;line-height:1.3;min-width:0}.dock b{display:block;font-size:15px}
+.dock .pill{height:48px;padding:0 22px}
+
+/* Material restylés */
+.bar{position:sticky;top:0;z-index:10;background:var(--et-surface);border-bottom:1px solid transparent;transition:border-color .3s}
+.bar.sc{border-bottom-color:var(--et-outline-variant)}
+.bar .in{display:flex;align-items:center;justify-content:space-between;height:64px}
+.bar .mk{min-height:48px;align-items:center}
+.faq details{border-top:1px solid var(--et-outline-variant)}.faq details:last-child{border-bottom:1px solid var(--et-outline-variant)}
+.faq summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:64px;padding:12px 0;font-size:18px;font-weight:650;cursor:pointer;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:12px;height:12px;border-radius:50%;border:1.5px solid var(--et-on-surface);transition:background .3s,border-color .3s}
+.faq details[open] summary::after{background:var(--et-signal);border-color:var(--et-signal)}
+.faq summary:hover{color:var(--et-primary)}
+.faq details p{margin:0 0 20px;color:var(--et-on-surface-variant);max-width:60ch}
+.car{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 16px 12px;margin:0 -16px;scrollbar-width:none;overscroll-behavior-x:contain}
+.car::-webkit-scrollbar{display:none}
+.car figure{flex:0 0 84%;scroll-snap-align:center;margin:0;padding:22px 20px;border-radius:24px;background:var(--et-surface-container-low);display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-width:0}
+.car blockquote{margin:0;font:330 21px/1.3 var(--et-font-wide);font-stretch:115%}
+.car figcaption{font-size:14px;color:var(--et-on-surface-variant)}.car figcaption b{color:var(--et-on-surface);display:block;font-size:15px}
+.car-nav{display:flex;gap:8px;justify-content:flex-end;margin-top:4px}
+.ib{position:relative;width:48px;height:48px;border-radius:50%;border:1.5px solid var(--et-outline-variant);background:none;color:var(--et-on-surface);display:grid;place-items:center;cursor:pointer;overflow:hidden}
+.ib:disabled{opacity:.38;cursor:default}
+.snack{position:fixed;left:12px;right:12px;bottom:calc(84px + env(safe-area-inset-bottom));z-index:30;max-width:480px;margin:0 auto;display:flex;align-items:center;gap:8px;min-height:48px;padding:6px 6px 6px 16px;border-radius:12px;background:var(--et-inverse-surface);color:var(--et-inverse-on-surface);box-shadow:var(--et-shadow);font-size:15px;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .3s,transform .5s var(--et-ease-slack)}
+.snack.on{opacity:1;transform:none;pointer-events:auto}
+.snack p{margin:0;flex:1}
+.snack button{min-height:48px;padding:0 14px;border:0;border-radius:999px;background:none;color:var(--et-inverse-primary);font:700 15px var(--et-font-text);cursor:pointer}
+.bar .pill{transition:opacity .2s,visibility .2s}
+body.dk .bar .pill{opacity:0;visibility:hidden}
+@media (min-width:900px){body.dk .bar .pill{opacity:1;visibility:visible}}
+
+/* ===== page ===== */
+.skip{position:absolute;left:12px;top:-60px;z-index:40;padding:12px 16px;border-radius:12px;background:var(--et-primary);color:var(--et-on-primary);font-weight:700}
+.skip:focus{top:12px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.hero{padding-top:28px;padding-bottom:56px;display:grid;gap:40px}
+.hero .eb{margin-bottom:22px}
+.lead{font-size:clamp(18px,4.8vw,20px);line-height:1.5;margin-top:20px;max-width:34ch;color:var(--et-on-surface-variant)}
+.cta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px;margin-top:28px}
+.sec{padding:64px 0;border-top:1px solid var(--et-outline-variant)}
+.sh{margin-bottom:28px;max-width:40ch}
+.sh .lb{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.sh .lb .num{font-size:20px;color:var(--et-on-surface);letter-spacing:0}
+.h2{font:300 clamp(32px,9.6vw,58px)/1.02 var(--et-font-wide);font-stretch:150%;letter-spacing:-.01em;text-wrap:balance}
+.sh p{margin-top:14px;color:var(--et-on-surface-variant)}
+.h2 em{font-style:normal;font-stretch:56%;font-weight:560}
+.sg h2{margin-bottom:8px}.sg>p{margin-bottom:22px;color:var(--et-on-surface-variant)}
+.foot{padding:48px 0 calc(110px + env(safe-area-inset-bottom));border-top:1.5px solid var(--et-on-surface)}
+.foot .in{display:grid;gap:20px}
+.foot p{font-size:14px;color:var(--et-on-surface-variant);max-width:52ch}
+.foot nav{display:flex;flex-wrap:wrap;gap:0 20px}
+.foot nav a{min-height:48px;display:inline-flex;align-items:center;font-size:15px}
+@media (min-width:600px){
+  .wrap{padding:0 32px}
+  .car{margin:0 -32px;padding:4px 32px 12px}
+  .car figure{flex-basis:46%}
+}
+@media (min-width:900px){
+  .hero{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:end;padding-top:56px;padding-bottom:88px;gap:56px}
+  .sec{padding:96px 0}
+  .sec>.wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;align-items:start}
+  .sec .sh{position:sticky;top:96px;margin:0}
+  .car{margin:0;padding:4px 0 12px}
+  .car figure{flex-basis:78%}
+  .dock{display:none}
+}
+</style>
+<a class=skip href=#main>Aller au contenu</a>
+<header class=bar id=bar><div class="in wrap"><a class="mk sm" href=#top aria-label="Étale, haut de page"><span class=e>E</span>TALE</a><a class=pill href=#inscription>Rejoindre la bêta</a></div></header>
+<main id=main>
+<section class="hero wrap" id=top>
+ <div>
+  <p class="lb eb">Bêta ouverte · Manche et Atlantique</p>
+  <h1 class=hero-t aria-label="Nagez à l'étale."><span class=x aria-hidden=true>Nagez à</span><span class=y aria-hidden=true><span class=w>l'étale.</span></span></h1>
+  <p class=lead>Étale vous dit à quelle heure la mer se calme sur votre plage&#8239;: marée, houle, vent et eau, en une ligne.</p>
+  <div class=cta><a class=go href=#inscription id=heroCta><span class=buoy><span class=ico aria-hidden=true>arrow_forward</span></span><span class=lbl>Rejoindre la bêta</span></a><a class=lk href=#courbe>Voir une journée de marée</a></div>
+ </div>
+ <div class=day role=group aria-label="Aperçu de la journée à la plage de l'Écluse">
+  <div class=hd><div><p class=lb>Plage de l'Écluse</p><p>Dinard · jeudi 12 novembre</p></div><span class=tag>Aperçu</span></div>
+  <p class="num win"><span class=vh>Fenêtre de baignade de </span>12:50–14:05</p>
+  <p class=say>Étale de pleine mer <b>dans 2&nbsp;h&nbsp;45</b>. Houle faible, vent de terre.</p>
+  <div class=rib aria-hidden=true><div class="w lo" style="left:3.9%;width:7.8%"><span>basse</span></div><div class=w style="left:42.7%;width:7.8%"><span>Étale 13:28</span></div><div class=now style="left:25.3%"><i>10:05</i></div></div>
+  <div class=ax aria-hidden=true><span>6 h</span><span>10 h</span><span>14 h</span><span>18 h</span><span>22 h</span></div>
+  <dl class=st><div><dd class=num>13,5<span class=u>°C</span></dd><dt class=lb>Eau</dt></div><div><dd class=num>0,4<span class=u>m</span></dd><dt class=lb>Houle</dt></div><div><dd class=num>9<span class=u>km/h</span></dd><dt class=lb>Vent</dt></div></dl>
+ </div>
+</section>
+
+<section class=sec id=courbe aria-labelledby=h-courbe><div class=wrap>
+ <header class=sh><p class=lb><span class=num>01</span>La marée</p><h2 class=h2 id=h-courbe>La mer s'arrête <em>quatre fois</em> par jour.</h2><p>Entre la montée et la descente, l'eau reste immobile une quarantaine de minutes. C'est là qu'on nage sans courant. Promenez la bouée sur la journée.</p></header>
+ <div class=tide id=tide></div>
+</div></section>
+
+<section class=sec id=froid aria-labelledby=h-froid><div class=wrap>
+ <header class=sh><p class=lb><span class=num>02</span>L'eau</p><h2 class=h2 id=h-froid>Une minute <em>par degré.</em></h2><p>Le repère des nageurs d'hiver pour une première entrée. Étale le calcule avec la température du matin.</p></header>
+ <div class=cold id=cold></div>
+</div></section>
+
+<section class=sec id=signaux aria-labelledby=h-sig><div class=wrap>
+ <header class=sh><p class=lb><span class=num>03</span>Les signaux</p><h2 class=h2 id=h-sig>Quatre choses <em>à lire</em>, une seule réponse.</h2><p>Étale croise les quatre et vous donne une fenêtre. Vous n'avez plus à ouvrir quatre applications au réveil.</p></header>
+ <ul class=sig>
+  <li><svg class=gl viewBox="0 0 56 36" aria-hidden=true><path d="M2 30 C12 30 16 6 28 6 S44 30 54 30"/><line class=o x1=20 x2=36 y1=6 y2=6 /></svg><h3>Marée</h3><span class="num v">13:28</span><p>L'heure de l'étale <b>à la minute près</b>, pour votre plage, pas pour le port voisin.</p></li>
+  <li><svg class=gl viewBox="0 0 56 36" aria-hidden=true><path d="M2 22 q6.5 -9 13 0 t13 0 t13 0 t13 0"/><line x1=2 x2=54 y1=33 y2=33 /><line class=o x1=48 x2=48 y1=12 y2=22 /></svg><h3>Houle</h3><span class="num v">0,4<small>m</small></span><p>Hauteur et période. Au-delà de <b>0,8&nbsp;m</b>, Étale vous prévient.</p></li>
+  <li><svg class=gl viewBox="0 0 56 36" aria-hidden=true><line x1=2 x2=38 y1=10 y2=10 /><line x1=2 x2=46 y1=18 y2=18 /><line x1=2 x2=30 y1=26 y2=26 /><circle class=f cx=50 cy=18 r=5 /></svg><h3>Vent</h3><span class="num v">9<small>km/h</small></span><p>Force et sens. Vent <b>de terre</b>&#8239;: la mer reste plate près du bord.</p></li>
+  <li><svg class=gl viewBox="0 0 56 36" aria-hidden=true><path d="M2 14 q6.5 -4 13 0 t13 0 t13 0 t13 0"/><line x1=28 x2=28 y1=2 y2=24 /><circle class=f cx=28 cy=29 r=5.5 /></svg><h3>Eau</h3><span class="num v">13,5<small>°C</small></span><p>Relevée chaque matin, <b>au demi-degré</b>, et reliée à la règle du froid.</p></li>
+ </ul>
+</div></section>
+
+<section class=sec id=avis aria-labelledby=h-avis><div class=wrap>
+ <header class=sh><p class=lb><span class=num>04</span>Les nageurs</p><h2 class=h2 id=h-avis>Ils nagent déjà <em>à l'heure.</em></h2><p>Retours de la première vague de testeurs, cet automne.</p></header>
+ <div>
+  <div class=car id=car tabindex=0 role=region aria-label="Témoignages, faites défiler">
+   <figure><blockquote>Je nageais au hasard des horaires du port. Maintenant je pars de la maison quand la bouée passe à l'orange.</blockquote><figcaption><b>Maëlle</b>Dinard, nage toute l'année</figcaption></figure>
+   <figure><blockquote>La règle du froid m'a évité de rester vingt minutes dans une eau à 11 degrés.</blockquote><figcaption><b>Yannick</b>Crozon, débutant en eau froide</figcaption></figure>
+   <figure><blockquote>Une seule phrase le matin. C'est tout ce que je voulais.</blockquote><figcaption><b>Sofia</b>Biarritz, club de longe-côte</figcaption></figure>
+  </div>
+  <div class=car-nav><button class="ib sl" id=prev aria-label="Témoignage précédent"><span class=ico aria-hidden=true>arrow_back</span></button><button class="ib sl" id=next aria-label="Témoignage suivant"><span class=ico aria-hidden=true>arrow_forward</span></button></div>
+ </div>
+</div></section>
+
+<section class=sec id=tarif aria-labelledby=h-tarif><div class=wrap>
+ <header class=sh><p class=lb><span class=num>05</span>Le tarif</p><h2 class=h2 id=h-tarif>Gratuit <em>pour une plage.</em></h2><p>Saison ajoute vos autres plages, la semaine d'avance et l'alerte du matin.</p></header>
+ <div style="padding-top:14px">
+  <table class=price><caption class=vh>Comparaison des formules Libre et Saison</caption><col class=a><col><col>
+  <thead><tr><td></td><th scope=col><span class=pn>Libre</span><span class="num n">0 €</span><span class=u>gratuit</span></th><th scope=col class=c><span class=ptag>Bêta −50 %</span><span class=pn>Saison</span><span class="num n">18 €</span><span class=u>par an</span></th></tr></thead>
+  <tbody>
+  <tr><th scope=row>Plages suivies</th><td>1</td><td class=c>5</td></tr>
+  <tr><th scope=row>Prévision</th><td>Le jour</td><td class=c>7 jours</td></tr>
+  <tr><th scope=row>Alerte du matin</th><td class=no><span class=ico aria-hidden=true>remove</span><span class=vh>Non</span></td><td class=c><span class=ico aria-hidden=true>check</span><span class=vh>Oui</span></td></tr>
+  <tr><th scope=row>Règle du froid</th><td><span class=ico aria-hidden=true>check</span><span class=vh>Oui</span></td><td class=c><span class=ico aria-hidden=true>check</span><span class=vh>Oui</span></td></tr>
+  </tbody></table>
+  <p class=price-n>Prix bêta garanti tant que l'abonnement reste actif. Sans engagement.</p>
+ </div>
+</div></section>
+
+<section class=sec id=faq aria-labelledby=h-faq><div class=wrap>
+ <header class=sh><p class=lb><span class=num>06</span>Questions</p><h2 class=h2 id=h-faq>Avant <em>de vous mouiller.</em></h2></header>
+ <div class=faq>
+  <details><summary>D'où viennent les heures de marée&#8239;?</summary><p>Des prédictions officielles des ports de référence, corrigées pour chaque plage. Une plage à 6 km d'un port peut avoir 20 minutes d'écart.</p></details>
+  <details><summary>Pourquoi nager à l'étale&#8239;?</summary><p>Le courant est au plus faible. Sur les côtes à fort marnage, c'est la différence entre nager et être emporté le long du bord.</p></details>
+  <details><summary>La règle du froid est-elle fiable&#8239;?</summary><p>C'est un repère d'usage, pas un avis médical. Il varie selon l'habitude, la corpulence et le vent. Ne nagez jamais seul en eau froide.</p></details>
+  <details><summary>Quelles côtes sont couvertes&#8239;?</summary><p>La Manche et l'Atlantique pendant la bêta. La Méditerranée a très peu de marée&#8239;: on y travaille avec la houle et le vent seulement.</p></details>
+ </div>
+</div></section>
+
+<section class=sec id=inscription aria-labelledby=h-ins><div class=wrap>
+ <header class=sh><p class=lb><span class=num>07</span>La bêta</p><h2 class=h2 id=h-ins>Prochaine étale&#8239;: <em>13:28.</em></h2><p>Inscrivez-vous et recevez la première alerte au prochain matin calme sur vos plages.</p></header>
+ <div>
+  <form class=sg id=form novalidate>
+   <div class=tf id=tf><input id=em name=email type=email placeholder=" " autocomplete=email inputmode=email aria-describedby=em-s required><label for=em>Adresse e-mail</label></div>
+   <p class=sup id=em-s aria-live=polite>Une alerte par matin d'étale, rien d'autre.</p>
+   <fieldset><legend class=lb>Vos plages</legend><div class=chips>
+    <label class=chip><input type=checkbox name=p value=Dinard checked><span class=ico aria-hidden=true>check</span>Dinard</label>
+    <label class=chip><input type=checkbox name=p value=Saint-Malo><span class=ico aria-hidden=true>check</span>Saint-Malo</label>
+    <label class=chip><input type=checkbox name=p value=Crozon><span class=ico aria-hidden=true>check</span>Crozon</label>
+    <label class=chip><input type=checkbox name=p value="Les Sables"><span class=ico aria-hidden=true>check</span>Les Sables</label>
+    <label class=chip><input type=checkbox name=p value=Biarritz><span class=ico aria-hidden=true>check</span>Biarritz</label>
+   </div></fieldset>
+   <button class="go wide" id=send><span class=buoy><span class=ico aria-hidden=true>arrow_forward</span></span><span class=lbl>Rejoindre la bêta</span></button>
+  </form>
+  <div class=done id=done role=status tabindex=-1 hidden><span class=ico aria-hidden=true>check_circle</span><div><b>Vous êtes sur la liste.</b><span id=done-t></span></div></div>
+ </div>
+</div></section>
+</main>
+
+<footer class=foot><div class="in wrap">
+ <span class="mk sm" role=img aria-label="Étale"><span class=e>E</span>TALE</span>
+ <nav aria-label="Pied de page"><a href=#courbe>Marée</a><a href=#froid>Froid</a><a href=#tarif>Tarif</a><a href=#faq>Questions</a></nav>
+ <p>Les données affichées sont un aperçu pour la plage de l'Écluse, à Dinard. Étale ne remplace ni les consignes des postes de secours ni votre jugement sur place.</p>
+</div></footer>
+
+<div class=dock id=dock aria-hidden=true><p><b>Étale haute 13:28</b>Bêta ouverte, 18 €/an</p><a class=pill href=#inscription tabindex=-1>Rejoindre</a></div>
+<div class=snack id=snack role=status aria-live=polite><p id=snack-t></p><button id=undo type=button>Annuler</button></div>
+
+<script>
+(()=>{
+const $=s=>document.querySelector(s);
+/* barre du haut */
+const bar=$('#bar');addEventListener('scroll',()=>bar.classList.toggle('sc',scrollY>8),{passive:true});
+/* barre collante */
+const dock=$('#dock'),dl=dock.querySelector('a');let heroOut=false,formIn=false;
+const sync=()=>{const on=heroOut&&!formIn;dock.classList.toggle('on',on);document.body.classList.toggle('dk',on);dock.setAttribute('aria-hidden',!on);dl.tabIndex=on?0:-1};
+new IntersectionObserver(([e])=>{heroOut=!e.isIntersecting&&e.boundingClientRect.top<0;sync()}).observe($('#heroCta'));
+new IntersectionObserver(([e])=>{formIn=e.isIntersecting;sync()},{rootMargin:'0px 0px -20% 0px'}).observe($('#inscription'));
+
+/* 5 · courbe */
+(function(root,start){
+ const T=12.42,tH=13.47,M=6.75,A=4.65,W=358,H=184,pt=22,pb=24,
+ h=t=>M+A*Math.cos(2*Math.PI*(t-tH)/T),x=t=>t/24*W,y=m=>pt+(1-m/12.5)*(H-pt-pb),base=y(0),
+ fmt=t=>{const m=Math.round(t*60),H=Math.floor(m/60)%24;return String(H).padStart(2,'0')+':'+String(m%60).padStart(2,'0')},
+ fr=n=>n.toFixed(1).replace('.',','),
+ ext=[-2,-1,0,1,2].map(k=>({t:tH+k*T/2,hi:k%2==0})).filter(e=>e.t>.5&&e.t<23.5);
+ let d='';for(let i=0;i<=240;i++){const t=i/10;d+=(i?'L':'M')+x(t).toFixed(1)+' '+y(h(t)).toFixed(1)}
+ const grid=[6,12,18].map(t=>`<line class="gd" x1="${x(t)}" x2="${x(t)}" y1="${pt}" y2="${base}"/>`).join('');
+ const pl=ext.map(e=>{const yy=y(h(e.t));return `<line class="pl" x1="${x(e.t-.63)}" x2="${x(e.t+.63)}" y1="${yy}" y2="${yy}"/><text class="sk" x="${x(e.t)}" y="${e.hi?yy-9:yy+17}" text-anchor="middle" data-x="${e.t}">${fmt(e.t)}</text>`}).join('');
+ const ax=[0,6,12,18,24].map(t=>`<text class="ax" x="${x(t)}" y="${H-6}" text-anchor="${t==0?'start':t==24?'end':'middle'}">${t} h</text>`).join('');
+ root.innerHTML=`<div class="rd" aria-hidden="true"><div><p class="num" data-k="t"></p><p class="lb">Heure</p></div><div><p class="num" data-k="h"></p><p class="lb">Hauteur</p></div><span class="stt"><span class="ico"></span><span data-k="s"></span></span></div>
+ <svg viewBox="0 0 ${W} ${H}" role="slider" tabindex="0" aria-label="Heure sur la courbe de marée du 12 novembre" aria-valuemin="0" aria-valuemax="1435" aria-orientation="horizontal">${grid}<path class="wa" d="${d} L${W} ${base} L0 ${base}Z"/><path class="cr" d="${d}"/>${pl}<line class="hz" x1="0" x2="${W}" y1="${base}" y2="${base}"/><line class="nl" y1="${pt}" y2="${base}"/><circle class="by" r="8"/>${ax}</svg>
+ <p class="hint">Glissez sur la courbe ou utilisez les flèches. Traits épais&#8239;: fenêtres d'étale.</p>`;
+ const sv=root.querySelector('svg'),nl=sv.querySelector('.nl'),by=sv.querySelector('.by'),st=root.querySelector('.stt'),q=k=>root.querySelector(`[data-k=${k}]`),sks=sv.querySelectorAll('.sk');
+ let t=start;
+ function set(v){t=Math.max(0,Math.min(23+55/60,Math.round(v*12)/12));const m=h(t),up=h(t+.05)>m,
+  sl=ext.find(e=>Math.abs(e.t-t)<=.63),s=sl?(sl.hi?'Étale haute':'Étale basse'):up?'Monte':'Descend';
+  nl.setAttribute('x1',x(t));nl.setAttribute('x2',x(t));by.setAttribute('cx',x(t));by.setAttribute('cy',y(m));
+  q('t').textContent=fmt(t);q('h').textContent=fr(m)+' m';q('s').textContent=s;
+  st.classList.toggle('on',!!sl);st.querySelector('.ico').textContent=sl?'water':up?'north_east':'south_east';
+  sks.forEach(n=>n.style.opacity=Math.abs(n.dataset.x-t)<.9?0:1);
+  sv.setAttribute('aria-valuenow',Math.round(t*60));sv.setAttribute('aria-valuetext',`${fmt(t)}, ${fr(m)} mètres, ${s.toLowerCase()}`)}
+ const at=e=>{const r=sv.getBoundingClientRect();set((e.clientX-r.left)/r.width*24)};
+ sv.addEventListener('pointerdown',e=>{sv.setPointerCapture(e.pointerId);at(e)});
+ sv.addEventListener('pointermove',e=>{if(sv.hasPointerCapture(e.pointerId))at(e)});
+ sv.addEventListener('keydown',e=>{const k={ArrowRight:1/12,ArrowUp:1/12,ArrowLeft:-1/12,ArrowDown:-1/12,PageUp:1,PageDown:-1}[e.key];
+  if(k!=null)set(t+k);else if(e.key=='Home')set(0);else if(e.key=='End')set(24);else return;e.preventDefault()});
+ set(start);
+})($('#tide'),10+5/60);
+
+/* 6 · froid */
+(function(root,v0){
+ root.innerHTML=`<p class="q" aria-live="polite">À <b data-k="c"></b>, restez environ <span class="vh" data-k="n2"></span></p>
+ <p class="m" aria-hidden="true"><span data-k="n"></span><small> min</small></p>
+ <div class="tk" aria-hidden="true">${'<i></i>'.repeat(30)}</div><div class="tks" aria-hidden="true"><span>0</span><span>15</span><span>30 min</span></div>
+ <label class="lb" for="ct">Température de l'eau</label><input id="ct" type="range" min="8" max="22" step=".5" value="${v0}">
+ <div class="ends" aria-hidden="true"><span>8 °C</span><span>22 °C</span></div>
+ <p class="note"><span class="ico" aria-hidden="true">info</span><span data-k="w"></span></p>`;
+ const i=root.querySelector('input'),q=k=>root.querySelector(`[data-k=${k}]`),ti=root.querySelectorAll('.tk i'),fr=n=>String(n).replace('.',',');
+ function up(){const c=+i.value,n=Math.floor(c);root.style.setProperty('--fs',(50+(c-8)/14*50)+'%');
+  q('c').textContent=fr(c)+' °C';q('n').textContent=n;q('n2').textContent=n+' minutes';ti.forEach((e,k)=>e.classList.toggle('on',k<n));
+  i.setAttribute('aria-valuetext',`${fr(c)} degrés, environ ${n} minutes`);
+  q('w').textContent=c<12?'Eau très froide : entrez lentement, jamais seul. Repère indicatif, pas un avis médical.':'Une minute par degré, la première fois. Repère indicatif, pas un avis médical.'}
+ i.addEventListener('input',up);up();
+})($('#cold'),13.5);
+
+/* carrousel */
+const car=$('#car'),pv=$('#prev'),nx=$('#next');
+const step=d=>{const f=car.querySelector('figure');car.scrollBy({left:d*(f.offsetWidth+12),behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})};
+const nav=()=>{pv.disabled=car.scrollLeft<4;nx.disabled=car.scrollLeft+car.clientWidth>car.scrollWidth-4};
+pv.onclick=()=>step(-1);nx.onclick=()=>step(1);car.addEventListener('scroll',nav,{passive:true});addEventListener('resize',nav);nav();
+
+/* 9 · inscription */
+const form=$('#form'),em=$('#em'),tf=$('#tf'),sup=$('#em-s'),send=$('#send'),done=$('#done'),snack=$('#snack');
+const msg0=sup.textContent;let tm;
+function check(){const v=em.value.trim();
+ if(!v)return 'Indiquez votre adresse e-mail.';
+ if(!/^[^\s@]+@[^\s@]+$/.test(v))return "Il manque le @, par exemple lea@exemple.fr";
+ if(!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v))return "Il manque la fin de l'adresse, par exemple .fr";
+ return ''}
+function show(err){tf.classList.toggle('err',!!err);em.setAttribute('aria-invalid',!!err);
+ sup.innerHTML=err?`<span class="ico" aria-hidden="true">error</span>${err}`:msg0}
+em.addEventListener('input',()=>{if(tf.classList.contains('err'))show(check())});
+em.addEventListener('blur',()=>{if(em.value.trim())show(check())});
+form.addEventListener('submit',e=>{e.preventDefault();const err=check();show(err);if(err){em.focus();return}
+ const ps=[...form.querySelectorAll('input[name=p]:checked')].map(c=>c.value);
+ send.setAttribute('aria-busy','true');send.querySelector('.buoy .ico').textContent='waves';send.querySelector('.lbl').textContent='Inscription…';
+ setTimeout(()=>{send.removeAttribute('aria-busy');form.hidden=true;done.hidden=false;
+  $('#done-t').textContent=`Première alerte au prochain matin d'étale${ps.length?' à '+(ps.length>1?ps.slice(0,-1).join(', ')+' et '+ps.at(-1):ps[0]):''}.`;
+  done.focus();$('#snack-t').textContent='Inscription enregistrée';snack.classList.add('on');clearTimeout(tm);tm=setTimeout(()=>snack.classList.remove('on'),6000)},700)});
+$('#undo').onclick=()=>{snack.classList.remove('on');done.hidden=true;form.hidden=false;
+ send.querySelector('.buoy .ico').textContent='arrow_forward';send.querySelector('.lbl').textContent='Rejoindre la bêta';em.focus()};
+})();
+</script>
