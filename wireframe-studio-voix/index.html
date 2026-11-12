@@ -1,0 +1,941 @@
+<title>Wireframe Studio Voix</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout : planche de wireframes. Mobile : écrans empilés, notes sous chaque écran.
+   ≥ 840 : écran 360 à gauche, notes à droite. Recomposition medium/expanded en schémas mis à l'échelle. */
+:root {
+  /* Palette neutre à chroma 0 (tones N0 à N100), rôles avant valeurs */
+  --wf-board: #eeeeee;                 /* N94 : fond de planche */
+  --wf-surface: #ffffff;               /* N100 : écran */
+  --wf-surface-low: #f3f3f3;           /* N96 */
+  --wf-surface-container: #eeeeee;     /* N94 */
+  --wf-surface-high: #e8e8e8;          /* N92 */
+  --wf-surface-highest: #e2e2e2;       /* N90 */
+  --wf-on-surface: #1b1b1b;            /* N10 */
+  --wf-on-surface-variant: #474747;    /* N30 */
+  --wf-outline: #777777;               /* N50 */
+  --wf-outline-variant: #c6c6c6;       /* N80 */
+  --wf-primary: #303030;               /* N20 */
+  --wf-on-primary: #ffffff;            /* N100 */
+  --wf-secondary-container: #dadada;   /* N87 : indicateur actif, sélection */
+  --wf-on-secondary-container: #1b1b1b;
+  --wf-inverse-surface: #303030;       /* N20 */
+  --wf-inverse-on-surface: #f1f1f1;    /* N95 */
+  --wf-scrim: rgba(0, 0, 0, .32);
+  --wf-placeholder: #c6c6c6;           /* traits de remplissage d'image */
+
+  --wf-font-plain: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wf-font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --wf-radius-xs: 4px;
+  --wf-radius-s: 8px;
+  --wf-radius-m: 12px;
+  --wf-radius-device: 28px;
+
+  --wf-ease: cubic-bezier(0.2, 0, 0, 1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --wf-board: #1b1b1b; --wf-surface: #131313; --wf-surface-low: #1b1b1b; --wf-surface-container: #1f1f1f;
+    --wf-surface-high: #2a2a2a; --wf-surface-highest: #353535; --wf-on-surface: #e2e2e2; --wf-on-surface-variant: #c6c6c6;
+    --wf-outline: #919191; --wf-outline-variant: #474747; --wf-primary: #e2e2e2; --wf-on-primary: #303030;
+    --wf-secondary-container: #474747; --wf-on-secondary-container: #e2e2e2; --wf-inverse-surface: #e2e2e2;
+    --wf-inverse-on-surface: #303030; --wf-scrim: rgba(0, 0, 0, .56); --wf-placeholder: #5e5e5e;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --wf-board: #1b1b1b; --wf-surface: #131313; --wf-surface-low: #1b1b1b; --wf-surface-container: #1f1f1f;
+  --wf-surface-high: #2a2a2a; --wf-surface-highest: #353535; --wf-on-surface: #e2e2e2; --wf-on-surface-variant: #c6c6c6;
+  --wf-outline: #919191; --wf-outline-variant: #474747; --wf-primary: #e2e2e2; --wf-on-primary: #303030;
+  --wf-secondary-container: #474747; --wf-on-secondary-container: #e2e2e2; --wf-inverse-surface: #e2e2e2;
+  --wf-inverse-on-surface: #303030; --wf-scrim: rgba(0, 0, 0, .56); --wf-placeholder: #5e5e5e;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--wf-board);
+  color: var(--wf-on-surface);
+  font: 400 16px/24px var(--wf-font-plain);
+  letter-spacing: .01em;
+}
+.page {
+  max-width: 1200px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 64px;
+  display: flex; flex-direction: column; gap: 64px;
+}
+@media (min-width: 600px) { .page { padding-left: max(24px, env(safe-area-inset-left, 0px)); padding-right: max(24px, env(safe-area-inset-right, 0px)); } }
+
+h1, h2, h3 { margin: 0; text-wrap: balance; font-weight: 500; }
+h1 { font-size: 32px; line-height: 40px; font-weight: 600; letter-spacing: -.01em; }
+h2 { font-size: 24px; line-height: 32px; }
+h3 { font-size: 22px; line-height: 28px; }
+p { margin: 0; }
+.lede { max-width: 60ch; color: var(--wf-on-surface-variant); }
+.eyebrow { font: 500 12px/16px var(--wf-font-mono); letter-spacing: .06em; color: var(--wf-on-surface-variant); }
+.tag { font: 400 12px/16px var(--wf-font-mono); color: var(--wf-on-surface-variant); }
+
+:focus-visible { outline: 3px solid var(--wf-on-surface); outline-offset: 2px; }
+a { color: inherit; text-underline-offset: 3px; }
+
+/* ---------- En-tête de planche ---------- */
+.intro { display: flex; flex-direction: column; gap: 16px; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; }
+.toggle {
+  display: inline-flex; align-items: center; gap: 12px; min-height: 48px; padding: 0 16px 0 8px;
+  border: 1px solid var(--wf-outline); border-radius: var(--wf-radius-s); background: var(--wf-surface);
+  color: var(--wf-on-surface); font: 500 14px/20px var(--wf-font-plain); cursor: pointer; position: relative;
+}
+.toggle::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: currentColor; opacity: 0; transition: opacity 150ms var(--wf-ease); }
+.toggle:hover::after { opacity: .08; }
+.toggle:active::after { opacity: .10; }
+.toggle .sw { width: 40px; height: 24px; border-radius: 12px; border: 2px solid var(--wf-outline); position: relative; flex: none; }
+.toggle .sw::before { content: ""; position: absolute; top: 3px; left: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--wf-outline); transition: transform 150ms var(--wf-ease); }
+.toggle[aria-pressed="true"] .sw { background: var(--wf-primary); border-color: var(--wf-primary); }
+.toggle[aria-pressed="true"] .sw::before { background: var(--wf-on-primary); transform: translateX(16px); }
+
+.toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.toc a {
+  display: inline-flex; align-items: center; min-height: 48px; padding: 0 16px;
+  border: 1px solid var(--wf-outline-variant); border-radius: var(--wf-radius-s);
+  text-decoration: none; font: 500 14px/20px var(--wf-font-plain); background: var(--wf-surface);
+}
+.toc a:hover { background: var(--wf-surface-high); }
+.toc .n { font-family: var(--wf-font-mono); margin-right: 8px; color: var(--wf-on-surface-variant); }
+
+/* ---------- Sections texte ---------- */
+.section { display: flex; flex-direction: column; gap: 24px; }
+.grid-cards { display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 600px) { .grid-cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .grid-cards.three { grid-template-columns: repeat(3, 1fr); } }
+.note-card { background: var(--wf-surface); border: 1px solid var(--wf-outline-variant); border-radius: var(--wf-radius-m); padding: 24px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.note-card h3 { font-size: 16px; line-height: 24px; font-weight: 600; }
+.note-card p { color: var(--wf-on-surface-variant); font-size: 14px; line-height: 20px; }
+
+.flow { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; grid-template-columns: 1fr; counter-reset: step; }
+@media (min-width: 600px) { .flow { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1000px) { .flow { grid-template-columns: repeat(6, 1fr); } }
+.flow li { counter-increment: step; background: var(--wf-surface); border: 1px solid var(--wf-outline-variant); border-radius: var(--wf-radius-s); padding: 16px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.flow li::before { content: counter(step); font: 500 12px/16px var(--wf-font-mono); color: var(--wf-on-surface-variant); }
+.flow b { font-weight: 600; font-size: 14px; line-height: 20px; }
+.flow span { font-size: 14px; line-height: 20px; color: var(--wf-on-surface-variant); }
+
+/* ---------- Écran + notes ---------- */
+.screen { display: grid; gap: 24px; grid-template-columns: minmax(0, 1fr); align-items: start; scroll-margin-top: 24px; }
+@media (min-width: 840px) { .screen { grid-template-columns: 360px minmax(0, 1fr); gap: 48px; } }
+.screen-head { display: flex; flex-direction: column; gap: 8px; }
+.screen-body { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+.notes { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; max-width: 62ch; }
+.notes li { display: grid; grid-template-columns: 24px minmax(0, 1fr); gap: 4px 12px; }
+.notes .num { grid-row: span 3; }
+.notes b { font-weight: 600; font-size: 16px; line-height: 24px; }
+.notes p { color: var(--wf-on-surface-variant); font-size: 14px; line-height: 20px; }
+
+.num, .mk {
+  display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--wf-inverse-surface); color: var(--wf-inverse-on-surface);
+  font: 500 12px/1 var(--wf-font-mono);
+}
+.mk { position: absolute; top: -10px; right: -10px; z-index: 3; box-shadow: 0 0 0 2px var(--wf-surface); }
+.mk.l { right: auto; left: -10px; }
+body.no-marks .mk { display: none; }
+
+/* ---------- Appareil (wireframe) ---------- */
+figure { margin: 0; }
+.device { display: flex; flex-direction: column; gap: 8px; width: 100%; max-width: 360px; }
+.device figcaption { font: 400 12px/16px var(--wf-font-mono); color: var(--wf-on-surface-variant); }
+.phone {
+  position: relative; width: 100%; min-height: 720px;
+  background: var(--wf-surface); color: var(--wf-on-surface);
+  border: 1px solid var(--wf-outline); border-radius: var(--wf-radius-device);
+  display: flex; flex-direction: column; overflow: visible;
+  font-size: 14px; line-height: 20px;
+}
+.phone > :first-child { border-top-left-radius: var(--wf-radius-device); border-top-right-radius: var(--wf-radius-device); }
+.phone > :last-child { border-bottom-left-radius: var(--wf-radius-device); border-bottom-right-radius: var(--wf-radius-device); }
+.r { position: relative; }
+
+.appbar { min-height: 64px; display: flex; align-items: center; gap: 4px; padding: 8px 4px 8px 16px; }
+.appbar .t { flex: 1; min-width: 0; font-size: 22px; line-height: 28px; font-weight: 400; }
+.appbar.lead { padding-left: 4px; }
+
+.content { flex: 1; display: flex; flex-direction: column; gap: 16px; padding: 8px 16px 16px; min-width: 0; }
+.ib { width: 48px; height: 48px; display: grid; place-items: center; flex: none; border-radius: 50%; color: var(--wf-on-surface-variant); }
+.ic { width: 24px; height: 24px; flex: none; }
+.ic.s { width: 18px; height: 18px; }
+.avatar { width: 40px; height: 40px; border-radius: 50%; flex: none; border: 1px solid var(--wf-outline-variant); background:
+  linear-gradient(45deg, transparent calc(50% - .5px), var(--wf-placeholder) 50%, transparent calc(50% + .5px)),
+  linear-gradient(-45deg, transparent calc(50% - .5px), var(--wf-placeholder) 50%, transparent calc(50% + .5px)), var(--wf-surface-container); }
+.avatar.sm { width: 32px; height: 32px; }
+
+/* Champ texte (outlined, text area) */
+.field { position: relative; display: flex; flex-direction: column; gap: 4px; }
+.field .box { position: relative; border: 1px solid var(--wf-outline); border-radius: var(--wf-radius-xs); padding: 16px; min-height: 160px; font-size: 16px; line-height: 24px; }
+.field .box.focus { border: 2px solid var(--wf-on-surface); padding: 15px; }
+.field .box.locked { background: var(--wf-surface-low); color: var(--wf-on-surface-variant); border-style: dashed; }
+.field .lbl { position: absolute; top: -10px; left: 12px; padding: 0 4px; background: var(--wf-surface); font-size: 12px; line-height: 16px; color: var(--wf-on-surface-variant); }
+.field .box.focus + .lbl, .field .lbl.on { color: var(--wf-on-surface); font-weight: 500; }
+.field .ph { color: var(--wf-on-surface-variant); }
+.field .caret { display: inline-block; width: 2px; height: 20px; background: var(--wf-on-surface); vertical-align: -4px; }
+.support { display: flex; justify-content: space-between; gap: 16px; padding: 0 16px; font-size: 12px; line-height: 16px; color: var(--wf-on-surface-variant); font-variant-numeric: tabular-nums; }
+
+/* Chips */
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chips.scroll { flex-wrap: nowrap; overflow: hidden; mask-image: linear-gradient(90deg, #000 85%, transparent); -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); }
+.chip { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 16px; border: 1px solid var(--wf-outline-variant); border-radius: var(--wf-radius-s); font-size: 14px; line-height: 20px; font-weight: 500; white-space: nowrap; flex: none; }
+.chip.sel { background: var(--wf-secondary-container); color: var(--wf-on-secondary-container); border-color: transparent; padding-left: 8px; }
+
+/* Ligne de liste */
+.row { display: flex; align-items: center; gap: 16px; min-height: 72px; padding: 8px 0 8px 16px; position: relative; }
+.row .txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.row .h { font-size: 16px; line-height: 24px; }
+.row .s { font-size: 14px; line-height: 20px; color: var(--wf-on-surface-variant); }
+.row.sel { background: var(--wf-secondary-container); color: var(--wf-on-secondary-container); }
+.row.sel .s { color: var(--wf-on-secondary-container); }
+.list { display: flex; flex-direction: column; margin: 0 -16px; }
+.list .row + .row { border-top: 1px solid var(--wf-outline-variant); }
+.list .row.sel + .row, .list .row + .row.sel { border-top-color: transparent; }
+
+.panel { border: 1px solid var(--wf-outline-variant); border-radius: var(--wf-radius-m); position: relative; }
+.panel .row { padding-right: 4px; }
+.panel .row + .row { border-top: 1px solid var(--wf-outline-variant); }
+.kicker { font-size: 12px; line-height: 16px; font-weight: 500; letter-spacing: .04em; color: var(--wf-on-surface-variant); }
+
+/* Boutons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 40px; padding: 0 24px; border-radius: var(--wf-radius-s); font-size: 14px; line-height: 20px; font-weight: 500; white-space: nowrap; position: relative; }
+.btn.filled { background: var(--wf-primary); color: var(--wf-on-primary); }
+.btn.tonal { background: var(--wf-secondary-container); color: var(--wf-on-secondary-container); }
+.btn.outlined { border: 1px solid var(--wf-outline); }
+.btn.text { padding: 0 12px; }
+.sheet .btn { padding: 0 var(--bp, 24px); }
+.sheet .btn.text { padding: 0 8px; margin-left: -8px; }
+.btn.block { width: 100%; }
+.btn.lg { min-height: 56px; font-size: 16px; }
+.btn.disabled { background: transparent; color: var(--wf-on-surface-variant); border: 1px dashed var(--wf-outline); }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.actions.end { justify-content: flex-end; }
+
+/* Zone du pouce + Extended FAB */
+.thumb { padding: 8px 16px 16px; display: flex; flex-direction: column; gap: 8px; }
+.efab { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 64px; padding: 0 28px; border-radius: 16px; background: var(--wf-primary); color: var(--wf-on-primary); font-size: 16px; line-height: 24px; font-weight: 600; position: relative; }
+.efab.disabled { background: var(--wf-surface-high); color: var(--wf-on-surface-variant); border: 1px dashed var(--wf-outline); font-weight: 500; }
+.hint { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; line-height: 16px; color: var(--wf-on-surface-variant); font-variant-numeric: tabular-nums; position: relative; }
+
+/* Navigation bar */
+.navbar { display: grid; grid-template-columns: repeat(3, 1fr); min-height: 80px; padding: 12px 8px 16px; background: var(--wf-surface-container); position: relative; }
+.navbar .it { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 12px; line-height: 16px; font-weight: 500; color: var(--wf-on-surface-variant); }
+.navbar .pill { width: 56px; height: 32px; border-radius: 16px; display: grid; place-items: center; }
+.navbar .it.on { color: var(--wf-on-surface); font-weight: 700; }
+.navbar .it.on .pill { background: var(--wf-secondary-container); color: var(--wf-on-secondary-container); }
+
+/* Sliders, segmented, switch */
+.slider { display: flex; flex-direction: column; gap: 8px; position: relative; }
+.slider .top { display: flex; justify-content: space-between; font-size: 14px; line-height: 20px; font-weight: 500; }
+.slider .val { font-variant-numeric: tabular-nums; font-family: var(--wf-font-mono); font-size: 13px; }
+.track { position: relative; height: 44px; display: flex; align-items: center; }
+.track .bar { height: 4px; border-radius: 2px; background: var(--wf-surface-highest); width: 100%; position: relative; }
+.track .fill { position: absolute; inset: 0 auto 0 0; background: var(--wf-primary); border-radius: 2px; }
+.track .hd { position: absolute; top: 50%; width: 4px; height: 44px; border-radius: 2px; background: var(--wf-primary); transform: translate(-50%, -50%); }
+.slider .ends { display: flex; justify-content: space-between; font-size: 12px; line-height: 16px; color: var(--wf-on-surface-variant); }
+.seg { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--wf-outline); border-radius: 20px; overflow: hidden; }
+.seg span { min-height: 40px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; font-weight: 500; }
+.seg span + span { border-left: 1px solid var(--wf-outline); }
+.seg .on { background: var(--wf-secondary-container); color: var(--wf-on-secondary-container); }
+.switchrow { display: flex; align-items: center; gap: 16px; min-height: 56px; }
+.switchrow .txt { flex: 1; min-width: 0; }
+.mini-switch { width: 52px; height: 32px; border-radius: 16px; background: var(--wf-primary); position: relative; flex: none; }
+.mini-switch::after { content: ""; position: absolute; right: 4px; top: 4px; width: 24px; height: 24px; border-radius: 50%; background: var(--wf-on-primary); }
+
+/* Overlay (sheet) */
+.under { filter: none; }
+.scrim { position: absolute; inset: 0; background: var(--wf-scrim); border-radius: var(--wf-radius-device); z-index: 1; }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; background: var(--wf-surface-low); border-top: 1px solid var(--wf-outline); border-radius: var(--wf-radius-device) var(--wf-radius-device) var(--wf-radius-device) var(--wf-radius-device); padding: 8px 16px 16px; display: flex; flex-direction: column; gap: 16px; }
+.handle { width: 32px; height: 4px; border-radius: 2px; background: var(--wf-outline); margin: 14px auto 6px; }
+.sheet .t { font-size: 22px; line-height: 28px; }
+
+/* Progression */
+.lin { height: 4px; border-radius: 2px; background: var(--wf-surface-highest); position: relative; overflow: hidden; }
+.lin i { position: absolute; inset: 0 auto 0 0; background: var(--wf-primary); border-radius: 2px; }
+.status-ic { width: 24px; height: 24px; display: grid; place-items: center; flex: none; }
+.spin { width: 20px; height: 20px; border-radius: 50%; border: 3px solid var(--wf-surface-highest); border-top-color: var(--wf-primary); }
+@media (prefers-reduced-motion: no-preference) { .spin { animation: rot 1s linear infinite; } }
+@keyframes rot { to { transform: rotate(1turn); } }
+.dash-circle { width: 20px; height: 20px; border-radius: 50%; border: 2px dashed var(--wf-outline); }
+
+/* Lecteur */
+.player { border: 1px solid var(--wf-outline-variant); border-radius: var(--wf-radius-m); padding: 16px; display: flex; flex-direction: column; gap: 12px; position: relative; }
+.wave { height: 56px; display: flex; align-items: center; gap: 2px; }
+.wave i { flex: 1; min-width: 1px; border-radius: 1px; background: var(--wf-outline-variant); }
+.wave i.p { background: var(--wf-on-surface); }
+.times { display: flex; justify-content: space-between; font: 400 12px/16px var(--wf-font-mono); color: var(--wf-on-surface-variant); font-variant-numeric: tabular-nums; }
+.transport { display: flex; align-items: center; justify-content: center; gap: 16px; position: relative; }
+.play { width: 64px; height: 64px; border-radius: 50%; background: var(--wf-primary); color: var(--wf-on-primary); display: grid; place-items: center; position: relative; }
+.speed { min-width: 48px; height: 48px; display: grid; place-items: center; font: 500 14px/20px var(--wf-font-mono); }
+.sent { display: flex; gap: 12px; padding: 12px 16px; font-size: 14px; line-height: 20px; border-radius: var(--wf-radius-s); position: relative; align-items: flex-start; }
+.sent .time { font: 400 12px/20px var(--wf-font-mono); color: var(--wf-on-surface-variant); flex: none; width: 34px; font-variant-numeric: tabular-nums; }
+.sent .tx { flex: 1; min-width: 0; }
+.sent.now { background: var(--wf-secondary-container); color: var(--wf-on-secondary-container); }
+.sent.now .time { color: var(--wf-on-secondary-container); }
+.sent .more { width: 24px; height: 20px; display: grid; place-items: center; color: var(--wf-on-surface-variant); flex: none; }
+.sents { display: flex; flex-direction: column; margin: 0 -16px; }
+
+.snackbar { margin: 0 8px 8px; padding: 6px 8px 6px 16px; min-height: 48px; display: flex; align-items: center; gap: 8px; border-radius: var(--wf-radius-xs); background: var(--wf-inverse-surface); color: var(--wf-inverse-on-surface); font-size: 14px; line-height: 20px; position: relative; }
+.snackbar .txt { flex: 1; min-width: 0; }
+.snackbar .act { font-weight: 600; padding: 0 12px; min-height: 40px; display: grid; place-items: center; text-decoration: underline; text-underline-offset: 3px; }
+
+.alert { border: 3px solid var(--wf-on-surface); border-radius: var(--wf-radius-m); padding: 16px; display: flex; flex-direction: column; gap: 12px; position: relative; background:
+  repeating-linear-gradient(-45deg, transparent 0 10px, var(--wf-surface-container) 10px 11px), var(--wf-surface); }
+.alert .hd { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; line-height: 24px; font-weight: 600; }
+.alert p { font-size: 14px; line-height: 20px; color: var(--wf-on-surface-variant); }
+
+.focus-card { border: 1px solid var(--wf-outline); border-radius: var(--wf-radius-m); padding: 16px; display: flex; flex-direction: column; gap: 12px; position: relative; }
+.focus-card .big { font-size: 22px; line-height: 28px; }
+.muted { color: var(--wf-on-surface-variant); }
+.small { font-size: 12px; line-height: 16px; }
+.numx { font-variant-numeric: tabular-nums; }
+.searchbar { display: flex; align-items: center; gap: 8px; min-height: 56px; padding: 0 4px 0 16px; border-radius: 28px; background: var(--wf-surface-high); color: var(--wf-on-surface-variant); font-size: 16px; position: relative; }
+.searchbar .txt { flex: 1; min-width: 0; }
+.count { font-size: 12px; line-height: 16px; color: var(--wf-on-surface-variant); position: relative; }
+
+/* ---------- Recomposition (schémas mis à l'échelle) ---------- */
+.scaler { width: 100%; max-width: var(--max, 100%); position: relative; overflow: hidden; border-radius: 16px; border: 1px solid var(--wf-outline); background: var(--wf-surface); }
+.scaler .stage { position: absolute; top: 0; left: 0; transform-origin: 0 0; transform: scale(var(--s, .3)); }
+.stage { font-size: 14px; line-height: 20px; color: var(--wf-on-surface); }
+.desk { display: grid; height: 100%; }
+.rail { background: var(--wf-surface-container); display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 24px 0; }
+.rail .fabm { width: 56px; height: 56px; border-radius: 16px; background: var(--wf-surface-highest); display: grid; place-items: center; margin-bottom: 24px; }
+.rail .it { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 12px; font-weight: 500; color: var(--wf-on-surface-variant); }
+.rail .it.on { color: var(--wf-on-surface); font-weight: 700; }
+.rail .pill { width: 56px; height: 32px; border-radius: 16px; display: grid; place-items: center; }
+.rail .it.on .pill { background: var(--wf-secondary-container); }
+.pane { padding: 24px; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.pane.fixed { background: var(--wf-surface-low); border-left: 1px solid var(--wf-outline-variant); }
+.dim { font: 400 12px/16px var(--wf-font-mono); color: var(--wf-on-surface-variant); }
+.recompo { display: grid; gap: 32px; grid-template-columns: minmax(0, 1fr); }
+.recompo figure { display: flex; flex-direction: column; gap: 12px; }
+.recompo figcaption { display: flex; flex-direction: column; gap: 4px; max-width: 70ch; }
+.recompo figcaption b { font-weight: 600; }
+.recompo figcaption span { color: var(--wf-on-surface-variant); font-size: 14px; line-height: 20px; }
+
+/* ---------- Direction & checklist ---------- */
+.decisions { margin: 0; display: grid; gap: 1px; background: var(--wf-outline-variant); border: 1px solid var(--wf-outline-variant); border-radius: var(--wf-radius-m); overflow: hidden; }
+.decisions > div { display: grid; grid-template-columns: 1fr; gap: 4px; padding: 16px 20px; background: var(--wf-surface); }
+@media (min-width: 600px) { .decisions > div { grid-template-columns: 160px minmax(0, 1fr); gap: 24px; } }
+.decisions dt { font-weight: 600; }
+.decisions dd { margin: 0; color: var(--wf-on-surface-variant); min-width: 0; }
+.checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; grid-template-columns: 1fr; }
+@media (min-width: 840px) { .checks { grid-template-columns: 1fr 1fr; } }
+.checks li { display: flex; gap: 12px; align-items: flex-start; padding: 12px 16px; background: var(--wf-surface); border-radius: var(--wf-radius-s); border: 1px solid var(--wf-outline-variant); font-size: 14px; line-height: 20px; }
+.checks .ic { margin-top: -2px; }
+footer { color: var(--wf-on-surface-variant); font-size: 14px; line-height: 20px; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+
+<!-- Sprite d'icônes (trait 2, grille 24) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16zM13.5 6.5l4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+    <symbol id="i-edit-f" viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z" fill="currentColor"/></symbol>
+    <symbol id="i-voice" viewBox="0 0 24 24"><path d="M4 10v4M8 7v10M12 4v16M16 8v8M20 11v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-lib" viewBox="0 0 24 24"><path d="M4 5h4v14H4zM10 5h4v14h-4zM16.2 5.8l3.8-1 3 13.5-3.8 1" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" transform="translate(-1 0)"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="currentColor"/><path d="M8 12.2l2.8 2.8L16.2 9.5" fill="none" stroke="var(--wf-surface)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-tune" viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="15" cy="7" r="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-dl" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="18.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.2 10.8l7.6-4M8.2 13.2l7.6 4" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2" fill="currentColor"/><circle cx="12" cy="12" r="2" fill="currentColor"/><circle cx="12" cy="19" r="2" fill="currentColor"/></symbol>
+    <symbol id="i-redo" viewBox="0 0 24 24"><path d="M19 12a7 7 0 1 1-2.1-5M19 4v4h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-back10" viewBox="0 0 24 24"><path d="M5 12a7 7 0 1 0 2.1-5M5 4v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-fwd10" viewBox="0 0 24 24"><path d="M19 12a7 7 0 1 1-2.1-5M19 4v4h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-err" viewBox="0 0 24 24"><path d="M12 3l10 18H2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="18" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3l2.2 6.8L21 12l-6.8 2.2L12 21l-2.2-6.8L3 12l6.8-2.2z" fill="currentColor"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
+<div class="page" id="top">
+
+  <header class="intro">
+    <p class="eyebrow">Wireframe · mobile first · niveaux de gris</p>
+    <h1>Studio Voix</h1>
+    <p class="lede">Un site pour transformer un texte en audio avec des modèles de voix intégrés. Ce wireframe fixe le parcours, la hiérarchie et les états avant toute couleur ou marque. Chaque écran est dessiné à 360&nbsp;dp, avec ses décisions UX numérotées.</p>
+    <div class="toolbar">
+      <button class="toggle" id="marks-toggle" type="button" aria-pressed="true">
+        <span class="sw" aria-hidden="true"></span>Repères numérotés sur les écrans
+      </button>
+    </div>
+    <nav aria-label="Sommaire des écrans">
+      <ul class="toc">
+        <li><a href="#ecran-vide"><span class="n">1</span>Créer, vide</a></li>
+        <li><a href="#ecran-pret"><span class="n">2</span>Créer, prêt</a></li>
+        <li><a href="#ecran-voix"><span class="n">3</span>Choisir une voix</a></li>
+        <li><a href="#ecran-reglages"><span class="n">4</span>Réglages</a></li>
+        <li><a href="#ecran-generation"><span class="n">5</span>Génération</a></li>
+        <li><a href="#ecran-resultat"><span class="n">6</span>Résultat</a></li>
+        <li><a href="#ecran-erreur"><span class="n">7</span>Erreur</a></li>
+        <li><a href="#ecran-bibliotheque"><span class="n">8</span>Bibliothèque</a></li>
+        <li><a href="#recomposition">Grands écrans</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page" style="padding:0;gap:64px" aria-label="Wireframe">
+
+    <!-- ===== Cadrage ===== -->
+    <section class="section" aria-labelledby="cadrage-t">
+      <h2 id="cadrage-t">Cadrage</h2>
+      <div class="grid-cards">
+        <div class="note-card">
+          <h3>Pour qui</h3>
+          <p>Créateurs de podcasts, petits commerces, enseignants. Ils écrivent sur téléphone, souvent entre deux tâches, et veulent un audio propre sans studio ni compétence technique.</p>
+        </div>
+        <div class="note-card">
+          <h3>Tâche principale</h3>
+          <p>Coller ou écrire un texte, entendre une voix crédible, télécharger le fichier. Tout le reste (voix, réglages, bibliothèque) sert cette tâche et passe après elle.</p>
+        </div>
+        <div class="note-card">
+          <h3>Ce qui échoue ailleurs</h3>
+          <p>On paie une génération complète pour découvrir qu'une voix ne convient pas ou qu'un mot est mal prononcé. Le coût de l'essai est trop élevé et l'attente est passive.</p>
+        </div>
+        <div class="note-card">
+          <h3>Trois hypothèses UX</h3>
+          <p>1. Écouter la voix sur son propre texte avant de générer réduit les générations gâchées. 2. Découper l'audio en phrases permet d'écouter tôt et de corriger une seule phrase. 3. Afficher durée et coût avant l'action renforce la confiance.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Parcours ===== -->
+    <section class="section" aria-labelledby="parcours-t">
+      <h2 id="parcours-t">Parcours principal</h2>
+      <ol class="flow">
+        <li><b>Écrire</b><span>Coller un texte ou partir d'un exemple.</span></li>
+        <li><b>Choisir la voix</b><span>Écouter chaque voix sur sa première phrase.</span></li>
+        <li><b>Régler</b><span>Vitesse, expressivité, format. Facultatif.</span></li>
+        <li><b>Générer</b><span>Durée et coût connus avant de toucher.</span></li>
+        <li><b>Écouter et corriger</b><span>Phrase par phrase, sans tout refaire.</span></li>
+        <li><b>Exporter</b><span>Télécharger, partager, retrouver en bibliothèque.</span></li>
+      </ol>
+    </section>
+
+    <!-- ===== Écrans ===== -->
+    <section class="section" aria-labelledby="ecrans-t">
+      <h2 id="ecrans-t">Écrans mobiles</h2>
+
+      <!-- 1. Créer, vide -->
+      <article class="screen" id="ecran-vide" aria-labelledby="s1-t">
+        <figure class="device">
+          <div class="phone" aria-hidden="true">
+            <div class="appbar"><span class="t">Nouvel audio</span><span class="ib"><svg class="ic"><use href="#i-person"/></svg></span></div>
+            <div class="content">
+              <div class="field r">
+                <div class="box focus"><span class="caret"></span><span class="ph"> Écrivez ou collez le texte à faire lire.</span></div>
+                <span class="lbl">Votre texte</span>
+                <span class="mk">1</span>
+              </div>
+              <div class="support"><span>Jusqu'à 5 000 caractères</span><span>0 / 5 000</span></div>
+              <div class="r" style="display:flex;flex-direction:column;gap:8px">
+                <span class="kicker">Pas d'idée ? Partez d'un exemple</span>
+                <div class="chips"><span class="chip">Intro de podcast</span><span class="chip">Message de répondeur</span><span class="chip">Histoire du soir</span></div>
+                <span class="mk">2</span>
+              </div>
+              <div class="panel">
+                <div class="row"><span class="avatar"></span><span class="txt"><span class="h">Voix : Camille</span><span class="s">Français · calme · narration</span></span><span class="ib"><svg class="ic"><use href="#i-play"/></svg></span></div>
+                <span class="mk">3</span>
+              </div>
+            </div>
+            <div class="thumb">
+              <div class="hint"><span>Ajoutez du texte pour générer l'audio.</span></div>
+              <div class="efab disabled"><svg class="ic"><use href="#i-sparkle"/></svg>Générer l'audio<span class="mk">4</span></div>
+            </div>
+            <div class="navbar">
+              <span class="it on"><span class="pill"><svg class="ic"><use href="#i-edit-f"/></svg></span>Créer</span>
+              <span class="it"><span class="pill"><svg class="ic"><use href="#i-voice"/></svg></span>Voix</span>
+              <span class="it"><span class="pill"><svg class="ic"><use href="#i-lib"/></svg></span>Bibliothèque</span>
+              <span class="mk">5</span>
+            </div>
+          </div>
+          <figcaption>Compact 360 dp · premier lancement, champ en focus</figcaption>
+        </figure>
+        <div class="screen-body">
+          <div class="screen-head"><span class="tag">Écran 1 · état vide</span><h3 id="s1-t">Créer, premier lancement</h3></div>
+          <ol class="notes">
+            <li><span class="num">1</span><b>Une seule tâche visible : écrire</b><p>Le champ occupe le haut de l'écran et reçoit le focus. Rien d'autre ne demande une décision avant que le texte existe.</p><span class="tag">Fondations · un foyer par écran</span></li>
+            <li><span class="num">2</span><b>Lever la page blanche</b><p>Des chips de suggestion remplissent le champ avec un texte modifiable. Elles disparaissent dès que la personne écrit.</p><span class="tag">Composants · chips de suggestion</span></li>
+            <li><span class="num">3</span><b>Un défaut intelligent</b><p>Une voix est déjà choisie et s'écoute en un toucher. On peut générer sans jamais ouvrir le catalogue.</p><span class="tag">Utilisabilité · réduire les décisions</span></li>
+            <li><span class="num">4</span><b>L'action principale annonce sa condition</b><p>Le bouton reste à sa place, inactif, et la raison est écrite juste au-dessus. On comprend la suite sans deviner, et le bouton ne saute pas quand il s'active.</p><span class="tag">Interaction · état désactivé expliqué</span></li>
+            <li><span class="num">5</span><b>Trois destinations stables</b><p>Créer, Voix, Bibliothèque. Labels toujours visibles, icône pleine et indicateur pour la destination active. Le compte vit dans l'app bar.</p><span class="tag">Composants · navigation bar</span></li>
+          </ol>
+        </div>
+      </article>
+
+      <!-- 2. Créer, prêt -->
+      <article class="screen" id="ecran-pret" aria-labelledby="s2-t">
+        <figure class="device">
+          <div class="phone" aria-hidden="true">
+            <div class="appbar"><span class="t">Nouvel audio</span><span class="ib"><svg class="ic"><use href="#i-person"/></svg></span></div>
+            <div class="content">
+              <div class="field">
+                <div class="box">Bienvenue dans le douzième épisode de Carnets de route. Aujourd'hui, on part à Lisbonne avec trois adresses que les guides oublient. Installez-vous. On commence par le marché de Campo de Ourique.</div>
+                <span class="lbl on">Votre texte</span>
+              </div>
+              <div class="support r"><span>4 phrases · environ 15 s d'audio</span><span>197 / 5 000</span><span class="mk">1</span></div>
+              <div class="panel">
+                <div class="row"><span class="avatar"></span><span class="txt"><span class="h">Voix : Camille</span><span class="s">Français · calme · narration</span></span><span class="ib"><svg class="ic"><use href="#i-play"/></svg></span></div>
+                <div class="row r"><span class="ib" style="margin-left:-12px;margin-right:-12px"><svg class="ic"><use href="#i-tune"/></svg></span><span class="txt"><span class="h">Réglages</span><span class="s">Vitesse 1,0× · naturel · MP3</span></span><span class="ib"><svg class="ic"><use href="#i-chev"/></svg></span><span class="mk">2</span></div>
+              </div>
+            </div>
+            <div class="thumb">
+              <div class="hint"><span>Coût : 1 crédit</span><span>Il vous reste 48 crédits</span><span class="mk l">3</span></div>
+              <div class="efab"><svg class="ic"><use href="#i-sparkle"/></svg>Générer l'audio<span class="mk">4</span></div>
+            </div>
+            <div class="navbar">
+              <span class="it on"><span class="pill"><svg class="ic"><use href="#i-edit-f"/></svg></span>Créer</span>
+              <span class="it"><span class="pill"><svg class="ic"><use href="#i-voice"/></svg></span>Voix</span>
+              <span class="it"><span class="pill"><svg class="ic"><use href="#i-lib"/></svg></span>Bibliothèque</span>
+            </div>
+          </div>
+          <figcaption>Compact 360 dp · texte saisi, prêt à générer</figcaption>
+        </figure>
+        <div class="screen-body">
+          <div class="screen-head"><span class="tag">Écran 2 · état prêt</span><h3 id="s2-t">Créer, texte prêt</h3></div>
+          <ol class="notes">
+            <li><span class="num">1</span><b>Le texte devient du temps</b><p>Sous le champ : nombre de phrases et durée estimée. La personne pense en secondes d'audio, pas en caractères. Le compteur reste disponible à droite.</p><span class="tag">Content design · unités de l'utilisateur</span></li>
+            <li><span class="num">2</span><b>Réglages résumés, pas étalés</b><p>Une ligne montre les valeurs actuelles sans ouvrir le panneau. Le détail arrive en bottom sheet seulement si on le demande.</p><span class="tag">Utilisabilité · divulgation progressive</span></li>
+            <li><span class="num">3</span><b>Le coût avant l'action</b><p>Crédit consommé et solde restant, en chiffres tabulaires, juste au-dessus du bouton. Aucune surprise après le toucher.</p><span class="tag">Composition · confiance et feedback</span></li>
+            <li><span class="num">4</span><b>Un seul élément plein à l'écran</b><p>L'Extended FAB est la seule surface remplie et la plus grande cible, dans la zone du pouce. Le regard et le doigt arrivent au même endroit.</p><span class="tag">Composants · extended FAB · cas Aura</span></li>
+          </ol>
+        </div>
+      </article>
+
+      <!-- 3. Choisir une voix -->
+      <article class="screen" id="ecran-voix" aria-labelledby="s3-t">
+        <figure class="device">
+          <div class="phone" aria-hidden="true">
+            <div class="appbar lead"><span class="ib"><svg class="ic"><use href="#i-close"/></svg></span><span class="t">Choisir une voix</span></div>
+            <div class="content">
+              <div class="searchbar"><svg class="ic"><use href="#i-search"/></svg><span class="txt">Rechercher une voix ou un style</span><span class="mk">1</span></div>
+              <div class="chips scroll"><span class="chip sel"><svg class="ic s"><use href="#i-check"/></svg>Français</span><span class="chip">Narration</span><span class="chip">Calme</span><span class="chip">Grave</span><span class="chip">Dynamique</span></div>
+              <span class="count">24 voix · aperçu lu avec votre première phrase</span>
+              <div class="list">
+                <div class="row sel"><span class="avatar"></span><span class="txt"><span class="h">Camille</span><span class="s">Calme · narration · sélectionnée</span></span><span class="ib"><svg class="ic"><use href="#i-play"/></svg></span><span class="ib" style="margin-left:-8px"><svg class="ic"><use href="#i-check-c"/></svg></span><span class="mk">4</span></div>
+                <div class="row r"><span class="avatar"></span><span class="txt"><span class="h">Hugo</span><span class="s">Grave · posé · lecture en cours</span><span class="lin" style="margin-top:6px"><i style="width:40%"></i></span></span><span class="ib"><svg class="ic"><use href="#i-pause"/></svg></span><span style="width:40px"></span><span class="mk">2</span></div>
+                <div class="row r"><span class="avatar"></span><span class="txt"><span class="h">Lina</span><span class="s">Chaleureuse · histoires</span></span><span class="ib"><svg class="ic"><use href="#i-play"/></svg></span><span style="width:40px"></span><span class="mk">3</span></div>
+                <div class="row"><span class="avatar"></span><span class="txt"><span class="h">Nadia</span><span class="s">Québec · dynamique · publicité</span></span><span class="ib"><svg class="ic"><use href="#i-play"/></svg></span><span style="width:40px"></span></div>
+              </div>
+            </div>
+            <div class="thumb" style="border-top:1px solid var(--wf-outline-variant);padding-top:16px">
+              <div class="btn filled lg block">Utiliser Camille<span class="mk">5</span></div>
+            </div>
+          </div>
+          <figcaption>Compact 360 dp · dialog plein écran ouvert depuis la ligne Voix</figcaption>
+        </figure>
+        <div class="screen-body">
+          <div class="screen-head"><span class="tag">Écran 3 · sélection</span><h3 id="s3-t">Choisir une voix</h3></div>
+          <ol class="notes">
+            <li><span class="num">1</span><b>Chercher et filtrer près de la liste</b><p>Recherche et chips filtres restent collées aux résultats. Le nombre de voix trouvées est annoncé à chaque changement.</p><span class="tag">Composants · search, chips filtres</span></li>
+            <li><span class="num">2</span><b>Écouter avec son propre texte</b><p>L'aperçu lit la première phrase de la personne, pas une phrase de démonstration. On juge la voix sur son contenu réel. La progression de lecture est visible sur la ligne.</p><span class="tag">Hypothèse 1 · essai à coût nul</span></li>
+            <li><span class="num">3</span><b>Écouter n'engage pas</b><p>Le bouton lecture est une cible 48 dp séparée de la ligne. Toucher la ligne sélectionne, toucher lecture écoute. Deux gestes, deux résultats.</p><span class="tag">Accessibilité · cibles distinctes</span></li>
+            <li><span class="num">4</span><b>Sélection redondante</b><p>Fond, coche et mot « sélectionnée ». Jamais la seule nuance de gris pour dire l'état.</p><span class="tag">Accessibilité · pas un seul signal</span></li>
+            <li><span class="num">5</span><b>La validation répète le choix</b><p>« Utiliser Camille » confirme ce qui va se passer. Fermer sans valider garde l'ancienne voix.</p><span class="tag">Content design · le bouton dit le résultat</span></li>
+          </ol>
+        </div>
+      </article>
+
+      <!-- 4. Réglages -->
+      <article class="screen" id="ecran-reglages" aria-labelledby="s4-t">
+        <figure class="device">
+          <div class="phone" aria-hidden="true">
+            <div class="appbar"><span class="t">Nouvel audio</span><span class="ib"><svg class="ic"><use href="#i-person"/></svg></span></div>
+            <div class="content">
+              <div class="field"><div class="box" style="min-height:120px">Bienvenue dans le douzième épisode de Carnets de route. Aujourd'hui, on part à Lisbonne…</div><span class="lbl on">Votre texte</span></div>
+            </div>
+            <div class="scrim"></div>
+            <div class="sheet">
+              <div class="handle"></div>
+              <div style="display:flex;align-items:center;gap:8px;position:relative"><span class="t" style="flex:1">Réglages de la voix</span><span class="mk">1</span></div>
+              <div class="slider">
+                <div class="top"><span>Vitesse</span><span class="val">1,0×</span></div>
+                <div class="track"><div class="bar"><span class="fill" style="width:33%"></span></div><span class="hd" style="left:33%"></span></div>
+                <div class="ends"><span>Lente 0,5×</span><span>Rapide 2,0×</span></div>
+                <span class="mk l">2</span>
+              </div>
+              <div class="slider">
+                <div class="top"><span>Expressivité</span><span class="val">Naturel</span></div>
+                <div class="track"><div class="bar"><span class="fill" style="width:50%"></span></div><span class="hd" style="left:50%"></span></div>
+                <div class="ends"><span>Neutre</span><span>Très expressive</span></div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <span class="kicker">Format du fichier</span>
+                <div class="seg"><span class="on"><svg class="ic s"><use href="#i-check"/></svg>MP3</span><span>WAV</span></div>
+              </div>
+              <div class="switchrow"><span class="txt"><span style="display:block;font-size:16px;line-height:24px">Pauses selon la ponctuation</span><span class="muted small">Respire aux points et aux virgules</span></span><span class="mini-switch"></span></div>
+              <div class="actions" style="justify-content:space-between;position:relative;--bp:14px">
+                <span class="btn text">Réinitialiser</span>
+                <span style="display:flex;gap:8px"><span class="btn tonal"><svg class="ic s"><use href="#i-play"/></svg>Extrait</span><span class="btn filled">Terminé</span></span>
+                <span class="mk l">3</span><span class="mk">4</span>
+              </div>
+            </div>
+          </div>
+          <figcaption>Compact 360 dp · bottom sheet modale au-dessus de Créer</figcaption>
+        </figure>
+        <div class="screen-body">
+          <div class="screen-head"><span class="tag">Écran 4 · couche secondaire</span><h3 id="s4-t">Réglages</h3></div>
+          <ol class="notes">
+            <li><span class="num">1</span><b>Régler sans perdre le contexte</b><p>Une bottom sheet modale, scrim derrière : le texte reste visible en haut. Glisser vers le bas ou toucher le scrim ferme sans rien perdre.</p><span class="tag">Composants · bottom sheet modale</span></li>
+            <li><span class="num">2</span><b>Des curseurs qui parlent</b><p>Valeur affichée en continu et extrémités nommées en mots. Au clavier : flèches, Début et Fin. Libellé accessible complet, par exemple « Vitesse, 1,0×, de 0,5 à 2 ».</p><span class="tag">Composants · slider, accessibilité</span></li>
+            <li><span class="num">3</span><b>Réinitialiser loin de Terminé</b><p>Action destructive discrète, bouton texte à l'opposé de l'action principale. Un toucher imprécis ne détruit rien.</p><span class="tag">Interaction · prévenir l'erreur</span></li>
+            <li><span class="num">4</span><b>Boucle courte réglage puis écoute</b><p>« Extrait » lit la première phrase avec les nouveaux réglages, sans crédit. On ajuste à l'oreille, pas au chiffre.</p><span class="tag">Hypothèse 1 · essai à coût nul</span></li>
+          </ol>
+        </div>
+      </article>
+
+      <!-- 5. Génération -->
+      <article class="screen" id="ecran-generation" aria-labelledby="s5-t">
+        <figure class="device">
+          <div class="phone" aria-hidden="true">
+            <div class="appbar"><span class="t">Nouvel audio</span><span class="ib"><svg class="ic"><use href="#i-person"/></svg></span></div>
+            <div class="content">
+              <div class="focus-card">
+                <span class="kicker">Génération en cours</span>
+                <span class="big numx">Phrase 3 sur 4</span>
+                <div class="lin"><i style="width:62%"></i></div>
+                <div style="display:flex;justify-content:space-between" class="muted small numx"><span>62 %</span><span>Environ 6 s restantes</span></div>
+                <span class="mk">1</span>
+              </div>
+              <div class="sents r">
+                <div class="sent"><span class="status-ic"><svg class="ic"><use href="#i-check-c"/></svg></span><span class="tx">Bienvenue dans le douzième épisode de Carnets de route.</span><span class="ib" style="width:40px;height:20px"><svg class="ic s"><use href="#i-play"/></svg></span></div>
+                <div class="sent"><span class="status-ic"><svg class="ic"><use href="#i-check-c"/></svg></span><span class="tx">Aujourd'hui, on part à Lisbonne avec trois adresses que les guides oublient.</span><span class="ib" style="width:40px;height:20px"><svg class="ic s"><use href="#i-play"/></svg></span></div>
+                <div class="sent"><span class="status-ic"><span class="spin"></span></span><span class="tx">Installez-vous.</span><span style="width:40px"></span></div>
+                <div class="sent muted"><span class="status-ic"><span class="dash-circle"></span></span><span class="tx">On commence par le marché de Campo de Ourique.</span><span style="width:40px"></span></div>
+                <span class="mk">2</span>
+              </div>
+              <div class="r" style="display:flex;gap:8px;align-items:center" >
+                <svg class="ic s muted"><use href="#i-lock"/></svg><span class="muted small">Le texte se modifie à la fin de la génération.</span><span class="mk">3</span>
+              </div>
+            </div>
+            <div class="thumb">
+              <div class="hint"><span>Vous pouvez quitter cet écran, la génération continue.</span></div>
+              <div class="btn outlined lg block">Annuler la génération<span class="mk">4</span></div>
+            </div>
+            <div class="navbar">
+              <span class="it on"><span class="pill"><svg class="ic"><use href="#i-edit-f"/></svg></span>Créer</span>
+              <span class="it"><span class="pill"><svg class="ic"><use href="#i-voice"/></svg></span>Voix</span>
+              <span class="it"><span class="pill"><svg class="ic"><use href="#i-lib"/></svg></span>Bibliothèque</span>
+            </div>
+          </div>
+          <figcaption>Compact 360 dp · chargement déterminé, phrase par phrase</figcaption>
+        </figure>
+        <div class="screen-body">
+          <div class="screen-head"><span class="tag">Écran 5 · chargement</span><h3 id="s5-t">Génération en cours</h3></div>
+          <ol class="notes">
+            <li><span class="num">1</span><b>Une attente qui se mesure</b><p>Indicateur déterminé, étape en clair et temps restant. La progression est annoncée aux lecteurs d'écran en région live polie, toutes les phrases, pas à chaque pourcent.</p><span class="tag">Composants · progress indicator</span></li>
+            <li><span class="num">2</span><b>Écouter avant la fin</b><p>Chaque phrase prête se lit tout de suite. L'attente devient une première écoute. Trois états distincts : prête (coche), en cours, en attente (cercle pointillé).</p><span class="tag">Hypothèse 2 · découpage en phrases</span></li>
+            <li><span class="num">3</span><b>Moins de contrôles en concurrence</b><p>Le texte est verrouillé et la raison est écrite. L'écran ne garde que suivre, écouter, annuler.</p><span class="tag">Utilisabilité · cas Aura, tâche focalisée</span></li>
+            <li><span class="num">4</span><b>Toujours une sortie</b><p>Annuler reste disponible et rembourse les phrases non générées. Quitter l'écran ne coupe rien : le projet apparaît en tête de Bibliothèque.</p><span class="tag">Interaction · récupération</span></li>
+          </ol>
+        </div>
+      </article>
+
+      <!-- 6. Résultat -->
+      <article class="screen" id="ecran-resultat" aria-labelledby="s6-t">
+        <figure class="device">
+          <div class="phone" aria-hidden="true">
+            <div class="appbar lead"><span class="ib"><svg class="ic"><use href="#i-back"/></svg></span><span class="t">Carnets de route, ép. 12</span><span class="ib"><svg class="ic"><use href="#i-more"/></svg></span></div>
+            <div class="content">
+              <div class="player">
+                <div class="wave" data-bars="56" data-played="0.4"></div>
+                <div class="times"><span>0:06</span><span>0:15</span></div>
+                <div class="transport">
+                  <span class="speed">1×</span>
+                  <span class="ib"><svg class="ic"><use href="#i-back10"/></svg></span>
+                  <span class="play"><svg class="ic" style="width:32px;height:32px"><use href="#i-pause"/></svg></span>
+                  <span class="ib"><svg class="ic"><use href="#i-fwd10"/></svg></span>
+                  <span class="ib"><svg class="ic"><use href="#i-dl"/></svg></span>
+                </div>
+                <span class="mk">1</span>
+              </div>
+              <div class="sents">
+                <div class="sent"><span class="time">0:00</span><span class="tx">Bienvenue dans le douzième épisode de Carnets de route.</span><span class="more"><svg class="ic s"><use href="#i-more"/></svg></span></div>
+                <div class="sent now"><span class="time">0:04</span><span class="tx">Aujourd'hui, on part à Lisbonne avec trois adresses que les guides oublient.</span><span class="more"><svg class="ic s"><use href="#i-more"/></svg></span><span class="mk l">2</span></div>
+                <div class="sent"><span class="time">0:09</span><span class="tx">Installez-vous.</span><span class="more"><svg class="ic s"><use href="#i-redo"/></svg></span><span class="mk">3</span></div>
+                <div class="sent"><span class="time">0:10</span><span class="tx">On commence par le marché de Campo de Ourique.</span><span class="more"><svg class="ic s"><use href="#i-more"/></svg></span></div>
+              </div>
+              <div class="actions r">
+                <span class="btn filled" style="flex:1"><svg class="ic s"><use href="#i-dl"/></svg>Télécharger MP3</span>
+                <span class="btn outlined"><svg class="ic s"><use href="#i-share"/></svg>Partager</span>
+                <span class="mk">4</span>
+              </div>
+            </div>
+            <div class="snackbar"><span class="txt">Enregistré dans la bibliothèque</span><span class="act">Ouvrir</span><span class="mk">5</span></div>
+            <div class="navbar">
+              <span class="it on"><span class="pill"><svg class="ic"><use href="#i-edit-f"/></svg></span>Créer</span>
+              <span class="it"><span class="pill"><svg class="ic"><use href="#i-voice"/></svg></span>Voix</span>
+              <span class="it"><span class="pill"><svg class="ic"><use href="#i-lib"/></svg></span>Bibliothèque</span>
+            </div>
+          </div>
+          <figcaption>Compact 360 dp · lecture en cours, phrase 2 active</figcaption>
+        </figure>
+        <div class="screen-body">
+          <div class="screen-head"><span class="tag">Écran 6 · succès</span><h3 id="s6-t">Écouter, corriger, exporter</h3></div>
+          <ol class="notes">
+            <li><span class="num">1</span><b>Le bouton lecture est le foyer</b><p>64 dp, seul cercle plein du lecteur. Temps en chiffres tabulaires pour qu'ils ne tremblent pas. Reculer et avancer de 10 s autour, vitesse à gauche.</p><span class="tag">Composition · foyer par échelle et isolement</span></li>
+            <li><span class="num">2</span><b>Transcription synchronisée</b><p>La phrase lue est marquée par un fond. Toucher une phrase y place la lecture. On navigue dans l'audio par le sens, pas par la forme d'onde.</p><span class="tag">Architecture d'information · repères de contenu</span></li>
+            <li><span class="num">3</span><b>Corriger une seule phrase</b><p>Le menu d'une phrase propose Régénérer, Changer la prononciation, Ajouter une pause. On corrige un mot sans repayer tout l'audio.</p><span class="tag">Hypothèse 2 · réparation locale</span></li>
+            <li><span class="num">4</span><b>Hiérarchie des sorties</b><p>Télécharger en bouton plein, Partager en contour. Le format choisi est écrit dans le libellé.</p><span class="tag">Composants · buttons, ordre d'emphase</span></li>
+            <li><span class="num">5</span><b>Confirmer sans interrompre</b><p>Snackbar en surface inverse avec une action, qui disparaît seule après 6 s et reste le temps du focus clavier.</p><span class="tag">Composants · snackbar</span></li>
+          </ol>
+        </div>
+      </article>
+
+      <!-- 7. Erreur -->
+      <article class="screen" id="ecran-erreur" aria-labelledby="s7-t">
+        <figure class="device">
+          <div class="phone" aria-hidden="true">
+            <div class="appbar"><span class="t">Nouvel audio</span><span class="ib"><svg class="ic"><use href="#i-person"/></svg></span></div>
+            <div class="content">
+              <div class="alert">
+                <div class="hd"><svg class="ic"><use href="#i-err"/></svg><span>La génération s'est arrêtée à la phrase 3</span></div>
+                <p>La connexion a été coupée. Les phrases 1 et 2 sont prêtes et votre texte est intact. Aucun crédit n'est débité pour la suite.</p>
+                <div class="actions"><span class="btn filled"><svg class="ic s"><use href="#i-redo"/></svg>Reprendre à la phrase 3</span></div>
+                <span class="btn text" style="align-self:flex-start;margin-left:-12px">Écouter les phrases prêtes</span>
+                <span class="mk">1</span><span class="mk l">4</span>
+              </div>
+              <div class="sents r">
+                <div class="sent"><span class="status-ic"><svg class="ic"><use href="#i-check-c"/></svg></span><span class="tx">Bienvenue dans le douzième épisode de Carnets de route.</span></div>
+                <div class="sent"><span class="status-ic"><svg class="ic"><use href="#i-check-c"/></svg></span><span class="tx">Aujourd'hui, on part à Lisbonne avec trois adresses que les guides oublient.</span></div>
+                <div class="sent"><span class="status-ic"><svg class="ic"><use href="#i-err"/></svg></span><span class="tx"><b style="font-weight:600">Non générée.</b> Installez-vous.</span></div>
+                <div class="sent muted"><span class="status-ic"><span class="dash-circle"></span></span><span class="tx">On commence par le marché de Campo de Ourique.</span></div>
+                <span class="mk">2</span>
+              </div>
+              <div class="field r" style="margin-top:8px">
+                <div class="box" style="min-height:72px;border:2px solid var(--wf-on-surface);padding:15px">Bienvenue dans le douzième épisode de Carnets de route. Aujourd'hui…</div>
+                <span class="lbl on">Votre texte</span>
+                <span class="mk">3</span>
+              </div>
+              <div class="support" style="color:var(--wf-on-surface)"><span style="display:flex;gap:4px;align-items:center"><svg class="ic s"><use href="#i-err"/></svg>Retirez 214 caractères ou découpez le texte.</span><span>5 214 / 5 000</span></div>
+            </div>
+            <div class="navbar">
+              <span class="it on"><span class="pill"><svg class="ic"><use href="#i-edit-f"/></svg></span>Créer</span>
+              <span class="it"><span class="pill"><svg class="ic"><use href="#i-voice"/></svg></span>Voix</span>
+              <span class="it"><span class="pill"><svg class="ic"><use href="#i-lib"/></svg></span>Bibliothèque</span>
+            </div>
+          </div>
+          <figcaption>Compact 360 dp · deux erreurs typiques réunies pour la planche</figcaption>
+        </figure>
+        <div class="screen-body">
+          <div class="screen-head"><span class="tag">Écran 7 · erreurs</span><h3 id="s7-t">Erreur et récupération</h3></div>
+          <ol class="notes">
+            <li><span class="num">1</span><b>Ce qui s'est passé, ce qui est sauvé, quoi faire</b><p>Titre factuel, cause en mots simples, ce qui est conservé, ce que ça coûte. Pas de code d'erreur, pas d'excuse vague. L'action dit exactement où l'on reprend.</p><span class="tag">Content design · messages d'erreur</span></li>
+            <li><span class="num">2</span><b>Rien n'est perdu</b><p>Les phrases prêtes restent cochées et écoutables. Seule la phrase en échec porte l'icône et le mot « Non générée ».</p><span class="tag">Interaction · récupération partielle</span></li>
+            <li><span class="num">3</span><b>Erreur de saisie dans le champ</b><p>Le message remplace le texte d'aide à la même place, avec icône et compteur. Il dit comment corriger. La mise en page ne bouge pas.</p><span class="tag">Composants · text field, erreur</span></li>
+            <li><span class="num">4</span><b>Sans couleur, l'erreur reste lisible</b><p>Icône triangle, bordure épaisse, trame et titre en gras. C'est le test que ce wireframe impose : si l'erreur se voit en gris, elle se verra avec n'importe quelle palette.</p><span class="tag">Accessibilité · la couleur n'est jamais seule</span></li>
+          </ol>
+        </div>
+      </article>
+
+      <!-- 8. Bibliothèque -->
+      <article class="screen" id="ecran-bibliotheque" aria-labelledby="s8-t">
+        <figure class="device">
+          <div class="phone" aria-hidden="true">
+            <div class="appbar"><span class="t">Bibliothèque</span><span class="ib"><svg class="ic"><use href="#i-search"/></svg></span><span class="ib"><svg class="ic"><use href="#i-person"/></svg></span></div>
+            <div class="content">
+              <div class="chips r"><span class="chip sel"><svg class="ic s"><use href="#i-check"/></svg>Tout</span><span class="chip">Cette semaine</span><span class="chip">Favoris</span><span class="mk">3</span></div>
+              <div class="list">
+                <div class="row r" style="padding-left:4px"><span class="ib"><span class="spin"></span></span><span class="txt"><span class="h">Annonce boutique</span><span class="s numx">Génération en cours · 64 %</span><span class="lin" style="margin-top:6px"><i style="width:64%"></i></span></span><span class="ib"><svg class="ic"><use href="#i-more"/></svg></span><span class="mk">1</span></div>
+                <div class="row r" style="padding-left:4px"><span class="ib" style="border:1px solid var(--wf-outline);width:40px;height:40px;margin:4px"><svg class="ic"><use href="#i-play"/></svg></span><span class="txt"><span class="h">Carnets de route, ép. 12</span><span class="s numx">Camille · 0:15 · à l'instant</span></span><span class="ib"><svg class="ic"><use href="#i-more"/></svg></span><span class="mk l">2</span></div>
+                <div class="row" style="padding-left:4px"><span class="ib" style="border:1px solid var(--wf-outline);width:40px;height:40px;margin:4px"><svg class="ic"><use href="#i-play"/></svg></span><span class="txt"><span class="h">Répondeur du cabinet</span><span class="s numx">Hugo · 0:22 · hier</span></span><span class="ib"><svg class="ic"><use href="#i-more"/></svg></span></div>
+                <div class="row" style="padding-left:4px"><span class="ib" style="border:1px solid var(--wf-outline);width:40px;height:40px;margin:4px"><svg class="ic"><use href="#i-play"/></svg></span><span class="txt"><span class="h">Histoire du soir : le phare</span><span class="s numx">Lina · 3:40 · 9 nov.</span></span><span class="ib"><svg class="ic"><use href="#i-more"/></svg></span></div>
+                <div class="row" style="padding-left:4px"><span class="ib" style="border:1px solid var(--wf-outline);width:40px;height:40px;margin:4px"><svg class="ic"><use href="#i-play"/></svg></span><span class="txt"><span class="h">Intro podcast, version 2</span><span class="s numx">Camille · 0:31 · 4 nov.</span></span><span class="ib"><svg class="ic"><use href="#i-more"/></svg></span></div>
+              </div>
+              <div class="panel r" style="padding:16px;display:flex;flex-direction:column;gap:8px;border-style:dashed">
+                <span class="kicker">État vide (première visite)</span>
+                <span>Vos audios générés apparaîtront ici.</span>
+                <span class="btn tonal" style="align-self:flex-start"><svg class="ic s"><use href="#i-plus"/></svg>Créer un audio</span>
+                <span class="mk">4</span>
+              </div>
+            </div>
+            <div class="navbar">
+              <span class="it"><span class="pill"><svg class="ic"><use href="#i-edit"/></svg></span>Créer</span>
+              <span class="it"><span class="pill"><svg class="ic"><use href="#i-voice"/></svg></span>Voix</span>
+              <span class="it on"><span class="pill"><svg class="ic"><use href="#i-lib"/></svg></span>Bibliothèque</span>
+            </div>
+          </div>
+          <figcaption>Compact 360 dp · liste avec un projet en cours, état vide en encart</figcaption>
+        </figure>
+        <div class="screen-body">
+          <div class="screen-head"><span class="tag">Écran 8 · destination</span><h3 id="s8-t">Bibliothèque</h3></div>
+          <ol class="notes">
+            <li><span class="num">1</span><b>Le travail en cours d'abord</b><p>Un projet qui se génère apparaît en tête avec sa progression. Quitter Créer pendant une génération n'est jamais risqué.</p><span class="tag">Utilisabilité · visibilité de l'état</span></li>
+            <li><span class="num">2</span><b>Écouter depuis la liste</b><p>Lecture directe à gauche, cible 48 dp. Le reste de la ligne ouvre le projet. Les métadonnées utiles tiennent sur une ligne : voix, durée, date.</p><span class="tag">Composants · lists</span></li>
+            <li><span class="num">3</span><b>Retrouver vite</b><p>Recherche dans l'app bar, trois filtres simples. Pas de dossiers tant que l'usage ne les réclame pas.</p><span class="tag">Architecture d'information · trouvabilité</span></li>
+            <li><span class="num">4</span><b>Un état vide qui mène quelque part</b><p>Une phrase qui dit ce qui apparaîtra ici et une action pour créer le premier audio.</p><span class="tag">Fondations · états vides</span></li>
+          </ol>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== Recomposition ===== -->
+    <section class="section" id="recomposition" aria-labelledby="recompo-t">
+      <h2 id="recompo-t">Grands écrans : recomposer, pas étirer</h2>
+      <p class="lede">Le même parcours, réorganisé à chaque palier. Les destinations passent du bas au côté, et les réglages quittent la bottom sheet pour rester visibles à côté du texte.</p>
+      <div class="recompo">
+        <figure>
+          <div class="scaler" data-w="760" data-h="520" style="--max:760px" aria-hidden="true">
+            <div class="stage" style="width:760px;height:520px">
+              <div class="desk" style="grid-template-columns:96px 1fr">
+                <div class="rail">
+                  <span class="fabm"><svg class="ic"><use href="#i-plus"/></svg></span>
+                  <span class="it on"><span class="pill"><svg class="ic"><use href="#i-edit-f"/></svg></span>Créer</span>
+                  <span class="it"><span class="pill"><svg class="ic"><use href="#i-voice"/></svg></span>Voix</span>
+                  <span class="it"><span class="pill"><svg class="ic"><use href="#i-lib"/></svg></span>Bibliothèque</span>
+                </div>
+                <div class="pane" style="padding:24px 24px">
+                  <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:24px;line-height:32px">Nouvel audio</span><span class="dim">medium · 600 à 839 dp · marges 24</span></div>
+                  <div class="field"><div class="box" style="min-height:150px">Bienvenue dans le douzième épisode de Carnets de route. Aujourd'hui, on part à Lisbonne avec trois adresses que les guides oublient. Installez-vous. On commence par le marché de Campo de Ourique.</div><span class="lbl on">Votre texte</span></div>
+                  <div class="support"><span>4 phrases · environ 15 s d'audio</span><span>197 / 5 000</span></div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+                    <div class="panel"><div class="row"><span class="avatar"></span><span class="txt"><span class="h">Camille</span><span class="s">Calme · narration</span></span><span class="ib"><svg class="ic"><use href="#i-play"/></svg></span></div></div>
+                    <div class="panel"><div class="row"><span class="ib" style="margin:0 -12px"><svg class="ic"><use href="#i-tune"/></svg></span><span class="txt"><span class="h">Réglages</span><span class="s">1,0× · naturel · MP3</span></span><span class="ib"><svg class="ic"><use href="#i-chev"/></svg></span></div></div>
+                  </div>
+                  <div style="display:flex;justify-content:flex-end;align-items:center;gap:16px;margin-top:auto">
+                    <span class="muted small">Coût : 1 crédit · 48 restants</span>
+                    <span class="efab" style="min-height:56px"><svg class="ic"><use href="#i-sparkle"/></svg>Générer l'audio</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption><b>Medium, 600 à 839 dp</b><span>Navigation rail à gauche à la place de la navigation bar, mêmes trois destinations dans le même ordre. Un seul pane : la voix et les réglages passent côte à côte sous le texte au lieu de s'empiler. L'Extended FAB reste en bas, sur le bord trailing.</span></figcaption>
+        </figure>
+        <figure>
+          <div class="scaler" data-w="1200" data-h="640" style="--max:1200px" aria-hidden="true">
+            <div class="stage" style="width:1200px;height:640px">
+              <div class="desk" style="grid-template-columns:96px 1fr 412px">
+                <div class="rail">
+                  <span class="fabm"><svg class="ic"><use href="#i-plus"/></svg></span>
+                  <span class="it on"><span class="pill"><svg class="ic"><use href="#i-edit-f"/></svg></span>Créer</span>
+                  <span class="it"><span class="pill"><svg class="ic"><use href="#i-voice"/></svg></span>Voix</span>
+                  <span class="it"><span class="pill"><svg class="ic"><use href="#i-lib"/></svg></span>Bibliothèque</span>
+                </div>
+                <div class="pane">
+                  <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:28px;line-height:36px">Carnets de route, ép. 12</span><span class="dim">pane flexible · texte 40 à 60 car./ligne</span></div>
+                  <div class="field" style="max-width:600px"><div class="box" style="min-height:120px">Bienvenue dans le douzième épisode de Carnets de route. Aujourd'hui, on part à Lisbonne avec trois adresses que les guides oublient. Installez-vous. On commence par le marché de Campo de Ourique.</div><span class="lbl on">Votre texte</span></div>
+                  <div class="player" style="max-width:600px">
+                    <div class="wave" data-bars="90" data-played="0.4"></div>
+                    <div class="times"><span>0:06</span><span>0:15</span></div>
+                    <div class="transport"><span class="speed">1×</span><span class="ib"><svg class="ic"><use href="#i-back10"/></svg></span><span class="play"><svg class="ic" style="width:32px;height:32px"><use href="#i-pause"/></svg></span><span class="ib"><svg class="ic"><use href="#i-fwd10"/></svg></span><span class="ib"><svg class="ic"><use href="#i-dl"/></svg></span></div>
+                  </div>
+                  <div class="sents" style="margin:0;max-width:600px">
+                    <div class="sent"><span class="time">0:00</span><span class="tx">Bienvenue dans le douzième épisode de Carnets de route.</span></div>
+                    <div class="sent now"><span class="time">0:04</span><span class="tx">Aujourd'hui, on part à Lisbonne avec trois adresses que les guides oublient.</span></div>
+                  </div>
+                </div>
+                <div class="pane fixed">
+                  <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:16px;font-weight:500">Voix et réglages</span><span class="dim">pane fixe 412</span></div>
+                  <div class="panel" style="background:var(--wf-surface)"><div class="row"><span class="avatar"></span><span class="txt"><span class="h">Camille</span><span class="s">Calme · narration</span></span><span class="ib"><svg class="ic"><use href="#i-play"/></svg></span></div></div>
+                  <div class="slider"><div class="top"><span>Vitesse</span><span class="val">1,0×</span></div><div class="track"><div class="bar"><span class="fill" style="width:33%"></span></div><span class="hd" style="left:33%"></span></div></div>
+                  <div class="slider"><div class="top"><span>Expressivité</span><span class="val">Naturel</span></div><div class="track"><div class="bar"><span class="fill" style="width:50%"></span></div><span class="hd" style="left:50%"></span></div></div>
+                  <div class="seg"><span class="on"><svg class="ic s"><use href="#i-check"/></svg>MP3</span><span>WAV</span></div>
+                  <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px">
+                    <span class="hint"><span>Coût : 1 crédit</span><span>48 restants</span></span>
+                    <span class="btn filled lg block"><svg class="ic s"><use href="#i-dl"/></svg>Télécharger MP3</span>
+                    <span class="btn outlined block"><svg class="ic s"><use href="#i-redo"/></svg>Régénérer avec ces réglages</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <figcaption><b>Expanded et large, 840 dp et plus</b><span>Deux panes. À gauche, pane flexible : texte, lecteur et transcription, limités à une colonne lisible. À droite, pane fixe : voix, réglages en ligne (plus de bottom sheet) et actions de sortie. On règle et on réécoute sans jamais masquer le texte.</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===== Direction ===== -->
+    <section class="section" aria-labelledby="direction-t">
+      <h2 id="direction-t">Direction visuelle en 6 décisions</h2>
+      <dl class="decisions">
+        <div><dt>Couleur</dt><dd>Neutre à chroma 0, rôles Material conservés (primary, surface, containers, outline, inverse). Le gris force la hiérarchie à tenir sans couleur ; la marque remplacera les valeurs, pas les rôles.</dd></div>
+        <div><dt>Typographie</dt><dd>Une famille sans empattement pour l'interface, une mono pour les annotations et les durées. Styles utilisés : headline, title large et medium, body large et medium, label large et medium.</dd></div>
+        <div><dt>Forme</dt><dd>Langage doux et discret : 4 pour les champs, 8 pour boutons et chips, 12 pour les panneaux, 16 pour l'Extended FAB. Cercles réservés à la lecture et aux avatars.</dd></div>
+        <div><dt>Profondeur</dt><dd>Plat contour. Aucune ombre : séparation par contours et tons de surface. Seul le scrim signale la couche modale.</dd></div>
+        <div><dt>Mouvement</dt><dd>Scheme standard, sans rebond. Mouvement réservé à la progression et à l'entrée de la bottom sheet ; tout est figé si le mouvement réduit est demandé.</dd></div>
+        <div><dt>Densité</dt><dd>Aérée par défaut : échelle 8, marges 16 en compact et 24 au-delà, cibles 48, une seule action pleine par écran.</dd></div>
+      </dl>
+    </section>
+
+    <!-- ===== Vérifications ===== -->
+    <section class="section" aria-labelledby="checks-t">
+      <h2 id="checks-t">Vérifications appliquées</h2>
+      <ul class="checks">
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Un seul foyer et une seule action pleine par écran, dans la zone du pouce.</span></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>États dessinés : vide, prêt, chargement, succès, erreur réseau, erreur de saisie.</span></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Cibles 48 dp espacées de 8 ; écouter et sélectionner sont deux cibles distinctes.</span></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Sélection et erreur signalées par icône et texte, jamais par le seul ton.</span></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Contrastes : texte au moins 4.5:1, contours et icônes au moins 3:1, en clair et en sombre.</span></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Recomposition aux paliers 600 et 840 : bar vers rail, sheet vers pane fixe.</span></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Planche testée à 320, 360, 390 et 412 de large sans défilement horizontal.</span></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg><span>Libellés en casse de phrase, sans points de suspension sur les boutons d'action.</span></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>Wireframe basse fidélité. Les textes sont des exemples réalistes, les voix et les chiffres sont fictifs.</footer>
+</div>
+
+<script>
+(function () {
+  // Formes d'onde déterministes
+  document.querySelectorAll('.wave').forEach(function (w) {
+    var n = +w.dataset.bars || 48, played = +w.dataset.played || 0, seed = 7;
+    for (var i = 0; i < n; i++) {
+      seed = (seed * 9301 + 49297) % 233280;
+      var r = seed / 233280;
+      var env = Math.sin(Math.PI * (i + 1) / (n + 1));
+      var h = Math.round(12 + (env * .6 + r * .4) * 88);
+      var b = document.createElement('i');
+      b.style.height = h + '%';
+      if (i / n < played) b.className = 'p';
+      w.appendChild(b);
+    }
+  });
+
+  // Mise à l'échelle des schémas de recomposition
+  function fit(el) {
+    var W = +el.dataset.w, H = +el.dataset.h, s = el.clientWidth / W;
+    el.style.height = Math.round(H * s) + 'px';
+    el.firstElementChild.style.setProperty('--s', s);
+  }
+  var scalers = document.querySelectorAll('.scaler');
+  scalers.forEach(fit);
+  if ('ResizeObserver' in window) {
+    var ro = new ResizeObserver(function (entries) { entries.forEach(function (e) { fit(e.target); }); });
+    scalers.forEach(function (s) { ro.observe(s); });
+  } else {
+    window.addEventListener('resize', function () { scalers.forEach(fit); });
+  }
+
+  // Repères numérotés
+  var t = document.getElementById('marks-toggle');
+  function apply(on) { t.setAttribute('aria-pressed', on ? 'true' : 'false'); document.body.classList.toggle('no-marks', !on); }
+  try { if (localStorage.getItem('wf-marks') === 'off') apply(false); } catch (e) {}
+  t.addEventListener('click', function () {
+    var on = t.getAttribute('aria-pressed') !== 'true';
+    apply(on);
+    try { localStorage.setItem('wf-marks', on ? 'on' : 'off'); } catch (e) {}
+  });
+})();
+</script>
