@@ -1,0 +1,642 @@
+<title>Marge, composants</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,300,0..1,0&display=block">
+<style>
+/* ===== Marge · tokens ===== */
+:root{
+  color-scheme:light;
+  /* 60 % : le blanc. Neutre froid très légèrement bleuté (teinte 279, chroma < 2), pour qu'il paraisse propre sans virer au gris ni au crème */
+  --surface:#fbfbfc;
+  --on-surface:#1b1b1f;
+  --on-surface-variant:#46464c;
+  /* 30 % : les nuances de blanc et de gris (surface-container-*) */
+  --sc-lowest:#ffffff;
+  --sc-low:#f6f6f8;
+  --sc:#f1f1f3;
+  --sc-high:#ebebee;
+  --sc-highest:#e4e4e8;
+  --outline:#77767d;
+  --outline-variant:#c7c5cd;
+  /* 10 % : bleu cobalt, l'encre du stylo qui annote dans la marge */
+  --primary:#3850d3;
+  --on-primary:#ffffff;
+  --primary-container:#dee0ff;
+  --on-primary-container:#1834bb;
+  --inverse-surface:#313031;
+  --inverse-on-surface:#f3f0f1;
+  --inverse-primary:#bbc3ff;
+  --error:#ba1a1a;
+  --on-error:#ffffff;
+  --scrim:#000;
+
+  --font-brand:"Newsreader",Georgia,"Times New Roman",serif;
+  --font-plain:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r-xs:4px; --r-s:8px;
+  --ease:cubic-bezier(.2,0,0,1);
+  --ease-dec:cubic-bezier(.05,.7,.1,1);
+  --ease-acc:cubic-bezier(.3,0,.8,.15);
+  --ease-spring:cubic-bezier(.38,1.21,.22,1);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --surface:#131314; --on-surface:#e5e1e3; --on-surface-variant:#c7c5cd;
+    --sc-lowest:#0e0e0f; --sc-low:#1c1b1c; --sc:#201f20; --sc-high:#2a2a2b; --sc-highest:#353435;
+    --outline:#919097; --outline-variant:#46464c;
+    --primary:#bbc3ff; --on-primary:#001e92; --primary-container:#1834bb; --on-primary-container:#dee0ff;
+    --inverse-surface:#e5e1e3; --inverse-on-surface:#313031; --inverse-primary:#3850d3;
+    --error:#ffb4ab; --on-error:#690005;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --surface:#131314; --on-surface:#e5e1e3; --on-surface-variant:#c7c5cd;
+  --sc-lowest:#0e0e0f; --sc-low:#1c1b1c; --sc:#201f20; --sc-high:#2a2a2b; --sc-highest:#353435;
+  --outline:#919097; --outline-variant:#46464c;
+  --primary:#bbc3ff; --on-primary:#001e92; --primary-container:#1834bb; --on-primary-container:#dee0ff;
+  --inverse-surface:#e5e1e3; --inverse-on-surface:#313031; --inverse-primary:#3850d3;
+  --error:#ffb4ab; --on-error:#690005;
+}
+
+/* ===== Base ===== */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--surface);color:var(--on-surface);font:400 16px/24px var(--font-plain);-webkit-font-smoothing:antialiased}
+h1,h2,h3,p{margin:0}
+button,input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--primary);outline-offset:2px}
+.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.num{font-variant-numeric:tabular-nums lining-nums}
+
+/* Type : brand = Newsreader (titres, chiffres de lecture, citations), plain = Instrument Sans (interface) */
+.display{font:400 57px/64px var(--font-brand);letter-spacing:-.5px;font-variation-settings:"opsz" 72}
+.headline-l{font:400 32px/40px var(--font-brand);letter-spacing:-.25px;font-variation-settings:"opsz" 48}
+.headline-s{font:400 24px/32px var(--font-brand);font-variation-settings:"opsz" 30}
+.title-l{font:500 22px/28px var(--font-brand);font-variation-settings:"opsz" 24}
+.title-m{font:600 16px/24px var(--font-plain);letter-spacing:.1px}
+.body-l{font:400 16px/24px var(--font-plain)}
+.body-m{font:400 14px/20px var(--font-plain);letter-spacing:.1px}
+.label-l{font:500 14px/20px var(--font-plain);letter-spacing:.1px}
+.label-m{font:500 12px/16px var(--font-plain);letter-spacing:.4px}
+.muted{color:var(--on-surface-variant)}
+
+/* Icônes : Material Symbols Sharp, poids 300 (coins nets, trait fin accordé à la serif) */
+.ic{font-family:"Material Symbols Sharp";font-weight:300;font-style:normal;font-size:24px;line-height:1;display:inline-block;width:24px;height:24px;overflow:hidden;white-space:nowrap;direction:ltr;user-select:none;flex:none;font-variation-settings:"FILL" 0,"wght" 300,"GRAD" 0,"opsz" 24}
+
+/* ===== Calque d'état partagé (8 % survol, 10 % focus, 10 % pression) ===== */
+.st{position:relative;isolation:isolate;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.st::before{content:"";position:absolute;inset:0;border-radius:inherit;background:currentColor;opacity:0;z-index:-1;transition:opacity 150ms var(--ease);pointer-events:none}
+.st:hover::before,.st.is-hover::before{opacity:.08}
+.st:focus-visible::before,.st.is-focus::before{opacity:.10}
+.st:active::before,.st.is-pressed::before{opacity:.10}
+.is-focus{outline:3px solid var(--primary);outline-offset:2px}
+
+/* ===== 1. Bouton encre ===== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border:0;border-radius:var(--r-xs);background:transparent;color:var(--primary);font:500 14px/20px var(--font-plain);letter-spacing:.1px;text-decoration:none;white-space:nowrap}
+.btn .ic{font-size:20px;width:20px;height:20px;margin-inline-start:-4px}
+.btn-fill{background:var(--primary);color:var(--on-primary)}
+.btn-fill .ic.trail{margin-inline:0 -6px;transition:transform 200ms var(--ease)}
+.btn-fill:hover .ic.trail,.btn-fill.is-hover .ic.trail{transform:translateX(3px)}
+.btn-line{color:var(--on-surface);box-shadow:inset 0 0 0 1px var(--outline)}
+.btn-text{padding:0 12px}
+.btn-danger{color:var(--error)}
+.btn:disabled,.btn.is-disabled{cursor:default;color:color-mix(in srgb,var(--on-surface) 38%,transparent);box-shadow:none}
+.btn-fill:disabled,.btn-fill.is-disabled{background:color-mix(in srgb,var(--on-surface) 12%,transparent)}
+.btn-line:disabled,.btn-line.is-disabled{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--on-surface) 12%,transparent)}
+.btn:disabled::before,.btn.is-disabled::before{display:none}
+
+.ib{display:inline-grid;place-items:center;width:48px;height:48px;padding:0;border:0;border-radius:var(--r-xs);background:transparent;color:var(--on-surface-variant);flex:none}
+.ib.box{box-shadow:inset 0 0 0 1px var(--outline-variant);color:var(--on-surface)}
+.ib:disabled{color:color-mix(in srgb,var(--on-surface) 38%,transparent);cursor:default}
+.ib:disabled::before{display:none}
+
+/* ===== 2. Tranche (livre sur l'étagère) ===== */
+.shelf{display:flex;align-items:flex-end;gap:6px;min-height:296px;padding:24px 4px 0;border-bottom:3px solid var(--on-surface);overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scroll-padding-inline:8px}
+.spine{--h:200px;--sp-bg:var(--sc-high);--sp-fg:var(--on-surface);--sp-sub:var(--on-surface-variant);
+  flex:none;width:52px;height:var(--h);margin:0;padding:22px 0 12px;border:0;border-radius:3px 3px 0 0;background:var(--sp-bg);color:var(--sp-fg);
+  display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:8px;text-align:start;
+  transition:transform 250ms var(--ease)}
+.spine::after{content:"";position:absolute;inset-inline:9px;top:9px;height:5px;border-block:1px solid currentColor;opacity:.45}
+.spine .sp-t{writing-mode:vertical-rl;transform:rotate(180deg);font:500 16px/20px var(--font-brand);font-variation-settings:"opsz" 18;max-height:calc(var(--h) - 92px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.spine .sp-a{writing-mode:vertical-rl;transform:rotate(180deg);font:500 11px/16px var(--font-plain);letter-spacing:.5px;color:var(--sp-sub);max-height:64px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.spine[data-tone="0"]{--sp-bg:var(--sc-lowest);box-shadow:inset 0 0 0 1px var(--outline-variant)}
+.spine[data-tone="1"]{--sp-bg:var(--sc)}
+.spine[data-tone="2"]{--sp-bg:var(--sc-high)}
+.spine[data-tone="3"]{--sp-bg:var(--sc-highest)}
+.spine[data-tone="4"]{--sp-bg:var(--inverse-surface);--sp-fg:var(--inverse-on-surface);--sp-sub:var(--inverse-on-surface)}
+.spine.reading{--sp-bg:var(--primary);--sp-fg:var(--on-primary);--sp-sub:var(--on-primary);box-shadow:none}
+.spine .sp-x{font-size:18px;width:18px;height:18px;margin-top:-2px}
+.spine:hover,.spine.is-hover,.spine:focus-visible,.spine.is-focus{transform:translateY(-8px)}
+.spine:focus-visible{outline-offset:3px}
+.shelf-empty{align-self:center;margin:auto;padding:24px;color:var(--on-surface-variant);text-align:center}
+
+/* ===== 3. Signet (progression) ===== */
+.ribbon{position:relative;padding-top:18px}
+.ribbon-track{position:relative;height:2px;background:var(--outline-variant)}
+.ribbon-track::after{content:"";position:absolute;inset:-4px 0;background:linear-gradient(90deg,transparent calc(25% - .5px),var(--outline) 0 calc(25% + .5px),transparent 0 calc(50% - .5px),var(--outline) 0 calc(50% + .5px),transparent 0 calc(75% - .5px),var(--outline) 0 calc(75% + .5px),transparent 0)}
+.ribbon-fill{height:100%;width:calc(var(--p,0) * 100%);background:var(--primary);transition:width 500ms var(--ease)}
+.ribbon-mark{position:absolute;top:2px;left:clamp(0px,calc(var(--p,0) * 100% - 7px),calc(100% - 14px));width:14px;height:34px;background:var(--primary);clip-path:polygon(0 0,100% 0,100% 100%,50% 78%,0 100%);transition:left 500ms var(--ease)}
+.ribbon-meta{display:flex;justify-content:space-between;gap:16px;margin-top:22px;font:500 12px/16px var(--font-plain);letter-spacing:.4px;color:var(--on-surface-variant)}
+.ribbon-meta b{color:var(--on-surface);font-weight:600}
+
+/* ===== 4. Compteur de page ===== */
+.stepper{display:flex;align-items:center;gap:8px}
+.stepper-num{display:flex;align-items:baseline;gap:6px;min-width:0}
+.stepper input{width:3.4ch;min-width:0;padding:0 0 2px;border:0;border-bottom:1px solid var(--outline);border-radius:0;background:transparent;text-align:center;font:400 45px/52px var(--font-brand);font-variation-settings:"opsz" 60;font-variant-numeric:tabular-nums lining-nums;-moz-appearance:textfield;appearance:textfield}
+.stepper input::-webkit-inner-spin-button,.stepper input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.stepper input:focus{outline:none;border-bottom:2px solid var(--primary);padding-bottom:1px}
+.stepper input:focus-visible{outline:3px solid var(--primary);outline-offset:4px}
+.stepper-of{font:400 16px/24px var(--font-brand);color:var(--on-surface-variant);white-space:nowrap}
+
+/* ===== 5. Minuteur de session ===== */
+.timer{display:flex;align-items:center;gap:12px;padding:8px 8px 8px 16px;background:var(--sc-low);border-radius:var(--r-s);box-shadow:inset 0 0 0 1px var(--sc-high)}
+.timer-dot{width:8px;height:8px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--outline);flex:none}
+.timer-time{font:400 28px/36px var(--font-brand);font-variation-settings:"opsz" 36;font-variant-numeric:tabular-nums lining-nums;flex:1;min-width:0}
+.timer-time small{display:block;font:500 12px/16px var(--font-plain);letter-spacing:.4px;color:var(--on-surface-variant)}
+.timer[data-state="run"] .timer-dot{background:var(--primary);box-shadow:none;animation:pulse 1.6s var(--ease) infinite}
+.timer[data-state="run"]{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--primary) 45%,transparent)}
+@keyframes pulse{50%{transform:scale(1.6);opacity:.45}}
+
+/* ===== 6. Traits (note sur 5) ===== */
+.traits{border:0;margin:0;padding:0;min-width:0}
+.traits legend{padding:0;margin-bottom:4px}
+.traits-row{display:flex;align-items:center;flex-wrap:wrap;gap:0}
+.trait{position:relative;display:grid;place-items:center;width:44px;height:48px;border-radius:var(--r-xs);color:var(--on-surface)}
+.trait input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
+.trait .bar{width:4px;height:28px;border-radius:1px;background:var(--outline-variant);transform:rotate(14deg);transition:background 150ms var(--ease),height 200ms var(--ease)}
+.trait:has(input:checked) .bar,.trait:has(~ .trait input:checked) .bar{background:var(--primary);height:32px}
+.trait:has(input:focus-visible){outline:3px solid var(--primary);outline-offset:-2px}
+.traits-out{margin-inline-start:12px;font:400 16px/24px var(--font-brand);font-style:italic;color:var(--on-surface-variant)}
+
+/* ===== 7. Fiche citation ===== */
+.quote{margin:0;padding:2px 0 2px 20px;border-inline-start:2px solid var(--primary)}
+.quote blockquote{margin:0;font:italic 400 20px/30px var(--font-brand);font-variation-settings:"opsz" 24;text-wrap:pretty}
+.quote figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px;min-height:48px}
+.quote figcaption .label-m{color:var(--on-surface-variant)}
+.quote-act{display:flex;opacity:.0;transition:opacity 150ms var(--ease)}
+.quote:hover .quote-act,.quote:focus-within .quote-act,.quote.is-hover .quote-act{opacity:1}
+@media (hover:none){.quote-act{opacity:1}}
+
+/* ===== 8. Calendrier d'encre ===== */
+.ink-grid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,auto);grid-template-columns:repeat(var(--weeks,20),minmax(0,1fr));gap:3px;max-width:100%}
+.ink-grid i{display:block;aspect-ratio:1;border-radius:2px;background:var(--sc-high)}
+.ink-grid i[data-l="1"]{background:color-mix(in srgb,var(--primary) 28%,var(--sc-high))}
+.ink-grid i[data-l="2"]{background:color-mix(in srgb,var(--primary) 52%,var(--sc-high))}
+.ink-grid i[data-l="3"]{background:color-mix(in srgb,var(--primary) 76%,var(--sc-high))}
+.ink-grid i[data-l="4"]{background:var(--primary)}
+.ink-grid i.today{outline:1.5px solid var(--on-surface);outline-offset:1px}
+.ink-grid i.void{background:transparent}
+.ink-legend{display:flex;align-items:center;gap:4px;margin-top:12px;font:500 12px/16px var(--font-plain);letter-spacing:.4px;color:var(--on-surface-variant)}
+.ink-legend i{width:12px;height:12px;border-radius:2px;display:inline-block}
+.ink-legend span:first-child{margin-inline-end:4px}.ink-legend span:last-child{margin-inline-start:4px}
+
+/* ===== 9. Index (navigation) ===== */
+.index{display:flex}
+.index a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;min-height:64px;padding:8px 4px;color:var(--on-surface-variant);text-decoration:none;font:500 13px/16px var(--font-plain);letter-spacing:.2px}
+.index a .n{font:italic 400 14px/18px var(--font-brand);font-variant-numeric:lining-nums;opacity:.8}
+.index a::after{content:"";position:absolute;top:0;inset-inline:28%;height:2px;background:var(--primary);transform:scaleX(0);transition:transform 250ms var(--ease)}
+.index a[aria-current="page"]{color:var(--on-surface);font-weight:650}
+.index a[aria-current="page"] .n{color:var(--primary);opacity:1}
+.index a[aria-current="page"]::after{transform:scaleX(1)}
+.index.toc{flex-direction:column;gap:2px}
+.index.toc a{flex:none;flex-direction:row;justify-content:flex-start;gap:14px;min-height:48px;padding:0 16px;border-radius:var(--r-xs);font:500 15px/20px var(--font-plain)}
+.index.toc a .n{width:20px}
+.index.toc a::after{top:12px;bottom:12px;inset-inline:0 auto;width:2px;height:auto;transform:scaleY(0)}
+.index.toc a[aria-current="page"]::after{transform:scaleY(1)}
+
+/* ===== Composants Material repris : segmented (onglets), text field, dialog, snackbar ===== */
+.seg{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;border-bottom:1px solid var(--outline-variant)}
+.seg::-webkit-scrollbar{display:none}
+.seg button{flex:none;min-height:48px;padding:0 12px;border:0;background:none;border-radius:var(--r-xs) var(--r-xs) 0 0;color:var(--on-surface-variant);font:500 14px/20px var(--font-plain)}
+.seg button[aria-pressed="true"]{color:var(--on-surface);box-shadow:inset 0 -2px 0 var(--primary)}
+.seg button .c{font:400 13px/16px var(--font-brand);font-style:italic;margin-inline-start:4px;color:var(--on-surface-variant)}
+
+.field{position:relative;display:block}
+.field input,.field textarea{display:block;width:100%;min-height:56px;padding:16px;border:1px solid var(--outline);border-radius:var(--r-xs);background:transparent;font:400 16px/24px var(--font-plain);resize:vertical}
+.field textarea{min-height:120px;font:italic 400 18px/28px var(--font-brand)}
+.field>span{position:absolute;top:-8px;inset-inline-start:12px;padding:0 4px;background:var(--field-bg,var(--surface));font:500 12px/16px var(--font-plain);letter-spacing:.4px;color:var(--on-surface-variant)}
+.field input:hover,.field textarea:hover{border-color:var(--on-surface)}
+.field input:focus,.field textarea:focus{outline:none;border:2px solid var(--primary);padding:15px}
+.field:focus-within>span{color:var(--primary)}
+.field small{display:block;padding:4px 16px 0;font:400 12px/16px var(--font-plain);letter-spacing:.4px;color:var(--on-surface-variant)}
+.field.err input,.field.err textarea{border-color:var(--error)}
+.field.err>span,.field.err small{color:var(--error)}
+
+dialog.dlg{width:min(560px,calc(100vw - 32px));max-height:calc(100dvh - 48px);margin:auto;padding:24px;border:0;border-radius:var(--r-s);background:var(--sc-high);color:var(--on-surface);--field-bg:var(--sc-high)}
+dialog.dlg::backdrop{background:color-mix(in srgb,var(--scrim) 32%,transparent)}
+dialog.dlg[open]{animation:dlgIn 300ms var(--ease-dec)}
+@keyframes dlgIn{from{opacity:0;transform:translateY(12px)}}
+.dlg h2{margin-bottom:16px}
+.dlg form>.stack{display:grid;gap:24px;padding-top:8px}
+.dlg .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.dlg .actions{display:flex;justify-content:flex-end;gap:8px;margin-top:24px}
+
+.snack{position:fixed;inset-inline:16px;bottom:16px;z-index:50;display:flex;align-items:center;gap:8px;max-width:560px;margin-inline:auto;min-height:48px;padding:4px 4px 4px 16px;border-radius:var(--r-xs);background:var(--inverse-surface);color:var(--inverse-on-surface);font:400 14px/20px var(--font-plain);transform:translateY(16px);opacity:0;visibility:hidden;transition:transform 250ms var(--ease-dec),opacity 200ms var(--ease),visibility 0s 250ms}
+.snack.on{transform:none;opacity:1;visibility:visible;transition:transform 300ms var(--ease-dec),opacity 200ms var(--ease)}
+.snack p{flex:1;padding:10px 0}
+.snack .btn{color:var(--inverse-primary)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:1ms!important;animation-iteration-count:1!important;transition-duration:1ms!important}
+  .spine:hover,.spine:focus-visible{transform:none}
+}
+
+
+/* ===== Page de spécification ===== */
+.page{max-width:1120px;margin:0 auto;padding:0 16px 96px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;border-bottom:1px solid var(--outline-variant)}
+.mark{display:flex;align-items:center;gap:12px;font:italic 500 24px/32px var(--font-brand);text-decoration:none;color:var(--on-surface)}
+.mark::before{content:"";width:2px;height:28px;background:var(--primary)}
+.intro{padding:48px 0 40px;display:grid;gap:16px;max-width:760px}
+.intro .display{font-size:clamp(40px,8vw,57px);line-height:1.1}
+.kicker{font:500 12px/16px var(--font-plain);letter-spacing:.4px;color:var(--on-surface-variant)}
+.toc{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:8px}
+.toc a{display:inline-flex;align-items:center;min-height:48px;color:var(--on-surface);text-decoration:underline;text-decoration-color:var(--outline-variant);text-underline-offset:4px}
+.toc a:hover{text-decoration-color:var(--primary)}
+
+.step{display:grid;gap:24px;padding:48px 0;border-top:1px solid var(--outline-variant);scroll-margin-top:8px}
+.step-h{display:grid;grid-template-columns:auto 1fr;column-gap:16px;align-items:baseline}
+.step-n{font:italic 400 32px/40px var(--font-brand);color:var(--primary);font-variant-numeric:lining-nums}
+.step-h p{grid-column:2;max-width:62ch;color:var(--on-surface-variant);margin-top:8px}
+.cols{display:grid;gap:24px}
+.plate{background:var(--sc-lowest);border-radius:var(--r-s);box-shadow:inset 0 0 0 1px var(--sc-high);padding:24px;min-width:0}
+.plate.gray{background:var(--sc-low)}
+.plate-cap{display:block;margin-bottom:16px;font:500 12px/16px var(--font-plain);letter-spacing:.4px;color:var(--on-surface-variant)}
+.states{display:flex;flex-wrap:wrap;gap:16px 12px;align-items:flex-start}
+.states figure{margin:0;display:grid;gap:8px;justify-items:start}
+.states figcaption{font:500 12px/16px var(--font-plain);letter-spacing:.4px;color:var(--on-surface-variant)}
+.spec{width:100%;border-collapse:collapse;font:400 14px/20px var(--font-plain)}
+.spec th{text-align:start;font:500 12px/16px var(--font-plain);letter-spacing:.4px;color:var(--on-surface-variant);padding:0 8px 8px 0;border-bottom:1px solid var(--outline-variant)}
+.spec td{padding:10px 8px 10px 0;border-bottom:1px solid var(--sc-high);vertical-align:top}
+.spec td:first-child{white-space:nowrap}
+.spec code{font:500 13px/20px ui-monospace,"SFMono-Regular",Menlo,monospace;color:var(--on-surface)}
+.notes{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.notes li{position:relative;padding-inline-start:28px;font:400 14px/20px var(--font-plain)}
+.notes li::before{content:"";position:absolute;inset-inline-start:0;top:10px;width:12px;height:1px;background:var(--primary)}
+h3.sub{font:600 14px/20px var(--font-plain);margin-bottom:12px}
+
+/* Répartition 60/30/10 */
+.ratio{display:flex;height:96px;border-radius:var(--r-s);overflow:hidden;box-shadow:inset 0 0 0 1px var(--outline-variant)}
+.ratio div{display:flex;flex-direction:column;justify-content:flex-end;padding:12px;font:500 12px/16px var(--font-plain);letter-spacing:.4px;min-width:0}
+.ratio div b{font:400 24px/28px var(--font-brand)}
+.r60{flex:60;background:var(--surface);color:var(--on-surface)}
+.r30{flex:30;background:linear-gradient(90deg,var(--sc-low),var(--sc),var(--sc-high),var(--sc-highest));color:var(--on-surface)}
+.r10{flex:10;background:var(--primary);color:var(--on-primary)}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.sw{display:grid;grid-template-rows:56px auto;border-radius:var(--r-xs);overflow:hidden;box-shadow:inset 0 0 0 1px var(--sc-high);background:var(--sc-lowest)}
+.sw i{display:block}
+.sw span{padding:8px 10px;font:500 12px/16px var(--font-plain);letter-spacing:.2px}
+.sw span em{display:block;font-style:normal;color:var(--on-surface-variant);font-weight:400}
+.decisions{display:grid;gap:0;margin:0;padding:0;list-style:none}
+.decisions li{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--sc-high)}
+.decisions b{font:600 14px/20px var(--font-plain)}
+.decisions span{font:400 14px/20px var(--font-plain);color:var(--on-surface-variant)}
+.specimen{display:grid;gap:16px}
+.specimen>div{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:baseline}
+.specimen>div>span{font:500 12px/16px var(--font-plain);letter-spacing:.4px;color:var(--on-surface-variant)}
+.phone{width:min(100%,360px);border-radius:var(--r-s);box-shadow:inset 0 0 0 1px var(--outline-variant);overflow:hidden;background:var(--surface)}
+.phone .index{background:var(--sc-low);border-top:1px solid var(--outline-variant)}
+.mini-toc{width:240px;max-width:100%;padding:16px 8px;background:var(--sc-low);border-radius:var(--r-s)}
+.assembly{display:grid;gap:24px;padding:24px;border-radius:var(--r-s);background:var(--surface);box-shadow:inset 0 0 0 1px var(--outline-variant)}
+.assembly .head{display:grid;gap:4px}
+.icon-row{display:flex;gap:4px;flex-wrap:wrap}
+
+@media (min-width:840px){
+  .page{padding:0 40px 120px}
+  .cols{grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:start}
+  .cols.even{grid-template-columns:1fr 1fr}
+  .step-h{grid-template-columns:72px 1fr}
+  .assembly{grid-template-columns:1fr 1fr;padding:32px}
+}
+@media (max-width:599px){
+  .decisions li{grid-template-columns:1fr;gap:2px}
+  .specimen>div{grid-template-columns:1fr;gap:2px}
+  .plate{padding:16px}
+  .step-h{grid-template-columns:1fr}
+  .step-h p{grid-column:1}
+}
+</style>
+
+<div class="page">
+  <header class="top">
+    <a class="mark" href="#">Marge</a>
+    <button class="ib st" id="theme" aria-label="Changer de thème"><span class="ic" aria-hidden="true">contrast</span></button>
+  </header>
+
+  <section class="intro">
+    <p class="kicker">Système de composants, conçu pièce par pièce avant l'intégration</p>
+    <h1 class="display">Un carnet de lecture qui écrit dans la marge.</h1>
+    <p class="body-l muted" style="max-width:60ch">Marge suit vos livres, vos pages et vos citations. Ici, chaque composant est dessiné seul : intention, anatomie, états, tokens et accessibilité. L'application les assemble ensuite.</p>
+    <nav class="toc" aria-label="Étapes">
+      <a href="#s0">00 Direction</a><a href="#s1">01 Bouton encre</a><a href="#s2">02 Tranche</a><a href="#s3">03 Signet</a><a href="#s4">04 Compteur</a><a href="#s5">05 Minuteur</a><a href="#s6">06 Traits</a><a href="#s7">07 Citation</a><a href="#s8">08 Calendrier d'encre</a><a href="#s9">09 Index</a><a href="#s10">10 Repris de Material</a><a href="#s11">11 Assemblage</a>
+    </nav>
+  </section>
+
+  <!-- 00 -->
+  <section class="step" id="s0" aria-labelledby="h0">
+    <div class="step-h"><span class="step-n">00</span><div><h2 class="headline-l" id="h0">Direction</h2><p>Les six décisions prises avant de dessiner quoi que ce soit, puis la répartition des couleurs.</p></div></div>
+    <div class="cols">
+      <ul class="decisions">
+        <li><b>Couleur</b><span>60 % blanc froid #fbfbfc, 30 % cinq gris de la même teinte, 10 % cobalt #3850d3. Statique. Le cobalt est l'encre du stylo bille qui annote un livre : un seul geste coloré par écran.</span></li>
+        <li><b>Typographie</b><span>Newsreader (serif à taille optique) pour tout ce qui appartient au livre : titres, pages, citations. Instrument Sans pour tout ce qui appartient à l'outil : libellés, boutons, aide.</span></li>
+        <li><b>Forme</b><span>Nette. 4 px pour les contrôles, 8 px pour les plateaux et dialogs, 3 px en haut des tranches. Aucune pilule : un livre n'est pas rond.</span></li>
+        <li><b>Profondeur</b><span>Plat tonal. Les surfaces se séparent par les gris et un filet, jamais par une ombre. Seule la tranche se soulève, parce qu'on la sort de l'étagère.</span></li>
+        <li><b>Mouvement</b><span>Standard, sans rebond. Une seule exception expressive : le signet qui glisse quand un livre est terminé.</span></li>
+        <li><b>Densité</b><span>Aérée. Rythme sur 8, grandes respirations entre sections, chiffres de lecture en grand.</span></li>
+      </ul>
+      <div style="display:grid;gap:16px;min-width:0">
+        <div class="ratio" aria-label="Répartition des couleurs : 60 % blanc, 30 % gris, 10 % cobalt" role="img">
+          <div class="r60"><b>60</b>Blanc · surface</div>
+          <div class="r30"><b>30</b>Gris · conteneurs</div>
+          <div class="r10"><b>10</b></div>
+        </div>
+        <div class="swatches" id="swatches"></div>
+      </div>
+    </div>
+    <div class="plate">
+      <span class="plate-cap">Échelle typographique utilisée (6 styles sur 30)</span>
+      <div class="specimen">
+        <div><span>Display L · brand</span><p class="display num">1 284</p></div>
+        <div><span>Headline L · brand</span><p class="headline-l">L'Écume des jours</p></div>
+        <div><span>Title L · brand</span><p class="title-l">Boris Vian, 1947</p></div>
+        <div><span>Body L · plain</span><p class="body-l">Reprenez là où vous vous êtes arrêté, page 132.</p></div>
+        <div><span>Label L · plain</span><p class="label-l">Démarrer la session</p></div>
+        <div><span>Citation · brand italique</span><p style="font:italic 400 20px/30px var(--font-brand)">« Mobilis in mobili. »</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 -->
+  <section class="step" id="s1" aria-labelledby="h1">
+    <div class="step-h"><span class="step-n">01</span><div><h2 class="headline-l" id="h1">Bouton encre</h2><p>Repris de Material pour la mécanique (calque d'état, cible 48, libellé en verbe), redessiné pour la forme : coins de 4 px, pas de pilule, une flèche qui avance au survol sur l'action principale.</p></div></div>
+    <div class="cols">
+      <div style="display:grid;gap:24px">
+        <ul class="notes">
+          <li>Trois emphases : <b>plein</b> (une seule action par écran, cobalt), <b>filet</b> (action secondaire, contour outline), <b>texte</b> (action tertiaire).</li>
+          <li>Hauteur 48, padding 20, gap icône 8. Libellé label-large, casse de phrase.</li>
+          <li>États par calque currentColor : 8 % survol, 10 % focus et pression. Focus visible : anneau cobalt 3 px, décalé de 2.</li>
+          <li>Désactivé : contenu à 38 %, fond à 12 %, sans calque.</li>
+        </ul>
+        <table class="spec"><thead><tr><th>Élément</th><th>Rôle</th></tr></thead><tbody>
+          <tr><td>Fond plein</td><td><code>--primary</code></td></tr>
+          <tr><td>Texte plein</td><td><code>--on-primary</code> · 6,3:1</td></tr>
+          <tr><td>Contour filet</td><td><code>--outline</code> · 4,4:1</td></tr>
+          <tr><td>Rayon</td><td><code>--r-xs</code> 4 px</td></tr>
+        </tbody></table>
+      </div>
+      <div class="plate" style="display:grid;gap:24px">
+        <div><span class="plate-cap">Plein</span><div class="states">
+          <figure><button class="btn btn-fill st">Reprendre la lecture<span class="ic trail" aria-hidden="true">arrow_forward</span></button><figcaption>Repos</figcaption></figure>
+          <figure><button class="btn btn-fill st is-hover" tabindex="-1">Reprendre<span class="ic trail" aria-hidden="true">arrow_forward</span></button><figcaption>Survol</figcaption></figure>
+          <figure><button class="btn btn-fill st is-focus is-pressed" tabindex="-1">Reprendre<span class="ic trail" aria-hidden="true">arrow_forward</span></button><figcaption>Focus</figcaption></figure>
+          <figure><button class="btn btn-fill st" disabled>Reprendre</button><figcaption>Désactivé</figcaption></figure>
+        </div></div>
+        <div><span class="plate-cap">Filet</span><div class="states">
+          <figure><button class="btn btn-line st"><span class="ic" aria-hidden="true">add</span>Ajouter un livre</button><figcaption>Repos</figcaption></figure>
+          <figure><button class="btn btn-line st is-hover" tabindex="-1"><span class="ic" aria-hidden="true">add</span>Ajouter</button><figcaption>Survol</figcaption></figure>
+          <figure><button class="btn btn-line st" disabled><span class="ic" aria-hidden="true">add</span>Ajouter</button><figcaption>Désactivé</figcaption></figure>
+        </div></div>
+        <div><span class="plate-cap">Texte et icône</span><div class="states">
+          <figure><button class="btn btn-text st">Annuler</button><figcaption>Texte</figcaption></figure>
+          <figure><button class="btn btn-text btn-danger st">Retirer de l'étagère</button><figcaption>Destructif</figcaption></figure>
+          <figure><div class="icon-row"><button class="ib st" aria-label="Retour"><span class="ic" aria-hidden="true">arrow_back</span></button><button class="ib box st" aria-label="Page suivante"><span class="ic" aria-hidden="true">add</span></button></div><figcaption>Icône, icône encadrée</figcaption></figure>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="step" id="s2" aria-labelledby="h2">
+    <div class="step-h"><span class="step-n">02</span><div><h2 class="headline-l" id="h2">Tranche</h2><p>Composant unique, signature du site. À la place d'une card avec couverture, chaque livre est une tranche sur une étagère : la hauteur dit l'épaisseur, la couleur dit l'état. On lit les titres comme dans une bibliothèque.</p></div></div>
+    <div class="cols">
+      <div style="display:grid;gap:24px">
+        <ul class="notes">
+          <li>Anatomie : bande de reliure (deux filets), titre vertical en Newsreader 16, auteur en label 11, socle commun de 3 px.</li>
+          <li>Hauteur 196 à 272 selon le nombre de pages. Largeur 52 : cible ≥ 48 dans les deux sens.</li>
+          <li>Cinq gris pour les livres posés (le 30 %), cobalt pour le livre en cours (le 10 %). Un livre lu porte une coche au pied, pas seulement une teinte.</li>
+          <li>Survol et focus : la tranche sort de 8 px, comme tirée du rayon. Mouvement réduit : elle reste en place, seul le calque et l'anneau signalent l'état.</li>
+          <li>Bouton natif, nom accessible complet : « L'Écume des jours, Boris Vian, en cours, page 132 sur 320 ».</li>
+        </ul>
+        <table class="spec"><thead><tr><th>Variante</th><th>Fond / texte</th></tr></thead><tbody>
+          <tr><td>Gris 0 à 3</td><td><code>--sc-lowest</code> à <code>--sc-highest</code> / <code>--on-surface</code></td></tr>
+          <tr><td>Gris 4</td><td><code>--inverse-surface</code> / <code>--inverse-on-surface</code></td></tr>
+          <tr><td>En cours</td><td><code>--primary</code> / <code>--on-primary</code></td></tr>
+        </tbody></table>
+      </div>
+      <div class="plate">
+        <span class="plate-cap">Étagère : repos, en cours, survol, focus, lu, titre long tronqué</span>
+        <div class="shelf" id="demoShelf"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="step" id="s3" aria-labelledby="h3">
+    <div class="step-h"><span class="step-n">03</span><div><h2 class="headline-l" id="h3">Signet</h2><p>Remplace la linear progress indicator. Même mécanique (piste, indicateur, rôle progressbar), mais l'indicateur est un ruban de signet glissé entre les pages, avec des repères aux quarts.</p></div></div>
+    <div class="cols">
+      <div style="display:grid;gap:24px">
+        <ul class="notes">
+          <li>Piste 2 px <code>--outline-variant</code>, remplissage et ruban <code>--primary</code> (3:1 minimum sur la surface, 6,3 mesuré).</li>
+          <li>Repères à 25, 50, 75 % en <code>--outline</code> : la lecture se mesure aussi en « à peu près la moitié ».</li>
+          <li>Le ruban reste dans la piste aux extrêmes (bornage à 0 et 100 %).</li>
+          <li><code>role="progressbar"</code>, <code>aria-valuetext</code> en mots : « page 132 sur 320, 41 % ».</li>
+        </ul>
+      </div>
+      <div class="plate" style="display:grid;gap:32px">
+        <div><span class="plate-cap">Début</span><div class="ribbon" id="rb0"></div></div>
+        <div><span class="plate-cap">En cours (glisser pour tester)</span><div class="ribbon" id="rb1"></div>
+          <label class="sr" for="rbRange">Simuler la progression</label><input id="rbRange" type="range" min="0" max="320" value="132" style="width:100%;margin-top:16px;accent-color:var(--primary)"></div>
+        <div><span class="plate-cap">Terminé</span><div class="ribbon" id="rb2"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="step" id="s4" aria-labelledby="h4">
+    <div class="step-h"><span class="step-n">04</span><div><h2 class="headline-l" id="h4">Compteur de page</h2><p>Saisir sa page est l'action la plus fréquente de l'application. Le chiffre est donc le plus gros élément de l'écran, en serif comme un folio, avec deux boutons de pas et une saisie directe.</p></div></div>
+    <div class="cols">
+      <div style="display:grid;gap:24px">
+        <ul class="notes">
+          <li>Numéro en Newsreader 45/52, chiffres tabulaires : la largeur ne saute pas entre 99 et 100.</li>
+          <li>Le champ est un vrai <code>input type="number"</code> avec libellé caché et bornes 0 à total. Les flèches du clavier fonctionnent.</li>
+          <li>Boutons encadrés 48 × 48. Le « − » se désactive à 0, le « + » au total.</li>
+          <li>Focus : soulignement cobalt 2 px plus anneau au clavier.</li>
+        </ul>
+      </div>
+      <div class="plate" style="display:grid;gap:24px">
+        <div class="stepper" id="demoStepper">
+          <button class="ib box st" data-d="-1" aria-label="Page précédente"><span class="ic" aria-hidden="true">remove</span></button>
+          <div class="stepper-num"><label class="sr" for="stepIn">Page actuelle</label><input id="stepIn" type="number" inputmode="numeric" min="0" max="320" value="132"><span class="stepper-of">/ 320 p.</span></div>
+          <button class="ib box st" data-d="1" aria-label="Page suivante"><span class="ic" aria-hidden="true">add</span></button>
+        </div>
+        <div class="ribbon" id="rb3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section class="step" id="s5" aria-labelledby="h5">
+    <div class="step-h"><span class="step-n">05</span><div><h2 class="headline-l" id="h5">Minuteur de session</h2><p>Un plateau gris discret qui chronomètre la lecture en cours. Le seul signe vivant est un point cobalt qui respire.</p></div></div>
+    <div class="cols">
+      <ul class="notes">
+        <li>Plateau <code>--sc-low</code>, rayon 8, filet tonal. En marche, le filet passe au cobalt à 45 %.</li>
+        <li>Point d'état : contour vide à l'arrêt, plein et pulsé en marche (pulsation coupée en mouvement réduit, le libellé change aussi : jamais la couleur seule).</li>
+        <li>Temps en Newsreader 28 tabulaire. Le lecteur d'écran n'annonce pas chaque seconde (<code>aria-live="off"</code>), seulement le début et la fin.</li>
+      </ul>
+      <div class="plate" style="display:grid;gap:16px">
+        <div class="timer" data-state="idle" id="demoTimer"><span class="timer-dot" aria-hidden="true"></span><span class="timer-time num"><small>Session</small><span>00:00</span></span><button class="btn btn-line st" style="background:var(--sc-lowest)">Démarrer</button></div>
+        <div class="timer" data-state="run"><span class="timer-dot" aria-hidden="true"></span><span class="timer-time num"><small>En lecture</small>24:07</span><button class="btn btn-fill st" tabindex="-1">Terminer</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section class="step" id="s6" aria-labelledby="h6">
+    <div class="step-h"><span class="step-n">06</span><div><h2 class="headline-l" id="h6">Traits</h2><p>La note d'un livre fini. Pas d'étoiles : cinq traits penchés, comme ceux qu'on trace pour compter. C'est un groupe de boutons radio natifs habillé.</p></div></div>
+    <div class="cols">
+      <ul class="notes">
+        <li>Chaque trait est une cible de 44 × 48 (la rangée fait 220 px). Flèches gauche et droite pour changer la note, comme tout groupe radio.</li>
+        <li>Traits vides en <code>--outline-variant</code>, traits pleins en <code>--primary</code> et légèrement plus longs : la forme change avec la couleur.</li>
+        <li>Résultat écrit à côté en italique : « 4 sur 5 ».</li>
+      </ul>
+      <div class="plate">
+        <fieldset class="traits" id="demoTraits"><legend class="label-l">Votre note</legend><div class="traits-row"></div></fieldset>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section class="step" id="s7" aria-labelledby="h7">
+    <div class="step-h"><span class="step-n">07</span><div><h2 class="headline-l" id="h7">Citation</h2><p>La marge, littéralement : un filet cobalt à gauche du texte souligné, la citation en italique, la page en petit. Pas de card, pas de fond : le texte suffit.</p></div></div>
+    <div class="cols">
+      <ul class="notes">
+        <li><code>figure</code> + <code>blockquote</code> + <code>figcaption</code>. Newsreader italique 20/30, mesure maximale 60 caractères.</li>
+        <li>Actions (copier, supprimer) en boutons icône, visibles au survol et au focus sur ordinateur, toujours visibles au toucher.</li>
+        <li>Le filet est logique (<code>border-inline-start</code>) : il passe à droite en RTL.</li>
+      </ul>
+      <div class="plate" style="display:grid;gap:24px">
+        <figure class="quote"><blockquote>« Aujourd'hui, maman est morte. Ou peut-être hier, je ne sais pas. »</blockquote><figcaption><span class="label-m">p. 9 · L'Étranger</span><span class="quote-act"><button class="ib st" aria-label="Copier la citation"><span class="ic" aria-hidden="true">content_copy</span></button><button class="ib st" aria-label="Supprimer la citation"><span class="ic" aria-hidden="true">delete</span></button></span></figcaption></figure>
+        <figure class="quote is-hover"><blockquote>« Mobilis in mobili. »</blockquote><figcaption><span class="label-m">p. 88 · Vingt mille lieues sous les mers · survol</span><span class="quote-act"><button class="ib st" tabindex="-1" aria-label="Copier la citation"><span class="ic" aria-hidden="true">content_copy</span></button><button class="ib st" tabindex="-1" aria-label="Supprimer la citation"><span class="ic" aria-hidden="true">delete</span></button></span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 -->
+  <section class="step" id="s8" aria-labelledby="h8">
+    <div class="step-h"><span class="step-n">08</span><div><h2 class="headline-l" id="h8">Calendrier d'encre</h2><p>Les jours de lecture comme des taches d'encre plus ou moins chargées. Une colonne par semaine, cinq niveaux mélangés entre le gris et le cobalt.</p></div></div>
+    <div class="cols">
+      <ul class="notes">
+        <li>Les cellules s'étirent sur la largeur disponible : 18 semaines en compact, 30 en moyen, 52 en étendu. On recompose, on ne rétrécit pas.</li>
+        <li>Niveaux par <code>color-mix</code> entre <code>--primary</code> et <code>--sc-high</code> : ils suivent le thème sans valeur en dur.</li>
+        <li>Image unique pour les lecteurs d'écran (<code>role="img"</code>) avec un résumé en phrase ; les chiffres exacts sont dans les stats à côté.</li>
+        <li>Aujourd'hui entouré d'un filet <code>--on-surface</code>.</li>
+      </ul>
+      <div class="plate"><div class="ink" id="demoInk"></div></div>
+    </div>
+  </section>
+
+  <!-- 09 -->
+  <section class="step" id="s9" aria-labelledby="h9">
+    <div class="step-h"><span class="step-n">09</span><div><h2 class="headline-l" id="h9">Index</h2><p>La navigation reprend la structure de la navigation bar et du rail Material (3 destinations, indicateur actif, cibles 48), mais se présente comme la table des matières d'un livre : numéros en italique, filet cobalt au lieu de la pilule.</p></div></div>
+    <div class="cols even">
+      <div class="plate gray"><span class="plate-cap">Compact (moins de 600) : barre basse</span>
+        <div class="phone"><div style="height:120px;display:grid;place-items:center" class="muted body-m">Contenu</div>
+          <nav class="index" aria-label="Démo compacte"><a class="st" href="#s9" aria-current="page"><span class="n">01</span>Étagère</a><a class="st" href="#s9"><span class="n">02</span>Citations</a><a class="st" href="#s9"><span class="n">03</span>Carnet</a></nav></div></div>
+      <div class="plate gray"><span class="plate-cap">Étendu (840 et plus) : table des matières</span>
+        <div class="mini-toc"><nav class="index toc" aria-label="Démo étendue"><a class="st" href="#s9"><span class="n">01</span>Étagère</a><a class="st" href="#s9" aria-current="page"><span class="n">02</span>Citations</a><a class="st" href="#s9"><span class="n">03</span>Carnet</a></nav></div></div>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="step" id="s10" aria-labelledby="h10">
+    <div class="step-h"><span class="step-n">10</span><div><h2 class="headline-l" id="h10">Repris de Material</h2><p>Là où un composant standard fait exactement le travail, on le garde. Seule la forme change pour suivre le langage net du site.</p></div></div>
+    <div class="cols even">
+      <div class="plate" style="display:grid;gap:24px;--field-bg:var(--sc-lowest)">
+        <span class="plate-cap" style="margin:0">Text field outlined · rayon 16 → 4</span>
+        <label class="field"><span>Titre</span><input value="La Peste"></label>
+        <label class="field err"><span>Nombre de pages</span><input value="0" inputmode="numeric" aria-invalid="true" aria-describedby="e1"><small id="e1">Entre 1 et 5 000 pages</small></label>
+        <span class="plate-cap" style="margin:0">Onglets de filtre · indicateur 2 px</span>
+        <div class="seg" role="group" aria-label="Filtre"><button class="st" aria-pressed="true">Tous<span class="c">9</span></button><button class="st" aria-pressed="false">En cours<span class="c">2</span></button><button class="st" aria-pressed="false">À lire<span class="c">3</span></button><button class="st" aria-pressed="false">Lus<span class="c">4</span></button></div>
+      </div>
+      <div class="plate" style="display:grid;gap:24px;align-content:start">
+        <span class="plate-cap" style="margin:0">Dialog · rayon 28 → 8, surface-container-high</span>
+        <div class="dlg" style="display:block;position:static;width:auto;padding:24px;border-radius:8px;background:var(--sc-high)"><h3 class="headline-s" style="margin-bottom:8px">Retirer ce livre ?</h3><p class="body-m muted">Ses citations seront aussi retirées. Vous pourrez annuler juste après.</p><div class="actions" style="display:flex;justify-content:flex-end;gap:8px;margin-top:24px"><button class="btn btn-text st">Annuler</button><button class="btn btn-text btn-danger st">Retirer</button></div></div>
+        <span class="plate-cap" style="margin:0">Snackbar · inverse-surface, action inverse-primary</span>
+        <div class="snack on" style="position:static;margin:0;max-width:none"><p>Session de 24 min enregistrée</p><button class="btn btn-text st">Annuler</button></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section class="step" id="s11" aria-labelledby="h11">
+    <div class="step-h"><span class="step-n">11</span><div><h2 class="headline-l" id="h11">Assemblage</h2><p>Premier essai d'intégration : la fiche du livre en cours réunit cinq composants. C'est ce bloc qui ouvre l'application.</p></div></div>
+    <div class="assembly">
+      <div style="display:grid;gap:24px;align-content:start">
+        <div class="head"><span class="kicker">Reprendre</span><h3 class="headline-l">L'Écume des jours</h3><p class="title-l muted" style="font-style:italic;font-weight:400">Boris Vian</p></div>
+        <div class="ribbon" id="rb4"></div>
+        <div><button class="btn btn-fill st">Reprendre la lecture<span class="ic trail" aria-hidden="true">arrow_forward</span></button></div>
+      </div>
+      <div style="display:grid;gap:24px;align-content:start">
+        <div class="timer" data-state="idle"><span class="timer-dot" aria-hidden="true"></span><span class="timer-time num"><small>Session</small>00:00</span><button class="btn btn-line st" style="background:var(--sc-lowest)">Démarrer</button></div>
+        <figure class="quote"><blockquote>« L'essentiel, c'est la ligne droite. »</blockquote><figcaption><span class="label-m">p. 41 · note personnelle</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(()=>{
+  const $=s=>document.querySelector(s);
+  // Thème
+  const root=document.documentElement;
+  try{const t=localStorage.getItem('marge.theme');if(t)root.dataset.theme=t;}catch(e){}
+  $('#theme').onclick=()=>{const dark=root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;root.dataset.theme=dark?'light':'dark';try{localStorage.setItem('marge.theme',root.dataset.theme)}catch(e){};paintSwatches();};
+
+  // Nuancier : valeurs lues dans les tokens, contrastes calculés
+  const L=h=>{const c=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(x=>x<=.03928?x/12.92:((x+.055)/1.055)**2.4);return .2126*c[0]+.7152*c[1]+.0722*c[2]};
+  const C=(a,b)=>{const x=[L(a),L(b)].sort((m,n)=>n-m);return ((x[0]+.05)/(x[1]+.05)).toFixed(1).replace('.',',')};
+  const v=n=>getComputedStyle(root).getPropertyValue('--'+n).trim();
+  function paintSwatches(){
+    const S=[['surface','60 %','on-surface'],['sc-lowest','30 %','on-surface'],['sc-low','30 %','on-surface'],['sc','30 %','on-surface'],['sc-high','30 %','on-surface-variant'],['sc-highest','30 %','on-surface-variant'],['primary','10 %','on-primary'],['outline','filet','surface']];
+    $('#swatches').innerHTML=S.map(([n,p,o])=>`<div class="sw"><i style="background:var(--${n})"></i><span>--${n} <em>${v(n)} · ${p} · ${o==='surface'?'non-texte':'texte'} ${C(v(n),v(o))}:1</em></span></div>`).join('');
+  }
+  paintSwatches();
+
+  // Étagère démo
+  const shelf=[['Bonjour tristesse','F. Sagan',160,1,''],["L'Écume des jours",'Boris Vian',320,0,'reading'],['La Peste','Albert Camus',352,3,'is-hover'],['Madame Bovary','G. Flaubert',480,2,'is-focus'],["L'Étranger",'Albert Camus',184,4,'done'],['Vingt mille lieues sous les mers','Jules Verne',512,0,''],['Le Rouge et le Noir','Stendhal',576,2,'done']];
+  const H=p=>Math.round(196+Math.min(76,p/576*76));
+  $('#demoShelf').innerHTML=shelf.map(([t,a,p,tone,cls])=>`<button class="spine st ${cls==='is-focus'?'is-focus':cls} ${cls==='reading'?'':''}" data-tone="${tone}" style="--h:${H(p)}px" aria-label="${t}, ${a}"><span class="sp-t">${t}</span><span class="sp-a">${a}</span>${cls==='done'?'<span class="ic sp-x" aria-hidden="true">check</span>':''}</button>`).join('');
+
+  // Signets
+  const ribbon=(el,page,total)=>{const p=total?page/total:0;el.setAttribute('role','progressbar');el.setAttribute('aria-valuemin',0);el.setAttribute('aria-valuemax',total);el.setAttribute('aria-valuenow',page);el.setAttribute('aria-valuetext',`page ${page} sur ${total}, ${Math.round(p*100)} %`);el.style.setProperty('--p',p);
+    el.innerHTML=`<div class="ribbon-track"><div class="ribbon-fill"></div></div><div class="ribbon-mark"></div><div class="ribbon-meta"><span>Page <b class="num">${page}</b> sur ${total}</span><span class="num">${p>=1?'Terminé':Math.round(p*100)+' %'}</span></div>`;};
+  ribbon($('#rb0'),0,320);ribbon($('#rb1'),132,320);ribbon($('#rb2'),320,320);ribbon($('#rb3'),132,320);ribbon($('#rb4'),132,320);
+  $('#rbRange').oninput=e=>ribbon($('#rb1'),+e.target.value,320);
+
+  // Compteur
+  const inp=$('#stepIn'),bs=document.querySelectorAll('#demoStepper [data-d]');
+  const sync=()=>{let n=Math.max(0,Math.min(320,parseInt(inp.value)||0));inp.value=n;bs[0].disabled=n<=0;bs[1].disabled=n>=320;ribbon($('#rb3'),n,320);};
+  bs.forEach(b=>b.onclick=()=>{inp.value=(+inp.value||0)+ +b.dataset.d;sync();});inp.onchange=sync;sync();
+
+  // Minuteur
+  const tm=$('#demoTimer');let t0=0,iv=0;
+  tm.querySelector('button').onclick=e=>{const b=e.currentTarget,out=tm.querySelector('.timer-time span'),lab=tm.querySelector('small');
+    if(tm.dataset.state==='run'){clearInterval(iv);tm.dataset.state='idle';b.textContent='Démarrer';b.className='btn btn-line st';b.style.background='var(--sc-lowest)';lab.textContent='Session terminée';}
+    else{t0=Date.now();tm.dataset.state='run';b.textContent='Terminer';b.className='btn btn-fill st';b.style.background='';lab.textContent='En lecture';iv=setInterval(()=>{const s=Math.floor((Date.now()-t0)/1000);out.textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');},1000);}};
+
+  // Traits
+  const tr=$('#demoTraits .traits-row');
+  tr.innerHTML=[1,2,3,4,5].map(i=>`<label class="trait st"><input type="radio" name="demoNote" value="${i}" ${i===4?'checked':''}><span class="bar" aria-hidden="true"></span><span class="sr">${i} sur 5</span></label>`).join('')+'<output class="traits-out" aria-live="polite">4 sur 5</output>';
+  tr.addEventListener('change',e=>tr.querySelector('output').textContent=e.target.value+' sur 5');
+
+  // Calendrier d'encre (données de démonstration déterministes)
+  const ink=$('#demoInk');
+  const draw=()=>{const w=ink.clientWidth,weeks=w<420?18:w<640?30:52;let seed=7;const rnd=()=>(seed=(seed*9301+49297)%233280)/233280;
+    const cells=[];let days=0;for(let i=0;i<weeks*7;i++){const r=rnd();const l=r<.3?0:r<.5?1:r<.7?2:r<.88?3:4;if(l)days++;cells.push(`<i data-l="${l}"${i===weeks*7-1?' class="today"':''}></i>`);}
+    ink.innerHTML=`<div class="ink-grid" style="--weeks:${weeks}" role="img" aria-label="${weeks} dernières semaines : lecture ${days} jours sur ${weeks*7}">${cells.join('')}</div><div class="ink-legend" aria-hidden="true"><span>Moins</span>${[0,1,2,3,4].map(l=>`<i style="background:${l?`color-mix(in srgb,var(--primary) ${[0,28,52,76,100][l]}%,var(--sc-high))`:'var(--sc-high)'}"></i>`).join('')}<span>Plus</span></div>`;};
+  draw();new ResizeObserver(()=>{const w=ink.clientWidth;const k=w<420?18:w<640?30:52;if(k!==+ink.dataset.k){ink.dataset.k=k;draw();}}).observe(ink);
+})();
+</script>
