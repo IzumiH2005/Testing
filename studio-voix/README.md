@@ -7,7 +7,7 @@ Site fonctionnel en un seul fichier (`index.html`) qui transforme un texte en au
 - **Bibliothèque** : audios enregistrés dans le navigateur (localStorage), favoris, suppression avec annulation.
 
 UI construite avec le skill Material Design, couleurs en 60/30/10 :
-60 % neutres chauds (surfaces), 30 % bleu pétrole (secondary-container), 10 % terracotta (primary, actions principales).
+60 % blanc laiteux (surfaces), 30 % bleu pétrole (secondary-container), 10 % framboise (primary, actions principales).
 
 Limite : l'audio est lu en direct par l'appareil, il n'y a pas de fichier MP3 à télécharger (il faudrait un modèle de voix côté serveur).
 
