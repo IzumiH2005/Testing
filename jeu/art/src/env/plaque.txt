@@ -1,0 +1,20 @@
+# ÉCHO, lot 2 env : plaque.png 32x12, plaque de pierre clouée.
+# Bord pierre : dessus/gauche l (lumière haut-gauche), corps m, bas/droite n, contour k.
+# Champ central uni s de 20x6 (cols 6-25, rangées 3-8) en creux : paroi haute et gauche
+# à l'ombre (n), paroi basse et droite éclairées (l) (creux inversé).
+# Deux clous en fer (tête p n / n d) à mi-hauteur. Coin bas-droit écorné.
+palette: shared
+size: 32x12
+---
+.kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.
+kllllllllllllllmmmmmmmmmmmmmmmnk
+klmmmnnnnnnnnnnnnnnnnnnnnnnmmmnk
+klmmmnsssssssssssssssssssslmmmnk
+klmmmnsssssssssssssssssssslmmmnk
+klpnmnsssssssssssssssssssslmpnnk
+klndmnsssssssssssssssssssslmndnk
+klmmmnsssssssssssssssssssslmmmnk
+klmmmnsssssssssssssssssssslmmmnk
+klmmmnlllllllllllllllllllllmmmnk
+kmnnnnnnnnnnnnnnnnnnnnnnnnnnnnk.
+.kkkkkkkkkkkkkkkkkkkkkkkkkkkkk..

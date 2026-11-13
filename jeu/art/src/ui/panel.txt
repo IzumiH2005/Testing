@@ -1,0 +1,35 @@
+# panel : cadre 9-slice 24x24, marges 8 (rangées et colonnes 8-15 identiques = zone étirée).
+# Pierre de la tour. Lumière haut-gauche.
+#   contour k · biseau extérieur : m en haut/gauche (éclairé), n en bas/droite (ombre)
+#   plat du cadre s (2 px) · biseau intérieur « creux inversé » : n en haut/gauche, m en bas/droite
+#   ombre portée du cadre sur le fond : b, 1 px en haut et à gauche seulement · fond d.
+# Joints n à 6 px des coins : chaque coin est une pierre d.angle rivetée.
+# Rivets 2x2 dans les 4 coins : p (éclat haut-gauche) · l · n (ombre bas-droite).
+# Zone de contenu sûre : de (6,6) à (18,18) en coordonnées du cadre non étiré.
+palette: shared
+size: 24x24
+---
+..kkkkkkkkkkkkkkkkkkkk..
+.kmmmmmmmmmmmmmmmmmmmmk.
+kmplssnssssssssssnssplnk
+kmlnssnssssssssssnsslnnk
+kmssnnnnnnnnnnnnnnnnssnk
+kmssnbbbbbbbbbbbbbbmssnk
+kmnnnbdddddddddddddmnnnk
+kmssnbdddddddddddddmssnk
+kmssnbdddddddddddddmssnk
+kmssnbdddddddddddddmssnk
+kmssnbdddddddddddddmssnk
+kmssnbdddddddddddddmssnk
+kmssnbdddddddddddddmssnk
+kmssnbdddddddddddddmssnk
+kmssnbdddddddddddddmssnk
+kmssnbdddddddddddddmssnk
+kmssnbdddddddddddddmssnk
+kmnnnbdddddddddddddmnnnk
+kmssnbdddddddddddddmssnk
+kmssnmmmmmmmmmmmmmmmssnk
+kmplssnssssssssssnssplnk
+kmlnssnssssssssssnsslnnk
+.knnnnnnnnnnnnnnnnnnnnk.
+..kkkkkkkkkkkkkkkkkkkk..

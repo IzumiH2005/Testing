@@ -1,0 +1,25 @@
+# ÉCHO, lot 2 env : floor.png, dalle de départ, 3 tuiles 16x16.
+# 0 bord gauche (contre le mur gauche : ombre portée du mur, col 0 n) · 1 milieu (se répète)
+# · 2 bord droit (occlusion du coin, col 15 n).
+# Dalle : dessus l (lèvre éclairée) puis m, face avant s, chanfrein gauche m, droite n,
+# joint d en col 15 (raccord : la col 15 de chaque tuile est un joint, la col 0 de la
+# suivante un chanfrein éclairé). Dessous : ombre k, puis fondation sombre b d.
+palette: shared
+size: 48x16
+---
+nmllllllmdllllmdlllllllllllllmmdlllllmdlllllllmn
+nmmmmmmmndmmmmndmmmmmmmmmmmmmmndmmmmmndmmmmmmmnn
+nsssssssndmsssndmsssssssssssssndmssssndmsssssssn
+nsssssssndmsssndmsssssssssssssndmssssndmsssssssn
+nssnnsssndmsssndmsssnnssssssssndmssssndmssssnssn
+nsssnsssndmsssndmssssnssssssssndmssssndmsssnnssn
+nsssssssndmsssndmsssssssssssssndmssssndmsssssssn
+nsssssssndmssnndmsssssssssssssndmssssndmsssssssn
+nsssssssndmsssndmsssssssssssssndmssssndmsssssssn
+nnnnnnnnndnnnnndnnnnnnnnnnnnnnndnnnnnndnnnnnnnnn
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bddnddbdddddndddddnddddddbdddndddddnddbdddddddbb
+bdddddbddddddddddddddddddbddddddddddddbddddddddb
+bdddddbddddddddddddddddddbddddddddddddbddddddddb
+bdddddbddddddddddddddddddbddddddddddddbddddddddb

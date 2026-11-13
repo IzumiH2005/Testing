@@ -1,0 +1,37 @@
+# btn_main : bouton principal ambre, 2 images 24x24 (normal · enfoncé). 9-slice marges 6.
+# Rampe chaude : W (reflet de coin, 3 px) · y (biseau éclairé, pris à la rampe or : un clair chaud,
+# jamais blanc sale) · a (face ambre) · o (biseau ombré) · R (épaisseur) · r (pied de l'épaisseur,
+# occlusion) · contour k. r est pris à la rampe joueur : c'est le même rouge profond que l'écharpe.
+# Lumière haut-gauche : biseau clair en haut et à gauche, sombre en bas et à droite.
+# Rangées 6-17 et colonnes 6-17 identiques (zone étirée) ; les détails restent dans les coins.
+# Enfoncé : tout descend de 2 px, l'épaisseur passe de 3 à 1 rangée, la face est creusée
+# (ombre interne o sous le rebord haut et à gauche), plus de reflet.
+# Itération 1 rejetée : face plate « post-it », épaisseur sans volume, enfoncé = juste plus petit.
+palette: shared
+size: 48x24
+frames: 2
+---
+..kkkkkkkkkkkkkkkkkkkk..........................
+.kyyWWyyyyyyyyyyyyyyyak.........................
+kyWyaaaaaaaaaaaaaaaaaaok..kkkkkkkkkkkkkkkkkkkk..
+kyyaaaaaaaaaaaaaaaaaaaok.kooooooooooooooooooayk.
+kyaaaaaaaaaaaaaaaaaaaaokkooaaaaaaaaaaaaaaaaaaayk
+kyaaaaaaaaaaaaaaaaaaaaokkoaaaaaaaaaaaaaaaaaaaayk
+kyaaaaaaaaaaaaaaaaaaaaokkoaaaaaaaaaaaaaaaaaaaayk
+kyaaaaaaaaaaaaaaaaaaaaokkoaaaaaaaaaaaaaaaaaaaayk
+kyaaaaaaaaaaaaaaaaaaaaokkoaaaaaaaaaaaaaaaaaaaayk
+kyaaaaaaaaaaaaaaaaaaaaokkoaaaaaaaaaaaaaaaaaaaayk
+kyaaaaaaaaaaaaaaaaaaaaokkoaaaaaaaaaaaaaaaaaaaayk
+kyaaaaaaaaaaaaaaaaaaaaokkoaaaaaaaaaaaaaaaaaaaayk
+kyaaaaaaaaaaaaaaaaaaaaokkoaaaaaaaaaaaaaaaaaaaayk
+kyaaaaaaaaaaaaaaaaaaaaokkoaaaaaaaaaaaaaaaaaaaayk
+kyaaaaaaaaaaaaaaaaaaaaokkoaaaaaaaaaaaaaaaaaaaayk
+kyaaaaaaaaaaaaaaaaaaaaokkoaaaaaaaaaaaaaaaaaaaayk
+kyaaaaaaaaaaaaaaaaaaaaokkoaaaaaaaaaaaaaaaaaaaayk
+kyaaaaaaaaaaaaaaaaaaaaokkoaaaaaaaaaaaaaaaaaaaayk
+kyaaaaaaaaaaaaaaaaaaaookkoaaaaaaaaaaaaaaaaaaaayk
+kaooooooooooooooooooooRkkoaaaaaaaaaaaaaaaaaaaayk
+koRRRRRRRRRRRRRRRRRRRRRkkoaaaaaaaaaaaaaaaaaaaayk
+koRRRRRRRRRRRRRRRRRRRRrkkaayyyyyyyyyyyyyyyyyyyyk
+.krrrrrrrrrrrrrrrrrrrrk..kRRRRRRRRRRRRRRRRRRRRk.
+..kkkkkkkkkkkkkkkkkkkk....kkkkkkkkkkkkkkkkkkkk..

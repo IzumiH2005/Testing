@@ -1,0 +1,27 @@
+# ÉCHO, lot 2 env : wall.png, 6 tuiles 16x16 (colonne de mur GAUCHE).
+# Intention (B0) : pierre taillée vue de face, lumière haut-gauche.
+#   cols 0-11 face des pierres : base s, chanfrein haut m (partiel), bas/droite n,
+#   joints d, croisements b, un seul petit amas l par tuile.
+#   col 12 arête m, cols 13-14 face intérieure (côté puits) s, col 15 contour k.
+# Contrat vertical : rangée 0 = haut d'une pierre, rangée 15 = joint. Toutes les tuiles
+# se raccordent donc entre elles dans n'importe quel ordre.
+# 0-3 variantes · 4 mousse (v V) · 5 fissure.
+palette: shared
+size: 96x16
+---
+mmmmssdllmmsmsskmmmmmmsssdllmsskmmmsdllmmmssmsskmmdmmmmmmsssmsskmmmmssdllmmsmsskmmdmmmmmmsssmssk
+sssssndmssssmsskssssssssndmsmssksssndmssssssmssksndmssssssssmssksssssndmssssmssksndmssssssbmmssk
+sssssndmssssmssksssnnsssndssmssksssndmssssssmssksndmsssnnsssmssksssssndmssssmssksndmsssssbmsmssk
+sssssndsssssmsskssssssssndssmssksssndmssssssmssksndsssssssssmssksssssndsssssmssksndssssssbssmssk
+sssssndssnnsmssksnnnnnnnndnnnnnksssndsssssssmssksndsssssssssmssksssssVVssnnsmssksndsssssbmssmssk
+sssssndsssssmsskddddbddddbdddddksssndssssnnsmssksndsssssssssmssksssVVvVsssssmssksndssssbmsssmssk
+snnnnndsnnnnnnnkmmssdmmmmsssmssknnnndsssssssmssksndsssssssssmssksnVVvvvVnnnnnnnksndssssbssssmssk
+dddbddbddddddddksssndmssssssmsskddddbsssssssmssksndsssssssssmsskdvVvvvvvVddddddksndsssdsssssmssk
+mmsdmmmmssssmssksssndmssssssmsskmmmsdsssssssmssknndsnnnnnnnnnnnkmvvdmvvmssssmssknndsnnnnnnnnnnnk
+ssndmsssssssmssksssndssnnsssmssksssndsssssssmsskddbddddbdddddddkssvdmsvsssssmsskddbddddbdddddddk
+ssndssssssssmssksssndsssssssmssksssndsnnssssmsskmmmmmssdllmsmsskssndssvsssssmsskmmmmsssdmmmsmssk
+ssndssssssssmssksssndsssssssmssksssndsssssssmsskssssssndmsssmsskssndssssssssmsskssssssndmsssmssk
+ssndssssssssmssksssndsssssssmssksssndsssssssmssksnnsssndssssmsskssndssssssssmsskssnnssndssssmssk
+ssndssssssssmssksssndsssssssmssksssndsssssssmsskssssssndssssmsskssndssssssssmsskssssssndssssmssk
+nnndssnnnnnnnnnknnnndsnnnnnnnnnknnnndsnnnnnnnnnksnnnnnndsnnnnnnknnndssnnnnnVVVvksnnnnnndsnnnnnnk
+dddbdddddddddddkddddbddddddddddkddddbddddddddddkdddddddbdddddddkdddbddddddvvvvvkdddddddbdddddddk

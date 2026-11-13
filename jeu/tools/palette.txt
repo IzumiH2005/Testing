@@ -1,0 +1,45 @@
+# Palette partagée d'ÉCHO : 1 caractère = 1 couleur. '.' = transparent.
+# Règle de projet : pas de brun, pas de blanc sale. Lumière en haut à gauche.
+
+# Nuit (pierre de la tour, contours, fonds) : rampe froide du plus sombre au plus clair
+k #0b0b1a   contour / noir bleuté
+b #161631   fond le plus sombre
+d #222246
+n #2f3060
+s #3f4580   pierre (base)
+m #5763a3
+l #7385c4
+p #9fb0e0
+w #dfe6ff   blanc froid (jamais de blanc sale)
+W #ffffff   reflet pur (rare)
+
+# Écho (fantômes, souvenirs, pièges neutralisés)
+q #0e4a5c
+t #1a8a9e
+c #3fd0d4
+e #a8fff0
+
+# Joueur (écharpe, lanterne, chaleur)
+r #7a1f3d
+R #c4384f
+o #ff7a59
+a #ffc46b
+
+# Danger (pics, scies, laser)
+x #5c0f2e
+X #b0174a
+z #ff3d6e
+Z #ffb3c6
+
+# Éclats (or, collectibles)
+g #e0a200
+G #ffd23f
+y #fff3a8
+
+# Mousse (décor)
+v #2e6b5a
+V #4fa37a
+
+# Violet (accent décor / UI)
+u #4a2a7a
+U #8a5ad0
