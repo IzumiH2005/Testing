@@ -1,4 +1,4 @@
-# Méthode de pixel art — objets, personnages, créatures et décors (v14)
+# Méthode de pixel art — objets, personnages, créatures et décors (v15)
 
 On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin classique
 (construction par volumes, ligne d'action, anatomie) et les règles du pixel art
@@ -17,9 +17,9 @@ On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin cla
 
 | Partie | Sections |
 |---|---|
-| Règles impératives | 38 ordres courts, tirés des tests et des livres |
+| Règles impératives | 42 ordres courts, tirés des tests et des livres |
 | **A. Règles communes** | A1 travail · A2 lisibilité · A3 table par taille · A4 règles du dessin · A4b simplifier · A5 pipeline pixel (silhouette → contour → palette → lumière → matières → détails → nettoyage → contrôle) · A6 finition pro · **A7 tramage** · **A8 lignes et formes** · **A9 perspectives de jeu** |
-| **B. Objets** | B0 intention · B0b projection · B1 cadre · B2 volumes · B3 forme iconique · B4 matière · B4b déclinaison par taille · B5 contrôle |
+| **B. Objets** | B0 intention · B0b projection · B1 cadre · B2 volumes · B3 forme iconique · B4 matière · B4b déclinaison par taille · B5 contrôle · **B6 recettes pas à pas (pierre, rocher, cristal, slime, livre)** |
 | **C. Personnages** | C0 intention · C1 proportions · C2 pose · C3 volumes · C4 tête et visage · C5 vêtements (design) · C6 cheveux · C7 astuces de figure · C8 contrôle · C9 anatomie · C10 tailles (8 à 128 px) · C11 portrait anime · C12 visage Loomis + anime · C13 chibi pas à pas · C14 corps nu puis vêtements en calque · C15 créatures · C16 créatures complexes · C17 vêtements (plis, matières) |
 | **E. Animation** | E0 méthode imposée image par image · E1 les 12 principes de *The Illusion of Life* · E2 techniques pixel (durées, espacement, smear, sous-pixel, pop, éclats, boucle) · E3 feuille de timing · E4 fichiers · E5 contrôles |
 | **D. Outils** | `trace.py` · `px.py` · `contour.py` · `planche.py` · dossiers de tests |
@@ -46,6 +46,10 @@ On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin cla
 | Palette, harmonie | A5-7 · A6-A · A6-B · **F4** |
 | Composition, point focal | A2 · A6-E · **F1** · **F5** |
 | Apprendre, s'entraîner | **G** · livres de référence |
+| Pierre, rochers, fissures, trous | A5-8 (creux inversés) · A5-8b · **B6-B** · **B6-C** |
+| Cristal, halo, étincelles | A5-8b · C15-D · **B6-D** |
+| Gélatine, slime | A5-8b (liquide) · **B6-E** |
+| Ordre des étapes d'un objet | A6-I · **B6-A** |
 
 **Sources (étiquettes) :** [Z] *Apprendre à tout dessiner avec Zephy* · [M] livre de dessin
 manga · [I] planches d'anatomie fournies · [C] planches sur les cheveux fournies · [P]
@@ -54,7 +58,8 @@ recherches web (liens en fin de document) · [L] méthode Loomis et tutoriels de
 · [A] analyse de portraits anime en pixel art fournis en exemple · [T1]…[T16] leçons de nos
 propres tests (partie D) · [B] livres de pixel art et de peinture ([B1] *Pixel Logic*, [B2]
 *Pixel Art for Game Developers*, [B3] *Make Your Own Pixel Art*, [B4] livres d'images,
-[B5] *Color and Light* ; détail en fin de document). Toutes les règles sont reformulées.
+[B5] *Color and Light* ; détail en fin de document) · [P2] planches de tutoriels pas à pas
+fournies (pierre, cristal, slime, livre, rochers ; B6). Toutes les règles sont reformulées.
 
 ---
 
@@ -163,6 +168,17 @@ Chaque règle est un ordre. Le détail et le « pourquoi » sont dans la section
 **Progresser (partie G)**
 38. **Entre deux projets, fais une copie d'étude** : analyse, copie, refais de mémoire,
     réutilise une technique (G2).
+
+**Recettes pas à pas (B6)**
+39. **Garde le contour sombre et neutre jusqu'à ce que la lumière soit posée**, puis colore-le ;
+    la teinte (glissement vers le froid) vient après les valeurs (B6-A).
+40. **Sur une pierre ou un bloc ombré, efface le trait des arêtes intérieures** : les faces
+    se séparent par la valeur, seul le contour extérieur reste (B6-C).
+41. **Une fissure ou une gravure = trait sombre + lèvre claire d'1 px**, attachée à une
+    arête, en « Y », et qui passe d'une face à l'autre (B6-C).
+42. **Primitive d'abord, déformation ensuite** : cube ou prisme propre et ombré en 3 tons,
+    puis coins cassés et sous-plans ; un rocher composé = 2-3 blocs de tailles différentes
+    (B6-B).
 
 ---
 
@@ -778,6 +794,119 @@ Exemple : une carotte en 8, 16 et 32 px.
 - Les matières se distinguent-elles en gris ?
 - Sur fond **sombre**, le contour côté ombre se fond : contour cassé et liseré de lumière
   de rebond net de ce côté. Toujours tester fond clair **et** fond sombre [T9].
+
+## B6. Recettes pas à pas des planches [P2]
+Tirées de cinq planches de tutoriels fournies : pierre, cristal, slime et livre (style
+Rappenem), et rochers (formes de base → déformer → détails → polir). Elles suivent toutes le
+même ordre, en 6 à 9 étapes, **une idée par étape** (R1, R2).
+
+### A. L'ordre commun des planches
+| # | Étape | Ce qu'on fait | Ce qu'on ne fait pas encore |
+|---|---|---|---|
+| 1 | **Forme de base** | primitive propre (cube, prismes, dôme, boîte), trait sombre neutre | aucun détail |
+| 2 | **Déformer / séparer** | casser les angles, arrondir, séparer les pièces (couverture et pages) | aucune couleur |
+| 3 | **Nettoyer le trait, poser les aplats** | trait propre, un aplat par matière | aucune ombre |
+| 4 | **Ombrage de base** | une lumière, un ton par face (A5-8), terminateur net | aucun reflet fin |
+| 5 | **Ombres et lumières secondaires** | sous-plans dans chaque grande face, AO, lumière de rebond | — |
+| 6 | **Éclats et contour coloré** | éclats sur les arêtes et les pointes ; le trait noir devient la couleur sombre de chaque matière (selout) | — |
+| 7 | **Contre-jour** | 2ᵉ lumière, opposée, d'une autre teinte, sur les bords du côté opposé | — |
+| 8 | **Variation de couleur** | les ombres glissent vers le froid (bleu, violet) ou vers une teinte voisine ; quelques taches de teinte dans les grandes faces | — |
+| 9 | **Détails et nettoyage** | marques, usure, étincelles, halo, ombre portée, chasse aux défauts (A6-H) | — |
+
+Ce que cet ordre apprend :
+- **Le contour reste sombre et neutre jusqu'à l'étape 6.** On le colore une fois la lumière
+  posée, car c'est la lumière qui dit quel bord s'éclaircit (selout, A6-C).
+- **La teinte se travaille après les valeurs** (étape 8) : les volumes doivent déjà se lire en
+  quasi-monochrome. C'est A5-8c, appliqué systématiquement.
+- **Les détails de surface (fissures, trous, décor) viennent après l'ombrage de base** : ils
+  s'éclairent selon la face où ils se trouvent.
+- **La lumière est dessinée** sur la planche (un point et un cône). Faire de même : poser un
+  repère de lumière sur le calque de construction (R4) et le garder visible jusqu'à la fin.
+  Les planches l'éclairent en haut à droite, ta méthode en haut à gauche : le côté est un
+  choix, l'important est **un seul côté dans tout le jeu** (règle 23).
+
+### B. Primitive, puis déformer (rochers, pierre) [P2]
+1. **Formes de base** : un ou plusieurs blocs simples (cubes, dalles, cylindres aplatis),
+   déjà ombrés en 3 tons : dessus clair, face éclairée moyenne, face opposée sombre.
+2. **Déformer** : retirer des pixels aux coins pour les arrondir, rendre les arêtes
+   irrégulières, pencher un peu les faces. Le rocher garde **les mêmes trois faces** et la
+   même lumière : seul le bord change.
+3. **Détails** : découper les grandes faces en **sous-plans** (cassures, facettes, strates),
+   chacun avec son ton selon son orientation.
+4. **Polir** : trous, points clairs, fissures fines, contour coloré, AA sur les grandes courbes.
+
+- **Rocher composé** : 2 ou 3 blocs de tailles **différentes** (grand, moyen, petit, A4b)
+  qui se chevauchent et se calent l'un contre l'autre, jamais alignés ni de même taille.
+- **Strates** (rocher en couches, galets empilés) : des disques de plus en plus petits vers le
+  haut, chaque couche avec son dessus clair et sa tranche sombre.
+
+### C. Pierre taillée en 9 étapes [P2]
+- **Arêtes plus rudes (2)** : écorner les coins du cube de 1 à 2 px, creuser une entaille en
+  « Y » sur une arête. Une pierre n'a pas d'angle parfait.
+- **Effacer le trait des arêtes intérieures (4)** : une fois les faces ombrées, les lignes
+  entre les faces disparaissent. **Les faces se séparent par la valeur**, seul le contour
+  extérieur reste. Une ligne intérieure sur une pierre la fait paraître dessinée, pas
+  sculptée.
+- **Fissures et rayures (5)** : un trait sombre **plus une lèvre claire d'1 px** du côté
+  opposé à la lumière (le bord qui reçoit la lumière). Une fissure part d'une arête ou d'un
+  coin, se divise en « Y », change de largeur, et **passe par-dessus les arêtes** d'une face
+  à l'autre. Jamais au milieu d'une face sans attache, jamais deux fissures parallèles.
+- **Trous et cratères (6)** : creux inversés (A5-8) : sombre du côté de la lumière, lèvre
+  claire du côté opposé. Par groupes de 2 ou 3 de **tailles différentes**, surtout sur les
+  faces moyennes et sombres ; le dessus éclairé reste calme (A4, peu de détails dans la
+  lumière).
+- **Couleur (8)** : une pierre grise n'est jamais d'un gris neutre. Les ombres tirent vers le
+  bleu-violet, la lumière reste à peine chaude.
+
+### D. Cristal en 9 étapes [P2]
+- **Esquisse (1)** : 3 à 5 prismes de tailles différentes, chacun penché d'un angle différent,
+  qui partent d'une même base (A4b, grand-moyen-petit).
+- **Facettes (3)** : tracer les arêtes de chaque prisme **avant** l'ombrage : face avant,
+  côté, pointe. Chaque facette aura un seul ton (A5-8).
+- **Ombrage (4-5)** : la facette tournée vers la lumière est la plus claire ; une arête
+  claire le long de chaque crête ; les prismes de derrière sont plus sombres que ceux de
+  devant.
+- **Éclats (6)** : 1 à 2 px presque blancs aux pointes et sur les crêtes ; contour coloré
+  (rouge très sombre pour un cristal rouge).
+- **Contre-jour (7)** : une lumière rose ou violette en bas à l'opposé : un liseré sur les
+  facettes de ce côté. Il fait sentir que la lumière traverse le cristal.
+- **Variation (8)** : les ombres glissent vers le magenta et le violet.
+- **Halo et étincelles (9)** : pour un cristal magique, un halo de la couleur de la lumière
+  émise, 1 ou 2 tons à peine plus clairs que le fond, en paliers ou tramé (A7) ; et 2 ou 3
+  étincelles en croix (4 branches d'1 px autour d'un centre clair), détachées du sujet.
+
+### E. Slime (matière gélatineuse) en 6 étapes [P2]
+- **Forme** : un dôme au bas aplati (posé au sol), les yeux en simples arcs sombres.
+- **Ombres secondaires (3)** : des bandes courbes qui suivent le dôme, plus sombres vers le bas.
+- **Éclats (4)** : un **grand reflet en forme** (un arc ou une tache allongée qui suit le
+  dôme) côté lumière, plus 1 ou 2 petits points. Une matière gélatineuse brille comme du
+  verre.
+- **Translucidité (5)** : la lumière traverse : une zone **plus claire en bas, du côté opposé
+  à la lumière**, plus une 2ᵉ lumière (cyan) sur le bord bas. Même règle que le liquide
+  (A5-8b).
+- **Finition (6)** : ombre portée en ellipse sous le slime, un peu décalée du côté opposé à la
+  lumière ; elle le pose au sol.
+
+### F. Livre (objet fabriqué) en 9 étapes [P2]
+- **Séparer la couverture des pages (2)** : la couverture déborde d'1 px autour des pages et
+  a 2 px d'épaisseur ; le dos est arrondi. C'est ce débord qui dit « livre » et pas « boîte ».
+- **Tranche des pages** : des lignes alternées claires et sombres, parallèles au dos.
+- **Décorer au trait, avant la couleur (4)** : coins de métal, fermoir, marque-page. Objet dur
+  = trait d'abord (A5-6, ordre selon la forme).
+- **Un élément qui dépasse** : le marque-page (ruban d'une autre couleur, saturée) sort de la
+  silhouette ; il casse la boîte et porte l'accent (A2).
+- **Matières contrastées** : cuir mat (pas d'éclat blanc) contre métal brillant (éclats nets) ;
+  la différence de brillance sépare les pièces autant que la couleur.
+- **Contour coloré et glissement de teinte (8)**, puis **détails (9)** : symbole gravé sur la
+  couverture (sombre + lèvre claire, comme une fissure), usure claire aux coins.
+
+### G. Contrôle propre aux recettes
+- Chaque étape est-elle **lisible seule** à ×1, comme sur les planches ?
+- Le trait intérieur des faces dures a-t-il disparu après l'ombrage (pierre, rocher) ?
+- Chaque fissure ou gravure a-t-elle sa **lèvre claire** ?
+- Le contre-jour est-il d'une **autre teinte** que la lumière principale, et seulement sur les
+  bords opposés ?
+- Les ombres ont-elles glissé vers le froid à l'étape 8, sans changer les valeurs ?
 
 ---
 
@@ -2625,6 +2754,11 @@ leurs raccords → test sur une petite carte → texture calme, lumière commune
 décors posés → autotile (4 pièces → 47 tuiles) → fonds en 2 à 4 couches, de plus en plus
 clairs et désaturés → parallaxe au pixel près → contrôle F6.
 
+**Objet en 9 étapes (B6) :** primitive → déformer et séparer les pièces → trait propre et
+aplats → ombrage de base (un ton par face) → ombres et lumières secondaires → éclats et
+contour coloré → contre-jour d'une autre teinte → glissement de teinte → détails (fissures
+à lèvre claire, trous, halo, étincelles, ombre portée) et nettoyage.
+
 **Tramage (A7) :** les trois conditions → limite seulement, entre tons voisins → rampe
 25 / 50 / 75 % → un seul style par image → contrôle à ×1.
 
@@ -2839,6 +2973,13 @@ Un livre de peinture réaliste, dense et avancé. Ce que les pixel artists en re
 
 # Historique des versions
 
+- **v15 :** **B6** recettes pas à pas tirées de cinq planches fournies [P2] : ordre commun
+  en 9 étapes (contour neutre jusqu'à la lumière, teinte après les valeurs), primitive puis
+  déformation (rochers, strates), pierre (arêtes cassées, trait intérieur effacé, fissures à
+  lèvre claire, trous en groupes), cristal (facettes avant l'ombre, contre-jour coloré, halo,
+  étincelles en croix), slime (grand reflet en forme, translucidité, ombre portée), livre
+  (couverture qui déborde, décor au trait, ruban qui casse la silhouette, mat contre
+  brillant) ; règles impératives 39 à 42 ; sommaire, index, sources et résumé mis à jour.
 - **v14 :** apports des livres [B] (*Pixel Logic*, *Pixel Art for Game Developers*, *Make
   Your Own Pixel Art*, *Color and Light*, livres d'images). Nouvelles sections : **A7**
   tramage (conditions, motifs, rampe de densité, défauts), **A8** lignes et formes (pentes
