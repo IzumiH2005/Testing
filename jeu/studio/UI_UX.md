@@ -1020,3 +1020,637 @@ Entrée : montée de 16 px (amorti 8/5/2/1 au pixel). Sortie : trame en 2 pas.
 - La mise à jour se fait par signaux, jamais dans `_process` : `altitude_changed(m)` (au mètre entier), `lives_changed(n)`, `shards_changed(n)`, `rythme_changed(n, tier)`, `volte_state(s)`, `powerup_started(id, dur)`, `tide_distance(m)`.
 - Les colonnes de mur sont des `VBoxContainer` ancrés à gauche et à droite de **l'écran réel**, décalés de `(largeur − 180) / 2` pour suivre le mur de la colonne de jeu.
 
+---
+
+## 5. Bibliothèque de composants pixel
+
+> Tous les fichiers vont dans `game/assets/ui/`, avec leur source `.txt` dans `art/src/ui/` (format `tools/px.py`, `palette: /home/user/Testing/jeu/studio/palette_v2.txt`).
+> Lumière en haut à gauche. Contour `k` de 1 px partout, sauf mention contraire.
+> Les images d'un même fichier sont **côte à côte horizontalement**.
+> Dans Godot, chaque image est une `AtlasTexture` (région) servie à un `StyleBoxTexture`.
+
+### 5.1 Panneaux (9-slice)
+
+| Fichier | Taille | Marges 9-slice | Couleurs | Usage |
+|---|---|---|---|---|
+| `panel.png` | 24×24 | 8 / 8 / 8 / 8 | fond `d` ; bord de pierre `n s m` (3 px) ; arête `l` 1 px en haut à gauche ; coins = sceau d'écho `t` 3×3 ; contour `k` | Panneaux standard (pause, fin) |
+| `panel_echo.png` | 24×24 | 8 | fond `d` ; bord `q t c` ; coins `e` ; contour `k` | Mort, offre de pub, abandon, déblocages |
+| `panel_inset.png` | 24×24 | 6 | fond `b` ; bord intérieur creusé : `k` en haut à gauche, `n` en bas à droite ; pas de contour externe | Blocs dans un panneau : butin, missions, lignes de liste |
+
+- Le centre (8×8) est **uni** : l'étirement ne crée aucun motif.
+- `content_margin` = 8 pour `panel` et `panel_echo`, 6 pour `panel_inset`.
+
+### 5.2 Boutons (9-slice, 3 images)
+
+| Fichier | Taille | Images | Marges | Couleurs | Texte |
+|---|---|---|---|---|---|
+| `btn_main.png` | 144×24 (3 × 48×24) | 0 normal, 1 pressé, 2 désactivé | g/d 8, h 6, b 8 | face `o`, haut de face `a` (2 rangées), ombre `R` (2 px), bord sombre `r`, contour `k` | `font_7` **`k`** (contraste 7,2 sur `o`) |
+| `btn_alt.png` | 144×24 | idem | idem | face `s`, haut `m`, ombre `n`, contour `k` | `font_7` `w` (8,5) |
+| `btn_echo.png` | 144×24 | idem | idem | face `c`, haut `e`, ombre `t`, bord `q`, contour `k` | `font_7` **`k`** (12,0 sur `c`) |
+
+**Changement par rapport à l'ART_BIBLE** : la face du bouton vidéo est `c`, pas `t`.
+Raison : un texte `w` sur `t` n'atteint que 3,77:1, sous le seuil de 4,5:1 du petit texte.
+
+| État | Image | Contenu | Règle |
+|---|---|---|---|
+| Normal | 0 | Libellé à y 7 (sur 24) | Ombre de 2 px sous la face. |
+| Pressé | 1 | La face descend de 2 px, l'ombre disparaît, le libellé descend de 2 px | Tenu ≥ 3 images (50 ms) même sur un tap très bref. **L'action part au relâchement** si le doigt est encore dans la cible élargie de 4 px. |
+| Désactivé | 2 | Face `n`, haut `s`, pas d'ombre, libellé `m` | **Toujours accompagné d'une raison lisible** : cadenas, « IL MANQUE 120 », « AU NIVEAU 25 ». Un tap joue `deny` + H1 et affiche un toast d'explication. |
+| Nouveau | 0 + `badge_new` | Badge 7×7 en haut à droite, débordant de 2 px | Disparaît au 1er tap ou après 1 s de vue. |
+| Respiration (GRIMPER seulement) | 0 | Le bouton monte de 1 px pendant 2 images toutes les 2 s | Coupée en Effets réduits et minimum. |
+
+Implémentation : `UIK.button(text, kind, ico, min_w)` existe déjà.
+- Passer l'action de `pressed` à `button_up` + vérification `get_global_rect().grow(4).has_point(...)`.
+- Ou plus simple : `action_mode = BaseButton.ACTION_MODE_BUTTON_RELEASE` (déjà le défaut de Godot), avec le son joué sur `button_up`, pas sur `button_down`. Voir arbitrage A9.
+
+**Tailles d'usage** :
+
+| Bouton | Taille |
+|---|---|
+| Principal | 124-156 × 32 |
+| Standard | 72-164 × 24 |
+| Icône | 28×28, avec une icône 16×16 centrée et le `btn_alt` étiré |
+
+### 5.3 Onglets et segments
+
+| Fichier | Taille | Images | Marges | Couleurs |
+|---|---|---|---|---|
+| `tab.png` | 72×20 (3 × 24×20) | 0 inactif, 1 actif, 2 pressé | 6 | Inactif : face `d`, bord `n`, texte `l`. Actif : face `s`, haut `m`, filet 2 px `a` en bas, texte `w`. Pressé : face `n`. |
+
+- **Segments** (réglages) : on aligne plusieurs `tab` de 24 px de haut (même source, étirée), avec bord commun.
+- Sélection = image 1. Elle porte aussi une **coche 12×12** devant le libellé. Raison : la sélection ne se lit pas qu'à la couleur.
+
+### 5.4 Barres
+
+| Fichier | Taille | Contenu |
+|---|---|---|
+| `bar.png` | 40×6 | 5 cases de 8×6 : 0 cadre (contour `k`, fond `b`) ; 1 remplissage XP `j` (haut `J`) ; 2 progression `G` (haut `y`) ; 3 écho `c` (haut `e`) ; 4 alerte `z` (haut `Z`) |
+
+- Le cadre est un 9-slice de marge 2. Le remplissage est un `TextureProgressBar` en mode étiré.
+- Hauteurs utilisées : 2, 3, 4 et 6 px. Les barres de 2-3 px n'ont pas de cadre.
+- Animation de remplissage : **au pixel**, 1 px par image au plus (vitesse plafonnée à 60 px/s). La fin est soulignée par un éclat `W` de 1×hauteur au bout, pendant 2 images.
+
+### 5.5 Badges
+
+| Fichier | Taille | Images | Couleurs | Règle |
+|---|---|---|---|---|
+| `badge_new.png` | 28×7 (4 × 7×7) | 0-3 : pulse (7×7, 7×7 avec reflet `y`, 5×5, 7×7), 150 ms par image, puis pause de 1,4 s | rond `G`, « ! » `k` 1×4, contour `k` | Or = « gain disponible ». Jamais magenta (le magenta est le danger). |
+| `hud_pip.png` | 4×2 (2 × 2×2) | vide `n` ; plein `G` | — | Paliers du Rythme |
+| `diff_pips.png` | 12×4 (3 × 4×4) | rond `l` ; losange `a` ; triangle `o` | contour `k` | Difficulté des missions, lisible par la forme |
+
+### 5.6 Icônes 12×12 (`icons12.png`, 288×12, 24 icônes)
+
+Règles : 5 couleurs au plus, contour `k`, lumière en haut à gauche, silhouette lisible en `k` seul.
+
+| # | Nom | Couleurs principales | Usage |
+|---|---|---|---|
+| 0 | `pause` | `l w` | HUD |
+| 1 | `shard` (éclat) | `g G y` + `o` en ombre | Monnaie |
+| 2 | `prism` | `t c e` + reflet `Z` | Monnaie rare |
+| 3 | `xp` (étoile à 4 branches) | `j J` | XP |
+| 4 | `volte` | `H i I` | HUD |
+| 5 | `rythme` (note) | `w l` | HUD |
+| 6 | `tide` (vague + flèche) | `u U j` | HUD |
+| 7 | `burin` | `m l` + halo `c` | Bonus |
+| 8 | `plume` | `i I` | Bonus |
+| 9 | `calm` (Accalmie, sablier) | `f F` | Bonus |
+| 10 | `magnet` | `R o` + `l` | Bonus P1 |
+| 11 | `lantern_pu` | `a A` | Bonus P1 |
+| 12 | `elan_gold` | `g G` | Bonus P1 |
+| 13 | `lock` | `m l` | Verrou |
+| 14 | `check` | `f F` | Fait, sélectionné |
+| 15 | `cross` | `z Z` + forme en X | Erreur, refus |
+| 16 | `video` (▶ dans un rond) | `t c e` | Pub |
+| 17 | `flame` | `o a A` | Série |
+| 18 | `ice` | `c e` | Gel de série |
+| 19 | `trophy` | `g G y` | Succès |
+| 20 | `grave` (stèle + sceau) | `s m` + `c` | Gravures |
+| 21 | `altar` | `m l` + `a` | Autel |
+| 22 | `arrow_down` | `l w` | Indicateurs |
+| 23 | `chest_mini` | `G` + `n s` | Coffre bonus |
+
+Équivalences avec `UIK.Ico` (prototype) :
+
+| `UIK.Ico` | `icons12` |
+|---|---|
+| `LIFE`, `LIFE_USED` | `ui_lantern` |
+| `SHARD` | 1 |
+| `PAUSE` | 0 |
+| `LOCK` | 13 |
+| `CHECK` | 14 |
+| `FLAME` | 17 |
+| `TROPHY` | 19 |
+| `VIDEO` | 16 |
+
+Les icônes de boutons (`PLAY`, `SHARE`, `GEAR`, `HOME`, `SOUND_*`, `VIBRATION`, `BACK`, `CALENDAR`) passent en 16×16.
+
+### 5.7 Icônes 16×16 (`icons16.png`, 256×16, 16 icônes)
+
+| # | Nom | Couleurs principales | Usage |
+|---|---|---|---|
+| 0 | `play` (▶) | `k` sur bouton `o` | Grimper |
+| 1 | `replay` (flèche circulaire) | `k` | Rejouer |
+| 2 | `home` (porte de la tour) | `w m` | Maison |
+| 3 | `share` | `w l` | Partager |
+| 4 | `video` | `k` sur bouton `c` | Pubs |
+| 5 | `shop` (écharpe) | `R o a` | Boutique |
+| 6 | `journal` (parchemin) | `i H` + `a` | Missions |
+| 7 | `codex` (livre + œil) | `m l` + `c` | Codex |
+| 8 | `trophy` | `g G y` | Succès |
+| 9 | `gear` | `m l w` | Réglages |
+| 10 | `daily` (calendrier « 312 ») | `w l` + `c` | Tour du jour |
+| 11 | `back` (flèche gauche) | `w` | Retour |
+| 12 | `sound` (haut-parleur ; la barre de « coupé » est ajoutée en code par l'image 2 de `toggle`) | `w l` | Son |
+| 13 | `music` (croche) | `w l` | Musique |
+| 14 | `vibration` (téléphone + ondes) | `w l` | Vibrations |
+| 15 | `shield` | `w l` + `c` | Confidentialité |
+
+**État « coupé »** des bascules de pause : une barre diagonale `z` de 2 px **et** l'icône passe en `s`. Raison : double codage, forme + valeur.
+
+### 5.8 Compteurs qui roulent
+
+- Chiffres de **chasse fixe** dans toutes les polices : 5 px de dessin, 6 px d'avance en `font_7`, 10 en `font_l`, 4 en `font_5`.
+- Chaque chiffre est un `Control` de taille cellule, avec `clip_contents = true`.
+- Quand un chiffre change, l'ancien monte et le nouveau arrive du bas : décalages 10 → 5 → 2 → 0 en `font_7`, ou 16 → 8 → 3 → 0 en `font_l`, à 1 pas toutes les 2 images (100 ms au total).
+- Les chiffres de droite changent d'abord ; il n'y a pas de cascade au-delà de 12 changements par seconde.
+- **Comptage long** (fin d'ascension) : `tween_method` de 0 à N, en `TRANS_QUART` + `EASE_OUT`, en 600 ms ; `tick` tous les 10 unités, au plus 12 par seconde.
+- **Gain** : le nombre passe en `y` pendant 2 images, puis revient à `G`.
+- **Perte** (achat) : le nombre passe en `l` pendant 2 images, puis revient.
+- Effets minimum : valeur posée directement, 1 `tick`.
+
+### 5.9 Cartes (boutique, récompenses)
+
+| Fichier | Taille | Images | Marges | Couleurs |
+|---|---|---|---|---|
+| `card.png` | 96×24 (4 × 24×24) | 0 normale (`panel_inset` + bord `n`) ; 1 sélectionnée (bord `w` 1 px + coins `a`) ; 2 équipée (bord `G` 1 px) ; 3 verrouillée (fond `k`, bord `n`, trame `d`) | 6 | — |
+
+**Carte de boutique** 48×56 :
+- vignette 32×32 à (8, 4) : le **héros réel** dans la tenue, image 0 de l'idle, rendu par un `SubViewport` 32×32 partagé, mis en cache en `ImageTexture` ;
+- nom `font_5` à y 40 (11 caractères au plus) ;
+- prix à y 48.
+
+**Carte de récompense** (`popup_reward`, fin d'ascension, coffre, niveau) : 64×64.
+- Rayons animés en 6 images, 83 ms par image, en boucle, couleurs `G y` sur `d`.
+- L'objet 32×32 est au centre ; le libellé en `font_7` est en dessous.
+- Elle arrive par un pop : 40 % → 115 % → écrasé (ART_BIBLE E2-G), **dessiné en images, jamais réduit par calcul**.
+- Elle se ferme d'un tap n'importe où après 400 ms.
+
+### 5.10 Carte « Prochain objectif » (composant clé)
+
+- Taille 164×28, `panel_inset`, bord 1 px `a`.
+- Icône 16×16 à (6, 6) ; texte `font_8` `w` à (28, 4) sur 1 ou 2 lignes ; mini-barre 108×3 `G` à (28, 21) ; récompense `font_5` `G` à droite.
+- Un tap ouvre l'écran concerné.
+
+**Choix de l'objectif** (fonction `NextGoal.pick()`) : on retient le candidat au **plus petit reste relatif**, `reste / cible`.
+
+| Candidat | Texte FR | Texte EN |
+|---|---|---|
+| Record | Record : encore 28 m | Best: 28 m to go |
+| Mission la plus avancée | Grave 1 scie de plus · 40 ◆ | Etch 1 more saw · 40 ◆ |
+| Niveau | Niveau 13 dans 140 XP · traînées | Level 13 in 140 XP · trails |
+| Tenue la moins chère non possédée | Braise dans 60 ◆ | Ember in 60 ◆ |
+| Coffre bonus 3/3 | Une mission avant le coffre | One mission to the chest |
+| Palier du Défi (P1) | Argent : encore 40 m | Silver: 40 m to go |
+
+**Exclusions** :
+- tout ce qui demande une pub ;
+- tout ce qui coûte des prismes ;
+- tout reste > 60 %, sauf s'il n'existe pas d'autre candidat.
+
+Raison : l'objectif doit être atteignable en une ascension, ce que le joueur ressent comme « juste une de plus ».
+
+### 5.11 Cases de calendrier
+
+| Fichier | Taille | Images | Contenu |
+|---|---|---|---|
+| `cal_cell.png` | 60×28 (3 × 20×28) | 0 à venir (`panel_inset`, chiffre `s`) ; 1 aujourd'hui (bord `a` qui pulse à 1 Hz) ; 2 obtenue (fond `n`, coche `f`) | Chiffre du jour `font_5` en haut ; icône de récompense 12×12 au centre ; montant `font_5` en bas |
+
+La case 7 (120 + 3 ◇) a un coffre 12×12 et un bord `G` en permanence.
+
+### 5.12 Toasts
+
+- `toast.png` 24×16 en 9-slice (marge 6), fond `k`, bord `n`, arête `m`.
+- Icône 12×12 à gauche + texte `font_7` ; largeur = contenu + 20 ; au plus 140 px.
+- Position : le bandeau bas en partie (§4.4) ; dans les menus, y B−24, centré.
+- Durées : 200 / 1600 / 200 ms. File de 3 au plus ; deux toasts du même type fusionnent (« 2 MISSIONS FINIES »).
+- Un toast n'est **jamais interactif**. Raison : un toast qu'on doit toucher est un bouton caché.
+
+### 5.13 Tutoriel
+
+| Fichier | Taille | Images | Couleurs | Usage |
+|---|---|---|---|---|
+| `banner_tuto.png` | 64×24 | 1 | `panel` en version courte, fond `d`, bord `n s` | Support des pictogrammes |
+| `tuto16.png` | 96×32 | 6 pictogrammes × 2 images | `w` + `l`, contour `k` | Rangée 0 = pose A, rangée 1 = pose B. 0 tap ; 1 tenir (doigt + arc long) ; 2 volte (tap en l'air) ; 3 glisse ; 4 danger (triangle + dents) ; 5 autel |
+| `tap.png` | 64×32 (2 × 32×32) | 2 | `i I` + contour `k` | Existant. Main posée sur le mur. |
+
+Les 2 images de `tuto16` alternent à 400 ms.
+
+### 5.14 Effets d'interface
+
+| Fichier | Taille | Images | Usage |
+|---|---|---|---|
+| `dither.png` | 16×4 | 4 motifs de Bayer 4×4 : 25, 50, 75, 100 % `k` | Fondus tramés et fonds de modal (shader `ui_dither.gdshader` qui échantillonne le motif selon `step`) |
+| `stamp_frame.png` | 320×24 (5 × 64×24) | pop 50 % → 115 % → écrasé → final → final + éclat `e` | Cadre du tampon GRAVÉ ; le texte est posé en `font_l_outline` |
+| `chest.png` | 256×32 (8 × 32×32) | 0-1 secousse ; 2-4 ouverture (couvercle, lueur `G`, pic `W` 1 image) ; 5-6 ouvert lueur ; 7 ouvert final | Coffre bonus et case 7 |
+| `popup_reward.png` | 384×64 (6 × 64×64) | rayons | §5.9 |
+| `shard_mini.png` | 24×6 (4 × 6×6) | rotation | `coin_fly` (au plus 12 à la fois) |
+| `confetti.png` | 24×3 (8 × 3×3) | 4 couleurs (`G o c j`) × 2 orientations | `ui_confetti`, 24 particules, 700 ms, gravité 200 px/s² |
+| `countdown.png` | 216×32 (3 chiffres × 3 images de 24×32) | pop | Reprise après pause |
+| `xp_badge.png` | 40×20 (2 × 20×20) | normal ; montée de niveau (bord `G` + reflet `y`) | Hub, niveaux |
+| `level_node.png` | 64×16 (4 × 16×16) | passé `c` ; actuel `G` ; futur `s` ; déblocage majeur (sceau `e`) | Tour des niveaux |
+| `codex_cell.png` | 108×40 (3 × 36×40) | inconnu ; vu ; maîtrisé (bord `G`) | Codex |
+| `star5.png` | 10×5 (2 × 5×5) | vide `n` ; pleine `G` | Codex grille |
+| `star8.png` | 24×8 (3 × 8×8) | vide ; pleine ; pop | Fiche du codex |
+| `toggle.png` | 96×16 (3 × 32×16) | off (rail `n`, bouton `m` à gauche) ; on (rail `f`, bouton `w` à droite, coche dans le bouton) ; barre « coupé » 16×16 | Notifications, sourdines |
+| `slider.png` | 24×12 | rail 8×4 9-slice (`n` / rempli `l`) + curseur 8×12 × 2 (normal `m l`, pressé `l w`) | Son, musique |
+| `shop_pedestal.png` | 64×16 | 1 | Socle de pierre `n s m l` de l'aperçu |
+| `hud_bar.png` | 180×20 | 1 | §4.2 |
+| `ui_lantern.png` | 48×12 (4 × 12×12) | 0 allumée, 1 flamme alternée, 2 extinction (fumée `l`), 3 éteinte en écho `q t c` | Vies |
+| `banner.png` | 96×16 (2 × 48×16) | or (`G` / `y`, contour `k`) ; pierre (`s m`, contour `k`) — 9-slice, marge 6 | Bannières en jeu |
+| `biome16.png` | 96×16 (6 × 16×16) | un médaillon par biome | Tour du jour (P1) |
+| `share_card.png` | 180×100 | fond + cadre ; le texte est rendu en code | Image de partage (P1) |
+| `focus_ring.png` | 8×8 | 9-slice marge 3, `c` 1 px, coins `e` | Focus clavier / manette / contrôle par contacteur (P2) |
+
+---
+
+## 6. Polices pixel
+
+### 6.1 Les quatre polices
+
+| Police | Fichier | Cellule | Hauteur capitale | Avance | Casse | Usage | Couleur de base |
+|---|---|---|---|---|---|---|---|
+| **5 px** | `font_5.png/.fnt` | 5×8 | 5 | 4 (chiffres 4) | capitales + chiffres + symboles | Badges, prix sur cartes, petits compteurs, légendes ≤ 20 caractères | `w` |
+| **7 px** | `font_7.png/.fnt` (= `font_s` actuel, complété) | 6×10 | 7 | 6 (chiffres 6) | capitales + chiffres + symboles | **Tous les boutons, titres, HUD texte** | `w` |
+| **8 px** | `font_8.png/.fnt` | 7×12 | 7 (ascendantes 8, x-height 5, descendantes 2) | 4 à 6, proportionnelle | **casse mixte** | Phrases : codex, missions, offres, confidentialité, quasi-réussite | `w` |
+| **Grande** | `font_l.png/.fnt` | 10×16 | 12 | 10 (chiffres 10) | capitales + chiffres | Altitude, titres de résultat, tampon | `w` |
+| Contours | `font_5_outline`, `font_7_outline`, `font_l_outline` | +2 px | — | identique | — | **Tout texte posé sur le jeu** (HUD, FRÔLÉ, tampon) | contour `k` 1 px, coins inclus |
+
+`font_8` n'a pas de version avec contour. Raison : elle n'est jamais posée sur le jeu, seulement sur un panneau.
+
+**Taille réelle à l'écran** (1080×2400, ×6, 420 dpi) :
+- capitale de `font_5` : 30 px physiques = 11,4 dp ;
+- capitale de `font_7` : 42 px = 16 dp, soit l'œil d'un texte de 22 sp ;
+- `font_l` : 72 px.
+
+Tout est donc **au-dessus** du texte minimal de 12 sp de Material, même `font_5`.
+
+**Caractères par ligne** dans la zone de 164 px :
+
+| Police | Caractères par ligne |
+|---|---|
+| `font_5` | 41 |
+| `font_7` | 27 |
+| `font_8` | ≈ 33 (moyenne de 5 px) |
+| `font_l` | 16 |
+
+### 6.2 Jeu de glyphes (toutes polices, sauf mention)
+
+- `A-Z`, `0-9`, espace, et la ponctuation `. , : ; ! ? ' " - + / % ( ) # × < > = _ * ·`.
+- **Accents FR** : `À Â Ä Æ Ç É È Ê Ë Î Ï Ô Ö Œ Ù Û Ü Ÿ`. Les glyphes suivants **manquent aujourd'hui** dans `font.txt` : `Ä Æ Ö Œ Ü Ÿ`.
+- **Typographie FR** : `« »` (5×5), apostrophe `’` (1×2), points de suspension `…` (une seule cellule), tiret demi-cadratin `–` et cadratin `—`.
+- **Symboles du jeu** : `◆` éclat (5×5 en `font_5`/`font_7`), `◇` prisme, `▶`, `↻`, `↑ ↓ ← →`, `▮` et `✕` (partage), `★ ☆`, `∞`.
+- `font_8` reçoit en plus les **minuscules** `a-z` et `à â ä æ ç é è ê ë î ï ô ö œ ù û ü ÿ`.
+  - x-height 5, ascendantes 8, descendantes 2.
+  - Accents sur les rangées 0-1 de la cellule (même règle que les capitales : aigu et grave **en diagonale** sur 2 rangées).
+- **Espaces** :
+  - normale = 3 px (`font_7`, `font_l` : 4) ;
+  - **espace fine insécable** U+202F = 1 px, placée avant `! ? : ; »` et après `«` ;
+  - insécable U+00A0 = 3 px.
+
+  Le code de localisation remplace automatiquement « ␣! » par « U+202F! » en FR. Raison : la règle typographique française est respectée et la largeur reste maîtrisée.
+- **Tailles du `.fnt`** : `lineHeight` 10 / 12 / 16 / 8, `base` = rangée de pied de capitale.
+- **Crénage** : aucun en `font_5`/`font_7`/`font_l` (chasse quasi fixe). En `font_8`, 6 paires négatives de 1 px : `Te To Ta Ve Vo Ya`.
+
+### 6.3 Production
+
+`tools/font.py` lit `art/src/ui/font.txt` et sort `font.png` + `.fnt`. À étendre :
+
+1. Accepter les clés `cell:`, `baseline:`, `advance:` par glyphe (`== a advance=4`) ;
+2. Produire la variante `_outline` automatiquement (dilatation 1 px en `k`, 8 voisins) ;
+3. Un fichier source par police : `font_5.txt`, `font_7.txt` (renommer `font.txt`), `font_8.txt`, `font_l.txt`.
+
+**Contrôle** : une planche `font_check.png` qui affiche, pour chaque police, la pangramme FR « VOIX AMBIGUË D’UN CŒUR QUI AU ZÉPHYR PRÉFÈRE LES JATTES DE KIWIS » et la pangramme EN.
+
+### 6.4 Règles de longueur des textes
+
+- Chaque clé a un **budget en pixels**, noté dans `strings.csv` (colonne `max_px`). Un test automatique mesure FR et EN avec la police réelle (`Font.get_string_size`) et échoue au-delà.
+- Budgets types :
+
+| Élément | Budget |
+|---|---|
+| Bouton de 132 px | 116 px (19 caractères `font_7`) |
+| Bouton de 78 px avec icône | 46 px (7 caractères) |
+| Segment de 54 px | 48 px (8 caractères) |
+
+- **Pas de texte dans les images** : tout passe par les polices (localisation et taille de l'APK).
+
+---
+
+## 7. Liste des assets UI demandés à l'équipe art
+
+> **Total : 52 fichiers**, dont 41 P0, 8 P1 et 3 P2.
+> « Existant » signifie : à reprendre en palette v2 et aux tailles ci-dessous.
+
+| # | Fichier | Taille totale | Images (taille unitaire) | Prio | État |
+|---|---|---|---|---|---|
+| 1 | `font_5.png` + `.fnt` | ≈ 160×40 | cellule 5×8 | P0 | nouveau |
+| 2 | `font_5_outline.png` + `.fnt` | ≈ 224×50 | cellule 7×10 | P0 | généré |
+| 3 | `font_7.png` + `.fnt` | ≈ 192×50 | cellule 6×10 | P0 | existant (`font.png`), à compléter : `Ä Æ Ö Œ Ü Ÿ « » ’ … – — ◆ ◇ ▶ ↻ ↑ ↓ ← → ▮ ✕ ★ ☆` |
+| 4 | `font_7_outline` | ≈ 256×60 | cellule 8×12 | P0 | généré |
+| 5 | `font_8.png` + `.fnt` | ≈ 224×72 | cellule 7×12, casse mixte | P0 | nouveau |
+| 6 | `font_l.png` + `.fnt` | ≈ 160×64 | cellule 10×16 | P0 | nouveau |
+| 7 | `font_l_outline` | ≈ 192×72 | cellule 12×18 | P0 | généré |
+| 8 | `panel.png` | 24×24 | 1 | P0 | existant, à refaire en v2 |
+| 9 | `panel_echo.png` | 24×24 | 1 | P0 | nouveau |
+| 10 | `panel_inset.png` | 24×24 | 1 | P0 | nouveau |
+| 11 | `btn_main.png` | 144×24 | 3 × 48×24 | P0 | existant (2 images), +1 image désactivée |
+| 12 | `btn_alt.png` | 144×24 | 3 × 48×24 | P0 | nouveau |
+| 13 | `btn_echo.png` | 144×24 | 3 × 48×24 | P0 | nouveau |
+| 14 | `tab.png` | 72×20 | 3 × 24×20 | P0 | nouveau |
+| 15 | `bar.png` | 40×6 | 5 × 8×6 | P0 | nouveau |
+| 16 | `badge_new.png` | 28×7 | 4 × 7×7 | P0 | nouveau |
+| 17 | `hud_pip.png` | 4×2 | 2 × 2×2 | P0 | nouveau |
+| 18 | `diff_pips.png` | 12×4 | 3 × 4×4 | P0 | nouveau |
+| 19 | `icons12.png` | 288×12 | 24 × 12×12 | P0 | existant (`icons.png`, 21), à refaire |
+| 20 | `icons16.png` | 256×16 | 16 × 16×16 | P0 | nouveau |
+| 21 | `hud_bar.png` | 180×20 | 1 | P0 | nouveau |
+| 22 | `ui_lantern.png` | 48×12 | 4 × 12×12 | P0 | nouveau |
+| 23 | `banner.png` | 96×16 | 2 × 48×16 | P0 | nouveau |
+| 24 | `toast.png` | 24×16 | 1 | P0 | nouveau |
+| 25 | `banner_tuto.png` | 64×24 | 1 | P0 | nouveau (P1 dans l'ART_BIBLE, remonté : le tutoriel est P0) |
+| 26 | `tuto16.png` | 96×32 | 6 × 2 × 16×16 | P0 | nouveau |
+| 27 | `tap.png` | 64×32 | 2 × 32×32 | P0 | existant (dans `sprites/`), à déplacer dans `ui/` |
+| 28 | `stamp_frame.png` | 320×24 | 5 × 64×24 | P0 | nouveau |
+| 29 | `card.png` | 96×24 | 4 × 24×24 | P0 | nouveau |
+| 30 | `shop_pedestal.png` | 64×16 | 1 | P0 | nouveau |
+| 31 | `chest.png` | 256×32 | 8 × 32×32 | P0 | nouveau |
+| 32 | `popup_reward.png` | 384×64 | 6 × 64×64 | P0 | nouveau (P1 dans l'ART_BIBLE ; requis par les niveaux P0) |
+| 33 | `shard_mini.png` | 24×6 | 4 × 6×6 | P0 | nouveau |
+| 34 | `dither.png` | 16×4 | 4 × 4×4 | P0 | nouveau |
+| 35 | `xp_badge.png` | 40×20 | 2 × 20×20 | P0 | nouveau |
+| 36 | `cal_cell.png` | 60×28 | 3 × 20×28 | P0 | nouveau |
+| 37 | `codex_cell.png` | 108×40 | 3 × 36×40 | P0 | nouveau |
+| 38 | `star5.png` | 10×5 | 2 × 5×5 | P0 | nouveau |
+| 39 | `toggle.png` | 96×16 | 3 × 32×16 | P0 | nouveau |
+| 40 | `slider.png` | 24×12 | rail + 2 curseurs | P0 | nouveau |
+| 41 | `logo.png` | 960×48 | 6 × 160×48 | P0 | existant, à refaire (F10) |
+| 42 | `countdown.png` | 216×32 | 9 × 24×32 | P1 | nouveau (P0 de secours : `font_l` sans pop) |
+| 43 | `confetti.png` | 24×3 | 8 × 3×3 | P1 | nouveau |
+| 44 | `star8.png` | 24×8 | 3 × 8×8 | P1 | nouveau |
+| 45 | `level_node.png` | 64×16 | 4 × 16×16 | P1 | nouveau (P0 de secours : `star5`) |
+| 46 | `biome16.png` | 96×16 | 6 × 16×16 | P1 | nouveau |
+| 47 | `share_card.png` | 180×100 | 1 | P1 | nouveau |
+| 48 | `splash.png` | 180×400 | 1 | P1 | nouveau (F10) |
+| 49 | `icon_adaptive_fg.png` + `_bg` | 108×108 (×4 à l'export = 432) | 2 | P1 | nouveau (F10, icône Android adaptative) |
+| 50 | `focus_ring.png` | 8×8 | 1 | P2 | nouveau |
+| 51 | `font_check.png` | — | planche de contrôle | P2 | généré |
+| 52 | `store_frames` | 1080×1920 × 5 | cadres de captures | P2 | F10 |
+
+Les **sprites de jeu** utilisés par l'UI ne sont pas comptés ici (pièges pour le codex 48×48, héros en tenues, `fx_engrave`, etc.). Ils sont listés dans l'ART_BIBLE F1-F9.
+
+---
+
+## 8. Récompenses : l'addiction éthique
+
+### 8.1 Principes
+
+1. **Toujours un gain.** Même une ascension de 8 m rapporte 14 éclats, de l'XP et une barre qui avance. L'écran de fin ne dit jamais « ÉCHEC ».
+2. **Le gain se compte, il ne se cache pas.** Chaque nombre compte de 0 à sa valeur (§5.8). Un tap montre tout de suite le total. Raison : le joueur qui veut rejouer ne doit pas subir notre spectacle (constat Vampire Survivors : les joueurs demandent l'accélération).
+3. **Une seule cible à la fois**, la plus proche (§5.10), visible au hub, en fin d'ascension et en pause.
+4. **La relance en 1 s.** REJOUER est actif à 300 ms, au même endroit que GRIMPER (bas de l'écran, pouce), et dans la même couleur.
+5. **La pub est un choix.**
+   - Bouton cyan, plus petit que l'action principale, récompense écrite dessus.
+   - Pas de minuteur, pas de deuxième demande dans la même ascension.
+   - Jamais au lancement, jamais pendant le jeu.
+6. **Pas de hasard payant.** Les coffres montrent leur contenu avant d'être ouverts. Aucune animation de machine à sous.
+7. **Pas de punition visible.** Une rupture de Rythme ne joue aucun son négatif. Une série perdue est **divisée par 2**, pas remise à zéro, et l'écran le dit positivement : « SÉRIE 3 J (GARDÉE À MOITIÉ) ».
+
+### 8.2 Le comptage animé de fin (rappel §3.8)
+
+La chronologie fait 2,4 s au total : altitude (600 ms), puis record, puis vies, puis éclats, puis XP, puis objectif.
+Chaque étape a son son, et la hauteur du son monte avec la valeur : `tick` + 1 demi-ton par tranche de 100 m, au plus +12.
+Raison : l'oreille sent le progrès avant que l'œil ait lu.
+
+### 8.3 Quasi-réussite : choix de la phrase (une seule)
+
+On teste dans l'ordre et on garde la première phrase qui s'applique. Elle s'affiche en `font_8` `a`.
+
+| Condition | FR | EN |
+|---|---|---|
+| Record battu | Nouveau record : +34 m ! | New best: +34 m! |
+| Record manqué de ≤ 15 % | Plus que 12 m pour ton record | Only 12 m short of your best |
+| Défi : palier manqué de ≤ 15 % (P1) | Argent à 18 m près | 18 m from silver |
+| Prochain autel manqué de ≤ 20 m | Le prochain autel était à 9 m | Next altar was 9 m away |
+| Mission manquée d'1 unité | Encore 1 scie à graver | 1 more saw to etch |
+| Biome suivant à ≤ 30 m | La Fonderie commence à 21 m | The Foundry starts 21 m higher |
+| Sinon | Ta meilleure vie : la 3e (218 m) | Your best life: #3 (218 m) |
+
+**Rapprochement record.** Pendant la partie, quand on est à moins de 50 m du record, l'écart s'affiche sous l'altitude (« −28 », `a`). La **ligne de record** dans le monde (FEEL n°25) est visible.
+Raison : la quasi-réussite se vit en jouant, pas seulement après.
+
+### 8.4 Ce qui est interdit (liste de contrôle pour la revue)
+
+- Un compte à rebours sur une offre ou un bouton.
+- Un bouton « non » plus petit, plus pâle ou décalé que le bouton « oui » d'une pub.
+- Une pub sans récompense annoncée, ou une pub qui démarre seule.
+- Un texte de culpabilisation (« Tu abandonnes déjà ? »).
+- Une récompense qui expire si on ne revient pas, sauf la série, qui est divisée et non perdue.
+- Une notification sans opt-in, ou plus d'une par jour.
+- Une monnaie premium achetable (prismes) : aucune dans P0-P2.
+
+---
+
+## 9. Accessibilité
+
+### 9.1 Cibles
+
+- Au moins **24×24 px logiques** pour toute cible, soit 48 dp dans le pire cas (§1.4).
+- Écart d'au moins 4 px entre cibles.
+- Les cibles d'action fréquentes (GRIMPER, REJOUER, REPRENDRE) font **32 px** de haut, soit 64 dp au pire.
+- Toutes les actions de navigation sont dans les **60 % bas**. Le seul contrôle en haut est la pause (cible 28×28), doublée par le bouton Retour.
+
+### 9.2 Contraste (WCAG 2.x, calculé sur palette_v2)
+
+| Paire (texte / fond) | Ratio | Usage | Verdict |
+|---|---|---|---|
+| `w` / `d` | 14,1 | Texte courant sur panneau | AAA |
+| `w` / `k` | 17,6 | HUD, toasts | AAA |
+| `l` / `d` | 5,5 | Texte secondaire | AA |
+| `l` / `b` | 6,4 | Texte secondaire sur encart | AA |
+| `G` / `d` | 11,2 | Éclats, gains | AAA |
+| `a` / `d` | 9,3 | Quasi-réussite, série | AAA |
+| `c` / `d` | 9,6 | Textes d'écho | AAA |
+| `e` / `d` | 13,8 | Gravure | AAA |
+| `j` / `d` | 4,6 | XP | AA (petit texte limite : réservé aux nombres ≥ `font_7`) |
+| `z` / `d` | 4,5 | Erreur, prix trop cher | AA limite : **toujours doublé** par une forme (croix, tremblement) |
+| `k` / `o` | 7,2 | Libellé du bouton principal | AAA |
+| `w` / `s` | 8,5 | Libellé du bouton secondaire | AAA |
+| `k` / `c` | 12,0 | Libellé du bouton vidéo | AAA |
+| `w` / `t` | 3,8 | — | **Refusé** : n'est plus utilisé (§5.2) |
+| `m` / `d` | 2,6 | Libellé désactivé | Exempté par WCAG ; toujours doublé d'un cadenas ou d'une raison |
+
+Les éléments non textuels (icônes du HUD sur `k`) sont tous ≥ 3:1. L'icône la plus faible est `U` / `u` = 1,9 ; c'est pourquoi la vague de la marée a une crête `j` (4,6 sur `u`).
+
+### 9.3 Mode effets réduits (rappel du §3.15)
+
+Trois niveaux : COMPLETS, RÉDUITS, MINIMUM.
+
+**Détection automatique au premier lancement** :
+- si `animator_duration_scale == 0` (option Android « supprimer les animations ») → MINIMUM ;
+- s'il vaut moins de 1 → RÉDUITS.
+
+Lecture via un plugin Android ou `OS.execute` non disponible : la valeur par défaut est COMPLETS, et le réglage est proposé dès le premier passage au hub (P1).
+
+Dans tous les modes, **les flashs restent sous 3 par seconde** et ne couvrent jamais tout l'écran (FEEL).
+
+### 9.4 Daltonisme : le danger ne se lit pas qu'à la couleur
+
+| Information | Couleur | Doublée par |
+|---|---|---|
+| Piège dangereux | magenta `x X z Z` | Triangles et dents, pulsation, préavis ≥ 450 ms (ART_BIBLE) |
+| Piège gravé (inoffensif pour le héros fantôme) | cyan `q t c e` | Pointes émoussées, sceau, pas de pulsation |
+| Erreur d'UI | `z` | Croix `cross`, tremblement ±2 px, son `deny`, haptique double |
+| Bonus qui expire | `z` sur la barre | Clignotement 4 Hz |
+| Dernière vie | `z` | 3 clignotements + son `warn` |
+| Sélection | `w` / `a` | Coche 12×12 |
+| Difficulté | `l` / `a` / `o` | Rond / losange / triangle |
+| Équipé | `G` | Coche + libellé PORTÉE |
+
+**Test obligatoire** : passer les maquettes et 3 captures de jeu au simulateur deutéranopie, protanopie et tritanopie (filtre Machado 2009). Critère : chaque ligne du tableau reste lisible.
+Point de vigilance de l'ART_BIBLE : `o` et `z` ont presque la même luminance (ratio 1,28). **Aucun élément de danger ne touche le héros dans l'UI** (ex. pas de croix `z` à côté de la vignette de l'écharpe).
+
+### 9.5 Autres
+
+- **Sans limite de temps** dans l'UI : aucune offre, aucun écran ne se ferme seul, sauf les toasts, qui ne contiennent jamais d'action.
+- **Haptique** : réglable (aucune, légères, fortes). Elle n'est jamais la seule porteuse d'une information.
+- **Son** : tout signal sonore utile a un équivalent visuel. Exemples : le « tic » du pendule a un repère `m` au point mort haut (GDD) ; l'approche de la marée a son indicateur de colonne.
+- **Une main** : toutes les actions marchent au pouce droit **ou** gauche (option « main du pouce », P1).
+- **Lecteur d'écran** (P2) : Godot 4.5 intègre AccessKit. Il faut renseigner `accessibility_name` sur chaque bouton icône (« Boutique », « Pause »…) et `accessibility_description` sur les compteurs.
+- **Lisibilité** : aucune police sous 5 px de capitale. Le texte posé sur le jeu a toujours un contour.
+
+---
+
+## 10. Textes : règles communes
+
+- Les clés vivent dans `game/data/strings.csv` (colonnes `key, fr, en, max_px, police`), importées comme `Translation` Godot (`tr()`).
+  Raison : `GameState.t()` renvoie aujourd'hui des paires `[fr, en]` codées en dur, ce qui empêche une 3e langue et le test de longueur.
+- **Capitales** pour l'interface (`font_5`, `font_7`, `font_l`) ; **casse de phrase** pour les phrases (`font_8`).
+- **Tutoiement en FR.** Phrases courtes, sans jargon, avec des verbes d'action : GRIMPER, REJOUER, PORTER.
+- **Nombres** : séparateur de milliers = espace fine en FR (« 1 250 »), virgule en EN (« 1,250 »). L'unité « M » est collée avec une espace fine en FR et une espace normale en EN.
+- **Pluriels** : clés `_one` / `_n` (§3.5).
+- Les noms propres de la tour (biomes, pièges, tenues) sont traduits.
+
+| Biome | FR | EN |
+|---|---|---|
+| 1 | LA CRYPTE | THE CRYPT |
+| 2 | LA FONDERIE FROIDE | THE COLD FOUNDRY |
+| 3 | LA BIBLIOTHÈQUE ENGLOUTIE | THE SUNKEN LIBRARY |
+| 4 | LE JARDIN SUSPENDU | THE HANGING GARDEN |
+
+« LA BIBLIOTHÈQUE ENGLOUTIE » fait 25 caractères = 150 px en `font_7` : elle tient dans la bannière de 140 px avec `font_5` (100 px). Règle : le nom d'un biome passe en `font_5` s'il dépasse 22 caractères.
+
+---
+
+## 11. Liste d'implémentation priorisée
+
+### P0 — nécessaire pour la première version publique
+
+| # | Tâche | Dépend de | Estimation |
+|---|---|---|---|
+| 1 | Passer `project.godot` en 180×320 `expand`, écrire `UIRoot` (calcul de `It`, `B`, colonne centrée) | arbitrage A1 | 0,5 j |
+| 2 | Polices `font_5`, `font_7` complétée, `font_8`, `font_l` + contours ; extension de `font.py` | assets 1-7 | 2 j (art) + 0,5 j (outil) |
+| 3 | Thème Godot `ui_theme.tres` : panneaux, boutons 3 états, onglets, barres, toasts ; `UIK.button` passe à l'action au relâchement | assets 8-24 | 1 j |
+| 4 | `UIK.slide` (pas discrets), `dither` shader, compteur qui roule | 34 | 1 j |
+| 5 | HUD : bande haute (pause, altitude, lanternes, éclats) + colonnes de mur (volte, bonus, Rythme, marée) + bandeau bas avec file de priorité | 19-23 | 2 j |
+| 6 | Premier lancement sans texte : splash, pictogrammes, main sur le mur, UMP reporté | 25-27 | 1 j |
+| 7 | Gravure : extinction de lanterne, tampon, bandes ; panneau « Vie perdue » | 28 | 1 j |
+| 8 | Pause (bascules, abandon en 2 temps, compte à rebours, pause automatique) | — | 0,5 j |
+| 9 | Offre +1 vie (toutes les conditions §3.7) et ×2 en fin d'ascension | AdMob | 1 j |
+| 10 | Fin d'ascension complète (chronologie §3.8, accélération par tap, REJOUER à 300 ms) + `NextGoal` | 29, 31-33, 35 | 2 j |
+| 11 | Hub (rangée d'icônes, badges, carte objectif, Tour du jour) | 16, 20, 35 | 1 j |
+| 12 | Boutique, onglet TENUES (états de cartes, aperçu, achat et refus) | 29-30 | 1,5 j |
+| 13 | Journal : missions + calendrier + série + coffre bonus | 18, 31, 36 | 1,5 j |
+| 14 | Niveaux (liste simple, `star5` en guise de nœuds) | — | 0,5 j |
+| 15 | Codex (grille + fiche, animation 48×48) | 37-38 | 1 j |
+| 16 | Succès (liste triée) | — | 0,5 j |
+| 17 | Tour du jour : fiche, partage texte | — | 0,5 j |
+| 18 | Réglages : effets, vibrations, son, musique, langue, notifications, confidentialité UMP | 39-40 | 1 j |
+| 19 | `strings.csv` FR/EN + test de longueur automatique | 2 | 0,5 j |
+| 20 | Bouton Retour Android sur tous les écrans (§2.2) | — | 0,25 j |
+
+**Total P0 : ≈ 20 jours de développement**, plus les assets.
+
+### P1 — dans les 4 semaines après le lancement
+
+- Onglets TRAÎNÉES et ÉCHOS de la boutique, avec essai pub (`skin_trial`).
+- Tour des niveaux illustrée (`level_node`).
+- Image de partage (`share_card`).
+- Rangs Google Play Games dans la fiche du Tour.
+- Défi hebdo (fiche + paliers dans `NextGoal`).
+- Option « main du pouce ».
+- Rallumer la série (`streak_rekindle`).
+- Bouclier d'écho (`echo_shield`).
+- `countdown.png`, `confetti`, `star8`, `biome16`.
+- Détection d'« animations supprimées » Android.
+- Splash et icône adaptative définitifs.
+
+### P2 — confort et finitions
+
+- AccessKit (noms accessibles), `focus_ring` et navigation manette ou contacteur.
+- Mode Zen (fiche).
+- Captures du store.
+- Planche `font_check`.
+- 3e langue (le CSV la permet).
+- Statistiques détaillées par piège dans le codex.
+
+---
+
+## 12. Points à arbitrer par le lead
+
+| # | Sujet | Options | Recommandation |
+|---|---|---|---|
+| A1 | Résolution | 192×352 `keep_width` (brief, `project.godot`) ; 180×320 `expand` (ART_BIBLE) | **180×320 expand.** Échelle ×6 entière sur 1080p et plus de hauteur visible sur les écrans 20:9. |
+| A2 | Nom du combo | « Élan » dans FEEL (paliers I-IV à 5/15/30/50) ; « Rythme » dans le GDD (10/20/30) | **Rythme, 10/20/30.** Élan reste le saut long ; corriger FEEL. |
+| A3 | Déblocages par niveau | GDD ; ECONOMY | **ECONOMY** (niv 2 missions, 3 traînées, 5 défi, 10 effets d'écho, 15 difficiles…). |
+| A4 | Catalogue | 24 ou 19 tenues ; 12 ou 8 reliques ; 22 fiches de codex à 3 étoiles ou 40 entrées ; deux listes de 30 succès | L'UI supporte n'importe quel nombre (grilles qui défilent). Il faut **une** liste. Codex : 22 pièges à 3 étoiles (P0), le reste en P1. |
+| A5 | Physique | 60 Hz (FEEL) ; 120 Hz (GDD) | Sans effet sur l'UI, mais les durées « en images » de ce document supposent un **affichage** à 60 Hz. |
+| A6 | Couleurs | Les hex d'ECONOMY et des `SKINS` de `game_state.gd` sortent de palette_v2 | Remapper sur palette_v2 : éclats `G g`, prismes `c e` + `Z`, XP `j J`. |
+| A7 | Pubs P0 | 4 emplacements (GDD) ; 5 (ECONOMY) | L'UI de ce document couvre les 5. On peut couper `skin_trial` en P1 sans casser l'interface. |
+| A8 | Formule de série | GDD ; ECONOMY | L'UI affiche seulement « SÉRIE n J » + gel ; elle ne dépend pas de la formule. Choisir ECONOMY. |
+| A9 | Action des boutons | `ui_kit.gd` joue le son et agit sur `pressed` ; FEEL demande l'action au relâchement | **Au relâchement**, son au relâchement, enfoncement visuel à l'appui. |
+| A10 | HUD | ART_BIBLE : « rien d'autre en partie » ; brief : Rythme, volte, marée, bonus | **Contextuel dans les murs** (§4.3) : rien n'apparaît tant que ça ne sert pas. |
+| A11 | Partage | `▮` par 10 m (GDD) | **Par 25 m.** Avec 10 m, une vie de 1 450 m fait 145 caractères. |
+| A12 | Face du bouton vidéo | `t` (ART_BIBLE) | **`c` avec texte `k`.** Contraste 12:1 au lieu de 3,8:1. |
+| A13 | Bannières en jeu | En haut (FEEL) | **Bandeau bas, sous le héros** : le haut du puits montre les pièges à venir. |
+| A14 | Consentement UMP | Au lancement ; après l'Ascension 0 | **Après l'Ascension 0** (aucune pub n'est chargée avant). À valider avec le juridique. |
+| A15 | Icônes | 22 en 12×12 et 10 en 16×16 (ART_BIBLE) | 24 + 16 (§5.6-5.7). |
+
+---
+
+## 13. Maquettes
+
+Toutes en 180×400 (`It = 0`, `B = 376`), avec une copie ×4 (`*_x4.png`) pour la lecture. Les textes sont rendus avec les glyphes de `art/src/ui/font.txt` (capitales 5×7 seulement) : les phrases en `font_8` y sont donc en capitales.
+
+| Fichier | Contenu |
+|---|---|
+| `ui_mockups/hub.png` | Hub : barre haute, logo (bloc), record, série, carte objectif, rangée d'icônes, Tour du jour, GRIMPER |
+| `ui_mockups/hud.png` | Partie : bande haute, colonnes de mur (volte, bonus, Rythme, marée), bandeau bas, zone sacrée en pointillé |
+| `ui_mockups/fin.png` | Fin d'ascension : altitude, record, 4 barres de vie, quasi-réussite, butin, objectif, ×2 / PARTAGER, MAISON / REJOUER |
+
+Les maquettes sont des **plans de placement**, pas de l'art final. Les blocs gris-bleu marquent la place des dessins à venir.
+
+---
+
+## 14. Sources
+
+- Documents internes : `studio/BRIEF.md`, `GDD.md`, `ECONOMY.md`, `FEEL.md`, `ART_BIBLE.md`, `palette_v2.txt` ; prototype `game/scripts/ui_kit.gd`, `main.gd`, `game_state.gd`, `project.godot` ; `art/src/ui/font.txt` ; `tools/px.py`, `tools/font.py`.
+- Material Design 3 : cibles de 48 dp, contrastes 4,5:1 et 3:1, « never color alone », mouvement réduit, retour prédictif Android.
+- Analyses d'écrans de fin et de HUD mobiles (recherche web) :
+  - Downwell (HUD minimal, combo comme difficulté implicite) ;
+  - Alto's Odyssey (3 objectifs, critiques des objectifs à la chance) ;
+  - Archero (contre-exemple : résurrection avec minuteur de 5 s) ;
+  - Vampire Survivors (demandes d'accélération des coffres) ;
+  - Dead Cells mobile (HUD hors des pouces) ;
+  - Slay the Spire mobile (cibles trop petites) ;
+  - Crossy Road (rétention avant monétisation).
+- Deux pages n'ont pas pu être lues (bugnet.io, gamedeveloper.com : hôtes bloqués par le réseau de la session) ; leurs constats viennent des extraits de recherche.
