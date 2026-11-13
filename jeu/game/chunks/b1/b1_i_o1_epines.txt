@@ -11,7 +11,7 @@ poids: 1
 // Intro O1 (épines), temps 1 « zone sûre » : la serrure se voit avant la clé.
 // En venant du départ, la main se pose SOUS la bande R5-R6 (en R3) : on la voit 8 px au-dessus, on repart.
 // Le grand O est collé sous les épines : le rythme naturel le prend, un tap tardif le perd.
-// Route (h0≈-5) : L1 bond -> R3 (O) bond -> L6 bond -> R10 sortie.
+// Route (h0≈-5, simulée) : L1 bond -> R3 (O pris à l'accroche) bond -> L6 bond -> R (h≈148, déjà dans le chunk suivant).
 // Entrées hautes (h0 > 1) : la main tomberait dans la bande -> attendre 0,3-2 s sur L (glisse) ;
 // c'est la première leçon de rythme, échec peu coûteux (on recommence 20 m plus bas).
 // Écho : graver la bande supprime toute attente, quelle que soit l'entrée.
