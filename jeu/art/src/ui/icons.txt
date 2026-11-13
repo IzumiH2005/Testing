@@ -1,23 +1,25 @@
-# icons : 21 icônes 12x12 en bande horizontale (252x12). Contour k, lumière haut-gauche,
-# 1 px de marge sauf les anses du trophée. Icônes d'action en pierre claire (w p l) pour aller
-# sur tous les boutons ; icônes d'état dans leur rampe (chaude, écho, or).
-# 0 vie (lanterne allumée : r R o a y) · 1 vie utilisée (même lanterne éteinte, flammèche écho)
-# 2 éclat (or g G y W) · 3 jouer · 4 partager · 5 vidéo · 6 réglages · 7 son on · 8 son off
-# 9 retour · 10 trophée (or) · 11 calendrier (en-tête chaud) · 12 cadenas · 13 coche (écho)
-# 14 pause · 15 flamme de série · 16 vibration · 17 maison · 18 crâne · 19 couronne · 20 écharpe
+# icons : 21 icônes 12x12 en bande horizontale (252x12). Contour k, lumière haut-gauche.
+# Icônes d'action en pierre claire (w p l) ; icônes d'état dans leur rampe (chaude, écho, or, danger).
+# 0 vie : lanterne allumée, flamme y/a sur verre o · 1 vie utilisée : même lanterne, éteinte en écho
+# 2 éclat (or) · 3 jouer · 4 partager (flèche qui sort du bac) · 5 vidéo · 6 réglages (roue à 8 dents)
+# 7 son on (2 ondes w) · 8 son off (croix z) · 9 retour · 10 trophée (or) · 11 calendrier
+# 12 cadenas · 13 coche (écho) · 14 pause · 15 flamme de série · 16 vibration · 17 maison (toit chaud)
+# 18 crâne · 19 couronne (or, joyau z) · 20 écharpe (ruban corail ondulant, rayures a)
+# Itération 1 rejetée : lanterne sans flamme, partager en grumeaux, réglages = anneau, ondes pâles.
+# Itération 2 : partager collé au bac (lu comme un visage), écharpe lue comme « π » -> redessinés.
 palette: shared
-size: 180x12
-frames: 15
+size: 252x12
+frames: 21
 ---
-.......................................................kkk..........................................................................................................................
-.....kk..........kk...................kk..............kwwwk..................kk..........k...p.......k...........k........kkkkkkkk.....p....p.......kkkk...................kk..kk...
-....k..k........k..k.........kk.......kwkk............kwwpk...kkkkkkkk.....kkwwkk.......kwk...p.....kwk.........kwk.....kkkyGGGGgkkk.kklkkkklkk....kplllk.................kwpkkwpk..
-...kkkkkk......kkkkkk.......kyGk......kwwwkk......kkkkwwppk..kwwwwwwwwk...kwwwwwpk....kkwwkw..p...kkwwk........kwwk.....kGkyWGGGgkgk.koooooooRk...kpkkkkmk..........kk....kwpkkwpk..
-..koRRRRRk....ktqqqqqk.....kWGGgk.....kwwwwwkk...kwwwwkkkk...kwwwkwwwpk...kwwkkwpk...kwwwwk.w.p..kwwwwkw..w...kwwwkkkk..kGkyGGGggkgk.kRRRRRRRRk...kpk..kmk.........keck...kwpkkwpk..
-..koaayaok....kqqqtqqk....kyGGGggk....kwwwwwwwk..kwwpk.......kwwwkkwwpk..kwwkkkkppk..kwwwpk.w.p..kwwwpk.ww...kwwwwwwwwk..kGkGGGgkgk..kwwwwwwwpk..kkkkkkkkkk...kk..keck....kwpkkwpk..
-..koayyaok....kqqtcqqk....kGGGgggk....kwwwwwwpk..kwppwkkkk...kwwwkkkwpk..kwpkkkkplk..kwwppk.w.p..kwwppk.ww...kwpppppppk...kkkGgkkk...kwlwlwlwpk..kppppppplk..keckkeck.....kwpkkwpk..
-..koayyaok....kqqtcqqk....kGGggggk....kwwwwpkk....kkkkwwwwk..kwwwkkwwpk...kwpkkppk...kppppk.w.p..kppppkw..w...kpppkkkk......kGgk.....kwwwwwwwpk..kpllkkllmk...keccck......kwpkkwpk..
-..kooaaook....kqqqqqqk.....kGgggk.....kwwpkk..........kwwpk..kwwwkwwwpk...kwpppplk....kkppkw..p...kkppk........kppk........kGGggk....kwlwlwowpk..kpllkkllmk....kctk.......kwpkkwpk..
-..kRRRRRrk....ktqqqqqk......kggk......kpkk............kwppk..kppppppppk....kkplkk.......kpk...p.....kpk.........kpk.......kyGGGggk...kwwwwwwwpk..kmmmmmmmmk.....kk........kppkkppk..
-...kkkkkk......kkkkkk........kk.......kk...............kkk....kkkkkkkk.......kk..........k...p.......k...........k........kkkkkkkk....kkkkkkkk....kkkkkkkk.................kk..kk...
-....................................................................................................................................................................................
+.....................................................kk..................................................................................................................................k..................................................................
+.....kk..........kk...................kk............kwpk.....................kk..........k...........k...........k........kkkkkkkk.....p....p.......kkkk...................kk..kk.......kak........kkkkkk........kk........kkkkkk...........................
+....k..k........k..k.........kk.......kwkk.........kwwwpk.....kkkkkkkk....k.kwwk.k......kwk..w......kwk.........kwk.....kkkyGGGGgkkk.kklkkkklkk....kplllk.................kwpkkwpk......kaak.k....kwwwwwpk......koRk......kwwwwwpk...k...kk...k.............
+...kkkkkk......kkkkkk.......kyGk......kwwwkk......kwwwwppk...kwwwwwwwwk..kwkwwwwkpk...kkwwk...w...kkwwk........kwwk.....kGkyWGGGgkgk.koooooooRk...kpkkkkmk..........kk....kwpkkwpk.....kaoakkak...kwbbbbpk.....kooRRk....kwwwwwwwpk.kyk.kyGk.kgk.kk......kk.
+..kRRRRRrk....kttttttk.....kWGGgk.....kwwwwwkk....kkkwpkkk...kwwwkwwwpk...kwwkkwpk...kwwwwk.w.w..kwwwwk.z..z..kwwwkkkk..kGkyGGGggkgk.kRRRRRRRRk...kpk..kmk.........keck...kwpkkwpk....kaoyaoaok.w.kwbbbbpk.w..kooRRRRk...kwkkwwkkpk.kGGkGGGgkggkkookk..kkook
+..koooaook....kqqqtqqk....kyGGGggk....kwwwwwwwk.....kwpk.....kwwwkkwwpk..kwwk..kppk..kwwwpk.w.w..kwwwpk..zz..kwwwwwwwwk..kGkGGGgkgk..kwwwwwwwpk..kkkkkkkkkk...kk..keck....kwpkkwpk....koayyaaok.w.kwbbbbpk.w.kooRRRRRRk..kwkkwwkkpk.kyGGGGGggggkkRRoakkoaRRk
+..kooayaok....kqqtctqk....kGGGgggk....kwwwwwwpk..kk.kppk.kk..kwwwkkkwpk..kwpk..kplk..kwwppk.w.w..kwwppk..zz..kwpppppppk...kkkGgkkk...kwlwlwlwpk..kppppppplk..keckkeck.....kwpkkwpk...kRoayyyaok.w.kwbbbbpk.w.kkkkkkkkkk..kwwwkkwwpk.kGGGGGGggggk.kkRoooRokk.
+..koayyaok....kqtcctqk....kGGggggk....kwwwwpkk...kwk.kk.kpk..kwwwkkwwpk...kwpkkppk...kppppk.w.w..kppppk.z..z..kpppkkkk......kGgk.....kwwwwwwwpk..kpllkkllmk...keccck......kwpkkwpk...kRoayWyaok.w.kwbbbbpk.w..kwwwwwpk....kpwwwwpk..kGGGGGGggggk...kkRRkk...
+..kooaaook....kqqttqqk.....kGgggk.....kwwpkk.....kwkkkkkkpk..kwwwkwwwpk..kpkppplkmk...kkppk...w...kkppk........kppk........kGGggk....kwlwlwowpk..kpllkkllmk....kctk.......kwpkkwpk...kRooaaaoRk...kpppppmk....kwwbbwpk.....kwkwpk...kyyyzzyyyygk.....kk.....
+..kRRRRRrk....kttttttk......kggk......kpkk.......kwwwwwwppk..kppppppppk...k.kllk.k......kpk..w......kpk.........kpk.......kyGGGggk...kwwwwwwwpk..kmmmmmmmmk.....kk........kppkkppk....kRRooRRk.....kkkkkk.....kwwbbwpk.....kkkkkk...kggggggggggk............
+...kkkkkk......kkkkkk........kk.......kk..........kkkkkkkk....kkkkkkkk.......kk..........k...........k...........k........kkkkkkkk....kkkkkkkk....kkkkkkkk.................kk..kk......kkkkkk.................kkkkkkkk..............kkkkkkkkkkkk............
+............................................................................................................................................................................................................................................................

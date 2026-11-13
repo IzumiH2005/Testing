@@ -284,7 +284,7 @@ func show_menu() -> void:
 	var top := UIK.hbox(3)
 	v.add_child(top)
 	top.add_child(UIK.icon_rect(UIK.Ico.SHARD))
-	top.add_child(UIK.label(str(Game.data.shards), A.P.G, 1, HORIZONTAL_ALIGNMENT_LEFT))
+	top.add_child(UIK.label(str(int(Game.data.shards)), A.P.G, 1, HORIZONTAL_ALIGNMENT_LEFT))
 	var sp := Control.new()
 	sp.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	sp.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -593,7 +593,7 @@ func show_skins() -> void:
 	_title(v, Game.t("skins"), A.P.W, UIK.Ico.SCARF)
 	var sh := UIK.hbox(3)
 	sh.add_child(UIK.icon_rect(UIK.Ico.SHARD))
-	sh.add_child(UIK.label(str(Game.data.shards), A.P.G))
+	sh.add_child(UIK.label(str(int(Game.data.shards)), A.P.G))
 	v.add_child(sh)
 	var grid := GridContainer.new()
 	grid.columns = 2

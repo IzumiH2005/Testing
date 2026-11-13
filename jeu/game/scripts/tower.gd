@@ -125,16 +125,21 @@ func deco_for_row(row: int) -> Dictionary:
 	var r := RandomNumberGenerator.new()
 	r.seed = hash(Vector2i(seed_value, row))
 	var back := []
-	for i in 10:
+	for i in 8:
 		var v := r.randi_range(0, 3)
-		var roll := r.randf()
-		if roll < 0.012:
-			v = 4   # fenêtre
-		elif roll < 0.024:
-			v = 6   # niche à rune
-		elif roll < 0.034:
-			v = 5   # chaîne
+		if i > 0 and v == back[i - 1]:
+			v = (v + 1 + r.randi_range(0, 2)) % 4
 		back.append(v)
+	# au plus une tuile spéciale par rangée, jamais sur deux rangées voisines
+	if posmod(row, 3) == 0:
+		var roll := r.randf()
+		var col := r.randi_range(0, 7)
+		if roll < 0.20:
+			back[col] = 4   # fenêtre
+		elif roll < 0.42:
+			back[col] = 5   # chaîne
+		elif roll < 0.55:
+			back[col] = 6   # niche à rune
 	var wl := r.randi_range(0, 3)
 	var wr := r.randi_range(0, 3)
 	if r.randf() < 0.10: wl = 4

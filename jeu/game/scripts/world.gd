@@ -421,7 +421,8 @@ func _draw() -> void:
 	_draw_floor()
 	_draw_marks(top, bot)
 	_draw_traps(top, bot)
-	_draw_shards(top, bot)
+	if state != S.DEMO:
+		_draw_shards(top, bot)
 	for g in graves:
 		_draw_frame("sprites/grave", 8, 0, g + Vector2(-4, -4), false, A.P.c)
 	_draw_particles()
