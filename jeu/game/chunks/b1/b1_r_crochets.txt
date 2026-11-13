@@ -1,0 +1,21 @@
+id: b1_r_crochets
+biome: B1
+tension: R
+D: 0
+entree: any
+sortie: any
+verbe: volte
+intro: -
+alt: 64-150
+poids: 1
+// Respiration (6 rangées) : un crochet d'éclats qui ne se ferme qu'avec une volte.
+// Idée : pratiquer la volte sans danger ; l'éclat k5 c4 est derrière le demi-tour.
+// Route (L, h0≈8) : L1 volte 0,30 -> L6 sortie (le crochet c4-c5 se ramasse aller et retour).
+---
+##........##
+##........##
+##..o.....##   // k4 : retour du crochet
+##...o....##   // k3 : demi-tour
+##........##
+##........##
+---

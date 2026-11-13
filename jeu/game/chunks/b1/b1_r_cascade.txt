@@ -1,0 +1,25 @@
+id: b1_r_cascade
+biome: B1
+tension: R
+D: 0
+entree: any
+sortie: any
+verbe: volte
+intro: -
+alt: 64-150
+poids: 1
+// Respiration (10 rangées) : une cascade d'éclats le long du mur gauche.
+// Idée : monter un seul mur à coups de voltes courtes (0,14-0,18 s) ; le zigzag habituel rate tout.
+// Route (L, h0≈8) : L1 volte -> L4 volte -> L7 volte -> L9 sortie, en restant collé à c3.
+---
+##........##
+##........##
+##.o......##   // k8
+##........##
+##.o......##   // k6
+##........##
+##.o......##   // k4
+##........##
+##........##
+##........##
+---

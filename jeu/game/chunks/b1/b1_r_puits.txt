@@ -1,0 +1,28 @@
+id: b1_r_puits
+biome: B1
+tension: R
+D: 1
+entree: any
+sortie: any
+verbe: elan
+intro: -
+alt: 70-150
+poids: 1
+// Respiration (12 rangées) : un puits calme avec deux petites bandes décalées (L5, R9), jamais face à face.
+// Idée : elles ne gênent que si l'on traîne ; elles « cadrent » une ligne d'éclats droite au centre.
+// Route des o (L, h0≈8) : L1 bond -> R4 bond -> L7 élan -> R12 sortie.
+// Écho : graver L5 rend le puits entièrement libre (inutile : c'est un repos).
+---
+##........##
+##........##
+##........##
+##.......<##   // k9 : épines R
+##........##
+##...o....##   // k7 : retour vers L
+##........##
+##>.......##
+##........##
+##........##
+##........##
+##........##
+---

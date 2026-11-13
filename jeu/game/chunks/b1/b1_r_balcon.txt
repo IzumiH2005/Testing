@@ -1,0 +1,24 @@
+id: b1_r_balcon
+biome: B1
+tension: R
+D: 1
+entree: any
+sortie: any
+verbe: bond
+intro: -
+alt: 60-150
+poids: 1
+// Respiration (8 rangées) : une seule bande d'épines R5, posée en « balcon » au-dessus de la main.
+// Idée : rappeler O1 sans pression ; le O est collé sous la bande (frôler), les o suivent le rythme.
+// Route (L, h0≈8) : L1 bond -> R4 (O) bond -> L7 bond -> sortie. Entrées hautes : attendre sur L.
+// Écho : graver la bande supprime l'attente des entrées hautes.
+---
+##........##
+##........##
+##........##
+##.......<##   // k5 : épines (balcon)
+##.....o.O##   // k4 : sommet (c7) et O sous la bande
+##...o....##   // k3
+##........##
+##........##
+---

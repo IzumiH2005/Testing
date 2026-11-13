@@ -1,0 +1,26 @@
+id: b1_r_deux_arcs
+biome: B1
+tension: R
+D: 0
+entree: any
+sortie: any
+verbe: elan
+intro: -
+alt: 60-150
+poids: 1
+// Respiration (10 rangées) : deux arcs dessinés, un bas (bond) en o, un haut (élan plein) avec un O.
+// Idée : choisir sa hauteur. Le bas est la route des o ; le haut paie un O mais décale tout le rythme.
+// Route des o (L, h0≈8) : L1 bond -> R4 bond -> L7 bond -> R10 sortie.
+// Route risquée : L1 élan plein -> R6 (O près du mur) -> ...
+---
+##........##
+##........##
+##........##
+##...o....##   // k7 : retour du bond
+##.......O##   // k6 : accroche de l'élan plein
+##.....o..##   // k5 : sommet du bond
+##...o....##   // k4
+##........##
+##........##
+##........##
+---

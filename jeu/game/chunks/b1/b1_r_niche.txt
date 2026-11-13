@@ -1,0 +1,23 @@
+id: b1_r_niche
+biome: B1
+tension: R
+D: 0
+entree: any
+sortie: any
+verbe: elan
+intro: -
+alt: 60-150
+poids: 1
+// Respiration (8 rangées) avec le seul créneau de pouvoir (*) du biome hors arène.
+// Idée : le * est en haut d'un arc tenu (élan plein) ; le bond simple passe 20 px dessous.
+// Route (L, h0≈8) : L1 élan plein -> R6 (prend *) bond -> L9 sortie. Sans élan : bond -> R4, on le voit filer.
+---
+##........##
+##........##
+##........##
+##.......*##   // k6 : pouvoir, au point d'accroche de l'élan plein
+##.....o..##   // k5 : haut de l'arc tenu
+##....o...##   // k4
+##........##
+##........##
+---

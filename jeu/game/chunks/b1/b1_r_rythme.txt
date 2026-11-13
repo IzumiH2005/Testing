@@ -1,0 +1,21 @@
+id: b1_r_rythme
+biome: B1
+tension: R
+D: 0
+entree: any
+sortie: any
+verbe: bond
+intro: -
+alt: 60-150
+poids: 1
+// Respiration (6 rangées) : le rythme pur. Aucun piège, une ligne d'éclats posée sur l'arc du bond.
+// Idée : rendre audible le métronome (≈0,56 s par saut) avant le prochain chunk M.
+// Route (L, h0≈8) : L1 bond -> R4 bond -> L7 sortie ; la chaîne de 4 o ne se prend qu'en ne s'arrêtant pas.
+---
+##........##
+##........##
+##.....o..##   // k4 : sommet de l'arc (c7)
+##...o..o.##   // k3 : montée (c5) et retour (c8)
+##........##
+##........##
+---

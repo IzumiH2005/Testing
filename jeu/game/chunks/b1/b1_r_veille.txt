@@ -1,0 +1,29 @@
+id: b1_r_veille
+biome: B1
+tension: R
+D: 1
+entree: any
+sortie: any
+verbe: volte
+intro: -
+alt: 70-150
+poids: 1
+// Respiration (12 rangées) : le grand O du repos, caché derrière une bande d'épines R6-R7.
+// Idée : le repos propose un pari. Les o suivent un zigzag tranquille côté gauche ;
+// le O est entre la bande et le centre : volte tardive (0,44-0,48 s) qui va le toucher puis revient.
+// Route des o (L, h0≈8) : L1 bond -> R4 bond -> L7 volte -> L12 sortie.
+// Écho : graver la bande rend le O prenable au simple bond.
+---
+##........##
+##........##
+##........##
+##........##
+##........##
+##........##
+##.......<##   // k6
+##......O<##   // k5 : O au ras des épines
+##........##
+##........##
+##........##
+##........##
+---
