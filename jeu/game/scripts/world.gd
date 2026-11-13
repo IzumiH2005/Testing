@@ -276,6 +276,8 @@ func _place_sprite(sp: Sprite2D, p: Vector2, f: int, flip: bool) -> void:
 	sp.flip_h = flip
 	# image dessinée accrochée au mur gauche, mains en x=0 : on aligne le bord du sprite sur la face du mur
 	var x0 := p.x - CLING_OFF if not flip else p.x + CLING_OFF - 16.0
+	if f >= 2:
+		x0 = p.x - 8.0   # images en vol : ancrage au centre
 	sp.position = Vector2(round(x0), round(p.y - 8.0 - 2.0))
 
 func _step_tide(dt: float) -> void:
@@ -569,8 +571,8 @@ func _draw_rail(tr: Dictionary) -> void:
 
 func _draw_beam(y: float, f: int, left: bool) -> void:
 	var bm := A.tex("sprites/beam")
-	var x0 := WL + 10.0 if left else WL
-	var x1 := WR if left else WR - 10.0
+	var x0 := WL + 16.0 if left else WL
+	var x1 := WR if left else WR - 16.0
 	if bm == null:
 		var h := 1.0 if f == 0 else 3.0
 		draw_rect(Rect2(x0, y - h * 0.5, x1 - x0, h), A.P.z if f > 0 else A.P.X)

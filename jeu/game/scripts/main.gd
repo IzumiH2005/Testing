@@ -32,6 +32,8 @@ var hud_shards: Label
 var hint: Label
 var toast_l: Label
 var _hint_tw: Tween
+var tap_hand: TextureRect
+var _tap_at: AtlasTexture
 var _toast_tw: Tween
 
 func _ready() -> void:
@@ -159,6 +161,17 @@ func _build_hud() -> void:
 	hint.add_theme_color_override("font_outline_color", A.P.k)
 	hint.add_theme_constant_override("outline_size", 0)
 	hud.add_child(hint)
+	var ttx := A.tex("sprites/tap")
+	if ttx:
+		_tap_at = AtlasTexture.new()
+		_tap_at.atlas = ttx
+		_tap_at.region = Rect2(0, 0, 16, 16)
+		tap_hand = TextureRect.new()
+		tap_hand.texture = _tap_at
+		tap_hand.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		tap_hand.position = Vector2(88, 216)
+		tap_hand.visible = false
+		hud.add_child(tap_hand)
 	hud.visible = false
 
 func _refresh_lives() -> void:
@@ -177,13 +190,20 @@ func _show_hint(txt: String, col: Color = A.P.w) -> void:
 	hint.modulate.a = 1.0
 	_hint_tw = create_tween().set_loops()
 	_hint_tw.tween_property(hint, "modulate:a", 0.35, 0.5)
+	if tap_hand:
+		_hint_tw.tween_callback(func(): _tap_at.region.position.x = 16.0)
 	_hint_tw.tween_property(hint, "modulate:a", 1.0, 0.5)
+	if tap_hand:
+		_hint_tw.tween_callback(func(): _tap_at.region.position.x = 0.0)
+		tap_hand.visible = true
 
 func _hide_hint() -> void:
 	if _hint_tw:
 		_hint_tw.kill()
 		_hint_tw = null
 	hint.modulate.a = 0.0
+	if tap_hand:
+		tap_hand.visible = false
 
 func toast(txt: String, col: Color = A.P.G) -> void:
 	toast_l.text = txt

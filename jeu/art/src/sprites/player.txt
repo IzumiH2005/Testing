@@ -1,6 +1,8 @@
 # player.png : 5 images 16x16. Héros d'ÉCHO (capuche pâle l/p, visage dans l'ombre d, œil w, écharpe corail o/R, bottes et moufles r/R).
 # Cape en rampe nuit claire (et non chaude) pour ne pas confondre le héros avec la rampe danger ; la chaleur est portée par l'écharpe, les moufles, les bottes.
 # 0 accroché mur gauche · 1 glissade · 2 saut montant · 3 saut descendant · 4 vrille
+# Ancrage : images 0-1 au bord gauche (x=0 = contact mur, moufle y9-10, semelle y13-14), pieds en y15 ; images 2-4 au centre (8,8).
+# Œil w : (10,6) en 0-1, (11,6) en 2, (10,5) en 3, (11,8) en 4. Mur droit = flipX.
 palette: shared
 size: 80x16
 frames: 5

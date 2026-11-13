@@ -52,6 +52,8 @@ Boucle 0, 1, 0, 1… (100 ms par tour visuel). Plus lent (67 ms) si la scie est 
 
 ## laser.png (3 images 16×16) + beam.png (3 images 8×8)
 
+Placement : beam en x = laser.x + 16, y = laser.y + 4, répété vers la droite tous les 8 px.
+
 Cycle de piège décidé par le code (durées conseillées) :
 
 | Phase | laser.png | beam.png | Durée conseillée |

@@ -1,0 +1,4 @@
+laser.png : 3 images 16x16, émetteur fixé au mur GAUCHE (x=0 contre le mur, sans contour), bouche vers la droite.
+Boîtier pierre-métal rampe nuit (p l m d, contour k), fente-témoin et lentille en rampe danger.
+0 éteint (lentille x) · 1 en charge (lueur X/z) · 2 actif (lentille Z, le rayon sort en x12-15).
+Le rayon (beam.png) se pose en x = laser.x + 16, y = laser.y + 4 : ses lignes 2-5 prolongent les lignes 6-9 du laser.

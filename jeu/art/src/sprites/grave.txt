@@ -1,0 +1,13 @@
+# grave.png : 8x8, sceau cyan posé là où un écho est mort : disque c, anneau intérieur t, cœur e, lumière haut-gauche, ombre q, contour k.
+palette: shared
+size: 8x8
+frames: 1
+---
+..kkkk..
+.keecck.
+kecttcqk
+kcteetqk
+kctecqqk
+kcqttqqk
+.kcqqqk.
+..kkkk..

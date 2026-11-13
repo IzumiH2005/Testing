@@ -1,0 +1,22 @@
+# tap.png : 2 images 16x16, main qui tape (aide du tutoriel), rampe nuit claire p w + plis l + contour k. Le poignet sort par le haut.
+# 0 doigt levé (doigt x6-8, bout en y10) · 1 doigt qui touche (2 px plus bas, bout en y12) + anneau d'impact w.
+palette: shared
+size: 32x16
+frames: 2
+---
+.........kwpk............kwpk...
+.......kkkwpk............kwpk...
+......kwwwwppk...........kwpk...
+.....kwwppppplk........kkkwpk...
+.....kwpplpplpk.......kwwwwppk..
+.....kwpppppppk......kwwppppplk.
+.....kwppkkkkk.......kwpplpplpk.
+.....kwppk...........kwpppppppk.
+.....kwppk...........kwppkkkkk..
+.....kwppk...........kwppk......
+.....kwppk...........kwppk......
+......kkk.........w..kwppk...w..
+.................w...kwppk....w.
+.................w....kkk.....w.
+..................w..........w..
+...................wwwwwwwwwww..
