@@ -323,10 +323,14 @@ func show_menu() -> void:
 		lg.texture = logo_tx
 		lg.stretch_mode = TextureRect.STRETCH_KEEP
 		lg.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		v.add_child(_center(lg))
+		var holder := Control.new()
+		holder.custom_minimum_size = logo_tx.get_size()
+		holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		holder.add_child(lg)
+		v.add_child(_center(holder))
 		var tw := create_tween().set_loops()
-		tw.tween_property(lg, "position:y", lg.position.y - 2, 1.2).set_trans(Tween.TRANS_SINE)
-		tw.tween_property(lg, "position:y", lg.position.y, 1.2).set_trans(Tween.TRANS_SINE)
+		tw.tween_property(lg, "position:y", -2.0, 1.2).set_trans(Tween.TRANS_SINE)
+		tw.tween_property(lg, "position:y", 0.0, 1.2).set_trans(Tween.TRANS_SINE)
 		tw.bind_node(lg)
 	else:
 		v.add_child(UIK.label("ÉCHO", A.P.c, 3))
