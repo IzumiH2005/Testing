@@ -14,9 +14,9 @@ poids: 1
 ---
 ##........##
 ##........##
-##........##
-##.......*##   // k6 : pouvoir, au point d'accroche de l'élan plein
+##.......*##   // k6 : pouvoir, à l'accroche de l'élan plein (le bond s'accroche 26 px dessous)
 ##.....o..##   // k5 : haut de l'arc tenu
+##...o....##   // k5 : haut de l'arc tenu
 ##....o...##   // k4
 ##........##
 ##........##

@@ -9,18 +9,18 @@ intro: -
 alt: 70-150
 poids: 1
 // Respiration (12 rangées) : un puits calme avec deux petites bandes décalées (L5, R9), jamais face à face.
-// Idée : elles ne gênent que si l'on traîne ; elles « cadrent » une ligne d'éclats droite au centre.
-// Route des o (L, h0≈8) : L1 bond -> R4 bond -> L7 élan -> R12 sortie.
+// Idée : L5-L6 se survole au bond ; R9-R10 tombe pile sur le 3e bond -> il faut tenir (élan) une fois.
+// Route des o (L, h0≈8) : L1 bond -> R4 bond -> L7 élan plein -> R12 sortie.
 // Écho : graver L5 rend le puits entièrement libre (inutile : c'est un repos).
 ---
 ##........##
 ##........##
+##...o...<##   // k10 : épines R (bande de 2) ; o sur l'élan
+##.......<##   // k9
 ##........##
-##.......<##   // k9 : épines R
-##........##
-##...o....##   // k7 : retour vers L
-##........##
-##>.......##
+##....o...##   // k7 : retour vers L
+##>.....o.##   // k6 : épines L (bande de 2)
+##>....o..##   // k5 : sommet du 1er bond
 ##........##
 ##........##
 ##........##

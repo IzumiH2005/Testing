@@ -12,10 +12,10 @@ poids: 1
 // Idée : rendre audible le métronome (≈0,56 s par saut) avant le prochain chunk M.
 // Route (L, h0≈8) : L1 bond -> R4 bond -> L7 sortie ; la chaîne de 4 o ne se prend qu'en ne s'arrêtant pas.
 ---
-##........##
-##........##
-##.....o..##   // k4 : sommet de l'arc (c7)
-##...o..o.##   // k3 : montée (c5) et retour (c8)
+##......o.##   // k6 : retour vers L
+##.....o..##   // k5 : sommet de l'arc (c7)
+##...o...o##   // k4 : montée (c5) et accroche R (c9)
+##........##   // k3 : montée (c5) et retour (c8)
 ##........##
 ##........##
 ---

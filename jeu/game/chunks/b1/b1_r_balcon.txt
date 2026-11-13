@@ -10,15 +10,16 @@ alt: 60-150
 poids: 1
 // Respiration (8 rangées) : une seule bande d'épines R5, posée en « balcon » au-dessus de la main.
 // Idée : rappeler O1 sans pression ; le O est collé sous la bande (frôler), les o suivent le rythme.
-// Route (L, h0≈8) : L1 bond -> R4 (O) bond -> L7 bond -> sortie. Entrées hautes : attendre sur L.
+// Route sûre (L, h0≈8) : L1 attendre 0,9 s -> bond -> R4 bond -> L7 bond -> sortie.
+// Route risquée : partir sans attendre -> R4 à 1 px sous la bande, O pris.
 // Écho : graver la bande supprime l'attente des entrées hautes.
 ---
 ##........##
-##........##
-##........##
-##.......<##   // k5 : épines (balcon)
-##.....o.O##   // k4 : sommet (c7) et O sous la bande
-##...o....##   // k3
+##..o.....##   // k7 : retour vers L
+##.......<##   // k6 : épines (balcon, bande de 2)
+##.......<##   // k5
+##...o...O##   // k4 : O à l'accroche sans attente (frôle la bande à 1 px)
+##........##   // k3
 ##........##
 ##........##
 ---
