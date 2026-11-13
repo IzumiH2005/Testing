@@ -1,0 +1,21 @@
+# ui_lantern 48x12 = 4 images 12x12 (vies du HUD).
+# 0 allumée (verre o a A, cœur W) · 1 flamme alternée (vacille, 2 images à 200 ms) ·
+# 2 s'éteint (verre n, braise a, fumée l) · 3 éteinte = écho (verre q t c e, la vie devient écho).
+# Chapeau m l, socle n, contour k.
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 48x12
+frames: 4
+---
+.................................l..............
+.....kk..........kk........l.kk.l........kk.....
+....k..k........k..k........k..k........k..k....
+...kkkkkk......kkkkkk......kkkkkk......kkkkkk...
+..kmlllmnk....kmlllmnk....kmlllmnk....kmlllmnk..
+..kooAaoRk....kooaAoRk....knnnnnnk....kqqttqqk..
+..koaAAaRk....koaAAoRk....knnnsnnk....kqtcctqk..
+..koaAWaRk....koaWAaRk....knnsannk....kqtcetqk..
+..kooaaoRk....kooaaoRk....knnnnnnk....kqqttqqk..
+..knnnnnnk....knnnnnnk....knnnnnnk....knnnnnnk..
+...kkkkkk......kkkkkk......kkkkkk......kkkkkk...
+................................................

@@ -1,0 +1,10 @@
+# confetti 24x3 = 8 images 3x3 : 4 couleurs (G o c j) x 2 orientations (plat, tranche).
+# Pas de contour (particules de 1-3 px).
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 24x3
+frames: 8
+---
+yG...yao...aec...eJj...J
+GGG.G.ooo.o.ccc.c.jjj.j.
+.G.G...o.o...c.c...j.j..

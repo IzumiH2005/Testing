@@ -1,0 +1,22 @@
+# toast 24x16, 9-patch marges 6. Fond k, bordure n, arête m en haut (1 px). Coins coupés.
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 24x16
+frames: 1
+---
+.mmmmmmmmmmmmmmmmmmmmmm.
+nnkkkkkkkkkkkkkkkkkkkknn
+nkkkkkkkkkkkkkkkkkkkkkkn
+nkkkkkkkkkkkkkkkkkkkkkkn
+nkkkkkkkkkkkkkkkkkkkkkkn
+nkkkkkkkkkkkkkkkkkkkkkkn
+nkkkkkkkkkkkkkkkkkkkkkkn
+nkkkkkkkkkkkkkkkkkkkkkkn
+nkkkkkkkkkkkkkkkkkkkkkkn
+nkkkkkkkkkkkkkkkkkkkkkkn
+nkkkkkkkkkkkkkkkkkkkkkkn
+nkkkkkkkkkkkkkkkkkkkkkkn
+nkkkkkkkkkkkkkkkkkkkkkkn
+nkkkkkkkkkkkkkkkkkkkkkkn
+nnkkkkkkkkkkkkkkkkkkkknn
+.nnnnnnnnnnnnnnnnnnnnnn.

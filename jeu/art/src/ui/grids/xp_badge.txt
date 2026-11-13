@@ -1,0 +1,28 @@
+# xp_badge 40x20 = 2 images 20x20 : pastille de niveau (le nombre est écrit par-dessus en
+# font_7_outline). 0 normal : disque u, anneau U/j, reflet J, contour k · 1 montée de niveau : anneau G/g,
+# reflets y, étincelles y aux coins.
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 40x20
+frames: 2
+---
+.........kk..................kk.....y...
+......kkkjjkkk............kkkGGkkk.yWy..
+....kkjjjjjjjjkk........kkGGGGGGGGkky...
+...kJJjjkkkkjjjjk......kyyGGkkkkGGGGk...
+..kjJjkkuuuukkjUUk....kGyGkkuuuukkGggk..
+..kjjkuuuuuuuukUUk....kGGkuuuuuuuukggk..
+.kjjkuuuuuuuuuukUUk..kGGkuuuuuuuuuukggk.
+.kjjkuuuuuuuuuukUUk..kGGkuuuuuuuuuukggk.
+.kjkuuuuuuuuuuuukUk..kGkuuuuuuuuuuuukgk.
+kjjkuuuuuuuuuuuukUUkkGGkuuuuuuuuuuuukggk
+kjjkuuuuuuuuuuuukUUkkGGkuuuuuuuuuuuukggk
+.kjkuuuuuuuuuuuukUk..kGkuuuuuuuuuuuukgk.
+.kjjkuuuuuuuuuukUUk..kGGkuuuuuuuuuukggk.
+.kjjkuuuuuuuuuukUUk..kGGkuuuuuuuuuukggk.
+..kjjkuuuuuuuukUUk....kGGkuuuuuuuukggk..
+..kjUUkkuuuukkUUUk....kGggkkuuuukkgggk..
+...kUUUUkkkkUUUUk......kggggkkkkggggk...
+....kkUUUUUUUUkk.....y..kkggggggggkk....
+......kkkUUkkk........G...kkkggkkk......
+.........kk..................kk.........

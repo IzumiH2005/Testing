@@ -1,0 +1,37 @@
+id: b2_friable_laser
+biome: B2
+tension: M
+D: 4
+entree: any
+sortie: any
+verbe: bond
+intro: -
+alt: 240-345
+poids: 1
+// Développement O11 x O8 : un laser mur-à-mur (rangée 8, 3,1 s) encadré de deux plaques friables :
+// R6-7 juste sous le faisceau, L9-10 juste au-dessus.
+// Idée : le laser oblige à attendre, la plaque interdit d'attendre. Sous le faisceau, le seul appui où
+// patienter est L7 (solide) ; la plaque R6-7 d'en face est le piège du joueur qui attend au mauvais mur.
+// Bond seul suffit (attente max 1,20 s, route commentée 31/31 phases).
+// Risque : le O (rangée 9, centre) se prend en traversant de plaque à plaque, R7 -> L10, sans appui solide
+// des deux côtés du faisceau (entrée par la droite ou élan court L1 -> R6).
+// Écho : la plaque gravée (règle complice) devient solide cyan : au retour on attend le laser sur R7,
+// et le faisceau gravé recharge la volte au passage.
+---
+##........##
+##........##
+##...o....##
+##........##                    // L13 bond -> R16 (sortie)
+##......o.##
+##........##
+##f.......##                    // R10 bond -> L13
+##f...O...##
+#L........L# ; phase=0.0
+##.......f##                    // L7 bond -> R10 : faisceau éteint
+##.......f##
+##......o.##
+##........##                    // R4 bond -> L7 : attendre le laser ICI, sur le seul pied solide sous le faisceau
+##.o......##
+##........##
+##........##                    // L1 bond -> R4
+---

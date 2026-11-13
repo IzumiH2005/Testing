@@ -1,0 +1,11 @@
+# dither 16x4 = 4 images 4x4 : trame Bayer k à 25 / 50 / 75 / 100 % (fondus d'écran sans alpha,
+# 4 pas de 50 ms). Se répète en mosaïque (TextureRect tile).
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 16x4
+frames: 4
+---
+k.k.k.k.kkkkkkkk
+.....k.k.k.kkkkk
+k.k.k.k.kkkkkkkk
+.....k.k.k.kkkkk

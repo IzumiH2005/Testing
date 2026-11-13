@@ -1,0 +1,28 @@
+# tab 72x20 = 3 images 24x20 : 0 inactif · 1 actif · 2 enfoncé. 9-patch marges 6.
+# Inactif : face d, bord n, libellé l. Actif : face s, haut m, trait a de 2 px en bas, libellé w.
+# Enfoncé : face n. Coins hauts arrondis, base droite (l'onglet se pose sur le panneau).
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 72x20
+frames: 3
+---
+.kkkkkkkkkkkkkkkkkkkkkk..kkkkkkkkkkkkkkkkkkkkkk..kkkkkkkkkkkkkkkkkkkkkk.
+kknnnnnnnnnnnnnnnnnnnnkkkkmmmmmmmmmmmmmmmmmmmmkkkksssssssssssssssssssskk
+knnnnnnnnnnnnnnnnnnnnnnkkmmmmmmmmmmmmmmmmmmmmmmkkssssssssssssssssssssssk
+knddddddddddddddddddddnkkmssssssssssssssssssssmkksnnnnnnnnnnnnnnnnnnnnsk
+knddddddddddddddddddddnkkmssssssssssssssssssssmkksnnnnnnnnnnnnnnnnnnnnsk
+knddddddddddddddddddddnkkmssssssssssssssssssssmkksnnnnnnnnnnnnnnnnnnnnsk
+knddddddddddddddddddddnkkmssssssssssssssssssssmkksnnnnnnnnnnnnnnnnnnnnsk
+knddddddddddddddddddddnkkmssssssssssssssssssssmkksnnnnnnnnnnnnnnnnnnnnsk
+knddddddddddddddddddddnkkmssssssssssssssssssssmkksnnnnnnnnnnnnnnnnnnnnsk
+knddddddddddddddddddddnkkmssssssssssssssssssssmkksnnnnnnnnnnnnnnnnnnnnsk
+knddddddddddddddddddddnkkmssssssssssssssssssssmkksnnnnnnnnnnnnnnnnnnnnsk
+knddddddddddddddddddddnkkmssssssssssssssssssssmkksnnnnnnnnnnnnnnnnnnnnsk
+knddddddddddddddddddddnkkmssssssssssssssssssssmkksnnnnnnnnnnnnnnnnnnnnsk
+knddddddddddddddddddddnkkmssssssssssssssssssssmkksnnnnnnnnnnnnnnnnnnnnsk
+knddddddddddddddddddddnkkmssssssssssssssssssssmkksnnnnnnnnnnnnnnnnnnnnsk
+knddddddddddddddddddddnkkmssssssssssssssssssssmkksnnnnnnnnnnnnnnnnnnnnsk
+knddddddddddddddddddddnkkmssssssssssssssssssssmkksnnnnnnnnnnnnnnnnnnnnsk
+knnnnnnnnnnnnnnnnnnnnnnkkaaaaaaaaaaaaaaaaaaaaaakkssssssssssssssssssssssk
+kkkkkkkkkkkkkkkkkkkkkkkkkaaaaaaaaaaaaaaaaaaaaaakkkkkkkkkkkkkkkkkkkkkkkkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk

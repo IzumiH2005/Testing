@@ -1,0 +1,11 @@
+# diff_pips 12x4 = 3 images 4x4 : 0 facile rond l · 1 moyen losange a · 2 dur triangle o.
+# Contour k ; les trois formes diffèrent aussi en silhouette (lecture sans couleur).
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 12x4
+frames: 3
+---
+.kk..k...kk.
+kwlkkAk.koak
+kllk.kakkook
+.kk...k.kkkk

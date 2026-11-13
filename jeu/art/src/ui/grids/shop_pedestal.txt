@@ -1,0 +1,23 @@
+# shop_pedestal 64x16 : socle de pierre de la boutique (la tenue se pose dessus, y 0).
+# Plateau l (arête) / m, devant s avec joints n, pied n, contour k.
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 64x16
+frames: 1
+---
+.kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.
+kllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllk
+kmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmk
+kmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmk
+kssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssk
+.kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.
+..kmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmnk..
+..kmssssssssnsssssssssssssnssssssssssnsssssssssssssnssssssssnk..
+..kmssssssssnsssssssssssssnssssssssssnsssssssssssssnssssssssnk..
+..kmssssssssnsssssssssssssnssssssssssnsssssssssssssnssssssssnk..
+..kmssssssssnsssssssssssssnssssssssssnsssssssssssssnssssssssnk..
+..kmssssssssnsssssssssssssnssssssssssnsssssssssssssnssssssssnk..
+..kmnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnk..
+.kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.
+knnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk

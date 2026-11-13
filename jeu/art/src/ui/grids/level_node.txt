@@ -1,0 +1,23 @@
+# level_node 64x16 = 4 images 16x16 (carte des niveaux) : 0 verrouillé (pierre n s, cadenas k) ·
+# 1 disponible (pierre m l, cœur a) · 2 réussi (or G y) · 3 actuel (anneau c pulsé : 1 image).
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 64x16
+frames: 4
+---
+.......kk..............kk..............kk..............kk.......
+....kkksskkk........kkkllkkk........kkkyykkk........kkkeekkk....
+...ksssssssnk......klllllllmk......kyyyyyyyGk......keeeeeeeck...
+..ksssssssnnnk....klllllllmmmk....kyyyyyyyGGGk....keeeeeeeccck..
+.kssssskknnnnnk..klllllkkmmmmmk..kyyyyykkGGGGGk..keeeeekkccccck.
+.kssskkddkknnnk..klllkkaakkmmmk..kyyykkggkkGGGk..keeekkttkkccck.
+.kssskkkkkknnnk..klllkaaaakmmmk..kyyykgyggkGGGk..keeekttttkccck.
+kssskdkddkdknnnkklllkaaaaaakmmmkkyyykggggggkGGGkkeeekttttttkccck
+kssskdkkkkdknnnkklllkaaaaaakmmmkkyyykggggggkGGGkkeeekttttttkccck
+.kssnkddddknnnk..kllmkaaaakmmmk..kyyGkggggkGGGk..keeckttttkccck.
+.ksnnkkddkknnnk..klmmkkaakkmmmk..kyGGkkggkkGGGk..kecckkttkkccck.
+.knnnnnkknnnnnk..kmmmmmkkmmmmmk..kGGGGGkkGGGGGk..kccccckkccccck.
+..knnnnnnnnnnk....kmmmmmmmmmmk....kGGGGGGGGGGk....kcccccccccck..
+...knnnnnnnnk......kmmmmmmmmk......kGGGGGGGGk......kcccccccck...
+....kkknnkkk........kkkmmkkk........kkkGGkkk........kkkcckkk....
+.......kk..............kk..............kk..............kk.......

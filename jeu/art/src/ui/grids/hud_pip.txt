@@ -1,0 +1,8 @@
+# hud_pip 4x2 = 2 images 2x2 : 0 vide n · 1 plein G (compteur de vies / combo du HUD).
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 4x2
+frames: 2
+---
+nnyG
+nnGG

@@ -1,0 +1,20 @@
+# slider 24x12 : x 0-7 = rail (rangées 0-3 vide : contour k, fond n ; rangées 4-7 rempli :
+# contour k, l + reflet p), 9-patch marges 2 · x 8-15 = curseur 8x12 normal (m, arête l) ·
+# x 16-23 = curseur enfoncé (l, arête w).
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 24x12
+frames: 3
+---
+nkkkkkkn.kkkkkk..kkkkkk.
+kddddddkkllllllkkwwwwwwk
+knnnnnnkklmmmmskkwllllmk
+nkkkkkknklmmmmskkwllllmk
+lkkkkkklklmslmskkwlmwlmk
+kppppppkklmslmskkwlmwlmk
+kllllllkklmslmskkwlmwlmk
+lkkkkkklklmslmskkwlmwlmk
+........klmmmmskkwllllmk
+........klmmmmskkwllllmk
+........ksssssskkmmmmmmk
+.........kkkkkk..kkkkkk.

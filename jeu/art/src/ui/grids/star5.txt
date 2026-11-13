@@ -1,0 +1,11 @@
+# star5 10x5 = 2 images 5x5 : étoile de niveau 0 vide n · 1 pleine G (pointe y). Sans contour : posée sur fond sombre.
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 10x5
+frames: 2
+---
+..n....y..
+.nnn..yGG.
+nnnnnGGGGG
+.dnd..gGg.
+.n.n..g.g.

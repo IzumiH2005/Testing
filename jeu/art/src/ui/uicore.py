@@ -171,14 +171,14 @@ def asset(name, frames=1, doc=""):
 
 def write_grid(name, canvas, frames, doc):
     path = os.path.join(GRIDS, name + ".txt")
-    if os.path.exists(path) and "# manuel" in open(path, encoding="utf-8").read():
+    if os.path.exists(path) and any(l.strip() == "# manuel" for l in open(path, encoding="utf-8")):
         print(f"  {name}: grille marquée « # manuel », seed ignoré")
         return
     lines = []
     for d in doc.strip().splitlines():
         lines.append("# " + d.strip())
-    lines.append("# Grille générée par build_ui.py. Ajouter « # manuel » pour la figer et la retoucher.")
-    lines.append("palette: " + PAL_PATH)
+    lines.append("# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.")
+    lines.append("palette: ../../../../studio/palette_v2.txt")
     lines.append(f"size: {canvas.w}x{canvas.h}")
     lines.append(f"frames: {frames}")
     lines.append("---")

@@ -1,0 +1,15 @@
+# star8 24x8 = 3 images 8x8 : étoile de fin de niveau 0 vide (n, contour k) · 1 pleine (G y,
+# contour k) · 2 éclat (pleine + cœur W, 1 image de flash).
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 24x8
+frames: 3
+---
+..knk.....kGk.....kGk...
+kknnnkk.kkGyGkk.kkGyGkk.
+nnnnnnnkGGyyGGGkGGyWGGGk
+knnnnnk.kGGGggk.kGGWggk.
+.knnnk...kGGgk...kGGgk..
+knnknnk.kGGkGGk.kGGkGGk.
+knk.knk.kGk.kGk.kGk.kGk.
+.k...k...k...k...k...k..

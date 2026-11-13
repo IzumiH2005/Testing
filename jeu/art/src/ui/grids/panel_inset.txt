@@ -1,0 +1,32 @@
+# panel_inset 24x24 · 9-patch marges 6. Creux (listes, cases, champs).
+# Fond b ; anneau creux k en haut-gauche / n en bas-droite ; ombre portée intérieure d sur la 2e rangée et
+# la 2e colonne ; pas de contour extérieur.
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 24x24
+frames: 1
+---
+.kkkkkkkkkkkkkkkkkkkkkkb
+kkkkkkkkkkkkkkkkkkkkkkkn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+kkbbbbbbbbbbbbbbbbbbbbbn
+bnnnnnnnnnnnnnnnnnnnnnnb

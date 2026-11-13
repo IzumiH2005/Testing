@@ -1,0 +1,34 @@
+# btn_main 144x24 = 3 images 48x24 : 0 normal · 1 enfoncé · 2 désactivé.
+# 9-patch marges gauche 8, droite 8, haut 6, bas 8 (zone étirée : colonnes 8-39, rangées 6-15).
+# Normal : contour k arrondi, biseau haut a (2 rangées) + reflet A, face o, bord droit r,
+# épaisseur R (2 rangées) + pied r. Enfoncé : la face descend de 2 px, plus d'épaisseur.
+# Désactivé : position enfoncée, face n, biseau s, libellé m. Libellé font_7 k, y 7 (9 enfoncé).
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 144x24
+frames: 3
+---
+.kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.................................................................................................
+kkaAAAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakk................................................................................................
+kaAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaak.kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk..kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.
+kaoooooooooooooooooooooooooooooooooooooooooooorkkkaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakkkksssssssssssssssssssssssssssssssssssssssssssskk
+kaoooooooooooooooooooooooooooooooooooooooooooorkkaooooooooooooooooooooooooooooooooooooooooooooakkssssssssssssssssssssssssssssssssssssssssssssssk
+kaoooooooooooooooooooooooooooooooooooooooooooorkkooooooooooooooooooooooooooooooooooooooooooooorkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnndk
+kaoooooooooooooooooooooooooooooooooooooooooooorkkooooooooooooooooooooooooooooooooooooooooooooorkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnndk
+kaoooooooooooooooooooooooooooooooooooooooooooorkkooooooooooooooooooooooooooooooooooooooooooooorkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnndk
+kaoooooooooooooooooooooooooooooooooooooooooooorkkooooooooooooooooooooooooooooooooooooooooooooorkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnndk
+kaoooooooooooooooooooooooooooooooooooooooooooorkkooooooooooooooooooooooooooooooooooooooooooooorkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnndk
+kaoooooooooooooooooooooooooooooooooooooooooooorkkooooooooooooooooooooooooooooooooooooooooooooorkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnndk
+kaoooooooooooooooooooooooooooooooooooooooooooorkkooooooooooooooooooooooooooooooooooooooooooooorkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnndk
+kaoooooooooooooooooooooooooooooooooooooooooooorkkooooooooooooooooooooooooooooooooooooooooooooorkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnndk
+kaoooooooooooooooooooooooooooooooooooooooooooorkkooooooooooooooooooooooooooooooooooooooooooooorkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnndk
+kaoooooooooooooooooooooooooooooooooooooooooooorkkooooooooooooooooooooooooooooooooooooooooooooorkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnndk
+kaoooooooooooooooooooooooooooooooooooooooooooorkkooooooooooooooooooooooooooooooooooooooooooooorkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnndk
+kaoooooooooooooooooooooooooooooooooooooooooooorkkooooooooooooooooooooooooooooooooooooooooooooorkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnndk
+kaoooooooooooooooooooooooooooooooooooooooooooorkkooooooooooooooooooooooooooooooooooooooooooooorkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnndk
+kaoooooooooooooooooooooooooooooooooooooooooooorkkooooooooooooooooooooooooooooooooooooooooooooorkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnndk
+krrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrkkooooooooooooooooooooooooooooooooooooooooooooorkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnndk
+kRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRkkooooooooooooooooooooooooooooooooooooooooooooorkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnndk
+kRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRkkorrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrkkndddddddddddddddddddddddddddddddddddddddddddddk
+kkrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrkkkkrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrkkkkddddddddddddddddddddddddddddddddddddddddddddkk
+.kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk..kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk..kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.

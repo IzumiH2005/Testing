@@ -1,0 +1,32 @@
+# panel 24x24 · 9-patch marges 8 (content_margin 8).
+# Fond d ; bordure pierre 3 px : anneau 1 l (haut-gauche, arête éclairée) / n (bas-droite),
+# anneau 2 s, anneau 3 creux n (haut-gauche) / m (bas-droite) ; sceaux d'écho t aux coins ; contour k.
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 24x24
+frames: 1
+---
+.kkkkkkkkkkkkkkkkkkkkkk.
+kstsllllllllllllllllstsk
+ktqtsssssssssssssssstqtk
+kstsnnnnnnnnnnnnnnnnstsk
+klsnddddddddddddddddmsnk
+klsnddddddddddddddddmsnk
+klsnddddddddddddddddmsnk
+klsnddddddddddddddddmsnk
+klsnddddddddddddddddmsnk
+klsnddddddddddddddddmsnk
+klsnddddddddddddddddmsnk
+klsnddddddddddddddddmsnk
+klsnddddddddddddddddmsnk
+klsnddddddddddddddddmsnk
+klsnddddddddddddddddmsnk
+klsnddddddddddddddddmsnk
+klsnddddddddddddddddmsnk
+klsnddddddddddddddddmsnk
+klsnddddddddddddddddmsnk
+klsnddddddddddddddddmsnk
+kstsmmmmmmmmmmmmmmmmstsk
+ktqtsssssssssssssssstqtk
+kstsnnnnnnnnnnnnnnnnstsk
+.kkkkkkkkkkkkkkkkkkkkkk.

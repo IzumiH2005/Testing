@@ -1,0 +1,14 @@
+# badge_new 28x7 = 4 images 7x7 (pop en boucle, 120 ms) : 7x7 · 7x7 + reflet y · 5x5 · 7x7.
+# Rond G, « ! » k 1x4 (barre 3 + point), contour k.
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 28x7
+frames: 4
+---
+.kkkkk..kkkkk.........kkkkk.
+kGGkGGkkyGkGGk..kkk..kGGkGGk
+kGGkGGkkGGkGGk.kGkGk.kGGkGGk
+kGGkGGkkGGkGGk.kGkGk.kGGkGGk
+kGGGGGkkGGGGGk.kGGGk.kGGGGGk
+kgGkGgkkgGkGgk..kkk..kgGkGgk
+.kkkkk..kkkkk.........kkkkk.

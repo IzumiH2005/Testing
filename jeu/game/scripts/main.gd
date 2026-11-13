@@ -330,11 +330,20 @@ func show_menu() -> void:
 	var logo_tx := A.tex("ui/logo")
 	if logo_tx:
 		var lg := TextureRect.new()
-		lg.texture = logo_tx
+		var lat := AtlasTexture.new()
+		lat.atlas = logo_tx
+		lat.region = Rect2(0, 0, 160, 48)
+		lg.texture = lat
+		var shine := create_tween().set_loops()
+		shine.tween_interval(3.0)
+		for f in range(1, 7):
+			shine.tween_property(lat, "region", Rect2((f % 6) * 160, 0, 160, 48), 0.0)
+			shine.tween_interval(0.1)
+		shine.bind_node(lg)
 		lg.stretch_mode = TextureRect.STRETCH_KEEP
 		lg.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		var holder := Control.new()
-		holder.custom_minimum_size = logo_tx.get_size()
+		holder.custom_minimum_size = Vector2(160, 48)
 		holder.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		holder.add_child(lg)
 		v.add_child(_center(holder))

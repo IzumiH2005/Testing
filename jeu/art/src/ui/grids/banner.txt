@@ -1,0 +1,24 @@
+# banner 96x16 = 2 images 48x16, 9-patch marges 6 (gauche/droite), 4 (haut/bas).
+# 0 or : face G, biseau y, ombre g, contour k, encoches en V aux deux bouts (record, niveau).
+# 1 pierre : face s, biseau m, ombre n, contour k (titres de section).
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 96x16
+frames: 2
+---
+.kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk..kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.
+kkyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyykkkkmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmkk
+kyGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGgkkmssssssssssssssssssssssssssssssssssssssssssssnk
+kyGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGgkkmssssssssssssssssssssssssssssssssssssssssssssnk
+kyGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGgkkmssssssssssssssssssssssssssssssssssssssssssssnk
+kyGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGgkkmssssssssssssssssssssssssssssssssssssssssssssnk
+.kGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGk..kssssssssssssssssssssssssssssssssssssssssssssk.
+..kGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGk....kssssssssssssssssssssssssssssssssssssssssssk..
+..kGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGk....kssssssssssssssssssssssssssssssssssssssssssk..
+.kGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGk..kssssssssssssssssssssssssssssssssssssssssssssk.
+kyGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGgkkmssssssssssssssssssssssssssssssssssssssssssssnk
+kyGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGgkkmssssssssssssssssssssssssssssssssssssssssssssnk
+kyGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGgkkmssssssssssssssssssssssssssssssssssssssssssssnk
+kggggggggggggggggggggggggggggggggggggggggggggggkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnk
+kkggggggggggggggggggggggggggggggggggggggggggggkkkknnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnkk
+.kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk..kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk.

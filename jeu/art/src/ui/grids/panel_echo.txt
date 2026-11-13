@@ -1,0 +1,31 @@
+# panel_echo 24x24 · 9-patch marges 8. Panneau « écho » (vidéo, confirmation, record).
+# Fond d ; bordure q t c : anneau 1 c / q, anneau 2 t, anneau 3 q / c ; sceaux e aux coins ; contour k.
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 24x24
+frames: 1
+---
+.kkkkkkkkkkkkkkkkkkkkkk.
+kcecccccccccccccccccceqk
+kecettttttttttttttttecek
+kceqqqqqqqqqqqqqqqqqceqk
+kctqddddddddddddddddctqk
+kctqddddddddddddddddctqk
+kctqddddddddddddddddctqk
+kctqddddddddddddddddctqk
+kctqddddddddddddddddctqk
+kctqddddddddddddddddctqk
+kctqddddddddddddddddctqk
+kctqddddddddddddddddctqk
+kctqddddddddddddddddctqk
+kctqddddddddddddddddctqk
+kctqddddddddddddddddctqk
+kctqddddddddddddddddctqk
+kctqddddddddddddddddctqk
+kctqddddddddddddddddctqk
+kctqddddddddddddddddctqk
+kctqddddddddddddddddctqk
+kcecccccccccccccccccceqk
+kecettttttttttttttttecek
+kqeqqqqqqqqqqqqqqqqqqeqk
+.kkkkkkkkkkkkkkkkkkkkkk.

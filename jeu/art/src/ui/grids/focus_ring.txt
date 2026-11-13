@@ -1,0 +1,15 @@
+# focus_ring 8x8, 9-patch marges 3 (P2) : anneau de focus clavier / manette, c 1 px,
+# coins e. Posé autour du contrôle avec 1 px d'écart.
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 8x8
+frames: 1
+---
+.ecccce.
+ec....ce
+c......c
+c......c
+c......c
+c......c
+ec....ce
+.ecccce.

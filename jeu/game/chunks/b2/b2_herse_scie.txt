@@ -8,22 +8,29 @@ verbe: elan
 intro: -
 alt: 185-345
 poids: 1
-// wip
+// Développement O9 x O4 : herse R6-7 (2,4 s) sous un rail horizontal court (rangée 10, c5-c7).
+// Idée : deux horloges, une seule fenêtre de vol. La herse chasse du mur droit (on ne peut pas grimper
+// R6-R9 à pied) et la scie interdit l'arc bas vers la gauche : l'élan tenu depuis R5 passe AU-DESSUS du
+// rail. Le bond seul échoue (min verbe = élan). Attente max 1,00 s, route commentée 185/185 phases.
+// Risque : le O R11 se prend par l'échelle de bonds L1-R4-L7-R10, qui se pose à côté du bout du rail :
+// calée sur la scie (~1 phase sur 3).
+// Écho : la herse gravée garde ses pointes sorties et devient une marche ; la scie gravée tourne en cyan
+// et recharge la volte au contact.
 ---
 ##........##
-##........##
-##........##
-##........##
-##........##
-##........##
-##...S--..## ; phase=0.0
-##........##
+##.....o..##
+##......o.##
+##........##                    // R13 bond -> L16 (sortie)
+##.o......##
+##......O.##
+##...S--..## ; phase=0.0        // L10 bond -> R13
+##...o....##
 ##........##
 ##.......H##
 ##.......H## ; phase=0.0
+##....o...##                    // R5 elan -> L10 : par-dessus la scie, le rail sous les pieds
 ##........##
+##.o......##
 ##........##
-##........##
-##........##
-##........##
+##........##                    // L1 elan -> R5 : sous la herse, repartir avant ses pointes
 ---

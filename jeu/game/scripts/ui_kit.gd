@@ -86,13 +86,17 @@ static func button(text: String, kind := "main", ico := -1, min_w := 120) -> But
 	var name := "ui/btn_" + kind
 	var fb := {"main": [A.P.o, A.P.k, A.P.k], "alt": [A.P.s, A.P.k, A.P.w], "echo": [A.P.t, A.P.k, A.P.k]}
 	var cols: Array = fb.get(kind, fb.main)
-	var normal := sb_tex(name, 0, 24, 6, cols[0], cols[1], Vector4(6, 3, 6, 6))
-	var pressed := sb_tex(name, 1, 24, 6, cols[0].darkened(0.2), cols[1], Vector4(6, 5, 6, 4))
+	var normal := sb_tex(name, 0, 48, 8, cols[0], cols[1], Vector4(8, 5, 8, 7))
+	var pressed := sb_tex(name, 1, 48, 8, cols[0].darkened(0.2), cols[1], Vector4(8, 7, 8, 5))
+	var disabled := sb_tex(name, 2, 48, 8, A.P.n, cols[1], Vector4(8, 7, 8, 5))
+	for sb in [normal, pressed, disabled]:
+		if sb is StyleBoxTexture:
+			(sb as StyleBoxTexture).texture_margin_top = 6
 	b.add_theme_stylebox_override("normal", normal)
 	b.add_theme_stylebox_override("hover", normal)
 	b.add_theme_stylebox_override("pressed", pressed)
 	b.add_theme_stylebox_override("hover_pressed", pressed)
-	b.add_theme_stylebox_override("disabled", normal)
+	b.add_theme_stylebox_override("disabled", disabled)
 	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 	var fc: Color = cols[2]
 	if kind == "main":
@@ -103,7 +107,7 @@ static func button(text: String, kind := "main", ico := -1, min_w := 120) -> But
 	b.add_theme_color_override("font_hover_color", fc)
 	b.add_theme_color_override("font_pressed_color", fc)
 	b.add_theme_color_override("font_hover_pressed_color", fc)
-	b.add_theme_color_override("font_disabled_color", Color(fc, 0.45))
+	b.add_theme_color_override("font_disabled_color", A.P.m)
 	b.add_theme_constant_override("h_separation", 4)
 	if ico >= 0:
 		b.icon = icon(ico)

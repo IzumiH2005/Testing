@@ -1,0 +1,14 @@
+# bar 40x6 = 5 images 8x6, 9-patch marges 2.
+# 0 cadre (contour k, fond b) · 1 remplissage XP j/J · 2 or G/y · 3 écho c/e · 4 danger z/Z.
+# Les remplissages se posent dans le cadre (même 9-patch), rangée 1 claire, rangées 2-4 base.
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 40x6
+frames: 5
+---
+.kkkkkk.................................
+kbbbbbbk.JJJJJJ..yyyyyy..eeeeee..ZZZZZZ.
+kbbbbbbk.jjjjjj..GGGGGG..cccccc..zzzzzz.
+kbbbbbbk.jjjjjj..GGGGGG..cccccc..zzzzzz.
+kddddddk.jjjjjj..GGGGGG..cccccc..zzzzzz.
+.kkkkkk.................................
