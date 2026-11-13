@@ -1,0 +1,22 @@
+# slot 48x14 = 3 images 16x14, 9-patch marges 4 (cases de valeur : hauteur, éclats).
+# Creux k/b : ombre k en haut-gauche, lèvre m en bas-droite, contour k, coins coupés.
+# 0 acier · 1 liseré or (G en haut, g en bas) · 2 liseré cyan (c / t).
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 48x14
+frames: 3
+---
+.kkkkkkkkkkkkkk..kkkkkkkkkkkkkk..kkkkkkkkkkkkkk.
+kkkkkkkkkkkkkkskkkkkkkkkkkkkkkgkkkkkkkkkkkkkkktk
+kkkkkkkkkkkkkkmkkkkkkkkkkkkkkkGkkkkkkkkkkkkkkkck
+kkbbbbbbbbbbbbmkkkbbbbbbbbbbbbGkkkbbbbbbbbbbbbck
+kkbbbbbbbbbbbbmkkkbbbbbbbbbbbbGkkkbbbbbbbbbbbbck
+kkbbbbbbbbbbbbmkkkbbbbbbbbbbbbGkkkbbbbbbbbbbbbck
+kkbbbbbbbbbbbbmkkkbbbbbbbbbbbbGkkkbbbbbbbbbbbbck
+kkbbbbbbbbbbbbmkkkbbbbbbbbbbbbGkkkbbbbbbbbbbbbck
+kkbbbbbbbbbbbbmkkkbbbbbbbbbbbbGkkkbbbbbbbbbbbbck
+kkbbbbbbbbbbbbmkkkbbbbbbbbbbbbGkkkbbbbbbbbbbbbck
+kkbbbbbbbbbbbbmkkkbbbbbbbbbbbbGkkkbbbbbbbbbbbbck
+kkbbbbbbbbbbbbmkkkbbbbbbbbbbbbGkkkbbbbbbbbbbbbck
+kssmmmmmmmmmmsmkkggGGGGGGGGGGgGkkttcccccccccctck
+.kkkkkkkkkkkkkk..kkkkkkkkkkkkkk..kkkkkkkkkkkkkk.

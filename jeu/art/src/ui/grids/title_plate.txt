@@ -1,0 +1,31 @@
+# title_plate 192x22 = 4 images 48x22, 9-patch marges gauche/droite 14, haut/bas 0.
+# Bandeau-titre en ruban : bande x 6-41 y 1-17 (contour k, biseau 2 rangées, ombre 2 rangées, double filet
+# gravé, reflet, rivet à chaque bout) ; queues en queue d'aronde derrière (y 6-21) avec pli sombre.
+# 0 acier (texte W) · 1 or (texte k) · 2 danger (texte W) · 3 écho (texte k). Texte font_7 centré, y 4-13.
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 192x22
+frames: 4
+---
+................................................................................................................................................................................................
+......kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk............kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk............kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk............kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk......
+......kmllllmmmmmmmmmmmmmmmmmmmmmmmmmmmmmk............kyWWWWyyyyyyyyyyyyyyyyyyyyyyyyyyyyyk............kzZZZZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk............kceeeeccccccccccccccccccccccccccccck......
+......klmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmk............kWyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyk............kZzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzk............keccccccccccccccccccccccccccccccccck......
+......kmsnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnsnk............kyGggggggggggggggggggggggggggggggGgk............kzXxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxXxk............kctqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqtqk......
+......kmssssssssssssssssssssssssssssssssnk............kyGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGgk............kzXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxk............kcttttttttttttttttttttttttttttttttqk......
+.kkkkkkmssssssssssssssssssssssssssssssssnkkkkkk..kkkkkkyGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGgkkkkkk..kkkkkkzXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxkkkkkk..kkkkkkcttttttttttttttttttttttttttttttttqkkkkkk.
+kdddddkmssssssssssssssssssssssssssssssssnkdddddkkoooookyGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGgkoooookkrrrrrkzXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxkrrrrrkkkkkkkkcttttttttttttttttttttttttttttttttqkkkkkkk
+knnnnnkmssksssssssssssssssssssssssssssksnknnnnnkkgggggkyGGkGGGGGGGGGGGGGGGGGGGGGGGGGGGkGgkgggggkkxxxxxkzXXkXXXXXXXXXXXXXXXXXXXXXXXXXXXkXxkxxxxxkkqqqqqkcttktttttttttttttttttttttttttttktqkqqqqqk
+knnnnnkmskGkssssssssssssssssssssssssskGknknnnnnkkgggggkyGkWkGGGGGGGGGGGGGGGGGGGGGGGGGkWkgkgggggkkxxxxxkzXkGkXXXXXXXXXXXXXXXXXXXXXXXXXkGkxkxxxxxkkqqqqqkctkGktttttttttttttttttttttttttkGkqkqqqqqk
+knnnnnkmssksssssssssssssssssssssssssssksnknnnnnkkgggggkyGGkGGGGGGGGGGGGGGGGGGGGGGGGGGGkGgkgggggkkxxxxxkzXXkXXXXXXXXXXXXXXXXXXXXXXXXXXXkXxkxxxxxkkqqqqqkcttktttttttttttttttttttttttttttktqkqqqqqk
+.knnnnkmssssssssssssssssssssssssssssssssnknnnnk..kggggkyGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGgkggggk..kxxxxkzXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxkxxxxk..kqqqqkcttttttttttttttttttttttttttttttttqkqqqqk.
+..knnnkmssssssssssssssssssssssssssssssssnknnnk....kgggkyGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGgkgggk....kxxxkzXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxkxxxk....kqqqkcttttttttttttttttttttttttttttttttqkqqqk..
+...knnkmssssssssssssssssssssssssssssssssnknnk......kggkyGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGgkggk......kxxkzXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxkxxk......kqqkcttttttttttttttttttttttttttttttttqkqqk...
+...knnkmsmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmsnknnk......kggkyGyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyGgkggk......kxxkzXzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzXxkxxk......kqqkctcccccccccccccccccccccccccccccctqkqqk...
+..knnnkmnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnknnnk....kgggkygggggggggggggggggggggggggggggggggkgggk....kxxxkzxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxkxxxk....kqqqkcqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqkqqqk..
+.knnnnkmnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnknnnnk..kggggkygggggggggggggggggggggggggggggggggkggggk..kxxxxkzxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxkxxxxk..kqqqqkcqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqkqqqqk.
+knnnnnkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkknnnnnkkgggggkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkgggggkkxxxxxkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkxxxxxkkqqqqqkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkqqqqqk
+knnnnnndddnk........................kndddnnnnnnkkggggggooogk........................kgoooggggggkkxxxxxxrrrxk........................kxrrrxxxxxxkkqqqqqqkkkqk........................kqkkkqqqqqqk
+knnnnnndddnk........................kndddnnnnnnkkggggggooogk........................kgoooggggggkkxxxxxxrrrxk........................kxrrrxxxxxxkkqqqqqqkkkqk........................kqkkkqqqqqqk
+knnnnnnnnnnk........................knnnnnnnnnnkkggggggggggk........................kggggggggggkkxxxxxxxxxxk........................kxxxxxxxxxxkkqqqqqqqqqqk........................kqqqqqqqqqqk
+.kkkkkkkkkk..........................kkkkkkkkkk..kkkkkkkkkk..........................kkkkkkkkkk..kkkkkkkkkk..........................kkkkkkkkkk..kkkkkkkkkk..........................kkkkkkkkkk.

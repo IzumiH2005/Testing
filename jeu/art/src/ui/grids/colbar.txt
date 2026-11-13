@@ -1,0 +1,13 @@
+# colbar 24x6 = 4 images 6x6 (barres verticales de l'histogramme), 9-patch marges 2.
+# 0 cadre (contour k, auge b, ombre k à gauche) · 1 écho (colonnes e c t q) · 2 or (y G g o) · 3 vide (n).
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 24x6
+frames: 4
+---
+.kkkk..kkkk..kkkk..kkkk.
+kkbbbkkeeeekkyyyykkssssk
+kkbbbkkectqkkyGgokksnndk
+kkbbbkkectqkkyGgokksnndk
+kkbbbkkectqkkyGgokksnndk
+.kkkk..kkkk..kkkk..kkkk.

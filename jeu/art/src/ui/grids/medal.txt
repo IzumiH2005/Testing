@@ -1,0 +1,24 @@
+# medal 48x16 = 3 images 16x16 : médaillon de rang (le chiffre se pose au centre en font_5).
+# Disque contour k, anneau de métal (lumière haut-gauche, ombre bas-droite), creux b au centre.
+# 0 acier · 1 or (meilleure vie) · 2 écho (cyan).
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 48x16
+frames: 3
+---
+.......kk..............kk..............kk.......
+....kkkmskkk........kkkgokkk........kkktqkkk....
+...kmpllllmsk......kgyGGGGgok......ktecccctqk...
+..klplmmmmlmsk....kGyGggggGgok....kcecttttctqk..
+.kmplmkkkkmlmsk..kgyGgkkkkgGgok..ktectkkkktctqk.
+.kllmkbbbbkmmsk..kGGgkbbbbkggok..kcctkbbbbkttqk.
+.klmkbbbbbbkmsk..kGgkbbbbbbkgok..kctkbbbbbbktqk.
+kmlmkbbbbbbkmmskkgGgkbbbbbbkggokktctkbbbbbbkttqk
+kslmkbbbbbbkmsskkoGgkbbbbbbkgookkqctkbbbbbbktqqk
+.klmkbbbbbbkmsk..kGgkbbbbbbkgok..kctkbbbbbbktqk.
+.kmlmkbbbbkmmsk..kgGgkbbbbkggok..ktctkbbbbkttqk.
+.ksmlmkkkkmmssk..kogGgkkkkggook..kqtctkkkkttqqk.
+..ksmmmmmmmssk....kogggggggook....kqtttttttqqk..
+...ksssmssssk......kooogooook......kqqqtqqqqk...
+....kkksskkk........kkkookkk........kkkqqkkk....
+.......kk..............kk..............kk.......

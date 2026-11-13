@@ -1,0 +1,21 @@
+# gauge 56x10 = 7 images 8x10.
+# 0 cadre : contour k arrondi, rail d'acier 1 px (m en haut, n en bas), auge b avec ombre k en haut ;
+# 9-patch marges 3 ; le remplissage se pose en x 2, y 2, hauteur 6.
+# 1-5 remplissages 8x6 (en haut de l'image, rangées 0-5) : 1 or · 2 écho · 3 danger · 4 marée · 5 acier ;
+# rangée 0 reflet, 1-2 base claire, 3-4 base, 5 ombre ; colonne 7 = bout lumineux (9-patch droite 1).
+# 6 graduation 8x6 : colonne 7 en k (rangées 1-5), à répéter en mosaïque par-dessus le remplissage.
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 56x10
+frames: 7
+---
+.kkkkkk.yyyyyyyyeeeeeeeeZZZZZZZZJJJJJJJJpppppppp........
+kmmmmmmkGGGGGGGycccccccezzzzzzzZjjjjjjjJlllllllp.......k
+kskkkknkGGGGGGGycccccccezzzzzzzZjjjjjjjJlllllllp.......k
+ksbbbbnkgggggggyttttttteXXXXXXXZUUUUUUUJmmmmmmmp.......k
+ksbbbbnkgggggggyttttttteXXXXXXXZUUUUUUUJmmmmmmmp.......k
+ksbbbbnkoooooooGqqqqqqqcxxxxxxxzuuuuuuujsssssssl.......k
+ksbbbbnk................................................
+ksbbbbnk................................................
+knnnnnnk................................................
+.kkkkkk.................................................

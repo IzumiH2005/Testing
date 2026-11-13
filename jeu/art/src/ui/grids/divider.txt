@@ -1,0 +1,17 @@
+# divider 72x9 = 3 images 24x9 : 0 bout gauche (volute + filet) · 1 gemme centrale (posée
+# une fois, 24 de large dont 9 utiles centrés) · 2 bout droit (miroir). Bouts : 9-patch marge 10 du côté
+# volute, 0 de l'autre ; filet l (haut) / k (ombre). Gemme : losange or G/y/g, contour k, ailettes acier.
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 72x9
+frames: 3
+---
+...................................k....................................
+.kkk..............................kyk...............................kkk.
+kmlmk............................kyGgk.............................kmlmk
+klkmkl..........................kyGGGgk...........................lkmklk
+kmkkkmlllllllllllllllllllllllllkmGGGGgmkllllllllllllllllllllllllllmkkkmk
+.kk...kkkkkkkkkkkkkkkkkkkkkkkkkkkgGGgokkkkkkkkkkkkkkkkkkkkkkkkkkkk...kk.
+.................................kgook..................................
+..................................kok...................................
+...................................k....................................

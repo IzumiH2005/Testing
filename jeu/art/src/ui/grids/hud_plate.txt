@@ -1,0 +1,32 @@
+# hud_plate 48x24 = 2 images 24x24, 9-patch marges 7 (plaques du HUD et des toasts).
+# 0 sombre : fond b, bordure k / n / s (arête m en haut), mini-équerres acier aux coins, contour k.
+# 1 or : idem, arête et équerres or (toasts de récompense).
+# Grille générée par build_ui.py. Ajouter une ligne « # manuel » seule pour la figer et la retoucher.
+palette: ../../../../studio/palette_v2.txt
+size: 48x24
+frames: 2
+---
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kpllkmmmmmmmmmmmmmmkllpkkyGGkmmmmmmmmmmmmmmkGGyk
+klkkkkkkkkkkkkkkkkkkkklkkGkkkkkkkkkkkkkkkkkkkkGk
+klkddddddddddddddddddklkkGkddddddddddddddddddkGk
+kkkbbbbbbbbbbbbbbbbbbkkkkkkbbbbbbbbbbbbbbbbbbkkk
+kskbbbbbbbbbbbbbbbbbbknkkskbbbbbbbbbbbbbbbbbbknk
+kskbbbbbbbbbbbbbbbbbbknkkskbbbbbbbbbbbbbbbbbbknk
+kskbbbbbbbbbbbbbbbbbbknkkskbbbbbbbbbbbbbbbbbbknk
+kskbbbbbbbbbbbbbbbbbbknkkskbbbbbbbbbbbbbbbbbbknk
+kskbbbbbbbbbbbbbbbbbbknkkskbbbbbbbbbbbbbbbbbbknk
+kskbbbbbbbbbbbbbbbbbbknkkskbbbbbbbbbbbbbbbbbbknk
+kskbbbbbbbbbbbbbbbbbbknkkskbbbbbbbbbbbbbbbbbbknk
+kskbbbbbbbbbbbbbbbbbbknkkskbbbbbbbbbbbbbbbbbbknk
+kskbbbbbbbbbbbbbbbbbbknkkskbbbbbbbbbbbbbbbbbbknk
+kskbbbbbbbbbbbbbbbbbbknkkskbbbbbbbbbbbbbbbbbbknk
+kskbbbbbbbbbbbbbbbbbbknkkskbbbbbbbbbbbbbbbbbbknk
+kskbbbbbbbbbbbbbbbbbbknkkskbbbbbbbbbbbbbbbbbbknk
+kskbbbbbbbbbbbbbbbbbbknkkskbbbbbbbbbbbbbbbbbbknk
+kskbbbbbbbbbbbbbbbbbbknkkskbbbbbbbbbbbbbbbbbbknk
+kkkbbbbbbbbbbbbbbbbbbkkkkkkbbbbbbbbbbbbbbbbbbkkk
+klkbbbbbbbbbbbbbbbbbbklkkGkbbbbbbbbbbbbbbbbbbkGk
+klkkkkkkkkkkkkkkkkkkkklkkGkkkkkkkkkkkkkkkkkkkkGk
+kpllknnnnnnnnnnnnnnkllpkkyGGknnnnnnnnnnnnnnkGGyk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk

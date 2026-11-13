@@ -1046,6 +1046,9 @@ def focus_ring():
     return c
 
 
+import rpg_ui  # noqa: E402,F401  (interface v3 : remplace btn_* et ajoute cadres, jauges…)
+
+
 # ----------------------------------------------------------------------------------------------
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]

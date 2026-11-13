@@ -29,14 +29,16 @@ static func font() -> Font:
 static func font_size() -> int:
 	return 10 if ResourceLoader.exists("res://assets/ui/font.fnt") else 8
 
-## Palette du jeu (mêmes valeurs que tools/palette.txt).
+## Palette du jeu (palette v2 : studio/palette_v2.txt).
 const P := {
-	"k": Color("0b0b1a"), "b": Color("161631"), "d": Color("222246"), "n": Color("2f3060"),
-	"s": Color("3f4580"), "m": Color("5763a3"), "l": Color("7385c4"), "p": Color("9fb0e0"),
-	"w": Color("dfe6ff"), "W": Color("ffffff"),
-	"q": Color("0e4a5c"), "t": Color("1a8a9e"), "c": Color("3fd0d4"), "e": Color("a8fff0"),
-	"r": Color("7a1f3d"), "R": Color("c4384f"), "o": Color("ff7a59"), "a": Color("ffc46b"),
-	"x": Color("5c0f2e"), "X": Color("b0174a"), "z": Color("ff3d6e"), "Z": Color("ffb3c6"),
-	"g": Color("e0a200"), "G": Color("ffd23f"), "y": Color("fff3a8"),
-	"v": Color("2e6b5a"), "V": Color("4fa37a"), "u": Color("4a2a7a"), "U": Color("8a5ad0"),
+	"k": Color("0e0a1a"), "b": Color("17122a"), "d": Color("23203d"), "n": Color("2f2c5c"),
+	"s": Color("39427b"), "m": Color("46639f"), "l": Color("719dca"), "p": Color("abd1eb"),
+	"w": Color("e6f6ff"), "W": Color("ffffff"), "h": Color("503d7a"), "H": Color("8a83c7"),
+	"i": Color("c7ccf0"), "I": Color("f2f6ff"), "r": Color("751a38"), "R": Color("cc353f"),
+	"o": Color("ff7247"), "a": Color("ffba6b"), "A": Color("fff0c7"), "x": Color("660e4c"),
+	"X": Color("b81661"), "z": Color("ff3874"), "Z": Color("ffb2c4"), "g": Color("fa9e14"),
+	"G": Color("ffd738"), "y": Color("fff9a8"), "q": Color("114161"), "t": Color("1787a3"),
+	"c": Color("3fe0e0"), "e": Color("b8ffee"), "u": Color("2c1752"), "U": Color("6a3499"),
+	"j": Color("bd69db"), "J": Color("f9c7ff"), "v": Color("174e52"), "V": Color("328a78"),
+	"f": Color("53bd8b"), "F": Color("9bebad")
 }
