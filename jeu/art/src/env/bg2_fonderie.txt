@@ -1,0 +1,43 @@
+# ÉCHO - bg2_fonderie : plan P2 (parallaxe 0.60) de la Fonderie, 4 panneaux de tôle 32x32 (128x32), raccord libre.
+# Intention : cloison de tôle lointaine, très sombre (Y 0.012-0.025), 2 tons ( ) + k pour les fentes : aucun rivet clair.
+# 0 tôle pleine + 2 points-rivets ) · 1 tôle coupée (joint horizontal k ligne 15, joint vertical décalé)
+# 2 tuyau horizontal lointain (corps ), ombre ( sous, brides k) · 3 grille à lames (lame ) / fente k).
+# Bord haut ) sur 1 px (lumière haut-gauche), joint bas k ; colonne x31 = joint k -> les panneaux se juxtaposent.
+# Budget : ( ) k (3).
+# Défaut corrigé : les rivets en 3 (ton de mur) faisaient remonter le fond au plan de jeu -> rivets en ) seulement.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 128x32
+fill (
+rect k 31 0 31 31
+rect k 63 0 63 31
+rect k 95 0 95 31
+rect k 127 0 127 31
+hline k 0 127 31
+hline ) 0 30 0
+hline ) 32 62 0
+hline ) 64 94 0
+hline ) 96 126 0
+px ) 3 3 27 3 3 27 27 27
+hline k 32 62 15
+vline k 44 0 14
+vline k 52 16 30
+hline ) 32 43 16
+hline ) 53 62 16
+hline ) 45 51 1
+px ) 35 4 59 20
+rect ) 64 12 94 17
+hline k 64 94 11
+hline k 64 94 18
+vline k 72 11 18
+vline k 86 11 18
+hline ( 64 94 17
+rect ) 99 5 123 6
+rect k 99 7 123 7
+rect ) 99 10 123 11
+rect k 99 12 123 12
+rect ) 99 15 123 16
+rect k 99 17 123 17
+rect ) 99 20 123 21
+rect k 99 22 123 22
+rect ) 99 25 123 26
+rect k 99 27 123 27

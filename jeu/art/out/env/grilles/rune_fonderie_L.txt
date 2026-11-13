@@ -1,0 +1,26 @@
+# ÉCHO - rune_fonderie_L : rune de mur GAUCHE Fonderie, 2 tuiles 16x16 (32x16) : 0 ÉTEINTE, 1 ALLUMÉE.
+# Intention : même glyphe « onde » 7x7 que la Crypte (le joueur reconnaît la rune d'un biome à l'autre), estampé
+#   dans une grande tôle nue (sans rivets ni coin 4, pour qu'aucun point clair ne concurrence le glyphe).
+# 0 éteinte : glyphe embouti en 1 (ton d'ombre de l'acier), PAS en cyan.
+# 1 allumée : traits G, coin haut-gauche de chaque trait en y, ombre portée o en bas-droite (bible : G y + contour o).
+# Budget : 0 = 1 2 3 k (4) ; 1 = 1 2 3 k G y o (7, objet de jeu).
+# Défaut corrigé : les rivets de la tuile 0 du mur formaient des « yeux » au-dessus du glyphe -> tôle sans rivet.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 32x16
+---
+333322222222221k333322222222221k
+322222222222221k322222222222221k
+222222222222221k222222222222221k
+222222222222221k222222222222221k
+222222122222221k222222y22222221k
+222221212222221k22222y2G2222221k
+222212221222221k2222y2o2G222221k
+222122122122221k222G2oG22G22221k
+222222122222221k2222o2Go22o2221k
+222222122222221k222222Go2222221k
+222211111222221k2222yGGGG222221k
+222222222222221k22222ooooo22221k
+222222222222221k222222222222221k
+222222222222221k222222222222221k
+222222222222221k222222222222221k
+111111111111111k111111111111111k

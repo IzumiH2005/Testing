@@ -1,0 +1,7 @@
+# pal_tide_calm.png : 4x1, palette d'Accalmie : u U J J (la crête j passe à J, §8.4). Même ordre que pal_tide.
+# Pendant l'Accalmie, tide_crest est figée sur son image courante.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 4x1
+frames: 1
+---
+uUJJ

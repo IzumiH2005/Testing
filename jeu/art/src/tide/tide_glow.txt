@@ -1,0 +1,27 @@
+# tide_glow.png : 1 image 32x16, halo de la marée en 3 paliers durs (pas de dégradé) :
+# j à 12 % (haut) / 22 % / 35 % (bas, contre la crête). Bords en vagues larges, bouclable en x.
+# À dessiner en mode ADDITIF (CanvasItemMaterial blend_mode = Add), juste au-dessus de tide_crest
+# (bas du halo = haut de la crête). Défile avec la crête ou reste fixe : les deux bouclent.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+= % #bd69db1f
+= & #bd69db38
+= + #bd69db59
+size: 32x16
+frames: 1
+---
+%%%%%%%%%%%%..............%%%%%%
+%%%%%%%%%%%%%%%%......%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%&&&&&&%%%%%%%%%%%%%%%%%&&&%%
+%%&&&&&&&&&&&%%%%%%%%%%&&&&&&&&&
+&&&&&&&&&&&&&&&&&%%%&&&&&&&&&&&&
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+&&&&&&++++++&&&&&&&&&&&&&&&+++&&
+&&&++++++++++++&&&&&&&&&+++++++&
+++++++++++++++++++&&&+++++++++++
+++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++

@@ -1,0 +1,46 @@
+# ÉCHO - wall_fonderie_to_bibliotheque_L : transition de mur GAUCHE Fonderie (bas) -> Bibliothèque (haut), 2 tuiles 16x16.
+# Règle bible : tuile BASSE (0) = matière A envahie par les joints de B ; tuile HAUTE (1) = matière B avec un dernier bloc de A.
+# Tuile 0 : tôles de fonderie (2 3 4, soudures 1) dont l'assise haute est coupée par des joints de pierre violette 5.
+# Tuile 1 : en bas une dernière tôle rivetée, joint 5, puis deux assises de pierre de bibliothèque
+#   (6 face, 7 arête, 8 coin sur 1 bloc, 5 joint et chanfrein x14). Changement de matière sur un joint, sans trame.
+# Ordre de pose : ... fonderie / 0 / 1 / bibliothèque ...
+# Budget : 1 2 3 4 k + 5 6 7 8 (tuile de transition, 4 tons max par matière). Aucun bois, aucun brun.
+# Défaut corrigé : un chanfrein x14 resté en 1 sous la pierre violette faisait une couture verticale grise -> 5 dès le joint.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 32x16
+grid 0 0
+433322225322221k
+322222225222221k
+222222225222221k
+555555555555555k
+433322222222221k
+322222222222221k
+223223222222221k
+222122122222221k
+222222222222221k
+222222222222221k
+111111111111111k
+333222122222221k
+322222122222221k
+222222122222221k
+222222122222221k
+111111111111111k
+end
+grid 16 0
+877766665777765k
+766666665766665k
+666666665666665k
+666666665666665k
+666666665666665k
+555555555555555k
+777665777766665k
+766665766666665k
+666665666666665k
+666665666666665k
+555555555555555k
+433322222222221k
+322222222222221k
+223223222222221k
+222122122222221k
+111111111111111k
+end

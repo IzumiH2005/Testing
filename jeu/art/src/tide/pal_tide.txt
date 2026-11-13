@@ -1,0 +1,6 @@
+# pal_tide.png : 4x1, palette de référence de la marée, ordre u U j J (entrée de l'échange de palette).
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 4x1
+frames: 1
+---
+uUjJ

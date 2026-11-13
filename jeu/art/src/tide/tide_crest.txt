@@ -1,0 +1,25 @@
+# tide_crest.png : 4 images 32x16, crête de la marée (tuile horizontale bouclable, se répète sur 192 px).
+# Écume J / crête j / corps U puis u ; la rangée 15 est en u pur et se raccorde à tide_body.
+# Les 4 images = la même crête qui défile de 8 px vers la droite (boucle exacte sur 32 px). Cycle de palette [E7-H] : 4 états, 150 ms par image en boucle.
+# Accalmie : appliquer pal_tide_calm (j -> J) et figer l'image courante.
+# Pivot : bord haut-gauche ; la crête monte avec la marée (y = niveau de la marée - 5).
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 128x16
+frames: 4
+---
+.....JJJ.................jJJ.....jJJ.........JJJ.........................jJJ.........JJJ.........................jJJ.........JJJ
+...JJjjjJJ.............JjjjJ....jjjJ.......JJjjjJJ.............J.......JjjjJ.......JJjjjJJ......JJ.............JjjjJ.......JJjjj
+.JJjjUUUjjJJ.........JJjjUUjjJJ.jUUjjJJ..JJjjUUUjjJJ.........JJj.....JJjjUUjjJJ..JJjjUUUjjJJ....jjJJ.........JJjjUUjjJJ..JJjjUUU
+JjjUUUUUUUjjJJJ...JJJjjUUUUUUjjJUUUUUjjJJjjUUUUUUUjjJJJ...JJJjjU..JJJjjUUUUUUjjJJjjUUUUUUUjjJJJ.UUjjJJJ...JJJjjUUUUUUjjJJjjUUUUU
+jUUUUUUUUUUUjjjJJJjjjUUUUUUUUUUjUUUUUUUjjUUUUUUUUUUUjjjJJJjjjUUUJJjjjUUUUUUUUUUjjUUUUUUUUUUUjjjJUUUUjjjJJJjjjUUUUUUUUUUjjUUUUUUU
+UUUUUUUUUUUUUUUjjjUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUjjjUUUUUUjjUUUUUUUUUUUUUUUUUUUUUUUUUUUUUjUUUUUUUjjjUUUUUUUUUUUUUUUUUUUUUU
+UUUUuuUUUUUUUUUUjUUUUUUUuuUUUUUUuuUUUUUUUUUUuuUUUUUUUUUUjUUUUUUUjUUUUUUUuuUUUUUUUUUUuuUUUUUUUUUUUUUUUUUUjUUUUUUUuuUUUUUUUUUUuuUU
+UUuuuuuUUUUuuUUUUUUUuuuuuuUUUUuUuuUUUUuUUUuuuuuUUUUuuUUUUUUUuuuuUUUUuuuuuuUUUUuUUUuuuuuUUUUuuUUUUUUuuUUUUUUUuuuuuuUUUUuUUUuuuuuU
+uuuuuuuuuUUUuuuuuuUUUUuuuuuuuuuuuuuuuuuuuuuuuuuuuUUUuuuuuuUUUUuuuuUUUUuuuuuuuuuuuuuuuuuuuUUUuuuuuUUUuuuuuuUUUUuuuuuuuuuuuuuuuuuu
+uuuUUuuuuuuuuuuuuuuuuuuUUUuuuuuuUUuuuuuuuuuUUuuuuuuuuuuuuuuuuuuUuuuuuuuUUUuuuuuuuuuUUuuuuuuuuuuuuuuuuuuuuuuuuuuUUUuuuuuuuuuUUuuu
+uuuuuuuuuuuuuUUuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuUUuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuUUuuuuuuUUuuuuuuuuuuuuuuuuuuuuuuuuu
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+uuuuuuUUuuuuuuuuuuuuuuuuuuUUuuuuuuUUuuuuuuuuuuUUuuuuuuuuuuuuuuuuuuuuuuuuuuUUuuuuuuuuuuUUuuuuuuuuuuuuuuuuuuuuuuuuuuUUuuuuuuuuuuUU
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu
+uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu

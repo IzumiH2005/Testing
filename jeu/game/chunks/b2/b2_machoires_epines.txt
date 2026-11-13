@@ -8,24 +8,29 @@ verbe: elan
 intro: -
 alt: 215-345
 poids: 1
-// wip
+// Twist O10 x O1 : la mâchoire (rangée 9) ferme le couloir entre deux bandes d'épines alternées (L6-8, R11-13).
+// Idée : on ne peut pas attendre sous la mâchoire (épines L), ni au-dessus (épines R) : la seule fenêtre
+// est en vol. Route sûre = deux élans tenus qui traversent la rangée 9 bouche ouverte (attente max 1.85 s en R5).
+// Risque : le O L8 se prend par un bond court L1 -> R4 puis élan R4 -> L10, trajectoire collée aux épines
+// et qui passe la mâchoire plus tôt : à caler sur l'ouverture.
+// Écho : une mâchoire gravée reste fermée en pont cyan : on peut s'y poser et s'accrocher sur ses flancs.
 ---
 ##........##
 ##........##
-##........##
+##......o.##
 ##........##                    // R15 bond -> L18 (sortie)
 ##........##
 ##.......<##
+##..o....<##
 ##.......<##
-##.......<##
-##........##                    // L10 elan -> R15
+##........##                    // L10 elan -> R15 : au-dessus des épines droites
 ##M......M## ; phase=0.0
+##>.O.....##
+##>....o..##
 ##>.......##
-##>.......##
-##>.......##
-##........##                    // R5 elan -> L10 : partir quand la mâchoire s'ouvre
+##........##                    // R5 elan -> L10 : partir mâchoire ouverte, franchir la rangée 9 en vol
 ##........##
+##.o......##
 ##........##
-##........##
-##........##                    // L1 elan -> R5
+##........##                    // L1 elan -> R5 : tenir, passer au-dessus du bas de la mâchoire
 ---
