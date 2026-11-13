@@ -11,8 +11,8 @@ poids: 1
 // draft
 ---
 ##........##
-##....P...## ; len=140 amp=25 period=2.6 r=20 phase=0
 ##........##
+##....P...## ; len=124 amp=25 period=2.6 r=20 phase=0
 ##........##
 #L........L# ; period=3.0 warn=0.6 on=0.5 phase=0.5
 ##........##

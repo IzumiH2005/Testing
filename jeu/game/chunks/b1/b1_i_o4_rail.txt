@@ -3,7 +3,7 @@ biome: B1
 tension: I
 D: 2
 entree: L
-sortie: any
+sortie: L
 verbe: elan
 intro: O4
 alt: 35-70

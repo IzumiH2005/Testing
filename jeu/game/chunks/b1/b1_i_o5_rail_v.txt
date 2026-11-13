@@ -2,8 +2,8 @@ id: b1_i_o5_rail_v
 biome: B1
 tension: I
 D: 2
-entree: any
-sortie: any
+entree: L
+sortie: R
 verbe: volte
 intro: O5
 alt: 90-120

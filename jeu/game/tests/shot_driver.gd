@@ -42,6 +42,9 @@ func bot(seconds: float, turn_every := 0) -> void:
 				w.tap()
 
 func _run() -> void:
+	if "--env" in OS.get_cmdline_user_args():
+		await _env_run()
+		return
 	Game.data.tuto_done = false
 	Game.data.tuto_turn_done = false
 	Game.data.shards = 240
@@ -101,4 +104,16 @@ func _run() -> void:
 	main.show_menu()
 	await wait(0.5)
 	await shot("menu_after")
+	get_tree().quit()
+
+## Captures du décor à des hauteurs fixes (état READY : la caméra ne bouge pas seule).
+func _env_run() -> void:
+	main.start_run(true)
+	await wait(0.6)
+	var w = main.world
+	for m in [2, 60, 140, 156, 250, 360]:
+		w.cam_y = -m * 16.0 - w._vh() * 0.5
+		w.tower.ensure(w.cam_y - 400.0)
+		await wait(0.3)
+		await shot("env_%dm" % m)
 	get_tree().quit()

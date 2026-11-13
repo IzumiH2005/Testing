@@ -1,0 +1,36 @@
+id: b2_contrefort_marche
+biome: B2
+tension: M
+D: 5
+entree: any
+sortie: any
+verbe: volte
+intro: -
+alt: 265-345
+poids: 1
+// Développement O3 x O1 : deux contreforts R5-7 et R11-13 face à deux bandes d'épines L4-7 et L9-12.
+// Idée : l'escalier d'un seul mur. Le mur gauche est entièrement piqué entre 4 et 12 : on ne peut pas
+// zigzaguer. Il faut monter de marche en marche sur le MÊME mur : élan + volte depuis la face du
+// premier contrefort pour revenir sur la face du second (min verbe = volte, bond/élan seuls échouent).
+// Risque : le O L10 se prend en pivotant tard, au ras des épines gauches.
+// Écho : un contrefort gravé devient une simple marche : tout le mur droit devient un escalier.
+---
+##........##
+##.o......##
+##........##                    // L16 bond -> R19 (sortie)
+##....o...##
+##........##
+##.......C##                    // R13 bond -> L16
+##>....o.C##
+##>......C##
+##>O......##
+##>..o....##
+##........##
+##>......C##
+##>......C##                    // R6 elan+volte -> R13 : pivot en l'air, retour sur la face du 2e contrefort
+##>...o..C##
+##>.......##
+##.o......##
+##........##
+##........##                    // L1 elan -> R6 : se poser sur la face du 1er contrefort
+---

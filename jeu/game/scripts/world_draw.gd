@@ -64,24 +64,32 @@ func _state(e: Dictionary) -> Array:
 
 # ------------------------------------------------------------------ décor
 
+const BIOME_ENV := ["crypte", "fonderie", "bibliotheque", "", "", ""]
+const DECO_PERIOD := 12
+
+func _env_name(bi: int) -> String:
+	var n: String = BIOME_ENV[clampi(bi, 0, 5)]
+	if n != "" and A.tex("env/wall_%s_L" % n):
+		return n
+	return ""
+
 func _draw_background(top: float, bot: float) -> void:
+	_draw_layers(top, bot)
 	var r0 := int(floor(top / TILE))
 	var r1 := int(ceil(bot / TILE))
-	var back := A.tex("env/back")
 	var wall := A.tex("env/wall")
 	for r in range(r0, r1 + 1):
 		if r >= 0:
 			continue
 		var y := r * TILE
+		var m := -r - 1
 		var dd: Dictionary = w.tower.deco_for_row(r)
-		var bi := Tower.biome_index(-r - 1)
+		var bi := Tower.biome_index(m)
+		var env := _env_name(bi)
+		if env != "":
+			_draw_wall_row(r, y, m, bi, env, dd)
+			continue
 		var tint: Color = BIOME_TINT[clampi(bi, 0, 5)]
-		for i in 8:
-			var x := WL + i * TILE
-			if back:
-				draw_texture_rect_region(back, Rect2(x, y, TILE, TILE), Rect2(dd.back[i] * TILE, 0, TILE, TILE), tint)
-			else:
-				draw_rect(Rect2(x, y, TILE, TILE), (A.P.d if (i + r) % 2 == 0 else A.P.b) * tint)
 		if wall:
 			var shade := Color(0.62, 0.62, 0.75) * tint
 			draw_texture_rect_region(wall, Rect2(0, y, TILE, TILE), Rect2(((dd.wr + 1) % 4) * TILE, 0, TILE, TILE), shade)
@@ -91,6 +99,146 @@ func _draw_background(top: float, bot: float) -> void:
 		else:
 			draw_rect(Rect2(0, y, WL, TILE), (A.P.s if r % 2 == 0 else A.P.n) * tint)
 			draw_rect(Rect2(WR, y, 192 - WR, TILE), (A.P.s if r % 2 == 0 else A.P.n) * tint)
+
+## Module de décor commençant à la rangée r dans la colonne intérieure c (0 = gauche, 1 = droite), ou -1.
+func _deco_at(r: int, c: int) -> int:
+	var off := posmod(hash(Vector2i(w.tower.seed_value, 7 + c)), DECO_PERIOD)
+	if posmod(r + off, DECO_PERIOD) != 0 or r >= -2:
+		return -1
+	var block := int(floor(float(r + off) / DECO_PERIOD))
+	var h := posmod(hash(Vector3i(w.tower.seed_value, r, c)), 3) + 1
+	return 0 if posmod(block, 2) == 0 else h
+
+## Index de tuile pour la rangée r, colonne c : remplace le tirage par une tuile éclairée autour d'une source.
+func _wall_lit(r: int, c: int) -> int:
+	if _deco_at(r + 1, c) == 0:
+		return 0
+	if _deco_at(r - 2, c) == 0:
+		return 1
+	return -1
+
+func _draw_wall_row(r: int, y: float, m: int, bi: int, env: String, dd: Dictionary) -> void:
+	var shade := Color(0.7, 0.7, 0.78)
+	var tl := A.tex("env/wall_%s_L" % env)
+	var tr := A.tex("env/wall_%s_R" % env)
+	var il: int = dd.wl
+	var ir: int = dd.wr
+	var rare := posmod(hash(Vector2i(w.tower.seed_value * 31, r)), 40) == 0
+	if rare:
+		il = 6
+	# transition vers le biome suivant (tuile 0 = dernière rangée, tuile 1 = première du biome du haut)
+	var trans := ""
+	var ti := 0
+	if bi + 1 < Tower.BIOMES.size() and m == int(Tower.BIOMES[bi + 1].start) - 1:
+		trans = env
+		ti = 0
+	elif bi > 0 and m == int(Tower.BIOMES[bi].start):
+		trans = _env_name(bi - 1)
+		ti = 1
+	if trans != "":
+		var nxt: String = BIOME_ENV[clampi(bi + (1 if ti == 0 else 0), 0, 5)]
+		var tt_l := A.tex("env/wall_%s_to_%s_L" % [trans, nxt])
+		var tt_r := A.tex("env/wall_%s_to_%s_R" % [trans, nxt])
+		if tt_l and tt_r:
+			draw_texture_rect_region(tt_r, Rect2(0, y, TILE, TILE), Rect2(ti * TILE, 0, TILE, TILE), shade)
+			draw_texture_rect_region(tt_l, Rect2(16, y, TILE, TILE), Rect2(ti * TILE, 0, TILE, TILE))
+			draw_texture_rect_region(tt_r, Rect2(WR, y, TILE, TILE), Rect2(ti * TILE, 0, TILE, TILE))
+			draw_texture_rect_region(tt_l, Rect2(WR + TILE, y, TILE, TILE), Rect2(ti * TILE, 0, TILE, TILE), shade)
+			return
+	# colonnes extérieures (assombries)
+	draw_texture_rect_region(tr, Rect2(0, y, TILE, TILE), Rect2(((ir + 1) % 4) * TILE, 0, TILE, TILE), shade)
+	draw_texture_rect_region(tl, Rect2(WR + TILE, y, TILE, TILE), Rect2(((dd.wl + 2) % 4) * TILE, 0, TILE, TILE), shade)
+	# colonnes intérieures
+	var cols := [[16, tl, il, "L"], [WR, tr, ir, "R"]]
+	for c in 2:
+		var x: int = cols[c][0]
+		var tex: Texture2D = cols[c][1]
+		var idx: int = cols[c][2]
+		var side: String = cols[c][3]
+		var lit := _wall_lit(r, c)
+		var lt := A.tex("env/wall_%s_lit_%s" % [env, side])
+		if lit >= 0 and lt:
+			draw_texture_rect_region(lt, Rect2(x, y, TILE, TILE), Rect2(lit * TILE, 0, TILE, TILE))
+		else:
+			draw_texture_rect_region(tex, Rect2(x, y, TILE, TILE), Rect2(idx * TILE, 0, TILE, TILE))
+		# module de décor 16×32 : il couvre les rangées r et r+1 ; on le dessine sur la rangée du bas (r+1) pour passer par-dessus.
+		var dm := _deco_at(r - 1, c)
+		var dt := A.tex("env/wall_%s_deco_%s" % [env, side])
+		if dm >= 0 and dt and Tower.biome_index(m + 1) == bi:
+			draw_texture_rect_region(dt, Rect2(x, y - TILE, TILE, 2 * TILE), Rect2(dm * TILE, 0, TILE, 2 * TILE))
+
+## Plans de fond (bg0 0.10, bg1 0.30, bg2 0.60), découpés par biome.
+func _draw_layers(top: float, bot: float) -> void:
+	var back := A.tex("env/back")
+	var y_lo := minf(bot, 0.0)
+	if top >= y_lo:
+		return
+	for bi in Tower.BIOMES.size():
+		var s0: float = -float(Tower.BIOMES[bi].start) * TILE
+		var s1: float = -INF if bi + 1 >= Tower.BIOMES.size() else -float(Tower.BIOMES[bi + 1].start) * TILE
+		var a := maxf(top, s1)
+		var b := minf(y_lo, s0)
+		if a >= b:
+			continue
+		var env: String = BIOME_ENV[bi]
+		var bg0 := A.tex("env/bg0_%s" % env) if env != "" else null
+		if bg0:
+			_layer(bg0, 0.10, Vector2(64, 0), 256.0, a, b, -1)
+			var bg1 := A.tex("env/bg1_%s" % env)
+			if bg1:
+				_layer(bg1, 0.30, Vector2(32, 0), 256.0, a, b, -1)
+		else:
+			_old_back(back, bi, a, b)
+		var bg2 := A.tex("env/bg2_%s" % env) if env != "" else null
+		if bg2:
+			for band in 2:
+				_layer(bg2, 0.60, Vector2(WL + band * 96, 0), 32.0, a, b, band, env)
+
+func _old_back(back: Texture2D, bi: int, a: float, b: float) -> void:
+	var tint: Color = BIOME_TINT[clampi(bi, 0, 5)] * Color(0.55, 0.55, 0.62)
+	for r in range(int(floor(a / TILE)), int(ceil(b / TILE))):
+		var y0 := maxf(r * TILE, a)
+		var y1 := minf((r + 1) * TILE, b)
+		if y1 <= y0:
+			continue
+		var dd: Dictionary = w.tower.deco_for_row(r)
+		for i in 8:
+			var x := WL + i * TILE
+			if back:
+				draw_texture_rect_region(back, Rect2(x, y0, TILE, y1 - y0), Rect2(dd.back[i] * TILE, y0 - r * TILE, TILE, y1 - y0), tint)
+			else:
+				draw_rect(Rect2(x, y0, TILE, y1 - y0), (A.P.d if (i + r) % 2 == 0 else A.P.b) * tint)
+
+## Pose un plan en parallaxe entre a et b (coordonnées monde).
+## band < 0 : texture pleine largeur 128 (src.x = décalage). band >= 0 : bande de 32 px de bg2 avec choix de panneau.
+func _layer(tex: Texture2D, p: float, at: Vector2, h: float, a: float, b: float, band: int, env := "") -> void:
+	var base: float = w.cam_y * (1.0 - p)
+	var k0 := int(floor((a - base) / h))
+	var k1 := int(floor((b - base) / h))
+	var deco := A.tex("env/bg2_%s_deco" % env) if band >= 0 else null
+	for k in range(k0, k1 + 1):
+		var uy := base + k * h
+		var y0 := maxf(uy, a)
+		var y1 := minf(uy + h, b)
+		if y1 <= y0:
+			continue
+		var sy := y0 - uy
+		if band < 0:
+			var ty := fposmod(uy - base, float(tex.get_height()))
+			draw_texture_rect_region(tex, Rect2(WL, y0, WR - WL, y1 - y0), Rect2(at.x, ty + sy, WR - WL, y1 - y0))
+		else:
+			var hh := posmod(hash(Vector3i(w.tower.seed_value, k, band + 3)), 60)
+			var sx := 0
+			if env == "crypte":
+				sx = 0 if hh >= 10 else (1 + hh % 3) * 32
+			else:
+				sx = 0 if hh >= 18 else (1 + hh % 3) * 32
+			draw_texture_rect_region(tex, Rect2(at.x, y0, 32, y1 - y0), Rect2(sx, sy, 32, y1 - y0))
+			if deco and hh >= 54:
+				draw_texture_rect_region(deco, Rect2(at.x, y0, 32, y1 - y0), Rect2((hh % 3) * 32, sy, 32, y1 - y0))
+			# bord intérieur de la bande assombri (cache le bord franc)
+			var ex := at.x + (31 if band == 0 else 0)
+			draw_rect(Rect2(ex, y0, 1, y1 - y0), Color(0, 0, 0, 0.45))
 
 func _draw_water(top: float, bot: float) -> void:
 	var m0 := Tower.meters_at(bot)
@@ -109,7 +257,8 @@ func _draw_water(top: float, bot: float) -> void:
 					xx += 8.0
 
 func _draw_floor() -> void:
-	var fl := A.tex("env/floor")
+	var fs := A.tex("env/floor_start")
+	var fl := fs if fs else A.tex("env/floor")
 	for i in 12:
 		var x := i * TILE
 		if fl:
@@ -381,6 +530,13 @@ func _draw_ent(e: Dictionary) -> void:
 			var ax: float = float(e.x)
 			var ay: float = float(e.y)
 			var at := Vector2(ax - 16, ay + 8 - 32)
+			var abi := Tower.biome_index(int(e.m))
+			var alt_env: String = {1: "env/altar_fonderie", 2: "env/altar_bibliotheque"}.get(abi, "")
+			if alt_env != "" and A.tex(alt_env):
+				draw_texture(A.tex(alt_env), at, Color(1, 1, 1) if on else Color(0.7, 0.7, 0.8))
+				if on:
+					_spr("env/altar_flame", 8, 16, int(w.t_global / 0.09) % 6, at + Vector2(12, -5))
+				return
 			if _spr("fx/altar", 32, 32, 1 if on else 0, at):
 				if on:
 					_spr("fx/altar_flame", 8, 16, int(w.t_global * 10.0) % 6, at + Vector2(12, -5))
