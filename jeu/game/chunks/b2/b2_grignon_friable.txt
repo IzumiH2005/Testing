@@ -8,22 +8,26 @@ verbe: elan
 intro: -
 alt: 235-345
 poids: 1
-// wip
+// Twist O20 : le mur droit n'est que plaques friables (R3-R14) : aucun repos possible de ce côté.
+// Le grignon (L6-L8) garde le seul mur solide. Idée : on ne peut plus « attendre qu'il passe » depuis
+// la plaque d'en face : il faut lire sa ronde PENDANT le vol et viser au-dessus de lui (L9, élan tenu)
+// quand il descend. Grand éclat L6 c3 : dans sa ronde, un bond court depuis la plaque R3 vers L6 quand il est en haut.
+// Écho : le grignon gravé (cyan, recharge) transforme la ronde en appui de volte : R4 volte vers R8 possible.
 ---
 ##........##
 ##........##
-##.......f##                    // R14 bond -> L17 (sortie)
+##......of##                    // R14 bond -> L17 (sortie)
+##....o..f##
 ##.......f##
-##.......f##
-##.......f##
+##.o.....f##
 ##.......f##
 ##.......f##                    // L9 elan -> R14
+##:..o...f##
 ##:......f##
-##:......f##
-##g......f## ; spd=24
-##.......f##
+##gO.....f## ; spd=24
+##.....o.f##
 ##.......f##                    // R4 elan -> L9 : se poser quand le grignon descend
-##.......f##
+##.o.....f##
 ##........##
 ##........##                    // L1 bond -> R4 : repartir aussitôt
 ---

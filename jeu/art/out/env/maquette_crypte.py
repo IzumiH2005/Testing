@@ -45,8 +45,8 @@ def col(x, side, seq):
         elif k == "r": out.alpha_composite(t(rune[side], i * 16, 0, 16, 16), (x, y)); y += 16
         elif k == "x": out.alpha_composite(t(tr[side], i * 16, 0, 16, 16), (x, y)); y += 16
         elif k == "d": out.alpha_composite(t(deco[side], i * 16, 0, 16, 32), (x, y)); y += 32
-SEQ_LI = "x1 x0 t0 t2 t1 t4 l0 d0 l1 t3 t0 t5 t1 r0 t2 t0 t3 t1 t7 t0".split()
-SEQ_RI = "x1 x0 t1 t3 t0 t2 d1 t0 t4 t1 t3 d2 t6 t2 r1 t1 t0 t3".split()
+SEQ_LI = "x1 x0 t0 t2 t1 t4 l0 d0 l1 t3 t0 t5 t1 r0 t2 t0 t3 t1 t7 t0 t2".split()
+SEQ_RI = "x1 x0 t1 t3 t0 t2 d1 t0 t4 t1 t3 d2 t6 t2 r1 t1 t0 t3 t2".split()
 SEQ_LO = "x1 x0 t1 t3 t2 t0 t3 t1 t2 t0 t4 t3 t1 t0 t2 t3 t1 t0 t2 t1 t3".split()
 SEQ_RO = "x1 x0 t2 t0 t3 t1 t0 t2 t4 t1 t3 t0 t2 t1 t5 t3 t0 t2 t1 t0 t3".split()
 col(16, "L", SEQ_LI); col(0, "R", SEQ_LO); col(160, "R", SEQ_RI); col(176, "L", SEQ_RO)
@@ -57,7 +57,7 @@ alt, fla = im("altar"), im("altar_flame")
 out.alpha_composite(alt, (80, 304))
 out.alpha_composite(t(fla, 0, 0, 8, 16), (92, 299))
 hero = Image.open(HERO).convert("RGBA").crop((0, 0, 32, 32))
-out.alpha_composite(hero, (25, 170))
+out.alpha_composite(hero, (22, 170))  # face du mur à x=10 de la cellule (bible §13)
 out.save(D + "maquette_crypte.png")
 out.resize((W * 3, H * 3), Image.NEAREST).save(D + "maquette_crypte@3.png")
 out.crop((6, 0, 186, H)).resize((180 * 3, H * 3), Image.NEAREST).save(D + "maquette_crypte_ecran@3.png")

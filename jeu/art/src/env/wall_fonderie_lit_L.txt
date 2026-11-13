@@ -1,0 +1,43 @@
+# ÉCHO - wall_fonderie_lit_L : mur GAUCHE Fonderie éclairé par une veilleuse (deco module 0), 2 tuiles 16x16 (32x16).
+# Tuile 0 = JUSTE AU-DESSUS de la source : arêtes BASSES des tôles montées d'un cran (2->3).
+# Tuile 1 = JUSTE EN DESSOUS : arêtes HAUTES montées d'un cran (3->4, 2->3) et allongées. Base = tuile 1 du mur.
+# Budget : 1 2 3 4 k (5). Pas de halo, un cran sur les arêtes seulement.
+# Défaut corrigé : un halo de pixels clairs faisait de la vapeur/bruit autour de la veilleuse.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 32x16
+grid 0 0
+433322222222221k
+322222222222221k
+222222222222221k
+222222222222221k
+222222222222221k
+222222222222221k
+223333333333221k
+111111111111111k
+333222133322221k
+322222132222221k
+222222122323221k
+222222122212121k
+222222122222221k
+222222122222221k
+233332133333221k
+111111111111111k
+end
+grid 16 0
+444433333322221k
+333222222222221k
+222222222222221k
+222222222222221k
+222222222222221k
+222222222222221k
+222222222222221k
+111111111111111k
+443332144333221k
+332222133222221k
+222222122323221k
+222222122212121k
+222222122222221k
+222222122222221k
+222222122222221k
+111111111111111k
+end

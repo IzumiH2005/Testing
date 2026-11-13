@@ -258,28 +258,27 @@ pu_calm.png : 1 image 8x8, icône Accalmie (deux vagues figées de marée : J j 
 # --- plume dorée -----------------------------------------------------------------------
 FEATHER = G("""
 ................
-.......oo.......
-......oyGo......
-......oyGo......
-.....oyyGgo.....
-.....oyyGgo.....
-.....oyGGgo.....
-.....oyGggo.....
-......oGgo......
-......oGgo......
-.......og.......
-.......og.......
-........o.......
-................
+...........oo...
+..........oGyo..
+.........oGyGo..
+........oGyGgo..
+.......oGyGgo...
+......oGyGo.....
+.....oGGygo.....
+....oGGygo......
+....oGygo.......
+....oyo.........
+...oyoo.........
+..oyo...........
+.oo.............
 ................
 ................""")
-# inclinaison décidée rangée par rangée (dx par rangée 0-15)
+# inclinaison décidée rangée par rangée (dx par rangée 0-15) : seule la pointe (rangées 1-4)
+# et le bout du tuyau (rangées 11-13) bougent, le milieu de la plume reste en place.
 TILT = {
-    "L": [0, -1, -1, -1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0],
-    "l": [0, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    "C": [0] * 16,
-    "r": [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    "R": [0, 1, 1, 1, 0, 0, 0, 0, 0, -1, -1, -1, -1, 0, 0, 0],
+    "A": [0, -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0],
+    "B": [0] * 16,
+    "C": [0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, -1, -1, -1, 0, 0],
 }
 
 
@@ -292,11 +291,11 @@ def feather_pose(t, dx, dy):
 
 @asset
 def feather_gold():
-    seq = [("L", -2, 0), ("l", -1, 1), ("r", 1, 1), ("R", 2, 0), ("C", 1, 1), ("C", -1, 1)]
+    seq = [("A", -1, 0), ("B", 0, 1), ("B", 1, 1), ("C", 2, 0), ("B", 1, 1), ("B", 0, 1)]
     W.write("feather_gold", """
-feather_gold.png : 6 images 16x16, plume dorée g G y contour o, balancement de pendule.
-Aux extrêmes la plume est inclinée (rangées du haut et du bas décalées d'1 px) et 1 px plus haut ;
-au centre elle est droite et 1 px plus bas. dx : -2 -1 +1 +2 +1 -1.
+feather_gold.png : 6 images 16x16, plume dorée en diagonale : tuyau y, barbes G (éclairées) / g, contour o.
+Balancement de pendule en aller-retour : A (pointe redressée) · B · B · C (pointe couchée) · B · B.
+Aux extrêmes la plume est 1 px plus haut, au passage du centre 1 px plus bas. dx : -1 0 +1 +2 +1 0.
 Timing : 6 fps en boucle (166 ms). Pivot (8,8).
 """, [feather_pose(*s) for s in seq], 16, 16)
 
@@ -625,10 +624,11 @@ Pivot (8,16).
 .kwwwwwk....
 kwkkkkkwk...
 kwk...kwk...
-kwk...kkwkk.
-kwk...kwwwk.
-.k.....kwk..
-........k...""")
+kwk..kkwkk..
+kwk.kwwwwwk.
+.k...kwwwk..
+......kwk...
+.......k....""")
     arrow1 = G("""
 ..kkkkk.....
 .kwwwwwk....
@@ -636,7 +636,8 @@ kwkkkkkwk...
 kwk...kwk...
 kwk...kwk...
 kwk..kkwkk..
-.k...kwwwk..
+.k..kwwwwwk.
+.....kwwwk..
 ......kwk...
 .......k....""")
     hand_small = G("""
@@ -690,13 +691,13 @@ Timing : 350 · 350 ms en boucle. Pivot (8,16).
 # F2 : écho et gravure
 # =====================================================================================
 GLYPH = G("""
-...q...
-..qeq..
-.qeqeq.
+.qqqqq.
+qqeeeqq
+qeqqqeq
 qeqeqeq
-.qeqeq.
-..qeq..
-...q...""")
+qeqqqeq
+qqeeeqq
+.qqqqq.""")
 
 
 @asset
@@ -706,25 +707,25 @@ def fx_engrave_seal():
 qeq
 .q."""), 16, 16, 6, 6)
     f1 = pad(G("""
-....q....
-...qeq...
-..qeqeq..
-.qeqcqeq.
+..qqqqq..
+.qqeeeqq.
+qqeqqqeqq
+qeqqcqqeq
 qeqcWcqeq
-.qeqcqeq.
-..qeqeq..
-...qeq...
-....q...."""), 16, 16, 3, 3)
+qeqqcqqeq
+qqeqqqeqq
+.qqeeeqq.
+..qqqqq.."""), 16, 16, 3, 3)
     f2 = pad(G("""
-...qqq...
-.qqeqeqq.
-qeqeWeqeq
-.qqeqeqq.
-...qqq..."""), 16, 16, 3, 5)
+.qqqqqqq.
+qqeeeeeqq
+qeqqWqqeq
+qqeeeeeqq
+.qqqqqqq."""), 16, 16, 3, 5)
     f3 = pad(GLYPH, 16, 16, 4, 4)
     W.write("fx_engrave_seal", """
 fx_engrave_seal.png : 4 images 16x16, pop du sceau d'écho sur le piège [E2-G].
-0 50 % (point e) · 1 115 % (losange 9x9, cœur W c) · 2 écrasé 9x5 · 3 final = glyphe 7x7 (motif e 5x5 + q).
+0 50 % (point e) · 1 115 % (anneau 9x9, cœur W c) · 2 écrasé 9x5 · 3 final = glyphe 7x7 (anneau e + point, fond q).
 Timing : 50 · 60 · 60 ms puis tenir l'image 3 (elle sert d'état final). Pivot (7.5,7.5).
 """, [f0, f1, f2, f3], 16, 16)
 
@@ -737,7 +738,7 @@ def grave():
 eWe
 .e."""), 6, 3), over(g, G("e"), 7, 3)]
     W.write("grave", """
-grave.png : 4 images 16x16, sceau gravé qui scintille (glyphe e 5x5, contour q, sans halo).
+grave.png : 4 images 16x16, sceau gravé qui scintille (glyphe e 5x5 : anneau + point central, fond et contour q, sans halo).
 0 repos · 1 la pointe du haut passe en W · 2 croix 3 e/W · 3 point e au-dessus, puis repos.
 Timing : 2400 · 80 · 100 · 80 ms en boucle (un éclat toutes les ~2,7 s [E2-H]). Pivot (7.5,7.5).
 """, fr, 16, 16)
@@ -936,17 +937,17 @@ ALTAR = G("""
 .....knnnnnnnnnnnnnnnnnnnnk.....
 .....kkkkkkkkkkkkkkkkkkkkkk.....""")
 ALTAR_GLYPH_OFF = G("""
-..s..
-.s.s.
-s.n.s
-.s.s.
-..s..""")
+.nnn.
+n...n
+n.n.n
+n...n
+.nnn.""")
 ALTAR_GLYPH_ON = G("""
-..e..
-.e.e.
+.eee.
+e...e
 e.W.e
-.e.e.
-..e..""")
+e...e
+.eee.""")
 ALTAR_LIT = G("""
 ...tccccccccccct
 ...ttttqqqtttt
@@ -958,12 +959,12 @@ def altar():
     off = over(ALTAR, ALTAR_GLYPH_OFF, 13, 19)
     on = over(ALTAR, ALTAR_GLYPH_ON, 13, 19)
     # lumière de la flamme sur les dessus : bord de vasque et fond de vasque (décidé au pixel)
-    on = over(on, G("....ppppeeeepppp"), 8, 9)
+    on = over(on, G(".....pppeeeeppp"), 8, 9)
     on = over(on, G("qqqqtttttqqqq"), 9, 10)
     on = over(on, G(".....pppp"), 9, 17)
     W.write("altar", """
 altar.png : 2 images 32x32, autel d'écho en pierre neutre (k n s m l, lumière haut-gauche).
-0 éteint : vasque b, glyphe creusé s/n · 1 allumé : glyphe e + cœur W, fond de vasque q/t,
+0 éteint : vasque b, glyphe creusé n (anneau + point) · 1 allumé : glyphe e + cœur W, fond de vasque q/t,
 bord de vasque et dessus du fût éclairés par la flamme (p, e). Pas une animation : 2 états.
 Pivot (16,32) bas-centre. Flamme altar_flame posée en (12,-5) depuis le coin haut-gauche de l'autel
 (sa base, rangée 15, tombe dans la vasque, rangée 10).

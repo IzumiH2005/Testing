@@ -148,22 +148,48 @@ func _draw_marks(top: float, bot: float) -> void:
 
 # ------------------------------------------------------------------ entités
 
+## Sprite d'une bande : cellule cw×ch, image f, miroirs horizontal / vertical, rognage en hauteur.
+func _spr(name: String, cw: int, ch: int, f: int, at: Vector2, fh := false, fv := false, mod := Color.WHITE, hcut := -1) -> bool:
+	var tx := A.tex(name)
+	if tx == null:
+		return false
+	var h := ch if hcut < 0 else mini(hcut, ch)
+	if h <= 0:
+		return true
+	var src := Rect2(f * cw, 0 if not fv else ch - h, cw, h)
+	var pos := at.round()
+	var size := Vector2(cw, h)
+	if fh:
+		pos.x += cw
+		size.x = -cw
+	if fv:
+		pos.y += h
+		size.y = -h
+	draw_texture_rect_region(tx, Rect2(pos, size), src, mod)
+	return true
+
+## Nom du sprite de piège (version écho si gravé et si elle existe).
+func _tn(base: String, cy: bool) -> String:
+	if cy and A.tex("traps/" + base + "_echo"):
+		return "traps/" + base + "_echo"
+	return "traps/" + base
+
 func _draw_ent(e: Dictionary) -> void:
 	var s := _state(e)
 	var t: float = s[0]
 	var cy: bool = s[1]
 	var hot: Color = A.P.c if cy else A.P.X
 	var core: Color = A.P.t if cy else A.P.z
+	var tg: float = w.t_global
 	match String(e.kind):
 		"spikes":
 			var left: bool = int(e.side) < 0
 			var y := float(e.y0)
 			while y < float(e.y1) - 1.0:
 				var x := WL if left else WR - TILE
-				var nm := "sprites/spikes_echo" if cy else "sprites/spikes"
-				if A.tex(nm):
-					_frame(nm, 16, 0, Vector2(x, y), not left, hot, 16)
-				else:
+				var ph := fposmod(tg + y * 0.031, 2.0) * 12.0
+				var f := 1 + int(ph) if ph < 4.0 and not cy else 0
+				if not _spr(_tn("spikes", cy), 16, 16, f, Vector2(x, y), not left, false, Color.WHITE, int(float(e.y1) - y)):
 					var xx := WL if left else WR - Tower.SPIKE_DEPTH
 					for k in 3:
 						var py := y + 2 + k * 5
@@ -172,32 +198,45 @@ func _draw_ent(e: Dictionary) -> void:
 						draw_colored_polygon(PackedVector2Array([Vector2(base, py), tip, Vector2(base, py + 4)]), hot)
 				y += TILE
 		"buttress":
-			var bx := WL if int(e.side) < 0 else WR - Tower.BUTTRESS_W
-			draw_rect(Rect2(bx, e.y0, Tower.BUTTRESS_W, float(e.y1) - float(e.y0)), A.P.n)
-			draw_rect(Rect2(bx, e.y0, Tower.BUTTRESS_W, 1), A.P.l)
-			for k in 3:
-				var px := bx + 2 + k * 4
-				draw_colored_polygon(PackedVector2Array([Vector2(px, e.y0), Vector2(px + 2, float(e.y0) - 5), Vector2(px + 4, e.y0)]), hot)
-				draw_colored_polygon(PackedVector2Array([Vector2(px, e.y1), Vector2(px + 2, float(e.y1) + 5), Vector2(px + 4, e.y1)]), hot)
+			var left: bool = int(e.side) < 0
+			var bx := WL if left else WR - Tower.BUTTRESS_W
+			var hh: float = float(e.y1) - float(e.y0)
+			var drawn := false
+			if absf(hh - 32.0) < 1.0 or absf(hh - 48.0) < 1.0:
+				drawn = _spr(_tn("buttress", cy), 16, 58, 0 if hh < 40.0 else 1, Vector2(bx, float(e.y0) - 5.0), not left, false, Color.WHITE, int(hh) + 10)
+			if not drawn:
+				draw_rect(Rect2(bx, e.y0, Tower.BUTTRESS_W, hh), A.P.n)
+				draw_rect(Rect2(bx, e.y0, Tower.BUTTRESS_W, 1), A.P.l)
+				for k in 3:
+					var px := bx + 2 + k * 4
+					draw_colored_polygon(PackedVector2Array([Vector2(px, e.y0), Vector2(px + 2, float(e.y0) - 5), Vector2(px + 4, e.y0)]), hot)
+					draw_colored_polygon(PackedVector2Array([Vector2(px, e.y1), Vector2(px + 2, float(e.y1) + 5), Vector2(px + 4, e.y1)]), hot)
 		"friable":
-			var fx := WL - 4 if int(e.side) < 0 else WR
-			var broken := false
-			var shaking := false
+			var left: bool = int(e.side) < 0
+			var fx := WL - 4 if left else WR + 4 - 16
+			var f := 0
+			var ox := 0.0
 			if not cy and w.fr_start.has(e.id):
 				var u: float = w.t_life - float(w.fr_start[e.id])
-				broken = u >= 0.35 and u < 3.35
-				shaking = u < 0.35
-			if broken:
-				for k in 4:
-					draw_rect(Rect2(fx + (k % 2) * 2, float(e.y0) + k * 5, 2, 2), A.P.n)
-			else:
-				var ox := (1.0 if _blink(30.0) else -1.0) if shaking else 0.0
+				if u < 0.17:
+					f = 1
+				elif u < 0.35:
+					f = 2
+					ox = 1.0 if _blink(30.0) else 0.0
+				elif u < 0.475:
+					f = 3
+				elif u < 3.35:
+					f = -1
+			if f >= 0 and A.tex("traps/crumble"):
+				var mod := Color(0.6, 1.4, 1.4) if cy else Color.WHITE
+				var y := float(e.y0)
+				while y < float(e.y1) - 1.0:
+					_spr("traps/crumble", 16, 32, f, Vector2(fx + ox, y), not left, false, mod, int(float(e.y1) - y))
+					y += 32.0
+			elif f >= 0:
 				var c: Color = A.P.t if cy else A.P.s
-				draw_rect(Rect2(fx + ox, e.y0, 4, float(e.y1) - float(e.y0)), c)
-				var yy := float(e.y0) + 3
-				while yy < float(e.y1):
-					draw_rect(Rect2(fx + ox + 1, yy, 2, 1), A.P.n)
-					yy += 6
+				var gx := WL - 4 if left else WR
+				draw_rect(Rect2(gx + ox, e.y0, 4, float(e.y1) - float(e.y0)), c)
 		"saw":
 			var p := Hz.saw_pos(e, t)
 			if int(e.axis) != 0 and not cy:
@@ -211,81 +250,118 @@ func _draw_ent(e: Dictionary) -> void:
 					while y <= maxf(e.a, e.b):
 						draw_rect(Rect2(p.x, y, 1, 2), A.P.n)
 						y += 4
-			var nm := "sprites/saw_echo" if cy else "sprites/saw"
-			if A.tex(nm):
-				_frame(nm, 16, 0 if cy else int(w.t_global * 16.0) % 2, p - Vector2(8, 8), false, hot)
-			else:
+			if not _spr(_tn("saw", cy), 24, 24, int(tg * 20.0) % 4, p - Vector2(12, 12)):
 				draw_circle(p, 7.0, hot)
 				draw_circle(p, 3.0, core)
 		"pendulum":
 			var q := Hz.pendulum_pos(e, t)
 			var a: Vector2 = e.anchor
-			draw_line(a, q, A.P.c if cy else A.P.l, 1.0)
+			if A.tex("traps/chain") and not cy:
+				var n := int(a.distance_to(q) / 8.0)
+				for k in n:
+					_spr("traps/chain", 8, 8, 0, a.lerp(q, float(k) / float(maxi(n, 1))) - Vector2(4, 0))
+			else:
+				draw_line(a, q, A.P.c if cy else A.P.l, 1.0)
 			draw_rect(Rect2(a - Vector2(2, 2), Vector2(4, 4)), A.P.n)
-			draw_circle(q, float(e.r) + 1.0, hot)
-			draw_circle(q, 2.0, core)
+			var u := fposmod(t / float(e.period) + float(e.phase), 1.0)
+			var low := absf(cos(TAU * u)) > 0.97
+			var f := 2 if low and not cy else int(u * 4.0) % 2
+			if not _spr(_tn("pendulum_chandelier", cy), 16, 16, 0 if cy else f, q - Vector2(8, 8), cos(TAU * u) < 0.0):
+				draw_circle(q, float(e.r) + 1.0, hot)
+				draw_circle(q, 2.0, core)
 		"laser":
 			var ls := Hz.laser_state(e, t)
 			var y: float = e.y
-			draw_rect(Rect2(WL, y - 3, 4, 6), A.P.n)
-			draw_rect(Rect2(WR - 4, y - 3, 4, 6), A.P.n)
-			if cy:
-				for x in range(int(WL) + 4, int(WR) - 4, 4):
-					draw_rect(Rect2(x, y, 2, 1), A.P.c)
-			elif ls == 1:
-				if _blink(10.0):
-					draw_rect(Rect2(WL + 4, y, WR - WL - 8, 1), A.P.X)
-			elif ls == 2:
-				draw_rect(Rect2(WL + 4, y - 2, WR - WL - 8, 4), A.P.X)
-				draw_rect(Rect2(WL + 4, y - (0 if _blink(20.0) else 1), WR - WL - 8, 1 + (0 if _blink(20.0) else 1)), A.P.Z)
+			var mf := 0 if cy else (2 if ls == 2 else (int(tg * 10.0) % 2 if ls == 1 else 0))
+			if _spr(_tn("laser", cy), 8, 8, mf, Vector2(WL, y - 4)):
+				_spr(_tn("laser", cy), 8, 8, mf, Vector2(WR - 8, y - 4), true)
+				var bf := -1
+				if cy:
+					bf = 0
+				elif ls == 1 and _blink(10.0):
+					bf = 0
+				elif ls == 2:
+					bf = 1 + int(tg * 20.0) % 3
+				if bf >= 0:
+					var x := WL + 8
+					while x < WR - 8:
+						_spr(_tn("beam", cy), 16, 8, bf, Vector2(x, y - 4), false, false, Color.WHITE)
+						x += 16
+			else:
+				draw_rect(Rect2(WL, y - 3, 4, 6), A.P.n)
+				draw_rect(Rect2(WR - 4, y - 3, 4, 6), A.P.n)
+				if cy:
+					for x in range(int(WL) + 4, int(WR) - 4, 4):
+						draw_rect(Rect2(x, y, 2, 1), A.P.c)
+				elif ls == 1:
+					if _blink(10.0):
+						draw_rect(Rect2(WL + 4, y, WR - WL - 8, 1), A.P.X)
+				elif ls == 2:
+					draw_rect(Rect2(WL + 4, y - 2, WR - WL - 8, 4), A.P.X)
 		"herse":
 			var hs := Hz.herse_state(e, t)
 			var left: bool = int(e.side) < 0
-			var ext := 24.0 if (hs == 2 or cy) else (4.0 if hs == 1 else 0.0)
-			var y0 := float(e.y0) + 2.0
-			var y1 := float(e.y1) - 2.0
-			if hs == 1 and not cy and _blink(10.0):
-				draw_rect(Rect2(WL if left else WR - 2, y0, 2, y1 - y0), A.P.X)
-			if ext > 0.0:
-				var yy := y0
-				while yy < y1:
+			var f := 0
+			if cy:
+				f = 0
+			elif hs == 1:
+				f = 1 if _blink(10.0) else 0
+			elif hs == 2:
+				f = 3
+			var hx := WL if left else WR - 24
+			if A.tex("traps/portcullis"):
+				var y := float(e.y0)
+				while y < float(e.y1) - 1.0:
+					_spr(_tn("portcullis", cy), 24, 32, f, Vector2(hx, y), not left, false, Color.WHITE, int(float(e.y1) - y))
+					y += 32.0
+			elif hs == 2 or cy:
+				var yy := float(e.y0) + 2.0
+				while yy < float(e.y1) - 2.0:
 					var x0 := WL if left else WR
-					var tip := WL + ext if left else WR - ext
+					var tip := WL + 24.0 if left else WR - 24.0
 					draw_line(Vector2(x0, yy + 1), Vector2(tip, yy + 1), hot, 2.0)
 					yy += 5.0
 		"jaws":
 			var j := Hz.jaws(e, t)
 			var mid: float = (float(e.y0) + float(e.y1)) * 0.5
-			var ext: float = j.x
-			if j.y == 1 and not cy and _blink(10.0):
-				draw_rect(Rect2(WL, mid - 10, 3, 20), A.P.X)
-				draw_rect(Rect2(WR - 3, mid - 10, 3, 20), A.P.X)
-			ext = maxf(ext, 3.0)
-			draw_rect(Rect2(WL, mid - 10, ext, 20), hot)
-			draw_rect(Rect2(WR - ext, mid - 10, ext, 20), hot)
-			for k in 4:
-				var ty := mid - 8 + k * 5
-				draw_rect(Rect2(WL + ext, ty, 2, 2), core)
-				draw_rect(Rect2(WR - ext - 2, ty, 2, 2), core)
+			var ext: float = maxf(j.x, 3.0)
+			if cy and A.tex("traps/jaws_echo"):
+				var x := WL
+				while x < WR:
+					_spr("traps/jaws_echo", 16, 24, 0, Vector2(x, mid - 12))
+					x += 16
+			elif A.tex("traps/jaws"):
+				var hf := 2 if (j.y == 1 and _blink(10.0)) else 1
+				var x := WL
+				while x + 16.0 <= WL + ext - 16.0:
+					_spr("traps/jaws", 16, 24, 0, Vector2(x, mid - 12))
+					_spr("traps/jaws", 16, 24, 0, Vector2(WR + WL - x - 16.0, mid - 12), true)
+					x += 16.0
+				_spr("traps/jaws", 16, 24, hf, Vector2(WL + ext - 16.0, mid - 12))
+				_spr("traps/jaws", 16, 24, hf, Vector2(WR - ext, mid - 12), true)
+			else:
+				draw_rect(Rect2(WL, mid - 10, ext, 20), hot)
+				draw_rect(Rect2(WR - ext, mid - 10, ext, 20), hot)
 		"grignon":
 			var g := Hz.grignon_pos(e, t)
-			draw_rect(Rect2(g - Vector2(4, 3), Vector2(8, 6)), hot)
-			draw_rect(Rect2(g + Vector2(-2, -1), Vector2(1, 1)), A.P.W)
-			draw_rect(Rect2(g + Vector2(1, -1), Vector2(1, 1)), A.P.W)
+			var up: bool = Hz.grignon_pos(e, t + 0.02).y <= g.y
+			if not _spr(_tn("gnawer", cy), 16, 16, 0 if cy else int(tg * 8.0) % 4, g - Vector2(8, 8), int(e.side) > 0, not up):
+				draw_rect(Rect2(g - Vector2(4, 3), Vector2(8, 6)), hot)
 		"moth":
 			var m := Hz.moth_pos(e, t)
-			var flap := 2.0 if _blink(12.0) else 0.0
-			draw_rect(Rect2(m - Vector2(4, 3 - flap * 0.5), Vector2(3, 6 - flap)), hot)
-			draw_rect(Rect2(m + Vector2(1, -3 + flap * 0.5), Vector2(3, 6 - flap)), hot)
-			draw_rect(Rect2(m - Vector2(1, 2), Vector2(2, 4)), core)
+			if not _spr(_tn("moth", cy), 16, 16, 0 if cy else int(tg * 8.0) % 2, m - Vector2(8, 8)):
+				draw_rect(Rect2(m - Vector2(4, 3), Vector2(8, 6)), hot)
 		"rockfall":
 			var ry := Hz.rock_y(e, t, w.st, w.tower.is_water(float(e.y)))
 			var armed: bool = w.st.has(e.id) and ry <= float(e.y)
 			var rx: float = float(e.x) + (1.0 if armed and _blink(30.0) else 0.0)
-			draw_rect(Rect2(rx - 5, ry - 5, 10, 10), A.P.c if cy else A.P.s)
-			draw_rect(Rect2(rx - 5, ry - 5, 10, 2), A.P.l)
-			if armed:
-				draw_rect(Rect2(rx - 1, ry + 6, 2, 2), A.P.X)
+			if _spr(_tn("rockfall_books", cy), 16, 16, 0, Vector2(rx - 8, ry - 8)):
+				if armed and not cy:
+					_spr("traps/rockfall_mark", 16, 4, int(tg * 10.0) % 2, Vector2(float(e.x) - 8, ry + 6))
+			else:
+				draw_rect(Rect2(rx - 5, ry - 5, 10, 10), A.P.c if cy else A.P.s)
+				if armed:
+					draw_rect(Rect2(rx - 1, ry + 6, 2, 2), A.P.X)
 		"power":
 			if w.used.has(e.id):
 				return
@@ -318,12 +394,19 @@ func _draw_boss() -> void:
 	var b: Vector2 = w.bell_pos()
 	var mid: float = (float(w.boss.y0) + float(w.boss.y1)) * 0.5
 	var anchor := Vector2(96.0, mid - 56.0)
-	draw_line(anchor, b, A.P.l, 1.0)
 	var stun: bool = w.boss_stun > 0.0
-	var body: Color = A.P.c if stun else A.P.U
-	draw_colored_polygon(PackedVector2Array([b + Vector2(-8, -14), b + Vector2(8, -14), b + Vector2(18, 12), b + Vector2(-18, 12)]), body)
-	draw_rect(Rect2(b + Vector2(-18, 12), Vector2(36, 3)), A.P.u)
-	draw_circle(b + Vector2(0, 16), 3.0, A.P.X if not stun else A.P.t)
+	if A.tex("traps/boss_sonneur"):
+		var n := int(anchor.distance_to(b) / 8.0)
+		for k in n:
+			_spr("traps/chain", 8, 8, 0, anchor.lerp(b, float(k) / float(maxi(n, 1))) - Vector2(4, 0))
+		_spr("traps/boss_sonneur_yoke", 64, 16, 0, Vector2(96 - 32, mid - 56 - 13))
+		var going_right: bool = cos(TAU * w.boss_t / 2.6) > 0.0
+		var f := (3 if _blink(20.0) else 0) if stun else (0 if going_right else 1)
+		_spr("traps/boss_sonneur", 48, 48, f, b - Vector2(24, 24))
+	else:
+		draw_line(anchor, b, A.P.l, 1.0)
+		var body: Color = A.P.c if stun else A.P.U
+		draw_colored_polygon(PackedVector2Array([b + Vector2(-8, -14), b + Vector2(8, -14), b + Vector2(18, 12), b + Vector2(-18, 12)]), body)
 	# runes : la prochaine est allumée
 	for i in w.boss_runes.size():
 		var r: Dictionary = w.boss_runes[i]
@@ -332,6 +415,18 @@ func _draw_boss() -> void:
 		elif i == w.boss_hits:
 			_draw_rune(r, _blink(4.0))
 	var ws: Vector2 = w.wave_state()
+	if A.tex("traps/boss_wave") and ws.y >= 0:
+		var wf := -1
+		if ws.y == 0 and _blink(10.0):
+			wf = 0
+		elif ws.y == 1:
+			wf = 1 + int(w.t_global * 20.0) % 3
+		if wf >= 0:
+			var x := WL
+			while x < WR:
+				_spr("traps/boss_wave", 16, 8, wf, Vector2(x, ws.x - 3))
+				x += 16
+		return
 	if ws.y == 0 and _blink(10.0):
 		draw_rect(Rect2(WL, ws.x, WR - WL, 1), A.P.X)
 	elif ws.y == 1:
