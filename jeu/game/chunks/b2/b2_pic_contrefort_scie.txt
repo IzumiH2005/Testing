@@ -1,0 +1,38 @@
+id: b2_pic_contrefort_scie
+biome: B2
+tension: P
+D: 6
+entree: any
+sortie: any
+verbe: elan
+intro: -
+alt: 295-345
+poids: 1
+// Pic O3 x O5 : deux contreforts R5-7 et R11-13 face à deux scies sur rails verticaux qui balaient le mur
+// gauche (L4-8 et L10-14, même phase : deux pistons synchrones).
+// Idée : la serrure. Le mur gauche n'a qu'une rangée hors des rails, L9 : la route sûre doit y entrer
+// pile entre les deux courses (face du contrefort R6, bond, L9), puis s'appuyer sur le DESSUS du second
+// contrefort. Bond seul échoue (min verbe = élan). Attente max 1,75 s (pire entrée), route commentée OK sur toutes les phases.
+// Risque : le O (rangée 14, sous la tête du rail haut) : grand élan R6 -> L11 DANS la course, calé sur
+// le piston, puis L11 elan -> R16 à travers le haut de course (attente 1,60 s, 37/37 ; la route sûre ne l'a pas).
+// Écho : contreforts gravés = marches ; scies gravées = cyan, toujours en mouvement, rechargent la volte.
+---
+##........##
+##........##
+##........##                    // L16 bond -> R19 (sortie)
+##.....o..##
+##S..O....## ; spd=1.7 phase=0.0
+##|......C##                    // R13 bond -> L16
+##|......C##
+##|......C##
+##|.......##
+##...o....##                    // L9 elan -> R13 : sur le DESSUS du second contrefort
+##S.......## ; spd=1.7 phase=0.0
+##|......C##
+##|.....oC##                    // R6 bond -> L9 : la seule rangée du mur gauche hors des rails
+##|......C##
+##|.......##
+##..o.....##
+##........##
+##........##                    // L1 elan -> R6 : sur la face du premier contrefort
+---

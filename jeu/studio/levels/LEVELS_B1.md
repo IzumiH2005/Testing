@@ -271,7 +271,73 @@ En plus de la validation :
 
 ### 5.3 Résultats
 
-RESULTS_PLACEHOLDER
+**Bilan : 34 chunks de parcours validés, 0 échec sur toutes les entrées testées.** L'arène est traitée à part, plus bas.
+
+Lecture des colonnes :
+
+- **Entrées** : nombre d'entrées testées (côté × h0 × phase).
+- **Attente max** : la plus longue attente cumulée sur la meilleure route d'une entrée (limite 2,3 s par mur).
+- **Marge min** : le plus petit vide entre la boîte du héros et un danger actif sur la route des o (« – » : non relevé, ≥ 4 px).
+
+| Chunk | T | Entrées | Échecs | Attente max (s) | Marge min (px) |
+|---|---|---|---|---|---|
+| b1_start | I | 1 | 0 | 0 | – |
+| i_o1_epines | I | 26 | 0 | 4,5 | – |
+| i_o2_scie | I | 26 | 0 | 3,2 | – |
+| i_o8_laser | I | 260 | 0 | 1,2 | – |
+| i_elan | I | 26 | 0 | 2,1 | – |
+| i_o4_rail | I | 260 | 0 | 1,6 | – |
+| i_volte | I | 26 | 0 | 0 | – |
+| i_o5_rail_v | I | 260 | 0 | 0 | – |
+| r_balcon | R | 26 | 0 | 4,5 | – |
+| r_cascade | R | 26 | 0 | 0 | – |
+| r_crochets | R | 26 | 0 | 0 | – |
+| r_deux_arcs | R | 26 | 0 | 0 | – |
+| r_niche | R | 26 | 0 | 0 | – |
+| r_puits | R | 26 | 0 | 2,1 | – |
+| r_rythme | R | 26 | 0 | 0 | – |
+| r_veille | R | 26 | 0 | 0 | – |
+| m_quinconce | M | 26 | 0 | 4,7 | 6,0 |
+| m_slalom | M | 26 | 0 | 3,0 | 4,1 |
+| m_laser_garde | M | 260 | 0 | 4,5 | 4,3 |
+| m_rail_bas | M | 260 | 0 | 1,8 | – |
+| m_tenaille | M | 26 | 0 | 0 | – |
+| m_scie_pivot | M | 26 | 0 | 0 | – |
+| m_laser_rail | M | 650 | 0 | 2,3 | 4,7 |
+| m_colonne_garde | M | 260 | 0 | 0 | – |
+| m_deux_rails | M | 520 | 0 | 1,7 | – |
+| m_scies_seuil | M | 26 | 0 | 2,8 | 5,3 |
+| m_laser_volte | M | 260 | 0 | 0,9 | – |
+| m_deux_colonnes | M | 520 | 0 | 1,1 | – |
+| p_gantelet | P | 26 | 0 | 0 | – |
+| p_tir_croise | P | 260 | 0 | 3,2 | 4,1 |
+| p_horloge | P | 650 | 0 | 2,1 | 4,7 |
+| p_pilier | P | 650 | 0 | 0,1 | – |
+| p_meules | P | 520 | 0 | 3,4 | – |
+| p_double_tenaille | P | 26 | 0 | 0 | 4,6 |
+
+L'attente max est cumulée sur tout le chunk, donc elle peut dépasser 2,3 s quand elle est répartie sur plusieurs murs (quinconce : 4,7 s sur 3 murs). La plus grosse attente d'un seul mur reste ≤ 2,3 s partout.
+
+En tout, **6 085 entrées** ont été testées sur les 34 chunks.
+
+**Autres contrôles :**
+
+- **Route des o** : trouvée et recopiée dans l'en-tête des 34 chunks. Chaque rangée d'arrivée porte un commentaire `// kN : arrivée ...`.
+- **O** : chaque O est atteignable. Pour les chunks à horloges, il l'est dans au moins 2 phases sur 4.
+- **`*`** : le `*` de chaque R est atteignable.
+- **Lint** : 0 violation sur les 35 fichiers.
+- **Parseur Godot 4.5.1** : `ChunkLib.load_all()` charge 35 chunks B1 (A 1, I 8, M 12, P 6, R 8), avec `ChunkLib.errors` vide.
+
+**Arène (b1_boss_sonneur).** Validation partielle, arrêtée sur demande du lead :
+
+- **Critère.** Les 3 runes sont obligatoires (dans l'ordre des hauteurs). Les entrées sont L/R × h0 {−12, 8, 28} × 10 phases (instants d'arrivée 0, 2, …, 18 sur 20), soit 60 entrées.
+- **Résultat :** **23 entrées résolues sur 23 testées**, 0 échec, attente 0 s, recherche de 3 300 à 28 500 nœuds :
+  - L −12 : 10/10 ;
+  - L 8 : 10/10 ;
+  - L 28 : 3/3 (phases 2, 4, 8).
+- **Non testées :** les 37 entrées restantes (fin de L 28 et tout le côté R).
+- **Une impasse de l'outil, pas du niveau.** Une première passe avait 6 « échecs » (phases ≥ 12). Il s'agissait d'erreurs mémoire du solveur, qui copiait le chemin à chaque empilement. Avec un solveur allégé (chemin chaîné, élagage à l'empilement), ces 6 entrées passent toutes.
+- **Le côté R n'est pas validé.** Le chunk qui précède l'arène peut finir des deux côtés (`sortie: any`), donc l'arène peut être abordée par la droite. Cette entrée **reste à valider** avant la sortie du jeu ; le dessin de l'arène n'est pas symétrique.
 
 ### 5.4 Ce que le simulateur ne vérifie pas
 
@@ -296,6 +362,7 @@ RESULTS_PLACEHOLDER
   - Les prochains chunks volte devraient aussi armer le mur de la volte.
 - **Le O de meules.** En k8 c5, il n'était atteignable dans aucune phase. Déplacé en k8 c6, il est pris dans 2 phases sur 4 : il récompense bien le joueur qui attend le bon moment.
 - **La fenêtre de l'élan (i_elan).** L'arc des o (L1 élan 0,28 -> R6) ne passe que pour h0 de 13 à 28 ; de 8 à 11, l'arrivée frôle la marge des épines R4-5. Les entrées basses (h0 < 13) passent par une route de secours simulée : glisser 2,1 s, bond sous la bande, puis élan court. Environ la moitié des hauteurs d'entrée ne voit donc l'élan qu'au-dessus d'elle. C'est noté dans le chunk ; une version future devrait remonter la bande d'un rang ou ajouter 2 rangées sûres en bas.
+- **Mémoire du solveur sur l'arène.** Les solves longs (≈ 25 000 nœuds) saturaient la mémoire et passaient pour des échecs. Corrigé par un solveur allégé ; voir §5.3.
 - **Le pendule de l'arène.**
   - À k23, il violait la règle des 2 rangées sûres au raccord ; il est passé en k22, avec len 124.
   - La route des runes échouait à cause du plafond de nœuds et d'une tolérance trop stricte sur la rune. Les deux ont été corrigés.

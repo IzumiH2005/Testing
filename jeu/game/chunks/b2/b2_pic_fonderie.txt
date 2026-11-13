@@ -1,0 +1,38 @@
+id: b2_pic_fonderie
+biome: B2
+tension: P
+D: 6
+entree: any
+sortie: any
+verbe: elan
+intro: -
+alt: 300-350
+poids: 1
+// Pic final O10 x O9 (300-350 m) : la mâchoire (rangée 8, 3,0 s) puis une herse R11-12 (2,4 s) trois rangées
+// plus haut. Deux horloges de périodes différentes (3,0 / 2,4) : la combinaison se décale à chaque passage,
+// on ne peut pas apprendre UN rythme, il faut lire les deux.
+// Idée : les deux sauts longs. Chaque élan tenu traverse un piège en vol : R5 -> L10 passe la gueule ouverte,
+// L10 -> R15 passe devant la herse ; se poser entre les deux (L10) est le seul repos, le bond seul échoue.
+// Attente max 0,95 s (pire entrée), route commentée 120/120 phases.
+// Risque : le O L7, juste sous la dent gauche, se prend par l'arc bas R4 -> L9 qui frôle la mâchoire.
+// Écho : mâchoire gravée = pont cyan fermé, herse gravée = marche : la fonderie revisitée devient un escalier.
+---
+##........##
+##........##
+##........##
+##......o.##                    // R15 bond -> L18 (sortie)
+##........##
+##........##
+##..o....H## ; phase=0.0
+##.......H##
+##........##                    // L10 elan -> R15 : passer devant la herse R11-12 en vol
+##...o....##
+##M......M## ; phase=0.0
+##.O......##
+##......o.##
+##........##                    // R5 elan -> L10 : traverser la rangée 8 bouche ouverte
+##........##
+##..o.....##
+##........##
+##........##                    // L1 elan -> R5
+---

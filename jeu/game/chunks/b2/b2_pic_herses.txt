@@ -12,7 +12,7 @@ poids: 1
 // phase 1,2), en contretemps.
 // Idée : grimper un mur qui mord. Le mur gauche ne porte pas : on monte le droit en élan+volte
 // (min verbe = volte) et chaque pivot doit tomber sur une herse RENTRÉE. Les deux horloges sont décalées
-// de 1,2 s : la fenêtre commune est de ~0,5 s (règle des deux timings >= 0,4 s respectée).
+// d'une demi-période (1,2 s sur 2,4 s) : elles mordent en alternance, on enchaîne sans pause.
 // Attente max 1,30 s ; route commentée 24/24 phases.
 // Risque : le O L8 se prend par un pivot tardif dans la brèche des épines.
 // Écho : herses gravées = pointes figées sorties, des marches où s'accrocher par-dessous.

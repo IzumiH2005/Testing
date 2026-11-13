@@ -1,0 +1,39 @@
+id: b2_pic_friable_rail
+biome: B2
+tension: P
+D: 6
+entree: any
+sortie: any
+verbe: elan
+intro: -
+alt: 300-345
+poids: 1
+// Pic O11 x O5 : deux plaques friables au mur droit (R5-6, R13-14), deux scies sur rails verticaux qui
+// balaient le mur gauche (col 3, L4-8 et L10-14, déphasées de 0,8 s) et une troisième au mur droit (col 8, R14-16, phase 0,8).
+// Idée : l'étau. Le mur gauche est tenu par les pistons, le mur droit par les plaques : chaque côté n'offre
+// qu'un palier sûr (R7 entre les plaques, L9 entre les courses, R12 sous la plaque haute). Le joueur doit
+// enchaîner ces trois paliers ; la troisième scie ferme la sortie facile par la droite. Bond seul échoue.
+// Attente max 1,80 s (pire entrée), route commentée 37/37 phases (attente 1,70 s).
+// Risque : le O (R4, sous la plaque basse) : L1 bond -> R5 SUR la plaque, puis R5 elan -> L9 aussitôt
+// (37/37 phases, attente 0,85 s : plus rapide, mais 0,35 s pour repartir). La route sûre ne l'atteint pas.
+// Écho : plaques gravées = solides cyan (on peut y attendre le piston) ; scies gravées rechargent la volte.
+---
+##........##
+##........##                    // L17 bond -> R20 (sortie)
+##......S.## ; spd=1.7 phase=0.8
+##.....o|.##
+##.S....|f## ; spd=1.7 phase=0.8
+##.|.....f##
+##.|.o....##                    // R12 elan -> L17 : par-dessus la course haute
+##.|......##
+##.|......##
+##......o.##                    // L9 elan -> R12 : sous la plaque haute
+##.S......## ; spd=1.7 phase=0.0
+##.|......##                    // R7 bond -> L9 : entre les deux courses
+##.|....of##
+##.|.....f##
+##.|....O.##
+##..o.....##
+##........##
+##........##                    // L1 elan -> R7 : le seul palier solide entre les deux plaques
+---
