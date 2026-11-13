@@ -1,0 +1,25 @@
+# ÉCHO - rune_bibliotheque_L : rune de mur GAUCHE Bibliothèque, 2 tuiles 16x16 (32x16) : 0 ÉTEINTE, 1 ALLUMÉE.
+# Intention : même glyphe « onde » 7x7 que la Crypte et la Fonderie, gravé dans le grand bloc nu (tuile 3 du mur).
+# 0 éteinte : gravure en 5 (ton d'ombre de l'encre), PAS en cyan ni en eau 9.
+# 1 allumée : traits G, coin haut-gauche de chaque trait en y, ombre portée o en bas-droite (bible : G y + contour o).
+# Budget : 0 = 5 6 7 8 k (5) ; 1 = 5 6 7 8 k G y o (8, objet de jeu).
+# Défaut corrigé : le coin 8 du bloc porteur, à 3 px du glyphe allumé, faisait un 2e point clair -> coin 7 ici.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 32x16
+---
+777766666666665k777766666666665k
+766666666666665k766666666666665k
+666666666666665k666666666666665k
+666666666666665k666666666666665k
+666666566666665k666666y66666665k
+666665656666665k66666y6G6666665k
+666656665666665k6666y6o6G666665k
+666566566566665k666G6oG66G66665k
+666666566666665k6666o6Go66o6665k
+666666566666665k666666Go6666665k
+666655555666665k6666yGGGG666665k
+666666666666665k66666ooooo66665k
+666666666666665k666666666666665k
+666666666666665k666666666666665k
+666666666666665k666666666666665k
+555555555555555k555555555555555k

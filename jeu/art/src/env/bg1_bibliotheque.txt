@@ -1,0 +1,49 @@
+# ÉCHO - bg1_bibliotheque : rayonnages de la Bibliothèque, plan P1 (parallaxe 0.30), 256x256 TRANSPARENT, boucle verticale.
+# Intention (bible B3) : deux hauts RAYONNAGES maçonnés en silhouette ] (A haut-gauche 6 rayons, B bas-droite 4 rayons),
+#   le vide au-dessus des livres en [ avec un bord bas irrégulier (livres manquants, couchés) ; 3 PAGES EN SUSPENSION ]
+#   (3x2, inclinées différemment) qui dérivent dans le puits.
+# Budget : ] [ (2). Y 0.008-0.017. Rien ne touche les bords haut/bas -> boucle sans raccord.
+# Défaut corrigé : dos de livres dessinés un par un = rayures/bruit à 0.30 ; seul le profil des vides se lit.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 256x256
+# rayonnage A
+rect ] 52 26 108 29
+rect ] 56 30 104 152
+rect [ 58 31 102 35
+rect [ 70 36 73 45
+rect [ 95 36 96 40
+hline [ 58 102 50
+rect [ 58 51 102 55
+rect [ 60 56 61 61
+rect [ 84 56 89 68
+hline [ 58 102 72
+rect [ 58 73 102 77
+rect [ 64 78 70 79
+rect [ 99 78 102 88
+hline [ 58 102 94
+rect [ 58 95 102 99
+rect [ 76 100 77 107
+hline [ 58 102 116
+rect [ 58 117 102 121
+rect [ 58 122 63 133
+rect [ 88 122 90 125
+hline [ 58 102 138
+rect ] 168 146 212 149
+rect ] 172 150 208 246
+rect [ 174 151 206 155
+rect [ 180 156 184 163
+hline [ 174 206 173
+rect [ 174 174 206 178
+rect [ 196 179 197 183
+rect [ 174 179 175 190
+hline [ 174 206 196
+rect [ 174 197 206 201
+rect [ 186 202 192 204
+hline [ 174 206 219
+rect [ 174 220 206 224
+rect [ 202 225 206 235
+hline [ 174 206 241
+# pages en suspension
+px ] 132 60 133 60 134 60 133 61 134 61 135 61
+px ] 146 112 147 112 146 113 147 113 147 114
+px ] 120 190 121 190 122 191 123 191 121 191

@@ -1,0 +1,43 @@
+# ÉCHO - bg2_bibliotheque : plan P2 (parallaxe 0.60) de la Bibliothèque, 4 panneaux 32x32 (128x32), raccord libre.
+# Intention : paroi de pierre d'encre lointaine, très sombre (Y 0.008-0.017), faces ] et joints [ (comme b/d en Crypte).
+# 0 blocs 32x16 (2x ceux du mur de jeu) · 1 LIGNE D'EAU : sous la ligne 20, la pierre mouillée passe à [ (cran dur,
+#   pas de dégradé), joints k dans la partie noyée · 2 arcade aveugle en plein cintre (fond k, tableau [) ·
+#   3 rayon de livres lointain : niche k, dos ] et [ par paires, hauteurs décidées, un vide.
+# Joint vertical [ en x31 de chaque panneau, joint horizontal [ ligne 31 -> les panneaux se juxtaposent.
+# Budget : [ ] k (3). Aucune arête claire, aucune eau 0/9 (trop claire pour P2).
+# Défaut corrigé : une ligne d'eau en 9 sortait de la bande P2 et volait la lecture -> la ligne d'eau est un cran de valeur.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 128x32
+---
+]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]][]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]][
+]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]][]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]][
+]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]][[[[]]]]]]]]]]]]]][]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]][
+]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]][[[[[[[[[[]]]]]]]]]]][]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]][
+]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]][[[[[[[[[[[[[[[]]]]]]]]][]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]][
+]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]][[[[[[kkkkk[[[[[[]]]]]]]][]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]][
+]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]][[[[[[[kkkkkkkkkkkk[[[[[[[[]][]]kkkkkkkkkkkkkkkkkkkkkkkkkkkk][
+]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]][[[[[[kkkkkkkkkkkkkk[[[[[[[]][]]kkkkkkkkkkkkkkkkkkkkkkkkkkkk][
+]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]][[[[[kkkkkkkkkkkkkkkk[[[[[[]][]]kkkkkkkkkkkkkkkkkkkkkkkkkkkk][
+]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]][[[[kkkkkkkkkkkkkkkkkk[[[[[]][]]kkkkkkkkk]]kkkkkkkkkkkkkkkkk][
+]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]][[[kkkkkkkkkkkkkkkkkkkk[[[[]][]]kkk[[kkkk]]kkkkkkkkkkkkkkkkk][
+]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]][[[kkkkkkkkkkkkkkkkkkkk[[[[]][]]kkk[[kk[[]]kkkkkkkkkkkkkkkkk][
+]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]k]][[kk[[]]kkkkkkkkkkkkkkkkk][
+]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]k]][[kk[[]]kkkkkkkkkkkk[[kkk][
+]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]]]]]]]]]]]]]][]]]]]]]]]]]]]]]][]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]k]][[]][[]]kkkkkkkkkkkk[[kkk][
+[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]k]][[]][[]]kkkkkkkkkkkk[[]]k][
+]]]]]]]]]]]]]]]]]]]]]][]]]]]]]][]]]]]]]][]]]]]]]]]]]]]]]]]]]]]][]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]k]][[]][[]]kkkkkkkkkkkk[[]]k][
+]]]]]]]]]]]]]]]]]]]]]][]]]]]]]][]]]]]]]][]]]]]]]]]]]]]]]]]]]]]][]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]k]][[]][[]]kkkkkkkkkkkk[[]]k][
+]]]]]]]]]]]]]]]]]]]]]][]]]]]]]][]]]]]]]][]]]]]]]]]]]]]]]]]]]]]][]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]k]][[]][[]]kkkkkkkkkkkk[[]]k][
+]]]]]]]]]]]]]]]]]]]]]][]]]]]]]][]]]]]]]][]]]]]]]]]]]]]]]]]]]]]][]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]k]][[]][[]]kkkkkkkkkkkk[[]]k][
+]]]]]]]]]]]]]]]]]]]]]][]]]]]]]][]]]]]]]][]]]]]]]]]]]]]]]]]]]]]][]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]k]][[]][[]]kkkkkkkkkkkk[[]]k][
+]]]]]]]]]]]]]]]]]]]]]][]]]]]]]][[[[[[[[[k[[[[[[[[[[[[[[[[[[[[[[[]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]k]][[]][[]]kkkkkkkkkkkk[[]]k][
+]]]]]]]]]]]]]]]]]]]]]][]]]]]]]][[[[[[[[[k[[[[[[[[[[[[[[[[[[[[[[[]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]k]][[]][[]]kkk]]]]]]]]][[]]k][
+]]]]]]]]]]]]]]]]]]]]]][]]]]]]]][[[[[[[[[k[[[[[[[[[[[[[[[[[[[[[[[]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]k]][[]][[]]kkk]]]]]]]]][[]]k][
+]]]]]]]]]]]]]]]]]]]]]][]]]]]]]][[[[[[[[[k[[[[[[[[[[[[[[[[[[[[[[[]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]k]][[]][[]]kkk[[[[[[[[[[[]]k][
+]]]]]]]]]]]]]]]]]]]]]][]]]]]]]][[[[[[[[[k[[[[[[[[[[[[[[[[[[[[[[[]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]k]][[]][[]]kkk[[[[[[[[[[[]]k][
+]]]]]]]]]]]]]]]]]]]]]][]]]]]]]][[[[[[[[[k[[[[[[[[[[[[[[[[[[[[[[[]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]][[[[[[[[[[[[[[[[[[[[[[[[[[[[][
+]]]]]]]]]]]]]]]]]]]]]][]]]]]]]][[[[[[[[[k[[[[[[[[[[[[[[[[[[[[[[[]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]][
+]]]]]]]]]]]]]]]]]]]]]][]]]]]]]][[[[[[[[[k[[[[[[[[[[[[[[[[[[[[[[[]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]][
+]]]]]]]]]]]]]]]]]]]]]][]]]]]]]][[[[[[[[[k[[[[[[[[[[[[[[[[[[[[[[[]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]][
+]]]]]]]]]]]]]]]]]]]]]][]]]]]]]][[[[[[[[[k[[[[[[[[[[[[[[[[[[[[[[[]][[kkkkkkkkkkkkkkkkkkkkkkk[[]][]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]][
+[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[

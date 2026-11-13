@@ -1,0 +1,43 @@
+# ÉCHO - wall_bibliotheque_lit_L : mur GAUCHE Bibliothèque éclairé par une lampe de lecture (deco module 0), 32x16.
+# Base = tuile 0 du mur (bloc haut + 2 petits). Tuile 0 = JUSTE AU-DESSUS de la source : arêtes BASSES montées 6->7.
+# Tuile 1 = JUSTE EN DESSOUS : arêtes HAUTES montées d'un cran (7->8, 6->7) et allongées.
+# Budget : 5 6 7 8 k (5). Un cran sur les arêtes seulement, pas de halo.
+# Défaut corrigé : un halo 7 autour de la lampe aplatissait les blocs ; la lumière ne se lit que sur les arêtes.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 32x16
+grid 0 0
+877766666577765k
+766666666576665k
+666666666566665k
+666666666566665k
+666666666566665k
+666666666566665k
+777777777566665k
+555555555566665k
+777757777566665k
+766657666566665k
+666656666566665k
+666656666566665k
+666656666566665k
+666656666566665k
+777757777577775k
+555555555555555k
+end
+grid 16 0
+888877777588775k
+777666666577665k
+666666666566665k
+666666666566665k
+666666666566665k
+666666666566665k
+666666666566665k
+555555555566665k
+887758877566665k
+776657766566665k
+666656666566665k
+666656666566665k
+666656666566665k
+666656666566665k
+666656666566665k
+555555555555555k
+end

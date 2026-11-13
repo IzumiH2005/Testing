@@ -1,0 +1,29 @@
+# ÉCHO - bg0_bibliotheque : fond lointain de la Bibliothèque engloutie, plan P0 (parallaxe 0.10), 256x256, boucle verticale.
+# Intention (bible B3) : NEF NOYÉE : colonnes [ pleine hauteur (x24-39, x152-167) à chapiteaux, arcs en plein cintre
+#   (bande [ de 6 px) tous les 128 px, haute fenêtre à tête ronde au vitrail éteint (verre ^, plombs k, 1 panneau [).
+#   Tout est sous l'eau : pas de ligne de surface en P0 (elle se répéterait toutes les 256 px).
+# Budget : k [ ^ (3). Y 0.004-0.008. Sommets des arcs calculés UNE fois et écrits en clair ; aucun dégradé.
+# Défaut corrigé : ogives de Crypte reprises telles quelles = même lieu -> ici plein cintre, colonnes rondes, plus large.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 256x256
+fill k
+rect [ 24 0 39 255
+rect [ 152 0 167 255
+poly [ 40 100 42 88 48 76 56 66 68 58 82 54 96 52 110 54 124 58 136 66 144 76 150 88 152 100
+poly k 46 100 48 89 53 79 61 70 71 64 83 59 96 58 109 59 121 64 131 70 139 79 144 89 146 100
+poly [ 40 228 42 216 48 204 56 194 68 186 82 182 96 180 110 182 124 186 136 194 144 204 150 216 152 228
+poly k 46 228 48 217 53 207 61 198 71 192 83 187 96 186 109 187 121 192 131 198 139 207 144 217 146 228
+rect [ 20 96 43 100
+rect [ 148 96 171 100
+rect [ 20 224 43 228
+rect [ 148 224 171 228
+# fenêtre
+rect [ 190 60 234 202
+poly [ 190 60 192 52 196 44 204 40 212 38 220 40 228 44 232 52 234 60
+rect ^ 194 62 230 200
+poly ^ 194 62 195 55 199 49 205 45 212 44 219 45 225 49 229 55 230 62
+vline k 212 44 200
+hline k 194 230 110
+hline k 194 230 155
+rect [ 213 111 230 154
+rect [ 186 201 238 204

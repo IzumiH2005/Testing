@@ -1,0 +1,40 @@
+# ÉCHO - bg2_bibliotheque : plan P2 (parallaxe 0.60) de la Bibliothèque, 4 panneaux 32x32 (128x32), raccord libre.
+# Intention : paroi de pierre d'encre lointaine, très sombre (Y 0.008-0.017), faces ] et joints [ (comme b/d en Crypte).
+# 0 blocs 32x16 (2x ceux du mur de jeu) · 1 LIGNE D'EAU : sous la ligne 20, la pierre mouillée passe à [ (cran dur,
+#   pas de dégradé), joints k dans la partie noyée · 2 arcade aveugle en plein cintre (fond k, tableau [) ·
+#   3 rayon de livres lointain : niche k, dos ] et [ par paires, hauteurs décidées, un vide.
+# Joint vertical [ en x31 de chaque panneau, joint horizontal [ ligne 31 -> les panneaux se juxtaposent.
+# Budget : [ ] k (3). Aucune arête claire, aucune eau 0/9 (trop claire pour P2).
+# Défaut corrigé : une ligne d'eau en 9 sortait de la bande P2 et volait la lecture -> la ligne d'eau est un cran de valeur.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 128x32
+fill ]
+vline [ 31 0 31
+vline [ 63 0 31
+vline [ 95 0 31
+vline [ 127 0 31
+hline [ 0 127 31
+hline [ 0 30 15
+vline [ 14 0 14
+vline [ 22 16 30
+hline [ 32 62 15
+vline [ 46 0 14
+rect [ 32 21 62 30
+vline k 40 21 30
+hline k 32 62 31
+vline [ 40 16 20
+rect [ 66 6 92 30
+poly [ 66 14 68 8 72 4 79 2 86 4 90 8 92 14
+rect k 68 12 90 30
+poly k 68 14 70 9 74 6 79 5 84 6 88 9 90 14
+rect k 98 6 125 25
+hline [ 98 125 26
+rect ] 99 12 100 25
+rect [ 101 10 102 25
+rect ] 103 14 104 25
+rect [ 105 11 106 25
+rect ] 107 9 108 25
+rect ] 112 22 120 23
+rect [ 112 24 120 25
+rect [ 121 13 122 25
+rect ] 123 15 124 25

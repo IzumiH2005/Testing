@@ -8,7 +8,14 @@ verbe: volte
 intro: -
 alt: 124-150
 poids: 1
-// draft
+// Arène du Sonneur (24 rangées, 124-150 m) : la cloche (pendule r=20, 124 px, amplitude 25°, 2,6 s) bat au sommet ;
+// son onde (GDD : bande de 40 px qui descend toutes les 3 s) est approchée par 2 paires de lasers mur à mur
+// (k20/k18 puis k9/k7, préavis 0,6 s, allumés 0,5 s, déphasés de 0,1 période : l'onde « tombe » d'un rang).
+// Idée : 3 runes à allumer dans l'ordre de montée (L k5, R k11, L k17) ; chaque rune impose un mur, donc une volte.
+// Route des runes (L, h0≈8, simulée) : L1 volte 0,52 -> L5 (rune 1) ; bond -> R8 ; volte -> R11 (rune 2) ;
+// volte -> R13 ; élan -> L17 (rune 3) ; élan+volte -> L23 sous la cloche, sortie quand elle part vers R.
+// Écho : graver un laser supprime une des deux attentes de l'onde (≈ -1,5 s).
+// Limites du format (voir LEVELS_B1.md) : onde mobile, ordre des runes et arrêt de la marée non exprimables ici.
 ---
 ##........##
 ##........##

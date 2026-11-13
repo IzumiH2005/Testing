@@ -1,0 +1,42 @@
+# ÉCHO - bg2_bord : piliers de bord des bandes bg2 (P2, parallaxe 0.60), 48x32 = 3 biomes x 2 piliers de 8x32.
+# Problème corrigé : la bande bg2 s'arrêtait net en x64 (bande gauche) et x128 (bande droite), coupe sans raison.
+# Pose : pilier « D » (bord droit de la bande gauche) sur x56-63 ; pilier « G » (bord gauche de la bande droite) sur x128-135.
+# Découpe : x0-7 Crypte D · x8-15 Crypte G · x16-23 Fonderie D · x24-31 Fonderie G · x32-39 Bibliothèque D · x40-47 Bibl. G.
+# Lumière haut-gauche : face au ton proche, côté droit du pilier au ton lointain (ombre), 1 px k côté puits (le vide).
+#   Joints horizontaux aux lignes 15 et 31 (période 16 des bandes) ; Fonderie = poteau de tôle (rainure d'aile ( , 2 rivets-points ( par 16 lignes).
+# Budget par biome : 2 tons de fond + k (3). Aucune arête claire (P2).
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 48x32
+---
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()()(kk)()())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()()(kk)()())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+bbbbbbbkkbbbbbbb(((((((kk((((((([[[[[[[kk[[[[[[[
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()()(kk)()())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()()(kk)()())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+ddddddbkkddddddb))()))(kk)))())(]]]]]][kk]]]]]][
+bbbbbbbkkbbbbbbb(((((((kk((((((([[[[[[[kk[[[[[[[

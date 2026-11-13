@@ -236,9 +236,15 @@ func _layer(tex: Texture2D, p: float, at: Vector2, h: float, a: float, b: float,
 			draw_texture_rect_region(tex, Rect2(at.x, y0, 32, y1 - y0), Rect2(sx, sy, 32, y1 - y0))
 			if deco and hh >= 54:
 				draw_texture_rect_region(deco, Rect2(at.x, y0, 32, y1 - y0), Rect2((hh % 3) * 32, sy, 32, y1 - y0))
-			# bord intérieur de la bande assombri (cache le bord franc)
-			var ex := at.x + (31 if band == 0 else 0)
-			draw_rect(Rect2(ex, y0, 1, y1 - y0), Color(0, 0, 0, 0.45))
+			# pilier de bord (ferme la bande côté puits)
+			var bord := A.tex("env/bg2_bord")
+			var bx: int = {"crypte": 0, "fonderie": 16, "bibliotheque": 32}.get(env, -1)
+			if bord and bx >= 0:
+				var px := at.x + (24 if band == 0 else 0)
+				draw_texture_rect_region(bord, Rect2(px, y0, 8, y1 - y0), Rect2(bx + band * 8, sy, 8, y1 - y0))
+			else:
+				var ex := at.x + (31 if band == 0 else 0)
+				draw_rect(Rect2(ex, y0, 1, y1 - y0), Color(0, 0, 0, 0.45))
 
 func _draw_water(top: float, bot: float) -> void:
 	var m0 := Tower.meters_at(bot)

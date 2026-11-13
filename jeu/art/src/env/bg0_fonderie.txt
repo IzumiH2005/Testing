@@ -1,0 +1,36 @@
+# ÉCHO - bg0_fonderie : fond lointain de la Fonderie, plan P0 (parallaxe 0.10), 256x256, boucle verticale.
+# Intention (bible B2) : CUVES ÉTEINTES GÉANTES entre des poteaux d'acier pleine hauteur ; cuve A (haut-gauche) sur
+#   pieds et plateforme, cuve B (bas-droite) avec une gueule de four éteinte ; les tuyaux qui sortent des cuves
+#   traversent le bord haut/bas au même x (raccord de boucle).
+# Budget : k ( ^ (3). Y 0.004-0.008 : ( et ^ ont la même valeur, seule la teinte change (cerclages ^ lisibles de près).
+# Formes : sommets des dômes et cônes décidés à la main (poly), aucun dégradé, aucune lueur (cuves ÉTEINTES).
+# Défaut corrigé : une lueur orangée de four = brun/or interdits et contre-sens (froid) -> gueule noire k cadrée ^.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 256x256
+fill k
+rect ( 0 0 7 255
+rect ( 124 0 131 255
+rect ( 248 0 255 255
+# cuve A
+rect ( 62 0 67 44
+poly ( 30 70 34 58 44 50 56 45 65 44 74 45 86 50 96 58 100 70
+rect ( 30 70 100 170
+poly ( 30 170 100 170 76 190 54 190
+rect ( 60 190 70 200
+rect ( 62 200 67 255
+hline ^ 30 100 95
+hline ^ 30 100 140
+rect ( 36 170 39 205
+rect ( 91 170 94 205
+rect ( 8 206 123 209
+# cuve B
+rect ( 188 0 193 123
+poly ( 150 150 154 138 166 129 180 124 190 123 200 124 214 129 226 138 230 150
+rect ( 150 150 230 236
+poly ( 150 236 230 236 202 250 178 250
+rect ( 188 250 193 255
+hline ^ 150 230 172
+hline ^ 150 230 222
+rect ^ 180 182 200 200
+rect k 182 184 198 200
+rect ( 132 216 149 219

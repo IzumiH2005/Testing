@@ -24,20 +24,20 @@ Les fichiers d'origine `back.png`, `wall.png`, `floor.png` et `plaque.png` ne so
   - Aucune couleur réservée dans le décor, sauf la flamme d'autel (cyan) et les runes allumées (`G y o`, objet de jeu).
   - Ni brun ni bois.
 
-## Murs par biome (B1 Crypte, B2 Fonderie)
+## Murs par biome (B1 Crypte, B2 Fonderie, B3 Bibliothèque)
 
 ### `wall_<biome>_L/R.png` — 128×16, 8 tuiles
 
-| Index | Crypte | Fonderie | Fréquence |
-|---|---|---|---|
-| 0 | grand bloc + 2 petits | grande tôle + 2 rivets | base, tirage uniforme 0-3 |
-| 1 | rythme inversé | deux tôles soudées | base |
-| 2 | bloc étroit + long | tôle étroite + large | base |
-| 3 | 3 assises | 3 bandes | base |
-| 4 | mousse | tuyau vertical à brides | 10 % (comme `tower.gd`) |
-| 5 | fissure en escalier | grille d'aération | 6 % |
-| 6 | niche-reliquaire (rare) | manomètre (rare) | ≤ 1 toutes les 40 rangées, jamais 2 fois à l'écran |
-| 7 | **brèche** = tuile 0 + 3 px clairs | **brèche** = tuile 0 + 3 px `4` | **uniquement** devant un passage secret, jamais au hasard |
+| Index | Crypte | Fonderie | Bibliothèque | Fréquence |
+|---|---|---|---|---|
+| 0 | grand bloc + 2 petits | grande tôle + 2 rivets | bloc haut + 2 petits | base, tirage uniforme 0-3 |
+| 1 | rythme inversé | deux tôles soudées | rythme inversé | base |
+| 2 | bloc étroit + long | tôle étroite + large | 3 assises décalées | base |
+| 3 | 3 assises | 3 bandes | grand bloc nu | base |
+| 4 | mousse | tuyau vertical à brides | étagère maçonnée (dos de livres) | 10 % (comme `tower.gd`) |
+| 5 | fissure en escalier | grille d'aération | coulure d'eau + 1 goutte | 6 % |
+| 6 | niche-reliquaire (rare) | manomètre (rare) | coquillage fossile (rare) | ≤ 1 toutes les 40 rangées, jamais 2 fois à l'écran |
+| 7 | **brèche** = tuile 0 + 3 px clairs | **brèche** = tuile 0 + 3 px `4` | **brèche** = tuile 0 + 3 px `8` | **uniquement** devant un passage secret, jamais au hasard |
 
 ### `wall_<biome>_lit_L/R.png` — 32×16, 2 tuiles
 
@@ -47,12 +47,12 @@ Les fichiers d'origine `back.png`, `wall.png`, `floor.png` et `plaque.png` ne so
 
 ### `wall_<biome>_deco_L/R.png` — 64×32, 4 modules de 16×32
 
-| Module | Crypte | Fonderie |
-|---|---|---|
-| 0 | lanterne froide (**source** : lit 0 au-dessus, lit 1 en dessous) | veilleuse en cage (**source**, même règle) |
-| 1 | niche en ogive + urne | tuyau + volant de vanne |
-| 2 | corniche + 3 bougies | haute grille + gouttes |
-| 3 | plaque d'épitaphe | plaque emboutie |
+| Module | Crypte | Fonderie | Bibliothèque |
+|---|---|---|---|
+| 0 | lanterne froide (**source** : lit 0 au-dessus, lit 1 en dessous) | veilleuse en cage (**source**, même règle) | lampe de lecture (**source**, même règle) |
+| 1 | niche en ogive + urne | tuyau + volant de vanne | rayonnage maçonné à 2 étagères |
+| 2 | corniche + 3 bougies | haute grille + gouttes | longue coulure d'eau |
+| 3 | plaque d'épitaphe | plaque emboutie | livre ouvert en bas-relief |
 
 Fréquence :
 - 1 module toutes les 10 à 14 rangées environ par colonne intérieure.
@@ -98,6 +98,12 @@ Elles se posent de haut en bas : `… biome du haut / tuile 1 / tuile 0 / biome 
 | `bg2_crypte.png` | 128×32 | P2 | **0.60** | voir ci-dessous |
 | `bg2_crypte_deco.png` | 96×32, transparent | P2 | **0.60** | voir ci-dessous |
 | `bg2_fonderie.png` | 128×32 | P2 | **0.60** | voir ci-dessous |
+| `bg0_fonderie.png` | 256×256 | P0 | **0.10** | répété en X et Y ; poteaux d'acier, 2 cuves éteintes géantes (tuyaux en boucle haut/bas) |
+| `bg1_fonderie.png` | 256×256, transparent | P1 | **0.30** | répété en X et Y ; 2 engrenages (image fixe), 2 chaînes de levage (période 8) |
+| `bg0_bibliotheque.png` | 256×256 | P0 | **0.10** | répété en X et Y ; nef noyée : colonnes, arcs en plein cintre, haute fenêtre éteinte |
+| `bg1_bibliotheque.png` | 256×256, transparent | P1 | **0.30** | répété en X et Y ; 2 rayonnages en silhouette, 3 pages en suspension |
+| `bg2_bibliotheque.png` | 128×32 | P2 | **0.60** | voir ci-dessous |
+| `bg2_bord.png` | 48×32 | P2 | **0.60** | piliers de bord des bandes, voir ci-dessous |
 
 **`bg2_crypte.png`** :
 - x0-31 : briques en 2 rangées de 16 (T0 en haut, T1 en bas).
@@ -113,6 +119,23 @@ Elles se posent de haut en bas : `… biome du haut / tuile 1 / tuile 0 / biome 
 - 4 panneaux de 32×32 : tôle pleine, tôle coupée, tuyau horizontal, grille à lames.
 - Pose en bandes comme pour la Crypte. Panneau 0 dominant, 3 au plus 1 fois par écran.
 
+**`bg2_bibliotheque.png`** :
+- 4 panneaux de 32×32 : blocs, ligne d'eau (pierre mouillée sous la ligne), arc aveugle en plein cintre, rangée de livres lointains.
+- Pose en bandes comme pour la Crypte. Panneau 0 dominant, panneau 1 au plus 1 fois par écran.
+
+**`bg2_bord.png`** (piliers de bord, 6 colonnes de 8×32, répétables verticalement, joints en lignes 15 et 31) :
+
+| x dans la feuille | Biome | Côté | Pose dans le monde |
+|---|---|---|---|
+| 0-7 | Crypte | D (ferme la bande de gauche) | x56-63 |
+| 8-15 | Crypte | G (ferme la bande de droite) | x128-135 |
+| 16-23 | Fonderie | D | x56-63 |
+| 24-31 | Fonderie | G | x128-135 |
+| 32-39 | Bibliothèque | D | x56-63 |
+| 40-47 | Bibliothèque | G | x128-135 |
+
+- Le pilier se pose **par-dessus** la bande bg2 (même parallaxe 0.60), sur toute la hauteur. Opaque, 0 px transparent.
+
 Luminances visées :
 
 | Plan | Y |
@@ -126,6 +149,6 @@ Le héros et les pièges restent toujours plus clairs que les murs.
 
 ## Reste à faire côté décor
 
-- bg0 et bg1 de la Fonderie et de la Bibliothèque. La maquette Fonderie a été jugée sur un aplat `k`.
-- Murs et bg2 de la Bibliothèque. L'autel et la transition d'entrée sont déjà faits.
-- Le bord des bandes bg2 est franc à x64/x128 : prévoir un pilier de bord ou laisser le code assombrir la dernière colonne.
+- Animation des engrenages de `bg1_fonderie` : rotation en 8 images à 4 fps (bible) ; l'image livrée est la pose 0.
+- Transition Bibliothèque → Jardin (non demandée pour l'instant).
+- Le code n'est pas branché : `world_draw.gd` charge encore `env/wall`, `env/back` et `env/floor`.
