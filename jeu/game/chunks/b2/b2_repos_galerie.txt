@@ -8,8 +8,9 @@ verbe: elan
 intro: -
 alt: 160-345
 poids: 1
-// Repos. Idée : la galerie des moules. Chaque bande d'épines est exactement là où tomberait un
-// bond (+3) : on respire en enchaînant de longs élans (+5) d'une zone libre à l'autre.
+// Repos. Idée : la galerie des moules. Une bande d'épines coiffe chaque accroche à +2/+3 :
+// enchaîner les bonds finit sous une bande (impasse), il faut alterner un bond court puis de longs
+// élans (+5) qui passent entre elles. Aucun minuteur, le seul danger est de mal doser.
 // Créneau de power-up au sommet du 2e élan : tenir le doigt jusqu'au bout (0,28 s) pour le toucher.
 ---
 ##........##
@@ -17,17 +18,17 @@ poids: 1
 ##.......<##
 ##.......<##
 ##........##
-##........##
+##........##                    // R14 elan -> L18 (sortie)
 ##........##
 ##>.......##
 ##>.......##
 ##........##
-##........##
+##........##                    // L9 elan -> R14
 ##........##
 ##.......<##
 ##.......<##
 ##........##
-##........##
+##........##                    // R4 elan -> L9
 ##........##
 ##........##
 ##........##                    // L1 bond -> R4
