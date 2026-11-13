@@ -1,0 +1,21 @@
+# ÉCHO - O8 émetteur de laser, mur GAUCHE, cellule 8x8, 3 états. Ancrage : coin haut-gauche à (WL, y-4).
+# Intention : une bouche de pierre qui se charge ; le préavis se lit à la couleur de la bouche avant le tir.
+# Bouche X dans la pierre (s m n + contour k), lentille sur les rangées 3-4 = cœur du faisceau (y-1, y).
+# Timing (E3, émissif E2-F) : img | rôle | change
+# 0 | éteint (état 0) | bouche x sombre
+# 1 | lueur (état 1, préavis : le code alterne 0/1 à 10 Hz) | dégradé x X z z z vers la sortie
+# 2 | actif (état 2) | X z Z W W, le W touche le faisceau
+# Budget par image : k n s m + 2 à 3 tons danger (+W en actif) = 6 au plus.
+# Défaut corrigé : la lentille fermée par un contour k côté couloir coupait le faisceau ; la bouche est ouverte en x=7.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 24x8
+frames: 3
+---
+kkkkkk..kkkkkk..kkkkkk..
+kmmmmsk.kmmmmsk.kmmmmsk.
+kmsXXXXkkmsXXXXkkmsXXXXk
+kmXxxxxxkmXxXzzzkmXXzZWW
+ksXxxxxxksXxXzzzksXXzZWW
+ksXXXXXkksXXXXXkksXXXXXk
+knnnnnk.knnnnnk.knnnnnk.
+kkkkkk..kkkkkk..kkkkkk..

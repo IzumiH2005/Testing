@@ -1,0 +1,22 @@
+# ÉCHO - O8 faisceau, tuile 16x8 répétable en x de WL+8 à WR-8, 4 images. Ancrage : coin haut-gauche à (x, y-4).
+# Rangées 2-5 = faisceau létal de 4 px (hz.gd Rect2(WL, y-2, WR-WL, 4)) ; rangées 1 et 6 = bords X (1 px de dépassement).
+# Intention : un trait qui tranche le couloir ; le préavis est un pointillé qui annonce l'axe sans le remplir.
+# Timing (E3) : img | rôle | change | principe | durée
+# 0 | préavis | tirets z de 3 px sur ombre x (rangées 3-4) | anticipation | tenue + clignotement 10 Hz du code
+# 1 | actif A | cœur W haut, Z bas | pic | 1/20 s
+# 2 | actif B | cœur inversé, 2 crans x dans le bord | vibration | 1/20 s
+# 3 | actif C | étincelles W isolées, bord crénelé | vibration | 1/20 s  (boucle 1-2-3)
+# Budget : x X z Z W = 5 couleurs (pas de contour : émissif à contour coloré X).
+# Défaut corrigé : faisceau de 3 px dans la bible élargi à 4 px pour coller à la hitbox du code.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 64x8
+frames: 4
+---
+................................................................
+................XXXXXXXXXXXXXXXXXXXxXXXXXXXxXXXXXxXXXXXxXXXXXXXx
+................zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+zzz.zzz.zzz.zzz.WWWWWWWWWWWWWWWWZZZZZZZZZZZZZZZZZZZWZZZZZZZWZZZZ
+xxx.xxx.xxx.xxx.ZZZZZZZZZZZZZZZZWWWWWWWWWWWWWWWWZZZZZZZWZZZZZZZW
+................zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+................XXXXXXXXXXXXXXXXXXXxXXXXXXXxXXXXXxXXXXXxXXXXXXXx
+................................................................

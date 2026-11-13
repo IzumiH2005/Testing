@@ -1,0 +1,15 @@
+# ÉCHO - O8 émetteur gravé, 8x8, 1 image : la pierre reste, la bouche passe en t c e (ligne cyan permanente).
+# Budget : k n s m + t c e = 7 (pierre 4 + écho 3) ; la pierre n'est pas un ton de danger.
+# Défaut corrigé : rien de magenta ne reste sur un piège gravé.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 8x8
+frames: 1
+---
+kkkkkk..
+kmmmmsk.
+kmsttttk
+kmttccee
+ksttccee
+kstttttk
+knnnnnk.
+kkkkkk..
