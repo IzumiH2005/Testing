@@ -1,0 +1,29 @@
+# ÉCHO - planche d'essai DA v2 : mur de jeu GAUCHE de la Crypte, 4 tuiles 16x16 (raccord vertical).
+# Face côté puits = bord DROIT : contour de collision k (1 px) + chanfrein d'ombre n (1 px).
+# Pierre taillée (A5-8b) : un ton par face (s), arête haute éclairée m, coin haut-gauche l (un seul reflet, A6-E).
+# Joints n et non k : le noir est réservé au contour de collision et aux personnages.
+# 0 grand bloc + 2 petits (grand/moyen/petit, A4b) · 1 rythme inversé · 2 mousse sur le dessus du bloc (v V)
+# · 3 fissure en escalier qui suit la pierre, avec un bord inférieur éclairé m et un coin écaillé.
+# Correction après mise en situation : arêtes éclairées raccourcies (l puis m sur 3-5 px puis s),
+# car des arêtes pleine largeur faisaient une grille de lignes horizontales (lecture « laser »).
+# Mousse agrandie (coussin de 4 px + coulure), car 2 px se lisaient comme un pixel parasite.
+# 5 couleurs par tuile au maximum (A3 16x16 : 2-3 tons par matière, aucun AA, une seule idée de détail).
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 64x16
+---
+llmmmsssssssssnklmmssssssnlmssnkllmmmsssssssssnkllmmmsssssssnnnk
+lmssssssssssssnkmssssssssnmsssnklmssssssssssssnklmssssssssssnsnk
+msssssssssssssnksssssssssnssssnkmsssssssssssssnkmsssssssssssnsnk
+ssssssssssssssnksssssssssnssssnkssssssssssssssnkssssssssssssnsnk
+ssssssssssssssnksssssssssnssssnkssssssssssssssnksssssssssssnmsnk
+ssssssssssssssnknnnnnnnnnnnnnnnkssssssssssssssnkssssssssssnsssnk
+ssssssssssssssnkllmmmsssssssssnkssssssssssssssnkssssssssssnmssnk
+ssssssssssssssnklmssssssssssssnkssssssssssssssnksssssssssnssssnk
+ssssssssssssssnkmsssssssssssssnkssvfVvssssssssnksssssssssnmsssnk
+nnnnnnnnnnnnnnnkssssssssssssssnknvVVVVvnnnnnnnnknnnnnnnnnnnnnnnk
+lmmsssnlmmssssnkssssssssssssssnklvVvvsnlmmssssnklmmsssnlmmssssnk
+msssssnmssssssnkssssssssssssssnkmsvsssnmssssssnkmsssssnmssssssnk
+ssssssnsssssssnkssssssssssssssnkssvsssnsssssssnkssssssnsssssssnk
+ssssssnsssssssnkssssssssssssssnkssssssnsssssssnkssssssnsssssssnk
+ssssssnsssssssnkssssssssssssssnkssssssnsssssssnkssssssnsssssssnk
+nnnnnnnnnnnnnnnknnnnnnnnnnnnnnnknnnnnnnnnnnnnnnknnnnnnnnnnnnnnnk

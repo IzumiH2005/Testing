@@ -1,0 +1,22 @@
+# ÉCHO - planche d'essai DA v2 : paroi de fond de la Crypte (plan P2), tuile 32x16 qui se raccorde dans les 2 sens.
+# Deux tons seulement (b joints, d faces), soit Y 0.008-0.017 : sous la bande des murs de jeu (A2 budget de contraste).
+# Briques 2x plus grandes que celles du mur de jeu : le motif plus grossier se lit comme plus loin.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 32x16
+---
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd

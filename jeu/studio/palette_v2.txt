@@ -1,0 +1,114 @@
+# Palette v2 d'ÉCHO (direction artistique, studio/ART_BIBLE.md §4).
+# Format identique à tools/palette.txt : 1 caractère = 1 couleur, '.' = transparent.
+# Déclaration dans un .txt de sprite : palette: /home/user/Testing/jeu/studio/palette_v2.txt
+#
+# Elle reprend les lettres de la v1 (k b d n s m l p w W q t c e r R o a x X z Z g G y v V u U).
+# Les anciennes sources se rendent donc sans erreur ; seules les teintes changent.
+# Rampes construites selon la méthode A6-A : la teinte tourne de 10 à 20° par cran.
+# L'ombre va vers le violet ou le bleu, la lumière vers le cyan ou le jaune. Le ton moyen est le plus saturé.
+# Les crans sont plus courts près du blanc. Jamais 0 ni 100 % de saturation sur un ton moyen.
+# Pas de brun : aucune teinte 20-45° sous V 90. Pas de blanc sale : les blancs sont froids (w, I) ou purs (W).
+#
+# BANDES DE LUMINANCE (Y relative, WCAG) : c'est la règle de lisibilité n°1.
+#   fond lointain   Y 0.004-0.012   k b ^ ( [ { <
+#   fond proche     Y 0.017-0.03    d ~ ) ] } >
+#   murs de jeu     Y 0.03-0.13     ombre / base / lumière (+ arête 0.32 sur 1 px seulement)
+#   héros, pièges, échos, or : Y 0.25-0.92 (toujours au-dessus de tous les murs)
+
+# ---------- NOYAU (tous les biomes) ----------
+# Nuit : contour universel et fonds de la Crypte. La teinte ne tourne que de 6° par cran,
+# car sous V 35 elle ne se perçoit presque plus.
+k #0e0a1a   contour universel (le plus sombre de toute l'image)
+b #17122a   fond lointain (Crypte)
+d #23203d   fond proche (Crypte)
+# Pierre de jeu de la Crypte. La même échelle de Y sert à tous les biomes : n s m l.
+n #2f2c5c   mur : ombre (Y .032)
+s #39427b   mur : base (Y .062)
+m #46639f   mur : lumière (Y .127)
+l #719dca   mur : arête éclairée, 1 px (Y .319)
+p #abd1eb   reflet froid, étincelle (rare)
+w #e6f6ff   blanc froid : yeux, éclat de lumière
+W #ffffff   blanc pur : 1 frame de flash, cœur d'émissif
+
+# ---------- HÉROS ----------
+# Cape lavande-glace : valeur haute pour sortir des murs, teinte violette pour ne pas être de la pierre.
+h #503d7a   cape : ombre
+H #8a83c7   cape : base
+i #c7ccf0   cape : lumière
+I #f2f6ff   cape : reflet (1-2 px)
+# Écharpe corail : seule chaleur du monde, avec l'or.
+r #751a38   écharpe : ombre profonde (vers le violet)
+R #cc353f   écharpe : ombre
+o #ff7247   écharpe : base (corail, l'accent saturé de l'écran)
+a #ffba6b   écharpe : lumière
+A #fff0c7   écharpe : reflet / flamme de lanterne
+
+# ---------- GAMEPLAY ----------
+# Danger : magenta-rouge, 28° plus froid que le corail du héros.
+x #660e4c   danger : ombre
+X #b81661   danger : base
+z #ff3874   danger : lumière / préavis
+Z #ffb2c4   danger : cœur émissif
+# Or : éclats et récompenses. L'ombre de l'or est le corail o (rampe chaînée) : jamais d'or sombre, donc jamais de brun.
+g #fa9e14   or : base
+G #ffd738   or : lumière
+y #fff9a8   or : reflet
+# Écho : fantômes et pièges gravés. Cyan réservé : aucun décor n'utilise c ni e.
+q #114161   écho : ombre / contour coloré
+t #1787a3   écho : base
+c #3fe0e0   écho : lumière
+e #b8ffee   écho : cœur
+# Silence : la marée violette. C'est un vide sombre bordé d'une crête lumineuse.
+u #2c1752   silence : corps
+U #6a3499   silence : base
+j #bd69db   silence : crête
+J #f9c7ff   silence : écume
+
+# ---------- ACCENTS DE DÉCOR ----------
+# Végétal : mousse, lierre, cristaux du Jardin (le cristal = f F + W, avec contour coloré v).
+v #174e52   végétal : ombre
+V #328a78   végétal : base
+f #53bd8b   végétal : lumière / cristal
+F #9bebad   végétal : reflet / cœur de cristal
+# Eau (Bibliothèque engloutie) et ciel de crépuscule (Clocher)
+0 #234a75   eau profonde
+9 #448eb2   surface d'eau / caustique (1 px)
+$ #854a6b   lueur d'horizon (Clocher, plan lointain seulement)
+
+# ---------- BIOMES : 4 tons de mur (ombre, base, lumière, arête) + 2 tons de fond ----------
+# La Crypte utilise n s m l + b d (noyau).
+# Fonderie froide : acier bleu-sarcelle, peu saturé
+1 #2a3341
+2 #364957
+3 #4a6973
+4 #76a1a4
+( #0f1622   fond lointain
+) #192431   fond proche
+# Bibliothèque engloutie : encre bleu-violet
+5 #3a2a55
+6 #483d7b
+7 #5a5cad
+8 #8a98cc
+[ #191229   fond lointain
+] #261f3b   fond proche
+# Jardin suspendu de cristal : pierre mauve
+B #452749
+C #5a396a
+D #76569a
+K #a191c9
+{ #1f1025   fond lointain
+} #2e1c37   fond proche
+# Clocher des vents : pierre prune cendrée
+L #452a39
+M #5f3b56
+N #825580
+O #b08eb6
+< #23101f   fond lointain
+> #331a30   fond proche
+# Sommet céleste : marbre de nuit argenté
+P #2c3149
+Q #3a475b
+S #516777
+T #829fa7
+^ #12142a   fond lointain (ciel)
+~ #1e2139   fond proche
