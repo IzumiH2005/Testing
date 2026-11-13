@@ -1,0 +1,27 @@
+id: b2_entree
+biome: B2
+tension: I
+D: 1
+entree: any
+sortie: any
+verbe: bond
+intro: -
+alt: 150-152
+poids: 1
+// Entrée de la Fonderie froide : autel, puis la plaque friable SEULE, sans aucun danger.
+// Idée : on s'accroche, la plaque craque (0,35 s) et on retombe sans mal : la fonderie dit "ne reste pas".
+// Route : L1 bond -> R4 bond -> L7 (friable : repartir tout de suite) bond -> R10.
+---
+##........##
+##........##
+##...o..o.##
+##........##   // R10 : arrivée, sortie libre
+##.....o..##
+##f...o...##
+##f.......##   // L7 bond -> R10 (plaque : partir avant 0,35 s)
+##........##
+##......o.##
+##..o.....##   // R4 bond -> L7
+##...A....##
+##........##   // L1 bond -> R4
+---

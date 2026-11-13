@@ -82,11 +82,17 @@ func _unhandled_input(ev: InputEvent) -> void:
 	elif ev is InputEventKey and ev.pressed and ev.keycode == KEY_ESCAPE:
 		_back()
 		return
+	var released: bool = (ev is InputEventMouseButton and not ev.pressed and ev.button_index == MOUSE_BUTTON_LEFT) \
+		or (ev is InputEventKey and not ev.pressed and ev.keycode in [KEY_SPACE, KEY_ENTER, KEY_UP])
+	if released:
+		if scr == Scr.PLAY:
+			world.release()
+		return
 	if not pressed:
 		return
 	match scr:
 		Scr.PLAY:
-			world.tap()
+			world.press()
 			get_viewport().set_input_as_handled()
 		Scr.LOST:
 			_continue_life()

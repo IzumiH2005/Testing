@@ -1,0 +1,33 @@
+id: b2_herse_intro
+biome: B2
+tension: I
+D: 2
+entree: any
+sortie: any
+verbe: bond
+intro: O9
+alt: 158-175
+poids: 1
+// Intro O9 herse, seule. Atome : s'accrocher SOUS le danger et partir au bon moment.
+// Idée : l'atterrissage R4 est juste sous la herse (R6-R7). Le départ du bond frôle sa zone :
+// on regarde le cycle (rentrée 1,2 s / préavis 0,3 / sortie 0,9) et on part quand elle se rétracte.
+// Grand éclat : collé à la herse sur l'arc de départ, il récompense celui qui part tôt dans la fenêtre.
+// Écho : graver la herse en fait une marche cyan (rien à gagner ici, c'est le lieu pour l'apprendre).
+---
+##........##
+##........##
+##..o.....##
+##...o....##   // L13 bond -> R16 (sortie)
+##......o.##
+##.....o..##
+##........##   // R10 bond -> L13
+##..o.....##
+##..o.....##   // L7 bond -> R10
+##.......H## ; phase=0.0
+##......OH##
+##........##
+##........##   // R4 bond -> L7 : sous la herse, attendre qu'elle rentre
+##...o....##
+##..o.....##
+##........##   // L1 bond -> R4
+---

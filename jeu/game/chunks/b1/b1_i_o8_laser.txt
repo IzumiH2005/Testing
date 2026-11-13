@@ -1,0 +1,28 @@
+id: b1_i_o8_laser
+biome: B1
+tension: I
+D: 2
+entree: R
+sortie: any
+verbe: bond
+intro: O8
+alt: 22-50
+poids: 1
+// Intro O8 (laser), seul, sans épines (un élément neuf apparaît seul).
+// Idée : une seule ligne à franchir. Le préavis (0,7 s) clignote, on attend accroché SOUS la ligne.
+// Route : grimper jusqu'à k4-k5, lire le cycle (3,1 s), partir dès que le rayon s'éteint.
+// Les éclats o sont sous la ligne (zone d'attente) puis juste au-dessus (récompense du bon départ).
+// O au ras du faisceau (k7) : on le prend en sautant pile à l'extinction.
+// Écho : graver le laser supprime l'attente (gain ≈ 1,5 s en moyenne).
+---
+##........##
+##........##
+##..o.....##   // k8 : récompense du bon départ
+##.O......##   // k7 : O au ras du faisceau, côté gauche
+#L........L#   // k6 : laser (période 3,1, allumé 0,9, préavis 0,7)
+##....o...##   // k5 : zone d'attente sous la ligne
+##.....o..##
+##........##
+##........##
+##........##
+---

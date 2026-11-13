@@ -1,0 +1,23 @@
+id: b1_start
+biome: B1
+tension: I
+D: 0
+entree: L
+sortie: L
+verbe: bond
+intro: -
+alt: 0-0
+poids: 1
+// Départ : sol plein (ajouté par le moteur sous la rangée 1), autel du Veilleur.
+// Idée : le premier tap EST le jeu. Les éclats dessinent l'arc du bond, puis le retour.
+// Route : sol L1 bond -> R4 bond -> L7 (h=107) -> sort ; entrée du chunk suivant en L, h≈-5.
+// 7 rangées (et non 6) : cale la première bande d'épines de b1_i_o1_epines juste AU-DESSUS de la main.
+---
+##........##
+##........##
+##.....o.o##   // k5 : sommet de l'arc (c7) puis départ du retour (c8-9)
+##...o...o##   // k4 : montée (c5) et accroche à droite (c9)
+##...A....##   // k3 : autel
+##........##
+##........##
+---

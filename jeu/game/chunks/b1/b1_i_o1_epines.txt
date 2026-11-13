@@ -1,0 +1,27 @@
+id: b1_i_o1_epines
+biome: B1
+tension: I
+D: 1
+entree: L
+sortie: R
+verbe: bond
+intro: O1
+alt: 7-30
+poids: 1
+// Intro O1 (épines), temps 1 « zone sûre » : la serrure se voit avant la clé.
+// En venant du départ, la main se pose SOUS la bande (R3) : on la voit à 8 px au-dessus, on repart.
+// Le grand O est collé sous les épines : le rythme naturel le prend, un tap tardif le perd.
+// Route (h0≈-5) : L1 bond -> R3 (O) bond -> L6 bond -> R10 sortie.
+// Entrées hautes (h0 > 1) : la main tomberait dans la bande -> attendre 0,3-2 s sur L (glisse) ;
+// c'est la première leçon de rythme, échec peu coûteux (on recommence 20 m plus bas).
+// Écho : graver la bande supprime toute attente, quelle que soit l'entrée.
+---
+##........##
+##........##
+##....o...##   // k6 : retour vers L
+##.......<##   // k5 : épines, une rangée, mur droit
+##.....o..##   // k4 : sommet de l'arc
+##...o...O##   // k3 : O sous la bande (frôler)
+##........##
+##........##
+---

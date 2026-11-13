@@ -1,0 +1,33 @@
+id: b2_machoires_intro
+biome: B2
+tension: I
+D: 3
+entree: any
+sortie: any
+verbe: bond
+intro: O10
+alt: 198-215
+poids: 1
+// Intro O10 mâchoires, seules. Coût de base 3 > plafond I (2) : exception signalée au lead.
+// Idée : une seule mâchoire coupe le couloir à R6. Le bond depuis L4 la traverse de part en part :
+// on part quand elle vient de se rouvrir (ouvert 1,6 s), jamais sur le préavis (0,5 s).
+// Grand éclat au centre exact de la ligne de fermeture : le prendre, c'est faire confiance au rythme.
+// Écho : gravées, elles restent fermées en pont cyan : on pourrait s'y poser (voir b2_machoires_pont).
+---
+##........##
+##........##
+##...o....##
+##..o.....##   // L13 bond -> R16
+##........##
+##.....o..##
+##......o.##   // R10 bond -> L13
+##.....o..##
+##...o....##
+##..o.....##   // L7 bond -> R10
+##........##
+##M...O..M## ; phase=0.0
+##......o.##
+##........##   // R4 bond -> L7 : partir quand la mâchoire se rouvre
+##...o....##
+##........##   // L1 bond -> R4
+---
