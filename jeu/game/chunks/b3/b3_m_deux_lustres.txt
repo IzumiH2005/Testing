@@ -7,6 +7,7 @@ sortie: any
 verbe: bond
 alt: 392-600
 poids: 1.0
+// Idée : deux lustres en opposition de phase : quand l'un passe, l'autre libère la voie.
 ---
 ##........##   // L14 bond -> sortie R
 ##........##

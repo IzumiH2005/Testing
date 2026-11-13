@@ -7,6 +7,7 @@ sortie: any
 verbe: volte
 alt: 375-600
 poids: 1.0
+// Idée : variante de bassin coupé, plus haute : la volte depuis l'eau est obligatoire.
 ---
 ##........##
 ##........##   // L11 élan+volte -> sortie L

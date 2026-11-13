@@ -7,6 +7,7 @@ sortie: any
 verbe: elan
 alt: 475-600
 poids: 1.0
+// Idée : deux phalènes de sens contraire et deux bandes d'épines : l'élan doit passer entre leurs croisements.
 ---
 ##........##
 ##........##   // R19 bond -> sortie L

@@ -8,17 +8,21 @@ verbe: bond
 intro: -
 alt: 64-150
 poids: 1
-// draft
+// Montée (O1) : deux bandes en quinconce, R6-R7 puis L9-L10, posées exactement ENTRE les accroches du bond.
+// Idée : faire confiance au rythme. Le bond régulier (+51 px) passe sans toucher ; celui qui hésite (glisse) se décale et doit attendre une 2e fois.
+// Route des o (L, h0≈8, simulée) : L1 bond -> R4 ; R4 bond -> L7 ; L7 bond -> R11 ; R11 bond -> L14
+// O : R6 c8, collé à la bande droite : on le prend en frôlant les épines sur le 2e saut.
+// Écho : graver R6-R7 libère le mur droit (zigzag sans contrainte de hauteur).
 ---
 ##........##
-##.....o..##
+##.....o..##   // k11 : arrivée R (bond depuis L7)
 ##>.......##
 ##>.......##
 ##..o.....##
-##.....o.<##
+##.....o.<##   // k7 : arrivée L (bond depuis R4)
 ##......O<##
 ##........##
-##...o....##
+##...o....##   // k4 : arrivée R (bond depuis L1)
 ##........##
 ##........##
 ##........##

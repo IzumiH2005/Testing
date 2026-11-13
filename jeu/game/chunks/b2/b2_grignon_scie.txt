@@ -8,22 +8,29 @@ verbe: elan
 intro: -
 alt: 240-345
 poids: 1
-// wip
+// Développement O20 x O2 : grignon en ronde L5-L8 (cycle ~4,7 s) et une scie fixe au ras du haut de
+// sa ronde (rangée 9, c5).
+// Idée : la scie est un couvercle. Sans elle on survolerait la ronde d'un bond ; avec elle l'arc doit
+// soit passer à DROITE de la lame (élan tenu R5 -> L10, route sûre 5/5 phases), soit plonger SOUS la
+// lame et se poser dans la ronde du grignon (L8) quand il est en bas.
+// Risque : le O L8 est dans la ronde, sous la scie : bond R4 -> L8 calé sur le grignon (4 phases sur 5).
+// Écho : le grignon gravé patrouille en cyan et recharge la volte ; la scie fixe gravée devient
+// un point d'accroche cyan inoffensif au centre du puits.
 ---
 ##........##
+##......o.##
+##....o...##
+##........##                    // R13 bond -> L16 (sortie)
 ##........##
-##........##
-##........##
-##........##
-##........##
-##........##
+##.o......##
+##........##                    // L10 bond -> R13
 ##...S....##
+##:.O.....##
 ##:.......##
-##:.......##
-##:.......##
-##g.......## ; spd=24
+##:......o##
+##g.......## ; spd=24           // R5 elan -> L10 : élan tenu, frôler la scie par la droite, se poser au-dessus de la ronde
 ##........##
+##.o......##
 ##........##
-##........##
-##........##
+##........##                    // L1 elan -> R5
 ---

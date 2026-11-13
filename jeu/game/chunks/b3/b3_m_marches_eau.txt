@@ -7,6 +7,7 @@ sortie: any
 verbe: bond
 alt: 362-600
 poids: 1.0
+// Idée : épines en escalier (L puis R) au-dessus d'un bassin : le bond aquatique doit viser entre les marches.
 ---
 ##........##   // R13 bond -> sortie L
 ##........##

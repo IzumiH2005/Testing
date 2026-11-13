@@ -8,17 +8,21 @@ verbe: elan
 intro: -
 alt: 64-150
 poids: 1
-// draft
+// Montée (O2 x2 + élan) : deux scies au même seuil (k6, c3 et c8), près de chaque mur.
+// Idée : le seuil se franchit à l'élan (+64 à +77) ; un bond simple a son sommet dans la scie d'en face.
+// Route des o (L, h0≈8, simulée) : L1 bond -> R4 ; R3 attendre 1,6s élan 0,18 -> L7 ; L7 élan 0,22 -> R11
+// O : k6 c5, pile entre les deux lames, au centre du seuil.
+// Écho : graver une scie : on peut longer ce mur au bond.
 ---
 ##........##
-##....o...##
+##....o...##   // k11 : arrivée R (élan 0,22 depuis L7)
 ##........##
 ##.o......##
 ##........##
-##..o.....##
+##..o.....##   // k7 : arrivée L (élan 0,18 depuis R3, après 1,6s d'attente)
 ##.S.O..S.##
 ##........##
-##...o....##
+##...o....##   // k4 : arrivée R (bond depuis L1)
 ##........##
 ##........##
 ##........##

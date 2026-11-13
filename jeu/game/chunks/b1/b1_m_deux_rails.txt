@@ -8,17 +8,21 @@ verbe: elan
 intro: -
 alt: 70-150
 poids: 1
-// draft
+// Montée (O4 x2, combinaison GDD « deux rails en opposition de phase ») : k6 (phase 0) et k10 (phase 0,5).
+// Idée : quand la lame basse est à gauche, la haute est à droite : on traverse en diagonale, toujours du côté vide.
+// Route des o (L, h0≈8, simulée) : L1 bond -> R4 ; R4 bond -> L7 ; L7 élan 0,18 -> R11
+// O : k8 c7, entre les deux rails, au milieu de la diagonale.
+// Écho : graver une lame : la diagonale devient libre (gain ≈ 1 s).
 ---
 ##........##
-##....o...##
+##....o...##   // k11 : arrivée R (élan 0,18 depuis L7)
 ##..---S..## ; phase=0.5
 ##........##
 ##..o..O..##
-##........##
+##........##   // k7 : arrivée L (bond depuis R4)
 ##..S---..## ; phase=0
 ##........##
-##...o....##
+##...o....##   // k4 : arrivée R (bond depuis L1)
 ##........##
 ##........##
 ##........##

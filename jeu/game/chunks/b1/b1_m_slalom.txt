@@ -8,18 +8,22 @@ verbe: elan
 intro: -
 alt: 64-150
 poids: 1
-// draft
+// Montée (O2 x2, combinaison GDD « deux scies fixes ») : une scie garde l'accroche droite basse (k5 c8), l'autre l'accroche gauche haute (k8 c3).
+// Idée : chaque scie punit UNE hauteur d'arrivée ; on choisit la sienne avec l'élan (+77) ou en glissant avant de partir.
+// Route des o (L, h0≈8, simulée) : L0 attendre 1,4s bond -> R3 ; R2 attendre 1,6s bond -> L5 ; L5 bond -> R8 ; R8 bond -> L12
+// O : k7 c4, juste sous la scie gauche : il faut arriver bas sur L puis repartir sans attendre.
+// Écho : graver une scie supprime la contrainte de hauteur sur ce mur (≈ -1,5 s).
 ---
-##........##
+##........##   // k12 : arrivée L (bond depuis R8)
 ##....o...##
 ##........##
 ##.....o..##
-##.S......##
+##.S......##   // k8 : arrivée R (bond depuis L5)
 ##..O.....##
 ##..o.....##
-##......S.##
+##......S.##   // k5 : arrivée L (bond depuis R2, après 1,6s d'attente)
 ##........##
-##...o....##
+##...o....##   // k3 : arrivée R (bond depuis L0, après 1,4s d'attente)
 ##........##
 ##........##
 ---

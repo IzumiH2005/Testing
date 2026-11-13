@@ -7,6 +7,7 @@ sortie: any
 verbe: bond
 alt: 380-600
 poids: 1.0
+// Idée : l'eau en haut : on y entre par un bond sec et on en ressort très haut.
 ---
 ##........##   // R13 bond -> sortie L
 ##........##

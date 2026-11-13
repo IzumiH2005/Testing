@@ -8,6 +8,7 @@ verbe: bond
 intro: O18
 alt: 350-358
 poids: 1.0
+// Idée : l'eau seule, sans piège : le même tap sous l'eau porte deux fois plus haut (+114 au lieu de +51).
 ---
 ##........##   // R14 bond -> sortie L
 ##........##

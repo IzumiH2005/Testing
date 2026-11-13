@@ -1,0 +1,36 @@
+id: b2_contrefort_laser
+biome: B2
+tension: M
+D: 5
+entree: any
+sortie: any
+verbe: elan
+intro: -
+alt: 265-345
+poids: 1
+// Développement O3 x O8 : contrefort R5-7 sous un laser mur-à-mur (rangée 9, 3,1 s).
+// Idée : le balcon. La face du contrefort est le seul endroit où attendre le faisceau à la bonne hauteur :
+// depuis la face, le saut est plus court et un élan tenu passe toute la rangée 9 d'un coup (L11).
+// Attendre au mur gauche oblige à deux sauts sous le faisceau. Bond seul échoue (min verbe = élan).
+// Attente max 1,95 s (pire entrée), route commentée 31/31 phases.
+// Risque : le O L4 ouvre la ligne basse : R1 -> L4, bond sur le DESSUS du contrefort (R7) puis bond court
+// sous le faisceau vers L10 (29/31 phases, attente 1,95 s au pied du laser).
+// Écho : le contrefort gravé devient une marche simple ; le laser gravé, une ligne cyan qui recharge la volte.
+---
+##........##
+##......o.##
+##........##                    // R14 bond -> L17 (sortie)
+##.o......##
+##........##
+##........##                    // L11 bond -> R14
+##...o....##
+#L........L# ; phase=0.0
+##.....o..##
+##.......C##
+##.......C##                    // R6 elan -> L11 : faisceau éteint, élan tenu par-dessus la rangée 9
+##....o..C##
+##O.......##
+##.o......##
+##........##
+##........##                    // L1 elan -> R6 : se poser sur la face du contrefort, sous le faisceau
+---

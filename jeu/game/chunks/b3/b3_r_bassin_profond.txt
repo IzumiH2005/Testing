@@ -7,6 +7,7 @@ sortie: any
 verbe: bond
 alt: 360-600
 poids: 1.0
+// Idée : grand bassin sans danger : on enchaîne les longs bonds aquatiques ; le O récompense la sortie haute.
 ---
 ##........##   // L12 bond -> sortie R
 ##........##

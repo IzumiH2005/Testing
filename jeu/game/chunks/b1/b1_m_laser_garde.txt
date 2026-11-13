@@ -8,17 +8,21 @@ verbe: bond
 intro: -
 alt: 70-150
 poids: 1
-// draft
+// Montée (O8 + O1, combinaison GDD « laser + épines ») : laser k6 (allumé 0,7 s / 3,1 s), bande R9-R10 au-dessus.
+// Idée : fenêtre verticale réduite. Le laser dit QUAND traverser, les épines interdisent de rattraper le retard en s'accrochant haut à droite.
+// Route des o (L, h0≈8, simulée) : L1 attendre 0,5s bond -> R4 ; R2 attendre 2,3s bond -> L5 ; L4 attendre 1,3s bond -> R8 ; R8 bond -> L11 ; L11 bond -> R14
+// O : k6 c3, DANS le faisceau côté gauche : on le prend au tout début de la phase éteinte.
+// Écho : graver le laser supprime toute attente (le chunk devient un R).
 ---
 ##........##
-##....o...##
+##....o...##   // k11 : arrivée L (bond depuis R8)
 ##.......<##
 ##.......<##
-##...o....##
+##...o....##   // k8 : arrivée R (bond depuis L4, après 1,3s d'attente)
 ##........##
 #L.O......L# ; period=3.1 warn=0.7 on=0.7
-##....o...##
-##..o.....##
+##....o...##   // k5 : arrivée L (bond depuis R2, après 2,3s d'attente)
+##..o.....##   // k4 : arrivée R (bond depuis L1, après 0,5s d'attente)
 ##........##
 ##........##
 ##........##

@@ -8,21 +8,25 @@ verbe: elan
 intro: -
 alt: 100-150
 poids: 1
-// draft
+// Pic (O8 + O1 x2 + O2) : R5-R6, laser k9, scie k11 c7, L12-L13.
+// Idée : trois contraintes en série : attendre (laser), viser (épines), lire l'arc (scie) — l'ordre d'apprentissage du biome en un seul chunk.
+// Route des o (L, h0≈8, simulée) : L0 attendre 0,9s bond -> R4 ; R4 élan 0,22 -> L8 ; L8 élan 0,18 -> R12 ; R12 élan 0,14 -> L16
+// O : k11 c6, collé à la scie : élan court qui passe sous la lame.
+// Écho : graver le laser enlève la seule attente.
 ---
-##........##
+##........##   // k16 : arrivée L (élan 0,14 depuis R12)
 ##....o...##
 ##........##
 ##>.......##
-##>...o...##
+##>...o...##   // k12 : arrivée R (élan 0,18 depuis L8)
 ##....OS..##
 ##.o......##
 #L........L# ; period=3.1 warn=0.7 on=0.9
-##........##
+##........##   // k8 : arrivée L (élan 0,22 depuis R4)
 ##....o...##
 ##.......<##
 ##.......<##
-##........##
+##........##   // k4 : arrivée R (bond depuis L0, après 0,9s d'attente)
 ##..o.....##
 ##........##
 ##........##

@@ -244,15 +244,17 @@ Les arcs de référence sont mesurés depuis un mur, à hauteur h :
 Pour chaque chunk, les entrées testées sont :
 
 - les **deux côtés** (L et R, puisque le moteur miroite selon `_exit_side`) ;
-- **h0 de −20 à +32 px, par pas de 4**, soit 14 hauteurs d'arrivée ;
-- **10 échantillons de phase** pour chaque horloge (laser, rail, colonne, pendule).
+- **h0 de −20 à +28 px, par pas de 4**, soit 13 hauteurs d'arrivée (h0 = hauteur de la main au-dessus du bas du chunk) ;
+- **les phases** : 10 échantillons pour une horloge libre, une grille 5 × 5 pour deux horloges libres, et 20 instants d'arrivée répartis sur 12 s quand toutes les phases sont fixées dans le fichier.
+
+Un chunk statique compte donc 26 entrées ; un chunk à horloges en compte 260 à 650.
 
 Une entrée est **réussie** si une suite de gestes du **verbe déclaré** (ou d'un verbe plus simple) atteint l'accroche de sortie, à h ∈ [H−20, H+32), sans contact létal. Deux limites s'appliquent :
 
 - une **attente ≤ 2,3 s par mur** (0,6 × le budget d'attente B1) ;
 - la **marée à 28 px/s** : le héros entre avec 130 px d'avance, et le simulateur suit cette avance (`lag_min` dans les sorties).
 
-La recherche est une A\* sur les états (mur, hauteur, temps, éclats pris). Elle est plafonnée à 6 000 nœuds, et à 30 000 pour l'arène.
+La recherche est un Dijkstra sur les états (mur, hauteur, temps, avance sur la marée, éclats pris), qui minimise l'attente totale puis le nombre de sauts. Les gestes essayés depuis chaque accroche : bond, élan tenu de 0,10 à 0,28 s, volte de 0,12 à 0,52 s, élan + volte, chacun après 0 à 2,3 s d'attente (glisse comprise). Elle est plafonnée à 6 000 nœuds, et à 30 000 pour l'arène.
 
 En plus de la validation :
 
@@ -273,7 +275,7 @@ RESULTS_PLACEHOLDER
 
 ### 5.4 Ce que le simulateur ne vérifie pas
 
-- **Le ressenti** : lisibilité du préavis, fenêtre de réaction humaine. Le simulateur joue parfait au 1/10 s près, sauf l'attente, qui est discrétisée de 0,1 à 0,15 s. Les marges minimales des routes (10-16 px) sont la garantie que nous donnons à la place.
+- **Le ressenti** : lisibilité du préavis, fenêtre de réaction humaine. Le simulateur joue parfait au 1/10 s près, sauf l'attente, qui est discrétisée de 0,1 à 0,15 s. La garantie que nous donnons à la place : chaque route garde **au moins 4 px** de vide entre la boîte du héros (8 × 12, celle du code) et tout danger actif ; le minimum observé sur les routes des o est 4,1 px (tir_croise, slalom).
 - **Le raccord réel entre chunks.** Il est couvert indirectement : chaque chunk est validé pour toute hauteur d'entrée de −20 à +32 et des deux côtés.
 - **L'onde mobile du boss**, qui est approchée par des lasers (§6).
 

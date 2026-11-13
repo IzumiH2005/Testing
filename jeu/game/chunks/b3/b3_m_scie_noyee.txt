@@ -7,6 +7,7 @@ sortie: any
 verbe: bond
 alt: 370-600
 poids: 1.0
+// Idée : une scie sur rail vertical descend jusqu'au bassin : on part de l'eau quand elle remonte.
 ---
 ##........##   // R14 bond -> sortie L
 ##........##

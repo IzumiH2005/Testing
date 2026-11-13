@@ -8,21 +8,25 @@ verbe: volte
 intro: -
 alt: 100-150
 poids: 1
-// draft
+// Pic (O1 en face x4) : R4-R6, L7-L9, R10-R12, L13-L14 — le mur libre change tous les 3 rangs.
+// Idée : maîtrise de la volte : on longe les épines à 4-5 px avec des voltes de durée différente (0,12 / 0,32 / 0,32).
+// Route des o (L, h0≈8, simulée) : L1 volte 0,12 -> L4 ; L4 élan+volte 0,32 -> L10 ; L10 volte 0,32 -> L15
+// O : k9 c6, au large de la route : une volte plus ample qui frôle L7-L9 au retour.
+// Écho : graver une bande transforme deux voltes en un bond.
 ---
 ##........##
-##........##
+##........##   // k15 : arrivée L (volte 0,32 depuis L10)
 ##>.......##
 ##>..o....##
 ##.......<##
 ##.......<##
-##..o....<##
+##..o....<##   // k10 : arrivée L (élan+volte 0,32 depuis L4)
 ##>...O...##
 ##>.......##
 ##>.o.....##
 ##.......<##
 ##.......<##
-##.o.....<##
+##.o.....<##   // k4 : arrivée L (volte 0,12 depuis L1)
 ##........##
 ##........##
 ##........##

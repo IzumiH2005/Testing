@@ -8,16 +8,20 @@ verbe: volte
 intro: -
 alt: 70-150
 poids: 1
-// draft
+// Montée (O1 en face, 70 m+) : L4-L6 puis R7-R9, une tenaille en escalier.
+// Idée : premier « épines en face » du GDD. Le bond droit atterrit dans la mâchoire ; on monte à l'élan sur R, puis élan + volte pour rester sur R au-dessus de la bande.
+// Route des o (L, h0≈8, simulée) : L1 élan 0,22 -> R5 ; R5 élan+volte 0,32 -> R11
+// O : k8 c8, à 16 px de la bande droite : volte tardive.
+// Écho : graver une bande rouvre le zigzag au bond simple.
 ---
 ##........##
-##........##
+##........##   // k11 : arrivée R (élan+volte 0,32 depuis R5)
 ##...o....##
 ##.......<##
 ##....o.O<##
 ##.......<##
 ##>.......##
-##>....o..##
+##>....o..##   // k5 : arrivée R (élan 0,22 depuis L1)
 ##>.o.....##
 ##........##
 ##........##

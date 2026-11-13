@@ -8,6 +8,7 @@ verbe: bond
 intro: O19
 alt: 448-470
 poids: 1.0
+// Idée : une phalène balaie une rangée vide : on regarde sa trajectoire, on traverse derrière elle.
 ---
 ##........##   // L14 bond -> sortie R
 ##........##

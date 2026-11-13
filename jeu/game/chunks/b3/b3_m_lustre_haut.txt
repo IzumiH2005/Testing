@@ -7,6 +7,7 @@ sortie: any
 verbe: elan
 alt: 395-600
 poids: 1.0
+// Idée : épines droites sous un lustre : l'élan atteint l'accroche haute pendant que la masse est à l'autre bout.
 ---
 ##........##
 ##........##   // L11 élan -> sortie R

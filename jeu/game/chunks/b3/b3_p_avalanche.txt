@@ -7,6 +7,7 @@ sortie: any
 verbe: bond
 alt: 445-600
 poids: 1.0
+// Idée : deux livres au-dessus de deux bassins : on les déclenche depuis l'eau sans s'arrêter sous la chute.
 ---
 ##........##
 ##........##   // L20 bond -> sortie R

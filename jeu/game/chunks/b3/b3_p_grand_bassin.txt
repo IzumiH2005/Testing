@@ -7,6 +7,7 @@ sortie: any
 verbe: bond
 alt: 410-600
 poids: 1.0
+// Idée : trois bassins et un lustre au centre : on remonte d'eau en eau en calant le passage sur la masse.
 ---
 ##........##   // L21 bond -> sortie R
 ##........##

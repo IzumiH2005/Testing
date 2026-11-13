@@ -7,6 +7,7 @@ sortie: any
 verbe: bond
 alt: 430-600
 poids: 1.0
+// Idée : le livre tombe dans l'eau : on le déclenche depuis le bassin, puis on part à côté.
 ---
 ##........##   // R14 bond -> sortie L
 ##........##

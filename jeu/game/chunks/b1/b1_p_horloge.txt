@@ -8,20 +8,24 @@ verbe: elan
 intro: -
 alt: 110-150
 poids: 1
-// draft
+// Pic (O4 + O8, 110 m+) : rail k6, laser k11, cinq rangées d'écart.
+// Idée : la double horloge à grande échelle : partir avec la lame donne la bonne phase du laser deux sauts plus haut. Mal partir = attendre deux fois.
+// Route des o (L, h0≈8, simulée) : L1 attendre 0,5s élan 0,18 -> R5 ; R5 attendre 0,2s bond -> L8 ; L8 bond -> R11 ; R11 élan 0,22 -> L15
+// O : k10 c5, sous le faisceau : on doit y être pendant l'extinction.
+// Écho : graver la lame ou le laser divise l'attente par deux.
 ---
 ##........##
-##..o.....##
+##..o.....##   // k15 : arrivée L (élan 0,22 depuis R11)
 ##........##
 ##........##
 ##.....o..##
-#L........L# ; period=3.1 warn=0.7 on=0.9
+#L........L# ; period=3.1 warn=0.7 on=0.9   // k11 : arrivée R (bond depuis L8)
 ##...O....##
 ##........##
-##..o.....##
+##..o.....##   // k8 : arrivée L (bond depuis R5, après 0,2s d'attente)
 ##........##
 ##..S---..##
-##........##
+##........##   // k5 : arrivée R (élan 0,18 depuis L1, après 0,5s d'attente)
 ##....o...##
 ##........##
 ##........##

@@ -7,6 +7,7 @@ sortie: any
 verbe: bond
 alt: 352-600
 poids: 1.0
+// Idée : repos sec, un éclat sur la route centrale.
 ---
 ##........##
 ##........##   // L7 bond -> sortie R

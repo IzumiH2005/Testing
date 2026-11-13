@@ -7,6 +7,7 @@ sortie: any
 verbe: elan
 alt: 405-600
 poids: 1.0
+// Idée : quatre bandes d'épines alternées autour d'un lustre : l'élan sans arrêt, rythme imposé par la masse.
 ---
 ##........##
 ##........##   // L18 élan -> sortie R

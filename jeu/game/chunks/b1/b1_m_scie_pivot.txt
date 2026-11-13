@@ -8,15 +8,19 @@ verbe: volte
 intro: -
 alt: 64-150
 poids: 1
-// draft
+// Montée (O2 + volte) : une scie entre deux tuiles (k7, x=112), juste sur l'arc de retour.
+// Idée : on tourne AUTOUR de la scie : élan vers R6, puis élan + volte qui la contourne par le haut et revient sur R.
+// Route des o (L, h0≈8, simulée) : L1 élan 0,28 -> R6 ; R6 élan+volte 0,32 -> R12
+// O : k8 c6, au-dessus de la lame : volte ample, on passe à 10 px de la scie.
+// Écho : graver la scie ouvre la ligne droite au bond.
 ---
-##........##
+##........##   // k12 : arrivée R (élan+volte 0,32 depuis R6)
 ##....o...##
 ##........##
 ##.....o..##
 ##....O...##
 ##....S...## ; dx=8
-##......o.##
+##......o.##   // k6 : arrivée R (élan 0,28 depuis L1)
 ##........##
 ##..o.....##
 ##........##

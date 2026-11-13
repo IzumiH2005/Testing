@@ -8,6 +8,7 @@ verbe: bond
 intro: O12
 alt: 418-440
 poids: 1.0
+// Idée : un livre au-dessus d'une accroche : il tombe quand on passe dessous, on apprend qu'il faut le déclencher puis attendre.
 ---
 ##........##   // L14 bond -> sortie R
 ##........##

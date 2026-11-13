@@ -8,16 +8,20 @@ verbe: volte
 intro: -
 alt: 98-150
 poids: 1
-// draft
+// Montée (O5 + O1, 98 m+) : colonne c6 de k4 à k9 ; mur droit fermé en R7-R8.
+// Idée : la colonne coupe le couloir en deux ; à droite le mur est fermé, donc on grimpe à gauche, en voltes serrées entre le mur et la lame.
+// Route des o (L, h0≈8, simulée) : L1 volte 0,20 -> L5 ; L5 élan+volte 0,32 -> L11
+// O : k6 c5, collé à la colonne : volte ample quand la lame est en haut.
+// Écho : graver la lame rouvre tout le couloir.
 ---
 ##........##
-##........##
+##........##   // k11 : arrivée L (élan+volte 0,32 depuis L5)
 ##...o....##
 ##....S...##
 ##....|..<##
 ##.o..|..<##
 ##...O|...##
-##....|...##
+##....|...##   // k5 : arrivée L (volte 0,20 depuis L1)
 ##..o.|...##
 ##........##
 ##........##

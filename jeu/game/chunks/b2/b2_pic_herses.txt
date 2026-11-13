@@ -1,0 +1,31 @@
+id: b2_pic_herses
+biome: B2
+tension: P
+D: 6
+entree: any
+sortie: any
+verbe: volte
+intro: -
+alt: 280-345
+poids: 1
+// wip
+---
+##........##
+##........##
+##........##
+##......o.##                    // R15 bond -> L18 (sortie)
+##........##
+##........##
+##>....o..##
+##>..O...H## ; phase=1.2
+##>......H##
+##>.....o.##                    // R9 elan+volte -> R15 : idem herse R10-11
+##........##
+##>.......##
+##>.....oH## ; phase=0.0
+##>......H##
+##>.......##                    // R4 elan+volte -> R9 : passer la herse R5-6 rentrée
+##..o.....##
+##........##
+##........##                    // L1 bond -> R4
+---

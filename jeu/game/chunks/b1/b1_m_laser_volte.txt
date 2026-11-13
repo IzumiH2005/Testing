@@ -8,16 +8,20 @@ verbe: volte
 intro: -
 alt: 70-150
 poids: 1
-// draft
+// Montée (O8 + O1 + volte) : mur droit fermé en R4-R5 et R9-R10, laser k7.
+// Idée : le mur d'en face est interdit deux fois ; on grimpe en volte sur L, et la volte doit traverser k7 pendant la phase éteinte.
+// Route des o (L, h0≈8, simulée) : L1 volte 0,20 -> L5 ; L5 élan+volte 0,32 -> L11
+// O : k7 c4, dans le faisceau, au sommet d'une volte : à prendre au début de l'extinction.
+// Écho : graver le laser rend la colonne de voltes libre.
 ---
 ##........##
-##........##
+##........##   // k11 : arrivée L (élan+volte 0,32 depuis L5)
 ##...o...<##
 ##.......<##
 ##..o.....##
 #L..O.....L# ; period=3.1 warn=0.7 on=0.9
 ##........##
-##.......<##
+##.......<##   // k5 : arrivée L (volte 0,20 depuis L1)
 ##..o....<##
 ##........##
 ##........##

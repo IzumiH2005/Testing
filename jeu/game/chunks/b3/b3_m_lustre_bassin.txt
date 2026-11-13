@@ -7,6 +7,7 @@ sortie: any
 verbe: bond
 alt: 398-600
 poids: 1.0
+// Idée : le bassin propulse droit dans la zone du lustre : il faut caler le départ sur le balancier.
 ---
 ##........##   // R14 bond -> sortie L
 ##........##

@@ -8,21 +8,25 @@ verbe: volte
 intro: -
 alt: 110-150
 poids: 1
-// draft
+// Pic (O5 + O8, 110 m+) : colonne c6 de k5 à k10, laser k13.
+// Idée : on grimpe en volte du côté où la colonne n'est pas, puis on franchit le laser : lecture de deux phases.
+// Route des o (L, h0≈8, simulée) : L1 bond -> R4 ; R4 volte 0,44 -> R9 ; R9 élan+volte 0,36 -> R15
+// O : k6 c7, collé au rail : passer quand la lame est en haut.
+// Écho : graver la colonne ouvre le zigzag.
 ---
 ##........##
-##........##
+##........##   // k15 : arrivée R (élan+volte 0,36 depuis R9)
 ##..o.....##
 #L........L# ; period=3.1 warn=0.7 on=0.9
 ##........##
 ##.....o..##
 ##....S...##
-##....|...##
+##....|...##   // k9 : arrivée R (volte 0,44 depuis R4)
 ##..o.|...##
 ##....|...##
 ##....|O..##
 ##....|...##
-##..o.....##
+##..o.....##   // k4 : arrivée R (bond depuis L1)
 ##........##
 ##........##
 ##........##

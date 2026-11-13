@@ -7,6 +7,7 @@ sortie: any
 verbe: elan
 alt: 455-600
 poids: 1.0
+// Idée : phalène entre deux bandes d'épines : l'élan franchit la bande pendant que la phalène est au loin.
 ---
 ##........##
 ##........##   // R11 bond -> sortie L

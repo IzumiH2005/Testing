@@ -8,16 +8,20 @@ verbe: elan
 intro: -
 alt: 70-150
 poids: 1
-// draft
+// Montée (O8 + O4, combinaison GDD « double horloge ») : rail k6, laser k9.
+// Idée : deux horloges indépendantes ; on attend la lame en bas, puis on lit le laser pendant le vol.
+// Route des o (L, h0≈8, simulée) : L1 attendre 0,5s élan 0,18 -> R5 ; R5 attendre 0,2s bond -> L8 ; L8 élan 0,14 -> R11
+// O : k7 c6, entre la lame et le faisceau : la case la plus exposée du chunk.
+// Écho : graver l'un des deux ramène le chunk à une seule horloge.
 ---
 ##........##
-##..o.....##
+##..o.....##   // k11 : arrivée R (élan 0,14 depuis L8)
 ##........##
 #L........L# ; period=3.1 warn=0.7 on=0.9
-##..o.....##
+##..o.....##   // k8 : arrivée L (bond depuis R5, après 0,2s d'attente)
 ##....O...##
 ##..S---..##
-##........##
+##........##   // k5 : arrivée R (élan 0,18 depuis L1, après 0,5s d'attente)
 ##...o....##
 ##........##
 ##........##

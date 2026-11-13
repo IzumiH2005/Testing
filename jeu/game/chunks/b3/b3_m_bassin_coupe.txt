@@ -7,6 +7,7 @@ sortie: any
 verbe: volte
 alt: 368-600
 poids: 1.0
+// Idée : l'épine droite plonge dans l'eau : le bond aquatique s'y écrase, la volte change de mur avant la bande.
 ---
 ##........##
 ##........##   // L11 élan+volte -> sortie L

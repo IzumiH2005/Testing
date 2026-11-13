@@ -7,6 +7,7 @@ sortie: any
 verbe: volte
 alt: 428-600
 poids: 1.0
+// Idée : livre au sommet, épines alternées : la volte change de mur sous le livre avant qu'il tombe.
 ---
 ##........##
 ##........##   // L11 élan+volte -> sortie L

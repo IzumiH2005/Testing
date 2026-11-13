@@ -8,6 +8,7 @@ verbe: bond
 intro: O18
 alt: 356-380
 poids: 1.0
+// Idée : deux bassins séparés par de l'air sec : on sent la différence de bond en sortant de l'eau.
 ---
 ##........##
 ##........##   // L10 bond -> sortie R

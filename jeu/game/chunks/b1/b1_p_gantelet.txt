@@ -8,19 +8,23 @@ verbe: volte
 intro: -
 alt: 100-150
 poids: 1
-// draft
+// Pic (O1 x3 + O2) : L4-L6, R8-R10, L12-L14 et une scie k7 (x=112) au milieu.
+// Idée : un escalier d'épines où chaque saut a une hauteur imposée (élan plein, élan court, élan + volte) ; aucune attente possible, marges de 6 px.
+// Route des o (L, h0≈8, simulée) : L1 élan 0,28 -> R6 ; R6 élan 0,14 -> L9 ; L9 élan+volte 0,32 -> L15
+// O : k6 c6, sous la scie : demande un élan plus court que la route.
+// Écho : graver une bande ramène un saut au bond simple.
 ---
 ##........##
-##........##
+##........##   // k15 : arrivée L (élan+volte 0,32 depuis L9)
 ##>..o....##
 ##>.......##
 ##>.o.....##
 ##........##
 ##.......<##
-##....o..<##
+##....o..<##   // k9 : arrivée L (élan 0,14 depuis R6)
 ##.......<##
 ##....S...## ; dx=8
-##>...O.o.##
+##>...O.o.##   // k6 : arrivée R (élan 0,28 depuis L1)
 ##>.......##
 ##>.o.....##
 ##........##

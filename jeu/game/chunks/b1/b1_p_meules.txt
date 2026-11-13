@@ -8,19 +8,23 @@ verbe: elan
 intro: -
 alt: 100-150
 poids: 1
-// draft
+// Pic (O4 x2 + O1 x2) : rails k6 et k11 en opposition, bandes L8-L9 et R13-R14.
+// Idée : trois élans pleins d'affilée (+77) ; les bandes interdisent le bond, les lames imposent le départ.
+// Route des o (L, h0≈8, simulée) : L1 élan 0,28 -> R6 ; R6 élan 0,28 -> L11 ; L11 élan 0,28 -> R15
+// O : k8 c6, entre les deux meules, sous l'arc de la route : élan court, à lancer au bon moment des deux meules (atteignable dans la moitié des phases : il faut attendre).
+// Écho : graver une meule enlève une attente.
 ---
 ##........##
-##........##
+##........##   // k15 : arrivée R (élan 0,28 depuis L11)
 ##.......<##
 ##..o....<##
 ##........##
-##..---S..## ; phase=0.5
+##..---S..## ; phase=0.5   // k11 : arrivée L (élan 0,28 depuis R6)
 ##..o.....##
 ##>.......##
-##>..O.o..##
+##>...Oo..##
 ##........##
-##..S---..## ; phase=0
+##..S---..## ; phase=0   // k6 : arrivée R (élan 0,28 depuis L1)
 ##....o...##
 ##........##
 ##........##

@@ -7,6 +7,7 @@ sortie: any
 verbe: bond
 alt: 500-600
 poids: 1.0
+// Idée : deux livres et une phalène : déclencher, esquiver puis traverser au bon moment, sur 24 rangées.
 ---
 ##........##
 ##........##   // L20 bond -> sortie R

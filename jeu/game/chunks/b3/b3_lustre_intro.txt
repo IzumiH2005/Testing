@@ -8,6 +8,7 @@ verbe: bond
 intro: O6
 alt: 378-400
 poids: 1.0
+// Idée : un lustre seul au centre ; les accroches sont hors de sa portée, on apprend à lire son balancier sans risque.
 ---
 ##........##   // L14 bond -> sortie R
 ##........##

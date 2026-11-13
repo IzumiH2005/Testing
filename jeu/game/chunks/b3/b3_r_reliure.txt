@@ -2,11 +2,12 @@ id: b3_r_reliure
 biome: B3
 tension: R
 D: 1
-entree: any
+entree: L
 sortie: any
 verbe: bond
 alt: 370-600
 poids: 1.0
+// Idée : repos avec une seule bande d'épines à gauche qui cadre la route par la droite.
 ---
 ##........##   // L14 bond -> sortie R
 ##........##

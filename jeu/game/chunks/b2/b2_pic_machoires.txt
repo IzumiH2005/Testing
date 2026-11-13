@@ -1,0 +1,31 @@
+id: b2_pic_machoires
+biome: B2
+tension: P
+D: 6
+entree: any
+sortie: any
+verbe: volte
+intro: -
+alt: 290-345
+poids: 1
+// wip
+---
+##........##
+##........##
+##........##                    // R16 bond -> L19 (sortie)
+##.....o..##
+##........##
+##........##
+##>.....o.##
+##>..O....##
+##>.......##                    // R10 elan+volte -> R16
+##>....o..##
+##M......M## ; phase=0.0
+##>.......##
+##>.....o.##
+##>.......##
+##>.......##                    // R4 elan+volte -> R10 : franchir la mâchoire R8 en vol, pivot haut
+##..o.....##
+##........##
+##........##                    // L1 bond -> R4
+---

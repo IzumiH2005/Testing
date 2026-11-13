@@ -8,17 +8,21 @@ verbe: elan
 intro: -
 alt: 64-150
 poids: 1
-// draft
+// Montée (O4 + O1) : rail k6 c3-c7 sous une bande L9-L10.
+// Idée : la scie impose le départ (attendre qu'elle file vers l'autre mur), la bande impose la hauteur du 3e saut -> élan court pour la sortie.
+// Route des o (L, h0≈8, simulée) : L1 bond -> R4 ; R4 bond -> L7 ; L7 élan 0,18 -> R11
+// O : k7 c5, juste au-dessus du rail : passer quand la lame est au bout.
+// Écho : graver la lame rend le chunk sans timing (gain ≈ 1 s).
 ---
 ##........##
-##....o...##
+##....o...##   // k11 : arrivée R (élan 0,18 depuis L7)
 ##>.......##
 ##>.......##
 ##..o.....##
-##...O....##
+##...O....##   // k7 : arrivée L (bond depuis R4)
 ##.S----..##
 ##........##
-##...o....##
+##...o....##   // k4 : arrivée R (bond depuis L1)
 ##........##
 ##........##
 ##........##

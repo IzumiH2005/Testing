@@ -8,16 +8,20 @@ verbe: volte
 intro: -
 alt: 98-150
 poids: 1
-// draft
+// Montée (O5 x2, 98 m+) : colonnes c5 (k5-k9) et c8 (k3-k8) en opposition de phase.
+// Idée : deux portes verticales ; on grimpe en voltes dans le couloir étroit entre le mur gauche et la 1re colonne.
+// Route des o (L, h0≈8, simulée) : L1 volte 0,20 -> L5 ; L5 élan+volte 0,32 -> L11
+// O : k6 c6, entre les deux colonnes : il faut entrer dans le couloir central au bon moment.
+// Écho : graver une colonne double la largeur du couloir de volte.
 ---
 ##........##
-##........##
+##........##   // k11 : arrivée L (élan+volte 0,32 depuis L5)
 ##...o....##
 ##...S....## ; phase=0
 ##...|..S.## ; phase=0.5
 ##.o.|..|.##
 ##...|O.|.##
-##...S..|.##
+##...S..|.##   // k5 : arrivée L (volte 0,20 depuis L1)
 ##..o...|.##
 ##......S.##
 ##........##
