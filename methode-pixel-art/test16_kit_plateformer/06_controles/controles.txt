@@ -1,0 +1,21 @@
+Contrôles F6 — Grotte des Échos cristallins
+
+         luminance moyenne L0 paroi          44.4
+         luminance moyenne L1 piliers        34.4
+         luminance moyenne L2 ruines         25.3
+         luminance moyenne FG                20.2
+         luminance moyenne roche jouable     84.5
+         luminance moyenne personnage       102.6
+         luminance moyenne épines            81.7
+         luminance moyenne grand cristal    107.4
+OK       plans de fond distincts en valeur et tous sous la roche jouable (contre-jour : plus proche = plus sombre)
+OK       carte dézoomée écrite (c2_niveau_x1.png ; à 50 % en couleur et en gris)
+OK       premier plan sur les épines : 0 px au pire sur 41 positions de caméra
+         distance RGB bord du perso / fond (L0, L1, L2, halo, faille) : 91, 112, 112, 116, 115
+OK       personnage / fond : distance RGB moyenne au bord, minimum 91 (seuil 60)
+         couture L1 : 0 px changent au raccord (max ailleurs : 50)
+         couture L2 : 1 px changent au raccord (max ailleurs : 68)
+         couture FG : 0 px changent au raccord (max ailleurs : 6)
+OK       les couches bouclent sans saut visible au raccord
+OK       caméra par pas de 4 px : L1 1 px, L2 2 px, FG 5 px (pas entiers, pas de pixel flottant)
+OK       planche du kit : 15 pièces sur clair et sombre
