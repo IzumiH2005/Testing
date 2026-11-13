@@ -1,0 +1,13 @@
+# pu_calm.png : 1 image 8x8, icône Accalmie (deux vagues figées de marée : J j puis U).
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 8x8
+frames: 1
+---
+........
+..JJ....
+.j..j..j
+j....jj.
+........
+..jj....
+.U..U..U
+U....UU.

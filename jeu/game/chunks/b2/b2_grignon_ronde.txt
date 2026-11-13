@@ -8,24 +8,29 @@ verbe: elan
 intro: -
 alt: 235-345
 poids: 1
-// wip
+// Développement O20 : deux grignons à longue ronde (5 rangées, cycle 6 s), un par mur, L5-L9 et R9-R13.
+// Idée : la ronde qu'on n'attend pas. Un cycle de 6 s dépasse l'attente permise : on ne peut pas
+// « laisser passer » le garde. Deux lectures : survoler chaque ronde d'un élan tenu (route sûre,
+// jamais d'arrêt) ou se poser DANS une ronde, derrière le dos du garde, pour le grand éclat L7.
+// Écho : un grignon gravé patrouille en cyan et recharge la volte : en revenant, sa ronde devient
+// un tremplin mobile (volte gratuite au contact).
 ---
 ##........##
 ##........##
-##........##
+##......o.##
+##........##                    // R15 bond -> L18 (sortie)
+##.....o..##
 ##.......:##
+##..o....:##
 ##.......:##
-##.......:##
-##.......:##
-##.......g## ; spd=24
+##.......:##                    // L10 elan -> R15 : au-dessus de la ronde droite
+##:.o....g## ; spd=24
 ##:.......##
-##:.......##
-##:.......##
-##:.......##
-##g.......## ; spd=24
+##:O......##
+##:......o##
+##g.......## ; spd=24           // R5 elan -> L10 : au-dessus de la ronde gauche
 ##........##
+##.o......##
 ##........##
-##........##
-##........##
-##........##
+##........##                    // L1 elan -> R5 : tenir
 ---

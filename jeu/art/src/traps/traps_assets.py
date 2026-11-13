@@ -564,14 +564,14 @@ BOOKS = G("""
 ................
 ....xxxxxxxxx...
 ....x8777776x...
-....x7777766x...
+....x7zz7766x...
 ..xxxxxxxxxxxx..
 ..x877777777x...
 ..x7777zz776x...
 ..x666666666x...
 ..xxxxxxxxxxxxx.
 ...x8777777776x.
-...x777777776x..
+...x77777zz76x..
 ...x66666666x...
 ...xxxxxxxxxx...
 ................
@@ -592,8 +592,24 @@ Intention : une pile de 3 livres qui tue : la matière est celle du biome (6 7 8
 Géométrie : masse x 2-14 / y 2-13 ; hitbox 10x10 de hz.gd (x-5, ry-5) = x 3-12, y 3-12 (dépassement 1-2 px, §9.1).
 Lumière haut-gauche : coin 8 sur chaque dos, dessous 6 ; une seule marque zz sur le livre du milieu.
 Timing : statique ; le préavis est rockfall_mark (0,6 s) + le tremblement de 1 px du code.
-Budget : x z + 6 7 8 = 5 couleurs. Défaut corrigé : livres alignés (lecture « brique ») -> 3 largeurs décalées.
-""", [books_clean()], 16, 16)
+Budget : k x X z + 6 7 8 = 7 couleurs (contour X + liseré k, seule entorse au budget). Défauts corrigés : livres alignés (lecture « brique ») -> 3 largeurs décalées ; passe 2 : une étiquette zz par livre (le violet seul ne disait pas « danger » sur le fond) ;\n contour extérieur X + liseré k : la pile se détache du fond sombre.
+""", [books_hot()], 16, 16)
+
+
+def books_hot():
+    """Passe 2 : contour extérieur en X (lecture danger à x1), séparations internes en x, puis liseré k."""
+    g = [list(r) for r in books_clean()]
+    H, W = len(g), len(g[0])
+    def empty(x, y):
+        return not (0 <= x < W and 0 <= y < H) or g[y][x] == "."
+    out = [r[:] for r in g]
+    for y in range(H):
+        for x in range(W):
+            if g[y][x] == "x" and any(empty(x + a, y + b) for a, b in ((1, 0), (-1, 0), (0, 1), (0, -1))):
+                out[y][x] = "X"
+            elif g[y][x] == "." and any(not empty(x + a, y + b) for a, b in ((1, 0), (-1, 0), (0, 1), (0, -1))):
+                out[y][x] = "k"
+    return ["".join(r) for r in out]
 
 
 @asset
@@ -806,7 +822,8 @@ GNAW_BODY = G("""
 def gnawer_frame(i):
     g = [list(r) for r in GNAW_BODY]
     # œil z sur l'avant (en haut = sens de marche), 1 px de pupille k devant
-    g[4][8] = "z"
+    g[4][8] = "Z"     # œil : seul point Z du corps (le z se perdait dans la carapace z)
+    g[4][7] = "X"
     g[3][8] = "k"
     # mandibules : ouvertes (0, 2) / fermées (1, 3)
     if i % 2 == 1:
@@ -838,7 +855,8 @@ Timing (E3) : img | rôle | change | principe | durée
   1 | passage | corps levé d'1 px, mandibules fermées | rebond | 1/8 s
   2 | appui B | pattes à l'autre phase, mandibules ouvertes | contact | 1/8 s
   3 | passage | corps levé, pattes ramenées | rebond | 1/8 s  (boucle 0-3, 8 fps à 24 px/s)
-Budget : k x X z = 4 couleurs (+ œil z). Défaut corrigé : yeux W du repli (blanc = héros/éclat) -> œil z de danger.
+Budget : k x X z Z = 5 couleurs (œil Z). Défauts corrigés : yeux W du repli (blanc = héros/éclat) -> œil de danger ;
+ passe 2 : l'œil z se perdait dans la carapace z -> œil Z cerné de X.
 """, [gnawer_frame(i) for i in range(4)], 16, 16)
 
 
@@ -920,13 +938,13 @@ Cercle létal r 20 de world.gd autour de (24,24) : la cloche couvre x 2-45 / y 1
 Intention : une masse de bronze-sang qui pendule ; la lèvre évasée et le battant Z disent « cloche » à x1 dans le couloir de 128.
 Lumière haut-gauche : bande de reflet z à gauche, ombre x à droite, deux cordons en relief, un reflet Z sur le dôme.
 Timing (E3) : img | rôle | change | principe | durée
-  0 | balancement A | battant à gauche (-2 px) | traîne (suite de mouvement) | quand la cloche va vers la droite
-  1 | balancement B | battant à droite (+2 px) | traîne | quand elle va vers la gauche
+  0 | balancement A | battant à gauche (-3 px) | traîne (suite de mouvement) | quand la cloche va vers la droite
+  1 | balancement B | battant à droite (+3 px) | traîne | quand elle va vers la gauche
   2 | sonné : flash | silhouette pleine en w (1 image) | impact | 1/20 s
   3 | sonné : tremblement | image 0 décalée d'1 px, battant centré | vibration | alterner 3 et 0 à 20 Hz pendant 1 s
 Budget : k x X z Z (+ W d'1 px dans le battant ; w pour le flash seul) = 6 par image.
 Défaut corrigé : profil en trapèze (repli) -> dôme 7-9-11-12-13, taille droite, évasement 16..22 en escalier régulier.
-""", [bell(-2), bell(2), bell(0, flash=True), bell(0, dx=1)], 48, 48)
+""", [bell(-3), bell(3), bell(0, flash=True), bell(0, dx=1)], 48, 48)
 
 
 @asset

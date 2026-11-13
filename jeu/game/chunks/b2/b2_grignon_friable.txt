@@ -1,0 +1,29 @@
+id: b2_grignon_friable
+biome: B2
+tension: M
+D: 4
+entree: any
+sortie: any
+verbe: elan
+intro: -
+alt: 235-345
+poids: 1
+// wip
+---
+##........##
+##........##
+##.......f##                    // R14 bond -> L17 (sortie)
+##.......f##
+##.......f##
+##.......f##
+##.......f##
+##.......f##                    // L9 elan -> R14
+##:......f##
+##:......f##
+##g......f## ; spd=24
+##.......f##
+##.......f##                    // R4 elan -> L9 : se poser quand le grignon descend
+##.......f##
+##........##
+##........##                    // L1 bond -> R4 : repartir aussitôt
+---

@@ -1,0 +1,13 @@
+# pu_plume.png : 1 image 8x8, icône Plume (plume claire w p l, contour s, tige l).
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 8x8
+frames: 1
+---
+......ss
+....sswp
+...swwps
+..swppls
+..spls..
+.slss...
+.ls.....
+l.......

@@ -65,7 +65,15 @@ lines = ["# Police font_l d'ÉCHO : grands chiffres et capitales (score, compte 
          "# Trait 2 px, capitales 12 px (rangées 3-14), chasse 10 (M et W : 12). Accents rangées 0-1.",
          "# Amorcée par seed_font_l.py (squelette 1 px dessiné à la main + Scale2x), puis retouchable ici.",
          "name: font_l", "cell: 10x16", "baseline: 14", "line: 16", "space: 4", "color: w", "upper_alias: 1"]
+RAW = {  # retouches pleine résolution (le Scale2x arrondit trop les croix)
+ "+": (6, "..##../..##../######/######/..##../..##.."),
+ "×": (7, "##...##/.##.##./..###../.##.##./##...##"),
+}
 for ch, (top, sk) in SK.items():
+    if ch in RAW:
+        t, r = RAW[ch]
+        lines.append(f"g {ch} {t} {r} adv={len(r.split('/')[0]) + 2}")
+        continue
     rows = scale2x(sk.split("/"))
     w = len(rows[0])
     adv = 10 if w <= 8 else w + 2

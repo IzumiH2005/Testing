@@ -5,7 +5,7 @@ const SAVE_PATH := "user://save.json"
 
 # Skins : remplacent les couleurs de l'écharpe (r, R, o). Prix en éclats.
 const SKINS := [
-	{"id": "corail", "name_fr": "CORAIL", "name_en": "CORAL", "price": 0, "c": ["7a1f3d", "c4384f", "ff7a59"]},
+	{"id": "corail", "name_fr": "CORAIL", "name_en": "CORAL", "price": 0, "c": ["751a38", "cc353f", "ff7247"]},
 	{"id": "jade", "name_fr": "JADE", "name_en": "JADE", "price": 60, "c": ["1f4a3a", "2e8a5e", "5fd08a"]},
 	{"id": "azur", "name_fr": "AZUR", "name_en": "AZURE", "price": 90, "c": ["1a2a6a", "2f5fd0", "6fa8ff"]},
 	{"id": "soleil", "name_fr": "SOLEIL", "name_en": "SUN", "price": 140, "c": ["8a4a00", "e0a200", "ffd23f"]},

@@ -1,0 +1,17 @@
+[remap]
+
+importer="font_data_bmfont"
+type="FontFile"
+uid="uid://1w6a41o5uiew"
+path="res://.godot/imported/font_l_outline.fnt-647224a8db8e7e2bdbf145dcff5bd3c0.fontdata"
+
+[deps]
+
+source_file="res://assets/ui/font_l_outline.fnt"
+dest_files=["res://.godot/imported/font_l_outline.fnt-647224a8db8e7e2bdbf145dcff5bd3c0.fontdata"]
+
+[params]
+
+fallbacks=[]
+compress=true
+scaling_mode=2

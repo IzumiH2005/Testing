@@ -1,0 +1,13 @@
+# pu_lantern.png : 1 image 8x8, icône Lanterne (cage s m, flamme a A, contour k).
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 8x8
+frames: 1
+---
+...kk...
+..kssk..
+.kmmmsk.
+.kmaAmk.
+.kmAamk.
+.kmaamk.
+.kssssk.
+..kkkk..

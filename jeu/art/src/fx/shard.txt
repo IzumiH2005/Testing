@@ -1,0 +1,15 @@
+# shard.png : 6 images 8x8, éclat d'or (gemme 6x6 g G y + cœur W, contour o), rotation + éclat.
+# 0 face · 1 trois-quarts · 2 tranche · 3 revers + point · 4 face + croix 3 · 5 face + point.
+# Timing : 8 fps en boucle (125 ms). Pivot (4,4), centre de la gemme (3.5,3.5).
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 48x8
+frames: 6
+---
+......................................y.........
+...oo......oo......oo......oo.y....ooyWy...oo.y.
+..oyGo....oyGo.....yo.....oGyo....oyGoy...oyGo..
+.oyWGgo...oyGo.....yo.....ogGo...oyWGgo..oyWGgo.
+.oGGggo...oGgo.....Go.....oggo...oGGggo..oGGggo.
+..oGgo....oGgo.....Go.....oggo....oGgo....oGgo..
+...oo......oo......oo......oo......oo......oo...
+................................................

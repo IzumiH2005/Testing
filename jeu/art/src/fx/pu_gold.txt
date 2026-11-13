@@ -1,0 +1,13 @@
+# pu_gold.png : 1 image 8x8, icône Pluie d'or (trois éclats g G y, contour o).
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 8x8
+frames: 1
+---
+.oo.....
+oyGo.oo.
+oGgooyGo
+.oo.oGgo
+..oo.oo.
+.oyGo...
+.oGgo...
+..oo....

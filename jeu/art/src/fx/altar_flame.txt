@@ -1,0 +1,24 @@
+# altar_flame.png : 6 images 8x16, flamme cyan de l'autel (cœur W, e, c, base t, contour q).
+# 0 droite · 1 pointe à gauche · 2 haute à gauche + braise e détachée · 3 basse · 4 pointe à droite
+# 5 haute à droite + braise. La base (rangées 8-15) ne bouge pas : seule la pointe vacille.
+# Timing : 10 fps en boucle (100 ms). Pivot (4,16) bas-centre.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 48x16
+frames: 6
+---
+..................e..........................e..
+................................................
+...........q......q..........................q..
+....q.....qcq.....qq.................q......qq..
+...qcq....qeq....qcq........q.......qcq.....qcq.
+...qeq....qecq...qecq......qcq......qeq....qceq.
+..qcecq...qeecq..qeccq.....qeq.....qecq...qcceq.
+..qeWcq..qceWcq..qceWcq...qcecq...qceeq..qcWecq.
+.qceWecq.qceWecq.qceWecq.qceWecq.qceWecq.qceWecq
+.qcWWecq.qcWWecq.qcWWecq.qcWWecq.qcWWecq.qcWWecq
+.qcWWecq.qcWWecq.qcWWecq.qcWWecq.qcWWecq.qcWWecq
+.qceWecq.qceWecq.qceWecq.qceWecq.qceWecq.qceWecq
+..qceccq..qceccq..qceccq..qceccq..qceccq..qceccq
+..qtcctq..qtcctq..qtcctq..qtcctq..qtcctq..qtcctq
+...qttq....qttq....qttq....qttq....qttq....qttq.
+....qq......qq......qq......qq......qq......qq..

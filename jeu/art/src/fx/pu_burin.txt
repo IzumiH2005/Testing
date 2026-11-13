@@ -1,0 +1,13 @@
+# pu_burin.png : 1 image 8x8, icône Burin (lame d'écho c e, pointe W, contour q), posée dans la bulle.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 8x8
+frames: 1
+---
+......qq
+.....qWq
+....qecq
+...qecq.
+..qecq..
+.qtcq...
+.qtq....
+..q.....

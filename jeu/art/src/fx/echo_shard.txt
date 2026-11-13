@@ -1,0 +1,15 @@
+# echo_shard.png : 4 images 8x8, éclat d'écho au point de mort : même gemme que shard, or -> écho
+# (e c t + cœur W, contour q). 0 face + point e · 1 trois-quarts · 2 tranche · 3 revers.
+# Timing : 8 fps en boucle. Pivot (4,4). Fantôme à 50 % d'opacité si le moteur le souhaite (sinon 100 %).
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 32x8
+frames: 4
+---
+................................
+...qq.e....qq......qq......qq...
+..qecq....qecq.....eq.....qceq..
+.qeWctq...qecq.....eq.....qtcq..
+.qccttq...qctq.....cq.....qttq..
+..qctq....qctq.....cq.....qttq..
+...qq......qq......qq......qq...
+................................

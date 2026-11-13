@@ -58,6 +58,15 @@ var buffer_t := 0.0
 var last_press := -1.0
 var turns := 0
 var turn_anim := 0.0
+var anim := "cling"         # animation courante du héros (assets/hero, MANIFEST F1)
+var anim_t := 0.0
+var land_t := 9.0
+const ANIMS := ["cling", "slide", "jump", "apex", "fall", "turn", "land", "death", "respawn"]
+const ANIM_DUR := {
+	"cling": [0.7, 0.22, 0.3, 0.22], "slide": [0.09, 0.09, 0.09, 0.09], "jump": [0.05, 0.07, 9.0],
+	"apex": [0.1, 9.0], "fall": [0.1, 0.1], "turn": [0.04, 0.033, 0.05, 0.06], "land": [0.11, 0.07, 0.09],
+	"death": [0.033, 0.1, 0.06, 0.06, 0.08, 0.08, 0.1, 0.12], "respawn": [0.06, 0.06, 0.05, 0.05, 0.07, 0.12]}
+const ANIM_LOOP := ["cling", "slide", "fall"]
 var on_floor := true
 var facing := 1
 var in_water := false
@@ -124,9 +133,6 @@ func _ready() -> void:
 	camera.make_current()
 	player = Sprite2D.new()
 	player.centered = false
-	player.texture = A.tex("sprites/player")
-	if player.texture:
-		player.hframes = 5
 	skin_mat = ShaderMaterial.new()
 	skin_mat.shader = load("res://shaders/skin.gdshader")
 	player.material = skin_mat
@@ -135,9 +141,6 @@ func _ready() -> void:
 	for i in MAX_ECHOES:
 		var e := Sprite2D.new()
 		e.centered = false
-		e.texture = player.texture
-		if e.texture:
-			e.hframes = 5
 		var m := ShaderMaterial.new()
 		m.shader = load("res://shaders/echo.gdshader")
 		e.material = m
@@ -231,10 +234,11 @@ func start_life() -> void:
 	state = S.READY
 	player.visible = true
 	skin_mat.set_shader_parameter("flash", 0.0)
+	_set_anim("respawn")
 	var n: int = mini(recordings.size(), MAX_ECHOES)
 	for i in MAX_ECHOES:
 		echo_nodes[i].visible = i < n
-	_place_sprite(player, pos, 0, false)
+	_place_sprite(player, pos, _code(), false)
 	combo_changed.emit(0)
 
 # ------------------------------------------------------------------ entrées
@@ -311,7 +315,7 @@ func _volte() -> void:
 	vel.x = -vel.x
 	vel.y = minf(vel.y, TURN_VY)
 	facing = int(signf(vel.x))
-	turn_anim = 0.22
+	turn_anim = 0.183
 	Sfx.play("turn")
 	_burst(pos, 5, A.P.p, 40.0)
 	air_turn_used.emit()
@@ -341,6 +345,10 @@ func _physics_process(dt_real: float) -> void:
 			t_life += dt
 		S.READY:
 			tower.ensure(cam_y - 200.0)
+			anim_t += dt
+			if anim == "respawn" and anim_t > 0.41:
+				_set_anim("cling")
+			_place_sprite(player, pos, _code(), facing < 0)
 		S.PLAY:
 			t_life += dt
 			invul = maxf(0.0, invul - dt)
@@ -356,6 +364,9 @@ func _physics_process(dt_real: float) -> void:
 			tower.ensure(cam_y - 200.0)
 		S.DYING, S.WAIT:
 			_step_echoes()
+			if player.visible:
+				anim_t += dt
+				_place_sprite(player, pos, _code(), facing < 0)
 	camera.position = Vector2(0, round(cam_y)) + Vector2(randf_range(-shake, shake), randf_range(-shake, shake)).round()
 	view.queue_redraw()
 
@@ -383,6 +394,7 @@ func _can_grip(s: int, y: float) -> bool:
 
 func _step_player(dt: float) -> void:
 	turn_anim = maxf(0.0, turn_anim - dt)
+	_pick_anim(dt)
 	coyote_t = maxf(0.0, coyote_t - dt)
 	buffer_t = maxf(0.0, buffer_t - dt)
 	in_water = tower.is_water(pos.y)
@@ -443,7 +455,7 @@ func _step_player(dt: float) -> void:
 		if m > ascension_best:
 			ascension_best = m
 		height_changed.emit(m)
-	_place_sprite(player, pos, _frame(), facing < 0)
+	_place_sprite(player, pos, _code(), facing < 0)
 
 func _detach() -> void:
 	side = 0
@@ -459,26 +471,68 @@ func _land(s: int) -> void:
 	cling_t = 0.0
 	turns = 0
 	facing = -s
+	land_t = 0.0
 	Sfx.play("land")
 	_burst(pos + Vector2(s * 5, 0), 3, A.P.l, 25.0)
 	if buffer_t > 0.0:
 		_jump()
 
-func _frame() -> int:
-	if side != 0:
-		return 1 if (grip > GRIP_TIME and not on_floor) else 0
-	if turn_anim > 0.0:
-		return 4
-	return 2 if vel.y < 0.0 else 3
+func _set_anim(n: String) -> void:
+	if anim != n:
+		anim = n
+		anim_t = 0.0
 
-func _place_sprite(sp: Sprite2D, p: Vector2, f: int, flip: bool) -> void:
-	if sp.texture:
-		sp.frame = clampi(f, 0, 4)
+## Choix de l'animation selon l'état physique (appelé à chaque pas de PLAY).
+func _pick_anim(dt: float) -> void:
+	anim_t += dt
+	land_t += dt
+	if anim == "respawn" and anim_t < 0.41:
+		return
+	if side != 0:
+		if land_t < 0.27 and not on_floor:
+			_set_anim("land")
+		elif grip > GRIP_TIME and not on_floor:
+			_set_anim("slide")
+		else:
+			_set_anim("cling")
+	elif turn_anim > 0.0:
+		_set_anim("turn")
+	elif vel.y < -70.0:
+		_set_anim("jump")
+	elif vel.y < 50.0:
+		_set_anim("apex")
+	else:
+		_set_anim("fall")
+
+## Image courante dans la bande de l'animation.
+func _anim_frame(n: String, t: float) -> int:
+	var d: Array = ANIM_DUR[n]
+	var tot := 0.0
+	for x in d:
+		tot += x
+	if n in ANIM_LOOP:
+		t = fposmod(t, tot)
+	for i in d.size():
+		t -= d[i]
+		if t < 0.0:
+			return i
+	return d.size() - 1
+
+## Code compact (animation × 16 + image) : sert au héros et aux échos enregistrés.
+func _code() -> int:
+	return ANIMS.find(anim) * 16 + _anim_frame(anim, anim_t)
+
+func _place_sprite(sp: Sprite2D, p: Vector2, code: int, flip: bool) -> void:
+	var n: String = ANIMS[clampi(code / 16, 0, ANIMS.size() - 1)]
+	var tx := A.tex("hero/player_" + n)
+	if sp.texture != tx:
+		sp.texture = tx
+		if tx:
+			sp.hframes = maxi(1, tx.get_width() / 32)
+	if tx:
+		sp.frame = clampi(code % 16, 0, sp.hframes - 1)
 	sp.flip_h = flip
-	var x0 := p.x - CLING_OFF if not flip else p.x + CLING_OFF - 16.0
-	if f >= 2:
-		x0 = p.x - 8.0
-	sp.position = Vector2(round(x0), round(p.y - 10.0))
+	sp.position = Vector2(round(p.x - 16.0), round(p.y - 20.0))
 	if sp == player:
 		sp.modulate.a = 0.5 if (invul > 0.0 and int(t_global * 20.0) % 2 == 0) else 1.0
 
@@ -712,8 +766,8 @@ func _die(info: Dictionary) -> void:
 	if combo > 0:
 		combo = 0
 		combo_changed.emit(0)
-	skin_mat.set_shader_parameter("flash", 1.0)
-	particles.append({"anim": "death", "p": pos, "t": 0.0, "life": 0.6})
+	_set_anim("death")
+	_place_sprite(player, pos, _code(), facing < 0)
 	_burst(pos, 14, A.P.c, 70.0)
 	var t_death := t_life
 	var accomplices := []
@@ -721,9 +775,8 @@ func _die(info: Dictionary) -> void:
 		if t_death - float(fr_touch[id]) < 1.0:
 			accomplices.append(tower.ents[id])
 	var tw := create_tween()
-	tw.tween_interval(0.18)
+	tw.tween_interval(0.63)
 	tw.tween_callback(func(): player.visible = false)
-	tw.tween_interval(0.45)
 	if info.kind == "trap":
 		var e: Dictionary = info.trap
 		info["trap_kind"] = e.kind
@@ -746,7 +799,7 @@ func _record() -> void:
 	if Engine.get_physics_frames() % 2 == 0:
 		rec.append(pos.x)
 		rec.append(pos.y)
-		rec.append(float(_frame() + (8 if facing < 0 else 0)))
+		rec.append(float(_code() + (1000 if facing < 0 else 0)))
 
 func _step_echoes() -> void:
 	var n: int = mini(recordings.size(), MAX_ECHOES)
@@ -757,7 +810,7 @@ func _step_echoes() -> void:
 		var count := r.size() / 3
 		if idx < count:
 			var f := int(r[idx * 3 + 2])
-			_place_sprite(e, Vector2(r[idx * 3], r[idx * 3 + 1]), f % 8, f >= 8)
+			_place_sprite(e, Vector2(r[idx * 3], r[idx * 3 + 1]), f % 1000, f >= 1000)
 			e.material.set_shader_parameter("alpha", 0.55 - 0.12 * i)
 			e.visible = state != S.READY or idx == 0
 		else:
