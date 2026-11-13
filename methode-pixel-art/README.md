@@ -12,3 +12,4 @@ perspectives de jeu (A9), décors et tuiles (partie F), progression (partie G).
 
 - `test16_kit_plateformer/` : kit de niveau complet pour un plateformer (autotile 47, dalles,
   décors, fonds en parallaxe, scène, contrôles F6, export). Voir son README.
+- `test17_perso_anime/` : personnage Ludo relevé puis animé (repos 6 images, course 8 images).
