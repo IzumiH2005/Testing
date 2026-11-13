@@ -1,0 +1,33 @@
+id: b2_repos_vitrail
+biome: B2
+tension: R
+D: 0
+entree: any
+sortie: any
+verbe: bond
+intro: -
+alt: 210-345
+poids: 1
+// Repos. Idée : le vitrail. Aucun piège : on y apprend la volte comme outil de déplacement, pas
+// d'esquive. Le grand éclat R12 c5 flotte hors de tout arc de bond : on ne l'atteint qu'en
+// restant sur le mur droit (R4 volte vers R8, puis R8 élan + volte tardive vers R14).
+// La route sûre (bonds alternés) ramasse les petits éclats et le power-up R11.
+// Variante récompensée : volte depuis R4 (pivot 0,2 s), puis élan 0,14 s + pivot 0,35 s depuis R8.
+---
+##........##
+##........##
+##..o.....##
+##........##                    // L13 bond -> R16 (sortie)
+##...O....##
+##......*.##
+##........##                    // R10 bond -> L13
+##........##
+##..o.....##
+##........##                    // L7 bond -> R10
+##........##
+##.....o..##
+##........##                    // R4 bond -> L7
+##.o......##
+##........##
+##........##                    // L1 bond -> R4
+---

@@ -1,0 +1,56 @@
+# ÉCHO - bg2_crypte_deco : 3 modules 32x32 (96x32) posés sur bg2_crypte (P2, parallaxe 0.60) ; même calepinage de briques.
+# 0 FENÊTRE en ogive : ouverture TRANSPARENTE (on voit bg1/bg0 à travers), ébrasement b, appui ~ -> profondeur.
+# 1 NICHE en ogive : fond k (trou profond), urne en silhouette b (k et b : le creux reste le plus sombre).
+# 2 CHAÎNE pendante en b : maillons de face 3x5 puis de profil 1x3, période 8 px -> 4 maillons, se répète en hauteur.
+# Fréquence conseillée : 1 module pour 6-10 tuiles de paroi ; jamais 2 fenêtres côte à côte.
+# Budget : b d ~ k (4 au plus par module).
+# Défaut corrigé : une chaîne en n (ton de mur) sortait de la bande du fond et passait devant le jeu ; ici b sur d.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 96x32
+grid 0 0
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd
+end
+copy 0 0 31 15 0 16
+copy 0 0 31 31 32 0
+copy 0 0 31 31 64 0
+# fenêtre : ébrasement b (1 px autour), ouverture transparente, appui ~
+rect b 9 8 22 28
+px b 14 2 15 2 16 2 17 2 13 3 18 3 12 4 19 4 11 5 20 5 10 6 21 6 10 7 21 7 9 7 22 7
+rect , 15 3 16 28
+rect , 14 4 17 28
+rect , 13 5 18 28
+rect , 12 6 19 28
+rect , 11 7 20 28
+rect , 10 8 21 28
+rect ~ 8 29 23 29
+hline b 8 23 30
+# niche : même ogive réduite, fond k, urne b
+rect b 43 10 52 27
+px b 47 6 48 6 46 7 49 7 45 8 50 8 44 9 51 9
+rect k 47 7 48 26
+rect k 46 8 49 26
+rect k 45 9 50 26
+rect k 44 10 51 26
+rect b 46 21 49 25
+px b 47 19 48 19 47 20 48 20 45 22 50 22 45 23 50 23
+rect ~ 42 27 53 27
+# chaîne
+px b 80 0 79 1 81 1 79 2 81 2 79 3 81 3 80 4 80 5 80 6 80 7
+copy 79 0 81 7 79 8
+copy 79 0 81 7 79 16
+copy 79 0 81 7 79 24

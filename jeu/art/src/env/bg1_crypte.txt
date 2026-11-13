@@ -1,0 +1,36 @@
+# ÉCHO - bg1_crypte : architecture de la Crypte, plan P1 (parallaxe 0.30), 256x256 TRANSPARENT, boucle verticale.
+# Intention : deux statues de Veilleurs encapuchonnés sur socle (silhouette d, 2 plis b, ombre du capuchon b), qui
+#   tendent chacune une lanterne froide de 2 px p (seules lumières du plan, bible B1) ; deux urnes sur corniche.
+#   Statue A tournée vers la droite (haut), statue B vers la gauche (bas) : le regard ramène vers le centre du puits.
+# Budget : d b p (3). Y 0.008-0.020 (p = 2 px de lumière seulement).
+# Formes : sommets décidés à la main ; rien ne touche les bords haut/bas -> boucle sans raccord.
+# Défaut corrigé : des statues détaillées (visage, mains) devenaient du bruit à 0.30 ; silhouette + 1 point de lumière.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 256x256
+# statue A
+poly d 69 44 72 38 75 44 76 50 80 54 83 59 81 61 77 58 78 70 80 91 64 91 66 70 66 56 68 50
+rect d 60 92 84 99
+hline b 60 84 92
+px b 71 42 72 42 71 43 72 43 72 44
+vline b 70 62 90
+vline b 74 66 90
+px b 82 61
+px p 82 62 82 63
+# statue B
+poly d 183 172 180 166 177 172 176 178 172 182 169 187 171 189 175 186 174 198 172 219 188 219 186 198 186 184 184 178
+rect d 168 220 192 227
+hline b 168 192 220
+px b 180 170 181 170 180 171 181 171 180 172
+vline b 182 190 218
+vline b 178 194 218
+px b 170 189
+px p 170 190 170 191
+# urnes sur corniches
+rect d 100 128 138 130
+rect d 116 120 121 127
+px d 117 119 120 119 118 117 119 117 118 118 119 118
+vline b 120 121 127
+rect d 28 204 52 206
+rect d 38 196 43 203
+px d 39 195 42 195 40 193 41 193 40 194 41 194
+vline b 42 197 203

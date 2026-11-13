@@ -1,0 +1,31 @@
+# ÉCHO - O10 mâchoires gravées : bloc fermé en pont, 16x24 bouclable en x de WL à WR, 1 image ; ancrage (x, mid-12).
+# Intention : les deux mâchoires soudées deviennent un pont accrochable : dessus c, dessous t, contour q.
+# Budget : q t c + acier 1 2 4 = 6. Défaut corrigé : sans dents (un pont n'a pas de gueule).
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 16x24
+frames: 1
+---
+................
+................
+qqqqqqqqqqqqqqqq
+cccccccccccccccc
+2222222222222221
+2222222222222221
+2222222222222221
+2222422224222221
+2222122221222221
+2222222222222221
+2222222222222221
+2222222222222221
+2222222222222221
+2222222222222221
+2222222222222221
+2222222222222221
+2222422224222221
+2222122221222221
+2222222222222221
+2222222222222221
+tttttttttttttttt
+qqqqqqqqqqqqqqqq
+................
+................

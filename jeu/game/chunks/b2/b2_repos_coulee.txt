@@ -1,0 +1,32 @@
+id: b2_repos_coulee
+biome: B2
+tension: R
+D: 1
+entree: any
+sortie: any
+verbe: elan
+intro: -
+alt: 200-345
+poids: 1
+// Repos. Idée : la coulée en escalier. Deux bandes longues (R7-R9 puis L10-L12) se chevauchent en
+// diagonale : depuis L7 un bond tombe dans R9, un élan court dans L10... seul l'élan tenu à fond
+// (0,25 s+) passe au-dessus des deux bandes d'un coup. Aucun minuteur : on dose, on respire.
+// Créneau de power-up au cœur de l'arc long (R11 c6) : il se prend en tenant jusqu'au bout.
+---
+##........##
+##........##
+##.....o..##
+##......o.##
+##>.......##                    // R12 bond -> L15 (sortie)
+##>...*...##
+##>.......##
+##.o.....<##
+##.......<##
+##.......<##                    // L7 elan -> R12 : tenir jusqu'au bout
+##......o.##
+##.....o..##
+##........##                    // R4 bond -> L7
+##.o......##
+##........##
+##........##                    // L1 bond -> R4
+---

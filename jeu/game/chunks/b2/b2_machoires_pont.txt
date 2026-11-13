@@ -1,0 +1,33 @@
+id: b2_machoires_pont
+biome: B2
+tension: M
+D: 4
+entree: any
+sortie: any
+verbe: bond
+intro: -
+alt: 205-345
+poids: 1
+// Développement O10 : deux mâchoires (R6, R9) en opposition de phase (décalage 1,5 s sur 3,0).
+// Idée : le pont qui bat. Quand l'une s'ouvre l'autre se ferme : on traverse la basse, on attend
+// en L7 entre les deux, puis la haute. Partir de R4 tard dans la fenêtre fait arriver en L7 juste
+// quand la haute rouvre : enchaînement sans pause. Grand éclat au centre de la ligne haute.
+// Écho : une mâchoire gravée reste fermée en pont cyan accrochable : graver R6 donne un appui à mi-couloir.
+---
+##........##
+##........##
+##.o......##
+##........##                    // L13 bond -> R16 (sortie)
+##........##
+##......o.##
+##........##                    // R10 bond -> L13
+##M.O....M## ; phase=1.5
+##........##
+##........##                    // L7 bond -> R10 : la seconde vient de s'ouvrir
+##M....o.M## ; phase=0.0
+##.....o..##
+##........##                    // R4 bond -> L7
+##.o......##
+##........##
+##........##                    // L1 bond -> R4
+---

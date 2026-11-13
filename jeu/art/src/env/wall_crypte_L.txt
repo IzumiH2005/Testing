@@ -1,0 +1,157 @@
+# ÉCHO - wall_crypte_L : mur de jeu GAUCHE de la Crypte (B1), 8 tuiles 16x16 (128x16), raccord vertical libre.
+# Intention : pierre taillée bleue, grand bloc + petits, rythme varié ; lumière haut-gauche ; la face côté puits
+#   est à DROITE (x14 chanfrein d'ombre n, x15 contour de collision k). Ligne 15 = joint n, ligne 0 = haut de bloc :
+#   n'importe quelle tuile peut suivre n'importe quelle autre.
+# Tuiles : 0 grand bloc + 2 petits · 1 rythme inversé · 2 bloc étroit haut + long bloc bas · 3 trois assises ·
+#   4 mousse (v f V, coussin 4 px + coulure) · 5 fissure en escalier · 6 RARE niche-reliquaire et urne (b n m) ·
+#   7 BRÈCHE SECRÈTE = tuile 0 + 3 px l en fissure courte au milieu du bloc, sans autre indice (bible).
+# Passe 1 : tuile 3 trop chargée (3 assises de petits blocs = lecture « brique ») -> assise du milieu d'un seul bloc.
+# Budget : n s m l k (5) ; +v f V pour la mousse ; niche : b n m s k (sans l).
+# Défaut corrigé : 0,1,4,5 reprennent la planche validée (arêtes courtes l puis m 3-5 px, plus de « laser »).
+#   Les nouvelles tuiles 2,3 n'ont PAS de reflet l (reflet sur ~1 bloc sur 3 seulement, sinon damier de points clairs).
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 128x16
+grid 0 0
+llmmmsssssssssnk
+lmssssssssssssnk
+msssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+nnnnnnnnnnnnnnnk
+lmmsssnlmmssssnk
+msssssnmssssssnk
+ssssssnsssssssnk
+ssssssnsssssssnk
+ssssssnsssssssnk
+nnnnnnnnnnnnnnnk
+end
+grid 16 0
+lmmssssssnlmssnk
+mssssssssnmsssnk
+sssssssssnssssnk
+sssssssssnssssnk
+sssssssssnssssnk
+nnnnnnnnnnnnnnnk
+llmmmsssssssssnk
+lmssssssssssssnk
+msssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+nnnnnnnnnnnnnnnk
+end
+grid 32 0
+mmsssnmmmmssssnk
+mssssnmsssssssnk
+sssssnssssssssnk
+sssssnssssssssnk
+sssssnssssssssnk
+sssssnssssssssnk
+sssssnssssssssnk
+sssssnssssssssnk
+sssssnssssssssnk
+nnnnnnnnnnnnnnnk
+mmmsssssssnmssnk
+msssssssssnsssnk
+ssssssssssnsssnk
+ssssssssssnsssnk
+ssssssssssnsssnk
+nnnnnnnnnnnnnnnk
+end
+grid 48 0
+mmmsssssnmmsssnk
+msssssssnmssssnk
+ssssssssnsssssnk
+ssssssssnsssssnk
+nnnnnnnnnnnnnnnk
+mmmmssssssssssnk
+msssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+nnnnnnnnnnnnnnnk
+mmmssnmmssssssnk
+mssssnmsssssssnk
+sssssnssssssssnk
+sssssnssssssssnk
+sssssnssssssssnk
+nnnnnnnnnnnnnnnk
+end
+grid 64 0
+llmmmsssssssssnk
+lmssssssssssssnk
+msssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssvfVvssssssssnk
+nvVVVVvnnnnnnnnk
+lvVvvsnlmmssssnk
+msvsssnmssssssnk
+ssvsssnsssssssnk
+ssssssnsssssssnk
+ssssssnsssssssnk
+nnnnnnnnnnnnnnnk
+end
+grid 80 0
+llmmmsssssssnnnk
+lmssssssssssnsnk
+msssssssssssnsnk
+ssssssssssssnsnk
+sssssssssssnmsnk
+ssssssssssnsssnk
+ssssssssssnmssnk
+sssssssssnssssnk
+sssssssssnmsssnk
+nnnnnnnnnnnnnnnk
+lmmsssnlmmssssnk
+msssssnmssssssnk
+ssssssnsssssssnk
+ssssssnsssssssnk
+ssssssnsssssssnk
+nnnnnnnnnnnnnnnk
+end
+grid 96 0
+mmmmssssssssssnk
+msssssssssssssnk
+sssssnnnnsssssnk
+ssssnbbbbnssssnk
+sssnbbbbbbmsssnk
+sssnbbnnbbmsssnk
+sssnbbmnbbmsssnk
+sssnbmnnnbmsssnk
+sssnbmnnnbmsssnk
+sssnbbnnbbmsssnk
+sssmmmmmmmmsssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+nnnnnnnnnnnnnnnk
+end
+grid 112 0
+llmmmsssssssssnk
+lmssssssssssssnk
+msssssssssssssnk
+ssssssssssssssnk
+ssssssslssssssnk
+sssssssslsssssnk
+ssssssssslssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+nnnnnnnnnnnnnnnk
+lmmsssnlmmssssnk
+msssssnmssssssnk
+ssssssnsssssssnk
+ssssssnsssssssnk
+ssssssnsssssssnk
+nnnnnnnnnnnnnnnk
+end

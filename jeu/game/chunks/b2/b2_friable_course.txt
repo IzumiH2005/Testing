@@ -1,0 +1,36 @@
+id: b2_friable_course
+biome: B2
+tension: M
+D: 3
+entree: R
+sortie: any
+verbe: elan
+intro: -
+alt: 175-345
+poids: 1
+// Idée : la course aux appâts. Chaque plaque friable est posée SUR une bande d'épines : un bond
+// court y atterrit, la plaque cède en 0,35 s et l'on glisse dans les pointes. Le seul sol sûr est
+// au-dessus, à portée d'élan tenu à fond : la route est une suite d'élans longs qui enjambent les appâts.
+// Grand éclat R8 c9 : sur l'arc d'un bond court L4 -> R7 qui se pose sur la plaque (repartir aussitôt).
+// Écho : mourir sur R4-R5 grave la bande ET la plaque complice (solide) : la route courte en bonds
+// s'ouvre et le grand éclat devient gratuit. Entrée R imposée (miroir pour l'autre côté).
+---
+##........##
+##........##
+##.......f##                    // L16 bond -> R19 (sortie)
+##...o...f##
+##.......<##
+##.......<##
+##......o.##
+##f.......##                    // R11 elan -> L16
+##f..o....##
+##>.......##
+##>.o....O##
+##.......f##
+##.......f##                    // L6 elan -> R11
+##...o...<##
+##.......<##
+##.....o..##
+##........##
+##........##                    // R1 elan -> L6 : tenir à fond
+---

@@ -1,0 +1,13 @@
+# ÉCHO - O12 marque de départ de l'éboulis, cellule 16x4, 2 images. Ancrage : coin haut-gauche à (x-8, ry+6)
+# (juste sous la pile, à la place du carré X de world_draw).
+# Intention : préavis de 0,6 s : la poussière tombe et une marque zz de 2 px s'allume sous la pile.
+# Timing : 0 et 1 alternés à 10 Hz pendant le préavis (la poussière descend d'1 px, la marque passe z -> Z).
+# Budget : p z Z = 3. Défaut corrigé : 4 grains de poussière = bruit ; 3 grains au plus, en groupe de 2 + 1.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 32x4
+frames: 2
+---
+....p...........................
+........p............p.....p....
+......p.................p.......
+.......zz..............ZZ.......

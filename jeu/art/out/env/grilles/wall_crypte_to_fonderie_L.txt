@@ -1,0 +1,27 @@
+# ÉCHO - wall_crypte_to_fonderie_L : transition de mur GAUCHE Crypte (bas) -> Fonderie (haut), 2 tuiles 16x16 (32x16).
+# Règle bible : tuile BASSE (0) = pierre A envahie par les joints de B ; tuile HAUTE (1) = pierre B avec un dernier bloc de A.
+# Tuile 0 : blocs de crypte (s m l, joints n) dont l'assise haute a des joints droits d'acier 1.
+# Tuile 1 : en bas un dernier long bloc de crypte, joint d'acier 1, puis deux plaques rivetées (2 face, 3 arête, 4 coin,
+#   rivet = 3 + ombre 1 en bas-droite, groupe de 2). Aucune trame, aucun mélange de pixels : la limite est un joint.
+# Ordre de pose : ... crypte / 0 / 1 / fonderie ... (la tour monte de la crypte vers la fonderie).
+# Budget : n s m l k + 1 2 3 4 (tuile de transition : les deux matières, 4 tons chacune max).
+# Défaut corrigé : une limite tramée (damier A/B) faisait du bruit ; ici on change de matière sur un joint.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 32x16
+---
+lmmsssss1lmmssnk433322222214321k
+msssssss1mssssnk322222222213221k
+ssssssss1sssssnk223222322212221k
+ssssssss1sssssnk222122212212221k
+111111111111111k222222222212221k
+llmmmsssssssssnk222222222212221k
+lmssssssssssssnk111111111111111k
+msssssssssssssnklmmmssssssssssnk
+ssssssssssssssnkmsssssssssssssnk
+nnnnnnnnnnnnnnnkssssssssssssssnk
+lmmsssnlmmssssnkssssssssssssssnk
+msssssnmssssssnkssssssssssssssnk
+ssssssnsssssssnkssssssssssssssnk
+ssssssnsssssssnkssssssssssssssnk
+ssssssnsssssssnkssssssssssssssnk
+nnnnnnnnnnnnnnnknnnnnnnnnnnnnnnk

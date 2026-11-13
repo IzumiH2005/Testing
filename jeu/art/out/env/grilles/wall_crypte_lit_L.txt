@@ -1,0 +1,25 @@
+# ÉCHO - wall_crypte_lit_L : mur GAUCHE Crypte éclairé par une lanterne froide (deco module 0), 2 tuiles 16x16 (32x16).
+# Intention : les arêtes qui regardent la source montent d'un cran (s->m, m->l), sur 1 tuile seulement.
+# Tuile 0 = posée JUSTE AU-DESSUS de la source : arêtes BASSES des blocs éclairées (ligne au-dessus du joint).
+# Tuile 1 = posée JUSTE EN DESSOUS : arêtes HAUTES éclairées et allongées.
+# Budget : n s m l k (5). Pas de halo, pas de dégradé : un cran, sur les arêtes seulement.
+# Défaut corrigé : un halo de pixels clairs autour de la lanterne se lisait comme de la mousse/brume (bruit).
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 32x16
+---
+llmmmsssssssssnklllllmmmmmmsssnk
+lmssssssssssssnklmmmssssssssssnk
+msssssssssssssnkmsssssssssssssnk
+ssssssssssssssnkssssssssssssssnk
+ssssssssssssssnkssssssssssssssnk
+ssssssssssssssnkssssssssssssssnk
+ssssssssssssssnkssssssssssssssnk
+ssssssssssssssnkssssssssssssssnk
+ssmmmmmmmmmmmsnkssssssssssssssnk
+nnnnnnnnnnnnnnnknnnnnnnnnnnnnnnk
+lmmsssnlmmssssnkllmmmmnllmmmmsnk
+msssssnmssssssnkmmssssnmmsssssnk
+ssssssnsssssssnkssssssnsssssssnk
+ssssssnsssssssnkssssssnsssssssnk
+smmmmmnsmmmmmsnkssssssnsssssssnk
+nnnnnnnnnnnnnnnknnnnnnnnnnnnnnnk

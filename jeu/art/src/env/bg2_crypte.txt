@@ -1,0 +1,40 @@
+# ÉCHO - bg2_crypte : paroi du puits de la Crypte, plan P2 (parallaxe 0.60), 128x32, tuiles qui se raccordent dans les 2 sens.
+# Découpe : x0-31 y0-15 = T0 briques de base (planche validée back_crypte) · x0-31 y16-31 = T1 briques à 2 faces en ~
+#   (même valeur que d, autre teinte : variation sans contraste) · x32-63 = T2 (32x32) brique manquante (trou k, rare) ·
+#   x64-95 = T3 (32x32) grande pierre de 2 assises à gauche · x96-127 = T4 (32x32) fissure en escalier b.
+# Briques 32x16 = 2x celles du mur de jeu -> lu comme plus loin. Joints b, faces d / ~, k seulement au fond des trous.
+# Budget : b d ~ (+k dans le trou) = 3 (+1). Y 0.008-0.017 : sous la bande des murs. Aucune arête claire, aucun trait horizontal clair.
+# Défaut corrigé : une paroi d'une seule tuile répétée faisait un papier peint ; T1-T4 cassent la répétition sans bruit.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 128x32
+grid 0 0
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddd
+end
+copy 0 0 31 15 0 16
+rect ~ 15 17 30 23
+rect ~ 0 25 6 31
+copy 0 0 31 15 32 0
+copy 0 0 31 15 32 16
+rect k 40 25 54 31
+copy 0 0 31 15 64 0
+copy 0 0 31 15 64 16
+rect d 64 1 77 15
+rect ~ 88 25 95 31
+copy 0 0 31 15 96 0
+copy 0 0 31 15 96 16
+px b 100 18 101 19 101 20 102 21 102 22 103 23 104 25 104 26 105 27

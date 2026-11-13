@@ -1,0 +1,30 @@
+# ÉCHO - wall_crypte_L : mur de jeu GAUCHE de la Crypte (B1), 8 tuiles 16x16 (128x16), raccord vertical libre.
+# Intention : pierre taillée bleue, grand bloc + petits, rythme varié ; lumière haut-gauche ; la face côté puits
+#   est à DROITE (x14 chanfrein d'ombre n, x15 contour de collision k). Ligne 15 = joint n, ligne 0 = haut de bloc :
+#   n'importe quelle tuile peut suivre n'importe quelle autre.
+# Tuiles : 0 grand bloc + 2 petits · 1 rythme inversé · 2 bloc étroit haut + long bloc bas · 3 trois assises ·
+#   4 mousse (v f V, coussin 4 px + coulure) · 5 fissure en escalier · 6 RARE niche-reliquaire et urne (b n m) ·
+#   7 BRÈCHE SECRÈTE = tuile 0 + 3 px l en fissure courte au milieu du bloc, sans autre indice (bible).
+# Passe 1 : tuile 3 trop chargée (3 assises de petits blocs = lecture « brique ») -> assise du milieu d'un seul bloc.
+# Budget : n s m l k (5) ; +v f V pour la mousse ; niche : b n m s k (sans l).
+# Défaut corrigé : 0,1,4,5 reprennent la planche validée (arêtes courtes l puis m 3-5 px, plus de « laser »).
+#   Les nouvelles tuiles 2,3 n'ont PAS de reflet l (reflet sur ~1 bloc sur 3 seulement, sinon damier de points clairs).
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 128x16
+---
+llmmmsssssssssnklmmssssssnlmssnkmmsssnmmmmssssnkmmmsssssnmmsssnkllmmmsssssssssnkllmmmsssssssnnnkmmmmssssssssssnkllmmmsssssssssnk
+lmssssssssssssnkmssssssssnmsssnkmssssnmsssssssnkmsssssssnmssssnklmssssssssssssnklmssssssssssnsnkmsssssssssssssnklmssssssssssssnk
+msssssssssssssnksssssssssnssssnksssssnssssssssnkssssssssnsssssnkmsssssssssssssnkmsssssssssssnsnksssssnnnnsssssnkmsssssssssssssnk
+ssssssssssssssnksssssssssnssssnksssssnssssssssnkssssssssnsssssnkssssssssssssssnkssssssssssssnsnkssssnbbbbnssssnkssssssssssssssnk
+ssssssssssssssnksssssssssnssssnksssssnssssssssnknnnnnnnnnnnnnnnkssssssssssssssnksssssssssssnmsnksssnbbbbbbmsssnkssssssslssssssnk
+ssssssssssssssnknnnnnnnnnnnnnnnksssssnssssssssnkmmmmssssssssssnkssssssssssssssnkssssssssssnsssnksssnbbnnbbmsssnksssssssslsssssnk
+ssssssssssssssnkllmmmsssssssssnksssssnssssssssnkmsssssssssssssnkssssssssssssssnkssssssssssnmssnksssnbbmnbbmsssnkssssssssslssssnk
+ssssssssssssssnklmssssssssssssnksssssnssssssssnkssssssssssssssnkssssssssssssssnksssssssssnssssnksssnbmnnnbmsssnkssssssssssssssnk
+ssssssssssssssnkmsssssssssssssnksssssnssssssssnkssssssssssssssnkssvfVvssssssssnksssssssssnmsssnksssnbmnnnbmsssnkssssssssssssssnk
+nnnnnnnnnnnnnnnkssssssssssssssnknnnnnnnnnnnnnnnknnnnnnnnnnnnnnnknvVVVVvnnnnnnnnknnnnnnnnnnnnnnnksssnbbnnbbmsssnknnnnnnnnnnnnnnnk
+lmmsssnlmmssssnkssssssssssssssnkmmmsssssssnmssnkmmmssnmmssssssnklvVvvsnlmmssssnklmmsssnlmmssssnksssmmmmmmmmsssnklmmsssnlmmssssnk
+msssssnmssssssnkssssssssssssssnkmsssssssssnsssnkmssssnmsssssssnkmsvsssnmssssssnkmsssssnmssssssnkssssssssssssssnkmsssssnmssssssnk
+ssssssnsssssssnkssssssssssssssnkssssssssssnsssnksssssnssssssssnkssvsssnsssssssnkssssssnsssssssnkssssssssssssssnkssssssnsssssssnk
+ssssssnsssssssnkssssssssssssssnkssssssssssnsssnksssssnssssssssnkssssssnsssssssnkssssssnsssssssnkssssssssssssssnkssssssnsssssssnk
+ssssssnsssssssnkssssssssssssssnkssssssssssnsssnksssssnssssssssnkssssssnsssssssnkssssssnsssssssnkssssssssssssssnkssssssnsssssssnk
+nnnnnnnnnnnnnnnknnnnnnnnnnnnnnnknnnnnnnnnnnnnnnknnnnnnnnnnnnnnnknnnnnnnnnnnnnnnknnnnnnnnnnnnnnnknnnnnnnnnnnnnnnknnnnnnnnnnnnnnnk

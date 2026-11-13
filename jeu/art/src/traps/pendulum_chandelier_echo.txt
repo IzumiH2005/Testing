@@ -1,0 +1,22 @@
+# ÉCHO - O6 lustre gravé : même sprite recoloré (q t c e), 16x16, même ancrage ; il continue de se balancer.
+# Budget : q t c e = 4. Défaut corrigé : aucun.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 16x16
+frames: 1
+---
+.......qq.......
+..q....qq....q..
+.qeq...qq...qeq.
+.qcq..qeeq..qcq.
+.qtq..qccq..qtq.
+qqqqqqqqqqqqqqqq
+qccccccccccccccq
+qtttttttttttttqq
+qqqqqqqqqqqqqqqq
+.qtecttttttttqq.
+..qcttttttttqq..
+...qttttttqqq...
+....qqqqqqqq....
+......qqqq......
+.......qq.......
+................

@@ -1,0 +1,29 @@
+# ÉCHO - O6 lustre-pendule (Bibliothèque), cellule 16x16, 3 images. Ancrage : coin haut-gauche à pendulum_pos - (8,8) ;
+# le crochet (7-8, 0) touche la chaîne. Cercle létal de hz.gd r 5 autour de (8,8) = vasque x 3-12 / y 3-13.
+# Intention : une couronne de bougies qui balaie le couloir ; la vasque magenta est la masse qui tue.
+# Timing (E3) : img | rôle | change | principe | durée
+# 0 | reflet A | reflet Z en haut à gauche de la vasque, flammes Z | tenue | 1/2 période
+# 1 | reflet B | reflet glissé au centre, flamme centrale seule allumée | arc | 1/2 période
+# 2 | smear | traînée x de 2 px côté opposé au mouvement (retourner l'image selon le sens) | smear unique [E2-C] | 1 image au point bas
+# Bible : 32x16 (2 images) ; + 1 smear demandé au §11 O6, d'où 48x16.
+# Budget : k x X z Z = 5 couleurs. Défaut corrigé : vasque en demi-cercle à escaliers 1-2-1 (jaggy) -> 1-1-1-2-2.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 48x16
+frames: 3
+---
+.......kk..............kk..............kk.......
+..k....kk....k....k....kk....k....k....kk....k..
+.kZk...kk...kZk..kzk...kk...kzk..kZk...kk...kZk.
+.kzk..kZZk..kzk..kXk..kZZk..kXk..kzk..kZZk..kzk.
+.kXk..kzzk..kXk..kXk..kzzk..kXk..kXk..kzzk..kXk.
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+kzzzzzzzzzzzzzzkkzzzzzzzzzzzzzzkkzzzzzzzzzzzzzzk
+kXXXXXXXXXXXXXxkkXXXXXXXXXXXXXxkkXXXXXXXXXXXXXxk
+kxxxxxxxxxxxxxxkkxxxxxxxxxxxxxxkkxxxxxxxxxxxxxxk
+.kXZzXXXXXXXXxk..kXXXXzZXXXXXxk.XkXZzXXXXXXXXxk.
+..kzXXXXXXXXxk....kXXXXzXXXXxk..xxkzXXXXXXXXxk..
+...kXXXXXXxxk......kXXXXXXxxk....xXkXXXXXXxxk...
+....kkxxxxkk........kkxxxxkk......xxkkxxxxkk....
+......kkkk............kkkk..........xxkkkk......
+.......kk..............kk..............kk.......
+................................................

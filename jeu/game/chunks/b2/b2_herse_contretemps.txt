@@ -1,0 +1,33 @@
+id: b2_herse_contretemps
+biome: B2
+tension: M
+D: 4
+entree: any
+sortie: any
+verbe: elan
+intro: -
+alt: 180-345
+poids: 1
+// Twist O9 : herse R5-R6 + épines L5-L7 en face. Le bond depuis R4 finirait dans les épines :
+// il faut l'élan long (0,25 s) vers L9, qui reste plus longtemps dans la zone de la herse.
+// Idée : à contretemps. La fenêtre utile n'est plus « dès qu'elle rentre » mais « assez tôt
+// pour que l'élan tenu sorte de sa zone avant la prochaine sortie ». Grand éclat collé à la herse.
+// Écho : graver la herse (marche figée R5-R6) permet de remonter R4 -> R7 et de bondir vers L10.
+---
+##........##
+##........##
+##........##
+##......o.##
+##........##                    // R12 bond -> L15 (sortie)
+##.o......##
+##........##
+##........##                    // L9 bond -> R12
+##....o...##
+##>.......##
+##>.....OH## ; phase=0.0
+##>......H##
+##........##                    // R4 elan -> L9 : tenir, la herse en tête
+##.o......##
+##........##
+##........##                    // L1 bond -> R4
+---

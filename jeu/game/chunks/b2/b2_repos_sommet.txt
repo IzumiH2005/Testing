@@ -1,0 +1,32 @@
+id: b2_repos_sommet
+biome: B2
+tension: R
+D: 1
+entree: any
+sortie: any
+verbe: bond
+intro: -
+alt: 320-350
+poids: 1
+// Repos. Idée : le sommet de la fonderie. Tout s'effrite (deux murs de plaques) sauf une seule
+// marche fixe, L7-L8, où l'on peut enfin s'arrêter : le power-up est posé juste devant.
+// C'est la leçon de B2 retournée : savoir où l'on PEUT attendre. Dernier palier avant B3.
+// Écho : graver une plaque friable la fige (marche cyan) : utile pour qui revient chercher l'éclat.
+---
+##........##
+##........##
+##f.o....f##
+##f......f##                    // L13 bond -> R16 (sortie)
+##f......f##
+##f....o.f##
+##f......f##                    // R10 bond -> L13
+##fo.....f##
+##...*...f##
+##.......f##                    // L7 bond -> R10 : seul appui fixe, on peut souffler
+##f......f##
+##f....o.f##
+##f......f##                    // R4 bond -> L7
+##fo.....f##
+##........##
+##........##                    // L1 bond -> R4
+---

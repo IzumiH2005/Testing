@@ -1,0 +1,33 @@
+id: b2_herse_echelle
+biome: B2
+tension: M
+D: 3
+entree: any
+sortie: any
+verbe: bond
+intro: -
+alt: 175-345
+poids: 1
+// Développement O9 : deux herses, une par mur (R5-R6 puis L8-L9), décalées de 0,8 s.
+// Idée : l'échelle à contretemps. Partir dès que la première rentre fait arriver sous la seconde
+// au moment où elle sort : on attend alors en L7, sous une herse (stress). La lecture experte : partir
+// en FIN de fenêtre de R5-R6, et l'on enchaîne sans arrêt. Grand éclat collé à la première herse.
+// Écho : une herse gravée reste sortie, figée : marche accrochable par-dessous (L8-L9 gravée = repos).
+---
+##........##
+##........##
+##..o.....##
+##........##                    // L13 bond -> R16 (sortie)
+##.....o..##
+##....o...##
+##........##                    // R10 bond -> L13
+##H.......## ; phase=0.8
+##Ho......##
+##........##                    // L7 bond -> R10
+##.......H## ; phase=0.0
+##......OH##
+##........##                    // R4 bond -> L7 : partir en FIN de fenêtre
+##.o......##
+##........##
+##........##                    // L1 bond -> R4
+---

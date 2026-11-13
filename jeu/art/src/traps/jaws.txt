@@ -1,0 +1,40 @@
+# ÉCHO - O10 mâchoires (Fonderie : acier 1 2 3 4 + mâchoire X), mur GAUCHE, cellule 16x24, 3 images.
+# 0 = corps : bloc d'acier bouclable en x, à répéter derrière la tête de WL à WL+ext-16 ;
+# 1 = tête au repos (ouvert / fermeture / fermé) ; 2 = tête en préavis : 1 px plus loin (tremblement) + dents allumées + 3 poussières p.
+# Ancrage : tête coin haut-gauche à (WL+ext-16, mid-12) ; corps à (WL+16*i, mid-12). Rangées 2-21 = hitbox 20 px (mid-10..mid+10).
+# Mur droit : même image retournée, tête à (WR-ext, mid-12). Pour ext < 16, la tête sort du mur (le mur se dessine par-dessus).
+# Intention : un étau d'acier dont seule la gueule est magenta : on lit « ça écrase » par les dents, pas par la masse.
+# Timing (cycle de 3 s de hz.gd) : img | rôle | durée
+# 1 | ouvert | 1,6 s (tenue)
+# 2 | préavis (alterner 1/2 à 10 Hz = tremblement de 1 px) | 0,5 s (anticipation)
+# 1 | fermeture 0,15 s (le code déplace ext) puis fermé 0,45 s puis réouverture 0,3 s
+# Budget : acier k 1 2 3 4 + mâchoire z X x (+ Z au préavis, p poussière) = 8 par image au plus ; détail : 2 rivets groupés.
+# Défaut corrigé : dents carrées 2x2 du dessin de repli -> dents triangulaires de 5 px, 4 par mâchoire, pointe Z.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 48x24
+frames: 3
+---
+...................................p............
+......................................p.........
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkk....kkkkkkkkkkkkk..
+333333333333333333333333kzXxzkk..33333333kzXxZkk
+222222222222222122222222kzXxXzZk.22222222kzXxzZZ
+222222222222222122222222kzXxxkk..22222222kzXxxkk
+222222222222222122222222kzXxk....22222222kzXxk..
+222242222422222122224222kzXxk....22224222kzXxk..
+222212222122222122221222kzXxzkk..22221222kzXxZkk
+222222222222222122222222kzXxXzZk.22222222kzXxzZZ
+222222222222222122222222kzXxxkk..22222222kzXxxkk
+222222222222222122222222kzXxk....22222222kzXxk..
+222222222222222122222222kzXxk....22222222kzXxk..
+222222222222222122222222kzXxzkk..22222222kzXxZkk
+222222222222222122222222kzXxXzZk.22222222kzXxzZZ
+222222222222222122222222kzXxxkk..22222222kzXxxkk
+222242222422222122224222kzXxk....22224222kzXxk..
+222212222122222122221222kzXxk....22221222kzXxk..
+222222222222222122222222kzXxzkk..22222222kzXxZkk
+222222222222222122222222kzXxXzZk.22222222kzXxzZZ
+111111111111111111111111kzXxxkk..11111111kzXxxkk
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkk....kkkkkkkkkkkkk..
+................................................
+....................................p...........

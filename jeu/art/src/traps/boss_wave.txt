@@ -1,0 +1,21 @@
+# ÉCHO - onde-laser du Sonneur, tuile 16x8 bouclable de WL à WR, 4 images. Ancrage : coin haut-gauche à (x, wave_y-3).
+# Bande létale de 5 px X z Z z X sur les rangées 1-5 (centre rangée 3 = wave_y ; world.gd tue à |y - wave_y| < 4).
+# Intention : la note de la cloche devenue trait ; le préavis pointillé annonce la hauteur avant qu'elle ne balaie.
+# Timing (E3) : img | rôle | change | durée
+# 0 | préavis (0,6 s) | tirets zz de 2 px sur 4, rangée 3 | le code clignote à 10 Hz
+# 1 | actif A | bande pleine | 1/20 s
+# 2 | actif B | 2 étincelles W, cran x en haut | 1/20 s
+# 3 | actif C | étincelles déplacées, cran x en bas | 1/20 s (boucle 1-2-3 pendant la descente)
+# Budget : x X z Z W = 5. Défaut corrigé : boucle de 2 images = jumeaux ; 3 images différentes, aucune symétrie.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 64x8
+frames: 4
+---
+................................................................
+................XXXXXXXXXXXXXXXXXXXXXXXxXXXXXXXxXXXXXXXXXXXXXXXX
+................zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+zz..zz..zz..zz..ZZZZZZZZZZZZZZZZZZZWZZZZZZZWZZZZWZZZZZZWZZZZZZZZ
+................zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+................XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxXXXXXXXxXXXX
+................................................................
+................................................................

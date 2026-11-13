@@ -1,0 +1,35 @@
+id: b2_friable_volte
+biome: B2
+tension: M
+D: 4
+entree: any
+sortie: any
+verbe: volte
+intro: -
+alt: 185-345
+poids: 1
+// Twist O11 : le puits qui s'effrite. Le mur gauche est hérissé (L4-L7, L9-L12, la brèche L8 est
+// trop étroite pour un élan propre) ; le mur droit porte des plaques friables. Seule la volte
+// (élan + pivot qui ramène sur le même mur) fait monter. On ne peut s'arrêter ni sur R10 ni sur R14.
+// Grand éclat L9 c3 : collé aux épines, pris par un pivot TARDIF (0,45 s) avec élan 0,18 s.
+// Écho : graver la bande L9-L12 (mort tactique) ouvre l'alternance classique en bonds : D réel 3.
+---
+##........##
+##........##
+##........##                    // R16 bond -> L19 (sortie)
+##.......f##
+##.......f##
+##....o...##
+##>....o..##
+##>......f##
+##>......f##                    // R10 elan+volte -> R16 : sans s'arrêter (plaque)
+##>O......##
+##...o....##
+##>......f##
+##>......f##
+##>.......##
+##>.......##                    // R4 elan+volte -> R10 : élan, pivot vers 0,35 s
+##.o......##
+##........##
+##........##                    // L1 bond -> R4
+---

@@ -46,7 +46,7 @@ def poly_fill(g, c, pts):
 
 def put(g, x, y, c):
     if 0 <= y < len(g) and 0 <= x < len(g[0]):
-        g[y][x] = c
+        g[y][x] = "." if c == "," else c  # ',' = rendre transparent (ouverture)
 
 
 def main():

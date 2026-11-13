@@ -1,0 +1,116 @@
+# ÉCHO - altar_flame : flamme d'écho de l'autel, 6 images 8x16 (48x16), boucle 90 ms. SEUL décor cyan admis (bible §7.1).
+# Intention : émissif = ombrage INVERSÉ (cœur e au centre-bas, anneau c, bord t, contour coloré q, jamais k).
+# Le corps (lignes 7-14) est fixe ; seule la pointe bouge : 1 neutre · 2 penche à droite · 3 s'étire ·
+#   4 penche à gauche · 5 une étincelle se détache · 6 se tasse -> vacillement sans « respiration » du corps.
+# Budget : q t c e (4).
+# Défaut corrigé : un corps qui gonfle d'image en image donnait un effet de pulsation (lecture « danger »).
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 48x16
+grid 0 0
+........
+........
+....q...
+...qq...
+...qtq..
+..qtcq..
+..qtcq..
+..qcecq.
+.qtcecq.
+.qceecq.
+.qceecq.
+.qceecq.
+.qtcctq.
+..qttq..
+...qq...
+........
+end
+grid 8 0
+........
+........
+.....q..
+....qq..
+....qtq.
+...qtcq.
+..qtccq.
+..qcecq.
+.qtcecq.
+.qceecq.
+.qceecq.
+.qceecq.
+.qtcctq.
+..qttq..
+...qq...
+........
+end
+grid 16 0
+........
+....q...
+....q...
+...qtq..
+...qtq..
+..qtcq..
+..qtecq.
+..qcecq.
+.qtcecq.
+.qceecq.
+.qceecq.
+.qceecq.
+.qtcctq.
+..qttq..
+...qq...
+........
+end
+grid 24 0
+........
+........
+..q.....
+..qq....
+..qtq...
+..qtcq..
+..qtcq..
+..qcecq.
+.qtcecq.
+.qceecq.
+.qceecq.
+.qceecq.
+.qtcctq.
+..qttq..
+...qq...
+........
+end
+grid 32 0
+........
+...q....
+........
+...qq...
+...qtq..
+..qtcq..
+..qtcq..
+..qcecq.
+.qtcecq.
+.qceecq.
+.qceecq.
+.qceecq.
+.qtcctq.
+..qttq..
+...qq...
+........
+end
+grid 40 0
+........
+........
+........
+........
+...qq...
+..qtcq..
+..qtcq..
+..qcecq.
+.qtcecq.
+.qceecq.
+.qceecq.
+.qceecq.
+.qtcctq.
+..qttq..
+...qq...
+........
+end

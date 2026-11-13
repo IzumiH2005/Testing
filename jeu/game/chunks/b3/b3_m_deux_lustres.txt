@@ -4,7 +4,7 @@ tension: M
 D: 6
 entree: L
 sortie: any
-verbe: elan
+verbe: bond
 alt: 392-600
 poids: 1.0
 ---

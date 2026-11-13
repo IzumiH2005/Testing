@@ -1,0 +1,22 @@
+# ÉCHO - wall_crypte_to_fonderie_R : mur DROIT, dérivé de wall_crypte_to_fonderie_L par la règle de art/out/env/vers_droite.py (pas de miroir).
+# x0 contour de collision k ; x1 chanfrein ÉCLAIRÉ (la face regarde la lumière haut-gauche) ; x2-14 = blocs du mur gauche décalés de 2 px ;
+# x15 joint vers la colonne extérieure. Intention, budget et défauts : voir wall_crypte_to_fonderie_L.txt (mêmes rôles de tuiles).
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 32x16
+---
+kmlmmsssss1lmmsnk343332222221431
+kmmsssssss1msssnk332222222221321
+kmssssssss1ssssnk322322232221221
+kmssssssss1ssssnk322212221221221
+k111111111111111k322222222221221
+kmllmmmssssssssnk322222222221221
+kmlmsssssssssssnk111111111111111
+kmmssssssssssssnkmlmmmsssssssssn
+kmsssssssssssssnkmmssssssssssssn
+knnnnnnnnnnnnnnnkmsssssssssssssn
+kmlmmsssnlmmsssnkmsssssssssssssn
+kmmsssssnmsssssnkmsssssssssssssn
+kmssssssnssssssnkmsssssssssssssn
+kmssssssnssssssnkmsssssssssssssn
+kmssssssnssssssnkmsssssssssssssn
+knnnnnnnnnnnnnnnknnnnnnnnnnnnnnn

@@ -1,0 +1,42 @@
+# ÉCHO - bg2_crypte : paroi du puits de la Crypte, plan P2 (parallaxe 0.60), 128x32, tuiles qui se raccordent dans les 2 sens.
+# Découpe : x0-31 y0-15 = T0 briques de base (planche validée back_crypte) · x0-31 y16-31 = T1 briques à 2 faces en ~
+#   (même valeur que d, autre teinte : variation sans contraste) · x32-63 = T2 (32x32) brique manquante (trou k, rare) ·
+#   x64-95 = T3 (32x32) grande pierre de 2 assises à gauche · x96-127 = T4 (32x32) fissure en escalier b.
+# Briques 32x16 = 2x celles du mur de jeu -> lu comme plus loin. Joints b, faces d / ~, k seulement au fond des trous.
+# Budget : b d ~ (+k dans le trou) = 3 (+1). Y 0.008-0.017 : sous la bande des murs. Aucune arête claire, aucun trait horizontal clair.
+# Défaut corrigé : une paroi d'une seule tuile répétée faisait un papier peint ; T1-T4 cassent la répétition sans bruit.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 128x32
+---
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+ddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddb
+ddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbddddddddddddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+dddddddbdddddddddddddddbdddddddddddddddbdddddddddddddddbdddddddddddddddddddddddddddddddbdddddddddddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddddddddddbdddddddddddddddbdddddddddddddddddddddddddddddddbdddddddddddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddddddddddbdddddddddddddddbdddddddddddddddddddddddddddddddbdddddddddddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddddddddddbdddddddddddddddbdddddddddddddddddddddddddddddddbdddddddddddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddddddddddbdddddddddddddddbdddddddddddddddddddddddddddddddbdddddddddddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddddddddddbdddddddddddddddbdddddddddddddddddddddddddddddddbdddddddddddddddbdddddddddddddddbdddddddd
+dddddddbdddddddddddddddbdddddddddddddddbdddddddddddddddbdddddddddddddddddddddddddddddddbdddddddddddddddbdddddddddddddddbdddddddd
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+ddddddddddddddb~~~~~~~~~~~~~~~~bddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddb
+ddddddddddddddb~~~~~~~~~~~~~~~~bddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddbdddddddddbddddddddddddddddb
+ddddddddddddddb~~~~~~~~~~~~~~~~bddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbdddddbddddddddbddddddddddddddddb
+ddddddddddddddb~~~~~~~~~~~~~~~~bddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbdddddbddddddddbddddddddddddddddb
+ddddddddddddddb~~~~~~~~~~~~~~~~bddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddbdddddddbddddddddddddddddb
+ddddddddddddddb~~~~~~~~~~~~~~~~bddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddbdddddddbddddddddddddddddb
+ddddddddddddddb~~~~~~~~~~~~~~~~bddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbdddddddbddddddbddddddddddddddddb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+~~~~~~~bdddddddddddddddbdddddddddddddddbkkkkkkkkkkkkkkkbdddddddddddddddbdddddddddddddddb~~~~~~~~dddddddbbddddddddddddddbdddddddd
+~~~~~~~bdddddddddddddddbdddddddddddddddbkkkkkkkkkkkkkkkbdddddddddddddddbdddddddddddddddb~~~~~~~~dddddddbbddddddddddddddbdddddddd
+~~~~~~~bdddddddddddddddbdddddddddddddddbkkkkkkkkkkkkkkkbdddddddddddddddbdddddddddddddddb~~~~~~~~dddddddbdbdddddddddddddbdddddddd
+~~~~~~~bdddddddddddddddbdddddddddddddddbkkkkkkkkkkkkkkkbdddddddddddddddbdddddddddddddddb~~~~~~~~dddddddbdddddddddddddddbdddddddd
+~~~~~~~bdddddddddddddddbdddddddddddddddbkkkkkkkkkkkkkkkbdddddddddddddddbdddddddddddddddb~~~~~~~~dddddddbdddddddddddddddbdddddddd
+~~~~~~~bdddddddddddddddbdddddddddddddddbkkkkkkkkkkkkkkkbdddddddddddddddbdddddddddddddddb~~~~~~~~dddddddbdddddddddddddddbdddddddd
+~~~~~~~bdddddddddddddddbdddddddddddddddbkkkkkkkkkkkkkkkbdddddddddddddddbdddddddddddddddb~~~~~~~~dddddddbdddddddddddddddbdddddddd

@@ -1,0 +1,70 @@
+# ÉCHO - O3 contrefort à épines (Fonderie froide : acier 1 2 3 4), mur GAUCHE, cellule 16x58, 2 images.
+# 0 = hauteur 32 (rangées 0-41 utilisées), 1 = hauteur 48 (rangées 0-57). Ancrage : coin haut-gauche à (bx, y0-5), bx = WL.
+# Intention : un bloc d'acier accrochable (arête 4 sur la face côté couloir) hérissé de dents dessus et dessous.
+# Géométrie : épines de 5 px x 2-13 au-dessus (hz.gd Rect2(bx+2, y0-5, 12, 5)) et au-dessous (Rect2(bx+2, y1, 12, 5)).
+# Lumière haut-gauche : dessus 3 + coin 4, joints 1 sous chaque plaque, terminateur 1 avant l'arête ; dents z à gauche, x à droite.
+# Timing : statique (1 image par hauteur).
+# Budget : k 1 2 3 4 + x X z = 8 ; par masse : acier 5, épines 4 (k partagé). Détail : 2 rivets par plaque.
+# Défaut corrigé : dents de 4 px avec double contour kk entre deux dents ; passé à des dents de 3 px à contour k partagé.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 32x58
+frames: 2
+---
+...k...k...k.......k...k...k....
+..kzk.kzk.kzk.....kzk.kzk.kzk...
+.kzXxkzXxkzXxk...kzXxkzXxkzXxk..
+.kzXxxzXxxzXxk...kzXxxzXxxzXxk..
+.kxxxxxxxxxxxk...kxxxxxxxxxxxk..
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+443333333333314k443333333333314k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+222422222422214k222422222422214k
+222122222122214k222122222122214k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+111111111111114k111111111111114k
+333333333333314k333333333333314k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+222422222422214k222422222422214k
+222122222122214k222122222122214k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+222222222222214k222222222222214k
+111111111111114k222222222222214k
+kkkkkkkkkkkkkkkk222222222222214k
+.kxxxxxxxxxxxk..111111111111114k
+.kzXxxzXxxzXxk..333333333333314k
+.kzXxkzXxkzXxk..222222222222214k
+..kzk.kzk.kzk...222222222222214k
+...k...k...k....222222222222214k
+................222422222422214k
+................222122222122214k
+................222222222222214k
+................222222222222214k
+................222222222222214k
+................222222222222214k
+................222222222222214k
+................222222222222214k
+................222222222222214k
+................111111111111114k
+................kkkkkkkkkkkkkkkk
+.................kxxxxxxxxxxxk..
+.................kzXxxzXxxzXxk..
+.................kzXxkzXxkzXxk..
+..................kzk.kzk.kzk...
+...................k...k...k....

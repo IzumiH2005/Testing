@@ -1,0 +1,45 @@
+# ÉCHO - rune_crypte_L : rune de mur GAUCHE Crypte, 2 tuiles 16x16 (32x16) : 0 ÉTEINTE, 1 ALLUMÉE.
+# Intention : un grand bloc nu porte un glyphe « onde » (chevron + hampe + socle) de 7x7 px.
+# 0 éteinte : glyphe gravé en n (ton d'ombre de la pierre), PAS en cyan (bible B1).
+# 1 allumée : traits G, coin haut-gauche de chaque trait en y, ombre portée o en bas-droite (bible : G y + contour o).
+# Le bloc porteur est identique dans les deux tuiles : seule la gravure change -> l'allumage se lit sans saut de forme.
+# Budget : 0 = n s m k (4) ; 1 = s m n k G y o (7, objet de jeu).
+# Défaut corrigé : glyphe à traits de 1 px sur un bloc sans reflet l, pour qu'aucun pixel clair ne concurrence le glyphe.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 32x16
+grid 0 0
+mmmmssssssssssnk
+msssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssnsssssssnk
+sssssnsnssssssnk
+ssssnsssnsssssnk
+sssnssnssnssssnk
+ssssssnsssssssnk
+ssssssnsssssssnk
+ssssnnnnnsssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+nnnnnnnnnnnnnnnk
+end
+grid 16 0
+mmmmssssssssssnk
+msssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssysssssssnk
+sssssysGssssssnk
+ssssysosGsssssnk
+sssGsoGssGssssnk
+ssssosGossosssnk
+ssssssGossssssnk
+ssssyGGGGsssssnk
+sssssooooossssnk
+ssssssssssssssnk
+ssssssssssssssnk
+ssssssssssssssnk
+nnnnnnnnnnnnnnnk
+end

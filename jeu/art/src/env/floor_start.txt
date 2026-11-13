@@ -1,0 +1,62 @@
+# ÉCHO - floor_start : sol de départ de la tour (Crypte), 3 tuiles 16x16 (48x16) : 0 bout gauche, 1 milieu, 2 bout droit.
+# Intention : dalles de pierre taillée : ligne 0 contour de collision k, dessus éclairé court (l puis m 3 px puis s),
+#   joints n perpendiculaires, 2 assises décalées (joints x7/x15 puis x3/x11), reflet l sur 1 bloc sur 2 tuiles ; bouts fermés par une colonne k.
+# Le milieu se répète (12 tuiles = 192 px) ; le code assombrit la 2e rangée (fondation).
+# Budget : k n s m l (5).
+# Défaut corrigé : l'ancien sol (floor.png) avait un dessus éclairé pleine largeur = trait « laser ».
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 48x16
+grid 0 0
+kkkkkkkkkkkkkkkk
+kmmssssnlmmssssn
+kssssssnmssssssn
+kssssssnsssssssn
+kssssssnsssssssn
+kssssssnsssssssn
+kssssssnsssssssn
+knnnnnnnnnnnnnnn
+kssnmssssssnmsss
+kssnsssssssnssss
+kssnsssssssnssss
+kssnsssssssnssss
+kssnsssssssnssss
+kssnsssssssnssss
+kssnsssssssnssss
+knnnnnnnnnnnnnnn
+end
+grid 16 0
+kkkkkkkkkkkkkkkk
+mmmssssnlmmssssn
+mssssssnmssssssn
+sssssssnsssssssn
+sssssssnsssssssn
+sssssssnsssssssn
+sssssssnsssssssn
+nnnnnnnnnnnnnnnn
+sssnmssssssnmsss
+sssnsssssssnssss
+sssnsssssssnssss
+sssnsssssssnssss
+sssnsssssssnssss
+sssnsssssssnssss
+sssnsssssssnssss
+nnnnnnnnnnnnnnnn
+end
+grid 32 0
+kkkkkkkkkkkkkkkk
+mmmssssnlmmssssk
+mssssssnmssssssk
+sssssssnsssssssk
+sssssssnsssssssk
+sssssssnsssssssk
+sssssssnsssssssk
+nnnnnnnnnnnnnnnk
+sssnmssssssnmssk
+sssnsssssssnsssk
+sssnsssssssnsssk
+sssnsssssssnsssk
+sssnsssssssnsssk
+sssnsssssssnsssk
+sssnsssssssnsssk
+nnnnnnnnnnnnnnnk
+end

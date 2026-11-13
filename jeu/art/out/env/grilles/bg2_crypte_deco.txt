@@ -1,0 +1,45 @@
+# ÉCHO - bg2_crypte_deco : 3 modules 32x32 (96x32) posés sur bg2_crypte (P2, parallaxe 0.60) ; même calepinage de briques.
+# 0 FENÊTRE en ogive : ouverture TRANSPARENTE (on voit bg1/bg0 à travers), ébrasement b, appui ~ -> profondeur.
+# 1 NICHE en ogive : fond k (trou profond), urne en silhouette b (k et b : le creux reste le plus sombre).
+# 2 CHAÎNE pendante en b : maillons de face 3x5 puis de profil 1x3, période 8 px -> 4 maillons, se répète en hauteur.
+# Fréquence conseillée : 1 module pour 6-10 tuiles de paroi ; jamais 2 fenêtres côte à côte.
+# Budget : b d ~ k (4 au plus par module).
+# Défaut corrigé : une chaîne en n (ton de mur) sortait de la bande du fond et passait devant le jeu ; ici b sur d.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 96x32
+# fenêtre : ébrasement b (1 px autour), ouverture transparente, appui ~
+# niche : même ogive réduite, fond k, urne b
+# chaîne
+---
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+ddddddddddddddbddddddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbbdbdddddddddddddb
+ddddddddddddddbbbbdddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbbdbdddddddddddddb
+dddddddddddddbb..dbddddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbbdbdddddddddddddb
+ddddddddddddbd....dbdddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbdbddddddddddddddb
+dddddddddddbd......dbddddddddddbddddddddddddddbddddddddddddddddbddddddddddddddbdbddddddddddddddb
+ddddddddddbd........dbdddddddddbddddddddddddddbbbddddddddddddddbddddddddddddddbdbddddddddddddddb
+dddddddddbb..........bbddddddddbddddddddddddddbkkbdddddddddddddbddddddddddddddbdbddddddddddddddb
+bbbbbbbbbb............bbbbbbbbbbbbbbbbbbbbbbbbkkkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+dddddddbdb............bbdddddddddddddddbddddbkkkkkkbdddbdddddddddddddddbdddddddbdbdddddbdddddddd
+dddddddbdb............bbdddddddddddddddbdddbkkkkkkkkbddbdddddddddddddddbdddddddbdbdddddbdddddddd
+dddddddbdb............bbdddddddddddddddbdddbkkkkkkkkbddbdddddddddddddddbdddddddbdbdddddbdddddddd
+dddddddbdb............bbdddddddddddddddbdddbkkkkkkkkbddbdddddddddddddddbddddddddbddddddbdddddddd
+dddddddbdb............bbdddddddddddddddbdddbkkkkkkkkbddbdddddddddddddddbddddddddbddddddbdddddddd
+dddddddbdb............bbdddddddddddddddbdddbkkkkkkkkbddbdddddddddddddddbddddddddbddddddbdddddddd
+dddddddbdb............bbdddddddddddddddbdddbkkkkkkkkbddbdddddddddddddddbddddddddbddddddbdddddddd
+bbbbbbbbbb............bbbbbbbbbbbbbbbbbbbbbbkkkkkkkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+dddddddddb............bddddddddbdddddddddddbkkkkkkkkbddddddddddbddddddddddddddbbdbdddddddddddddb
+dddddddddb............bddddddddbdddddddddddbkkkkkkkkbddddddddddbddddddddddddddbbdbdddddddddddddb
+dddddddddb............bddddddddbdddddddddddbkkkbbkkkbddddddddddbddddddddddddddbbdbdddddddddddddb
+dddddddddb............bddddddddbdddddddddddbkkkbbkkkbddddddddddbddddddddddddddbdbddddddddddddddb
+dddddddddb............bddddddddbdddddddddddbkkbbbbkkbddddddddddbddddddddddddddbdbddddddddddddddb
+dddddddddb............bddddddddbdddddddddddbkbbbbbbkbddddddddddbddddddddddddddbdbddddddddddddddb
+dddddddddb............bddddddddbdddddddddddbkbbbbbbkbddddddddddbddddddddddddddbdbddddddddddddddb
+bbbbbbbbbb............bbbbbbbbbbbbbbbbbbbbbbkkbbbbkkbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+dddddddbdb............bbdddddddddddddddbdddbkkbbbbkkbddbdddddddddddddddbdddddddbdbdddddbdddddddd
+dddddddbdb............bbdddddddddddddddbdddbkkkkkkkkbddbdddddddddddddddbdddddddbdbdddddbdddddddd
+dddddddbdb............bbdddddddddddddddbdd~~~~~~~~~~~~dbdddddddddddddddbdddddddbdbdddddbdddddddd
+dddddddbdb............bbdddddddddddddddbdddddddddddddddbdddddddddddddddbddddddddbddddddbdddddddd
+dddddddb~~~~~~~~~~~~~~~~dddddddddddddddbdddddddddddddddbdddddddddddddddbddddddddbddddddbdddddddd
+dddddddbbbbbbbbbbbbbbbbbdddddddddddddddbdddddddddddddddbdddddddddddddddbddddddddbddddddbdddddddd
+dddddddbdddddddddddddddbdddddddddddddddbdddddddddddddddbdddddddddddddddbddddddddbddddddbdddddddd

@@ -1,0 +1,22 @@
+# ÉCHO - wall_crypte_lit_R : mur DROIT, dérivé de wall_crypte_lit_L par la règle de art/out/env/vers_droite.py (pas de miroir).
+# x0 contour de collision k ; x1 chanfrein ÉCLAIRÉ (la face regarde la lumière haut-gauche) ; x2-14 = blocs du mur gauche décalés de 2 px ;
+# x15 joint vers la colonne extérieure. Intention, budget et défauts : voir wall_crypte_lit_L.txt (mêmes rôles de tuiles).
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 32x16
+---
+kmllmmmssssssssnkmlllllmmmmmmssn
+kmlmsssssssssssnkmlmmmsssssssssn
+kmmssssssssssssnkmmssssssssssssn
+kmsssssssssssssnkmsssssssssssssn
+kmsssssssssssssnkmsssssssssssssn
+kmsssssssssssssnkmsssssssssssssn
+kmsssssssssssssnkmsssssssssssssn
+kmsssssssssssssnkmsssssssssssssn
+kmssmmmmmmmmmmmnkmsssssssssssssn
+knnnnnnnnnnnnnnnknnnnnnnnnnnnnnn
+kmlmmsssnlmmsssnkmllmmmmnllmmmmn
+kmmsssssnmsssssnkmmmssssnmmssssn
+kmssssssnssssssnkmssssssnssssssn
+kmssssssnssssssnkmssssssnssssssn
+kmsmmmmmnsmmmmmnkmssssssnssssssn
+knnnnnnnnnnnnnnnknnnnnnnnnnnnnnn

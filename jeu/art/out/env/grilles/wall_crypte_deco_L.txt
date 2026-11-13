@@ -1,0 +1,45 @@
+# ÉCHO - wall_crypte_deco_L : mur GAUCHE Crypte, 4 modules de décor 16x32 (64x32) = 2 tuiles de haut chacun.
+# Chaque module commence par un haut de bloc (ligne 0) et finit par un joint n (ligne 31) : se pose entre 2 tuiles.
+# 0 lanterne froide (verre W p l, ombrage INVERSÉ cœur W, contour m jamais k ; potence n) -> source de lumière,
+#   poser wall_crypte_lit_L 0 au-dessus et 1 en dessous.
+# 1 niche-reliquaire en ogive avec urne (intérieur b, urne n + reflet m, appui l m, ombre portée n).
+# 2 corniche et 3 bougies froides (cire l, flamme W 1 px + pointe p), hauteurs 5/3/4 = groupe de 3 inégal.
+# 3 plaque d'épitaphe en relief (arêtes haut/gauche l m, bas/droite n), 3 lignes gravées n de longueurs inégales.
+# Budget : n s m l k + 2 couleurs d'objet max par module (W p | b | p W | aucune).
+# Passe 1 : cire en p = 3 barres blanches qui écrasaient les flammes -> cire l, la flamme W reste le seul point blanc.
+# Défaut corrigé : pas de brun ni de bois ; les objets restent dans les tons de pierre + lumière froide.
+palette: /home/user/Testing/jeu/studio/palette_v2.txt
+size: 64x32
+---
+llmmmsssssssssnkmmmmssssssssssnklmmssssssnlmssnkllmmmsssssssssnk
+lmssssssssssssnkmsssssssssssssnkmssssssssnmsssnklmssssssssssssnk
+msssssssssssssnkssssssssssssssnksssssssssnssssnkmsssssssssssssnk
+ssssssssssssssnkssssssnnnsssssnksssssssssnssssnkssssssssssssssnk
+ssssssssssssssnksssssnbbbnssssnksssssssssnssssnkssssssssssssssnk
+ssssssnnnsssssnkssssnbbbbbmsssnknnnnnnnnnnnnnnnkssssssssssssssnk
+ssssssssnsssssnksssnbbbbbbbmssnkmmmmssssssssssnkssssssssssssssnk
+ssssssmmmmmsssnksssnbbbbbbbmssnkmsssssssssssssnksslmmmmmmmmnssnk
+sssssmmmmmmmssnksssnbbbbbbbmssnkssssssssssssssnkssmssssssssnssnk
+sssssmlpWplmssnksssnbbbnbbbmssnkssssssssssssssnkssmsnnnnnnsnssnk
+sssssmpWWWpmssnksssnbbnnnbbmssnkssssssssssssssnkssmssssssssnssnk
+sssssmpWWWpmssnksssnbbbmbbbmssnkssssssssssssssnkssmsnnnnsssnssnk
+sssssmlpWplmssnksssnbbmnnbbmssnkssspssssssssssnkssmssssssssnssnk
+sssssmllpllmssnksssnbmnnnnbmssnksssWssssssspssnkssmsnnnnnssnssnk
+sssssmmmmmmmssnksssnbmnnnnbmssnkssllssspsssWssnkssmssssssssnssnk
+nnnnnnnmmmnnnnnksssnbmnnnnbmssnkssllsssWssllssnkssmnnnnnnnnnssnk
+mmmsssnsmsssssnksssnbbmnnbbmssnkssllssllssllssnkssssssssssssssnk
+msssssnsssssssnksssnbbbnbbbmssnkssllssllssllssnkssssssssssssssnk
+ssssssnsssssssnksssnbbnnnbbmssnkssllssllssllssnkssssssssssssssnk
+ssssssnsssssssnkssslmmmmmmmmssnkslmmmmmmmmmmmsnknnnnnnnnnnnnnnnk
+ssssssnsssssssnksssnnnnnnnnnssnksnnnnnnnnnnnnsnklmmsssnlmmssssnk
+ssssssnsssssssnkssssssssssssssnkssssssssssssssnkmsssssnmssssssnk
+ssssssnsssssssnkssssssssssssssnknnnnnnnnnnnnnnnkssssssnsssssssnk
+ssssssnsssssssnknnnnnnnnnnnnnnnkllmmmssnmmssssnkssssssnsssssssnk
+nnnnnnnnnnnnnnnklmmsssnlmmssssnklmsssssnmsssssnkssssssnsssssssnk
+llmmmsssnmmsssnkmsssssnmssssssnkmssssssnssssssnkssssssnsssssssnk
+lmssssssnmssssnkssssssnsssssssnksssssssnssssssnkssssssnsssssssnk
+msssssssnsssssnkssssssnsssssssnksssssssnssssssnkssssssnsssssssnk
+ssssssssnsssssnkssssssnsssssssnksssssssnssssssnkssssssnsssssssnk
+ssssssssnsssssnkssssssnsssssssnksssssssnssssssnkssssssnsssssssnk
+ssssssssnsssssnkssssssnsssssssnksssssssnssssssnkssssssnsssssssnk
+nnnnnnnnnnnnnnnknnnnnnnnnnnnnnnknnnnnnnnnnnnnnnknnnnnnnnnnnnnnnk
