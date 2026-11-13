@@ -47,6 +47,10 @@ func _ready() -> void:
 	world.air_turn_used.connect(_on_air_turn)
 	world.height_changed.connect(_on_height)
 	world.shard_taken.connect(func(n): hud_shards.text = str(n))
+	world.combo_changed.connect(_on_combo)
+	world.altar_reached.connect(_on_altar)
+	world.power_taken.connect(_on_power)
+	world.boss_event.connect(_on_boss)
 
 	ui = CanvasLayer.new()
 	ui.layer = 10
@@ -453,8 +457,9 @@ func _show_lost(info: Dictionary) -> void:
 	_hide_hint()
 	var trap: bool = info.kind == "trap"
 	var v := _overlay(0.45, trap)
+	var cause := {"tide": Game.t("tide_got"), "boss": "LE SONNEUR T'A EU"}
 	_title(v, Game.t("life_lost"), A.P.z, UIK.Ico.SKULL)
-	v.add_child(UIK.label(Game.t("engraved") if trap else Game.t("tide_got"), A.P.c if trap else A.P.U))
+	v.add_child(UIK.label(Game.t("engraved") if trap else String(cause.get(info.kind, Game.t("tide_got"))), A.P.c if trap else A.P.U))
 	v.add_child(UIK.label("%s %d M" % [Game.t("height"), int(info.height)], A.P.w))
 	var lv := UIK.hbox(2)
 	for i in lives_total:
@@ -792,3 +797,25 @@ func _stat(v: Container, k: String, val: String) -> void:
 	row.add_child(l)
 	row.add_child(UIK.label(val, A.P.W, 1, HORIZONTAL_ALIGNMENT_RIGHT))
 	v.add_child(row)
+
+
+func _on_combo(n: int) -> void:
+	if n >= 5 and n % 5 == 0:
+		toast("RYTHME x%d" % n, A.P.y)
+
+func _on_altar(_b: int, m: int) -> void:
+	if m >= 20:
+		toast("AUTEL  %d M" % m, A.P.a)
+
+func _on_power(k: String) -> void:
+	var txt := {"burin": "BURIN : UN COUP ENCAISSÉ", "plume": "PLUME : VOLTE RECHARGÉE", "accalmie": "ACCALMIE : LA MARÉE S'ARRÊTE"}
+	toast(String(txt.get(k, k.to_upper())), A.P.G)
+
+func _on_boss(k: String, n: int) -> void:
+	match k:
+		"start":
+			toast("LE SONNEUR : TOUCHE LES RUNES", A.P.G)
+		"rune":
+			toast("RUNE %d / 3" % n, A.P.G)
+		"won":
+			toast("LE SONNEUR SE TAIT  +20", A.P.G)
