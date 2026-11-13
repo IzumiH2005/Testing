@@ -5,7 +5,7 @@ D: 5
 entree: L
 sortie: any
 verbe: bond
-alt: 386-600
+alt: 398-600
 poids: 1.0
 ---
 ##........##   // R14 bond -> sortie L
