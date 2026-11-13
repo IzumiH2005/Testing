@@ -1,0 +1,19 @@
+# Étape 02d : remplissage plus calme encore. Au test de carte (étape 04), les arcs d de 02c
+# font des « pois » réguliers vus de loin (règle 35). On garde seulement les ombres b (petits
+# rebords) et une seule lèvre d par fissure : la face se lit comme une masse, pas un motif.
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccbcccc
+ccccccccccccbccc
+cccbbbbccccbdccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccbcccccccccccc
+ccccbccccccccccc
+ccccbdcccbbbbccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc

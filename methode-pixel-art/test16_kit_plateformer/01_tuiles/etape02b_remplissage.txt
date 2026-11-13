@@ -1,0 +1,20 @@
+# Étape 02b (REJETÉE) : mieux (formes ouvertes) mais trop de pixels isolés et la fissure en Y se répète dans chaque tuile (test 3×3, règle 35). Le Y part dans une variante.
+# Formes ouvertes, jamais d'anneau fermé (défaut de 02a). Une fissure en Y (règle 41 : b +
+# lèvre d à droite/dessous, lèvre partielle) ; deux bosses (arc d en haut-gauche, ombre b
+# plus épaisse en bas-droite) ; deux trous. Rien ne touche les rangées/colonnes 0 et 15.
+cccccccccccccccc
+cccccccccccccccc
+ccddccccccbccccc
+cdcccccccbdccccc
+ccccbcccccbccccc
+cbbbbccccbdcdddc
+cccccccccbccdccc
+cccccccccbcccbbc
+cccccccccbdccccc
+ccccccccbccccccc
+cbccccdbcbdccccc
+ccdcccbdccbdcccc
+cccccbdcccbdcccc
+ccccbdccccccbcbc
+ccccccccccccdccd
+cccccccccccccccc

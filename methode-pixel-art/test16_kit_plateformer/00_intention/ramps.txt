@@ -1,0 +1,9 @@
+# rampes triées du sombre au clair (une ligne = une rampe), pour le contrôle A6-A
+contour+pierre Oabcde
+mousse        ghij
+cristal       tuvwW
+danger        rpqX
+fond          123456789
+perso cape    kl
+perso habit   ynN
+perso peau    Ss

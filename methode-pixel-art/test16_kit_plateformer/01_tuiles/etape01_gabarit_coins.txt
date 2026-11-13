@@ -1,0 +1,17 @@
+# etape01_gabarit_coins.txt — gabarit grossier, aplats (F2-C)
+iedccccccccccbai
+iidccccccccccahi
+ihgcccccccccbghi
+hhgbcccccccbbghh
+hgbccccccccbbghh
+gbcccccccccccbgg
+bccccccccccccccb
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+bccccccccccccccb
+bbccccccccccccbb
+abbcccccccccbbba
+aabcccccccccbaaa

@@ -1,0 +1,17 @@
+# etape05_croute2.txt (écrit par etape05_variantes.py)
+OOOOOOOOOOOOOOOO
+jihijiihijjihijj
+iihiiihhiiiihiii
+hhghihhghihhghhi
+gggghggghhhggghh
+gbbbggbbghggbbgg
+gbbgbbbbghggbbbb
+cccgcccbgggbcccc
+ccccccccbggbcccc
+cccccccccgbccccc
+cccccccccccccccc
+cccbcccccccccccc
+ccccbccccccccccc
+cccbdccccccbbbbc
+cccccccccccccccc
+cccccccccccccccc

@@ -1,0 +1,19 @@
+# Étape 02c (remplacée par 02d) : vue de loin, les arcs d font des pois réguliers.
+# Deux bosses larges (arc d en haut-gauche, ombre b en bas-droite, ouvertes), deux fissures
+# courtes (b + lèvre d partielle, règle 41). Aucun pixel isolé. Rien sur les bords 0 et 15.
+cccccccccccccccc
+cccccccccccccccc
+cccdddcccccccccc
+ccdcccdccccbcccc
+ccccccccccccbccc
+cccbbbbccccbdccc
+ccccccccccccbdcc
+cccccccccccccccc
+cccccccccccccccc
+ccccccccccdddccc
+cccbcccccdcccccc
+ccccbccccccccbcc
+ccccbdcccccccbcc
+cccccccccbbbbccc
+cccccccccccccccc
+cccccccccccccccc

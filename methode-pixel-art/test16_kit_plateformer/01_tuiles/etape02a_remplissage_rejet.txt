@@ -1,0 +1,20 @@
+# Étape 02a (REJETÉE) : anneaux et « < » fermés, lignes de 1 px partout : se lit comme des symboles, pas comme de la roche.
+# c = face ; d = bord éclairé d'une bosse (haut-gauche) ; b = ombre de la bosse (bas-droite)
+# et fissures ; lèvre claire d sous/à droite de chaque fissure (règle 41). Rien ne touche le
+# bord d'une rangée/colonne (0 et 15) : la texture se raccorde à n'importe quel bord.
+cccccccccccccccc
+cccddddccccccccc
+ccdccccdcccccccc
+cdcccccccccbcccc
+cdccccccccbdcccc
+cdcccccbcbdccccc
+ccbcccbdcbbccccc
+cccbbbdcccdbcccc
+cccccccccccdbccc
+ccccccccccccdccc
+cbcccccccccccccc
+ccdcccccddddcccc
+cccccccdccccdccc
+ccccccdcccccbccc
+cccccccbbbbbcccc
+cccccccccccccccc

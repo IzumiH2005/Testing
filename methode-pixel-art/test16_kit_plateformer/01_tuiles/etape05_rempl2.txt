@@ -1,0 +1,17 @@
+# etape05_rempl2.txt (écrit par etape05_variantes.py)
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccbbccccccc
+ccccccbaWabccccc
+cccccbawvuabcccc
+cccccbawvuaWbccc
+cccccbawvuwuaccc
+cccccbavvtvtaccc
+ccccccbaaaaadccc
+cccccccdddddcccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc

@@ -1,0 +1,19 @@
+# Étape 04 : coins intérieurs 16×16 = copie des quarts du remplissage 02d + traitement du coin.
+# HG : la mousse s'accumule au pied du mur (éclairé) ; HD : même chose, plus sombre (ombre) ;
+# BG/BD : occlusion a/b sous le plafond. Colonne/rangée de raccord = celle du voisin (îlot x15/x16).
+jhdccccccccccbgh
+jihcccccccccgghj
+iihgcccccccbbghi
+ihgbccccccccbggh
+hgbbbbccccccbdgg
+gbcccccccccccbbg
+bccccccccccccbbg
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccccccccccccccc
+cccbcccccccccccc
+bcccbccccccccccc
+bbcbdccccccbbbbb
+abbccccccccccbaa
+aabcccccccccbaaa
