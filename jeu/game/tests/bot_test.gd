@@ -1,155 +1,162 @@
 extends SceneTree
-## Robot planificateur (vision parfaite) : vérifie que les tours générées sont franchissables.
-## godot --headless --path . -s tests/bot_test.gd
+## Robot validateur : recherche en faisceau sur la vraie physique (Tower + Hz) pour vérifier
+## que les tours assemblées sont franchissables. Signale les mètres où il reste bloqué.
+## godot --headless --path . -s tests/bot_test.gd [-- --seeds=5 --goal=300]
 
 const GRAV := 700.0
+const GRAV_ELAN := 300.0
+const GRAV_WATER := 300.0
 const JUMP_VX := 210.0
 const JUMP_VY := -290.0
 const TURN_VY := -205.0
 const SLIDE := 14.0
 const GRIP_TIME := 0.22
 const MAX_FALL := 330.0
-const HALF := Vector2(4, 6)
+const MAX_FALL_WATER := 150.0
+const HIT := Vector2(3, 5)
+const HALF_Y := 6.0
 const CLING_OFF := 6.0
-const WL := 32.0
-const WR := 160.0
-const DT := 1.0 / 60.0
+const DT := 1.0 / 120.0
+
+const WAITS := [0.0, 0.12, 0.3, 0.55, 0.9, 1.4, 2.0]
+const HOLDS := [false, true]
+const VOLTES := [-1.0, 0.12, 0.25, 0.38, 0.5]
+const BEAM := 8
 
 var tower: Tower
+var empty := {}
 
-func hit(p: Vector2, t: float) -> String:
-	var box := Rect2(p - HALF, HALF * 2.0)
-	for tr in tower.traps:
-		if absf(tr.y - p.y) > 90.0:
+func _ents(y: float) -> Array:
+	var out := []
+	for e in tower.near(y - 160.0, y + 60.0):
+		if String(e.kind) in Hz.LETHAL and e.kind != "rockfall":
+			out.append(e)
+	return out
+
+func _dead(p: Vector2, t: float, ents: Array) -> bool:
+	var box := Rect2(p - HIT, HIT * 2.0)
+	for e in ents:
+		if absf(float(e.y0) - p.y) > 140.0 and absf(float(e.y1) - p.y) > 140.0 and not (p.y > float(e.y0) and p.y < float(e.y1)):
 			continue
-		match int(tr.type):
-			Tower.SPIKES:
-				var x0: float = WL if tr.side < 0 else WR - Tower.SPIKE_DEPTH
-				if Rect2(x0, tr.y - tr.h + 2.0, Tower.SPIKE_DEPTH, tr.h - 4.0).intersects(box):
-					return "spikes"
-			Tower.SAW:
-				var c := Tower.saw_pos(tr, t)
-				var q := Vector2(clampf(c.x, box.position.x, box.end.x), clampf(c.y, box.position.y, box.end.y))
-				if q.distance_to(c) < 6.0:
-					return "saw"
-			Tower.LASER:
-				if Tower.laser_state(tr, t) == 2 and absf(tr.y - p.y) < HALF.y + 2.0:
-					return "laser"
-	return ""
+		if Hz.test(e, t, empty, tower, box) == 2:
+			return true
+	return false
 
-## simule un saut depuis (p, side) au temps t, demi-tour à la frame k (-1 = jamais).
-## renvoie [ok, pos_atterrissage, side, t_atterrissage]
-func sim_jump(p: Vector2, side: int, t: float, k: int) -> Array:
-	var v := Vector2(JUMP_VX * -side, JUMP_VY)
-	var f := 0
-	while f < 200:
-		f += 1
+func _friable(side: int, y: float) -> bool:
+	for e in tower.near(y - 1.0, y + 1.0):
+		if e.kind == "friable" and int(e.side) == side and y >= float(e.y0) - 2.0 and y <= float(e.y1) + 2.0:
+			return true
+	return false
+
+## Attente au mur puis bond. Renvoie {} si mort, sinon le nouvel état d'accroche.
+func sim(s: Dictionary, wait: float, hold: bool, volte: float) -> Dictionary:
+	var p: Vector2 = s.p
+	var side: int = s.side
+	var t: float = s.t
+	var ents := _ents(p.y)
+	if wait > 0.3 and _friable(side, p.y):
+		return {}
+	# attente
+	var w := 0.0
+	var grip := 0.0
+	while w < wait:
+		w += DT
 		t += DT
-		if f == k:
+		grip += DT
+		if not s.floor and grip > GRIP_TIME:
+			p.y = minf(p.y + SLIDE * DT, -HALF_Y)
+		if _dead(p, t, ents):
+			return {}
+	# bond
+	var v := Vector2(JUMP_VX * -side, JUMP_VY)
+	var air := 0.0
+	var turned := false
+	while air < 2.5:
+		air += DT
+		t += DT
+		if not turned and volte > 0.0 and air >= volte:
+			turned = true
 			v.x = -v.x
 			v.y = minf(v.y, TURN_VY)
-		v.y = minf(v.y + GRAV * DT, MAX_FALL)
+		var water := tower.is_water(p.y)
+		var g := GRAV_WATER if water else GRAV
+		if hold and air >= 0.10 and air <= 0.28 and v.y < 0.0:
+			g = minf(g, GRAV_ELAN)
+		v.y = minf(v.y + g * DT, MAX_FALL_WATER if water else MAX_FALL)
 		p += v * DT
-		var ns := 0
-		if p.x <= WL + CLING_OFF:
-			p.x = WL + CLING_OFF
-			ns = -1
-		elif p.x >= WR - CLING_OFF:
-			p.x = WR - CLING_OFF
-			ns = 1
-		if p.y >= -HALF.y:
-			return [false, p, 0, t]
-		if hit(p, t) != "":
-			return [false, p, 0, t]
-		if ns != 0:
-			# doit survivre accroché 0.3 s
-			var q := p
-			var tt := t
-			for i in 18:
-				tt += DT
-				if i * DT > GRIP_TIME:
-					q.y += SLIDE * DT
-				if hit(q, tt) != "":
-					return [false, p, 0, t]
-			return [true, p, ns, t]
-	return [false, p, 0, t]
+		if _dead(p, t, ents):
+			return {}
+		if p.y >= -HALF_Y:
+			return {}  # retour au sol : inutile
+		var fl := tower.wall_face(-1, p.y) + CLING_OFF
+		var fr := tower.wall_face(1, p.y) - CLING_OFF
+		if p.x <= fl and v.x < 0.0:
+			p.x = fl
+			return {"p": p, "side": -1, "t": t, "floor": false}
+		if p.x >= fr and v.x > 0.0:
+			p.x = fr
+			return {"p": p, "side": 1, "t": t, "floor": false}
+	return {}
 
-func run(seed_v: int, max_t := 240.0) -> Dictionary:
+func run_seed(seed_v: int, goal: int) -> Dictionary:
 	tower = Tower.new(seed_v)
-	var p := Vector2(WL + CLING_OFF, -HALF.y)
-	var side := -1
-	var t := 0.0
-	var grip := 0.0
-	var tide := 70.0
-	var best := 0
-	var jumps := 0
-	var turns := 0
-	var plan_k := -2
-	while t < max_t:
-		tower.ensure(p.y - 400.0)
-		# accroché : choisir
-		var options := [-1, 10, 14, 18, 22, 28]
-		var chosen := -2
-		var bestup := 1e9
-		for k in options:
-			var r := sim_jump(p, side, t, k)
-			if r[0]:
-				# préfère le plus haut atterrissage
-				if r[1].y < bestup:
-					bestup = r[1].y
-					chosen = k
-		if chosen != -2:
-			# exécuter le saut choisi (sans revérifier)
-			var v := Vector2(JUMP_VX * -side, JUMP_VY)
-			var f := 0
-			jumps += 1
-			if chosen > 0:
-				turns += 1
-			while true:
-				f += 1
-				t += DT
-				if f == chosen:
-					v.x = -v.x
-					v.y = minf(v.y, TURN_VY)
-				v.y = minf(v.y + GRAV * DT, MAX_FALL)
-				p += v * DT
-				var spd := minf(9.0 + t * 0.30, 30.0) + maxf(0.0, best - 150.0) * 0.02
-				tide -= spd * DT
-				var h := hit(p, t)
-				if h != "":
-					return {"best": best, "cause": h, "t": t, "jumps": jumps, "turns": turns}
-				if p.y + HALF.y > tide + 5.0:
-					return {"best": best, "cause": "tide", "t": t, "jumps": jumps, "turns": turns}
-				if p.x <= WL + CLING_OFF:
-					p.x = WL + CLING_OFF; side = -1; break
-				if p.x >= WR - CLING_OFF:
-					p.x = WR - CLING_OFF; side = 1; break
-				if p.y >= -HALF.y:
-					p.y = -HALF.y; break
-			grip = 0.0
-			best = maxi(best, tower.meters_at(p.y + HALF.y))
-			if tide > p.y + 26.0 + 352.0 * 0.38:
-				tide = p.y + 26.0 + 352.0 * 0.38
-		else:
-			# attendre
-			t += DT
-			grip += DT
-			if grip > GRIP_TIME:
-				p.y = minf(p.y + SLIDE * DT, -HALF.y)
-			var spd2 := minf(9.0 + t * 0.30, 30.0) + maxf(0.0, best - 150.0) * 0.02
-			tide -= spd2 * DT
-			var h2 := hit(p, t)
-			if h2 != "":
-				return {"best": best, "cause": "wait-" + h2, "t": t, "jumps": jumps, "turns": turns}
-			if p.y + HALF.y > tide + 5.0:
-				return {"best": best, "cause": "tide(wait)", "t": t, "jumps": jumps, "turns": turns}
-	return {"best": best, "cause": "timeout", "t": t, "jumps": jumps, "turns": turns}
+	tower.ensure(-goal * 16.0 - 400.0)
+	var beam := [{"p": Vector2(Tower.WALL_L + CLING_OFF, -HALF_Y), "side": -1, "t": 0.0, "floor": true}]
+	var best_y := 0.0
+	var steps := 0
+	while not beam.is_empty() and steps < 600:
+		steps += 1
+		var nxt := {}
+		for s in beam:
+			for w in WAITS:
+				for h in HOLDS:
+					for vt in VOLTES:
+						var r := sim(s, w, h, vt)
+						if r.is_empty():
+							continue
+						if r.p.y > s.p.y + 32.0:
+							continue
+						var key := "%d_%d" % [r.side, int(r.p.y / 6.0)]
+						if not nxt.has(key) or nxt[key].t > r.t:
+							nxt[key] = r
+		var arr := nxt.values()
+		arr.sort_custom(func(a, b): return a.p.y < b.p.y)
+		beam = arr.slice(0, BEAM)
+		if not beam.is_empty():
+			best_y = minf(best_y, beam[0].p.y)
+			if Tower.meters_at(best_y) >= goal:
+				break
+	var m := Tower.meters_at(best_y)
+	var chunk := ""
+	for c in tower.placed:
+		if m >= int(c.m0) and m < int(c.m0) + int(c.h):
+			chunk = "%s (m0=%d)" % [c.id, c.m0]
+	return {"m": m, "chunk": chunk, "steps": steps}
 
 func _initialize() -> void:
-	var tot := 0
-	for s in [20261113, 20261114, 20261115, 20261116, 20261117, 1, 2, 3, 4, 5, 6, 7]:
-		var r := run(s)
-		tot += int(r.best)
-		print("%9d  %4d m  %-12s t=%5.1f  sauts=%d  demi-tours=%d" % [s, r.best, r.cause, r.t, r.jumps, r.turns])
-	print("moyenne ", tot / 12)
-	quit()
+	var root := "res://chunks"
+	for a in OS.get_cmdline_user_args():
+		if a.begins_with("--root="):
+			root = a.substr(7)
+	ChunkLib.load_all(root)
+	for er in ChunkLib.errors:
+		print("CHUNK : ", er)
+	var seeds := 5
+	var goal := 300
+	for a in OS.get_cmdline_user_args():
+		if a.begins_with("--seeds="):
+			seeds = int(a.substr(8))
+		elif a.begins_with("--goal="):
+			goal = int(a.substr(7))
+	var fails := 0
+	for i in seeds:
+		var sd := 1000 + i * 7919
+		var t0 := Time.get_ticks_msec()
+		var r := run_seed(sd, goal)
+		var ok: bool = r.m >= goal
+		if not ok:
+			fails += 1
+		print("graine %d : %s %d m en %d bonds (%d ms)%s" % [sd, "OK" if ok else "BLOQUÉ à", r.m, r.steps,
+			Time.get_ticks_msec() - t0, "" if ok else " — chunk " + r.chunk])
+	print("RÉSULTAT : %d/%d tours franchissables jusqu'à %d m" % [seeds - fails, seeds, goal])
+	quit(1 if fails > 0 else 0)
