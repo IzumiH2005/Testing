@@ -31,7 +31,8 @@ func _draw() -> void:
 	if w.state != w.S.DEMO:
 		_draw_shards(top, bot)
 	for g in w.graves:
-		_frame("sprites/grave", 8, 0, g + Vector2(-4, -4), false, A.P.c)
+		if not _spr("fx/echo_shard", 8, 8, int(w.t_global * 8.0) % 4, g + Vector2(-4, -4), false, false, Color(1, 1, 1, 0.75)):
+			_frame("sprites/grave", 8, 0, g + Vector2(-4, -4), false, A.P.c)
 	_draw_particles()
 	_draw_floaters()
 	_draw_tide(bot)
@@ -365,6 +366,11 @@ func _draw_ent(e: Dictionary) -> void:
 		"power":
 			if w.used.has(e.id):
 				return
+			var bf := int(w.t_global * 4.0) % 4
+			var icon: String = {"burin": "fx/pu_burin", "plume": "fx/pu_plume", "accalmie": "fx/pu_calm"}.get(String(e.power), "")
+			if icon != "" and _spr("fx/powerup_bubble", 16, 16, bf, e.pos - Vector2(8, 8)):
+				_spr(icon, 8, 8, 0, e.pos - Vector2(8, 8) + Vector2(4, 4 + [0, 0, 1, 1][bf]))
+				return
 			var p: Vector2 = e.pos + Vector2(0, roundf(sin(w.t_global * 2.5) * 2.0))
 			var col: Color = {"burin": A.P.c, "plume": A.P.p, "accalmie": A.P.U}.get(String(e.power), A.P.y)
 			draw_circle(p, 6.0, A.P.k)
@@ -374,6 +380,11 @@ func _draw_ent(e: Dictionary) -> void:
 			var on: bool = w.altars_on.has(e.id)
 			var ax: float = float(e.x)
 			var ay: float = float(e.y)
+			var at := Vector2(ax - 16, ay + 8 - 32)
+			if _spr("fx/altar", 32, 32, 1 if on else 0, at):
+				if on:
+					_spr("fx/altar_flame", 8, 16, int(w.t_global * 10.0) % 6, at + Vector2(12, -5))
+				return
 			draw_rect(Rect2(ax - 8, ay + 2, 16, 6), A.P.n)
 			draw_rect(Rect2(ax - 6, ay - 6, 12, 8), A.P.s)
 			var fl: Color = A.P.a if on else A.P.d
@@ -441,6 +452,10 @@ func _draw_shards(top: float, bot: float) -> void:
 		if s.pos.y < top or s.pos.y > bot or w.taken.has(s.id):
 			continue
 		var bob := roundf(sin(w.t_global * 3.0 + s.id) * 1.5)
+		if s.big and _spr("fx/shard_big", 16, 16, int(w.t_global * 4.0) % 4, s.pos + Vector2(-8, -8 + bob)):
+			continue
+		if not s.big and _spr("fx/shard", 8, 8, int(w.t_global * 8.0 + s.id) % 6, s.pos + Vector2(-4, -4 + bob)):
+			continue
 		if s.big:
 			var p: Vector2 = s.pos + Vector2(0, bob)
 			draw_colored_polygon(PackedVector2Array([p + Vector2(0, -6), p + Vector2(5, 0), p + Vector2(0, 6), p + Vector2(-5, 0)]), A.P.G)
@@ -452,7 +467,9 @@ func _draw_particles() -> void:
 	for pt in w.particles:
 		if pt.has("anim"):
 			var k: float = pt.t / pt.life
-			if pt.anim == "shard_pop":
+			if pt.anim == "shard_pop" and A.tex("fx/shard_pop"):
+				_spr("fx/shard_pop", 16, 16, mini(4, int(k * 5.0)), pt.p - Vector2(8, 8))
+			elif pt.anim == "shard_pop":
 				_frame("sprites/shard_pop", 8, mini(3, int(k * 4.0)), pt.p - Vector2(4, 4), false, A.P.y)
 			elif pt.anim == "death":
 				_frame("sprites/death", 16, mini(4, int(k * 5.0)), pt.p - Vector2(8, 10), w.facing < 0, A.P.e)
@@ -475,6 +492,20 @@ func _draw_floaters() -> void:
 func _draw_tide(bot: float) -> void:
 	var ty: float = w.tide_y
 	if ty > bot + 20.0:
+		return
+	var crest := A.tex("tide/tide_crest")
+	if crest:
+		var y := roundf(ty) - 6.0
+		var calm: bool = w.calm_t > 0.0
+		var f := 0 if calm else int(w.t_global / 0.15) % 4
+		for i in 6:
+			_spr("tide/tide_glow", 32, 16, 0, Vector2(i * 32, y - 16), false, false, Color(0.75, 1.0, 1.0) if calm else Color.WHITE)
+			_spr("tide/tide_crest", 32, 16, f, Vector2(i * 32, y))
+		var yy := y + 16.0
+		while yy < bot:
+			for i in 6:
+				_spr("tide/tide_body", 32, 32, 0, Vector2(i * 32, yy))
+			yy += 32.0
 		return
 	var tx := A.tex("sprites/tide")
 	var f := int(w.t_global * 4.0) % 2
