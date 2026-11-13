@@ -8,7 +8,13 @@ verbe: volte
 intro: -
 alt: 290-345
 poids: 1
-// wip
+// Pic O10 x O1 : mur gauche piqué L4-7 et L9-12 ; la seule brèche (L8) est la rangée de la mâchoire (3,0 s),
+// qui ferme aussi le mur droit en R8.
+// Idée : l'escalier qui passe dans la gueule. Impossible de zigzaguer : on monte par le mur droit en
+// élan+volte (min verbe = volte), et chaque volte doit franchir la rangée 8 pendant que la mâchoire est ouverte.
+// Attente max 0,70 s ; route commentée 30/30 phases.
+// Risque : le O L8 est entre les dents, au ras des épines : pivot tardif, mâchoire ouverte.
+// Écho : la mâchoire gravée reste fermée en pont cyan : au retour, L8-R8 devient un palier complet.
 ---
 ##........##
 ##........##
@@ -17,10 +23,10 @@ poids: 1
 ##........##
 ##........##
 ##>.....o.##
-##>..O....##
+##>.......##
 ##>.......##                    // R10 elan+volte -> R16
 ##>....o..##
-##M......M## ; phase=0.0
+##MO.....M## ; phase=0.0
 ##>.......##
 ##>.....o.##
 ##>.......##

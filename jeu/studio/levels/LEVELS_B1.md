@@ -254,7 +254,7 @@ Une entrée est **réussie** si une suite de gestes du **verbe déclaré** (ou d
 - une **attente ≤ 2,3 s par mur** (0,6 × le budget d'attente B1) ;
 - la **marée à 28 px/s** : le héros entre avec 130 px d'avance, et le simulateur suit cette avance (`lag_min` dans les sorties).
 
-La recherche est un Dijkstra sur les états (mur, hauteur, temps, avance sur la marée, éclats pris), qui minimise l'attente totale puis le nombre de sauts. Les gestes essayés depuis chaque accroche : bond, élan tenu de 0,10 à 0,28 s, volte de 0,12 à 0,52 s, élan + volte, chacun après 0 à 2,3 s d'attente (glisse comprise). Elle est plafonnée à 6 000 nœuds, et à 30 000 pour l'arène.
+La recherche est un Dijkstra sur les états (mur, hauteur, temps, avance sur la marée, éclats pris), qui minimise l'attente totale puis le nombre de sauts. Les gestes essayés depuis chaque accroche : bond, élan tenu 0,14 / 0,18 / 0,22 / 0,28 s, volte de 0,08 à 0,56 s (pas de 0,04), élan + volte (volte de 0,32 à 0,56 s), chacun après 0 à 2,3 s d'attente (glisse comprise). Elle est plafonnée à 6 000 nœuds, et à 30 000 pour l'arène.
 
 En plus de la validation :
 
@@ -276,7 +276,7 @@ RESULTS_PLACEHOLDER
 ### 5.4 Ce que le simulateur ne vérifie pas
 
 - **Le ressenti** : lisibilité du préavis, fenêtre de réaction humaine. Le simulateur joue parfait au 1/10 s près, sauf l'attente, qui est discrétisée de 0,1 à 0,15 s. La garantie que nous donnons à la place : chaque route garde **au moins 4 px** de vide entre la boîte du héros (8 × 12, celle du code) et tout danger actif ; le minimum observé sur les routes des o est 4,1 px (tir_croise, slalom).
-- **Le raccord réel entre chunks.** Il est couvert indirectement : chaque chunk est validé pour toute hauteur d'entrée de −20 à +32 et des deux côtés.
+- **Le raccord réel entre chunks.** Il est couvert indirectement : chaque chunk est validé pour toute hauteur d'entrée de −20 à +28 et des deux côtés.
 - **L'onde mobile du boss**, qui est approchée par des lasers (§6).
 
 ---
@@ -294,6 +294,8 @@ RESULTS_PLACEHOLDER
 - **Volte le long d'un seul mur.** Elle banalise les dangers posés sur le mur d'en face. colonne_garde, deux_colonnes et laser_volte en profitent.
   - Je l'assume comme idée (« grimper en volte entre mur et colonne »).
   - Les prochains chunks volte devraient aussi armer le mur de la volte.
+- **Le O de meules.** En k8 c5, il n'était atteignable dans aucune phase. Déplacé en k8 c6, il est pris dans 2 phases sur 4 : il récompense bien le joueur qui attend le bon moment.
+- **La fenêtre de l'élan (i_elan).** L'arc des o (L1 élan 0,28 -> R6) ne passe que pour h0 de 13 à 28 ; de 8 à 11, l'arrivée frôle la marge des épines R4-5. Les entrées basses (h0 < 13) passent par une route de secours simulée : glisser 2,1 s, bond sous la bande, puis élan court. Environ la moitié des hauteurs d'entrée ne voit donc l'élan qu'au-dessus d'elle. C'est noté dans le chunk ; une version future devrait remonter la bande d'un rang ou ajouter 2 rangées sûres en bas.
 - **Le pendule de l'arène.**
   - À k23, il violait la règle des 2 rangées sûres au raccord ; il est passé en k22, avec len 124.
   - La route des runes échouait à cause du plafond de nœuds et d'une tolérance trop stricte sur la rune. Les deux ont été corrigés.

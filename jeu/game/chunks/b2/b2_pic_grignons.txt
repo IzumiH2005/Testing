@@ -8,7 +8,14 @@ verbe: volte
 intro: -
 alt: 285-345
 poids: 1
-// wip
+// Pic O20 x O1 : mur gauche piqué L4-7 et L9-12 ; deux grignons patrouillent le mur droit (R4-7, R10-13).
+// Idée : on grimpe le mur des gardes. Le mur gauche ne porte pas : élan+volte sur le mur droit
+// (min verbe = volte), en se posant ENTRE les deux rondes (R10 n'est sûr que si le garde est en haut,
+// la route passe au-dessus de chaque ronde). Deux instances du grignon (+1 D).
+// Attente max 0,25 s ; route commentée 25/25 phases.
+// Risque : le O L8 se prend par un pivot tardif dans la brèche des épines.
+// Écho : les grignons gravés deviennent cyan, inoffensifs, et rechargent la volte : au retour, le mur droit
+// devient une échelle de voltes gratuites.
 ---
 ##........##
 ##........##
@@ -17,10 +24,10 @@ poids: 1
 ##........##
 ##.......:##
 ##>.....o:##
-##>..O...:##
+##>......:##
 ##>......g## ; spd=24           // R10 elan+volte -> R16
 ##>....o..##
-##........##
+##.O......##
 ##>......:##
 ##>.....o:##
 ##>......:##
