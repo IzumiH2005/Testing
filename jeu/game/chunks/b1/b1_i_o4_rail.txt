@@ -1,0 +1,28 @@
+id: b1_i_o4_rail
+biome: B1
+tension: I
+D: 2
+entree: L
+sortie: any
+verbe: elan
+intro: O4
+alt: 35-70
+poids: 1
+// Intro O4 (scie sur rail horizontal), seule, au milieu d'un chunk vide.
+// Idée : la lame balaie k6 entre c4 et c7 (4 tuiles, période 3,7 s). On traverse k6 au moment où elle
+// est à l'autre bout. Le bond la croise au centre, l'élan la croise plus près du mur d'arrivée.
+// Route : L/R2-4 attendre que la lame parte vers le mur d'en face -> bond ou élan au-dessus de k6.
+// Éclats o : la diagonale L -> R par-dessus le rail ; O au-dessus du centre (passer quand la lame est au bout).
+// Écho : graver la lame vide la rangée k6 (aucune attente).
+---
+##........##
+##........##
+##........##
+##....O.o.##   // k7 : O au-dessus du centre du rail (y passer quand la lame est au bout)
+##..S---..##   // k6 : rail c4-c7 (amplitude 24 px, vitesse 1,7 = 3,7 s par aller-retour)
+##...o....##   // k5 : départ de l'arc, sous le rail
+##........##
+##........##
+##........##
+##........##
+---

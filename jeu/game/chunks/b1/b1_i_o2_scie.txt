@@ -3,7 +3,7 @@ biome: B1
 tension: I
 D: 1
 entree: R
-sortie: R
+sortie: L
 verbe: bond
 intro: O2
 alt: 14-40
@@ -11,7 +11,7 @@ poids: 1
 // Intro O2 (scie fixe), temps 1 : la scie est posée AU-DESSUS du sommet de l'arc naturel.
 // On passe dessous à ~6 px : on la voit tourner, on comprend sa taille, on ne la touche pas.
 // Les éclats o tracent l'arc qui passe sous la lame ; le O est pris en restant sous la scie.
-// Route (h0≈21, venant de O1) : R2 bond -> L5 bond -> R8 bond -> sortie.
+// Route (h0≈21, venant de O1) : R2 (attend 0,3 s) bond -> L5 bond -> R8 bond -> L11 sortie.
 // Entrées hautes : l'arc monterait dans la lame -> attendre sur R pour « descendre » l'arc.
 // Écho : graver la scie libère l'arc du milieu (aucune attente).
 ---

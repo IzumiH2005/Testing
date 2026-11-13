@@ -1,0 +1,34 @@
+id: b2_grignon_intro
+biome: B2
+tension: I
+D: 2
+entree: any
+sortie: any
+verbe: elan
+intro: O20
+alt: 228-245
+poids: 1
+// Intro O20 grignon, seul. Atome : atterrir là où le danger NE SERA PAS.
+// Idée : le grignon arpente R4-R6 (48 px, aller-retour 3,3 s) ; son demi-tour bas est pile sur l'atterrissage du bond depuis L1. On le regarde monter,
+// on part quand il passe au-dessus : 0,55 s de vol plus tard, il est déjà redescendu... ou pas.
+// Deux réponses : attendre son passage (bond, route commentée) ou le survoler à l'élan (+78).
+// Le grand éclat R8 est sur l'arc qui part de R4 à la volée (grignon encore loin) : prudence récompensée.
+// Écho : graver le grignon en fait une recharge de volte mobile (inutile ici, on n'a que le bond).
+---
+##........##
+##........##
+##..o.....##
+##.o......##   // L13 bond -> R16
+##......o.##
+##.....o..##
+##........##   // R10 bond -> L13
+##..o.....##
+##.o......##   // L7 bond -> R10
+##....O...##
+##.......:## ; spd=24
+##.......:##
+##.......g##   // R4 bond -> L7 : partir avant que le grignon redescende
+##........##
+##.o......##
+##........##   // L1 bond -> R4 : partir quand il est en haut
+---

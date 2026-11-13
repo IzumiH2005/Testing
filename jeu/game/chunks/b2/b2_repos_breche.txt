@@ -1,0 +1,31 @@
+id: b2_repos_breche
+biome: B2
+tension: R
+D: 0
+entree: any
+sortie: any
+verbe: bond
+intro: -
+alt: 165-345
+poids: 0.7
+// Repos. Idée : une alcôve secrète (?) en R9, hors de l'arc du bond. Le bond montre le chemin
+// (éclats), l'élan suivi d'une volte tôt (0,1 s) ramène le héros contre la brèche : la curiosité paie.
+// Aucun piège : c'est le chunk où l'on teste la volte sans peur avant les pics.
+---
+##........##
+##........##
+##..o.....##
+##.o......##   // L13 bond -> R16
+##.......o##
+##......o.##
+##.....o..##   // R10 bond -> L13
+##........?#
+##...*....##
+##..o.....##   // L7 bond -> R10
+##........##
+##......o.##
+##.....o..##   // R4 bond -> L7
+##........##
+##..o.....##
+##........##   // L1 bond -> R4
+---

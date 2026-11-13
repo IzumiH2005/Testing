@@ -1,0 +1,35 @@
+id: b2_contrefort_intro
+biome: B2
+tension: I
+D: 2
+entree: any
+sortie: any
+verbe: elan
+intro: O3
+alt: 258-275
+poids: 1
+// Intro O3 contrefort, seul. Atome : la face est sûre, le dessus et le dessous piquent.
+// Idée : VISER une face. Le contrefort R5-R7 avance de 16 px ; selon sa hauteur d'arrivée on choisit
+// bond (+52) ou élan (+78) pour s'y poser au milieu : premier calibrage de saut du jeu.
+// Depuis la face le saut est plus court (84 px) donc il monte plus (+59) : on arrive en L10, pas L9.
+// La glisse mène aux épines du dessous : repartir. Grand éclat sur l'arc qui part de la face.
+---
+##........##
+##........##
+##........##   // L16 bond -> R19 (sortie)
+##......o.##
+##.....o..##
+##........##   // R13 bond -> L16
+##..o.....##
+##.o......##
+##........##   // L10 bond -> R13
+##.o......##
+##....O...##
+##........##
+##.......C##   // R6 bond -> L10 (depuis la face)
+##...o...C##
+##..o....C##
+##.o......##
+##........##
+##........##   // L1 elan -> R6 (sur la face du contrefort)
+---

@@ -3,7 +3,7 @@ biome: B1
 tension: I
 D: 2
 entree: R
-sortie: any
+sortie: L
 verbe: bond
 intro: O8
 alt: 22-50

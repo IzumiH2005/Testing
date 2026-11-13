@@ -1,0 +1,29 @@
+id: b1_i_o5_rail_v
+biome: B1
+tension: I
+D: 2
+entree: any
+sortie: any
+verbe: volte
+intro: O5
+alt: 90-120
+poids: 1
+// Intro O5 (scie sur rail vertical), seule.
+// Idée : une colonne qui monte et descend au centre (c6, k3-k8, 80 px de course, 3,7 s par cycle).
+// Le bond la traverse forcément ; la question n'est plus « où » mais « quand » : partir quand la lame
+// redescend, passer derrière elle. La volte permet aussi de rester de son côté et d'attendre en montant.
+// Route : L2 attendre que la lame passe sous k5 -> bond -> R5 -> volte sur R -> traverser haut quand elle redescend.
+// Éclats o : de part et d'autre de la colonne (route en Z) ; O au milieu de la course, sur le rail (k5 c5).
+// Écho : graver la lame ouvre tout le centre (aucune attente, gain ≈ 1,8 s).
+---
+##........##
+##........##
+##..o.S...##   // k8 : haut de la course
+##....|...##
+##....|.o.##   // k6
+##...O|...##   // k5 : O collé au rail
+##....|...##
+##..o.|...##   // k3 : bas de la course
+##........##
+##........##
+---

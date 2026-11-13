@@ -1,0 +1,31 @@
+id: b2_repos_cheminee
+biome: B2
+tension: R
+D: 1
+entree: any
+sortie: any
+verbe: bond
+intro: -
+alt: 190-345
+poids: 1
+// Repos. Idée : la cheminée calme. Chaque bande d'épines est juste AU-DESSUS du point d'accroche
+// suivant : on la voit, le bond ne la touche pas (apex de l'autre côté). On lit la cheminée comme une
+// partition. Le power-up R5 est sous l'accroche : seul un élan raté-exprès (court) le frôle.
+---
+##........##
+##........##
+##..o.....##
+##.o.....<##                    // L13 bond -> R16
+##.......<##
+##........##
+##>......o##                    // R10 bond -> L13
+##>...o...##
+##........##
+##.o......##                    // L7 bond -> R10
+##..o.....##
+##.......*##
+##......o.##                    // R4 bond -> L7
+##.....o..##
+##..o.....##
+##........##                    // L1 bond -> R4
+---

@@ -1,0 +1,34 @@
+id: b2_repos_galerie
+biome: B2
+tension: R
+D: 1
+entree: any
+sortie: any
+verbe: elan
+intro: -
+alt: 160-345
+poids: 1
+// Repos. Idée : la galerie des moules. Chaque bande d'épines est exactement là où tomberait un
+// bond (+3) : on respire en enchaînant de longs élans (+5) d'une zone libre à l'autre.
+// Créneau de power-up au sommet du 2e élan : tenir le doigt jusqu'au bout (0,28 s) pour le toucher.
+---
+##........##
+##........##
+##........##
+##........##                    // R16 bond -> L19 (sortie)
+##.......<##
+##.......<##
+##..*.....##
+##........##
+##..o.....##                    // L11 elan -> R16
+##>.......##
+##>.......##
+##......o.##
+##........##
+##.....o..##                    // R6 elan -> L11
+##.......<##
+##.......<##
+##..o.....##
+##........##
+##........##                    // L1 elan -> R6 (le bond tomberait sur R4-R5)
+---

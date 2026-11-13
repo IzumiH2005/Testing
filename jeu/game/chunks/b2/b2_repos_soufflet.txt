@@ -1,0 +1,31 @@
+id: b2_repos_soufflet
+biome: B2
+tension: R
+D: 1
+entree: any
+sortie: any
+verbe: bond
+intro: -
+alt: 180-345
+poids: 1
+// Repos. Idée : le soufflet. Les deux murs sont des plaques friables décalées : on ne peut s'arrêter
+// nulle part mais rien ne tue. Le rythme bond-bond-bond sans pause est la récompense (éclats serrés) ;
+// une hésitation fait retomber d'une plaque (la suivante tient encore). Power-up sur l'arc central.
+---
+##........##
+##........##
+##...o....##
+##..o.....##   // L13 bond -> R16
+##f.......##
+##f....o..##
+##......of##   // R10 bond -> L13
+##.......f##
+##..*.....##
+##f.o.....##   // L7 bond -> R10
+##f.......##
+##.....o..##
+##......of##   // R4 bond -> L7
+##.......f##
+##..o.....##
+##........##   // L1 bond -> R4
+---

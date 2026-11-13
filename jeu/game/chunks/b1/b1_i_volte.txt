@@ -1,0 +1,30 @@
+id: b1_i_volte
+biome: B1
+tension: I
+D: 2
+entree: L
+sortie: L
+verbe: volte
+intro: volte
+alt: 50-80
+poids: 1
+// Intro du verbe VOLTE (2e tap en vol : demi-tour, une fois par saut).
+// Idée : tout le mur droit est hérissé de k4 à k10 (deux bandes, fente k7 trop étroite). On ne peut que revenir sur son propre mur.
+// La serrure (le mur d'en face) se voit dès l'entrée ; la clé est la volte, montrée par les éclats en crochet.
+// Route (h0≈15, L) : L1 volte 0,30 -> L6 volte 0,30 -> L11 sortie. Entrée côté R : bond -> L puis voltes.
+// Volte tôt (+45) = sûr ; volte tard (0,40-0,48 s) = va chercher le O près des épines (frôler).
+// Écho : graver une bande rouvre le zigzag habituel sur 4 rangées (plus rapide de ~0,2 s par saut).
+---
+##........##
+##........##
+##.......<##   // k10
+##..o....<##   // k9 : sortie de la 2e volte
+##.......<##   // k8
+##........##   // k7 : fente de 20 px entre les bandes : inutilisable avec la marge de 4 px
+##..o...O<##   // k6 : O au bout d'une volte tenue et tardive (élan + volte 0,48), à 19 px des épines
+##....o..<##   // k5 : demi-tour de la volte 0,30
+##.......<##
+##........##   // k3 : pas d'épines murales en k3 (une entrée à h0≈28 mourrait dès la 1re image du saut)
+##........##
+##........##
+---

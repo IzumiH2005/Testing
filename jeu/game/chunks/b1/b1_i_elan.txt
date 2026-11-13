@@ -1,0 +1,28 @@
+id: b1_i_elan
+biome: B1
+tension: I
+D: 1
+entree: L
+sortie: L
+verbe: elan
+intro: elan
+alt: 30-60
+poids: 1
+// Intro du verbe ÉLAN (tenir le doigt 0,10-0,28 s = arc plus haut, +77 px au lieu de +51).
+// Idée : la bande d'épines R4-R5 est exactement là où le bond ordinaire pose la main.
+// Les éclats o dessinent un arc PLUS HAUT que celui qu'on connaît : la clé est montrée avant d'être donnée.
+// Route (h0≈15) : L1 élan (tenir) -> R6 (O, au ras des épines) bond -> L9 sortie.
+// Bond seul : mort sur R5 (échec peu coûteux, 30 m) ou attente longue sur L pour passer dessous.
+// Écho : graver la bande rend le bond simple suffisant (raccourci pour qui ne maîtrise pas l'élan).
+---
+##........##
+##........##
+##.....o..##   // k8 : retour vers L
+##........##
+##.....oO.##   // k6 : haut de l'arc tenu, O à l'accroche juste au-dessus des épines
+##....o..<##   // k5 : épines
+##.......<##   // k4 : épines (bande de 2)
+##........##
+##........##
+##........##
+---
