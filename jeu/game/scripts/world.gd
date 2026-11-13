@@ -31,7 +31,8 @@ const MAX_FALL_WATER := 150.0
 const ELAN_DEAD := 0.10
 const ELAN_END := 0.28
 const COYOTE := 0.10
-const BUFFER := 0.08
+const BUFFER := 0.10
+const TAP_LOCK := 0.05  ## anti double-tap (critique design)
 const HALF := Vector2(4, 6)          # boîte visuelle / ramassage 8 × 12
 const HIT := Vector2(3, 5)           # boîte létale 6 × 10
 const CLING_OFF := 6.0
@@ -54,6 +55,7 @@ var air_t := 0.0
 var held := false
 var coyote_t := 0.0
 var buffer_t := 0.0
+var last_press := -1.0
 var turns := 0
 var turn_anim := 0.0
 var on_floor := true
@@ -248,6 +250,9 @@ func press() -> void:
 			first_jump.emit()
 		S.PLAY:
 			held = true
+			if t_global - last_press < TAP_LOCK:
+				return
+			last_press = t_global
 			if side != 0 or coyote_t > 0.0:
 				_jump()
 			elif _time_to_wall() < BUFFER:
