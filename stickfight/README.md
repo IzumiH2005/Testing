@@ -6,7 +6,8 @@ degré, un atelier pour les composer à la souris ou au clavier, et un outil de
 rendu en ligne de commande pour itérer sans ouvrir l'éditeur.
 
 Le style vise celui des vidéos de référence : grosse tête ronde, trait gras à
-bouts ronds, pas de pieds ni de mains dessinés. Les proportions mesurées
+bouts ronds, et un petit pied en crochet arrondi au bout de chaque jambe
+(os `footN`, `footF`, articulés à la cheville). Les proportions mesurées
 sur ces vidéos, les amplitudes articulaires et les notes sur l'animation de
 combat sont dans [RECHERCHE.md](RECHERCHE.md). La liste des animations à
 produire par personnage (communes et propres, d'après Tekken 8) est dans
@@ -138,6 +139,23 @@ courbe du segment qui suit (`auto`, `lin`, `acc`, `dec`, `acc-dec`,
 `palier`). Les pieds qui ne bougent pas entre deux clés restent plantés, et
 le `decalage` retarde la tête et les avant-bras de quelques images
 (chevauchement).
+
+Les **pieds** se calculent tout seuls à partir des jambes (`_bake_feet`
+dans `scripts/stick_anim.gd`) ; les clés n'ont pas à les régler. Pour chaque
+image, selon la hauteur et la vitesse de la cheville :
+
+- au sol et immobile : pied **à plat** ;
+- au sol en glissade vers l'avant : pointe relevée (16°), le talon glisse ;
+- cheville un peu levée, presque à la verticale de la pointe : appui **sur la
+  pointe** (poussée, pied qui traîne) ;
+- en l'air : la pointe s'abaisse au décollage puis remonte avant la pose, et
+  la pose suivante commence par **le talon** (+14° qui retombe à plat en
+  4 images) ; la cheville ne tourne pas plus de 11° par image.
+
+Ensuite, dans toutes les poses (animations, fondus, atelier) : un pied ne
+passe jamais sous le sol, et si poser un pied à plat demandait de plier la
+cheville au-delà de 30°, **le talon se lève** (le pied pivote sur sa
+pointe et la jambe suit). C'est ce qui lève le talon arrière en garde.
 
 Une boucle qui fait avancer le personnage déclare son `avance` (en unités
 par cycle) : chaque cycle reprend décalé d'autant, et le combattant

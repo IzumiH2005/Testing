@@ -39,7 +39,7 @@ const STYLES := {
 		"spineLow": 33.0, "chest": 35.0,
 		"upperArm": 34.0, "forearm": 32.0,
 		"thigh": 30.0, "shin": 31.0,
-		"foot": 0.0,       # 0 = pas de pied, la jambe finit en bout rond
+		"foot": 10.0,      # pied : petit crochet du trait, de la cheville vers l'avant
 	},
 	"fin": {
 		"label": "Fin (petite tête, trait léger)",
@@ -47,7 +47,7 @@ const STYLES := {
 		"spineLow": 27.0, "chest": 27.0,
 		"upperArm": 30.0, "forearm": 28.0,
 		"thigh": 44.0, "shin": 44.0,
-		"foot": 0.0,
+		"foot": 8.0,
 	},
 }
 
@@ -68,10 +68,10 @@ const BONES := [
 	{"id": "foreN",    "parent": "armN",     "len": "forearm",  "rest": 0.0,   "sign": 1.0,  "lim": Vector2(0, 150),   "label": "Coude (proche)"},
 	{"id": "thighF",   "parent": "root",     "len": "thigh",    "rest": 180.0, "sign": 1.0,  "lim": Vector2(-30, 140), "label": "Hanche (loin)"},
 	{"id": "shinF",    "parent": "thighF",   "len": "shin",     "rest": 0.0,   "sign": -1.0, "lim": Vector2(0, 150),   "label": "Genou (loin)"},
-	{"id": "footF",    "parent": "shinF",    "len": "foot",     "rest": 90.0,  "sign": 1.0,  "lim": Vector2(-50, 20),  "label": "Cheville (loin)"},
+	{"id": "footF",    "parent": "shinF",    "len": "foot",     "rest": 90.0,  "sign": 1.0,  "lim": Vector2(-50, 30),  "label": "Cheville (loin)"},
 	{"id": "thighN",   "parent": "root",     "len": "thigh",    "rest": 180.0, "sign": 1.0,  "lim": Vector2(-30, 140), "label": "Hanche (proche)"},
 	{"id": "shinN",    "parent": "thighN",   "len": "shin",     "rest": 0.0,   "sign": -1.0, "lim": Vector2(0, 150),   "label": "Genou (proche)"},
-	{"id": "footN",    "parent": "shinN",    "len": "foot",     "rest": 90.0,  "sign": 1.0,  "lim": Vector2(-50, 20),  "label": "Cheville (proche)"},
+	{"id": "footN",    "parent": "shinN",    "len": "foot",     "rest": 90.0,  "sign": 1.0,  "lim": Vector2(-50, 30),  "label": "Cheville (proche)"},
 ]
 
 ## Chaînes à deux os pour la cinématique inverse.
@@ -213,6 +213,91 @@ static func plant(p: Dictionary) -> Dictionary:
 	return q
 
 
+# ---------- Pieds ----------
+# Le pied part de la cheville vers l'avant. On le règle par son angle « absolu »
+# phi dans le repère du personnage : 0 = à plat vers l'avant, négatif = pointe
+# vers le bas (sur la pointe, pied tendu), positif = pointe relevée (talon).
+
+## Angle absolu du pied (degrés, repère du personnage).
+static func foot_phi(p: Dictionary, side: String) -> float:
+	var sol := solve(p)
+	return float(sol.world["foot" + side])
+
+
+## Oriente le pied à l'angle absolu phi (dans les amplitudes de la cheville).
+static func set_foot(p: Dictionary, side: String, phi: float, limits := true) -> void:
+	var sol := solve(p)
+	var b := bone("foot" + side)
+	var a := norm180((phi - float(sol.world["shin" + side]) - b.rest) * b.sign)
+	p.angles["foot" + side] = clamp_angle("foot" + side, a) if limits else a
+
+
+## Flexion maximale de la cheville (pointe vers le tibia), en degrés.
+const MAX_DORSI := 30.0
+
+## Le pied ne passe jamais sous le sol : si la pointe s'enfonce, le pied
+## pivote autour de la cheville jusqu'à poser la pointe (talon levé).
+## Si le pied posé à plat demanderait une cheville pliée au-delà de
+## MAX_DORSI (tibia très incliné vers l'arrière, comme la jambe arrière de la
+## garde), le talon se lève : le pied pivote autour de la pointe, qui reste
+## au sol, et la jambe suit la cheville.
+static func ground_feet(p: Dictionary) -> void:
+	var s := get_style(p.get("style", "epais"))
+	var L: float = s.foot
+	if L <= 0.0:
+		return
+	var g: float = s.stroke / 2.0
+	for side in ["N", "F"]:
+		var sol := solve(p)
+		var ank: Vector2 = sol.joints["ankle" + side]
+		var toe: Vector2 = sol.joints["toe" + side]
+		if toe.y < g - 0.01:
+			var h := clampf((ank.y - g) / L, -1.0, 1.0)
+			set_foot(p, side, -rad_to_deg(asin(h)), false)
+			toe = solve(p).joints["toe" + side]
+		if angle(p, "foot" + side) > MAX_DORSI + 0.01 and toe.y < g + 0.5:
+			var T := Vector2(toe.x, g)
+			var f: float = sol.facing
+			var base := clone_pose(p)
+			# Bissection sur l'angle du pied phi (pointe au sol en T) : la
+			# cheville se place en T - L·dir(phi), la jambe la rejoint, et on
+			# cherche phi tel que la cheville soit pliée de MAX_DORSI.
+			var lo := -85.0
+			var hi := 0.0
+			var q := base
+			for it in 16:
+				var phi := (lo + hi) / 2.0
+				var A := T - Vector2(f * cos(deg_to_rad(phi)), sin(deg_to_rad(phi))) * L
+				q = reach(base, "leg" + side, A)
+				set_foot(q, side, phi, false)
+				if angle(q, "foot" + side) > MAX_DORSI:
+					hi = phi
+				else:
+					lo = phi
+			p.angles["thigh" + side] = q.angles["thigh" + side]
+			p.angles["shin" + side] = q.angles["shin" + side]
+			p.angles["foot" + side] = q.angles["foot" + side]
+
+
+## Pieds d'une pose isolée (sans trajectoire) : à plat si la cheville est au
+## sol, sinon relâchés (pointe légèrement tendue) ; jamais sous le sol.
+static func auto_feet(p: Dictionary) -> Dictionary:
+	var q := clone_pose(p)
+	var s := get_style(q.get("style", "epais"))
+	if s.foot <= 0.0:
+		return q
+	var g: float = s.stroke / 2.0
+	for side in ["N", "F"]:
+		var sol := solve(q)
+		var h: float = sol.joints["ankle" + side].y - g
+		if h < 0.8:
+			set_foot(q, side, 0.0, false)
+		else:
+			q.angles["foot" + side] = -15.0
+	ground_feet(q)
+	return q
+
+
 ## Cinématique inverse à deux os (loi des cosinus) : le bout du membre va vers
 ## la cible (coordonnées du monde). Des deux sens de pliage possibles, garde
 ## celui qui respecte les amplitudes, puis le plus proche de la pose actuelle.
@@ -281,7 +366,8 @@ static func aim(p: Dictionary, bone_id: String, target: Vector2, limits := true)
 		q.angles.root = clamp_angle("root", ar) if limits else ar
 		return q
 	var start_joint := {"spineLow": "hip", "chest": "waist", "neck": "shoulder", "armN": "shoulder", "armF": "shoulder",
-		"foreN": "elbowN", "foreF": "elbowF", "thighN": "hip", "thighF": "hip", "shinN": "kneeN", "shinF": "kneeF"}
+		"foreN": "elbowN", "foreF": "elbowF", "thighN": "hip", "thighF": "hip", "shinN": "kneeN", "shinF": "kneeF",
+		"footN": "ankleN", "footF": "ankleF"}
 	if not start_joint.has(bone_id):
 		return q
 	var o: Vector2 = sol.joints[start_joint[bone_id]]

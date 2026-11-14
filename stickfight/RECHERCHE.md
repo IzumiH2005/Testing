@@ -12,10 +12,12 @@ diamètre de la tête comme unité.
 | Hauteur totale | ≈ 3,8 têtes | ≈ 5,4 têtes |
 | Épaisseur du trait | ≈ 0,34 tête | ≈ 0,36 tête |
 | Tête | disque plein, posé sur le tronc sans cou visible | idem |
-| Mains, pieds | simples bouts ronds du trait | idem |
+| Mains | simples bouts ronds du trait | idem |
+| Pieds | petit crochet arrondi vers l'avant, à peine plus long que le trait est épais ; à plat au sol, sur la pointe en poussée | idem |
 
 D'où le style `epais` du rig : tête de 46, trait de 15 (≈ 0,33 tête), pas de
-cou, la tête « mord » de 12 % de son rayon sur le haut du tronc. Le tronc est
+cou, la tête « mord » de 12 % de son rayon sur le haut du tronc, pied de 10
+(une fois et demie à peine le trait, pour rester un simple crochet). Le tronc est
 coupé en deux os (bas du dos, poitrine) pour pouvoir arrondir le dos en garde.
 Le style `fin` garde des proportions plus humaines (≈ 5,5 têtes).
 

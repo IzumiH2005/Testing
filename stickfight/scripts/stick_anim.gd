@@ -123,7 +123,161 @@ static func build(data: Dictionary) -> Dictionary:
 	for k in a.decalage:
 		max_lag = maxf(max_lag, a.decalage[k])
 	a.duree = float(a.longueur) if a.boucle else float(last) + max_lag
+	_bake_feet(a)
 	return a
+
+
+# ---------- Pieds automatiques ----------
+# L'angle absolu de chaque pied (0 = à plat vers l'avant, négatif = pointe vers
+# le bas) est calculé une fois pour toutes, image par image, d'après le
+# mouvement de la cheville :
+#   PLAT    cheville au sol, immobile : pied à plat ;
+#   GLISSE  cheville au sol qui file vers l'avant, devant le bassin : talon
+#           en avant, pointe relevée (freinage) ;
+#   POINTE  cheville levée sous le bassin ou derrière : appui sur l'avant-pied
+#           (la pointe reste au sol) ;
+#   AIR     pied en l'air : il se relâche (pointe vers le bas après la
+#           poussée), revient à peu près dans l'axe, puis se prépare à la pose
+#           (pointe relevée si la jambe attaque du talon devant le bassin).
+const FOOT_GROUND := 0.8      # cheville à moins de 0,8 du sol : pied posé
+const HEEL_STRIKE := 14.0     # pointe relevée à l'attaque du talon
+const HEEL_FRAMES := 4        # images pour que le pied se pose à plat
+const SLIDE_PHI := 16.0       # glissade
+const FOOT_RATE := 11.0       # variation max de l'angle de cheville par image (en l'air)
+
+static func _bake_feet(a: Dictionary) -> void:
+	var s: Dictionary = StickRig.get_style(a.cles[0].pose.get("style", "epais"))
+	var L: float = s.foot
+	if L <= 0.0:
+		return
+	var g: float = s.stroke / 2.0
+	var n: int = a.longueur if a.boucle else int(ceil(a.duree)) + 1
+	var loop: bool = a.boucle
+	var adv := float(a.avance)
+	var out := {}
+	for side in ["N", "F"]:
+		var h := []
+		var ax := []
+		var dx := []
+		var shin := []
+		for i in n:
+			var sol := StickRig.solve(sample(a, float(i)))
+			var ank: Vector2 = sol.joints["ankle" + side]
+			h.append(ank.y - g)
+			ax.append(ank.x)
+			dx.append(ank.x - float(sol.joints.hip.x))
+			shin.append(float(sol.world["shin" + side]))
+		var st := []
+		var phi := []
+		for i in n:
+			var vx: float
+			if loop:
+				var xp: float = ax[(i - 1 + n) % n] - (adv if i == 0 else 0.0)
+				var xn: float = ax[(i + 1) % n] + (adv if i == n - 1 else 0.0)
+				vx = (xn - xp) / 2.0
+			else:
+				vx = (ax[mini(i + 1, n - 1)] - ax[maxi(i - 1, 0)]) / float(mini(i + 1, n - 1) - maxi(i - 1, 0))
+			if h[i] < FOOT_GROUND:
+				if vx > 1.2 and dx[i] > 0.0:
+					st.append("glisse"); phi.append(SLIDE_PHI)
+				else:
+					st.append("plat"); phi.append(0.0)
+			elif h[i] <= 0.95 * L and dx[i] < 4.0 and (absf(vx) < 1.5 or h[i] < 3.0):
+				st.append("pointe"); phi.append(-rad_to_deg(asin(h[i] / L)))
+			else:
+				st.append("air"); phi.append(0.0)
+		# Attaque du talon : à plat après une phase en l'air, cheville devant.
+		for i in n:
+			var prev: int = (i - 1 + n) % n if loop else i - 1
+			if st[i] == "plat" and prev >= 0 and st[prev] == "air" and dx[i] > 6.0:
+				for k in HEEL_FRAMES:
+					var j: int = (i + k) % n if loop else i + k
+					if j >= n or st[j] != "plat":
+						break
+					phi[j] = HEEL_STRIKE * (1.0 - float(k) / HEEL_FRAMES)
+		# Phases en l'air.
+		var done := []
+		done.resize(n)
+		done.fill(false)
+		if not "air" in st:
+			out[side] = phi
+			continue
+		if not ("plat" in st or "glisse" in st or "pointe" in st):
+			for i in n:
+				phi[i] = shin[i] + 90.0 - 12.0
+			out[side] = phi
+			continue
+		for i0 in n:
+			if st[i0] != "air" or done[i0]:
+				continue
+			var p0: int = (i0 - 1 + n) % n if loop else i0 - 1
+			if p0 >= 0 and st[p0] == "air":
+				continue   # pas le début de la phase
+			var run := []
+			var j := i0
+			while st[j] == "air" and not done[j]:
+				run.append(j)
+				done[j] = true
+				j = (j + 1) % n if loop else j + 1
+				if j >= n:
+					break
+			var before: int = p0
+			var after: int = j if j < n else -1
+			# Angles relatifs (pied par rapport au tibia) aux bords.
+			var relA := -12.0
+			var relB := -12.0
+			if before >= 0:
+				relA = StickRig.norm180(phi[before] - shin[before] - 90.0)
+			if after >= 0:
+				var phiB: float = phi[after]
+				relB = StickRig.norm180(phiB - shin[after] - 90.0)
+			var m := run.size()
+			for k in m:
+				var i: int = run[k]
+				var u := float(k + 1) / float(m + 1)
+				if m <= 4 and before >= 0 and after >= 0:
+					var pa: float = phi[before]
+					var pb: float = phi[after]
+					phi[i] = pa + StickRig.norm180(pb - pa) * u
+					continue
+				var keys := [[0.0, relA], [0.3, minf(relA, -24.0)], [0.68, -9.0], [1.0, relB]]
+				var r := relB
+				for q in 3:
+					if u <= keys[q + 1][0]:
+						var w: float = (u - keys[q][0]) / (keys[q + 1][0] - keys[q][0])
+						w = w * w * (3.0 - 2.0 * w)
+						r = lerpf(keys[q][1], keys[q + 1][1], w)
+						break
+				phi[i] = shin[i] + 90.0 + r
+			# Vitesse de cheville bornée (en angle relatif au tibia), dans les
+			# deux sens, pour que le pied ne claque pas au décollage ni à la pose.
+			var rel := []
+			for k in m:
+				rel.append(StickRig.norm180(phi[run[k]] - shin[run[k]] - 90.0))
+			var r0: float = relA if before >= 0 else float(rel[0])
+			for k in m:
+				rel[k] = clampf(rel[k], r0 - FOOT_RATE, r0 + FOOT_RATE)
+				r0 = rel[k]
+			var r1: float = relB if after >= 0 else float(rel[m - 1])
+			for k in range(m - 1, -1, -1):
+				rel[k] = clampf(rel[k], r1 - FOOT_RATE, r1 + FOOT_RATE)
+				r1 = rel[k]
+			for k in m:
+				phi[run[k]] = shin[run[k]] + 90.0 + rel[k]
+		out[side] = phi
+	a.pieds = out
+
+
+## Angle absolu du pied à l'instant t (interpolé entre deux images).
+static func _foot_at(a: Dictionary, side: String, t: float) -> float:
+	var tab: Array = a.pieds[side]
+	var n := tab.size()
+	var tt := fposmod(t, float(n)) if a.boucle else clampf(t, 0.0, float(n - 1))
+	var i0 := int(floor(tt))
+	var i1 := (i0 + 1) % n if a.boucle else mini(i0 + 1, n - 1)
+	var u := tt - float(i0)
+	var p0: float = tab[i0 % n]
+	return p0 + StickRig.norm180(float(tab[i1]) - p0) * u
 
 
 static func _side_of(channel: String) -> String:
@@ -336,6 +490,10 @@ static func sample(a: Dictionary, t: float) -> Dictionary:
 			var ank: Vector2 = StickRig.solve(p).joints["ankle" + side]
 			if ank.y < ground:
 				p = StickRig.reach(p, "leg" + side, Vector2(ank.x, ground))
+	if a.has("pieds"):
+		for side in ["N", "F"]:
+			StickRig.set_foot(p, side, _foot_at(a, side, t))
+		StickRig.ground_feet(p)
 	p.nom = "%s @%s" % [a.nom, str(snappedf(t, 0.01))]
 	return p
 

@@ -94,6 +94,7 @@ func local_pose() -> Dictionary:
 		var u := float(blend_t) / blend_len
 		u = u * u * (3.0 - 2.0 * u)
 		p = StickRig.lerp_pose(blend_from, p, u)
+		StickRig.ground_feet(p)
 	return p
 
 

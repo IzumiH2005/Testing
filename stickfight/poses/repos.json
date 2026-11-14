@@ -2,7 +2,7 @@
   "nom": "repos",
   "style": "epais",
   "x": 0,
-  "y": 66.49796950200655,
+  "y": 66.5,
   "facing": 1,
   "angles": {
     "root": -11,
@@ -15,9 +15,9 @@
     "foreN": 10,
     "thighF": 3.73,
     "shinF": 0.02,
-    "footF": 0,
+    "footF": -14.71,
     "thighN": -25.71,
     "shinN": 0.02,
-    "footN": 0
+    "footN": 14.73
   }
 }
