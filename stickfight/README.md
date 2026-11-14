@@ -147,6 +147,14 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `saut_avant` | 72 i, avance 87 | ↑ + → : même mécanique, avec une poussée plus inclinée vers l'avant et les genoux groupés plus haut. Le pied avant touche le premier, devant le centre de gravité, ce qui le freine |
 | `saut_arriere` | 70 i, recule 92 | ↑ + ← : la poussée part en arrière, le buste se redresse et les bras équilibrent vers l'avant. Le pied arrière touche le premier, puis le pied avant se pose |
 | `reception` | 19 i, avance 17 | Commune aux trois sauts : depuis la pose basse d'amorti, le bassin remonte au-dessus des pieds et le buste se redresse jusqu'au repos, puis `idle_repos` |
+| `saut_booste_neutre` | 95 i, recule 10 | Maj + ↑ : anticipation plus profonde et plus longue (le bassin descend à 53 au lieu de 67, les bras partent loin derrière), contraction des jambes puis extension explosive. Le bassin monte 35 plus haut qu'au saut normal. Retombée sur la pointe du pied avant, le second pied, puis la main avant se pose : appui sur trois points, onde de choc au sol et secousse, puis `reception_lourde` |
+| `saut_booste_avant` | 92 i, avance 140 | Maj + ↑ + → : même charge, poussée inclinée vers l'avant, genoux groupés haut ; le pied avant touche le premier et freine |
+| `saut_booste_arriere` | 92 i, recule 134 | Maj + ↑ + ← : poussée en arrière, bras qui équilibrent vers l'avant, le pied arrière touche le premier |
+| `reception_lourde` | 38 i, avance 3 | Commune aux trois sauts boostés : depuis l'appui main au sol, la main pousse et se décolle, le bassin remonte et le buste se redresse jusqu'au repos, puis `idle_repos` |
+| `propulsion_avant` | 60 i, avance 232 | Accroupi (↓ tenu) puis → : le poids passe sur la main, les jambes se contractent, puis poussée explosive à ras du sol, buste penché à 45°. Pointe du pied, second pied, main posée, amorti jusqu'à la pose accroupie, puis `accroupi_repos_idle` |
+| `propulsion_avant_haute` | 75 i, avance 225 | ↑ + → depuis l'accroupi : même charge, poussée plus verticale, vol en cloche (le bassin monte à 105), genoux groupés |
+| `propulsion_arriere` | 59 i, recule 150 | ← depuis l'accroupi : le poids recule sur le pied avant, la main se lève, poussée en arrière à ras du sol, le pied arrière se pose le premier |
+| `propulsion_arriere_haute` | 73 i, recule 157 | ↑ + ← depuis l'accroupi : même chose en cloche |
 
 Une clé part d'une pose (`poses/`), applique des réglages (`plus`, `fixe`,
 `vise` pour placer une main ou un pied en cinématique inverse), et choisit la
@@ -179,8 +187,15 @@ animation en remplace une autre, le bassin reste où il est arrivé.
 
 Événements : `contact` (repère de synchronisation), `hitstop` (arrêt sur
 impact global, la figure qui l'émet tremble), `etincelle`, `poussiere`,
-`vitesse` (lignes de vitesse derrière le bassin), `secousse` (caméra). Les effets (`scripts/vfx.gd`) sont dessinés en aplats,
-palette de 4 couleurs, et changent d'image toutes les 2 images.
+`vitesse` (lignes de vitesse derrière le bassin), `onde` (onde de choc au
+sol : flash, anneau aplati qui s'élargit puis s'efface par trous, éclats de
+sol ; `"articulation": "pieds"` la centre entre les deux chevilles),
+`choc` (onde d'air : flash en croissant puis trois croissants qui se
+détachent dans la direction `dir`), `secousse` (caméra). Les effets
+(`scripts/vfx.gd`) sont dessinés en aplats, palette de 4 couleurs, et
+changent d'image toutes les 2 images. Ils disparaissent par trous qui
+grandissent, jamais en fondu. Le choc est dessiné derrière les combattants ;
+l'onde met la moitié du fond de son anneau derrière les jambes.
 
 Un **duo** (`anims/duo_*.json`) place plusieurs combattants et leur programme :
 `{"contact": 33, "anim": "blocage_bas", "fondu": 3}` démarre l'animation pour
@@ -199,6 +214,8 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | Ctrl + → maintenus | Depuis le repos : départ de sprint puis sprint ; relâchés, freinage en glissade au prochain appui et retour au repos. La caméra regarde devant en proportion de la vitesse |
 | ↓ maintenu | Depuis le repos : accroupi détendu, une main posée au sol ; relâché, le combattant se relève au repos |
 | ↑ | Depuis le repos : saut sur place ; ↑ + → saut avant, ↑ + ← saut arrière (↑ reste accepté dans les 6 premières images d'un départ de marche). Réception, puis retour au repos |
+| Maj + ↑ | Saut boosté sur place ; avec → ou ←, saut boosté avant ou arrière (accepté aussi au début d'un départ de marche ou de course). Atterrissage sur trois appuis, réception lourde, puis repos |
+| ↓ tenu, puis → ou ← | Propulsion rasante avant ou arrière depuis l'accroupi ; avec ↑ en plus, propulsion haute. Le combattant revient accroupi |
 | G maintenu | Mise en garde (garde ouverte) ; avec →, marche en garde ; ← ferme la garde (défensive) puis recule, et la garde se rouvre après 10 images sans ← ; → → ou ← ← (double appui rapide) : dash avant ou arrière ; ↓ maintenu : accroupi en garde ; relâché, sortie de garde et retour au repos |
 | B | Blocage bas (en garde) |
 | K | Duo coup de pied / blocage (en boucle) |

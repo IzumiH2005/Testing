@@ -1,0 +1,809 @@
+{
+ "nom": "reception_lourde",
+ "boucle": false,
+ "base": "repos",
+ "suivante": "idle_repos",
+ "cles": [
+  {
+   "f": 0,
+   "nom": "accroupi, main au sol",
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 0.0,
+    "y": 38.0,
+    "root": 6,
+    "spineLow": 30,
+    "chest": 26,
+    "neck": -48,
+    "armN": 70.087,
+    "foreN": 30.812,
+    "armF": 25.17,
+    "foreF": 114.47,
+    "thighN": 52.047,
+    "shinN": 144.752,
+    "thighF": 107.698,
+    "shinF": 124.162
+   }
+  },
+  {
+   "f": 1,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.027,
+    "y": 37.921,
+    "root": 6.078,
+    "spineLow": 30.234,
+    "chest": 26.312,
+    "neck": -48.469,
+    "armN": 69.394,
+    "foreN": 33.486,
+    "armF": 25.326,
+    "foreF": 114.939,
+    "thighN": 52.159,
+    "shinN": 144.871,
+    "thighF": 107.916,
+    "shinF": 124.233
+   }
+  },
+  {
+   "f": 2,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.084,
+    "y": 37.75,
+    "root": 6.25,
+    "spineLow": 30.75,
+    "chest": 27.0,
+    "neck": -49.5,
+    "armN": 68.181,
+    "foreN": 38.746,
+    "armF": 25.67,
+    "foreF": 115.97,
+    "thighN": 52.406,
+    "shinN": 145.129,
+    "thighF": 108.394,
+    "shinF": 124.387
+   }
+  },
+  {
+   "f": 3,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.14,
+    "y": 37.58,
+    "root": 6.422,
+    "spineLow": 31.266,
+    "chest": 27.688,
+    "neck": -50.531,
+    "armN": 67.275,
+    "foreN": 43.398,
+    "armF": 26.014,
+    "foreF": 117.001,
+    "thighN": 52.646,
+    "shinN": 145.383,
+    "thighF": 108.867,
+    "shinF": 124.539
+   }
+  },
+  {
+   "f": 4,
+   "nom": "fin du choc",
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.164,
+    "y": 37.504,
+    "root": 6.5,
+    "spineLow": 31.5,
+    "chest": 28.0,
+    "neck": -51.0,
+    "armN": 66.94,
+    "foreN": 45.364,
+    "armF": 26.17,
+    "foreF": 117.47,
+    "thighN": 52.752,
+    "shinN": 145.496,
+    "thighF": 109.08,
+    "shinF": 124.607
+   }
+  },
+  {
+   "f": 5,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.181,
+    "y": 37.58,
+    "root": 6.457,
+    "spineLow": 31.362,
+    "chest": 27.832,
+    "neck": -50.611,
+    "armN": 67.238,
+    "foreN": 44.07,
+    "armF": 26.086,
+    "foreF": 116.724,
+    "thighN": 52.783,
+    "shinN": 145.412,
+    "thighF": 108.929,
+    "shinF": 124.498
+   }
+  },
+  {
+   "f": 6,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.235,
+    "y": 37.803,
+    "root": 6.335,
+    "spineLow": 30.971,
+    "chest": 27.364,
+    "neck": -49.516,
+    "armN": 68.213,
+    "foreN": 40.156,
+    "armF": 25.846,
+    "foreF": 114.629,
+    "thighN": 52.876,
+    "shinN": 145.166,
+    "thighF": 108.492,
+    "shinF": 124.174
+   }
+  },
+  {
+   "f": 7,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.329,
+    "y": 38.166,
+    "root": 6.141,
+    "spineLow": 30.363,
+    "chest": 26.645,
+    "neck": -47.825,
+    "armN": 70.214,
+    "foreN": 33.117,
+    "armF": 25.471,
+    "foreF": 111.396,
+    "thighN": 53.033,
+    "shinN": 144.764,
+    "thighF": 107.79,
+    "shinF": 123.639
+   }
+  },
+  {
+   "f": 8,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.474,
+    "y": 38.656,
+    "root": 5.883,
+    "spineLow": 29.575,
+    "chest": 25.727,
+    "neck": -45.648,
+    "armN": 74.503,
+    "foreN": 20.588,
+    "armF": 24.981,
+    "foreF": 107.237,
+    "thighN": 53.273,
+    "shinN": 144.228,
+    "thighF": 106.862,
+    "shinF": 122.894
+   }
+  },
+  {
+   "f": 9,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.675,
+    "y": 39.239,
+    "root": 5.571,
+    "spineLow": 28.641,
+    "chest": 24.66,
+    "neck": -43.094,
+    "armN": 82.433,
+    "foreN": 0.02,
+    "armF": 24.395,
+    "foreF": 102.364,
+    "thighN": 53.584,
+    "shinN": 143.599,
+    "thighF": 105.778,
+    "shinF": 121.976
+   }
+  },
+  {
+   "f": 10,
+   "nom": "la main pousse et quitte le sol",
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.738,
+    "y": 40.01,
+    "root": 5.211,
+    "spineLow": 27.598,
+    "chest": 23.497,
+    "neck": -40.273,
+    "armN": 80.039,
+    "foreN": 0.02,
+    "armF": 23.735,
+    "foreF": 96.989,
+    "thighN": 53.526,
+    "shinN": 142.625,
+    "thighF": 104.285,
+    "shinF": 120.949
+   }
+  },
+  {
+   "f": 11,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.748,
+    "y": 40.957,
+    "root": 4.813,
+    "spineLow": 26.482,
+    "chest": 22.286,
+    "neck": -37.295,
+    "armN": 75.796,
+    "foreN": 0.02,
+    "armF": 23.018,
+    "foreF": 91.324,
+    "thighN": 53.045,
+    "shinN": 141.224,
+    "thighF": 102.471,
+    "shinF": 119.736
+   }
+  },
+  {
+   "f": 12,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.39,
+    "y": 42.152,
+    "root": 4.385,
+    "spineLow": 25.328,
+    "chest": 21.081,
+    "neck": -34.269,
+    "armN": 52.599,
+    "foreN": 28.577,
+    "armF": 22.267,
+    "foreF": 85.581,
+    "thighN": 51.297,
+    "shinN": 138.98,
+    "thighF": 100.056,
+    "shinF": 118.521
+   }
+  },
+  {
+   "f": 13,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.258,
+    "y": 43.397,
+    "root": 3.934,
+    "spineLow": 24.173,
+    "chest": 19.93,
+    "neck": -31.305,
+    "armN": 43.052,
+    "foreN": 31.897,
+    "armF": 21.5,
+    "foreF": 79.971,
+    "thighN": 49.676,
+    "shinN": 136.536,
+    "thighF": 97.715,
+    "shinF": 116.991
+   }
+  },
+  {
+   "f": 14,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.304,
+    "y": 45.25,
+    "root": 3.47,
+    "spineLow": 23.051,
+    "chest": 18.887,
+    "neck": -28.512,
+    "armN": 39.313,
+    "foreN": 31.972,
+    "armF": 20.738,
+    "foreF": 74.707,
+    "thighN": 48.118,
+    "shinN": 133.113,
+    "thighF": 94.638,
+    "shinF": 114.43
+   }
+  },
+  {
+   "f": 15,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.388,
+    "y": 48.118,
+    "root": 3.0,
+    "spineLow": 22.0,
+    "chest": 18.0,
+    "neck": -26.0,
+    "armN": 36.0,
+    "foreN": 32.0,
+    "armF": 20.0,
+    "foreF": 70.0,
+    "thighN": 46.226,
+    "shinN": 128.021,
+    "thighF": 90.233,
+    "shinF": 110.312
+   }
+  },
+  {
+   "f": 16,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.434,
+    "y": 51.763,
+    "root": 2.456,
+    "spineLow": 20.939,
+    "chest": 17.216,
+    "neck": -23.629,
+    "armN": 32.961,
+    "foreN": 31.828,
+    "armF": 19.21,
+    "foreF": 65.537,
+    "thighN": 43.655,
+    "shinN": 121.45,
+    "thighF": 84.787,
+    "shinF": 104.87
+   }
+  },
+  {
+   "f": 17,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.358,
+    "y": 55.949,
+    "root": 1.777,
+    "spineLow": 19.781,
+    "chest": 16.446,
+    "neck": -21.198,
+    "armN": 29.938,
+    "foreN": 31.344,
+    "armF": 18.296,
+    "foreF": 60.909,
+    "thighN": 40.177,
+    "shinN": 113.584,
+    "thighF": 78.531,
+    "shinF": 98.339
+   }
+  },
+  {
+   "f": 18,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": -0.158,
+    "y": 60.481,
+    "root": 0.984,
+    "spineLow": 18.551,
+    "chest": 15.693,
+    "neck": -18.727,
+    "armN": 26.929,
+    "foreN": 30.596,
+    "armF": 17.288,
+    "foreF": 56.183,
+    "thighN": 35.846,
+    "shinN": 104.583,
+    "thighF": 71.699,
+    "shinF": 90.825
+   }
+  },
+  {
+   "f": 19,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 0.163,
+    "y": 65.163,
+    "root": 0.099,
+    "spineLow": 17.274,
+    "chest": 14.957,
+    "neck": -16.236,
+    "armN": 23.93,
+    "foreN": 29.632,
+    "armF": 16.213,
+    "foreF": 51.425,
+    "thighN": 30.749,
+    "shinN": 94.6,
+    "thighF": 64.469,
+    "shinF": 82.443
+   }
+  },
+  {
+   "f": 20,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 0.596,
+    "y": 69.798,
+    "root": -0.859,
+    "spineLow": 15.974,
+    "chest": 14.24,
+    "neck": -13.746,
+    "armN": 20.939,
+    "foreN": 28.5,
+    "armF": 15.102,
+    "foreF": 46.704,
+    "thighN": 24.987,
+    "shinN": 83.783,
+    "thighF": 56.986,
+    "shinF": 73.321
+   }
+  },
+  {
+   "f": 21,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 1.126,
+    "y": 74.187,
+    "root": -1.868,
+    "spineLow": 14.676,
+    "chest": 13.545,
+    "neck": -11.276,
+    "armN": 17.953,
+    "foreN": 27.248,
+    "armF": 13.982,
+    "foreF": 42.087,
+    "thighN": 18.664,
+    "shinN": 72.287,
+    "thighF": 49.382,
+    "shinF": 63.625
+   }
+  },
+  {
+   "f": 22,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 1.73,
+    "y": 78.129,
+    "root": -2.907,
+    "spineLow": 13.405,
+    "chest": 12.871,
+    "neck": -8.846,
+    "armN": 14.969,
+    "foreN": 25.924,
+    "armF": 12.883,
+    "foreF": 37.64,
+    "thighN": 11.909,
+    "shinN": 60.311,
+    "thighF": 41.814,
+    "shinF": 53.596
+   }
+  },
+  {
+   "f": 23,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 2.372,
+    "y": 81.421,
+    "root": -3.956,
+    "spineLow": 12.186,
+    "chest": 12.222,
+    "neck": -6.477,
+    "armN": 11.984,
+    "foreN": 24.576,
+    "armF": 11.834,
+    "foreF": 33.432,
+    "thighN": 4.917,
+    "shinN": 48.192,
+    "thighF": 34.533,
+    "shinF": 43.664
+   }
+  },
+  {
+   "f": 24,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 2.988,
+    "y": 83.856,
+    "root": -4.994,
+    "spineLow": 11.042,
+    "chest": 11.597,
+    "neck": -4.188,
+    "armN": 8.996,
+    "foreN": 23.252,
+    "armF": 10.863,
+    "foreF": 29.53,
+    "thighN": -1.887,
+    "shinN": 36.695,
+    "thighF": 28.036,
+    "shinF": 34.717
+   }
+  },
+  {
+   "f": 25,
+   "nom": "le buste se relève",
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 3.445,
+    "y": 85.229,
+    "root": -6.0,
+    "spineLow": 10.0,
+    "chest": 11.0,
+    "neck": -2.0,
+    "armN": 6.0,
+    "foreN": 22.0,
+    "armF": 10.0,
+    "foreF": 26.0,
+    "thighN": -7.365,
+    "shinN": 27.929,
+    "thighF": 23.363,
+    "shinF": 28.612
+   }
+  },
+  {
+   "f": 26,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 3.848,
+    "y": 85.89,
+    "root": -7.164,
+    "spineLow": 8.947,
+    "chest": 10.373,
+    "neck": 0.332,
+    "armN": 2.583,
+    "foreN": 20.604,
+    "armF": 9.148,
+    "foreF": 22.591,
+    "thighN": -11.414,
+    "shinN": 22.509,
+    "thighF": 20.197,
+    "shinF": 25.44
+   }
+  },
+  {
+   "f": 27,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 4.379,
+    "y": 86.369,
+    "root": -8.559,
+    "spineLow": 7.829,
+    "chest": 9.704,
+    "neck": 2.876,
+    "armN": -1.333,
+    "foreN": 18.933,
+    "armF": 8.252,
+    "foreF": 19.163,
+    "thighN": -15.5,
+    "shinN": 17.719,
+    "thighF": 17.249,
+    "shinF": 23.255
+   }
+  },
+  {
+   "f": 28,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 4.943,
+    "y": 86.724,
+    "root": -9.987,
+    "spineLow": 6.762,
+    "chest": 9.062,
+    "neck": 5.348,
+    "armN": -5.25,
+    "foreN": 17.163,
+    "armF": 7.4,
+    "foreF": 15.954,
+    "thighN": -19.884,
+    "shinN": 12.492,
+    "thighF": 14.622,
+    "shinF": 21.766
+   }
+  },
+  {
+   "f": 29,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 5.436,
+    "y": 86.979,
+    "root": -11.252,
+    "spineLow": 5.859,
+    "chest": 8.519,
+    "neck": 7.466,
+    "armN": -8.667,
+    "foreN": 15.467,
+    "armF": 6.681,
+    "foreF": 13.199,
+    "thighN": -24.765,
+    "shinN": 5.894,
+    "thighF": 12.475,
+    "shinF": 20.769
+   }
+  },
+  {
+   "f": 30,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 5.645,
+    "y": 87.031,
+    "root": -12.155,
+    "spineLow": 5.234,
+    "chest": 8.141,
+    "neck": 8.944,
+    "armN": -11.083,
+    "foreN": 14.021,
+    "armF": 6.185,
+    "foreF": 11.135,
+    "thighN": -28.689,
+    "shinN": 0.178,
+    "thighF": 11.407,
+    "shinF": 20.744
+   }
+  },
+  {
+   "f": 31,
+   "nom": "léger dépassement",
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 5.361,
+    "y": 87.115,
+    "root": -12.5,
+    "spineLow": 5.0,
+    "chest": 8.0,
+    "neck": 9.5,
+    "armN": -12.0,
+    "foreN": 13.0,
+    "armF": 6.0,
+    "foreF": 10.0,
+    "thighN": -28.829,
+    "shinN": 0.178,
+    "thighF": 10.658,
+    "shinF": 19.588
+   }
+  },
+  {
+   "f": 32,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 4.834,
+    "y": 87.268,
+    "root": -12.389,
+    "spineLow": 5.074,
+    "chest": 8.074,
+    "neck": 9.389,
+    "armN": -11.852,
+    "foreN": 12.257,
+    "armF": 6.148,
+    "foreF": 9.44,
+    "thighN": -28.339,
+    "shinN": 0.178,
+    "thighF": 9.917,
+    "shinF": 17.245
+   }
+  },
+  {
+   "f": 33,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 4.27,
+    "y": 87.428,
+    "root": -12.111,
+    "spineLow": 5.259,
+    "chest": 8.259,
+    "neck": 9.111,
+    "armN": -11.481,
+    "foreN": 11.556,
+    "armF": 6.519,
+    "foreF": 8.955,
+    "thighN": -27.657,
+    "shinN": 0.178,
+    "thighF": 9.077,
+    "shinF": 14.335
+   }
+  },
+  {
+   "f": 34,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 3.739,
+    "y": 87.575,
+    "root": -11.75,
+    "spineLow": 5.5,
+    "chest": 8.5,
+    "neck": 8.75,
+    "armN": -11.0,
+    "foreN": 10.938,
+    "armF": 7.0,
+    "foreF": 8.556,
+    "thighN": -26.916,
+    "shinN": 0.178,
+    "thighF": 8.045,
+    "shinF": 10.925
+   }
+  },
+  {
+   "f": 35,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 3.3,
+    "y": 87.691,
+    "root": -11.389,
+    "spineLow": 5.741,
+    "chest": 8.741,
+    "neck": 8.389,
+    "armN": -10.519,
+    "foreN": 10.444,
+    "armF": 7.481,
+    "foreF": 8.255,
+    "thighN": -25.893,
+    "shinN": 0.864,
+    "thighF": 6.696,
+    "shinF": 7.002
+   }
+  },
+  {
+   "f": 36,
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 2.991,
+    "y": 87.759,
+    "root": -11.111,
+    "spineLow": 5.926,
+    "chest": 8.926,
+    "neck": 8.111,
+    "armN": -10.148,
+    "foreN": 10.118,
+    "armF": 7.852,
+    "foreF": 8.066,
+    "thighN": -24.697,
+    "shinN": 2.248,
+    "thighF": 4.592,
+    "shinF": 1.912
+   }
+  },
+  {
+   "f": 37,
+   "nom": "repos",
+   "courbe": "lin",
+   "ancre": false,
+   "fixe": {
+    "x": 2.863
+   },
+   "pose": "repos"
+  }
+ ],
+ "evenements": [
+  {
+   "f": 10,
+   "type": "poussiere",
+   "articulation": "handN",
+   "dir": 0,
+   "taille": 0.5
+  }
+ ]
+}

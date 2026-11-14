@@ -29,7 +29,10 @@ const ROUVRIR := 10
 ## Images au début d'un départ de marche pendant lesquelles ↑ le change
 ## encore en saut (→ ou ← enfoncée un peu avant ↑).
 const SAUT_TOLERANCE := 6
-const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   ↑ sauter (+ → / ← : avant / arrière)   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+## Images minimales passées dans accroupi_repos_idle avant qu'une propulsion
+## puisse partir (le fondu de retour de la propulsion précédente se termine).
+const PROPULSION_DELAI := 4
+const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   ↑ sauter (+ → / ← : avant / arrière)   Maj + ↑ saut boosté   ↓ puis → / ← propulsion (+ ↑ haute)   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
 var planche: Planche
 var help: Label
@@ -179,7 +182,14 @@ const ARRETS := {
 ## - ↑ depuis le repos : saut sur place ; ↑ + → saut avant, ↑ + ← saut arrière.
 ##   Chaque saut finit accroupi sur la pose d'amorti commune, puis enchaîne
 ##   la réception (reception) et le repos. ↑ dans les SAUT_TOLERANCE
-##   premières images d'un départ de marche le change en saut avant / arrière ;
+##   premières images d'un départ de marche le change en saut avant / arrière
+##   (en saut boosté si Maj est tenue, y compris pendant un départ de course) ;
+## - Maj + ↑ depuis le repos : saut boosté (+ → / ← : avant / arrière). Les
+##   jambes se contractent plus, il monte plus haut et retombe sur trois appuis
+##   (main au sol), puis enchaîne la réception lourde et le repos ;
+## - accroupi (↓ tenu) : → / ← propulsion rasante avant / arrière, ↑ + → / ←
+##   propulsion haute. Elle repart de la pose accroupie main au sol et y
+##   revient ; → / ← encore tenue après PROPULSION_DELAI images relance ;
 ## - G tenu met en garde (depuis le repos) : garde ouverte, prête à se battre ;
 ##   → y fait la marche en garde, qui s'arrête à l'image 0 de son cycle ;
 ## - ← en garde ouverte ferme la garde (garde défensive, comme on bloque en
@@ -207,7 +217,10 @@ func _control_input() -> void:
 	var nom := f.anim_name()
 	match nom:
 		"idle_repos":
-			if up:
+			if up and run:
+				f.play("saut_booste_avant" if fwd else "saut_booste_arriere" if back
+						else "saut_booste_neutre", 4)
+			elif up:
 				f.play("saut_avant" if fwd else "saut_arriere" if back else "saut_neutre", 4)
 			elif guard:
 				f.play("mise_en_garde", 4)
@@ -223,10 +236,20 @@ func _control_input() -> void:
 				f.play("accroupi_repos_entree", 4)
 		"marche_detendue_depart", "marche_detendue_arriere_depart":
 			if up and f.t < SAUT_TOLERANCE:
-				f.play("saut_avant" if nom == "marche_detendue_depart" else "saut_arriere", 3)
+				var avant := nom == "marche_detendue_depart"
+				if run:
+					f.play("saut_booste_avant" if avant else "saut_booste_arriere", 3)
+				else:
+					f.play("saut_avant" if avant else "saut_arriere", 3)
+		"course_depart":
+			if up and f.t < SAUT_TOLERANCE:
+				f.play("saut_booste_avant", 3)
 		"accroupi_repos_idle":
 			if not down:
 				f.play("accroupi_repos_sortie", 3)
+			elif (fwd or back) and f.t >= PROPULSION_DELAI:
+				var cote := "avant" if fwd else "arriere"
+				f.play("propulsion_" + cote + ("_haute" if up else ""), 3)
 		"marche_detendue", "marche_detendue_arriere", "course", "sprint":
 			var held: bool = {"marche_detendue": fwd, "marche_detendue_arriere": back,
 					"course": fwd and run, "sprint": fwd and sprint}[nom]

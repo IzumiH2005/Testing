@@ -493,6 +493,9 @@ mêmes jambes : seuls le buste et les bras changent.
 | Postures | Sortie de garde (garde → repos) | `sortie_de_garde` | fait |
 | Déplacements | Saut neutre, avant, arrière | `saut_*` | fait |
 | Déplacements | Réception légère | `reception` | fait |
+| Déplacements | Saut boosté neutre, avant, arrière (atterrissage sur trois appuis) | `saut_booste_*` | fait |
+| Déplacements | Réception lourde | `reception_lourde` | fait |
+| Déplacements | Propulsion avant, arrière, rasante ou haute, depuis l'accroupi main au sol | `propulsion_*` | fait |
 | Déplacements | Demi-tour | `demi_tour` | |
 | Défense | Garde haute tenue (garde fermée) | `garde_idle` | fait |
 | Défense | Garde accroupie tenue | `garde_basse` | |

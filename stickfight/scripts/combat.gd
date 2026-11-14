@@ -16,6 +16,9 @@ extends RefCounted
 ##   {"f": 8, "type": "secousse", "n": 6, "force": 2}
 ##   {"f": 14, "type": "poussiere", "articulation": "ankleN", "dir": 0}
 ##   {"f": 3, "type": "vitesse", "articulation": "hip", "dec": [-14, 22], "dir": 0}
+##   {"f": 29, "type": "onde", "articulation": "pieds", "dir": -90, "taille": 1.4}  (posée au sol sous l'articulation ;
+##       "pieds" = milieu des deux chevilles, valable pour tous les effets)
+##   {"f": 28, "type": "choc", "articulation": "hip", "dir": 10, "taille": 1}
 ##   {"f": 8, "type": "contact"}  (repère de synchronisation, ne fait rien)
 ## Les angles « dir » sont donnés dans le repère du personnage (0 = devant,
 ## -90 = vers le bas) et retournés s'il regarde à gauche.
@@ -102,9 +105,11 @@ func _handle(f: Fighter, ev: Dictionary) -> void:
 			cam_n = int(ev.get("n", 6))
 			cam_len = cam_n
 			cam_force = float(ev.get("force", 2.0))
-		"etincelle", "poussiere", "vitesse":
+		"etincelle", "poussiere", "vitesse", "onde", "choc":
 			var J: Dictionary = StickRig.solve(f.to_world(f.local_pose())).joints
-			var pos: Vector2 = J.get(str(ev.get("articulation", "hip")), J.hip)
+			var art := str(ev.get("articulation", "hip"))
+			# « pieds » : milieu des deux chevilles (onde sous les deux appuis).
+			var pos: Vector2 = (J.ankleN + J.ankleF) / 2.0 if art == "pieds" else J.get(art, J.hip)
 			var dec = ev.get("dec", [0, 0])
 			pos += Vector2(f.facing * float(dec[0]), float(dec[1]))
 			vfx.append(Vfx.make(str(ev.type), pos, {"dir": _world_dir(f, float(ev.get("dir", 0.0))),
@@ -133,6 +138,8 @@ func record() -> Dictionary:
 
 static func draw_record(ci: CanvasItem, rec: Dictionary, origin: Vector2, scale: float, far_shade := 1.0) -> void:
 	var o: Vector2 = origin + rec.cam * scale * Vector2(1, -1)
+	for v in rec.vfx:
+		Vfx.draw(ci, v, o, scale, "derriere")
 	for fig in rec.fighters:
 		for sm in fig.smears:
 			if not sm.proche:
@@ -142,7 +149,7 @@ static func draw_record(ci: CanvasItem, rec: Dictionary, origin: Vector2, scale:
 			if sm.proche:
 				_draw_smear(ci, sm, o, scale, fig.color)
 	for v in rec.vfx:
-		Vfx.draw(ci, v, o, scale)
+		Vfx.draw(ci, v, o, scale, "devant")
 
 
 ## Image « étalée » (smear) : l'avant-bras occupe tout l'espace balayé

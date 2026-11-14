@@ -16,13 +16,28 @@ extends RefCounted
 ## vitesse    lignes de vitesse : traits horizontaux laissés sur place dans
 ##            l'arène ; le coureur s'en éloigne, ils se rétractent vers
 ##            l'arrière (dir = sens de la course, les traits partent à l'opposé).
+## onde       onde de choc au sol (décollage ou atterrissage en force) : flash
+##            blanc d'une image (0-1), anneau aplati qui s'élargit (2-15), en
+##            passant du blanc au gris, puis se troue par morceaux ; quelques
+##            éclats de sol sautent aux deux bouts. dir penche l'onde : elle
+##            s'étend plus loin du côté de dir (−90 = symétrique).
+## choc       ondes d'air laissées sur place au point de départ d'une
+##            propulsion : trois croissants bombés vers dir (sens du vol), du
+##            plus large au plus petit, qui s'ouvrent, s'amincissent et se
+##            brisent pendant que le corps s'en éloigne.
 
 const PALETTES := {
 	"garde": [Color("#ffffff"), Color("#d0ebff"), Color("#74c0fc"), Color("#1864ab")],
 	"coup": [Color("#ffffff"), Color("#fff3bf"), Color("#ffa94d"), Color("#c2410c")],
 }
 const DUST := [Color("#f1e6e2"), Color("#cdbab5"), Color("#9f8b86")]
-const LIFE := {"etincelle": 14, "poussiere": 18, "vitesse": 10}
+const LIFE := {"etincelle": 14, "poussiere": 18, "vitesse": 10, "onde": 18, "choc": 14}
+## Air comprimé : même famille que les lignes de vitesse (blanc froid → gris).
+const AIR := [Color("#ffffff"), Color("#e9ecef"), Color("#adb5bd"), Color("#495057")]
+## Ordre dans lequel les morceaux d'un trait s'effacent (des trous qui grandissent).
+const HOLES := [5, 1, 9, 3, 7, 0, 10, 4, 8, 2, 11, 6]
+## Éclats de sol de l'onde : (angle depuis l'horizontale, vitesse, taille), par groupe de 3.
+const CHIPS := [[58.0, 2.3, 3.0], [40.0, 2.9, 2.5], [72.0, 1.7, 2.0]]
 const SPEED := Color("#f8f9fa")
 const SPEED_EDGE := Color("#495057")
 ## Traits : (hauteur relative, recul du départ, longueur).
@@ -44,7 +59,20 @@ static func make(type: String, pos: Vector2, params := {}) -> Dictionary:
 	return v
 
 
-static func draw(ci: CanvasItem, v: Dictionary, origin: Vector2, scale: float) -> void:
+## Calques : `draw` est appelé deux fois par image, avant les combattants
+## (layer = "derriere") et après (layer = "devant"). Le choc passe entièrement
+## derrière le corps ; l'onde met la moitié du fond de son anneau derrière
+## les jambes et la moitié de devant par-dessus. Le reste est devant.
+static func draw(ci: CanvasItem, v: Dictionary, origin: Vector2, scale: float, layer := "devant") -> void:
+	if v.type == "choc":
+		if layer == "derriere":
+			_boom(ci, v, origin, scale)
+		return
+	if v.type == "onde":
+		_wave(ci, v, origin, scale, layer)
+		return
+	if layer != "devant":
+		return
 	match v.type:
 		"etincelle":
 			_spark(ci, v, origin, scale)
@@ -160,3 +188,131 @@ static func _speed(ci: CanvasItem, v: Dictionary, origin: Vector2, scale: float)
 		var p1 := _scr(Vector2(tail, y), origin, scale)
 		ci.draw_line(p0, p1, SPEED_EDGE, maxf(1.0, (w + 1.4) * scale))
 		ci.draw_line(p0, p1, SPEED, maxf(1.0, w * scale))
+
+
+## Morceau i (sur n) déjà effacé quand la proportion « gone » est atteinte.
+static func _erased(i: int, n: int, gone: float) -> bool:
+	if gone <= 0.0:
+		return false
+	var rank := HOLES.find(int(i * 12.0 / n))
+	return float(rank) < gone * 12.0
+
+
+## Traits cerclés de sombre (comme les lignes de vitesse) : tous les bords
+## d'abord, puis tous les cœurs clairs, pour que les morceaux jointifs
+## forment un seul trait sans coutures. segs = [[a, b], ...] (monde).
+static func _strokes(ci: CanvasItem, segs: Array, w: float, core: Color, edge: Color, origin: Vector2, scale: float) -> void:
+	for pass_i in 2:
+		for sg in segs:
+			var p0 := _scr(sg[0], origin, scale)
+			var p1 := _scr(sg[1], origin, scale)
+			if pass_i == 0:
+				ci.draw_line(p0, p1, edge, maxf(1.0, (w + 1.4) * scale))
+				ci.draw_circle(p0, maxf(0.5, (w + 1.4) * scale / 2.0), edge)
+				ci.draw_circle(p1, maxf(0.5, (w + 1.4) * scale / 2.0), edge)
+			else:
+				ci.draw_line(p0, p1, core, maxf(1.0, w * scale))
+				ci.draw_circle(p0, maxf(0.5, w * scale / 2.0), core)
+				ci.draw_circle(p1, maxf(0.5, w * scale / 2.0), core)
+
+
+static func _wave(ci: CanvasItem, v: Dictionary, origin: Vector2, scale: float, layer := "devant") -> void:
+	var back := layer == "derriere"
+	var a: int = int(v.age) - int(v.age) % 2
+	var k: float = v.taille
+	var c := Vector2(v.pos.x, 1.0)
+	var s := clampf(_dirv(v.dir).x, -1.0, 1.0)
+	var reach := {1.0: 1.0 + 0.45 * s, -1.0: 1.0 - 0.45 * s}   # côté droit, côté gauche (monde)
+	if a == 0:
+		if back:
+			return
+		# Flash : galette blanche au sol et étoile plate, comme l'étincelle.
+		var pts := PackedVector2Array()
+		for i in 20:
+			var th := TAU * i / 20.0
+			var side := 1.0 if cos(th) >= 0.0 else -1.0
+			pts.append(_scr(c + Vector2(cos(th) * 17.0 * k * reach[side], sin(th) * 4.5 * k), origin, scale))
+		ci.draw_colored_polygon(pts, AIR[2])
+		_star(ci, c + Vector2(0, 2.0 * k), 0.0, 30.0 * k, 11.0 * k, 3.0 * k, AIR[0], origin, scale)
+		ci.draw_circle(_scr(c + Vector2(0, 2.0 * k), origin, scale), 5.0 * k * scale, AIR[0])
+		return
+	# Anneau aplati : s'ouvre vite puis ralentit.
+	var u := float(a) / 16.0                   # 0.125 → 1
+	var grow := 1.0 - (1.0 - u) * (1.0 - u)
+	var rx := (22.0 + 58.0 * grow) * k
+	var ry := rx * 0.2
+	var w := (4.2 - 2.8 * u) * k
+	var core: Color = AIR[0] if a <= 2 else (AIR[1] if a <= 8 else AIR[2])
+	var gone := clampf((float(a) - 8.0) / 8.0, 0.0, 1.0)
+	if a <= 14:
+		var n := 24
+		var segs := []
+		for i in n:
+			if _erased(i, n, gone):
+				continue
+			# Moitié du fond (au-dessus du centre à l'écran) : calque arrière.
+			if (sin(TAU * (i + 0.5) / n) > 0.0) != back:
+				continue
+			var t0 := TAU * i / n
+			var t1 := TAU * (i + 1) / n
+			var q := []
+			for th in [t0, t1]:
+				var side := 1.0 if cos(th) >= 0.0 else -1.0
+				q.append(c + Vector2(cos(th) * rx * reach[side], sin(th) * ry))
+			segs.append(q)
+		_strokes(ci, segs, w, core, AIR[3], origin, scale)
+	if back:
+		return
+	# Éclats de sol aux deux bouts, en paraboles, de plus en plus petits.
+	for side in [1.0, -1.0]:
+		var m: float = reach[side]
+		for ch in CHIPS:
+			var t := float(a)
+			var ang := deg_to_rad(float(ch[0]))
+			var sp: float = float(ch[1]) * k * m
+			var p := Vector2(c.x + side * (16.0 * k * m + cos(ang) * sp * t), c.y + sin(ang) * sp * t - 0.2 * t * t)
+			if p.y < 0.0:
+				continue
+			var size: float = float(ch[2]) * k * (1.0 if a < 8 else 0.6)
+			_square(ci, p, size + 1.2, DUST[2], origin, scale)
+			_square(ci, p, size, DUST[0] if a < 8 else DUST[1], origin, scale)
+
+
+static func _boom(ci: CanvasItem, v: Dictionary, origin: Vector2, scale: float) -> void:
+	var a: int = int(v.age) - int(v.age) % 2
+	var k: float = v.taille
+	var d: float = v.dir
+	var dv := _dirv(d)
+	var c: Vector2 = v.pos
+	if a == 0:
+		# Flash : un seul croissant blanc, épais, au point de départ.
+		var fl := []
+		for i in 8:
+			var b0 := d - 60.0 + 15.0 * i
+			fl.append([c + _dirv(b0) * 20.0 * k, c + _dirv(b0 + 15.0) * 20.0 * k])
+		_strokes(ci, fl, 7.0 * k, AIR[0], AIR[2], origin, scale)
+		return
+	# Trois croissants : le premier devant et large, les suivants plus en arrière
+	# et plus petits ; chacun apparaît une image après le précédent.
+	for j in 3:
+		var aj := a - 2 * j
+		if aj < 0:
+			continue
+		var uj := float(aj) / 12.0
+		var r := (26.0 - 5.0 * j + 16.0 * uj) * k
+		var cc := c - dv * (13.0 * j + 6.0 * uj) * k
+		var span := 58.0 - 8.0 * j
+		var w := (5.0 - 1.0 * j - 3.2 * uj) * k
+		if w < 0.6:
+			continue
+		var core: Color = AIR[0] if aj <= 2 else (AIR[1] if aj <= 6 else AIR[2])
+		var gone := clampf((float(aj) - 6.0) / 6.0, 0.0, 1.0)
+		var n := 8
+		var segs := []
+		for i in n:
+			if _erased(i, n, gone):
+				continue
+			var b0 := d - span + 2.0 * span * i / n
+			var b1 := d - span + 2.0 * span * (i + 1) / n
+			segs.append([cc + _dirv(b0) * r, cc + _dirv(b1) * r])
+		_strokes(ci, segs, w, core, AIR[3], origin, scale)
