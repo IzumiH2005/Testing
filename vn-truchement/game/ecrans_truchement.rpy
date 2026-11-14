@@ -82,5 +82,5 @@ screen journal():
         xalign 0.5
         yalign 0.97
         spacing 80
-        text "Fins découvertes : [fins_trouvees()] sur 6" style "journal_texte" size 24 color "#8a857c" yalign 0.5
+        text "Fins découvertes : {} sur 6".format(fins_trouvees()) style "journal_texte" size 24 color "#8a857c" yalign 0.5
         textbutton "Continuer" action Return() text_size 34 text_font "fonts/CrimsonPro.ttf"
