@@ -15,7 +15,8 @@
   "cles": [
     {
       "f": 0,
-      "courbe": "acc-dec"
+      "courbe": "acc-dec",
+      "pose": "garde_ouverte"
     },
     {
       "f": 3,

@@ -2,8 +2,8 @@
   "nom": "accroupi_sortie",
   "boucle": false,
   "longueur": 16,
-  "base": "garde",
-  "suivante": "garde_idle",
+  "base": "garde_ouverte",
+  "suivante": "garde_ouverte_idle",
   "decalage": {
     "chest": 2,
     "neck": 3,

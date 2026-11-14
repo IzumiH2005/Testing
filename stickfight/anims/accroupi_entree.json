@@ -2,7 +2,7 @@
   "nom": "accroupi_entree",
   "boucle": false,
   "longueur": 12,
-  "base": "garde",
+  "base": "garde_ouverte",
   "suivante": "accroupi_idle",
   "decalage": {
     "chest": 2,

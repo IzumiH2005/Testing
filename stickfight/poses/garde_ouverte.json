@@ -1,0 +1,23 @@
+{
+  "nom": "garde_ouverte",
+  "style": "epais",
+  "x": 0,
+  "y": 72.13,
+  "facing": 1,
+  "angles": {
+    "root": 3,
+    "spineLow": 7,
+    "chest": 7,
+    "neck": 10,
+    "armF": 47.2,
+    "foreF": 127.66,
+    "armN": 62.29,
+    "foreN": 77.17,
+    "thighF": -2.82,
+    "shinF": 62.5,
+    "footF": 11.96,
+    "thighN": 59.31,
+    "shinN": 61.79,
+    "footN": 5.48
+  }
+}

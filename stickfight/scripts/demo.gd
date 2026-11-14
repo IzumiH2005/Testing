@@ -8,7 +8,8 @@ extends Control
 ##   → / ←  maintenus : marche détendue avant / arrière depuis le repos ;
 ##      relâchés, le combattant finit son pas et s'arrête au repos.
 ##   Maj + →  course ;  Ctrl + →  sprint (départ explosif, freinage en glissade).
-##   G  maintenu : mise en garde ; avec → / ←, marche en garde ; → → (double
+##   G  maintenu : mise en garde (garde ouverte) ; avec →, marche en garde ;
+##      ← ferme la garde (défensive) et recule ; → → (double
 ##      appui) dash avant, ← ← dash arrière ; ↓ maintenu, accroupi ;
 ##      relâché, le combattant sort de la garde et revient au repos.
 ##   B  blocage bas (en garde)   K  duo coup de pied direct + blocage bas
@@ -20,7 +21,9 @@ const DUO := "res://anims/duo_blocage.json"
 const HISTORY_MAX := 600
 ## Écart maximal, en images, entre les deux appuis sur → d'un dash.
 const DOUBLE_APPUI := 14
-const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   G tenu : garde (→ ← en garde, → → dash, ← ← backdash, ↓ accroupi, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+## Images en garde fermée, sans ← ni action, avant qu'elle se rouvre.
+const ROUVRIR := 10
+const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
 var planche: Planche
 var help: Label
@@ -165,13 +168,17 @@ const ARRETS := {
 ##   elle freine à la prochaine pose d'appui (image 0 ou 20) et revient au repos ;
 ## - Ctrl + → depuis le repos lance le sprint ; relâchées, il freine en
 ##   glissade à la prochaine pose d'appui (image 0 ou 14) ;
-## - G tenu met en garde (depuis le repos) ; en garde, → / ← font la marche en
-##   garde, qui s'arrête à l'image 0 de son cycle (pieds en position de garde) ;
-##   G relâché, une fois revenu en garde_idle, joue la sortie de garde ;
+## - G tenu met en garde (depuis le repos) : garde ouverte, prête à se battre ;
+##   → y fait la marche en garde, qui s'arrête à l'image 0 de son cycle ;
+## - ← en garde ouverte ferme la garde (garde défensive, comme on bloque en
+##   reculant) puis recule en garde fermée ; sans ← ni action pendant
+##   ROUVRIR images, la garde fermée se rouvre ;
+## - G relâché, en garde (ouverte ou fermée), joue la sortie de garde ;
 ## - en garde, → → (deux appuis en moins de DOUBLE_APPUI images) lance le dash
 ##   avant, depuis l'arrêt ou dans les premières images de la marche en garde
-##   lancée par le premier appui ; il revient en garde_idle. ← ← fait de même
-##   avec le dash arrière.
+##   lancée par le premier appui ; il revient en garde ouverte. ← ← lance le
+##   dash arrière, qui ferme la garde ;
+## - ↓ tenu en garde : accroupi, qui se relève en garde ouverte.
 func _control_input() -> void:
 	var dash := dash_req
 	var backdash := backdash_req
@@ -203,19 +210,8 @@ func _control_input() -> void:
 			var phase := int(f.t) % int(f.anim.longueur)
 			if not held and ARRETS[nom].has(phase):
 				f.play(ARRETS[nom][phase], 0)
-		"garde_idle":
-			if not guard:
-				f.play("sortie_de_garde", 6)
-			elif down:
-				f.play("accroupi_entree", 3)
-			elif dash:
-				f.play("dash_avant", 4)
-			elif backdash:
-				f.play("dash_arriere", 4)
-			elif fwd:
-				f.play("marche_avant", 6)
-			elif back:
-				f.play("marche_arriere", 6)
+		"garde_ouverte_idle", "garde_ouvrir", "garde_idle", "garde_fermer":
+			_guard_input(f, nom, guard, fwd, back, down, dash, backdash)
 		"accroupi_idle":
 			if not (down and guard):
 				f.play("accroupi_sortie", 3)
@@ -228,7 +224,33 @@ func _control_input() -> void:
 				return
 			var held := (fwd if nom == "marche_avant" else back) and guard
 			if not held and int(f.t) % int(f.anim.longueur) == 0 and f.t > 0.0:
-				f.play("garde_idle", 6)
+				f.play("garde_ouverte_idle" if nom == "marche_avant" else "garde_idle", 6)
+
+
+
+## Garde ouverte (garde_ouverte_idle, garde_ouvrir) et garde fermée
+## (garde_idle, garde_fermer) : mêmes jambes, seuls le buste et les bras
+## changent, d'où des fondus courts entre les deux.
+func _guard_input(f: Fighter, nom: String, guard: bool, fwd: bool, back: bool,
+		down: bool, dash: bool, backdash: bool) -> void:
+	var ouverte := nom in ["garde_ouverte_idle", "garde_ouvrir"]
+	if not guard:
+		f.play("sortie_de_garde", 6)
+	elif down:
+		f.play("accroupi_entree", 3 if ouverte else 5)
+	elif dash:
+		f.play("dash_avant", 4)
+	elif backdash:
+		f.play("dash_arriere", 4)
+	elif fwd:
+		f.play("marche_avant", 6)
+	elif back:
+		if ouverte:
+			f.play("garde_fermer", 0 if nom == "garde_ouverte_idle" else 4)
+		elif nom == "garde_idle" or f.t >= 4.0:
+			f.play("marche_arriere", 4 if nom == "garde_fermer" else 6)
+	elif nom == "garde_idle" and f.t >= ROUVRIR:
+		f.play("garde_ouvrir", 0)
 
 
 func _current() -> Dictionary:

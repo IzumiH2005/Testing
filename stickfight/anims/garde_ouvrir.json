@@ -1,0 +1,5 @@
+{"nom":"garde_ouvrir","boucle":false,"base":"garde","suivante":"garde_ouverte_idle",
+ "decalage":{"chest":1,"neck":2,"armN":2,"foreN":3,"armF":3,"foreF":4},
+ "cles":[{"f":0},
+  {"f":6,"nom":"relache","pose":"garde_ouverte","plus":{"y":-0.8,"armN":-2,"foreN":-3,"armF":-1,"foreF":-2},"courbe":"acc-dec"},
+  {"f":12,"pose":"garde_ouverte","courbe":"dec"}]}

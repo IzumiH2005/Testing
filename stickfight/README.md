@@ -113,12 +113,15 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | Animation | Durée | Contenu |
 |---|---|---|
 | `idle_repos` | 260 i, en boucle | Debout détendu : respiration lente, léger transfert de poids, deux paliers pour que la boucle ne se devine pas |
-| `mise_en_garde` | 40 i | Du repos à la garde : anticipation (le corps se tasse), pas en avant, pied arrière qui glisse, poussière à chaque appui ; enchaîne sur `garde_idle` |
-| `garde_idle` | 112 i, en boucle | Garde vivante : rebond sur les jambes, poings qui suivent avec 5 à 9 images de retard |
+| `mise_en_garde` | 40 i | Du repos à la garde : anticipation (le corps se tasse), pas en avant, pied arrière qui glisse, poussière à chaque appui ; enchaîne sur `garde_ouverte_idle` |
+| `garde_ouverte_idle` | 96 i, en boucle | Garde ouverte, la garde par défaut quand G est tenu (prêt à se battre) : mains plus avancées et plus écartées, poing avant à hauteur d'épaule, buste plus droit ; respiration lente, bras qui suivent avec retard |
+| `garde_idle` | 112 i, en boucle | Garde fermée, défensive (quand il bloque ou s'apprête à bloquer) : poings serrés devant le visage, rebond sur les jambes, poings qui suivent avec 5 à 9 images de retard |
+| `garde_fermer` | 8 i | Garde ouverte → garde fermée : les mains remontent vite devant le visage, menton rentré, léger tassement ; puis `garde_idle` |
+| `garde_ouvrir` | 12 i | Garde fermée → garde ouverte : les mains se relâchent et repartent devant ; puis `garde_ouverte_idle` |
 | `blocage_bas` | 44 i | Les mains descendent frapper le pied d'un coup visant le ventre, sans se baisser : armé (f4), contact (f8, arrêt sur impact 7 i, étincelle, secousse), écrasé, tenue, retour en garde |
 | `coup_de_pied_ventre` | 56 i | Pied direct (teep) de la jambe avant, pour le duo : pas glissé, genou armé, contact (f17), pied rabattu vers le bas par le blocage, reprise de distance |
 | `duo_blocage` | 110 i | Les deux ensemble : les contacts sont calés sur la même image globale |
-| `sortie_de_garde` | 60 i | De la garde au repos, sur place : le poids bascule en arrière, le pied avant revient en se posant par la pointe, puis le pied arrière repasse devant et le bassin remonte ; les mains retombent le long du corps, le bras du pied qui avance passe devant (contrepoids) ; enchaîne sur `idle_repos` |
+| `sortie_de_garde` | 60 i | De la garde ouverte au repos, sur place : le poids bascule en arrière, le pied avant revient en se posant par la pointe, puis le pied arrière repasse devant et le bassin remonte ; les mains retombent le long du corps, le bras du pied qui avance passe devant (contrepoids) ; enchaîne sur `idle_repos` |
 | `marche_detendue` | 56 i, en boucle, avance 76 | Marche normale depuis le repos, sans garde : bras ballants en opposition des jambes, bassin qui monte et descend sur chaque appui |
 | `marche_detendue_depart` | — | Du repos à la boucle : transfert de poids, premier pas plus court |
 | `marche_detendue_arret_court`, `_arret_pas` | — | Arrêts au repos depuis l'un ou l'autre pied de la boucle (pied ramené à côté de l'autre, ou un dernier pas freiné) |
@@ -130,13 +133,13 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `sprint` | 28 i, en boucle, avance 243 | Course à pleine vitesse, exagérée : buste couché à ~43°, tête rentrée, foulée longue et vol de 8 images, genou qui monte haut devant, talon qui fouette jusqu'aux fesses derrière, bras pliés qui balaient large ; lignes de vitesse derrière le bassin |
 | `sprint_depart` | 50 i | Du repos au sprint : anticipation courte et profonde (le bassin tombe, le buste plonge, les bras s'arment), poussée explosive avec poussière, trois appuis bas qui accélèrent, buste couché à ~55° qui se relève jusqu'à l'inclinaison de la boucle ; finit sur l'image 0 de la boucle |
 | `sprint_arret_n`, `_arret_f` | 46 et 54 i | Freinage en glissade depuis l'appui N (image 0) ou F (image 14) : le pied de devant se plante jambe presque tendue et glisse ~40 cm dans une gerbe de poussière, le bassin s'assied, le buste bascule en arrière, les deux bras partent devant ; en `_n` le pied arrière traîne sur la pointe, en `_f` il fait un pas de rattrapage devant ; retour au repos |
-| `marche_arriere` | 30 i, en boucle, recule 14 | En garde maintenue. Plus lente et prudente : la jambe avant pousse, le bassin recule, le pied arrière se pose loin (la hanche ne s'étend pas au-delà de 30°, d'où ce bassin qui part avant le pied), puis le pied avant se ramène en glissant |
-| `marche_avant` | 28 i, en boucle, avance 18 | En garde maintenue, pas chassé : le pied avant s'avance au ras du sol (4 de haut), le poids passe dessus, le talon arrière se lève et le pied arrière glisse ; garde serrée qui suit avec retard |
-| `dash_avant` | 28 i, avance 72 | Pas chassé avant rapide depuis la garde (double appui sur →) : le corps se tasse 3 images, le pied arrière pousse dans un petit nuage de poussière, vol rasant buste penché, le pied avant se plante loin devant, le pied arrière chasse au ras du sol pour retrouver l'écart de garde, puis petit rebond et retour en `garde_idle` |
-| `dash_arriere` | 28 i, recule 50 | Pas chassé arrière rapide depuis la garde (double appui sur ←) : le poids passe sur l'avant, la jambe avant pousse, petit vol bas, le pied arrière se pose loin et le buste part en arrière sous l'élan, le pied avant revient en glissant, rebond puis `garde_idle` |
-| `accroupi_entree` | 12 i, recule 12 | Depuis la garde (↓ maintenu) : le pied arrière glisse vers l'avant sur la pointe, le bassin descend et recule pour que le genou arrière reste décollé du sol, le buste se penche, petit écrasement puis `accroupi_idle` |
-| `accroupi_idle` | 96 i, en boucle | Accroupi en garde : respiration lente (le bassin s'abaisse et le dos se voûte à l'expiration), garde haute qui suit avec retard |
-| `accroupi_sortie` | 16 i, avance 12 | ↓ relâché : appui bref, poussée des jambes, le pied arrière recule à sa place de garde, puis `garde_idle` |
+| `marche_arriere` | 30 i, en boucle, recule 14 | En garde fermée (← en garde ferme d'abord la garde). Plus lente et prudente : la jambe avant pousse, le bassin recule, le pied arrière se pose loin (la hanche ne s'étend pas au-delà de 30°, d'où ce bassin qui part avant le pied), puis le pied avant se ramène en glissant |
+| `marche_avant` | 28 i, en boucle, avance 18 | En garde ouverte, pas chassé : le pied avant s'avance au ras du sol (4 de haut), le poids passe dessus, le talon arrière se lève et le pied arrière glisse ; les mains suivent avec retard |
+| `dash_avant` | 28 i, avance 72 | Pas chassé avant rapide depuis la garde (double appui sur →) : le corps se tasse 3 images, le pied arrière pousse dans un petit nuage de poussière, vol rasant buste penché, le pied avant se plante loin devant, le pied arrière chasse au ras du sol pour retrouver l'écart de garde, puis petit rebond et retour en `garde_ouverte_idle` |
+| `dash_arriere` | 28 i, recule 50 | Pas chassé arrière rapide depuis la garde (double appui sur ←) : le poids passe sur l'avant, la jambe avant pousse, petit vol bas, le pied arrière se pose loin et le buste part en arrière sous l'élan, le pied avant revient en glissant, rebond puis `garde_idle` ; la garde se ferme pendant le recul |
+| `accroupi_entree` | 12 i, recule 12 | Depuis la garde ouverte ou fermée (↓ maintenu) : le pied arrière glisse vers l'avant sur la pointe, le bassin descend et recule pour que le genou arrière reste décollé du sol, le buste se penche, petit écrasement puis `accroupi_idle` |
+| `accroupi_idle` | 96 i, en boucle | Accroupi en garde ouverte : respiration lente (le bassin s'abaisse et le dos se voûte à l'expiration), garde haute qui suit avec retard |
+| `accroupi_sortie` | 16 i, avance 12 | ↓ relâché : appui bref, poussée des jambes, le pied arrière recule à sa place de garde, puis `garde_ouverte_idle` |
 
 Une clé part d'une pose (`poses/`), applique des réglages (`plus`, `fixe`,
 `vise` pour placer une main ou un pied en cinématique inverse), et choisit la
@@ -187,7 +190,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | → ou ← maintenu | Depuis le repos : marche détendue avant ou arrière ; relâché, le pas en cours se termine et le combattant s'arrête au repos. La caméra suit |
 | Maj + → maintenus | Depuis le repos : départ de course puis course ; relâchés, le combattant freine au prochain appui et revient au repos |
 | Ctrl + → maintenus | Depuis le repos : départ de sprint puis sprint ; relâchés, freinage en glissade au prochain appui et retour au repos. La caméra regarde devant en proportion de la vitesse |
-| G maintenu | Mise en garde ; avec → ou ←, marche en garde ; → → ou ← ← (double appui rapide) : dash avant ou arrière ; ↓ maintenu : accroupi ; relâché, sortie de garde et retour au repos |
+| G maintenu | Mise en garde (garde ouverte) ; avec →, marche en garde ; ← ferme la garde (défensive) puis recule, et la garde se rouvre après 10 images sans ← ; → → ou ← ← (double appui rapide) : dash avant ou arrière ; ↓ maintenu : accroupi ; relâché, sortie de garde et retour au repos |
 | B | Blocage bas (en garde) |
 | K | Duo coup de pied / blocage (en boucle) |
 | R | Repos (remise à zéro) |
@@ -233,7 +236,7 @@ scripts/vfx.gd            étincelle et poussière en aplats
 scripts/demo.gd           scène de démo
 tools/rendu.gd, rendu.sh  rendu PNG d'une pose
 tools/anim.gd, anim.sh    planche, stroboscopie, GIF, vidéo d'une animation
-poses/                    neutre, neutre-fin, repos, garde
+poses/                    neutre, neutre-fin, repos, garde (fermée), garde_ouverte
 anims/                    animations et duos
 ```
 

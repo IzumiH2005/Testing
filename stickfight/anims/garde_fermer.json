@@ -1,0 +1,5 @@
+{"nom":"garde_fermer","boucle":false,"base":"garde_ouverte","suivante":"garde_idle",
+ "decalage":{"armN":0,"foreN":1,"armF":1,"foreF":2},
+ "cles":[{"f":0},
+  {"f":4,"nom":"serre","pose":"garde","plus":{"y":-1.5,"neck":2,"chest":1,"foreN":3,"foreF":3},"courbe":"dec"},
+  {"f":8,"pose":"garde"}]}

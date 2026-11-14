@@ -2,7 +2,7 @@
   "nom": "mise_en_garde",
   "boucle": false,
   "base": "repos",
-  "suivante": "garde_idle",
+  "suivante": "garde_ouverte_idle",
   "decalage": {
     "neck": 2,
     "armN": 2,
@@ -53,7 +53,7 @@
     {
       "f": 17,
       "nom": "pose du pied",
-      "pose": "garde",
+      "pose": "garde_ouverte",
       "plus": {
         "x": 12.25,
         "y": 6.8,
@@ -66,10 +66,10 @@
         ]
       },
       "fixe": {
-        "armN": 22,
-        "foreN": 125,
-        "armF": 34,
-        "foreF": 135
+        "armN": 48,
+        "foreN": 82,
+        "armF": 36,
+        "foreF": 122
       }
     },
     {
@@ -87,7 +87,7 @@
     {
       "f": 28,
       "nom": "glissé arrière",
-      "pose": "garde",
+      "pose": "garde_ouverte",
       "plus": {
         "y": -2.04,
         "armN": 1.5,
@@ -98,7 +98,7 @@
     },
     {
       "f": 34,
-      "pose": "garde",
+      "pose": "garde_ouverte",
       "plus": {
         "y": 0.54,
         "armN": -1,
@@ -107,7 +107,7 @@
     },
     {
       "f": 40,
-      "pose": "garde"
+      "pose": "garde_ouverte"
     }
   ],
   "evenements": [

@@ -2,8 +2,8 @@
   "nom": "dash_avant",
   "boucle": false,
   "longueur": 28,
-  "base": "garde",
-  "suivante": "garde_idle",
+  "base": "garde_ouverte",
+  "suivante": "garde_ouverte_idle",
   "decalage": {
     "chest": 2,
     "neck": 3,

@@ -2,7 +2,7 @@
   "nom": "accroupi_idle",
   "boucle": true,
   "longueur": 96,
-  "base": "garde",
+  "base": "garde_ouverte",
   "decalage": {
     "chest": 3,
     "neck": 4,

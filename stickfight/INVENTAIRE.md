@@ -121,7 +121,7 @@ par sa propre version (marquées ✱ quand c'est presque toujours le cas).
 |---|---|---|
 | 1 | Repos (hors combat) | fait |
 | 2 | Mise en garde (repos → garde) | fait |
-| 3 | Garde, respiration ✱ | fait |
+| 3 | Garde, respiration ✱ (garde ouverte, prête ; garde fermée, défensive ; passage de l'une à l'autre) | fait |
 | 4 | Sortie de garde (garde → repos) | fait |
 | 5 | Accroupi, respiration | fait |
 | 6 | Debout → accroupi | fait |
@@ -154,7 +154,7 @@ par sa propre version (marquées ✱ quand c'est presque toujours le cas).
 
 | # | Animation | État |
 |---|---|---|
-| 1 | Garde haute tenue | |
+| 1 | Garde haute tenue | fait (garde fermée) |
 | 2 | Garde accroupie tenue | |
 | 3 | Blocage bas debout | fait |
 | 4-9 | Recul sur garde léger, moyen, lourd × haut et bas | |
@@ -468,10 +468,18 @@ repos, de façon détendue ; la garde n'apparaît que si le joueur la maintient 
 déplacement par exemple), et il en ressort dès qu'il la relâche. Chaque déplacement existe
 donc en deux versions : détendue (depuis le repos) et en garde maintenue.
 
+**Deux gardes.** G tenu donne la garde **ouverte** (prêt à se battre, mains avancées) ;
+la garde **fermée** (défensive, poings devant le visage) ne sert que pour bloquer : en
+reculant (← en garde, comme dans Tekken), avant et après un blocage. Les deux ont les
+mêmes jambes : seuls le buste et les bras changent.
+
 | Bloc | Animation | Fichier | État |
 |---|---|---|---|
 | Déplacements | Marche détendue avant : départ, boucle, arrêt court, arrêt en un pas | `marche_detendue*` | fait |
 | Déplacements | Marche détendue arrière : départ, boucle, arrêt en un pas, arrêt en deux pas | `marche_detendue_arriere*` | fait |
+| Postures | Garde ouverte, respiration (boucle) | `garde_ouverte_idle` | fait |
+| Postures | Garde fermée, respiration (boucle) | `garde_idle` | fait |
+| Postures | Garde ouverte → fermée, fermée → ouverte | `garde_fermer`, `garde_ouvrir` | fait |
 | Déplacements | Marche avant en garde maintenue (boucle) | `marche_avant` | fait |
 | Déplacements | Marche arrière en garde maintenue (boucle) | `marche_arriere` | fait |
 | Déplacements | Course à vitesse moyenne : départ, boucle, arrêt depuis chaque pied | `course*` | fait |
@@ -481,11 +489,13 @@ donc en deux versions : détendue (depuis le repos) et en garde maintenue.
 | Postures | Debout → accroupi | `accroupi_entree` | fait |
 | Postures | Accroupi, respiration (boucle) | `accroupi_idle` | fait |
 | Postures | Accroupi → debout | `accroupi_sortie` | fait |
+| Postures | Accroupi depuis le repos, une main au sol : entrée, respiration, sortie | `accroupi_repos_*` | |
 | Postures | Sortie de garde (garde → repos) | `sortie_de_garde` | fait |
 | Déplacements | Saut neutre, avant, arrière | `saut_*` | |
 | Déplacements | Réception légère | `reception` | |
 | Déplacements | Demi-tour | `demi_tour` | |
-| Défense | Garde haute tenue, garde accroupie tenue | `garde_haute`, `garde_basse` | |
+| Défense | Garde haute tenue (garde fermée) | `garde_idle` | fait |
+| Défense | Garde accroupie tenue | `garde_basse` | |
 | Défense | Recul sur garde haut et bas | `recul_garde_haut`, `recul_garde_bas` | |
 | Défense | Parade haute, parade basse | `parade_haute`, `parade_basse` | |
 | Défense | Esquive buste en arrière (sway), se baisser | `esquive_sway`, `esquive_baisse` | |
