@@ -9,7 +9,7 @@ extends Control
 ##      relâchés, le combattant finit son pas et s'arrête au repos.
 ##   Maj + →  course ;  Ctrl + →  sprint (départ explosif, freinage en glissade).
 ##   G  maintenu : mise en garde ; avec → / ←, marche en garde ; → → (double
-##      appui) dash avant ; relâché, le combattant sort de la garde et revient
+##      appui) dash avant, ← ← dash arrière ; relâché, le combattant sort de la garde et revient
 ##      au repos.
 ##   B  blocage bas (en garde)   K  duo coup de pied direct + blocage bas
 ##   R  repos (remise à zéro)
@@ -20,7 +20,7 @@ const DUO := "res://anims/duo_blocage.json"
 const HISTORY_MAX := 600
 ## Écart maximal, en images, entre les deux appuis sur → d'un dash.
 const DOUBLE_APPUI := 14
-const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   G tenu : garde (→ ← en garde, → → dash, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   G tenu : garde (→ ← en garde, → → dash, ← ← backdash, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
 var planche: Planche
 var help: Label
@@ -36,8 +36,10 @@ var slow := 1
 var tick := 0
 ## Image (tick) du dernier appui sur →, pour reconnaître le double appui.
 var last_fwd_press := -1000
-## Double appui sur → reçu, consommé à la prochaine image par _control_input.
+var last_back_press := -1000
+## Double appui sur → ou ← reçu, consommé à la prochaine image par _control_input.
 var dash_req := false
+var backdash_req := false
 ## Centre de la caméra en solo (suit le bassin avec un peu de retard).
 var cam_x := 8.0
 ## Vitesse lissée du bassin : la caméra regarde devant quand on court.
@@ -168,10 +170,13 @@ const ARRETS := {
 ##   G relâché, une fois revenu en garde_idle, joue la sortie de garde ;
 ## - en garde, → → (deux appuis en moins de DOUBLE_APPUI images) lance le dash
 ##   avant, depuis l'arrêt ou dans les premières images de la marche en garde
-##   lancée par le premier appui ; il revient en garde_idle.
+##   lancée par le premier appui ; il revient en garde_idle. ← ← fait de même
+##   avec le dash arrière.
 func _control_input() -> void:
 	var dash := dash_req
+	var backdash := backdash_req
 	dash_req = false
+	backdash_req = false
 	var f: Fighter = combat.fighters[0]
 	var fwd := Input.is_physical_key_pressed(KEY_RIGHT)
 	var back := Input.is_physical_key_pressed(KEY_LEFT) and not fwd
@@ -202,6 +207,8 @@ func _control_input() -> void:
 				f.play("sortie_de_garde", 6)
 			elif dash:
 				f.play("dash_avant", 4)
+			elif backdash:
+				f.play("dash_arriere", 4)
 			elif fwd:
 				f.play("marche_avant", 6)
 			elif back:
@@ -209,6 +216,9 @@ func _control_input() -> void:
 		"marche_avant", "marche_arriere":
 			if dash and guard and nom == "marche_avant" and f.t < DOUBLE_APPUI:
 				f.play("dash_avant", 4)
+				return
+			if backdash and guard and nom == "marche_arriere" and f.t < DOUBLE_APPUI:
+				f.play("dash_arriere", 4)
 				return
 			var held := (fwd if nom == "marche_avant" else back) and guard
 			if not held and int(f.t) % int(f.anim.longueur) == 0 and f.t > 0.0:
@@ -290,6 +300,9 @@ func _gui_input(ev: InputEvent) -> void:
 		KEY_LEFT:
 			if paused:
 				_step_back()
+			elif not ev.echo:
+				backdash_req = tick - last_back_press <= DOUBLE_APPUI * slow
+				last_back_press = tick
 		KEY_L:
 			slow = 4 if slow == 1 else 1
 			_refresh()
