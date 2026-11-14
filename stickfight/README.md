@@ -117,6 +117,7 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `blocage_bas` | 44 i | Les mains descendent frapper le pied d'un coup visant le ventre, sans se baisser : armé (f4), contact (f8, arrêt sur impact 7 i, étincelle, secousse), écrasé, tenue, retour en garde |
 | `coup_de_pied_ventre` | 56 i | Pied direct (teep) de la jambe avant, pour le duo : pas glissé, genou armé, contact (f17), pied rabattu vers le bas par le blocage, reprise de distance |
 | `duo_blocage` | 110 i | Les deux ensemble : les contacts sont calés sur la même image globale |
+| `marche_avant` | 28 i, en boucle, avance 18 | Marche en garde, pas chassé : le pied avant s'avance au ras du sol (4 de haut), le poids passe dessus, le talon arrière se lève et le pied arrière glisse ; garde serrée qui suit avec retard |
 
 Une clé part d'une pose (`poses/`), applique des réglages (`plus`, `fixe`,
 `vise` pour placer une main ou un pied en cinématique inverse), et choisit la
@@ -124,6 +125,11 @@ courbe du segment qui suit (`auto`, `lin`, `acc`, `dec`, `acc-dec`,
 `palier`). Les pieds qui ne bougent pas entre deux clés restent plantés, et
 le `decalage` retarde la tête et les avant-bras de quelques images
 (chevauchement).
+
+Une boucle qui fait avancer le personnage déclare son `avance` (en unités
+par cycle) : chaque cycle reprend décalé d'autant, et le combattant
+(`scripts/fighter.gd`) reporte ce déplacement dans sa position. Quand une
+animation en remplace une autre, le bassin reste où il est arrivé.
 
 Événements : `contact` (repère de synchronisation), `hitstop` (arrêt sur
 impact global, la figure qui l'émet tremble), `etincelle`, `poussiere`,
@@ -144,6 +150,7 @@ que son événement `contact` tombe à l'image 33.
 | G | Mise en garde |
 | B | Blocage bas |
 | K | Duo coup de pied / blocage (en boucle) |
+| → maintenu | En garde : marche avant ; relâché, le pas en cours se termine puis la garde reprend. La caméra suit |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |
 | L | Ralenti ×4 |
 | D | Squelette coloré |
@@ -160,6 +167,7 @@ tools/anim.sh anims/duo_blocage.json -o /tmp/duo.png --pas 2 --cols 7
 tools/anim.sh anims/garde_idle.json --print          # articulations image par image
 tools/anim.sh anims/duo_blocage.json --gif /tmp/duo.gif --video /tmp/duo.mp4
 tools/anim.sh anims/duo_blocage.json --gif /tmp/lent.gif --lent 3
+tools/anim.sh anims/marche_avant.json --strobe /tmp/marche.png --boucles 2
 ```
 
 La planche contact montre chaque image numérotée ; la stroboscopie superpose

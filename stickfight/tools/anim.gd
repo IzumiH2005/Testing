@@ -19,6 +19,7 @@ extends SceneTree
 ##               suivies : un point par image, pour voir les arcs et l'espacement
 ## --suivre a,b  articulations suivies (handN, handF, head, ankleN, hip...)
 ## --images dir  une PNG par image (frame_0000.png...)
+## --boucles n  une boucle est jouée n fois (1 par défaut)
 ## --vue x,y,l,h rectangle du monde affiché (sinon calculé)
 ## --scale n     pixels par unité (2 par défaut)
 ## --debug       squelette coloré par-dessus
@@ -46,7 +47,7 @@ func _abs(path: String) -> String:
 
 func _parse(argv: PackedStringArray) -> Dictionary:
 	var a := {"file": "", "out": "", "strobe": "", "images": "", "de": -1, "a": -1, "pas": 1, "cols": 6,
-		"suivre": [], "vue": [], "scale": 2.0, "debug": false, "print": false}
+		"suivre": [], "vue": [], "scale": 2.0, "debug": false, "print": false, "boucles": 1}
 	var i := 0
 	while i < argv.size():
 		var k := argv[i]
@@ -57,7 +58,7 @@ func _parse(argv: PackedStringArray) -> Dictionary:
 			"--strobe", "--images":
 				i += 1
 				a[k.substr(2)] = argv[i]
-			"--de", "--a", "--pas", "--cols":
+			"--de", "--a", "--pas", "--cols", "--boucles":
 				i += 1
 				a[k.substr(2)] = int(argv[i])
 			"--scale":
@@ -78,7 +79,7 @@ func _parse(argv: PackedStringArray) -> Dictionary:
 
 
 ## Simule et renvoie toutes les images (records) de 0 à la fin.
-func _simulate(path: String) -> Dictionary:
+func _simulate(path: String, boucles := 1) -> Dictionary:
 	var data = JSON.parse_string(FileAccess.get_file_as_string(path))
 	if not (data is Dictionary):
 		return {}
@@ -95,7 +96,7 @@ func _simulate(path: String) -> Dictionary:
 		combat = Combat.new()
 		var f := combat.add(Fighter.new(0.0, 1))
 		f.play(single.nom)
-		total = int(ceil(single.duree))
+		total = int(ceil(single.duree)) * (maxi(1, boucles) if single.boucle else 1)
 		for e in single.evenements:
 			if e.type == "hitstop":
 				total += int(e.get("n", 0))
@@ -178,7 +179,7 @@ func _run() -> void:
 	if a.file == "":
 		_fail("Usage : tools/anim.sh anims/x.json [-o planche.png] [--strobe s.png] (voir tools/anim.gd)")
 		return
-	var sim := _simulate(_abs(a.file))
+	var sim := _simulate(_abs(a.file), a.boucles)
 	if sim.is_empty():
 		_fail("Fichier illisible : " + a.file)
 		return

@@ -1,0 +1,166 @@
+{
+  "nom": "marche_avant",
+  "boucle": true,
+  "longueur": 28,
+  "avance": 18,
+  "base": "garde",
+  "decalage": {
+    "chest": 2,
+    "neck": 3,
+    "armN": 3,
+    "foreN": 4,
+    "armF": 4,
+    "foreF": 5
+  },
+  "cles": [
+    {
+      "f": 0,
+      "nom": "appui",
+      "vise": {
+        "legN": [
+          22,
+          7.5
+        ],
+        "legF": [
+          -34,
+          7.5
+        ]
+      }
+    },
+    {
+      "f": 4,
+      "nom": "pied avant décolle",
+      "fixe": {
+        "x": 1.2,
+        "y": 54.6
+      },
+      "vise": {
+        "legN": [
+          25,
+          9.8
+        ],
+        "legF": [
+          -34,
+          7.5
+        ]
+      }
+    },
+    {
+      "f": 8,
+      "nom": "pied avant en l'air",
+      "fixe": {
+        "x": 2.8,
+        "y": 54.0
+      },
+      "plus": {
+        "chest": 0.5,
+        "armN": 1,
+        "foreN": -1.5
+      },
+      "vise": {
+        "legN": [
+          32,
+          11.5
+        ],
+        "legF": [
+          -34,
+          7.5
+        ]
+      }
+    },
+    {
+      "f": 12,
+      "nom": "pied avant posé",
+      "fixe": {
+        "x": 4.5,
+        "y": 53.4
+      },
+      "plus": {
+        "chest": 1,
+        "armN": 2,
+        "foreN": -3,
+        "armF": -1
+      },
+      "vise": {
+        "legN": [
+          40,
+          7.5
+        ],
+        "legF": [
+          -34,
+          7.5
+        ]
+      }
+    },
+    {
+      "f": 15,
+      "nom": "transfert, talon arrière levé",
+      "fixe": {
+        "x": 7,
+        "y": 53.0
+      },
+      "plus": {
+        "chest": 1.5,
+        "neck": -1,
+        "armN": 2.5,
+        "foreN": -3.5,
+        "armF": -1.5,
+        "foreF": 1.5
+      },
+      "vise": {
+        "legN": [
+          40,
+          7.5
+        ],
+        "legF": [
+          -33,
+          9
+        ]
+      }
+    },
+    {
+      "f": 20,
+      "nom": "pied arrière glisse",
+      "fixe": {
+        "x": 12,
+        "y": 53.8
+      },
+      "plus": {
+        "chest": 1,
+        "neck": -0.5,
+        "armN": 1,
+        "foreN": -1.5,
+        "armF": -0.5,
+        "foreF": 0.5
+      },
+      "vise": {
+        "legN": [
+          40,
+          7.5
+        ],
+        "legF": [
+          -25,
+          11
+        ]
+      }
+    },
+    {
+      "f": 24,
+      "nom": "pied arrière posé",
+      "fixe": {
+        "x": 15.8,
+        "y": 54.7
+      },
+      "vise": {
+        "legN": [
+          40,
+          7.5
+        ],
+        "legF": [
+          -16,
+          7.5
+        ]
+      }
+    }
+  ]
+}

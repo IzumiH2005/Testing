@@ -6,12 +6,14 @@ extends Control
 ##
 ##   R  repos         G  mise en garde      B  blocage bas (depuis la garde)
 ##   K  duo coup de pied direct + blocage bas (rejoué en boucle)
+##   →  maintenu (en garde) : marche avant ; relâché, le pas en cours se
+##      termine puis le combattant reprend la garde. La caméra suit.
 ##   Espace  pause    → / ←  image suivante / précédente (en pause)
 ##   L  ralenti ×4    D  squelette
 
 const DUO := "res://anims/duo_blocage.json"
 const HISTORY_MAX := 600
-const HELP := "R repos   G mise en garde   B blocage bas   K duo   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+const HELP := "R repos   G mise en garde   B blocage bas   K duo   → marcher (en garde)   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
 var planche: Planche
 var help: Label
@@ -25,6 +27,8 @@ var cursor := -1
 var paused := false
 var slow := 1
 var tick := 0
+## Centre de la caméra en solo (suit le bassin avec un peu de retard).
+var cam_x := 8.0
 
 
 func _ready() -> void:
@@ -50,7 +54,11 @@ func _fit() -> void:
 		return
 	var h := 212.0
 	var w := h * size.x / size.y
-	var cx := 61.0 if mode == "duo" else 8.0
+	var cx := cam_x
+	if mode == "duo":
+		cx = 61.0
+	elif not history.is_empty():
+		cx = float(_current().get("camx", cam_x))
 	planche.px_per_unit = size.y / h
 	planche.view = Rect2(cx - w / 2.0, -12, w, h)
 	help.position = Vector2(12, size.y - 30)
@@ -70,6 +78,7 @@ func _solo(nom: String, fondu: int) -> void:
 		combat = Combat.new()
 		combat.add(Fighter.new(0.0, 1))
 		combat.fighters[0].play(nom)
+		cam_x = 8.0
 		_fit()
 		_restart_history()
 		return
@@ -99,14 +108,36 @@ func _physics_process(_delta: float) -> void:
 
 
 func _advance() -> void:
+	if mode == "solo":
+		_walk_input()
 	combat.step()
-	history.append(combat.record())
+	var rec := combat.record()
+	if mode == "solo":
+		var hip: float = rec.fighters[0].pose.x
+		cam_x += (hip + 8.0 - cam_x) * 0.08
+		rec["camx"] = cam_x
+	history.append(rec)
 	if history.size() > HISTORY_MAX:
 		history.pop_front()
 	if mode == "duo" and combat.g > duo_len + 20:
 		_duo()
 		return
 	_refresh()
+
+
+## → maintenu : marche depuis la garde. Relâché : le cycle en cours va
+## jusqu'à son image 0 (pieds dans la position de garde), puis la garde
+## reprend, pour que les pieds ne glissent pas.
+func _walk_input() -> void:
+	var f: Fighter = combat.fighters[0]
+	var held := Input.is_physical_key_pressed(KEY_RIGHT)
+	match f.anim_name():
+		"garde_idle":
+			if held:
+				f.play("marche_avant", 6)
+		"marche_avant":
+			if not held and int(f.t) % int(f.anim.longueur) == 0 and f.t > 0.0:
+				f.play("garde_idle", 6)
 
 
 func _current() -> Dictionary:
@@ -127,6 +158,8 @@ func _refresh() -> void:
 	if slow > 1:
 		parts.append("ralenti ×%d" % slow)
 	planche.caption = "   ".join(parts)
+	if mode == "solo":
+		_fit()
 	planche.queue_redraw()
 
 

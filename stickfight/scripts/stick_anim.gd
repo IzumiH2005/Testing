@@ -17,6 +17,9 @@ extends RefCounted
 ##   "nom": "blocage_bas", "boucle": false, "longueur": 40,
 ##   "base": "garde",                      pose de départ des clés (poses/garde.json)
 ##   "suivante": "garde_idle",             animation enchaînée à la fin
+##   "avance": 18,                         boucle qui se déplace : à la fin du
+##                                         cycle, le bassin est 18 plus loin
+##                                         (la clé 0 du cycle suivant aussi)
 ##   "decalage": {"neck": 2, "foreN": 1},  retard en images par canal
 ##   "cles": [
 ##     {"f": 0},                           la pose de base telle quelle
@@ -86,6 +89,7 @@ static func build(data: Dictionary) -> Dictionary:
 	var a := {
 		"nom": str(data.get("nom", "sans nom")),
 		"boucle": bool(data.get("boucle", false)),
+		"avance": float(data.get("avance", 0.0)),
 		"suivante": str(data.get("suivante", "")),
 		"decalage": {},
 		"evenements": data.get("evenements", []),
@@ -207,6 +211,15 @@ static func _key(a: Dictionary, i: int) -> Dictionary:
 	return a.cles[posmod(i, a.cles.size())]
 
 
+## Valeur du canal à la clé i (avec bouclage) : dans une boucle qui avance,
+## le bassin des clés du cycle suivant est décalé de « avance ».
+static func _kval(a: Dictionary, i: int, c: String) -> float:
+	var v := _value(_key(a, i), c)
+	if c == "x" and a.boucle:
+		v += floorf(float(i) / a.cles.size()) * float(a.avance)
+	return v
+
+
 ## Tangente (unités par image) à la clé i, pour la courbe « auto ».
 static func _tangent(a: Dictionary, i: int, c: String) -> float:
 	var n: int = a.cles.size()
@@ -218,9 +231,9 @@ static func _tangent(a: Dictionary, i: int, c: String) -> float:
 	var t0 := _key_time(a, i - 1)
 	var t1 := _key_time(a, i)
 	var t2 := _key_time(a, i + 1)
-	var v0 := _value(_key(a, i - 1), c)
-	var v1 := _value(k, c)
-	var v2 := _value(_key(a, i + 1), c)
+	var v0 := _kval(a, i - 1, c)
+	var v1 := _kval(a, i, c)
+	var v2 := _kval(a, i + 1, c)
 	var s0 := (v1 - v0) / maxf(t1 - t0, 1e-6)
 	var s1 := (v2 - v1) / maxf(t2 - t1, 1e-6)
 	if s0 * s1 <= 0.0:
@@ -279,7 +292,7 @@ static func _channel(a: Dictionary, c: String, t: float) -> float:
 	var v0 := _value(k0, c)
 	if seg.end:
 		return v0
-	var v1 := _value(_key(a, seg.i + 1), c)
+	var v1 := _kval(a, seg.i + 1, c)
 	var u: float = seg.u
 	if k0.courbe != "auto":
 		return lerpf(v0, v1, _ease(k0.courbe, u, k0.p))
@@ -311,11 +324,12 @@ static func sample(a: Dictionary, t: float) -> Dictionary:
 	var seg := _segment(a, _wrap(a, t))
 	var k0: Dictionary = a.cles[seg.i]
 	var k1 := k0 if seg.end else _key(a, seg.i + 1)
+	var wrap_dx := float(a.avance) if (not seg.end and seg.i + 1 >= a.cles.size()) else 0.0
 	var s: Dictionary = StickRig.get_style(p.style)
 	var ground: float = s.stroke / 2.0
 	for side in ["N", "F"]:
 		var A: Vector2 = k0.chevilles[side]
-		var B: Vector2 = k1.chevilles[side]
+		var B: Vector2 = k1.chevilles[side] + Vector2(wrap_dx, 0.0)
 		if A.distance_to(B) < PLANT_EPS:
 			p = StickRig.reach(p, "leg" + side, A)
 		else:

@@ -35,14 +35,21 @@ func anim_name() -> String:
 
 ## Lance une animation. fondu = nombre d'images de transition depuis la pose
 ## actuelle (0 = coupe franche, quand la nouvelle commence là où l'autre finit).
+## Le combattant reste où son bassin est arrivé : le déplacement local de
+## l'animation qui s'arrête passe dans x, et la nouvelle repart de son
+## propre repère (bassin de la base en 0).
 func play(nom: String, fondu := 0, t0 := 0.0) -> void:
-	if not anim.is_empty() and fondu > 0:
-		blend_from = local_pose()
-		blend_len = fondu
-		blend_t = 0
-	else:
-		blend_from = {}
-		blend_len = 0
+	blend_from = {}
+	blend_len = 0
+	if not anim.is_empty():
+		var cur := local_pose()
+		var dx := float(cur.x)
+		x += facing * dx
+		if fondu > 0:
+			cur.x = 0.0
+			blend_from = cur
+			blend_len = fondu
+			blend_t = 0
 	anim = StickAnim.load_named(nom)
 	t = t0
 	history.clear()
@@ -57,6 +64,14 @@ func step() -> Array:
 		history.pop_back()
 	var t0 := t
 	t += 1.0
+	if anim.boucle and float(anim.avance) != 0.0:
+		var L := float(anim.longueur)
+		var n := floorf(t / L) - floorf(t0 / L)
+		if n != 0.0:
+			var d: float = n * float(anim.avance)
+			x += facing * d
+			for h in history:
+				h.x = float(h.x) - d
 	if blend_len > 0:
 		blend_t += 1
 		if blend_t >= blend_len:

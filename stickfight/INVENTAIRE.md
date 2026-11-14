@@ -143,7 +143,7 @@ par sa propre version (marquées ✱ quand c'est presque toujours le cas).
 | 14 | Petit saut (passe au-dessus d'un coup bas) |
 | 15 | Demi-tour (l'adversaire est passé derrière) |
 | 16 | Se retourner depuis dos tourné |
-| 17-19 | Pas de côté vers le fond, vers l'avant, marche latérale *(seulement si on garde une profondeur, voir § 7)* |
+| ~~17-19~~ | ~~Pas de côté~~ : retirés, le jeu est en 2D pure (§ 7) |
 | 20-21 | Roulade avant, roulade arrière |
 | 22-23 | Salto avant, salto arrière (esquive acrobatique, vidéo 2) |
 | 24 | Rebond sur un mur (wall jump) |
@@ -441,29 +441,55 @@ On s'arrête à la fin de chaque phase pour tester en jeu avant d'aller plus loi
 
 ---
 
-## 7. Questions à trancher avant de commencer
+## 7. Décisions prises
 
-1. **2D pure ou une profondeur ?**
-   - Tekken est en 3D, avec des pas de côté ; les vidéos sont en 2D pure.
-   - Recommandation : **2D**, comme les vidéos. On remplace le pas de côté par les esquives
-     (sway, se baisser, salto, roulade). Cela retire 3 communes et la catégorie
-     « après pas de côté ».
-2. **Combien de boutons ?**
-   - Tekken utilise 4 boutons, un par membre (poing gauche, poing droit, pied gauche,
-     pied droit).
-   - Recommandation : ces 4, plus **un bouton « saisir »** (clinch, ramasser un objet) et
-     **un bouton « pouvoir »**.
-3. **Chutes animées à la main ou physique ?**
-   - Recommandation : **à la main** pour le combat en duel, comme Tekken.
-   - En option, une physique de chiffon (ragdoll) seulement pour les corps projetés loin
-     dans les scènes de foule. Cela réduit le travail sans toucher au duel.
-4. **Armes et pouvoirs : pour tous, ou propres à certains personnages ?**
-   - Recommandation : les gestes génériques pour tous (ramasser une chaise, frapper avec) ;
-   - les pouvoirs et les styles d'arme réservés à certains personnages, comme un style
-     de combat.
-5. **Combien de personnages visés** pour une première version jouable ?
-   - Recommandation : 2. C'est le minimum pour vérifier que les communes marchent sur
-     deux styles différents.
+1. **2D pure.** Pas de pas de côté ni de profondeur : les communes 3.2 #17-19 sont retirées
+   (socle commun : 187). Les esquives (sway, se baisser, salto, roulade) remplacent le pas
+   de côté.
+2. **Boutons et game design** : décidés plus tard. Les animations ne dépendent pas du
+   nombre de boutons.
+3. **Chutes animées à la main** en duel. Physique de chiffon en option, seulement pour les
+   corps projetés dans les scènes de foule.
+4. **Objets** : presque tous les personnages auront quelques gestes d'objets ; certains
+   s'y spécialiseront (comme un style de combat). À affiner plus tard.
+5. **2 personnages** pour la première version jouable.
+
+---
+
+## 8. Première passe des communes
+
+On ne fait pas tous les nombres d'un coup : juste assez par bloc pour un premier jeu
+fluide. Chaque animation est faite **une à une**, pose par pose, vérifiée en planche et en
+stroboscopie, et doit marcher dans toutes les situations où elle sert (une parade doit
+paraître naturelle contre un coup de poing comme contre un coup de pied, haut ou moyen).
+
+| Bloc | Animation | Fichier | État |
+|---|---|---|---|
+| Déplacements | Marche avant (boucle) | `marche_avant` | fait |
+| Déplacements | Marche arrière (boucle) | `marche_arriere` | |
+| Déplacements | Pas chassé avant (dash) | `dash_avant` | |
+| Déplacements | Pas chassé arrière (backdash) | `dash_arriere` | |
+| Postures | Debout → accroupi | `accroupi_entree` | |
+| Postures | Accroupi, respiration (boucle) | `accroupi_idle` | |
+| Postures | Accroupi → debout | `accroupi_sortie` | |
+| Postures | Sortie de garde (garde → repos) | `sortie_de_garde` | |
+| Déplacements | Saut neutre, avant, arrière | `saut_*` | |
+| Déplacements | Réception légère | `reception` | |
+| Déplacements | Demi-tour | `demi_tour` | |
+| Défense | Garde haute tenue, garde accroupie tenue | `garde_haute`, `garde_basse` | |
+| Défense | Recul sur garde haut et bas | `recul_garde_haut`, `recul_garde_bas` | |
+| Défense | Parade haute, parade basse | `parade_haute`, `parade_basse` | |
+| Défense | Esquive buste en arrière (sway), se baisser | `esquive_sway`, `esquive_baisse` | |
+| Réactions | Tête légère, tête lourde | `touche_tete_*` | |
+| Réactions | Ventre léger, plié en deux | `touche_ventre_*` | |
+| Réactions | Jambe légère, fauché | `touche_jambe`, `fauche` | |
+| Réactions | Accroupi touché, recul titubant, effondrement lent | | |
+| En l'air | Lancé, touché en l'air, retombée sur le dos | | |
+| Au sol | Chute arrière, chute avant, au sol (boucle), relevé, tech roll | | |
+| KO | KO en arrière, inconscient au sol | | |
+| Projections | Saisie de face (duo), saisie ratée | | |
+
+Environ 45 animations. Le reste du socle vient en phase 2.
 
 ---
 
