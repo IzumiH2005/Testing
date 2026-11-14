@@ -130,6 +130,13 @@ static func neutral_pose(style_name := "epais") -> Dictionary:
 	return {"nom": "neutre", "style": style_name, "x": 0.0, "y": standing_hip_y(style_name), "facing": 1, "angles": angles}
 
 
+## Longueur d'un os dans une pose : longueur du style × étirement éventuel
+## (p.etire = {os: facteur}, pour le squash & stretch des images d'action).
+static func bone_len(p: Dictionary, s: Dictionary, id: String) -> float:
+	var b := bone(id)
+	return float(s.get(b.get("len", ""), 0.0)) * float(p.get("etire", {}).get(id, 1.0))
+
+
 static func clone_pose(p: Dictionary) -> Dictionary:
 	return p.duplicate(true)
 
@@ -161,7 +168,7 @@ static func solve(p: Dictionary) -> Dictionary:
 		var w: float = world[b.parent] + b.rest + b.sign * angle(p, b.id)
 		world[b.id] = w
 		var o: Vector2 = tip[b.parent]
-		var l: float = s.get(b.len, 0.0)
+		var l := bone_len(p, s, b.id)
 		tip[b.id] = o + Vector2(cos(deg_to_rad(w)), sin(deg_to_rad(w))) * l
 
 	var r: float = s.head / 2.0
@@ -217,8 +224,8 @@ static func reach(p: Dictionary, limb_id: String, target: Vector2, limits := tru
 	var f: float = sol.facing
 	var up := bone(limb.upper)
 	var lo := bone(limb.lower)
-	var l1: float = s[up.len]
-	var l2: float = s[lo.len]
+	var l1 := bone_len(q, s, limb.upper)
+	var l2 := bone_len(q, s, limb.lower)
 	var base: Vector2 = sol.joints[limb.base]
 	var t := Vector2((target.x - base.x) * f, target.y - base.y)  # repère local, avant miroir
 	var d := t.length()
@@ -305,6 +312,13 @@ static func lerp_pose(a: Dictionary, b: Dictionary, t: float) -> Dictionary:
 	for k in b.angles:
 		var va := angle(a, k)
 		q.angles[k] = va + norm180(angle(b, k) - va) * t
+	var ea: Dictionary = a.get("etire", {})
+	var eb: Dictionary = b.get("etire", {})
+	if not ea.is_empty() or not eb.is_empty():
+		var e := {}
+		for k in ea.keys() + eb.keys():
+			e[k] = lerpf(float(ea.get(k, 1.0)), float(eb.get(k, 1.0)), t)
+		q.etire = e
 	return q
 
 

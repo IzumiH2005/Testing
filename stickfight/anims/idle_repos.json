@@ -1,0 +1,68 @@
+{
+  "nom": "idle_repos",
+  "boucle": true,
+  "longueur": 260,
+  "base": "repos",
+  "decalage": {
+    "neck": 4,
+    "armN": 6,
+    "armF": 8,
+    "foreN": 10,
+    "foreF": 12
+  },
+  "cles": [
+    {
+      "f": 0,
+      "courbe": "acc-dec"
+    },
+    {
+      "f": 72,
+      "plus": {
+        "spineLow": -0.5,
+        "chest": -1.6,
+        "neck": 1.4,
+        "armN": -0.1,
+        "armF": -0.2,
+        "foreN": 0.4,
+        "foreF": 0.5
+      },
+      "courbe": "dec"
+    },
+    {
+      "f": 118,
+      "plus": {
+        "chest": 0.3,
+        "neck": -0.3
+      },
+      "courbe": "palier"
+    },
+    {
+      "f": 134,
+      "plus": {
+        "chest": 0.3,
+        "neck": -0.3
+      },
+      "courbe": "acc-dec"
+    },
+    {
+      "f": 192,
+      "plus": {
+        "spineLow": -0.3,
+        "chest": -1.0,
+        "neck": 0.9,
+        "armN": -0.1,
+        "armF": -0.1,
+        "foreN": 0.3,
+        "foreF": 0.3
+      },
+      "courbe": "dec"
+    },
+    {
+      "f": 240,
+      "courbe": "palier"
+    },
+    {
+      "f": 260
+    }
+  ]
+}

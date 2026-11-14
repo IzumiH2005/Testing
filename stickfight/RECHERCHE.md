@@ -76,3 +76,76 @@ timing**. D'où les choix du modèle :
   un angle, regarder » sans rouvrir l'éditeur ;
 - l'animation, à venir, sera faite de poses clés à la main avec un timing en
   images, comme pour Tekken, plutôt qu'en capture.
+
+## 4. Animer le blocage bas, la garde et le repos
+
+### Le geste réel
+
+- **Gedan barai (karaté)** : l'avant-bras descend en diagonale pour chasser
+  vers le bas et sur le côté un coup visant le ventre ou plus bas. Le bras
+  part d'en haut (armé près de l'épaule opposée) pour prendre de la vitesse,
+  et le corps ne se baisse pas.
+  ([The Martial Way](https://www.themartialway.com.au/gedan-barai-lower-block/),
+  [Black Belt Wiki](https://blackbeltwiki.com/?p=5634))
+- **Parade du teep (boxe thaï)** : contre un pied direct, on ne bloque pas de
+  face, on frappe le pied ou le tibia de la main pour le dévier vers le bas ;
+  l'attaquant perd l'équilibre vers l'avant.
+  ([Evolve University](https://evolve-university.com/blog/the-3-best-ways-to-defend-a-muay-thai-push-kick/))
+
+D'où le blocage du projet : les deux mains montent un peu (armé, f4), puis
+s'abattent ensemble sur le tibia juste derrière la cheville (contact f8,
+133 ms). Le défenseur reste droit, le bassin bouge de moins de 2 unités.
+
+### Les 12 principes (Thomas et Johnston, *The Illusion of Life*)
+
+Résumé des principes : [EVL, Université de l'Illinois (PDF)](https://www.evl.uic.edu/datsoupi/251/docs/12AnimationPrinciples.pdf),
+[CG Wire](https://blog.cg-wire.com/12-principles-animation/).
+Comment ils sont appliqués ici :
+
+| Principe | Application |
+|---|---|
+| Squash and stretch | Clé « écrasé » juste après le contact : la jambe du coup de pied se plie sous la frappe, les mains du défenseur s'enfoncent de quelques unités ; canal `etire` pour allonger un os |
+| Anticipation | Le blocage arme les mains vers le haut avant de frapper vers le bas ; la mise en garde tasse le corps avant le pas ; le coup de pied charge en reculant le bassin de 1,5 |
+| Mise en scène (staging) | Tout est de profil, chaque pose clé doit se lire en silhouette ; au contact, les deux corps s'écartent pour que la main et le pied soient sur fond vide |
+| Pose à pose | Animation par clés nommées, le mouvement entre elles est calculé |
+| Continuité et chevauchement | `decalage` : tête, avant-bras et bras arrière suivent avec 1 à 12 images de retard |
+| Ralentis (slow in / slow out) | Courbes `acc`, `dec`, `acc-dec` par segment ; `dec` après un contact pour que la pose d'impact reste lisible |
+| Arcs | Courbe `auto` (spline) ; trajectoires vérifiées sur la stroboscopie |
+| Action secondaire | Poussière sous les pieds qui glissent, respiration et transfert de poids dans les idles |
+| Timing | Blocage en 8 images, coup de pied en 17 : l'attaque est lisible, la défense rapide |
+| Exagération | Pied rabattu bien plus bas qu'en réalité après le blocage, arrêt sur impact |
+| Dessin solide | Proportions et amplitudes humaines de la partie 1 et 2 |
+| Charisme (appeal) | Garde compacte, tête rentrée, poings hauts |
+
+### Astuces des jeux de combat
+
+- **Arrêt sur impact (hit-stop)** : 7 images où les deux combattants sont
+  figés et tremblent, pendant que l'étincelle éclate. Le poids du coup vient
+  de cette pause. ([Sonic Hurricane, Impact Freeze](https://sonichurricane.com/?p=1043))
+- **Démarrage, actif, récupération** : un coup se découpe en images de
+  démarrage, images actives et images de récupération. Ici la défense doit
+  être active quand le pied arrive, d'où le calage des deux animations sur
+  le même événement `contact`.
+  ([Critical Points, frame data](https://critpoints.net/2023/02/20/frame-data-patterns-that-game-designers-should-know))
+- **Secousse de caméra** courte et amortie au contact.
+- **Fondu court** (3 à 4 images) entre deux animations pour ne jamais sauter
+  de pose.
+
+### Astuces d'animation en pixel art
+
+- **Animer « en deux »** : les effets changent d'image toutes les 2 images,
+  ce qui donne un rythme sec et lisible. Option `pas` pour faire pareil sur
+  le corps.
+- **Images étalées (smears)** : l'avant-bras qui frappe est étalé sur
+  l'espace balayé depuis l'image précédente, plus une traînée effilée.
+  ([Game Developer, 5 tips for 2D game animation](https://gamedeveloper.com/art/5-tips-for-making-great-animations-for-2d-games),
+  [RebusFarm, smear frames](https://rebusfarm.net/blog/smear-frames-in-animation-how-animators-create-fast-and-dynamic-motion))
+- **Aplats, palette courte, pas de transparence** : l'étincelle utilise
+  4 couleurs (bleu pour une parade, orange pour un coup reçu), la poussière 3.
+- **Idle de combat** : un rebond régulier sur les jambes, les épaules et les
+  poings qui suivent en décalé, pour que le personnage ait l'air prêt à
+  bouger sans attirer l'œil. ([Slynyrd, Pixelblog 52 : Idle Fighting Stance](https://www.slynyrd.com/blog/2024/9/26/pixelblog-52-idle-fighting-stance),
+  [AnimSchool, Breathing Life into Idle Animations](https://blog.animschool.edu/2024/06/14/breathing-life-into-idle-animations))
+- **Boucle d'idle qui ne se voit pas** : périodes différentes pour chaque
+  partie du corps (grâce aux décalages) et paliers irréguliers dans le repos.
+

@@ -1,0 +1,129 @@
+{
+  "nom": "mise_en_garde",
+  "boucle": false,
+  "base": "repos",
+  "suivante": "garde_idle",
+  "decalage": {
+    "neck": 2,
+    "armN": 2,
+    "foreN": 2,
+    "armF": 3,
+    "foreF": 3
+  },
+  "cles": [
+    {
+      "f": 0,
+      "courbe": "acc-dec"
+    },
+    {
+      "f": 6,
+      "nom": "anticipation",
+      "plus": {
+        "x": 3,
+        "y": -1.5,
+        "spineLow": 1,
+        "chest": 2,
+        "armN": -4,
+        "armF": -3
+      },
+      "courbe": "auto"
+    },
+    {
+      "f": 12,
+      "nom": "passage",
+      "plus": {
+        "x": 7,
+        "y": -1,
+        "root": 1,
+        "chest": 4
+      },
+      "vise": {
+        "legN": [
+          6,
+          20
+        ]
+      },
+      "fixe": {
+        "armN": -8,
+        "foreN": 60,
+        "armF": -4,
+        "foreF": 70
+      }
+    },
+    {
+      "f": 17,
+      "nom": "pose du pied",
+      "pose": "garde",
+      "plus": {
+        "x": 9,
+        "y": 5,
+        "chest": 2
+      },
+      "vise": {
+        "legF": [
+          15.5,
+          7.5
+        ]
+      },
+      "fixe": {
+        "armN": 22,
+        "foreN": 125,
+        "armF": 34,
+        "foreF": 135
+      }
+    },
+    {
+      "f": 20,
+      "pose": "=",
+      "plus": {
+        "x": -1,
+        "y": -1,
+        "armN": 3,
+        "foreN": 7,
+        "armF": 5,
+        "foreF": 6
+      }
+    },
+    {
+      "f": 28,
+      "nom": "glissé arrière",
+      "pose": "garde",
+      "plus": {
+        "y": -1.5,
+        "armN": 1.5,
+        "foreN": -2,
+        "armF": 1
+      },
+      "courbe": "auto"
+    },
+    {
+      "f": 34,
+      "pose": "garde",
+      "plus": {
+        "y": 0.4,
+        "armN": -1,
+        "armF": -0.5
+      }
+    },
+    {
+      "f": 40,
+      "pose": "garde"
+    }
+  ],
+  "evenements": [
+    {
+      "f": 17,
+      "type": "poussiere",
+      "articulation": "ankleN",
+      "dir": 0,
+      "taille": 0.8
+    },
+    {
+      "f": 28,
+      "type": "poussiere",
+      "articulation": "ankleF",
+      "dir": 180,
+      "taille": 0.9
+    }
+  ]
+}

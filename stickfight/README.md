@@ -101,26 +101,98 @@ Format d'une pose (`poses/*.json`) :
 
 `x`, `y` = position du bassin ; `facing` = 1 (regarde à droite) ou −1.
 
+## Animations
+
+Le dossier `anims/` contient des animations par poses clés, jouées à
+60 images par seconde (le format complet est décrit en tête de
+`scripts/stick_anim.gd`).
+
+| Animation | Durée | Contenu |
+|---|---|---|
+| `idle_repos` | 260 i, en boucle | Debout détendu : respiration lente, léger transfert de poids, deux paliers pour que la boucle ne se devine pas |
+| `mise_en_garde` | 40 i | Du repos à la garde : anticipation (le corps se tasse), pas en avant, pied arrière qui glisse, poussière à chaque appui ; enchaîne sur `garde_idle` |
+| `garde_idle` | 112 i, en boucle | Garde vivante : rebond sur les jambes, poings qui suivent avec 5 à 9 images de retard |
+| `blocage_bas` | 44 i | Les mains descendent frapper le pied d'un coup visant le ventre, sans se baisser : armé (f4), contact (f8, arrêt sur impact 7 i, étincelle, secousse), écrasé, tenue, retour en garde |
+| `coup_de_pied_ventre` | 56 i | Pied direct (teep) de la jambe avant, pour le duo : pas glissé, genou armé, contact (f17), pied rabattu vers le bas par le blocage, reprise de distance |
+| `duo_blocage` | 110 i | Les deux ensemble : les contacts sont calés sur la même image globale |
+
+Une clé part d'une pose (`poses/`), applique des réglages (`plus`, `fixe`,
+`vise` pour placer une main ou un pied en cinématique inverse), et choisit la
+courbe du segment qui suit (`auto`, `lin`, `acc`, `dec`, `acc-dec`,
+`palier`). Les pieds qui ne bougent pas entre deux clés restent plantés, et
+le `decalage` retarde la tête et les avant-bras de quelques images
+(chevauchement).
+
+Événements : `contact` (repère de synchronisation), `hitstop` (arrêt sur
+impact global, la figure qui l'émet tremble), `etincelle`, `poussiere`,
+`secousse` (caméra). Les effets (`scripts/vfx.gd`) sont dessinés en aplats,
+palette de 4 couleurs, et changent d'image toutes les 2 images.
+
+Un **duo** (`anims/duo_*.json`) place plusieurs combattants et leur programme :
+`{"contact": 33, "anim": "blocage_bas", "fondu": 3}` démarre l'animation pour
+que son événement `contact` tombe à l'image 33.
+
+### Démo
+
+`scenes/demo.tscn` (ouvrir la scène puis F6) joue les animations en direct :
+
+| Touche | Effet |
+|---|---|
+| R | Repos |
+| G | Mise en garde |
+| B | Blocage bas |
+| K | Duo coup de pied / blocage (en boucle) |
+| Espace | Pause ; en pause, ← → reculent ou avancent d'une image |
+| L | Ralenti ×4 |
+| D | Squelette coloré |
+
+### Régler une animation en ligne de commande
+
+`tools/anim.sh` simule l'animation (ou le duo) avec le code du jeu et la
+rend en images :
+
+```sh
+tools/anim.sh anims/blocage_bas.json -o /tmp/planche.png --de 0 --a 24
+tools/anim.sh anims/blocage_bas.json --strobe /tmp/strobe.png --suivre handN,handF,head
+tools/anim.sh anims/duo_blocage.json -o /tmp/duo.png --pas 2 --cols 7
+tools/anim.sh anims/garde_idle.json --print          # articulations image par image
+tools/anim.sh anims/duo_blocage.json --gif /tmp/duo.gif --video /tmp/duo.mp4
+tools/anim.sh anims/duo_blocage.json --gif /tmp/lent.gif --lent 3
+```
+
+La planche contact montre chaque image numérotée ; la stroboscopie superpose
+toutes les images avec la trajectoire des articulations suivies (un point
+par image : des points serrés = lent, espacés = rapide), ce qui permet de
+vérifier les arcs et l'espacement. `--print` sert à vérifier au dixième près
+qu'un pied ne glisse pas ou qu'une main touche bien le pied adverse.
+
 ## Fichiers
 
 ```
 project.godot
 scenes/atelier.tscn       scène principale
+scenes/demo.tscn          démo des animations
 scripts/stick_rig.gd      squelette : FK, IK, amplitudes, dessin, JSON
 scripts/planche.gd        fond, grille, sol, figures (partagé atelier / rendu)
 scripts/atelier.gd        état, historique, panneau de réglages
 scripts/atelier_scene.gd  poignées, souris, clavier
-tools/rendu.gd, rendu.sh  rendu PNG en ligne de commande
+scripts/stick_anim.gd     animation par clés : courbes, pieds plantés, décalages
+scripts/fighter.gd        un combattant : animation, fondus, traînées
+scripts/combat.gd         plusieurs combattants, arrêt sur impact, effets, duo
+scripts/vfx.gd            étincelle et poussière en aplats
+scripts/demo.gd           scène de démo
+tools/rendu.gd, rendu.sh  rendu PNG d'une pose
+tools/anim.gd, anim.sh    planche, stroboscopie, GIF, vidéo d'une animation
 poses/                    neutre, neutre-fin, repos, garde
+anims/                    animations et duos
 ```
 
 ## Suite prévue
 
-1. Poses clés et interpolation dans le temps : une animation est une liste de
-   poses avec des durées en images (60 i/s), et des courbes d'accélération par
-   segment.
-2. Lecteur d'animation dans l'atelier : pelure d'oignon, image par image,
-   timing des phases (préparation, impact, retour).
-3. Premiers coups (jab, direct, coup de pied bas) avec boîtes de coup et de
-   vulnérabilité attachées aux os, arrêt sur impact (hit-stop).
-4. Deux personnages, déplacements, garde, puis enchaînements.
+1. Timeline dans l'atelier : pelure d'oignon, déplacement des clés, réglage
+   des courbes sans passer par le JSON.
+2. Coups de poing (jab, direct) et coup de pied bas, avec boîtes de coup et
+   de vulnérabilité attachées aux os.
+3. Contrôle au clavier ou à la manette : déplacements, garde, blocage selon
+   la hauteur du coup reçu.
+4. Réactions aux coups reçus et enchaînements.

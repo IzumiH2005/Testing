@@ -40,6 +40,9 @@ const DEBUG_BONES := [
 		caption = v
 		queue_redraw()
 
+## Dessin supplémentaire après les figures (combat, effets) : func(planche).
+var extra_draw: Callable
+
 ## [{pose: Dictionary, color: Color, far_shade: float}], de l'arrière vers l'avant.
 var figures: Array = []:
 	set(v):
@@ -88,6 +91,8 @@ func _draw() -> void:
 		StickRig.draw_pose(self, fig.pose, origin_px(), px_per_unit, fig.get("color", Color("#111111")), fig.get("far_shade", 1.0))
 		if debug:
 			_draw_debug(fig.pose)
+	if extra_draw.is_valid():
+		extra_draw.call(self)
 	if caption != "":
 		draw_string(ThemeDB.fallback_font, Vector2(8, 18), caption, HORIZONTAL_ALIGNMENT_LEFT, -1, 13, Color("#222222"))
 

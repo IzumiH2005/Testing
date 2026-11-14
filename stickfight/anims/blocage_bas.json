@@ -1,0 +1,157 @@
+{
+  "nom": "blocage_bas",
+  "boucle": false,
+  "base": "garde",
+  "suivante": "garde_idle",
+  "decalage": {
+    "neck": 2,
+    "armF": 1,
+    "foreF": 1
+  },
+  "cles": [
+    {
+      "f": 0,
+      "courbe": "dec"
+    },
+    {
+      "f": 4,
+      "nom": "armé",
+      "plus": {
+        "y": 1,
+        "chest": -3,
+        "spineLow": -1,
+        "neck": 2,
+        "armN": 8,
+        "foreN": 14,
+        "armF": 6,
+        "foreF": 6
+      },
+      "courbe": "acc"
+    },
+    {
+      "f": 8,
+      "nom": "contact",
+      "plus": {
+        "y": -1,
+        "chest": 6,
+        "spineLow": 2,
+        "neck": -3
+      },
+      "etire": {
+        "foreN": 1.06
+      },
+      "courbe": "dec",
+      "vise": {
+        "armN": [
+          60,
+          88
+        ],
+        "armF": [
+          54,
+          93
+        ]
+      }
+    },
+    {
+      "f": 13,
+      "nom": "écrasé",
+      "plus": {
+        "x": -2,
+        "y": -3,
+        "chest": 9,
+        "spineLow": 4,
+        "neck": -4
+      },
+      "etire": {
+        "foreN": 1.0
+      },
+      "courbe": "dec",
+      "vise": {
+        "armN": [
+          54,
+          62
+        ],
+        "armF": [
+          49,
+          66
+        ]
+      }
+    },
+    {
+      "f": 17,
+      "nom": "tenue",
+      "pose": "=",
+      "plus": {
+        "y": -0.4,
+        "chest": 0.8
+      },
+      "courbe": "palier",
+      "vise_rel": {
+        "armN": [
+          -0.5,
+          -1.5
+        ],
+        "armF": [
+          -0.5,
+          -1.5
+        ]
+      }
+    },
+    {
+      "f": 21,
+      "pose": "=",
+      "courbe": "acc-dec"
+    },
+    {
+      "f": 38,
+      "nom": "retour",
+      "plus": {
+        "y": 0.3,
+        "armN": 1,
+        "foreN": 2
+      },
+      "courbe": "acc-dec"
+    },
+    {
+      "f": 44
+    }
+  ],
+  "trainees": [
+    {
+      "articulation": "handN",
+      "coude": "elbowN",
+      "de": 6,
+      "a": 8
+    }
+  ],
+  "evenements": [
+    {
+      "f": 8,
+      "type": "contact"
+    },
+    {
+      "f": 8,
+      "type": "hitstop",
+      "n": 7,
+      "tremble": 1.2
+    },
+    {
+      "f": 8,
+      "type": "etincelle",
+      "articulation": "handN",
+      "dec": [
+        0,
+        -3
+      ],
+      "dir": -60,
+      "genre": "garde",
+      "taille": 0.9
+    },
+    {
+      "f": 8,
+      "type": "secousse",
+      "n": 5,
+      "force": 1.5
+    }
+  ]
+}
