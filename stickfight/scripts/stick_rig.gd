@@ -391,7 +391,49 @@ static func swap_sides(p: Dictionary) -> Dictionary:
 
 
 ## Mélange deux poses (t entre 0 et 1), angle par angle, par le plus court chemin.
+## Côté opposé d'un os (armN ↔ armF…), ou l'os lui-même s'il est central.
+static func other_side(id: String) -> String:
+	for pr in SIDE_PAIRS:
+		if id == pr[0]:
+			return pr[1]
+		if id == pr[1]:
+			return pr[0]
+	return id
+
+
+## Canal qui porte la même information dans la pose miroir, et son signe :
+## [canal, signe]. Voir mirror_pose.
+static func mirror_channel(c: String) -> Array:
+	if c == "x" or c == "y":
+		return [c, 1.0]
+	if c.begins_with("etire:"):
+		return ["etire:" + other_side(c.substr(6)), 1.0]
+	return [other_side(c), 1.0 if c.begins_with("foot") else -1.0]
+
+
+## Même dessin, décrit depuis l'autre côté : sens inversé, proche et loin
+## échangés, chaque angle changé de signe (tous les repos valent 0 ou 180,
+## donc le symétrique d'un angle relatif est son opposé). Seuls les pieds
+## ne suivent pas le miroir : ils pointent toujours vers l'avant. C'est la
+## pose d'un personnage vu exactement de face ou de dos, au moment où il se
+## retourne : ce qui était proche passe derrière.
+static func mirror_pose(p: Dictionary) -> Dictionary:
+	var q := clone_pose(p)
+	q.facing = -int(facing(p))
+	for id in angle_ids():
+		var mc := mirror_channel(id)
+		q.angles[id] = float(mc[1]) * angle(p, mc[0])
+	if p.has("etire"):
+		var e := {}
+		for k in p.etire:
+			e[other_side(k)] = float(p.etire[k])
+		q.etire = e
+	return q
+
+
 static func lerp_pose(a: Dictionary, b: Dictionary, t: float) -> Dictionary:
+	if facing(a) != facing(b):
+		b = mirror_pose(b)
 	var q := clone_pose(a)
 	q.x = lerpf(float(a.x), float(b.x), t)
 	q.y = lerpf(float(a.y), float(b.y), t)

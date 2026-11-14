@@ -45,6 +45,11 @@ func play(nom: String, fondu := 0, t0 := 0.0) -> void:
 		var cur := local_pose()
 		var dx := float(cur.x)
 		x += facing * dx
+		# L'animation finissait retournée (demi-tour) : le combattant change
+		# de sens, et la pose de fondu est décrite dans ce nouveau sens.
+		if StickRig.facing(cur) < 0.0:
+			facing = -facing
+			cur.facing = 1
 		if fondu > 0:
 			cur.x = 0.0
 			blend_from = cur
@@ -101,7 +106,7 @@ func local_pose() -> Dictionary:
 func to_world(p: Dictionary) -> Dictionary:
 	var q := StickRig.clone_pose(p)
 	q.x = x + facing * float(p.x)
-	q.facing = facing
+	q.facing = facing * int(StickRig.facing(p))
 	return q
 
 

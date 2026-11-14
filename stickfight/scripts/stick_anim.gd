@@ -21,6 +21,8 @@ extends RefCounted
 ##                                         cycle, le bassin est 18 plus loin
 ##                                         (la clé 0 du cycle suivant aussi)
 ##   "decalage": {"neck": 2, "foreN": 1},  retard en images par canal
+##   "pieds_auto": false,                  angles des pieds pris dans les clés
+##                                         (sinon calculés, voir _bake_feet)
 ##   "cles": [
 ##     {"f": 0},                           la pose de base telle quelle
 ##     {"f": 4, "plus": {"chest": -3, "y": 1}, "courbe": "dec"},
@@ -41,6 +43,12 @@ extends RefCounted
 ##   ancre    true / false / "N" / "F"  par défaut true : si le bassin bouge,
 ##            les jambes se replient pour garder les chevilles de la pose
 ##            de départ (sauf jambe touchée par fixe, plus ou vise).
+## facing : -1 = la clé est vue retournée (le personnage regarde vers -x du
+##   repère local). Le sens se transmet aux clés suivantes. « miroir »: true
+##   reprend la clé précédente vue de l'autre côté (même dessin, proche et
+##   loin échangés). Le sens affiché est celui de la clé qui commence le
+##   segment : le demi-tour se lit à la première clé retournée. Une
+##   animation qui finit retournée retourne le combattant (Fighter.play).
 ## courbe : forme du segment qui part de cette clé.
 ##   auto     spline passant par les clés voisines (arcs fluides) ; une clé
 ##            qui est un extrême (aller-retour) a une tangente nulle
@@ -113,17 +121,28 @@ static func build(data: Dictionary) -> Dictionary:
 			"courbe": str(kd.get("courbe", "auto")), "p": float(kd.get("p", 2.0)), "pas": maxi(1, int(kd.get("pas", 1))),
 			"plate": bool(kd.get("plate", false)),
 			"chevilles": {"N": J.ankleN, "F": J.ankleF},
+			"facing": StickRig.facing(pose),
 		})
 		for e in pose.get("etire", {}):
 			if not e in a.etire_ids:
 				a.etire_ids.append(e)
+	# Une animation qui se retourne lit chaque étirement aussi de l'autre côté.
+	var sens := {}
+	for k in a.cles:
+		sens[k.facing] = true
+	if sens.size() > 1:
+		for e in a.etire_ids.duplicate():
+			var o := StickRig.other_side(e)
+			if not o in a.etire_ids:
+				a.etire_ids.append(o)
 	var last: int = a.cles[-1].f
 	a.longueur = int(data.get("longueur", last))
 	var max_lag := 0.0
 	for k in a.decalage:
 		max_lag = maxf(max_lag, a.decalage[k])
 	a.duree = float(a.longueur) if a.boucle else float(last) + max_lag
-	_bake_feet(a)
+	if bool(data.get("pieds_auto", true)):
+		_bake_feet(a)
 	return a
 
 
@@ -159,13 +178,15 @@ static func _bake_feet(a: Dictionary) -> void:
 		var h := []
 		var ax := []
 		var dx := []
+		var fs := []
 		var shin := []
 		for i in n:
 			var sol := StickRig.solve(sample(a, float(i)))
 			var ank: Vector2 = sol.joints["ankle" + side]
 			h.append(ank.y - g)
 			ax.append(ank.x)
-			dx.append(ank.x - float(sol.joints.hip.x))
+			fs.append(float(sol.facing))
+			dx.append((ank.x - float(sol.joints.hip.x)) * float(sol.facing))
 			shin.append(float(sol.world["shin" + side]))
 		var st := []
 		var phi := []
@@ -177,6 +198,7 @@ static func _bake_feet(a: Dictionary) -> void:
 				vx = (xn - xp) / 2.0
 			else:
 				vx = (ax[mini(i + 1, n - 1)] - ax[maxi(i - 1, 0)]) / float(mini(i + 1, n - 1) - maxi(i - 1, 0))
+			vx *= float(fs[i])
 			if h[i] < FOOT_GROUND:
 				if vx > 1.2 and dx[i] > 0.0:
 					st.append("glisse"); phi.append(SLIDE_PHI)
@@ -320,7 +342,8 @@ static func _vec(v) -> Vector2:
 
 
 static func _resolve(kd: Dictionary, base: Dictionary, prev: Dictionary) -> Dictionary:
-	var src := str(kd.get("pose", ""))
+	var miroir := bool(kd.get("miroir", false))
+	var src := str(kd.get("pose", "=" if miroir else ""))
 	var p: Dictionary
 	if src == "":
 		p = StickRig.clone_pose(base)
@@ -328,6 +351,9 @@ static func _resolve(kd: Dictionary, base: Dictionary, prev: Dictionary) -> Dict
 		p = StickRig.clone_pose(prev)
 	else:
 		p = _pose_file(src)
+	p.facing = int(kd.facing) if kd.has("facing") else int(StickRig.facing(prev))
+	if miroir:
+		p = StickRig.mirror_pose(p)
 	var J0: Dictionary = StickRig.solve(p).joints
 	var touched := {"N": false, "F": false}
 	for k in kd.get("fixe", {}):
@@ -378,6 +404,17 @@ static func _value(key: Dictionary, c: String) -> float:
 	return StickRig.angle(p, c)
 
 
+## Valeur du canal c de la clé, exprimée dans le sens f : une clé vue de
+## l'autre côté est lue à travers le miroir (StickRig.mirror_channel). Les
+## courbes d'un segment qui franchit un demi-tour se calculent ainsi dans un
+## seul repère, celui de la clé de départ.
+static func _vf(key: Dictionary, c: String, f: float) -> float:
+	if float(key.facing) == f:
+		return _value(key, c)
+	var mc := StickRig.mirror_channel(c)
+	return float(mc[1]) * _value(key, mc[0])
+
+
 ## Clé i (avec bouclage) et son temps, éventuellement décalé d'une longueur.
 static func _key_time(a: Dictionary, i: int) -> float:
 	var n: int = a.cles.size()
@@ -391,15 +428,15 @@ static func _key(a: Dictionary, i: int) -> Dictionary:
 
 ## Valeur du canal à la clé i (avec bouclage) : dans une boucle qui avance,
 ## le bassin des clés du cycle suivant est décalé de « avance ».
-static func _kval(a: Dictionary, i: int, c: String) -> float:
-	var v := _value(_key(a, i), c)
+static func _kval(a: Dictionary, i: int, c: String, f: float) -> float:
+	var v := _vf(_key(a, i), c, f)
 	if c == "x" and a.boucle:
 		v += floorf(float(i) / a.cles.size()) * float(a.avance)
 	return v
 
 
 ## Tangente (unités par image) à la clé i, pour la courbe « auto ».
-static func _tangent(a: Dictionary, i: int, c: String) -> float:
+static func _tangent(a: Dictionary, i: int, c: String, f: float) -> float:
 	var n: int = a.cles.size()
 	if not a.boucle and (i <= 0 or i >= n - 1):
 		return 0.0
@@ -409,9 +446,9 @@ static func _tangent(a: Dictionary, i: int, c: String) -> float:
 	var t0 := _key_time(a, i - 1)
 	var t1 := _key_time(a, i)
 	var t2 := _key_time(a, i + 1)
-	var v0 := _kval(a, i - 1, c)
-	var v1 := _kval(a, i, c)
-	var v2 := _kval(a, i + 1, c)
+	var v0 := _kval(a, i - 1, c, f)
+	var v1 := _kval(a, i, c, f)
+	var v2 := _kval(a, i + 1, c, f)
 	var s0 := (v1 - v0) / maxf(t1 - t0, 1e-6)
 	var s1 := (v2 - v1) / maxf(t2 - t1, 1e-6)
 	if s0 * s1 <= 0.0:
@@ -462,22 +499,25 @@ static func _wrap(a: Dictionary, t: float) -> float:
 	return clampf(t, float(a.cles[0].f), float(a.cles[-1].f))
 
 
-static func _channel(a: Dictionary, c: String, t: float) -> float:
+## Canal c à l'instant t, exprimé dans le sens f (0 = celui du segment).
+static func _channel(a: Dictionary, c: String, t: float, f := 0.0) -> float:
 	if a.cles.size() == 1:
-		return _value(a.cles[0], c)
+		return _vf(a.cles[0], c, f if f != 0.0 else float(a.cles[0].facing))
 	var seg := _segment(a, _wrap(a, t))
 	var k0: Dictionary = a.cles[seg.i]
-	var v0 := _value(k0, c)
+	if f == 0.0:
+		f = float(k0.facing)
+	var v0 := _vf(k0, c, f)
 	if seg.end:
 		return v0
-	var v1 := _kval(a, seg.i + 1, c)
+	var v1 := _kval(a, seg.i + 1, c, f)
 	var u: float = seg.u
 	if k0.courbe != "auto":
 		return lerpf(v0, v1, _ease(k0.courbe, u, k0.p))
 	# Hermite cubique, tangentes en unités par image.
 	var dt := _key_time(a, seg.i + 1) - float(k0.f)
-	var m0 := _tangent(a, seg.i, c) * dt
-	var m1 := _tangent(a, seg.i + 1, c) * dt
+	var m0 := _tangent(a, seg.i, c, f) * dt
+	var m1 := _tangent(a, seg.i + 1, c, f) * dt
 	var u2 := u * u
 	var u3 := u2 * u
 	return (2.0 * u3 - 3.0 * u2 + 1.0) * v0 + (u3 - 2.0 * u2 + u) * m0 + (-2.0 * u3 + 3.0 * u2) * v1 + (u3 - u2) * m1
@@ -486,28 +526,34 @@ static func _channel(a: Dictionary, c: String, t: float) -> float:
 ## Pose locale à l'instant t (en images, réel).
 static func sample(a: Dictionary, t: float) -> Dictionary:
 	var p := StickRig.clone_pose(a.cles[0].pose)
-	var lag: Dictionary = a.decalage
-	for c in StickRig.angle_ids():
-		p.angles[c] = _channel(a, c, t - lag.get(c, 0.0))
-	p.x = _channel(a, "x", t - lag.get("x", 0.0))
-	p.y = _channel(a, "y", t - lag.get("y", 0.0))
-	if not a.etire_ids.is_empty():
-		var e := {}
-		for b in a.etire_ids:
-			e[b] = _channel(a, "etire:" + b, t - lag.get(b, 0.0))
-		p.etire = e
-	else:
-		p.erase("etire")
-	# Pieds plantés : même cheville dans les deux clés du segment.
+	# Le sens est celui de la clé qui commence le segment ; les canaux
+	# retardés (décalage) sont lus dans ce même sens.
 	var seg := _segment(a, _wrap(a, t))
 	var k0: Dictionary = a.cles[seg.i]
 	var k1 := k0 if seg.end else _key(a, seg.i + 1)
+	var f := float(k0.facing)
+	p.facing = int(f)
+	var lag: Dictionary = a.decalage
+	for c in StickRig.angle_ids():
+		p.angles[c] = _channel(a, c, t - lag.get(c, 0.0), f)
+	p.x = _channel(a, "x", t - lag.get("x", 0.0), f)
+	p.y = _channel(a, "y", t - lag.get("y", 0.0), f)
+	if not a.etire_ids.is_empty():
+		var e := {}
+		for b in a.etire_ids:
+			e[b] = _channel(a, "etire:" + b, t - lag.get(b, 0.0), f)
+		p.etire = e
+	else:
+		p.erase("etire")
+	# Pieds plantés : même cheville dans les deux clés du segment (de part et
+	# d'autre d'un demi-tour, la jambe proche devient la jambe loin).
 	var wrap_dx := float(a.avance) if (not seg.end and seg.i + 1 >= a.cles.size()) else 0.0
 	var s: Dictionary = StickRig.get_style(p.style)
 	var ground: float = s.stroke / 2.0
 	for side in ["N", "F"]:
 		var A: Vector2 = k0.chevilles[side]
-		var B: Vector2 = k1.chevilles[side] + Vector2(wrap_dx, 0.0)
+		var s1: String = side if k1.facing == k0.facing else ("F" if side == "N" else "N")
+		var B: Vector2 = k1.chevilles[s1] + Vector2(wrap_dx, 0.0)
 		if A.distance_to(B) < PLANT_EPS:
 			p = StickRig.reach(p, "leg" + side, A)
 		else:

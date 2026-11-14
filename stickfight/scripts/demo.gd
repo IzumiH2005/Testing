@@ -32,7 +32,7 @@ const SAUT_TOLERANCE := 6
 ## Images minimales passées dans accroupi_repos_idle avant qu'une propulsion
 ## puisse partir (le fondu de retour de la propulsion précédente se termine).
 const PROPULSION_DELAI := 4
-const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   ↑ sauter (+ → / ← : avant / arrière)   Maj + ↑ saut boosté   ↓ puis → / ← propulsion (+ ↑ haute)   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   ↑ sauter (+ → / ← : avant / arrière)   Maj + ↑ saut boosté   ↓ puis → / ← propulsion (+ ↑ haute)   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, B blocage bas, T demi-tour)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
 var planche: Planche
 var help: Label
@@ -52,6 +52,8 @@ var last_back_press := -1000
 ## Double appui sur → ou ← reçu, consommé à la prochaine image par _control_input.
 var dash_req := false
 var backdash_req := false
+## T appuyé (demi-tour), consommé de la même façon.
+var tour_req := false
 ## Centre de la caméra en solo (suit le bassin avec un peu de retard).
 var cam_x := 8.0
 ## Vitesse lissée du bassin : la caméra regarde devant quand on court.
@@ -200,15 +202,29 @@ const ARRETS := {
 ##   avant, depuis l'arrêt ou dans les premières images de la marche en garde
 ##   lancée par le premier appui ; il revient en garde ouverte. ← ← lance le
 ##   dash arrière, qui ferme la garde ;
-## - ↓ tenu en garde : accroupi, qui se relève en garde ouverte.
+## - ↓ tenu en garde : accroupi, qui se relève en garde ouverte ;
+## - T en garde : demi-tour sur place, qui finit en garde ouverte tournée de
+##   l'autre côté. Les flèches restent celles de l'écran : retourné, → recule
+##   et ← avance.
 func _control_input() -> void:
 	var dash := dash_req
 	var backdash := backdash_req
+	var tour := tour_req
 	dash_req = false
 	backdash_req = false
+	tour_req = false
 	var f: Fighter = combat.fighters[0]
-	var fwd := Input.is_physical_key_pressed(KEY_RIGHT)
-	var back := Input.is_physical_key_pressed(KEY_LEFT) and not fwd
+	var right := Input.is_physical_key_pressed(KEY_RIGHT)
+	var left := Input.is_physical_key_pressed(KEY_LEFT)
+	if f.facing < 0:
+		var tmp := right
+		right = left
+		left = tmp
+		var td := dash
+		dash = backdash
+		backdash = td
+	var fwd := right
+	var back := left and not fwd
 	var guard := Input.is_physical_key_pressed(KEY_G)
 	var run := Input.is_physical_key_pressed(KEY_SHIFT)
 	var sprint := Input.is_physical_key_pressed(KEY_CTRL)
@@ -257,7 +273,7 @@ func _control_input() -> void:
 			if not held and ARRETS[nom].has(phase):
 				f.play(ARRETS[nom][phase], 0)
 		"garde_ouverte_idle", "garde_ouvrir", "garde_idle", "garde_fermer":
-			_guard_input(f, nom, guard, fwd, back, down, dash, backdash)
+			_guard_input(f, nom, guard, fwd, back, down, dash, backdash, tour)
 		"accroupi_idle":
 			if not (down and guard):
 				f.play("accroupi_sortie", 3)
@@ -278,7 +294,7 @@ func _control_input() -> void:
 ## (garde_idle, garde_fermer) : mêmes jambes, seuls le buste et les bras
 ## changent, d'où des fondus courts entre les deux.
 func _guard_input(f: Fighter, nom: String, guard: bool, fwd: bool, back: bool,
-		down: bool, dash: bool, backdash: bool) -> void:
+		down: bool, dash: bool, backdash: bool, tour: bool) -> void:
 	var ouverte := nom in ["garde_ouverte_idle", "garde_ouvrir"]
 	if not guard:
 		f.play("sortie_de_garde", 6)
@@ -288,6 +304,8 @@ func _guard_input(f: Fighter, nom: String, guard: bool, fwd: bool, back: bool,
 		f.play("dash_avant", 4)
 	elif backdash:
 		f.play("dash_arriere", 4)
+	elif tour:
+		f.play("demi_tour", 0 if nom == "garde_ouverte_idle" else 4)
 	elif fwd:
 		f.play("marche_avant", 6)
 	elif back:
@@ -377,6 +395,9 @@ func _gui_input(ev: InputEvent) -> void:
 			elif not ev.echo:
 				backdash_req = tick - last_back_press <= DOUBLE_APPUI * slow
 				last_back_press = tick
+		KEY_T:
+			if not ev.echo:
+				tour_req = true
 		KEY_L:
 			slow = 4 if slow == 1 else 1
 			_refresh()

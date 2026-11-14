@@ -155,6 +155,7 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `propulsion_avant_haute` | 75 i, avance 225 | ↑ + → depuis l'accroupi : même charge, poussée plus verticale, vol en cloche (le bassin monte à 105), genoux groupés |
 | `propulsion_arriere` | 59 i, recule 150 | ← depuis l'accroupi : le poids recule sur le pied avant, la main se lève, poussée en arrière à ras du sol, le pied arrière se pose le premier |
 | `propulsion_arriere_haute` | 73 i, recule 157 | ↑ + ← depuis l'accroupi : même chose en cloche |
+| `demi_tour` | 22 i, recule 13 | T en garde : pivot sur place, de la garde ouverte à la même garde tournée de l'autre côté. Petite anticipation à contre-sens, le haut du corps devance le bassin (la tête encore plus), passage de face mains rentrées devant le visage, léger dépassement puis retour ; les chevilles restent sur place, le talon de l'ancienne jambe arrière se pose et celui de l'autre se lève. Puis `garde_ouverte_idle`, retourné |
 
 Une clé part d'une pose (`poses/`), applique des réglages (`plus`, `fixe`,
 `vise` pour placer une main ou un pied en cinématique inverse), et choisit la
@@ -179,6 +180,23 @@ Ensuite, dans toutes les poses (animations, fondus, atelier) : un pied ne
 passe jamais sous le sol, et si poser un pied à plat demandait de plier la
 cheville au-delà de 30°, **le talon se lève** (le pied pivote sur sa
 pointe et la jambe suit). C'est ce qui lève le talon arrière en garde.
+
+Le **sens** se règle par clé : `"facing": -1` retourne le personnage à
+partir de cette clé (il se transmet aux suivantes), `"miroir": true` reprend
+la clé précédente vue de l'autre côté. Entre deux clés de sens différents,
+la pose passe par le miroir (proche et loin échangés) ; le sens affiché est
+celui de la clé qui commence le segment. Une animation qui finit retournée
+retourne le combattant. `"pieds_auto": false` en tête d'animation coupe le
+calcul automatique des pieds : leurs angles viennent alors des clés.
+
+`demi_tour` est généré par `tools/gen_demi_tour.gd` (une clé par image) : la
+garde est remontée en 3D (profondeur de chaque articulation), tournée autour
+de l'axe vertical, projetée, puis relue en angles 2D avec étirement des os
+raccourcis ; les genoux sont recalculés en 3D.
+
+```sh
+$GODOT --headless --path . -s res://tools/gen_demi_tour.gd
+```
 
 Une boucle qui fait avancer le personnage déclare son `avance` (en unités
 par cycle) : chaque cycle reprend décalé d'autant, et le combattant
@@ -229,6 +247,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | Maj + ↑ | Saut boosté sur place ; avec → ou ←, saut boosté avant ou arrière (accepté aussi au début d'un départ de marche ou de course). Atterrissage sur trois appuis, réception lourde, puis repos |
 | ↓ tenu, puis → ou ← | Propulsion rasante avant ou arrière depuis l'accroupi ; avec ↑ en plus, propulsion haute. Le combattant revient accroupi |
 | G maintenu | Mise en garde (garde ouverte) ; avec →, marche en garde ; ← ferme la garde (défensive) puis recule, et la garde se rouvre après 10 images sans ← ; → → ou ← ← (double appui rapide) : dash avant ou arrière ; ↓ maintenu : accroupi en garde ; relâché, sortie de garde et retour au repos |
+| T | Demi-tour (en garde) : le combattant se retrouve tourné de l'autre côté. Les flèches restent celles de l'écran : retourné, → recule et ← avance |
 | B | Blocage bas (en garde) |
 | K | Duo coup de pied / blocage (en boucle) |
 | R | Repos (remise à zéro) |
@@ -274,6 +293,7 @@ scripts/vfx.gd            effets en pixel art : étincelle, poussière, onde, ch
 scripts/demo.gd           scène de démo
 tools/rendu.gd, rendu.sh  rendu PNG d'une pose
 tools/anim.gd, anim.sh    planche, stroboscopie, GIF, vidéo d'une animation
+tools/gen_demi_tour.gd    génère anims/demi_tour.json (rotation 3D projetée)
 poses/                    neutre, neutre-fin, repos, garde (fermée), garde_ouverte
 anims/                    animations et duos
 ```
