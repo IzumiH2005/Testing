@@ -123,6 +123,9 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `marche_detendue_arret_court`, `_arret_pas` | — | Arrêts au repos depuis l'un ou l'autre pied de la boucle (pied ramené à côté de l'autre, ou un dernier pas freiné) |
 | `marche_detendue_arriere` | 64 i, en boucle, recule 48 | Recul détendu : pas plus courts, la pointe se pose avant le talon, le buste reste droit |
 | `marche_detendue_arriere_depart`, `_arret_pas`, `_arret_deux_pas` | — | Départ et arrêts au repos du recul détendu |
+| `course` | 40 i, en boucle, avance 160 | Course à vitesse moyenne : appui de 14 images (amorti, talon qui se lève), 6 images de vol, bras pliés en opposition, buste penché qui plonge à l'amorti |
+| `course_depart` | 66 i | Du repos à la boucle : anticipation (petit recul, on s'abaisse, les bras s'arment), puis trois appuis qui accélèrent ; finit exactement sur l'image 0 de la boucle |
+| `course_arret_n`, `_arret_f` | 56 et 58 i | Freinage depuis l'appui N (image 0) ou F (image 20) : buste qui part en arrière, pied posé loin devant, genoux qui amortissent, bras vers l'avant pour l'équilibre, puis retour au repos |
 | `marche_arriere` | 30 i, en boucle, recule 14 | En garde maintenue. Plus lente et prudente : la jambe avant pousse, le bassin recule, le pied arrière se pose loin (la hanche ne s'étend pas au-delà de 30°, d'où ce bassin qui part avant le pied), puis le pied avant se ramène en glissant |
 | `marche_avant` | 28 i, en boucle, avance 18 | En garde maintenue, pas chassé : le pied avant s'avance au ras du sol (4 de haut), le poids passe dessus, le talon arrière se lève et le pied arrière glisse ; garde serrée qui suit avec retard |
 
@@ -156,6 +159,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | Touche | Effet |
 |---|---|
 | → ou ← maintenu | Depuis le repos : marche détendue avant ou arrière ; relâché, le pas en cours se termine et le combattant s'arrête au repos. La caméra suit |
+| Maj + → maintenus | Depuis le repos : départ de course puis course ; relâchés, le combattant freine au prochain appui et revient au repos |
 | G maintenu | Mise en garde ; avec → ou ←, marche en garde ; relâché, sortie de garde et retour au repos |
 | B | Blocage bas (en garde) |
 | K | Duo coup de pied / blocage (en boucle) |

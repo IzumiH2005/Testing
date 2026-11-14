@@ -16,7 +16,7 @@ extends Control
 
 const DUO := "res://anims/duo_blocage.json"
 const HISTORY_MAX := 600
-const HELP := "→ ← marcher   G tenu : garde (→ ← en garde, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+const HELP := "→ ← marcher   Maj + → courir   G tenu : garde (→ ← en garde, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
 var planche: Planche
 var help: Label
@@ -135,6 +135,7 @@ func _advance() -> void:
 const ARRETS := {
 	"marche_detendue": {28: "marche_detendue_arret_court", 0: "marche_detendue_arret_pas"},
 	"marche_detendue_arriere": {24: "marche_detendue_arriere_arret_pas", 56: "marche_detendue_arriere_arret_deux_pas"},
+	"course": {0: "course_arret_n", 20: "course_arret_f"},
 }
 
 
@@ -142,6 +143,8 @@ const ARRETS := {
 ## - depuis le repos, → / ← lancent la marche détendue ; relâchées, la marche
 ##   s'arrête à la prochaine image d'arrêt de la boucle (ARRETS) et revient au
 ##   repos ;
+## - Maj + → depuis le repos lance la course (départ, boucle) ; relâchées,
+##   elle freine à la prochaine pose d'appui (image 0 ou 20) et revient au repos ;
 ## - G tenu met en garde (depuis le repos) ; en garde, → / ← font la marche en
 ##   garde, qui s'arrête à l'image 0 de son cycle (pieds en position de garde) ;
 ##   G relâché, une fois revenu en garde_idle, joue la sortie de garde.
@@ -150,17 +153,20 @@ func _control_input() -> void:
 	var fwd := Input.is_physical_key_pressed(KEY_RIGHT)
 	var back := Input.is_physical_key_pressed(KEY_LEFT) and not fwd
 	var guard := Input.is_physical_key_pressed(KEY_G)
+	var run := Input.is_physical_key_pressed(KEY_SHIFT)
 	var nom := f.anim_name()
 	match nom:
 		"idle_repos":
 			if guard:
 				f.play("mise_en_garde", 4)
+			elif fwd and run:
+				f.play("course_depart", 6)
 			elif fwd:
 				f.play("marche_detendue_depart", 6)
 			elif back:
 				f.play("marche_detendue_arriere_depart", 6)
-		"marche_detendue", "marche_detendue_arriere":
-			var held := fwd if nom == "marche_detendue" else back
+		"marche_detendue", "marche_detendue_arriere", "course":
+			var held := fwd and run if nom == "course" else (fwd if nom == "marche_detendue" else back)
 			var phase := int(f.t) % int(f.anim.longueur)
 			if not held and ARRETS[nom].has(phase):
 				f.play(ARRETS[nom][phase], 0)
