@@ -132,6 +132,7 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `sprint_arret_n`, `_arret_f` | 46 et 54 i | Freinage en glissade depuis l'appui N (image 0) ou F (image 14) : le pied de devant se plante jambe presque tendue et glisse ~40 cm dans une gerbe de poussière, le bassin s'assied, le buste bascule en arrière, les deux bras partent devant ; en `_n` le pied arrière traîne sur la pointe, en `_f` il fait un pas de rattrapage devant ; retour au repos |
 | `marche_arriere` | 30 i, en boucle, recule 14 | En garde maintenue. Plus lente et prudente : la jambe avant pousse, le bassin recule, le pied arrière se pose loin (la hanche ne s'étend pas au-delà de 30°, d'où ce bassin qui part avant le pied), puis le pied avant se ramène en glissant |
 | `marche_avant` | 28 i, en boucle, avance 18 | En garde maintenue, pas chassé : le pied avant s'avance au ras du sol (4 de haut), le poids passe dessus, le talon arrière se lève et le pied arrière glisse ; garde serrée qui suit avec retard |
+| `dash_avant` | 28 i, avance 72 | Pas chassé avant rapide depuis la garde (double appui sur →) : le corps se tasse 3 images, le pied arrière pousse dans un petit nuage de poussière, vol rasant buste penché, le pied avant se plante loin devant, le pied arrière chasse au ras du sol pour retrouver l'écart de garde, puis petit rebond et retour en `garde_idle` |
 
 Une clé part d'une pose (`poses/`), applique des réglages (`plus`, `fixe`,
 `vise` pour placer une main ou un pied en cinématique inverse), et choisit la
@@ -182,7 +183,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | → ou ← maintenu | Depuis le repos : marche détendue avant ou arrière ; relâché, le pas en cours se termine et le combattant s'arrête au repos. La caméra suit |
 | Maj + → maintenus | Depuis le repos : départ de course puis course ; relâchés, le combattant freine au prochain appui et revient au repos |
 | Ctrl + → maintenus | Depuis le repos : départ de sprint puis sprint ; relâchés, freinage en glissade au prochain appui et retour au repos. La caméra regarde devant en proportion de la vitesse |
-| G maintenu | Mise en garde ; avec → ou ←, marche en garde ; relâché, sortie de garde et retour au repos |
+| G maintenu | Mise en garde ; avec → ou ←, marche en garde ; → → (double appui rapide) : dash avant ; relâché, sortie de garde et retour au repos |
 | B | Blocage bas (en garde) |
 | K | Duo coup de pied / blocage (en boucle) |
 | R | Repos (remise à zéro) |

@@ -476,7 +476,7 @@ donc en deux versions : détendue (depuis le repos) et en garde maintenue.
 | Déplacements | Marche arrière en garde maintenue (boucle) | `marche_arriere` | fait |
 | Déplacements | Course à vitesse moyenne : départ, boucle, arrêt depuis chaque pied | `course*` | fait |
 | Déplacements | Course à pleine vitesse (sprint) : départ, boucle, freinage en glissade | `sprint*` | fait |
-| Déplacements | Pas chassé avant (dash) | `dash_avant` | |
+| Déplacements | Pas chassé avant (dash) | `dash_avant` | fait |
 | Déplacements | Pas chassé arrière (backdash) | `dash_arriere` | |
 | Postures | Debout → accroupi | `accroupi_entree` | |
 | Postures | Accroupi, respiration (boucle) | `accroupi_idle` | |
