@@ -1,0 +1,107 @@
+{
+  "nom": "accroupi_entree",
+  "boucle": false,
+  "longueur": 12,
+  "base": "garde",
+  "suivante": "accroupi_idle",
+  "decalage": {
+    "chest": 2,
+    "neck": 3,
+    "armN": 2,
+    "foreN": 3,
+    "armF": 3,
+    "foreF": 4
+  },
+  "cles": [
+    {
+      "f": 0,
+      "courbe": "auto"
+    },
+    {
+      "f": 3,
+      "nom": "le pied arrière glisse",
+      "courbe": "auto",
+      "fixe": {
+        "x": -5.4,
+        "y": 65.32
+      },
+      "plus": {
+        "root": 2.7,
+        "spineLow": 2.25,
+        "chest": 1.35,
+        "neck": -3.15,
+        "armN": 1.35,
+        "foreN": 1.35,
+        "armF": 0.9,
+        "foreF": 0.9
+      },
+      "vise": {
+        "legN": [
+          29.93,
+          7.5
+        ],
+        "legF": [
+          -40.0,
+          10.0
+        ]
+      }
+    },
+    {
+      "f": 6,
+      "nom": "écrasé",
+      "courbe": "acc-dec",
+      "fixe": {
+        "x": -12.0,
+        "y": 55.0
+      },
+      "plus": {
+        "root": 6.0,
+        "spineLow": 6.5,
+        "chest": 4.5,
+        "neck": -8.0,
+        "armN": 4.5,
+        "foreN": 5.0,
+        "armF": 2.0,
+        "foreF": 2.0
+      },
+      "vise": {
+        "legN": [
+          29.93,
+          7.5
+        ],
+        "legF": [
+          -29.0,
+          11.5
+        ]
+      }
+    },
+    {
+      "f": 12,
+      "nom": "accroupi",
+      "fixe": {
+        "x": -12.0,
+        "y": 57.0
+      },
+      "plus": {
+        "root": 6.0,
+        "spineLow": 5.0,
+        "chest": 3.0,
+        "neck": -7.0,
+        "armN": 3.0,
+        "foreN": 3.0,
+        "armF": 2.0,
+        "foreF": 2.0
+      },
+      "vise": {
+        "legN": [
+          29.93,
+          7.5
+        ],
+        "legF": [
+          -29.0,
+          11.5
+        ]
+      }
+    }
+  ]
+}

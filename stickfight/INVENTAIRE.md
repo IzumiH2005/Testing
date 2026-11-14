@@ -123,9 +123,9 @@ par sa propre version (marquées ✱ quand c'est presque toujours le cas).
 | 2 | Mise en garde (repos → garde) | fait |
 | 3 | Garde, respiration ✱ | fait |
 | 4 | Sortie de garde (garde → repos) | fait |
-| 5 | Accroupi, respiration | |
-| 6 | Debout → accroupi | |
-| 7 | Accroupi → debout | |
+| 5 | Accroupi, respiration | fait |
+| 6 | Debout → accroupi | fait |
+| 7 | Accroupi → debout | fait |
 | 8 | Garde essoufflée (vie basse) | |
 | 9 | Garde en Rage / Heat (couche d'aura) | |
 | 10 | Dos tourné, respiration | |
@@ -478,9 +478,9 @@ donc en deux versions : détendue (depuis le repos) et en garde maintenue.
 | Déplacements | Course à pleine vitesse (sprint) : départ, boucle, freinage en glissade | `sprint*` | fait |
 | Déplacements | Pas chassé avant (dash) | `dash_avant` | fait |
 | Déplacements | Pas chassé arrière (backdash) | `dash_arriere` | fait |
-| Postures | Debout → accroupi | `accroupi_entree` | |
-| Postures | Accroupi, respiration (boucle) | `accroupi_idle` | |
-| Postures | Accroupi → debout | `accroupi_sortie` | |
+| Postures | Debout → accroupi | `accroupi_entree` | fait |
+| Postures | Accroupi, respiration (boucle) | `accroupi_idle` | fait |
+| Postures | Accroupi → debout | `accroupi_sortie` | fait |
 | Postures | Sortie de garde (garde → repos) | `sortie_de_garde` | fait |
 | Déplacements | Saut neutre, avant, arrière | `saut_*` | |
 | Déplacements | Réception légère | `reception` | |

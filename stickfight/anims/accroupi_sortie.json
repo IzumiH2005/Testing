@@ -1,0 +1,112 @@
+{
+  "nom": "accroupi_sortie",
+  "boucle": false,
+  "longueur": 16,
+  "base": "garde",
+  "suivante": "garde_idle",
+  "decalage": {
+    "chest": 2,
+    "neck": 3,
+    "armN": 2,
+    "foreN": 3,
+    "armF": 3,
+    "foreF": 4
+  },
+  "cles": [
+    {
+      "f": 0,
+      "nom": "accroupi",
+      "courbe": "auto",
+      "fixe": {
+        "x": 0.0,
+        "y": 57.0
+      },
+      "plus": {
+        "root": 6.0,
+        "spineLow": 5.0,
+        "chest": 3.0,
+        "neck": -7.0,
+        "armN": 3.0,
+        "foreN": 3.0,
+        "armF": 2.0,
+        "foreF": 2.0
+      },
+      "vise": {
+        "legN": [
+          41.93,
+          7.5
+        ],
+        "legF": [
+          -17.0,
+          11.5
+        ]
+      }
+    },
+    {
+      "f": 3,
+      "nom": "appui",
+      "courbe": "acc-dec",
+      "fixe": {
+        "x": 0.0,
+        "y": 55.5
+      },
+      "plus": {
+        "root": 6.0,
+        "spineLow": 5.0,
+        "chest": 4.0,
+        "neck": -7.6,
+        "armN": 4.0,
+        "foreN": 4.0,
+        "armF": 2.0,
+        "foreF": 2.0
+      },
+      "vise": {
+        "legN": [
+          41.93,
+          7.5
+        ],
+        "legF": [
+          -17.0,
+          11.5
+        ]
+      }
+    },
+    {
+      "f": 9,
+      "nom": "poussée, le pied arrière recule",
+      "courbe": "auto",
+      "fixe": {
+        "x": 12.8,
+        "y": 73.73
+      },
+      "plus": {
+        "root": -0.8,
+        "spineLow": -0.6,
+        "chest": -0.8,
+        "neck": 0.8,
+        "armN": 0.0,
+        "foreN": 0.0,
+        "armF": 0.0,
+        "foreF": 0.0
+      },
+      "vise": {
+        "legN": [
+          41.93,
+          7.5
+        ],
+        "legF": [
+          -28.0,
+          10.5
+        ]
+      }
+    },
+    {
+      "f": 16,
+      "nom": "garde",
+      "fixe": {
+        "x": 12.0
+      },
+      "ancre": false
+    }
+  ]
+}

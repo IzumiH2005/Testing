@@ -1,0 +1,156 @@
+{
+  "nom": "accroupi_idle",
+  "boucle": true,
+  "longueur": 96,
+  "base": "garde",
+  "decalage": {
+    "chest": 3,
+    "neck": 4,
+    "armN": 5,
+    "foreN": 6,
+    "armF": 8,
+    "foreF": 9
+  },
+  "cles": [
+    {
+      "f": 0,
+      "nom": "accroupi",
+      "fixe": {
+        "x": 0.0,
+        "y": 57.0
+      },
+      "plus": {
+        "root": 6.0,
+        "spineLow": 5.0,
+        "chest": 3.0,
+        "neck": -7.0,
+        "armN": 3.0,
+        "foreN": 3.0,
+        "armF": 2.0,
+        "foreF": 2.0
+      },
+      "vise": {
+        "legN": [
+          41.93,
+          7.5
+        ],
+        "legF": [
+          -17.0,
+          11.5
+        ]
+      }
+    },
+    {
+      "f": 20,
+      "nom": "expire",
+      "fixe": {
+        "x": 0.0,
+        "y": 54.7
+      },
+      "plus": {
+        "root": 6.0,
+        "spineLow": 5.6,
+        "chest": 4.2,
+        "neck": -7.9,
+        "armN": 4.8,
+        "foreN": 5.2,
+        "armF": 3.2,
+        "foreF": 3.6
+      },
+      "vise": {
+        "legN": [
+          41.93,
+          7.5
+        ],
+        "legF": [
+          -17.0,
+          11.5
+        ]
+      }
+    },
+    {
+      "f": 48,
+      "nom": "inspire",
+      "fixe": {
+        "x": 0.0,
+        "y": 57.3
+      },
+      "plus": {
+        "root": 6.0,
+        "spineLow": 5.0,
+        "chest": 2.7,
+        "neck": -6.6,
+        "armN": 3.0,
+        "foreN": 3.0,
+        "armF": 2.0,
+        "foreF": 2.0
+      },
+      "vise": {
+        "legN": [
+          41.93,
+          7.5
+        ],
+        "legF": [
+          -17.0,
+          11.5
+        ]
+      }
+    },
+    {
+      "f": 70,
+      "nom": "expire",
+      "fixe": {
+        "x": 0.0,
+        "y": 55.2
+      },
+      "plus": {
+        "root": 6.0,
+        "spineLow": 5.4,
+        "chest": 3.9,
+        "neck": -7.6,
+        "armN": 4.4,
+        "foreN": 4.6,
+        "armF": 2.8,
+        "foreF": 3.2
+      },
+      "vise": {
+        "legN": [
+          41.93,
+          7.5
+        ],
+        "legF": [
+          -17.0,
+          11.5
+        ]
+      }
+    },
+    {
+      "f": 96,
+      "nom": "accroupi",
+      "fixe": {
+        "x": 0.0,
+        "y": 57.0
+      },
+      "plus": {
+        "root": 6.0,
+        "spineLow": 5.0,
+        "chest": 3.0,
+        "neck": -7.0,
+        "armN": 3.0,
+        "foreN": 3.0,
+        "armF": 2.0,
+        "foreF": 2.0
+      },
+      "vise": {
+        "legN": [
+          41.93,
+          7.5
+        ],
+        "legF": [
+          -17.0,
+          11.5
+        ]
+      }
+    }
+  ]
+}

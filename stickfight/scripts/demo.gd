@@ -9,8 +9,8 @@ extends Control
 ##      relâchés, le combattant finit son pas et s'arrête au repos.
 ##   Maj + →  course ;  Ctrl + →  sprint (départ explosif, freinage en glissade).
 ##   G  maintenu : mise en garde ; avec → / ←, marche en garde ; → → (double
-##      appui) dash avant, ← ← dash arrière ; relâché, le combattant sort de la garde et revient
-##      au repos.
+##      appui) dash avant, ← ← dash arrière ; ↓ maintenu, accroupi ;
+##      relâché, le combattant sort de la garde et revient au repos.
 ##   B  blocage bas (en garde)   K  duo coup de pied direct + blocage bas
 ##   R  repos (remise à zéro)
 ##   Espace  pause    → / ←  image suivante / précédente (en pause)
@@ -20,7 +20,7 @@ const DUO := "res://anims/duo_blocage.json"
 const HISTORY_MAX := 600
 ## Écart maximal, en images, entre les deux appuis sur → d'un dash.
 const DOUBLE_APPUI := 14
-const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   G tenu : garde (→ ← en garde, → → dash, ← ← backdash, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   G tenu : garde (→ ← en garde, → → dash, ← ← backdash, ↓ accroupi, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
 var planche: Planche
 var help: Label
@@ -183,6 +183,7 @@ func _control_input() -> void:
 	var guard := Input.is_physical_key_pressed(KEY_G)
 	var run := Input.is_physical_key_pressed(KEY_SHIFT)
 	var sprint := Input.is_physical_key_pressed(KEY_CTRL)
+	var down := Input.is_physical_key_pressed(KEY_DOWN)
 	var nom := f.anim_name()
 	match nom:
 		"idle_repos":
@@ -205,6 +206,8 @@ func _control_input() -> void:
 		"garde_idle":
 			if not guard:
 				f.play("sortie_de_garde", 6)
+			elif down:
+				f.play("accroupi_entree", 3)
 			elif dash:
 				f.play("dash_avant", 4)
 			elif backdash:
@@ -213,6 +216,9 @@ func _control_input() -> void:
 				f.play("marche_avant", 6)
 			elif back:
 				f.play("marche_arriere", 6)
+		"accroupi_idle":
+			if not (down and guard):
+				f.play("accroupi_sortie", 3)
 		"marche_avant", "marche_arriere":
 			if dash and guard and nom == "marche_avant" and f.t < DOUBLE_APPUI:
 				f.play("dash_avant", 4)
