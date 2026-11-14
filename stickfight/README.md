@@ -117,6 +117,7 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `blocage_bas` | 44 i | Les mains descendent frapper le pied d'un coup visant le ventre, sans se baisser : armé (f4), contact (f8, arrêt sur impact 7 i, étincelle, secousse), écrasé, tenue, retour en garde |
 | `coup_de_pied_ventre` | 56 i | Pied direct (teep) de la jambe avant, pour le duo : pas glissé, genou armé, contact (f17), pied rabattu vers le bas par le blocage, reprise de distance |
 | `duo_blocage` | 110 i | Les deux ensemble : les contacts sont calés sur la même image globale |
+| `marche_arriere` | 30 i, en boucle, recule 14 | Plus lente et prudente : la jambe avant pousse, le bassin recule, le pied arrière se pose loin (la hanche ne s'étend pas au-delà de 30°, d'où ce bassin qui part avant le pied), puis le pied avant se ramène en glissant |
 | `marche_avant` | 28 i, en boucle, avance 18 | Marche en garde, pas chassé : le pied avant s'avance au ras du sol (4 de haut), le poids passe dessus, le talon arrière se lève et le pied arrière glisse ; garde serrée qui suit avec retard |
 
 Une clé part d'une pose (`poses/`), applique des réglages (`plus`, `fixe`,
@@ -150,7 +151,7 @@ que son événement `contact` tombe à l'image 33.
 | G | Mise en garde |
 | B | Blocage bas |
 | K | Duo coup de pied / blocage (en boucle) |
-| → maintenu | En garde : marche avant ; relâché, le pas en cours se termine puis la garde reprend. La caméra suit |
+| → ou ← maintenu | En garde : marche avant ou arrière ; relâché, le pas en cours se termine puis la garde reprend. La caméra suit |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |
 | L | Ralenti ×4 |
 | D | Squelette coloré |

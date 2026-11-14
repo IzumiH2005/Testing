@@ -6,14 +6,14 @@ extends Control
 ##
 ##   R  repos         G  mise en garde      B  blocage bas (depuis la garde)
 ##   K  duo coup de pied direct + blocage bas (rejoué en boucle)
-##   →  maintenu (en garde) : marche avant ; relâché, le pas en cours se
-##      termine puis le combattant reprend la garde. La caméra suit.
+##   → / ←  maintenus (en garde) : marche avant / arrière ; relâchés, le pas
+##      en cours se termine puis le combattant reprend la garde. La caméra suit.
 ##   Espace  pause    → / ←  image suivante / précédente (en pause)
 ##   L  ralenti ×4    D  squelette
 
 const DUO := "res://anims/duo_blocage.json"
 const HISTORY_MAX := 600
-const HELP := "R repos   G mise en garde   B blocage bas   K duo   → marcher (en garde)   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+const HELP := "R repos   G mise en garde   B blocage bas   K duo   → ← marcher (en garde)   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
 var planche: Planche
 var help: Label
@@ -108,8 +108,8 @@ func _physics_process(_delta: float) -> void:
 
 
 func _advance() -> void:
-	if mode == "solo":
-		_walk_input()
+	if mode == "solo" and not paused:
+		_walk_input()  # en pause, → et ← servent à avancer image par image
 	combat.step()
 	var rec := combat.record()
 	if mode == "solo":
@@ -125,17 +125,22 @@ func _advance() -> void:
 	_refresh()
 
 
-## → maintenu : marche depuis la garde. Relâché : le cycle en cours va
-## jusqu'à son image 0 (pieds dans la position de garde), puis la garde
-## reprend, pour que les pieds ne glissent pas.
+## → / ← maintenus : marche avant / arrière depuis la garde. Relâché : le
+## cycle en cours va jusqu'à son image 0 (pieds dans la position de garde),
+## puis la garde reprend, pour que les pieds ne glissent pas.
 func _walk_input() -> void:
 	var f: Fighter = combat.fighters[0]
-	var held := Input.is_physical_key_pressed(KEY_RIGHT)
-	match f.anim_name():
+	var fwd := Input.is_physical_key_pressed(KEY_RIGHT)
+	var back := Input.is_physical_key_pressed(KEY_LEFT) and not fwd
+	var nom := f.anim_name()
+	match nom:
 		"garde_idle":
-			if held:
+			if fwd:
 				f.play("marche_avant", 6)
-		"marche_avant":
+			elif back:
+				f.play("marche_arriere", 6)
+		"marche_avant", "marche_arriere":
+			var held := fwd if nom == "marche_avant" else back
 			if not held and int(f.t) % int(f.anim.longueur) == 0 and f.t > 0.0:
 				f.play("garde_idle", 6)
 

@@ -466,7 +466,7 @@ paraître naturelle contre un coup de poing comme contre un coup de pied, haut o
 | Bloc | Animation | Fichier | État |
 |---|---|---|---|
 | Déplacements | Marche avant (boucle) | `marche_avant` | fait |
-| Déplacements | Marche arrière (boucle) | `marche_arriere` | |
+| Déplacements | Marche arrière (boucle) | `marche_arriere` | fait |
 | Déplacements | Pas chassé avant (dash) | `dash_avant` | |
 | Déplacements | Pas chassé arrière (backdash) | `dash_arriere` | |
 | Postures | Debout → accroupi | `accroupi_entree` | |

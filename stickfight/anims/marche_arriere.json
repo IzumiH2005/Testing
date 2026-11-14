@@ -1,0 +1,29 @@
+{
+  "nom": "marche_arriere",
+  "boucle": true,
+  "longueur": 30,
+  "avance": -14,
+  "base": "garde",
+  "decalage": {"chest": 2, "neck": 3, "armN": 3, "foreN": 4, "armF": 4, "foreF": 5},
+  "cles": [
+    {"f": 0, "nom": "appui", "vise": {"legN": [22, 7.5], "legF": [-34, 7.5]}},
+    {"f": 4, "nom": "pied avant pousse, pied arrière décolle", "fixe": {"x": -1.6, "y": 54.7},
+     "vise": {"legN": [22, 7.5], "legF": [-35, 9.2]}},
+    {"f": 9, "nom": "pied arrière en l'air", "fixe": {"x": -5.5, "y": 54.0},
+     "plus": {"chest": -0.5, "neck": 0.5},
+     "vise": {"legN": [22, 7.5], "legF": [-41, 11.2]}},
+    {"f": 12, "nom": "pied arrière cherche le sol", "fixe": {"x": -8.4, "y": 53.6},
+     "plus": {"chest": -1, "neck": 1, "armN": 1, "foreN": -1},
+     "vise": {"legN": [22, 7.5], "legF": [-45.5, 10.0]}},
+    {"f": 15, "nom": "pied arrière posé", "fixe": {"x": -10.8, "y": 53.4},
+     "plus": {"chest": -1, "neck": 1, "armN": 1.5, "foreN": -1.5},
+     "vise": {"legN": [22, 7.5], "legF": [-48, 7.5]}},
+    {"f": 19, "nom": "poids en arrière, talon avant levé", "courbe": "lin", "fixe": {"x": -12.4, "y": 53.3},
+     "plus": {"chest": -0.5, "neck": 0.5, "armN": 1, "foreN": -1},
+     "vise": {"legN": [21.3, 8.8], "legF": [-48, 7.5]}},
+    {"f": 23, "nom": "pied avant glisse", "courbe": "lin", "fixe": {"x": -13.3, "y": 53.9},
+     "vise": {"legN": [14.8, 10.2], "legF": [-48, 7.5]}},
+    {"f": 27, "nom": "pied avant posé", "fixe": {"x": -13.9, "y": 54.6},
+     "vise": {"legN": [8, 7.5], "legF": [-48, 7.5]}}
+  ]
+}
