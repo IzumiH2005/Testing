@@ -19,8 +19,8 @@
       "f": 6,
       "nom": "anticipation",
       "plus": {
-        "x": 3,
-        "y": -1.5,
+        "x": 4.08,
+        "y": -2.04,
         "spineLow": 1,
         "chest": 2,
         "armN": -4,
@@ -32,15 +32,15 @@
       "f": 12,
       "nom": "passage",
       "plus": {
-        "x": 7,
-        "y": -1,
+        "x": 9.52,
+        "y": -1.36,
         "root": 1,
         "chest": 4
       },
       "vise": {
         "legN": [
-          6,
-          20
+          8.16,
+          24.51
         ]
       },
       "fixe": {
@@ -55,13 +55,13 @@
       "nom": "pose du pied",
       "pose": "garde",
       "plus": {
-        "x": 9,
-        "y": 5,
+        "x": 12.25,
+        "y": 6.8,
         "chest": 2
       },
       "vise": {
         "legF": [
-          15.5,
+          21.09,
           7.5
         ]
       },
@@ -76,8 +76,8 @@
       "f": 20,
       "pose": "=",
       "plus": {
-        "x": -1,
-        "y": -1,
+        "x": -1.36,
+        "y": -1.36,
         "armN": 3,
         "foreN": 7,
         "armF": 5,
@@ -89,7 +89,7 @@
       "nom": "glissé arrière",
       "pose": "garde",
       "plus": {
-        "y": -1.5,
+        "y": -2.04,
         "armN": 1.5,
         "foreN": -2,
         "armF": 1
@@ -100,7 +100,7 @@
       "f": 34,
       "pose": "garde",
       "plus": {
-        "y": 0.4,
+        "y": 0.54,
         "armN": -1,
         "armF": -0.5
       }

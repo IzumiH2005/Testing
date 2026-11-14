@@ -4,7 +4,7 @@
   "acteurs": [
     {"x": 0, "facing": 1, "couleur": "#111111", "anim": "garde_idle", "t0": 0,
      "programme": [{"contact": 33, "anim": "coup_de_pied_ventre", "fondu": 4}]},
-    {"x": 122, "facing": -1, "couleur": "#1d3f8f", "anim": "garde_idle", "t0": 37,
+    {"x": 149, "facing": -1, "couleur": "#1d3f8f", "anim": "garde_idle", "t0": 37,
      "programme": [{"contact": 33, "anim": "blocage_bas", "fondu": 3}]}
   ]
 }

@@ -2,7 +2,7 @@
   "nom": "garde",
   "style": "epais",
   "x": 0,
-  "y": 55,
+  "y": 72.13,
   "facing": 1,
   "angles": {
     "root": 2,
@@ -15,7 +15,7 @@
     "foreN": 112.7,
     "thighF": -3.82,
     "shinF": 62.5,
-    "footF": 30,
+    "footF": 11.96,
     "thighN": 58.31,
     "shinN": 61.79,
     "footN": 5.48

@@ -182,7 +182,7 @@ static func _bake_feet(a: Dictionary) -> void:
 					st.append("glisse"); phi.append(SLIDE_PHI)
 				else:
 					st.append("plat"); phi.append(0.0)
-			elif h[i] <= 0.95 * L and dx[i] < 4.0 and (absf(vx) < 1.5 or h[i] < 3.0):
+			elif h[i] <= 0.85 * L and dx[i] < 4.0 and (absf(vx) < 1.5 or h[i] < 3.0):
 				st.append("pointe"); phi.append(-rad_to_deg(asin(h[i] / L)))
 			else:
 				st.append("air"); phi.append(0.0)
@@ -226,11 +226,12 @@ static func _bake_feet(a: Dictionary) -> void:
 			# Angles relatifs (pied par rapport au tibia) aux bords.
 			var relA := -12.0
 			var relB := -12.0
+			# Angles réels, après la contrainte du sol (talon levé au-delà de
+			# MAX_DORSI) : c'est vers eux que la phase en l'air doit aller.
 			if before >= 0:
-				relA = StickRig.norm180(phi[before] - shin[before] - 90.0)
+				relA = _grounded_rel(a, side, before, phi[before])
 			if after >= 0:
-				var phiB: float = phi[after]
-				relB = StickRig.norm180(phiB - shin[after] - 90.0)
+				relB = _grounded_rel(a, side, after, phi[after])
 			var m := run.size()
 			for k in m:
 				var i: int = run[k]
@@ -262,10 +263,33 @@ static func _bake_feet(a: Dictionary) -> void:
 			for k in range(m - 1, -1, -1):
 				rel[k] = clampf(rel[k], r1 - FOOT_RATE, r1 + FOOT_RATE)
 				r1 = rel[k]
+			# Contrainte du sol : là où la pointe passerait sous le sol, le pied
+			# est redressé au rendu. On en fait un plancher, et la cheville s'y
+			# prépare (ou en revient) à la même vitesse bornée.
+			var forced := false
+			for k in m:
+				var gk := _grounded_rel(a, side, run[k], shin[run[k]] + 90.0 + rel[k])
+				if gk > rel[k] + 0.5:
+					rel[k] = gk
+					forced = true
+			if forced:
+				for k in range(m - 2, -1, -1):
+					rel[k] = maxf(rel[k], rel[k + 1] - FOOT_RATE)
+				for k in range(1, m):
+					rel[k] = maxf(rel[k], rel[k - 1] - FOOT_RATE)
 			for k in m:
 				phi[run[k]] = shin[run[k]] + 90.0 + rel[k]
 		out[side] = phi
 	a.pieds = out
+
+
+## Angle relatif (pied / tibia) obtenu à l'image i quand on y pose le pied à
+## l'angle absolu phi et qu'on applique la contrainte du sol.
+static func _grounded_rel(a: Dictionary, side: String, i: int, phi: float) -> float:
+	var p := sample(a, float(i))
+	StickRig.set_foot(p, side, phi)
+	StickRig.ground_feet(p)
+	return StickRig.angle(p, "foot" + side)
 
 
 ## Angle absolu du pied à l'instant t (interpolé entre deux images).

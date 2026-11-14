@@ -14,11 +14,18 @@ diamètre de la tête comme unité.
 | Tête | disque plein, posé sur le tronc sans cou visible | idem |
 | Mains | simples bouts ronds du trait | idem |
 | Pieds | petit crochet arrondi vers l'avant, à peine plus long que le trait est épais ; à plat au sol, sur la pointe en poussée | idem |
+| Bassin → sol, debout | ≈ 0,47–0,49 de la hauteur | ≈ 0,48–0,50 |
 
 D'où le style `epais` du rig : tête de 46, trait de 15 (≈ 0,33 tête), pas de
 cou, la tête « mord » de 12 % de son rayon sur le haut du tronc, pied de 10
 (une fois et demie à peine le trait, pour rester un simple crochet). Le tronc est
-coupé en deux os (bas du dos, poitrine) pour pouvoir arrondir le dos en garde.
+coupé en deux os (bas du dos 22, poitrine 24) pour pouvoir arrondir le dos en
+garde. Les jambes font au moins la moitié du corps, comme sur les vidéos :
+cuisse 41, tibia 42, hanche à 90,5 du sol pour une hauteur totale de 179,7
+(rapport 0,50 ; bras 34 + 32). Une première version avait un tronc trop long
+(hanche à 68,5, rapport 0,38) : toutes les poses et animations ont été
+recalées sur ces longueurs (positions mises à l'échelle 83/61 depuis le sol,
+angles inchangés, contacts du coup de pied et du blocage réajustés).
 Le style `fin` garde des proportions plus humaines (≈ 5,5 têtes).
 
 ## 2. Amplitudes articulaires (degrés)

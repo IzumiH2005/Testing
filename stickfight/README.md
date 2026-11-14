@@ -94,11 +94,11 @@ Format d'une pose (`poses/*.json`) :
 
 ```json
 {
-  "nom": "garde", "style": "epais", "x": 0, "y": 55, "facing": 1,
+  "nom": "garde", "style": "epais", "x": 0, "y": 72.13, "facing": 1,
   "angles": { "root": 2, "spineLow": 6, "chest": 4, "neck": 6,
               "armF": 65.29, "foreF": 137.75, "armN": 38.96, "foreN": 112.7,
-              "thighF": -16.57, "shinF": 33.49, "footF": 0,
-              "thighN": 58.31, "shinN": 61.79, "footN": 0 }
+              "thighF": -3.82, "shinF": 62.5, "footF": 11.96,
+              "thighN": 58.31, "shinN": 61.79, "footN": 5.48 }
 }
 ```
 

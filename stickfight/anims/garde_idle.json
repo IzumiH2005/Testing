@@ -6,9 +6,9 @@
   "decalage": {"chest": 3, "neck": 4, "armN": 5, "foreN": 6, "armF": 8, "foreF": 9},
   "cles": [
     {"f": 0},
-    {"f": 22, "plus": {"y": -2.2, "spineLow": 0.8, "chest": 1.5, "neck": -1.2, "armN": 2.5, "foreN": 3, "armF": 1.5, "foreF": 2}},
+    {"f": 22, "plus": {"y": -2.99, "spineLow": 0.8, "chest": 1.5, "neck": -1.2, "armN": 2.5, "foreN": 3, "armF": 1.5, "foreF": 2}},
     {"f": 56, "plus": {"neck": 0.6, "chest": -0.4}},
-    {"f": 80, "plus": {"y": -1.8, "spineLow": 0.6, "chest": 1.2, "neck": -0.8, "armN": 2, "foreN": 2, "armF": 1, "foreF": 1.5}},
+    {"f": 80, "plus": {"y": -2.45, "spineLow": 0.6, "chest": 1.2, "neck": -0.8, "armN": 2, "foreN": 2, "armF": 1, "foreF": 1.5}},
     {"f": 112}
   ]
 }

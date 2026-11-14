@@ -36,9 +36,9 @@ const STYLES := {
 		"stroke": 15.0,    # épaisseur du trait
 		"hand": 8.5,       # rayon du poing (≤ trait/2 = simple bout rond)
 		"neck": 0.0,
-		"spineLow": 33.0, "chest": 35.0,
+		"spineLow": 22.0, "chest": 24.0,
 		"upperArm": 34.0, "forearm": 32.0,
-		"thigh": 30.0, "shin": 31.0,
+		"thigh": 41.0, "shin": 42.0,
 		"foot": 10.0,      # pied : petit crochet du trait, de la cheville vers l'avant
 	},
 	"fin": {
