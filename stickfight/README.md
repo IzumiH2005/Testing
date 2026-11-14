@@ -126,6 +126,9 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `course` | 40 i, en boucle, avance 160 | Course à vitesse moyenne : appui de 14 images (amorti, talon qui se lève), 6 images de vol, bras pliés en opposition, buste penché qui plonge à l'amorti |
 | `course_depart` | 66 i | Du repos à la boucle : anticipation (petit recul, on s'abaisse, les bras s'arment), puis trois appuis qui accélèrent ; finit exactement sur l'image 0 de la boucle |
 | `course_arret_n`, `_arret_f` | 56 et 58 i | Freinage depuis l'appui N (image 0) ou F (image 20) : buste qui part en arrière, pied posé loin devant, genoux qui amortissent, bras vers l'avant pour l'équilibre, puis retour au repos |
+| `sprint` | 28 i, en boucle, avance 243 | Course à pleine vitesse, exagérée : buste couché à ~43°, tête rentrée, foulée longue et vol de 8 images, genou qui monte haut devant, talon qui fouette jusqu'aux fesses derrière, bras pliés qui balaient large ; lignes de vitesse derrière le bassin |
+| `sprint_depart` | 50 i | Du repos au sprint : anticipation courte et profonde (le bassin tombe, le buste plonge, les bras s'arment), poussée explosive avec poussière, trois appuis bas qui accélèrent, buste couché à ~55° qui se relève jusqu'à l'inclinaison de la boucle ; finit sur l'image 0 de la boucle |
+| `sprint_arret_n`, `_arret_f` | 46 et 54 i | Freinage en glissade depuis l'appui N (image 0) ou F (image 14) : le pied de devant se plante jambe presque tendue et glisse ~40 cm dans une gerbe de poussière, le bassin s'assied, le buste bascule en arrière, les deux bras partent devant ; en `_n` le pied arrière traîne sur la pointe, en `_f` il fait un pas de rattrapage devant ; retour au repos |
 | `marche_arriere` | 30 i, en boucle, recule 14 | En garde maintenue. Plus lente et prudente : la jambe avant pousse, le bassin recule, le pied arrière se pose loin (la hanche ne s'étend pas au-delà de 30°, d'où ce bassin qui part avant le pied), puis le pied avant se ramène en glissant |
 | `marche_avant` | 28 i, en boucle, avance 18 | En garde maintenue, pas chassé : le pied avant s'avance au ras du sol (4 de haut), le poids passe dessus, le talon arrière se lève et le pied arrière glisse ; garde serrée qui suit avec retard |
 
@@ -143,7 +146,7 @@ animation en remplace une autre, le bassin reste où il est arrivé.
 
 Événements : `contact` (repère de synchronisation), `hitstop` (arrêt sur
 impact global, la figure qui l'émet tremble), `etincelle`, `poussiere`,
-`secousse` (caméra). Les effets (`scripts/vfx.gd`) sont dessinés en aplats,
+`vitesse` (lignes de vitesse derrière le bassin), `secousse` (caméra). Les effets (`scripts/vfx.gd`) sont dessinés en aplats,
 palette de 4 couleurs, et changent d'image toutes les 2 images.
 
 Un **duo** (`anims/duo_*.json`) place plusieurs combattants et leur programme :
@@ -160,6 +163,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 |---|---|
 | → ou ← maintenu | Depuis le repos : marche détendue avant ou arrière ; relâché, le pas en cours se termine et le combattant s'arrête au repos. La caméra suit |
 | Maj + → maintenus | Depuis le repos : départ de course puis course ; relâchés, le combattant freine au prochain appui et revient au repos |
+| Ctrl + → maintenus | Depuis le repos : départ de sprint puis sprint ; relâchés, freinage en glissade au prochain appui et retour au repos. La caméra regarde devant en proportion de la vitesse |
 | G maintenu | Mise en garde ; avec → ou ←, marche en garde ; relâché, sortie de garde et retour au repos |
 | B | Blocage bas (en garde) |
 | K | Duo coup de pied / blocage (en boucle) |

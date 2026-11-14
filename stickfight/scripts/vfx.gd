@@ -13,13 +13,20 @@ extends RefCounted
 ##            direction du coup (2-3), anneau qui s'ouvre et traits (4-7),
 ##            éclats qui retombent (8-13).
 ## poussiere  petits nuages au sol quand un pied se pose ou glisse.
+## vitesse    lignes de vitesse : traits horizontaux laissés sur place dans
+##            l'arène ; le coureur s'en éloigne, ils se rétractent vers
+##            l'arrière (dir = sens de la course, les traits partent à l'opposé).
 
 const PALETTES := {
 	"garde": [Color("#ffffff"), Color("#d0ebff"), Color("#74c0fc"), Color("#1864ab")],
 	"coup": [Color("#ffffff"), Color("#fff3bf"), Color("#ffa94d"), Color("#c2410c")],
 }
 const DUST := [Color("#f1e6e2"), Color("#cdbab5"), Color("#9f8b86")]
-const LIFE := {"etincelle": 14, "poussiere": 18}
+const LIFE := {"etincelle": 14, "poussiere": 18, "vitesse": 10}
+const SPEED := Color("#f8f9fa")
+const SPEED_EDGE := Color("#495057")
+## Traits : (hauteur relative, recul du départ, longueur).
+const LINES := [[16.0, 6.0, 46.0], [2.0, 0.0, 62.0], [-14.0, 10.0, 38.0], [-30.0, 18.0, 28.0]]
 
 ## Éclats : (écart d'angle en degrés, vitesse en unités par image, taille).
 const SHARDS := [[-38.0, 2.6, 3.0], [-14.0, 3.4, 3.5], [8.0, 3.0, 3.0], [27.0, 2.4, 2.5],
@@ -43,6 +50,8 @@ static func draw(ci: CanvasItem, v: Dictionary, origin: Vector2, scale: float) -
 			_spark(ci, v, origin, scale)
 		"poussiere":
 			_dust(ci, v, origin, scale)
+		"vitesse":
+			_speed(ci, v, origin, scale)
 
 
 static func _dirv(deg: float) -> Vector2:
@@ -129,3 +138,25 @@ static func _dust(ci: CanvasItem, v: Dictionary, origin: Vector2, scale: float) 
 		var p := _scr(Vector2(x, y), origin, scale)
 		ci.draw_circle(p, (r + 1.0) * scale, DUST[2])
 		ci.draw_circle(p, r * scale, DUST[1] if a >= 10 else DUST[0])
+
+
+## Traits fixes dans l'arène : la tête du trait (côté coureur) rattrape la
+## queue, en deux images, jusqu'à disparaître.
+static func _speed(ci: CanvasItem, v: Dictionary, origin: Vector2, scale: float) -> void:
+	var a: int = int(v.age) - int(v.age) % 2
+	var k: float = v.taille
+	var back := -1.0 if _dirv(v.dir).x >= 0.0 else 1.0
+	var u := float(a) / float(LIFE.vitesse)      # 0 → 0.8
+	for ln in LINES:
+		var y: float = v.pos.y + float(ln[0]) * k
+		var x0: float = v.pos.x + back * float(ln[1]) * k
+		var L: float = float(ln[2]) * k
+		var head := x0 + back * L * u * 1.1      # la tête recule plus vite que la queue
+		var tail := x0 + back * L * (1.0 + 0.25 * u)
+		if absf(tail - head) < 3.0:
+			continue
+		var w := (2.2 - 1.2 * u) * k
+		var p0 := _scr(Vector2(head, y), origin, scale)
+		var p1 := _scr(Vector2(tail, y), origin, scale)
+		ci.draw_line(p0, p1, SPEED_EDGE, maxf(1.0, (w + 1.4) * scale))
+		ci.draw_line(p0, p1, SPEED, maxf(1.0, w * scale))

@@ -7,6 +7,7 @@ extends Control
 ## Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 ##   → / ←  maintenus : marche détendue avant / arrière depuis le repos ;
 ##      relâchés, le combattant finit son pas et s'arrête au repos.
+##   Maj + →  course ;  Ctrl + →  sprint (départ explosif, freinage en glissade).
 ##   G  maintenu : mise en garde ; avec → / ←, marche en garde ; relâché,
 ##      le combattant sort de la garde et revient au repos.
 ##   B  blocage bas (en garde)   K  duo coup de pied direct + blocage bas
@@ -16,7 +17,7 @@ extends Control
 
 const DUO := "res://anims/duo_blocage.json"
 const HISTORY_MAX := 600
-const HELP := "→ ← marcher   Maj + → courir   G tenu : garde (→ ← en garde, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   G tenu : garde (→ ← en garde, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
 var planche: Planche
 var help: Label
@@ -32,6 +33,9 @@ var slow := 1
 var tick := 0
 ## Centre de la caméra en solo (suit le bassin avec un peu de retard).
 var cam_x := 8.0
+## Vitesse lissée du bassin : la caméra regarde devant quand on court.
+var cam_v := 0.0
+var last_hip := 0.0
 
 
 func _ready() -> void:
@@ -82,6 +86,8 @@ func _solo(nom: String, fondu: int) -> void:
 		combat.add(Fighter.new(0.0, 1))
 		combat.fighters[0].play(nom)
 		cam_x = 8.0
+		cam_v = 0.0
+		last_hip = 0.0
 		_fit()
 		_restart_history()
 		return
@@ -117,7 +123,9 @@ func _advance() -> void:
 	var rec := combat.record()
 	if mode == "solo":
 		var hip: float = rec.fighters[0].pose.x
-		cam_x += (hip + 8.0 - cam_x) * 0.08
+		cam_v += (hip - last_hip - cam_v) * 0.1
+		last_hip = hip
+		cam_x += (hip + 8.0 + 12.0 * cam_v - cam_x) * 0.08
 		rec["camx"] = cam_x
 	history.append(rec)
 	if history.size() > HISTORY_MAX:
@@ -136,6 +144,7 @@ const ARRETS := {
 	"marche_detendue": {28: "marche_detendue_arret_court", 0: "marche_detendue_arret_pas"},
 	"marche_detendue_arriere": {24: "marche_detendue_arriere_arret_pas", 56: "marche_detendue_arriere_arret_deux_pas"},
 	"course": {0: "course_arret_n", 20: "course_arret_f"},
+	"sprint": {0: "sprint_arret_n", 14: "sprint_arret_f"},
 }
 
 
@@ -145,6 +154,8 @@ const ARRETS := {
 ##   repos ;
 ## - Maj + → depuis le repos lance la course (départ, boucle) ; relâchées,
 ##   elle freine à la prochaine pose d'appui (image 0 ou 20) et revient au repos ;
+## - Ctrl + → depuis le repos lance le sprint ; relâchées, il freine en
+##   glissade à la prochaine pose d'appui (image 0 ou 14) ;
 ## - G tenu met en garde (depuis le repos) ; en garde, → / ← font la marche en
 ##   garde, qui s'arrête à l'image 0 de son cycle (pieds en position de garde) ;
 ##   G relâché, une fois revenu en garde_idle, joue la sortie de garde.
@@ -154,19 +165,23 @@ func _control_input() -> void:
 	var back := Input.is_physical_key_pressed(KEY_LEFT) and not fwd
 	var guard := Input.is_physical_key_pressed(KEY_G)
 	var run := Input.is_physical_key_pressed(KEY_SHIFT)
+	var sprint := Input.is_physical_key_pressed(KEY_CTRL)
 	var nom := f.anim_name()
 	match nom:
 		"idle_repos":
 			if guard:
 				f.play("mise_en_garde", 4)
+			elif fwd and sprint:
+				f.play("sprint_depart", 6)
 			elif fwd and run:
 				f.play("course_depart", 6)
 			elif fwd:
 				f.play("marche_detendue_depart", 6)
 			elif back:
 				f.play("marche_detendue_arriere_depart", 6)
-		"marche_detendue", "marche_detendue_arriere", "course":
-			var held := fwd and run if nom == "course" else (fwd if nom == "marche_detendue" else back)
+		"marche_detendue", "marche_detendue_arriere", "course", "sprint":
+			var held: bool = {"marche_detendue": fwd, "marche_detendue_arriere": back,
+					"course": fwd and run, "sprint": fwd and sprint}[nom]
 			var phase := int(f.t) % int(f.anim.longueur)
 			if not held and ARRETS[nom].has(phase):
 				f.play(ARRETS[nom][phase], 0)

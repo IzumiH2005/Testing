@@ -15,6 +15,7 @@ extends RefCounted
 ##   {"f": 8, "type": "etincelle", "articulation": "handN", "dec": [4, -3], "dir": -60, "genre": "garde", "taille": 1}
 ##   {"f": 8, "type": "secousse", "n": 6, "force": 2}
 ##   {"f": 14, "type": "poussiere", "articulation": "ankleN", "dir": 0}
+##   {"f": 3, "type": "vitesse", "articulation": "hip", "dec": [-14, 22], "dir": 0}
 ##   {"f": 8, "type": "contact"}  (repère de synchronisation, ne fait rien)
 ## Les angles « dir » sont donnés dans le repère du personnage (0 = devant,
 ## -90 = vers le bas) et retournés s'il regarde à gauche.
@@ -101,7 +102,7 @@ func _handle(f: Fighter, ev: Dictionary) -> void:
 			cam_n = int(ev.get("n", 6))
 			cam_len = cam_n
 			cam_force = float(ev.get("force", 2.0))
-		"etincelle", "poussiere":
+		"etincelle", "poussiere", "vitesse":
 			var J: Dictionary = StickRig.solve(f.to_world(f.local_pose())).joints
 			var pos: Vector2 = J.get(str(ev.get("articulation", "hip")), J.hip)
 			var dec = ev.get("dec", [0, 0])
