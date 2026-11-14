@@ -8,7 +8,9 @@ rendu en ligne de commande pour itérer sans ouvrir l'éditeur.
 Le style vise celui des vidéos de référence : grosse tête ronde, trait gras à
 bouts ronds, pas de pieds ni de mains dessinés. Les proportions mesurées
 sur ces vidéos, les amplitudes articulaires et les notes sur l'animation de
-combat sont dans [RECHERCHE.md](RECHERCHE.md).
+combat sont dans [RECHERCHE.md](RECHERCHE.md). La liste des animations à
+produire par personnage (communes et propres, d'après Tekken 8) est dans
+[INVENTAIRE.md](INVENTAIRE.md).
 
 ## Lancer
 
