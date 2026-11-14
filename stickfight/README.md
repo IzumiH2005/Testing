@@ -151,6 +151,7 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `recul_garde_bas_leger` | 15 i, recule 4 | H en garde basse : coup bloqué accroupi, mêmes temps que le recul haut, les avant-bras encaissent devant le visage et les pieds glissent ensemble, puis `garde_basse` |
 | `recul_garde_bas_moyen` | 21 i, recule 8 | Maj + H en garde basse |
 | `recul_garde_bas_lourd` | 28 i, recule 14 | Ctrl + H en garde basse |
+| `garde_repoussee` | 48 i, recule 48 | Ctrl + Maj + H en garde : très gros coup bloqué. Contact à l'image 1 (arrêt 12 i, grosse étincelle, secousse), les poings écrasés sur le visage ; le corps est chassé en arrière pendant que les pieds tiennent encore, puis les deux pieds décrochent et glissent en soulevant de la poussière. Pendant le freinage le buste se penche contre la poussée et la jambe arrière s'étire ; le pied arrière accroche en premier, le haut du corps continue sur son élan vers l'avant, puis le pied arrière se décolle et revient se poser pour retrouver la garde, puis `garde_idle` |
 | `accroupi_repos_entree` | 28 i, recule 3 | Depuis le repos (↓ maintenu), sans passer par la garde : les genoux cèdent, la main avant part devant et se pose au sol devant le pied avant, le pied arrière monte sur la pointe, petit tassement sur la main puis `accroupi_repos_idle` |
 | `accroupi_repos_idle` | 104 i, en boucle | Accroupi détendu, une main au sol : respiration lente (le dos se voûte à l'expiration), le bras libre suit avec retard. La main et les pieds restent fixes |
 | `accroupi_repos_sortie` | 30 i, avance 3 | ↓ relâché : appui sur la main, poussée qui la décolle, le buste se relève, léger dépassement puis `idle_repos` |
@@ -261,6 +262,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | T | Demi-tour (en garde) : le combattant se retrouve tourné de l'autre côté. Les flèches restent celles de l'écran : retourné, → recule et ← avance |
 | B | Blocage bas (en garde) |
 | H, Maj + H, Ctrl + H | Encaisser un coup bloqué léger, moyen ou lourd (en garde : recul sur garde debout, ou accroupi en garde basse). Un recul peut en interrompre un autre |
+| Ctrl + Maj + H | Très gros coup bloqué en garde : garde repoussée, les pieds glissent loin (en garde basse : recul lourd) |
 | K | Duo coup de pied / blocage (en boucle) |
 | R | Repos (remise à zéro) |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |

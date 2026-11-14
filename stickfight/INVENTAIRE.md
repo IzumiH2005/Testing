@@ -158,7 +158,7 @@ par sa propre version (marquées ✱ quand c'est presque toujours le cas).
 | 2 | Garde accroupie tenue | fait (`garde_basse`) |
 | 3 | Blocage bas debout | fait |
 | 4-9 | Recul sur garde léger, moyen, lourd × haut et bas | fait (`recul_garde_*`) |
-| 10 | Garde repoussée (gros coup bloqué, les pieds glissent) | |
+| 10 | Garde repoussée (gros coup bloqué, les pieds glissent) | fait (`garde_repoussee`) |
 | 11 | Garde brisée (bras ouverts, vulnérable) | |
 | 12-13 | Parade haute, parade basse (dévier un coup) | |
 | 14 | Esquive buste en arrière (sway) | |
