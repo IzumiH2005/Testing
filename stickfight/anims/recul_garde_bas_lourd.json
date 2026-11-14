@@ -1,0 +1,208 @@
+{
+  "nom": "recul_garde_bas_lourd",
+  "boucle": false,
+  "base": "garde",
+  "suivante": "garde_basse",
+  "decalage": {
+    "spineLow": 1,
+    "neck": 2,
+    "armF": 1,
+    "foreF": 1
+  },
+  "cles": [
+    {
+      "f": 0,
+      "nom": "garde basse",
+      "fixe": {
+        "x": 0,
+        "y": 54.0
+      },
+      "plus": {
+        "root": 9.5,
+        "spineLow": 9.0,
+        "chest": 7.0,
+        "neck": -16.0
+      },
+      "vise": {
+        "legN": [
+          41.93,
+          7.5
+        ],
+        "legF": [
+          -17.0,
+          11.5
+        ],
+        "armN": [
+          59.0,
+          97.0
+        ],
+        "armF": [
+          47.0,
+          106.0
+        ]
+      },
+      "courbe": "lin"
+    },
+    {
+      "f": 1,
+      "nom": "impact",
+      "fixe": {
+        "x": -2.16,
+        "y": 52.6
+      },
+      "plus": {
+        "root": 8.38,
+        "spineLow": 5.64,
+        "chest": -0.28,
+        "neck": -20.48
+      },
+      "vise": {
+        "legN": [
+          41.93,
+          7.5
+        ],
+        "legF": [
+          -17.0,
+          11.5
+        ],
+        "armN": [
+          45.64,
+          97.84
+        ],
+        "armF": [
+          35.88,
+          106.0
+        ]
+      },
+      "courbe": "dec"
+    },
+    {
+      "f": 7,
+      "nom": "recul : les pieds glissent",
+      "fixe": {
+        "x": -11.52,
+        "y": 51.2
+      },
+      "plus": {
+        "root": 8.1,
+        "spineLow": 4.52,
+        "chest": -2.52,
+        "neck": -19.36
+      },
+      "vise": {
+        "legN": [
+          30.12,
+          7.5
+        ],
+        "legF": [
+          -27.08,
+          11.5
+        ],
+        "armN": [
+          33.48,
+          95.04
+        ],
+        "armF": [
+          24.28,
+          103.76
+        ]
+      },
+      "courbe": "acc-dec"
+    },
+    {
+      "f": 16,
+      "nom": "tassement",
+      "fixe": {
+        "x": -14.4,
+        "y": 52.04
+      },
+      "plus": {
+        "root": 9.5,
+        "spineLow": 10.12,
+        "chest": 9.24,
+        "neck": -15.16
+      },
+      "vise": {
+        "legN": [
+          27.53,
+          7.5
+        ],
+        "legF": [
+          -31.4,
+          11.5
+        ],
+        "armN": [
+          46.28,
+          94.48
+        ],
+        "armF": [
+          34.0,
+          103.48
+        ]
+      },
+      "courbe": "acc-dec"
+    },
+    {
+      "f": 28,
+      "nom": "garde basse",
+      "fixe": {
+        "x": -14.4,
+        "y": 54.0
+      },
+      "plus": {
+        "root": 9.5,
+        "spineLow": 9.0,
+        "chest": 7.0,
+        "neck": -16.0
+      },
+      "vise": {
+        "legN": [
+          27.53,
+          7.5
+        ],
+        "legF": [
+          -31.4,
+          11.5
+        ],
+        "armN": [
+          44.6,
+          97.0
+        ],
+        "armF": [
+          32.6,
+          106.0
+        ]
+      }
+    }
+  ],
+  "evenements": [
+    {
+      "f": 1,
+      "type": "contact"
+    },
+    {
+      "f": 1,
+      "type": "hitstop",
+      "n": 10,
+      "tremble": 1.7
+    },
+    {
+      "f": 1,
+      "type": "etincelle",
+      "articulation": "handN",
+      "dec": [
+        4,
+        -6
+      ],
+      "dir": 190,
+      "genre": "garde",
+      "taille": 1.26
+    },
+    {
+      "f": 1,
+      "type": "secousse",
+      "n": 8,
+      "force": 1.68
+    }
+  ]
+}

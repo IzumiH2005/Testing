@@ -16,6 +16,8 @@ extends Control
 ##   ↓  maintenu depuis le repos : accroupi, une main au sol ; relâché, il se
 ##      relève au repos.
 ##   ↑  depuis le repos : saut sur place ; ↑ + → saut avant, ↑ + ← saut arrière.
+##   H  en garde : encaisser un coup bloqué (recul sur garde ; haut debout,
+##      bas en garde basse) ; H léger, Maj + H moyen, Ctrl + H lourd.
 ##   B  blocage bas (en garde)   K  duo coup de pied direct + blocage bas
 ##   R  repos (remise à zéro)
 ##   Espace  pause    → / ←  image suivante / précédente (en pause)
@@ -33,7 +35,7 @@ const SAUT_TOLERANCE := 6
 ## Images minimales passées dans accroupi_repos_idle avant qu'une propulsion
 ## puisse partir (le fondu de retour de la propulsion précédente se termine).
 const PROPULSION_DELAI := 4
-const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   ↑ sauter (+ → / ← : avant / arrière)   Maj + ↑ saut boosté   ↓ puis → / ← propulsion (+ ↑ haute)   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, ↓ + ← garde basse, B blocage bas, T demi-tour)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   ↑ sauter (+ → / ← : avant / arrière)   Maj + ↑ saut boosté   ↓ puis → / ← propulsion (+ ↑ haute)   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, ↓ + ← garde basse, B blocage bas, T demi-tour, H / Maj + H / Ctrl + H coup bloqué)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
 var planche: Planche
 var help: Label
@@ -55,6 +57,8 @@ var dash_req := false
 var backdash_req := false
 ## T appuyé (demi-tour), consommé de la même façon.
 var tour_req := false
+## H appuyé : force du coup bloqué à encaisser ("" = aucun), consommé de même.
+var coup_req := ""
 ## Images passées en garde basse sans ←, pour la rouvrir après ROUVRIR.
 var gb_sans_recul := 0
 ## Centre de la caméra en solo (suit le bassin avec un peu de retard).
@@ -219,6 +223,8 @@ func _control_input() -> void:
 	dash_req = false
 	backdash_req = false
 	tour_req = false
+	var coup := coup_req
+	coup_req = ""
 	var f: Fighter = combat.fighters[0]
 	var right := Input.is_physical_key_pressed(KEY_RIGHT)
 	var left := Input.is_physical_key_pressed(KEY_LEFT)
@@ -237,6 +243,17 @@ func _control_input() -> void:
 	var down := Input.is_physical_key_pressed(KEY_DOWN)
 	var up := Input.is_physical_key_pressed(KEY_UP)
 	var nom := f.anim_name()
+	# Coup bloqué : recul sur garde, debout ou accroupi. Un recul peut en
+	# interrompre un autre (série de coups bloqués).
+	if coup != "":
+		if nom in ["garde_basse", "garde_basse_fermer"] or nom.begins_with("recul_garde_bas_"):
+			gb_sans_recul = 0
+			f.play("recul_garde_bas_" + coup, 1)
+			return
+		if nom in ["garde_ouverte_idle", "garde_ouvrir", "garde_idle", "garde_fermer"] \
+				or nom.begins_with("recul_garde_haut_"):
+			f.play("recul_garde_haut_" + coup, 1)
+			return
 	match nom:
 		"idle_repos":
 			if up and run:
@@ -416,6 +433,9 @@ func _gui_input(ev: InputEvent) -> void:
 		KEY_T:
 			if not ev.echo:
 				tour_req = true
+		KEY_H:
+			if not ev.echo:
+				coup_req = "lourd" if ev.ctrl_pressed else "moyen" if ev.shift_pressed else "leger"
 		KEY_L:
 			slow = 4 if slow == 1 else 1
 			_refresh()

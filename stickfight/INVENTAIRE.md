@@ -157,7 +157,7 @@ par sa propre version (marquées ✱ quand c'est presque toujours le cas).
 | 1 | Garde haute tenue | fait (garde fermée) |
 | 2 | Garde accroupie tenue | fait (`garde_basse`) |
 | 3 | Blocage bas debout | fait |
-| 4-9 | Recul sur garde léger, moyen, lourd × haut et bas | |
+| 4-9 | Recul sur garde léger, moyen, lourd × haut et bas | fait (`recul_garde_*`) |
 | 10 | Garde repoussée (gros coup bloqué, les pieds glissent) | |
 | 11 | Garde brisée (bras ouverts, vulnérable) | |
 | 12-13 | Parade haute, parade basse (dévier un coup) | |
@@ -499,7 +499,7 @@ mêmes jambes : seuls le buste et les bras changent.
 | Déplacements | Demi-tour | `demi_tour` | fait |
 | Défense | Garde haute tenue (garde fermée) | `garde_idle` | fait |
 | Défense | Garde accroupie tenue : boucle, entrée, sortie, fermer, ouvrir | `garde_basse*` | fait |
-| Défense | Recul sur garde haut et bas | `recul_garde_haut`, `recul_garde_bas` | |
+| Défense | Recul sur garde haut et bas, léger, moyen, lourd | `recul_garde_{haut,bas}_{leger,moyen,lourd}` | fait |
 | Défense | Parade haute, parade basse | `parade_haute`, `parade_basse` | |
 | Défense | Esquive buste en arrière (sway), se baisser | `esquive_sway`, `esquive_baisse` | |
 | Réactions | Tête légère, tête lourde | `touche_tete_*` | |

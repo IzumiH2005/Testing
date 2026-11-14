@@ -145,6 +145,12 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `garde_basse_fermer` | 8 i | Accroupi en garde ouverte, ← : le buste se penche et les bras se referment devant le visage, puis `garde_basse` |
 | `garde_basse_ouvrir` | 12 i | 10 images sans ← en garde basse : le buste se redresse et la garde se rouvre, puis `accroupi_idle` |
 | `garde_basse_sortie` | 16 i, avance 12 | ↓ relâché : même relevé qu'`accroupi_sortie`, la garde reste fermée, puis `garde_idle` |
+| `recul_garde_haut_leger` | 15 i, recule 5 | H en garde : coup bloqué debout. Contact dès l'image 1 (arrêt sur impact 5 i, tremblement, étincelle de garde devant la main avant) : les bras sont repoussés vers le visage, le buste se tasse en arrière et la tête suit avec retard, les deux pieds glissent ensemble sans se lever, puis le buste se redresse et `garde_idle` |
+| `recul_garde_haut_moyen` | 21 i, recule 10 | Maj + H : même chose, arrêt 7 i, secousse, recul et tassement plus marqués |
+| `recul_garde_haut_lourd` | 28 i, recule 18 | Ctrl + H : arrêt 10 i, grosse secousse, le bassin s'écrase et le buste part loin en arrière avant de revenir |
+| `recul_garde_bas_leger` | 15 i, recule 4 | H en garde basse : coup bloqué accroupi, mêmes temps que le recul haut, les avant-bras encaissent devant le visage et les pieds glissent ensemble, puis `garde_basse` |
+| `recul_garde_bas_moyen` | 21 i, recule 8 | Maj + H en garde basse |
+| `recul_garde_bas_lourd` | 28 i, recule 14 | Ctrl + H en garde basse |
 | `accroupi_repos_entree` | 28 i, recule 3 | Depuis le repos (↓ maintenu), sans passer par la garde : les genoux cèdent, la main avant part devant et se pose au sol devant le pied avant, le pied arrière monte sur la pointe, petit tassement sur la main puis `accroupi_repos_idle` |
 | `accroupi_repos_idle` | 104 i, en boucle | Accroupi détendu, une main au sol : respiration lente (le dos se voûte à l'expiration), le bras libre suit avec retard. La main et les pieds restent fixes |
 | `accroupi_repos_sortie` | 30 i, avance 3 | ↓ relâché : appui sur la main, poussée qui la décolle, le buste se relève, léger dépassement puis `idle_repos` |
@@ -254,6 +260,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | G maintenu | Mise en garde (garde ouverte) ; avec →, marche en garde ; ← ferme la garde (défensive) puis recule, et la garde se rouvre après 10 images sans ← ; → → ou ← ← (double appui rapide) : dash avant ou arrière ; ↓ maintenu : accroupi en garde ; ↓ + ← : garde basse (accroupi, garde fermée), et ← ferme aussi la garde quand on est déjà accroupi ; elle se rouvre après 10 images sans ←, et se relève en garde fermée quand ↓ est relâché ; G relâché, sortie de garde et retour au repos |
 | T | Demi-tour (en garde) : le combattant se retrouve tourné de l'autre côté. Les flèches restent celles de l'écran : retourné, → recule et ← avance |
 | B | Blocage bas (en garde) |
+| H, Maj + H, Ctrl + H | Encaisser un coup bloqué léger, moyen ou lourd (en garde : recul sur garde debout, ou accroupi en garde basse). Un recul peut en interrompre un autre |
 | K | Duo coup de pied / blocage (en boucle) |
 | R | Repos (remise à zéro) |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |
