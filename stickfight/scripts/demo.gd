@@ -1,19 +1,22 @@
 extends Control
-## Démo des animations : un combattant seul (repos, mise en garde, blocage
-## bas) ou le duo coup de pied / blocage. Le temps avance à 60 images par
-## seconde, comme dans le jeu ; on peut figer, avancer et reculer image par
-## image, ralentir, et afficher le squelette.
+## Démo des animations : un combattant seul ou le duo coup de pied /
+## blocage. Le temps avance à 60 images par seconde, comme dans le jeu ; on
+## peut figer, avancer et reculer image par image, ralentir, et afficher le
+## squelette.
 ##
-##   R  repos         G  mise en garde      B  blocage bas (depuis la garde)
-##   K  duo coup de pied direct + blocage bas (rejoué en boucle)
-##   → / ←  maintenus (en garde) : marche avant / arrière ; relâchés, le pas
-##      en cours se termine puis le combattant reprend la garde. La caméra suit.
+## Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
+##   → / ←  maintenus : marche détendue avant / arrière depuis le repos ;
+##      relâchés, le combattant finit son pas et s'arrête au repos.
+##   G  maintenu : mise en garde ; avec → / ←, marche en garde ; relâché,
+##      le combattant sort de la garde et revient au repos.
+##   B  blocage bas (en garde)   K  duo coup de pied direct + blocage bas
+##   R  repos (remise à zéro)
 ##   Espace  pause    → / ←  image suivante / précédente (en pause)
 ##   L  ralenti ×4    D  squelette
 
 const DUO := "res://anims/duo_blocage.json"
 const HISTORY_MAX := 600
-const HELP := "R repos   G mise en garde   B blocage bas   K duo   → ← marcher (en garde)   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+const HELP := "→ ← marcher   G tenu : garde (→ ← en garde, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
 var planche: Planche
 var help: Label
@@ -109,7 +112,7 @@ func _physics_process(_delta: float) -> void:
 
 func _advance() -> void:
 	if mode == "solo" and not paused:
-		_walk_input()  # en pause, → et ← servent à avancer image par image
+		_control_input()  # en pause, → et ← servent à avancer image par image
 	combat.step()
 	var rec := combat.record()
 	if mode == "solo":
@@ -125,22 +128,51 @@ func _advance() -> void:
 	_refresh()
 
 
-## → / ← maintenus : marche avant / arrière depuis la garde. Relâché : le
-## cycle en cours va jusqu'à son image 0 (pieds dans la position de garde),
-## puis la garde reprend, pour que les pieds ne glissent pas.
-func _walk_input() -> void:
+## Images de la boucle de marche détendue où un arrêt peut commencer, et
+## l'arrêt à jouer. Chaque arrêt part exactement de la pose de la boucle à
+## cette image : au relâché, le combattant finit le pas en cours jusqu'à la
+## prochaine de ces images (au plus une demi-boucle), sans fondu.
+const ARRETS := {
+	"marche_detendue": {28: "marche_detendue_arret_court", 0: "marche_detendue_arret_pas"},
+	"marche_detendue_arriere": {24: "marche_detendue_arriere_arret_pas", 56: "marche_detendue_arriere_arret_deux_pas"},
+}
+
+
+## Clavier tenu, lu à chaque image :
+## - depuis le repos, → / ← lancent la marche détendue ; relâchées, la marche
+##   s'arrête à la prochaine image d'arrêt de la boucle (ARRETS) et revient au
+##   repos ;
+## - G tenu met en garde (depuis le repos) ; en garde, → / ← font la marche en
+##   garde, qui s'arrête à l'image 0 de son cycle (pieds en position de garde) ;
+##   G relâché, une fois revenu en garde_idle, joue la sortie de garde.
+func _control_input() -> void:
 	var f: Fighter = combat.fighters[0]
 	var fwd := Input.is_physical_key_pressed(KEY_RIGHT)
 	var back := Input.is_physical_key_pressed(KEY_LEFT) and not fwd
+	var guard := Input.is_physical_key_pressed(KEY_G)
 	var nom := f.anim_name()
 	match nom:
+		"idle_repos":
+			if guard:
+				f.play("mise_en_garde", 4)
+			elif fwd:
+				f.play("marche_detendue_depart", 6)
+			elif back:
+				f.play("marche_detendue_arriere_depart", 6)
+		"marche_detendue", "marche_detendue_arriere":
+			var held := fwd if nom == "marche_detendue" else back
+			var phase := int(f.t) % int(f.anim.longueur)
+			if not held and ARRETS[nom].has(phase):
+				f.play(ARRETS[nom][phase], 0)
 		"garde_idle":
-			if fwd:
+			if not guard:
+				f.play("sortie_de_garde", 6)
+			elif fwd:
 				f.play("marche_avant", 6)
 			elif back:
 				f.play("marche_arriere", 6)
 		"marche_avant", "marche_arriere":
-			var held := fwd if nom == "marche_avant" else back
+			var held := (fwd if nom == "marche_avant" else back) and guard
 			if not held and int(f.t) % int(f.anim.longueur) == 0 and f.t > 0.0:
 				f.play("garde_idle", 6)
 

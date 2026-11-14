@@ -122,7 +122,7 @@ par sa propre version (marquées ✱ quand c'est presque toujours le cas).
 | 1 | Repos (hors combat) | fait |
 | 2 | Mise en garde (repos → garde) | fait |
 | 3 | Garde, respiration ✱ | fait |
-| 4 | Sortie de garde (garde → repos) | |
+| 4 | Sortie de garde (garde → repos) | fait |
 | 5 | Accroupi, respiration | |
 | 6 | Debout → accroupi | |
 | 7 | Accroupi → debout | |
@@ -463,16 +463,23 @@ fluide. Chaque animation est faite **une à une**, pose par pose, vérifiée en 
 stroboscopie, et doit marcher dans toutes les situations où elle sert (une parade doit
 paraître naturelle contre un coup de poing comme contre un coup de pied, haut ou moyen).
 
+**Le repos est l'état par défaut, pas la garde.** Le personnage se déplace depuis son
+repos, de façon détendue ; la garde n'apparaît que si le joueur la maintient (pendant un
+déplacement par exemple), et il en ressort dès qu'il la relâche. Chaque déplacement existe
+donc en deux versions : détendue (depuis le repos) et en garde maintenue.
+
 | Bloc | Animation | Fichier | État |
 |---|---|---|---|
-| Déplacements | Marche avant (boucle) | `marche_avant` | fait |
-| Déplacements | Marche arrière (boucle) | `marche_arriere` | fait |
+| Déplacements | Marche détendue avant : départ, boucle, arrêt court, arrêt en un pas | `marche_detendue*` | fait |
+| Déplacements | Marche détendue arrière : départ, boucle, arrêt en un pas, arrêt en deux pas | `marche_detendue_arriere*` | fait |
+| Déplacements | Marche avant en garde maintenue (boucle) | `marche_avant` | fait |
+| Déplacements | Marche arrière en garde maintenue (boucle) | `marche_arriere` | fait |
 | Déplacements | Pas chassé avant (dash) | `dash_avant` | |
 | Déplacements | Pas chassé arrière (backdash) | `dash_arriere` | |
 | Postures | Debout → accroupi | `accroupi_entree` | |
 | Postures | Accroupi, respiration (boucle) | `accroupi_idle` | |
 | Postures | Accroupi → debout | `accroupi_sortie` | |
-| Postures | Sortie de garde (garde → repos) | `sortie_de_garde` | |
+| Postures | Sortie de garde (garde → repos) | `sortie_de_garde` | fait |
 | Déplacements | Saut neutre, avant, arrière | `saut_*` | |
 | Déplacements | Réception légère | `reception` | |
 | Déplacements | Demi-tour | `demi_tour` | |

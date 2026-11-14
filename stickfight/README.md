@@ -117,8 +117,14 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `blocage_bas` | 44 i | Les mains descendent frapper le pied d'un coup visant le ventre, sans se baisser : armé (f4), contact (f8, arrêt sur impact 7 i, étincelle, secousse), écrasé, tenue, retour en garde |
 | `coup_de_pied_ventre` | 56 i | Pied direct (teep) de la jambe avant, pour le duo : pas glissé, genou armé, contact (f17), pied rabattu vers le bas par le blocage, reprise de distance |
 | `duo_blocage` | 110 i | Les deux ensemble : les contacts sont calés sur la même image globale |
-| `marche_arriere` | 30 i, en boucle, recule 14 | Plus lente et prudente : la jambe avant pousse, le bassin recule, le pied arrière se pose loin (la hanche ne s'étend pas au-delà de 30°, d'où ce bassin qui part avant le pied), puis le pied avant se ramène en glissant |
-| `marche_avant` | 28 i, en boucle, avance 18 | Marche en garde, pas chassé : le pied avant s'avance au ras du sol (4 de haut), le poids passe dessus, le talon arrière se lève et le pied arrière glisse ; garde serrée qui suit avec retard |
+| `sortie_de_garde` | 60 i | De la garde au repos, sur place : le poids bascule en arrière, le pied avant revient en se posant par la pointe, puis le pied arrière repasse devant et le bassin remonte ; les mains retombent le long du corps, le bras du pied qui avance passe devant (contrepoids) ; enchaîne sur `idle_repos` |
+| `marche_detendue` | 56 i, en boucle, avance 76 | Marche normale depuis le repos, sans garde : bras ballants en opposition des jambes, bassin qui monte et descend sur chaque appui |
+| `marche_detendue_depart` | — | Du repos à la boucle : transfert de poids, premier pas plus court |
+| `marche_detendue_arret_court`, `_arret_pas` | — | Arrêts au repos depuis l'un ou l'autre pied de la boucle (pied ramené à côté de l'autre, ou un dernier pas freiné) |
+| `marche_detendue_arriere` | 64 i, en boucle, recule 48 | Recul détendu : pas plus courts, la pointe se pose avant le talon, le buste reste droit |
+| `marche_detendue_arriere_depart`, `_arret_pas`, `_arret_deux_pas` | — | Départ et arrêts au repos du recul détendu |
+| `marche_arriere` | 30 i, en boucle, recule 14 | En garde maintenue. Plus lente et prudente : la jambe avant pousse, le bassin recule, le pied arrière se pose loin (la hanche ne s'étend pas au-delà de 30°, d'où ce bassin qui part avant le pied), puis le pied avant se ramène en glissant |
+| `marche_avant` | 28 i, en boucle, avance 18 | En garde maintenue, pas chassé : le pied avant s'avance au ras du sol (4 de haut), le poids passe dessus, le talon arrière se lève et le pied arrière glisse ; garde serrée qui suit avec retard |
 
 Une clé part d'une pose (`poses/`), applique des réglages (`plus`, `fixe`,
 `vise` pour placer une main ou un pied en cinématique inverse), et choisit la
@@ -145,13 +151,15 @@ que son événement `contact` tombe à l'image 33.
 
 `scenes/demo.tscn` (ouvrir la scène puis F6) joue les animations en direct :
 
+Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
+
 | Touche | Effet |
 |---|---|
-| R | Repos |
-| G | Mise en garde |
-| B | Blocage bas |
+| → ou ← maintenu | Depuis le repos : marche détendue avant ou arrière ; relâché, le pas en cours se termine et le combattant s'arrête au repos. La caméra suit |
+| G maintenu | Mise en garde ; avec → ou ←, marche en garde ; relâché, sortie de garde et retour au repos |
+| B | Blocage bas (en garde) |
 | K | Duo coup de pied / blocage (en boucle) |
-| → ou ← maintenu | En garde : marche avant ou arrière ; relâché, le pas en cours se termine puis la garde reprend. La caméra suit |
+| R | Repos (remise à zéro) |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |
 | L | Ralenti ×4 |
 | D | Squelette coloré |
