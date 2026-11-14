@@ -1,0 +1,22 @@
+; Projet Godot 4.3 : stickman riggé et atelier de poses.
+
+config_version=5
+
+[application]
+
+config/name="Stickfight"
+config/description="Stickman riggé, atelier de poses, base d'un jeu de combat."
+run/main_scene="res://scenes/atelier.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=800
+window/stretch/aspect="expand"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.6039, 0.6039, 0.6039, 1)

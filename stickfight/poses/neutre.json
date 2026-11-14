@@ -1,0 +1,23 @@
+{
+  "nom": "neutre",
+  "style": "epais",
+  "x": 0,
+  "y": 68.5,
+  "facing": 1,
+  "angles": {
+    "root": 0,
+    "spineLow": 0,
+    "chest": 0,
+    "neck": 0,
+    "armF": 0,
+    "foreF": 0,
+    "armN": 0,
+    "foreN": 0,
+    "thighF": 0,
+    "shinF": 0,
+    "footF": 0,
+    "thighN": 0,
+    "shinN": 0,
+    "footN": 0
+  }
+}
