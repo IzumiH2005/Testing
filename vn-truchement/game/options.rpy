@@ -224,3 +224,7 @@ init python:
 ## slash.
 
 # define build.itch_project = "renpytom/test-project"
+
+## Langue de l'interface : les textes du moteur (confirmations, menus,
+## préférences) utilisent la traduction française fournie avec Ren'Py.
+define config.default_language = "french"
