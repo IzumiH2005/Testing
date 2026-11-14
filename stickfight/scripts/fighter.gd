@@ -60,6 +60,19 @@ func play(nom: String, fondu := 0, t0 := 0.0) -> void:
 	history.clear()
 
 
+## Vrai si l'image en cours est dans une fenêtre nommée de l'animation
+## (événement {"type": "fenetre", "nom": nom, "f": a, "n": k} : images a à
+## a + k − 1). Sert à savoir si une contre-attaque peut annuler la fin d'une
+## parade ; la contre-attaque elle-même est propre à chaque personnage.
+func en_fenetre(nom: String) -> bool:
+	for e in anim.get("evenements", []):
+		if str(e.get("type", "")) == "fenetre" and str(e.get("nom", "")) == nom:
+			var a := float(e.get("f", 0))
+			if t >= a and t < a + float(e.get("n", 0)):
+				return true
+	return false
+
+
 ## Avance d'une image. Renvoie les événements franchis.
 func step() -> Array:
 	if anim.is_empty():

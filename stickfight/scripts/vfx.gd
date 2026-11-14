@@ -12,7 +12,9 @@ extends RefCounted
 ## - tout dépend seulement de l'âge : même âge, même dessin.
 ##
 ## Un effet : {type, pos: Vector2 (monde), age: int, dir: degrés (monde),
-##             genre: "garde" | "coup", taille: facteur}
+##             genre: "garde" | "coup" | "parade", taille: facteur}
+## Les trois genres de l'étincelle : coup bloqué (bleu), coup qui touche
+## (orange), coup dévié par une parade (vert d'eau).
 ##
 ## etincelle  éclair de contact : flash blanc (0-1), étoile allongée dans la
 ##            direction du coup (2-3), anneau qui s'ouvre et traits (4-7),
@@ -39,6 +41,7 @@ extends RefCounted
 const PALETTES := {
 	"garde": [Color("#ffffff"), Color("#d0ebff"), Color("#74c0fc"), Color("#1864ab")],
 	"coup": [Color("#ffffff"), Color("#fff3bf"), Color("#ffa94d"), Color("#c2410c")],
+	"parade": [Color("#ffffff"), Color("#d3f9d8"), Color("#63e6be"), Color("#087f5b")],
 }
 const LIFE := {"etincelle": 14, "poussiere": 32, "vitesse": 10, "onde": 30, "choc": 22}
 ## Début de chaque dessin (âge en images) : tenues de plus en plus longues.

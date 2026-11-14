@@ -160,7 +160,7 @@ par sa propre version (marquées ✱ quand c'est presque toujours le cas).
 | 4-9 | Recul sur garde léger, moyen, lourd × haut et bas | fait (`recul_garde_*`) |
 | 10 | Garde repoussée (gros coup bloqué, les pieds glissent) | fait (`garde_repoussee`) |
 | 11 | Garde brisée (bras ouverts, vulnérable) | fait (`garde_brisee`) |
-| 12-13 | Parade haute, parade basse (dévier un coup) | |
+| 12-13 | Parade haute, parade basse (dévier un coup) | fait : 4 variantes selon le coup (`parade_*`), fenêtre de contre |
 | 14 | Esquive buste en arrière (sway) | |
 | 15 | Esquive en se baissant sous un coup haut | |
 | 16 | Esquive de la tête sur le côté (slip) | |
@@ -383,7 +383,7 @@ au-delà de 200.
 | Heat | Heat Engager (2), Heat Smash (1), coups renforcés en Heat (4) | 7 |
 | Rage Art | attaque cinématique à deux | 1 |
 | Power Crush | coups avec armure | 2 |
-| Parades et contres propres | | 2 |
+| Parades et contres propres | contre-attaques lancées dans la fenêtre `contre` d'une parade commune, parades spéciales (attrape-jambe, parade à deux mains…) | 2 |
 | **Total des coups** | | **≈ 146** |
 
 **En animations**, cela fait un peu plus que les coups :
@@ -446,8 +446,15 @@ On s'arrête à la fin de chaque phase pour tester en jeu avant d'aller plus loi
 1. **2D pure.** Pas de pas de côté ni de profondeur : les communes 3.2 #17-19 sont retirées
    (socle commun : 187). Les esquives (sway, se baisser, salto, roulade) remplacent le pas
    de côté.
-2. **Boutons et game design** : décidés plus tard. Les animations ne dépendent pas du
-   nombre de boutons.
+2. **Commandes à la manette, comme Tekken** : quatre boutons d'attaque sur la croix de la
+   manette PS5 (□ = 1 poing gauche, △ = 2 poing droit, × = 3 pied gauche, ○ = 4 pied
+   droit), plus les directions ; on reprend les commandes des jeux de combat existants au
+   lieu d'en inventer. Les touches du clavier de la démo sont provisoires. Le reste du game
+   design est décidé plus tard.
+6. **Parades et contre-attaques** : seules les parades de base (une par type de coup :
+   poing haut, pied haut, moyen, bas) sont communes. Les contre-attaques qui suivent une
+   parade, et les parades spéciales, sont propres à chaque personnage : la parade commune
+   ouvre seulement une fenêtre `contre` où elles pourront partir.
 3. **Chutes animées à la main** en duel. Physique de chiffon en option, seulement pour les
    corps projetés dans les scènes de foule.
 4. **Objets** : presque tous les personnages auront quelques gestes d'objets ; certains
@@ -500,7 +507,7 @@ mêmes jambes : seuls le buste et les bras changent.
 | Défense | Garde haute tenue (garde fermée) | `garde_idle` | fait |
 | Défense | Garde accroupie tenue : boucle, entrée, sortie, fermer, ouvrir | `garde_basse*` | fait |
 | Défense | Recul sur garde haut et bas, léger, moyen, lourd | `recul_garde_{haut,bas}_{leger,moyen,lourd}` | fait |
-| Défense | Parade haute, parade basse | `parade_haute`, `parade_basse` | |
+| Défense | Parade selon le coup : poing haut, pied haut, moyen, bas ; fenêtre de contre | `parade_haute_poing`, `parade_haute_pied`, `parade_moyenne`, `parade_basse` | fait |
 | Défense | Esquive buste en arrière (sway), se baisser | `esquive_sway`, `esquive_baisse` | |
 | Réactions | Tête légère, tête lourde | `touche_tete_*` | |
 | Réactions | Ventre léger, plié en deux | `touche_ventre_*` | |

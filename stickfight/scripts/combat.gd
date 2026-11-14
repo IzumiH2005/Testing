@@ -20,6 +20,9 @@ extends RefCounted
 ##       "pieds" = milieu des deux chevilles, valable pour tous les effets)
 ##   {"f": 28, "type": "choc", "articulation": "hip", "dir": 10, "taille": 1}
 ##   {"f": 8, "type": "contact"}  (repère de synchronisation, ne fait rien)
+##   {"f": 9, "type": "fenetre", "nom": "contre", "n": 20}  (fenêtre ouverte de f
+##       à f + n − 1 : ici, après une parade, la contre-attaque propre au
+##       personnage peut annuler la fin de l'animation ; voir Fighter.en_fenetre)
 ## Les angles « dir » sont donnés dans le repère du personnage (0 = devant,
 ## -90 = vers le bas) et retournés s'il regarde à gauche.
 

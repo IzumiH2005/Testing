@@ -153,6 +153,10 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `recul_garde_bas_lourd` | 28 i, recule 14 | Ctrl + H en garde basse |
 | `garde_repoussee` | 48 i, recule 48 | Ctrl + Maj + H en garde : très gros coup bloqué. Contact à l'image 1 (arrêt 12 i, grosse étincelle, secousse), les poings écrasés sur le visage ; le corps est chassé en arrière pendant que les pieds tiennent encore, puis les deux pieds décrochent et glissent en soulevant de la poussière. Pendant le freinage le buste se penche contre la poussée et la jambe arrière s'étire ; le pied arrière accroche en premier, le haut du corps continue sur son élan vers l'avant, puis le pied arrière se décolle et revient se poser pour retrouver la garde, puis `garde_idle` |
 | `garde_brisee` | 62 i, recule 36 | J en garde : coup qui brise la garde. Contact à l'image 1 (arrêt 14 i, étincelle, secousse) : la garde est arrachée, la tête part en arrière ; les bras s'ouvrent en V et le buste se cambre, le pied avant traîne pendant que le pied arrière décolle et se pose loin derrière pour rattraper l'équilibre. Les genoux absorbent, les bras retombent bas et écartés, la tête pend : c'est la fenêtre vulnérable, où un nouveau coup bloqué est ignoré. Puis il se reprend : bras remontés en garde, le pied avant recule et se pose, puis `garde_idle` |
+| `parade_haute_poing` | 34 i | P en garde : dévie un coup de poing visant le visage. L'avant-bras avant monte en biais (f3) et rencontre le poing à l'image 5 (arrêt 6 i, étincelle verte de parade) en le chassant vers le haut ; le bras suit le geste au-dessus de la tête, le buste à peine en retrait, puis la main redescend en garde et `garde_idle` |
+| `parade_haute_pied` | 40 i | Maj + P : dévie un coup de pied haut (tempe, mâchoire). Contact plus tard (f7) et plus lourd (arrêt 8 i, grosse étincelle, secousse) : le buste cède en arrière, le bassin recule de quelques unités, l'avant-bras balaie la jambe vers le haut et loin au-dessus de la tête, puis il se replace |
+| `parade_moyenne` | 36 i | Ctrl + P : dévie un coup au ventre. La main avant descend devant le plexus, le buste se penche un peu en avant au contact (f5, arrêt 7 i) et l'avant-bras chasse le coup vers le bas et sur le côté, puis remonte en garde |
+| `parade_basse` | 36 i | Ctrl + Maj + P : dévie un coup bas (tibia). Le combattant fléchit les genoux (le talon arrière se lève), la main avant descend frapper le pied à l'image 6 (arrêt 7 i) et le rabat vers le sol, l'autre main protège le visage, puis il se relève en garde |
 | `accroupi_repos_entree` | 28 i, recule 3 | Depuis le repos (↓ maintenu), sans passer par la garde : les genoux cèdent, la main avant part devant et se pose au sol devant le pied avant, le pied arrière monte sur la pointe, petit tassement sur la main puis `accroupi_repos_idle` |
 | `accroupi_repos_idle` | 104 i, en boucle | Accroupi détendu, une main au sol : respiration lente (le dos se voûte à l'expiration), le bras libre suit avec retard. La main et les pieds restent fixes |
 | `accroupi_repos_sortie` | 30 i, avance 3 | ↓ relâché : appui sur la main, poussée qui la décolle, le buste se relève, léger dépassement puis `idle_repos` |
@@ -220,7 +224,12 @@ animation en remplace une autre, le bassin reste où il est arrivé.
 impact global, la figure qui l'émet tremble), `etincelle`, `poussiere`,
 `vitesse` (lignes de vitesse derrière le bassin), `onde` (onde de choc au
 sol ; `"articulation": "pieds"` la centre entre les deux chevilles),
-`choc` (onde d'air dans la direction `dir`), `secousse` (caméra).
+`choc` (onde d'air dans la direction `dir`), `secousse` (caméra),
+`fenetre` (intervalle d'images nommé : `"nom": "contre"` marque, après une
+parade, le moment où une contre-attaque peut annuler la fin de
+l'animation ; `Fighter.en_fenetre(nom)` le teste). L'étincelle a trois
+genres : `garde` (coup bloqué, bleu), `coup` (touché, orange) et `parade`
+(coup dévié, vert d'eau).
 
 Les effets (`scripts/vfx.gd`) suivent la méthode pixel art du dépôt
 (`methode-pixel-art/`) : aplats sans tramage, rampes à décalage de teinte
@@ -265,6 +274,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | H, Maj + H, Ctrl + H | Encaisser un coup bloqué léger, moyen ou lourd (en garde : recul sur garde debout, ou accroupi en garde basse). Un recul peut en interrompre un autre |
 | Ctrl + Maj + H | Très gros coup bloqué en garde : garde repoussée, les pieds glissent loin (en garde basse : recul lourd) |
 | J | Coup qui brise la garde : garde brisée, bras ouverts et vulnérable (en garde basse : recul lourd) |
+| P, Maj + P, Ctrl + P, Ctrl + Maj + P | Parade en garde : coup de poing haut, coup de pied haut, coup moyen, coup bas. Pendant la fenêtre de contre d'une parade, une nouvelle parade peut l'annuler (à la place de la contre-attaque, qui sera propre à chaque personnage) |
 | K | Duo coup de pied / blocage (en boucle) |
 | R | Repos (remise à zéro) |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |
