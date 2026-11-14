@@ -188,14 +188,26 @@ animation en remplace une autre, le bassin reste où il est arrivé.
 Événements : `contact` (repère de synchronisation), `hitstop` (arrêt sur
 impact global, la figure qui l'émet tremble), `etincelle`, `poussiere`,
 `vitesse` (lignes de vitesse derrière le bassin), `onde` (onde de choc au
-sol : flash, anneau aplati qui s'élargit puis s'efface par trous, éclats de
 sol ; `"articulation": "pieds"` la centre entre les deux chevilles),
-`choc` (onde d'air : flash en croissant puis trois croissants qui se
-détachent dans la direction `dir`), `secousse` (caméra). Les effets
-(`scripts/vfx.gd`) sont dessinés en aplats, palette de 4 couleurs, et
-changent d'image toutes les 2 images. Ils disparaissent par trous qui
-grandissent, jamais en fondu. Le choc est dessiné derrière les combattants ;
-l'onde met la moitié du fond de son anneau derrière les jambes.
+`choc` (onde d'air dans la direction `dir`), `secousse` (caméra).
+
+Les effets (`scripts/vfx.gd`) suivent la méthode pixel art du dépôt
+(`methode-pixel-art/`) : aplats sans tramage, rampes à décalage de teinte
+(lumière chaude, ombre froide, trait plus sombre), lumière en haut à gauche,
+flash d'une seule image à l'impact, chaque dessin tenu plus longtemps à
+mesure que l'effet ralentit, disparition par trous et jamais en fondu.
+
+- **Poussière** (32 i) : cinq bouffées de quatre boules ombrées (trait,
+  ombre, corps, reflet) qui jaillissent, gonflent, montent, puis passent du
+  blanc chaud au gris froid et se défont boule par boule.
+- **Onde** (30 i) : flash plat au sol, dôme d'air qui se brise, front en
+  bande épaisse (bord blanc, bande bleutée derrière) qui s'élargit en
+  ralentissant, second anneau plus lent, mur de poussière soulevé sur le
+  front, cailloux en parabole et, pour les gros impacts, fissures. La moitié
+  du fond de l'anneau passe derrière les jambes, en plus mince.
+- **Choc** (22 i) : flash en disque et étoile perpendiculaire au vol, cône
+  d'air, puis trois anneaux en perspective laissés sur place le long de la
+  trajectoire, qui se brisent par trous.
 
 Un **duo** (`anims/duo_*.json`) place plusieurs combattants et leur programme :
 `{"contact": 33, "anim": "blocage_bas", "fondu": 3}` démarre l'animation pour
@@ -258,7 +270,7 @@ scripts/atelier_scene.gd  poignées, souris, clavier
 scripts/stick_anim.gd     animation par clés : courbes, pieds plantés, décalages
 scripts/fighter.gd        un combattant : animation, fondus, traînées
 scripts/combat.gd         plusieurs combattants, arrêt sur impact, effets, duo
-scripts/vfx.gd            étincelle et poussière en aplats
+scripts/vfx.gd            effets en pixel art : étincelle, poussière, onde, choc
 scripts/demo.gd           scène de démo
 tools/rendu.gd, rendu.sh  rendu PNG d'une pose
 tools/anim.gd, anim.sh    planche, stroboscopie, GIF, vidéo d'une animation

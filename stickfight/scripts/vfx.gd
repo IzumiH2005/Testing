@@ -1,10 +1,15 @@
 class_name Vfx
 extends RefCounted
-## Effets visuels dessinés à la main, en aplats, comme en pixel art :
-## couleurs en nombre limité, pas de dégradé ni de transparence, chaque
-## effet change d'image toutes les 2 images (« en deux ») pour garder un
-## rythme sec. Tout dépend seulement de l'âge de l'effet : le même âge donne
-## toujours le même dessin (rendus et tests reproductibles).
+## Effets visuels dessinés à la main, en aplats, comme en pixel art
+## (methode-pixel-art, E7-G effets, E7-F impact, E2 timing, A6 rampes) :
+## - couleurs en nombre limité, pas de dégradé ni de transparence ;
+## - lumière en haut à gauche, rampes qui passent du clair au sombre puis
+##   au gris en vieillissant (ombres froides, lumières chaudes) ;
+## - chaque effet est une suite de DESSINS tenus chacun plusieurs images,
+##   de plus en plus longtemps (ralenti à l'arrivée, table KEYS) ;
+## - la masse se fragmente : chaque morceau a sa trajectoire, ralentit,
+##   rétrécit ; on efface par morceaux (trous), jamais en fondu ;
+## - tout dépend seulement de l'âge : même âge, même dessin.
 ##
 ## Un effet : {type, pos: Vector2 (monde), age: int, dir: degrés (monde),
 ##             genre: "garde" | "coup", taille: facteur}
@@ -12,32 +17,80 @@ extends RefCounted
 ## etincelle  éclair de contact : flash blanc (0-1), étoile allongée dans la
 ##            direction du coup (2-3), anneau qui s'ouvre et traits (4-7),
 ##            éclats qui retombent (8-13).
-## poussiere  petits nuages au sol quand un pied se pose ou glisse.
+## poussiere  nuage de poussière au sol (pied qui se pose, glisse, pousse) :
+##            5 bouffées en grappes de boules ombrées qui fuient au ras du
+##            sol (surtout du côté de dir), montent un peu, ralentissent,
+##            virent au gris et se défont boule par boule.
 ## vitesse    lignes de vitesse : traits horizontaux laissés sur place dans
 ##            l'arène ; le coureur s'en éloigne, ils se rétractent vers
 ##            l'arrière (dir = sens de la course, les traits partent à l'opposé).
-## onde       onde de choc au sol (décollage ou atterrissage en force) : flash
-##            blanc d'une image (0-1), anneau aplati qui s'élargit (2-15), en
-##            passant du blanc au gris, puis se troue par morceaux ; quelques
-##            éclats de sol sautent aux deux bouts. dir penche l'onde : elle
-##            s'étend plus loin du côté de dir (−90 = symétrique).
-## choc       ondes d'air laissées sur place au point de départ d'une
-##            propulsion : trois croissants bombés vers dir (sens du vol), du
-##            plus large au plus petit, qui s'ouvrent, s'amincissent et se
-##            brisent pendant que le corps s'en éloigne.
+## onde       onde de choc au sol (décollage ou atterrissage en force) :
+##            image d'impact (galette blanche, rayons), puis un front d'air
+##            épais qui court sur le sol en perspective, plus épais devant
+##            que derrière, suivi d'un second anneau ; un dôme d'air se
+##            soulève et se brise ; un mur de poussière roule avec le front ;
+##            des cailloux sautent ; si taille ≥ 1,2 le sol se fend. dir
+##            penche l'onde : elle va plus loin du côté de dir (−90 = symétrique).
+## choc       bang d'air au point de départ d'une propulsion : flash, puis
+##            trois anneaux en perspective, perpendiculaires au vol (dir),
+##            laissés sur place et reliés en cône vers le corps qui s'en
+##            éloigne ; ils s'ouvrent, s'amincissent, grisent et se brisent.
 
 const PALETTES := {
 	"garde": [Color("#ffffff"), Color("#d0ebff"), Color("#74c0fc"), Color("#1864ab")],
 	"coup": [Color("#ffffff"), Color("#fff3bf"), Color("#ffa94d"), Color("#c2410c")],
 }
-const DUST := [Color("#f1e6e2"), Color("#cdbab5"), Color("#9f8b86")]
-const LIFE := {"etincelle": 14, "poussiere": 18, "vitesse": 10, "onde": 18, "choc": 14}
-## Air comprimé : même famille que les lignes de vitesse (blanc froid → gris).
-const AIR := [Color("#ffffff"), Color("#e9ecef"), Color("#adb5bd"), Color("#495057")]
+const LIFE := {"etincelle": 14, "poussiere": 32, "vitesse": 10, "onde": 30, "choc": 22}
+## Début de chaque dessin (âge en images) : tenues de plus en plus longues.
+const KEYS := {
+	"poussiere": [0, 2, 4, 6, 9, 12, 16, 20, 25, 30],
+	"onde": [0, 2, 4, 6, 8, 11, 14, 18, 22, 26],
+	"choc": [0, 2, 4, 6, 9, 12, 15, 19],
+}
+
+## Poussière : rampes [lumière, corps, ombre, trait], du plus jeune au plus
+## vieux. La teinte part chaude (crème) et tourne au froid (mauve) dans les
+## ombres ; en vieillissant tout descend d'un cran puis se désature.
+const DUST_POP := [Color("#ffffff"), Color("#fbf3e6"), Color("#e3d3c2"), Color("#857479")]
+const DUST_A := [Color("#fbf3e6"), Color("#e3d3c2"), Color("#b9a59a"), Color("#5e5260")]
+const DUST_B := [Color("#e3d3c2"), Color("#b9a59a"), Color("#8f7f84"), Color("#4f4651")]
+const DUST_C := [Color("#c9c2bf"), Color("#a29c9c"), Color("#7b7680"), Color("#4f4651")]
+## Air comprimé : [cœur, clair, moyen, trait]. Blanc → bleu-gris froid.
+const AIR := [Color("#ffffff"), Color("#dfe7f5"), Color("#a3b1cc"), Color("#4c5873")]
+const AIR_OLD := [Color("#dfe7f5"), Color("#b8c1d1"), Color("#8b94a6"), Color("#4c5873")]
+## Cailloux : [dessus éclairé, face, trait].
+const ROCK := [Color("#e3d3c2"), Color("#9f8b86"), Color("#4f4651")]
+const CRACK := Color("#3b3340")
+const CRACK_LIP := Color("#f4ebe1")
+
 ## Ordre dans lequel les morceaux d'un trait s'effacent (des trous qui grandissent).
 const HOLES := [5, 1, 9, 3, 7, 0, 10, 4, 8, 2, 11, 6]
-## Éclats de sol de l'onde : (angle depuis l'horizontale, vitesse, taille), par groupe de 3.
-const CHIPS := [[58.0, 2.3, 3.0], [40.0, 2.9, 2.5], [72.0, 1.7, 2.0]]
+
+## Bouffées : [côté (+1 = vers dir), vitesse, montée, taille, retard].
+const PUFFS := [[1.0, 4.2, 0.6, 1.0, 0], [1.0, 2.2, 1.1, 0.75, 1], [-1.0, 2.6, 0.7, 0.8, 0],
+	[-1.0, 1.0, 1.3, 0.6, 2], [0.15, 0.4, 1.6, 0.85, 1]]
+## Boules d'une bouffée : [x, y (en rayons), rayon relatif, dérive x, dérive y]
+## (la dérive écarte les morceaux quand la bouffée se défait).
+const LOBES := [[0.0, 0.0, 1.0, 0.0, 0.4], [-0.78, -0.18, 0.68, -0.9, 0.1],
+	[0.74, -0.22, 0.62, 0.9, 0.0], [0.12, 0.62, 0.55, 0.3, 0.9]]
+## Ordre d'effacement des boules (la grosse en dernier).
+const LOBE_ORDER := [3, 1, 2, 0]
+
+## Onde : bouffées du mur de poussière, angle sur l'ellipse (degrés, 0 = droite,
+## > 0 = moitié du fond) et taille.
+const CROWN := [[0.0, 1.0], [180.0, 1.0], [-28.0, 0.8], [-152.0, 0.8], [26.0, 0.7],
+	[154.0, 0.7], [-62.0, 0.6], [-118.0, 0.6]]
+## Cailloux : [angle depuis l'horizontale, vitesse, taille, départ (rayon relatif)].
+const CHIPS := [[62.0, 3.0, 3.2, 0.7], [38.0, 3.6, 2.6, 0.9], [76.0, 2.2, 2.2, 0.5],
+	[24.0, 3.1, 2.0, 1.0], [52.0, 2.5, 1.6, 0.8]]
+## Fissures : suites de points (angle degrés, rayon) dans le plan du sol.
+const CRACKS := [
+	[[0.0, 4.0], [-8.0, 12.0], [6.0, 19.0], [-4.0, 27.0]],
+	[[180.0, 4.0], [190.0, 11.0], [174.0, 18.0], [184.0, 24.0]],
+	[[-60.0, 4.0], [-48.0, 10.0], [-66.0, 16.0]],
+	[[-125.0, 4.0], [-138.0, 11.0], [-120.0, 15.0]],
+]
+
 const SPEED := Color("#f8f9fa")
 const SPEED_EDGE := Color("#495057")
 ## Traits : (hauteur relative, recul du départ, longueur).
@@ -60,26 +113,34 @@ static func make(type: String, pos: Vector2, params := {}) -> Dictionary:
 
 
 ## Calques : `draw` est appelé deux fois par image, avant les combattants
-## (layer = "derriere") et après (layer = "devant"). Le choc passe entièrement
-## derrière le corps ; l'onde met la moitié du fond de son anneau derrière
-## les jambes et la moitié de devant par-dessus. Le reste est devant.
+## (layer = "derriere") et après (layer = "devant"). Les anneaux (onde, choc)
+## mettent leur moitié du fond derrière le corps et celle de devant par-dessus ;
+## dôme, fissures et cône passent derrière ; le reste est devant.
 static func draw(ci: CanvasItem, v: Dictionary, origin: Vector2, scale: float, layer := "devant") -> void:
-	if v.type == "choc":
-		if layer == "derriere":
-			_boom(ci, v, origin, scale)
-		return
-	if v.type == "onde":
-		_wave(ci, v, origin, scale, layer)
-		return
-	if layer != "devant":
-		return
 	match v.type:
-		"etincelle":
-			_spark(ci, v, origin, scale)
+		"choc":
+			_boom(ci, v, origin, scale, layer)
+		"onde":
+			_wave(ci, v, origin, scale, layer)
 		"poussiere":
-			_dust(ci, v, origin, scale)
+			if layer == "devant":
+				_dust(ci, v, origin, scale)
+		"etincelle":
+			if layer == "devant":
+				_spark(ci, v, origin, scale)
 		"vitesse":
-			_speed(ci, v, origin, scale)
+			if layer == "devant":
+				_speed(ci, v, origin, scale)
+
+
+## Âge du dessin affiché : le début de la tenue en cours (table KEYS).
+static func _key(type: String, age: int) -> int:
+	var keys: Array = KEYS[type]
+	var k := 0
+	for t in keys:
+		if age >= int(t):
+			k = int(t)
+	return k
 
 
 static func _dirv(deg: float) -> Vector2:
@@ -88,6 +149,11 @@ static func _dirv(deg: float) -> Vector2:
 
 static func _scr(w: Vector2, origin: Vector2, scale: float) -> Vector2:
 	return StickRig.to_screen(w, origin, scale)
+
+
+## Ralenti à l'arrivée : 0 → 1, vite au départ puis de plus en plus lent.
+static func _out(t: float, tau: float) -> float:
+	return 1.0 - exp(-maxf(t, 0.0) / tau)
 
 
 ## Étoile à 4 branches : 2 longues dans l'axe du coup, 2 courtes en travers.
@@ -109,6 +175,15 @@ static func _square(ci: CanvasItem, c: Vector2, s: float, col: Color, origin: Ve
 	var p := _scr(c, origin, scale)
 	var h := s * scale / 2.0
 	ci.draw_rect(Rect2(p - Vector2(h, h), Vector2(2 * h, 2 * h)), col)
+
+
+## Ellipse pleine dans le monde (rx en x, ry en y).
+static func _oval(ci: CanvasItem, c: Vector2, rx: float, ry: float, col: Color, origin: Vector2, scale: float) -> void:
+	var pts := PackedVector2Array()
+	for i in 24:
+		var th := TAU * i / 24.0
+		pts.append(_scr(c + Vector2(cos(th) * rx, sin(th) * ry), origin, scale))
+	ci.draw_colored_polygon(pts, col)
 
 
 static func _spark(ci: CanvasItem, v: Dictionary, origin: Vector2, scale: float) -> void:
@@ -146,26 +221,76 @@ static func _spark(ci: CanvasItem, v: Dictionary, origin: Vector2, scale: float)
 			_square(ci, p, size, pal[1] if a < 10 else pal[2], origin, scale)
 
 
-static func _dust(ci: CanvasItem, v: Dictionary, origin: Vector2, scale: float) -> void:
-	var a: int = int(v.age) - int(v.age) % 2
-	var k: float = v.taille
-	var c: Vector2 = Vector2(v.pos.x, 0.0)
-	var sens := 1.0 if _dirv(v.dir).x >= 0.0 else -1.0
-	# Trois bouffées : deux qui fuient au ras du sol, une qui monte un peu.
-	var puffs := [[sens * 1.0, 0.9, 1.0], [-sens * 1.0, 0.55, 0.8], [sens * 0.3, 0.3, 0.7]]
-	for i in puffs.size():
-		var pf: Array = puffs[i]
-		var t := float(a)
-		var x: float = c.x + pf[0] * (5.0 + t * 1.3 * pf[1]) * k
-		var y: float = (2.0 + t * 0.35 + (1.0 if i == 2 else 0.0) * t * 0.3) * k
-		var grow := clampf(t / 6.0, 0.0, 1.0)
-		var shrink := clampf((float(LIFE.poussiere) - t) / 8.0, 0.0, 1.0)
-		var r: float = (2.5 + 4.5 * grow) * shrink * pf[2] * k
-		if r < 0.8:
+# --- Poussière ---------------------------------------------------------------
+
+## Grappe de boules ombrées, dessinée en 4 passes sur TOUTES les boules (trait,
+## ombre, corps, lumière) pour qu'elles se fondent en un seul nuage :
+## lumière en haut à gauche, ombre froide en bas à droite, trait de 1.
+## blobs = [[centre monde, rayon], ...] ; pal = [lumière, corps, ombre, trait].
+static func _cloud(ci: CanvasItem, blobs: Array, pal: Array, origin: Vector2, scale: float) -> void:
+	for pass_i in 4:
+		for b in blobs:
+			var c: Vector2 = b[0]
+			var r: float = b[1]
+			match pass_i:
+				0:
+					ci.draw_circle(_scr(c, origin, scale), (r + 1.0) * scale, pal[3])
+				1:
+					ci.draw_circle(_scr(c, origin, scale), r * scale, pal[2])
+				2:
+					if r >= 2.0:
+						ci.draw_circle(_scr(c + Vector2(-0.14, 0.16) * r, origin, scale), r * 0.84 * scale, pal[1])
+				3:
+					if r >= 3.0:
+						ci.draw_circle(_scr(c + Vector2(-0.34, 0.36) * r, origin, scale), r * 0.42 * scale, pal[0])
+
+
+## Rampe de la poussière selon l'âge de la bouffée (t = 0 : image « pop »).
+static func _dust_pal(t: float) -> Array:
+	if t <= 0.0:
+		return DUST_POP
+	if t <= 5.0:
+		return DUST_A
+	if t <= 13.0:
+		return DUST_B
+	return DUST_C
+
+
+## Une bouffée : boules d'un rayon r autour de c, qui s'écartent et
+## disparaissent une à une quand `gone` monte (0 → 1).
+static func _puff_blobs(c: Vector2, r: float, spread: float, gone: float, k: float) -> Array:
+	var out := []
+	for rank in LOBE_ORDER.size():
+		var i: int = LOBE_ORDER[rank]
+		if float(rank) < gone * LOBE_ORDER.size():
 			continue
-		var p := _scr(Vector2(x, y), origin, scale)
-		ci.draw_circle(p, (r + 1.0) * scale, DUST[2])
-		ci.draw_circle(p, r * scale, DUST[1] if a >= 10 else DUST[0])
+		var lb: Array = LOBES[i]
+		var rr: float = r * float(lb[2]) * (1.0 - 0.25 * spread)
+		var p := c + Vector2(float(lb[0]), float(lb[1])) * r + Vector2(float(lb[3]), float(lb[4])) * spread * 5.0 * k
+		out.append([p.round(), maxf(0.0, roundf(rr * 2.0) / 2.0)])
+	return out
+
+
+static func _dust(ci: CanvasItem, v: Dictionary, origin: Vector2, scale: float) -> void:
+	var T := float(_key("poussiere", int(v.age)))
+	var k: float = v.taille
+	var sens := 1.0 if _dirv(v.dir).x >= 0.0 else -1.0
+	var n := PUFFS.size() if k >= 0.8 else 3
+	# Les bouffées du fond d'abord (les plus hautes), celles de devant ensuite.
+	for idx in [3, 1, 4, 2, 0]:
+		if idx >= n:
+			continue
+		var pf: Array = PUFFS[idx]
+		var t := T - float(pf[4])
+		if t < 0.0:
+			continue
+		var late := clampf((t - 10.0) / 14.0, 0.0, 1.0)
+		var r: float = float(pf[3]) * k * (2.5 + 6.5 * _out(t, 3.0)) * (1.0 - 0.4 * late)
+		var x: float = v.pos.x + float(pf[0]) * sens * (3.0 * k + float(pf[1]) * k * 5.0 * _out(t, 5.0))
+		var y: float = r * 0.7 + float(pf[2]) * k * 9.0 * _out(t, 9.0)
+		var gone := clampf((t - 14.0) / 14.0, 0.0, 1.0)
+		var blobs := _puff_blobs(Vector2(x, y), r, late, gone, k)
+		_cloud(ci, blobs, _dust_pal(t), origin, scale)
 
 
 ## Traits fixes dans l'arène : la tête du trait (côté coureur) rattrape la
@@ -190,6 +315,8 @@ static func _speed(ci: CanvasItem, v: Dictionary, origin: Vector2, scale: float)
 		ci.draw_line(p0, p1, SPEED, maxf(1.0, w * scale))
 
 
+# --- Traits d'air --------------------------------------------------------------
+
 ## Morceau i (sur n) déjà effacé quand la proportion « gone » est atteinte.
 static func _erased(i: int, n: int, gone: float) -> bool:
 	if gone <= 0.0:
@@ -198,121 +325,225 @@ static func _erased(i: int, n: int, gone: float) -> bool:
 	return float(rank) < gone * 12.0
 
 
-## Traits cerclés de sombre (comme les lignes de vitesse) : tous les bords
-## d'abord, puis tous les cœurs clairs, pour que les morceaux jointifs
-## forment un seul trait sans coutures. segs = [[a, b], ...] (monde).
-static func _strokes(ci: CanvasItem, segs: Array, w: float, core: Color, edge: Color, origin: Vector2, scale: float) -> void:
-	for pass_i in 2:
+## Traits cerclés de sombre : tous les bords d'abord, puis tous les cœurs,
+## pour que les morceaux jointifs forment un seul trait sans coutures.
+## groups = [[segs, couleur du cœur], ...], segs = [[a, b, épaisseur], ...]
+## (monde) ; les cœurs sont peints dans l'ordre des groupes.
+static func _strokes2(ci: CanvasItem, groups: Array, edge: Color, origin: Vector2, scale: float, rim := 1.2) -> void:
+	for pass_i in groups.size() + 1:
+		var segs: Array = []
+		var col := edge
+		if pass_i == 0:
+			for gr in groups:
+				segs.append_array(gr[0])
+		else:
+			segs = groups[pass_i - 1][0]
+			col = groups[pass_i - 1][1]
 		for sg in segs:
 			var p0 := _scr(sg[0], origin, scale)
 			var p1 := _scr(sg[1], origin, scale)
-			if pass_i == 0:
-				ci.draw_line(p0, p1, edge, maxf(1.0, (w + 1.4) * scale))
-				ci.draw_circle(p0, maxf(0.5, (w + 1.4) * scale / 2.0), edge)
-				ci.draw_circle(p1, maxf(0.5, (w + 1.4) * scale / 2.0), edge)
-			else:
-				ci.draw_line(p0, p1, core, maxf(1.0, w * scale))
-				ci.draw_circle(p0, maxf(0.5, w * scale / 2.0), core)
-				ci.draw_circle(p1, maxf(0.5, w * scale / 2.0), core)
+			var w: float = (float(sg[2]) + (rim if pass_i == 0 else 0.0)) * scale
+			ci.draw_line(p0, p1, col, maxf(1.0, w))
+			ci.draw_circle(p0, maxf(0.5, w / 2.0), col)
+			ci.draw_circle(p1, maxf(0.5, w / 2.0), col)
 
+
+static func _strokes(ci: CanvasItem, segs: Array, core: Color, edge: Color, origin: Vector2, scale: float, rim := 1.2) -> void:
+	_strokes2(ci, [[segs, core]], edge, origin, scale, rim)
+
+
+## Segments d'un anneau d'air en perspective : ellipse de centre c, d'axes
+## ax (vecteur, demi-grand axe) et ay (vecteur, demi-petit axe). La moitié où
+## sin > 0 est « au fond » (calque arrière) et plus mince (facteur thin).
+## Épaisseur w devant, effacement par trous selon gone.
+static func _ring_segs(c: Vector2, ax: Vector2, ay: Vector2, w: float, thin: float, gone: float,
+		back: bool, n := 28) -> Array:
+	var segs := []
+	for i in n:
+		if _erased(i, n, gone):
+			continue
+		var mid := TAU * (i + 0.5) / n
+		if (sin(mid) > 0.0) != back:
+			continue
+		var t0 := TAU * i / n
+		var t1 := TAU * (i + 1) / n
+		var ww := w * lerpf(1.0, thin, (sin(mid) + 1.0) / 2.0)
+		segs.append([c + ax * cos(t0) + ay * sin(t0), c + ax * cos(t1) + ay * sin(t1), ww])
+	return segs
+
+
+## Anneau d'air simple (un ton).
+static func _air_ring(ci: CanvasItem, c: Vector2, ax: Vector2, ay: Vector2, w: float, thin: float,
+		gone: float, pal: Array, back: bool, origin: Vector2, scale: float, n := 28, core_i := 0) -> void:
+	_strokes(ci, _ring_segs(c, ax, ay, w, thin, gone, back, n), pal[core_i], pal[3], origin, scale)
+
+
+## Front d'onde en bande : bord extérieur clair et épais (le front), bande
+## intérieure d'un ton plus sombre juste derrière, un seul trait autour.
+static func _air_band(ci: CanvasItem, c: Vector2, ax: Vector2, ay: Vector2, w: float, thin: float,
+		gone: float, pal: Array, back: bool, origin: Vector2, scale: float, n := 28, core_i := 0) -> void:
+	var inner := 1.0 - 0.9 * w / maxf(ax.length(), 1.0)
+	var outer := _ring_segs(c, ax, ay, w * 0.62, thin, gone, back, n)
+	var band := _ring_segs(c, ax * inner, ay * inner, w * 0.75, thin, gone, back, n)
+	_strokes2(ci, [[band, pal[2]], [outer, pal[core_i]]], pal[3], origin, scale)
+
+
+# --- Onde de choc au sol -----------------------------------------------------
 
 static func _wave(ci: CanvasItem, v: Dictionary, origin: Vector2, scale: float, layer := "devant") -> void:
 	var back := layer == "derriere"
-	var a: int = int(v.age) - int(v.age) % 2
+	var T := float(_key("onde", int(v.age)))
 	var k: float = v.taille
-	var c := Vector2(v.pos.x, 1.0)
+	var c := Vector2(v.pos.x, 0.0)
 	var s := clampf(_dirv(v.dir).x, -1.0, 1.0)
-	var reach := {1.0: 1.0 + 0.45 * s, -1.0: 1.0 - 0.45 * s}   # côté droit, côté gauche (monde)
-	if a == 0:
+	var reach := 1.0 + 0.4 * absf(s)
+	var shift := 0.3 * s                     # le centre de l'ellipse glisse vers dir
+	var R := 92.0 * k
+	if T == 0.0:
 		if back:
 			return
-		# Flash : galette blanche au sol et étoile plate, comme l'étincelle.
-		var pts := PackedVector2Array()
-		for i in 20:
-			var th := TAU * i / 20.0
-			var side := 1.0 if cos(th) >= 0.0 else -1.0
-			pts.append(_scr(c + Vector2(cos(th) * 17.0 * k * reach[side], sin(th) * 4.5 * k), origin, scale))
-		ci.draw_colored_polygon(pts, AIR[2])
-		_star(ci, c + Vector2(0, 2.0 * k), 0.0, 30.0 * k, 11.0 * k, 3.0 * k, AIR[0], origin, scale)
-		ci.draw_circle(_scr(c + Vector2(0, 2.0 * k), origin, scale), 5.0 * k * scale, AIR[0])
+		# Image d'impact : galette blanche cerclée au sol, rayons qui jaillissent.
+		var cc := c + Vector2(shift * 12.0 * k, 0.0)
+		_oval(ci, cc, 34.0 * k * reach + 1.5, 8.5 * k + 1.5, AIR[3], origin, scale)
+		_oval(ci, cc, 34.0 * k * reach, 8.5 * k, AIR[1], origin, scale)
+		_oval(ci, cc, 24.0 * k * reach, 5.5 * k, AIR[0], origin, scale)
+		for ang in [18.0, 50.0, 90.0, 130.0, 162.0]:
+			var L := (16.0 + 14.0 * sin(deg_to_rad(ang))) * k
+			var b := cc + Vector2(0, 2.0 * k)
+			var tip := b + _dirv(ang) * L
+			var side := _dirv(ang + 90.0) * 2.4 * k
+			var pts := PackedVector2Array([_scr(b + side, origin, scale), _scr(tip, origin, scale), _scr(b - side, origin, scale)])
+			ci.draw_colored_polygon(pts, AIR[0])
+		_star(ci, cc + Vector2(0, 1.0 * k), 0.0, 46.0 * k * reach, 9.0 * k, 3.0 * k, AIR[0], origin, scale)
 		return
-	# Anneau aplati : s'ouvre vite puis ralentit.
-	var u := float(a) / 16.0                   # 0.125 → 1
-	var grow := 1.0 - (1.0 - u) * (1.0 - u)
-	var rx := (22.0 + 58.0 * grow) * k
-	var ry := rx * 0.2
-	var w := (4.2 - 2.8 * u) * k
-	var core: Color = AIR[0] if a <= 2 else (AIR[1] if a <= 8 else AIR[2])
-	var gone := clampf((float(a) - 8.0) / 8.0, 0.0, 1.0)
-	if a <= 14:
-		var n := 24
+	var g := _out(T, 6.0)
+	var rx := (14.0 * k + R * g)
+	var cc := c + Vector2(shift * rx, 0.0)
+	var ax := Vector2(rx * reach, 0.0)
+	var ay := Vector2(0.0, rx * 0.2)
+	var u := clampf(T / 26.0, 0.0, 1.0)
+	var pal: Array = AIR if T <= 8.0 else AIR_OLD
+	var core_i := 0 if T <= 4.0 else 1
+	# Fissures du sol (lourd seulement) : trait sombre + lèvre claire.
+	if back and k >= 1.2:
+		var cgone := clampf((T - 14.0) / 12.0, 0.0, 1.0)
+		var grow := clampf(T / 4.0, 0.0, 1.0)
+		var ci_n := 0
+		for cr in CRACKS:
+			var pts: Array = cr
+			for j in pts.size() - 1:
+				ci_n += 1
+				if _erased(ci_n * 5 % 12, 12, cgone):
+					continue
+				var a0: Array = pts[j]
+				var a1: Array = pts[j + 1]
+				var r0 := float(a0[1]) * k * reach * grow
+				var r1 := float(a1[1]) * k * reach * grow
+				var p0 := c + Vector2(cos(deg_to_rad(float(a0[0]))) * r0, sin(deg_to_rad(float(a0[0]))) * r0 * 0.25)
+				var p1 := c + Vector2(cos(deg_to_rad(float(a1[0]))) * r1, sin(deg_to_rad(float(a1[0]))) * r1 * 0.25)
+				ci.draw_line(_scr(p0 + Vector2(0, -1.2), origin, scale), _scr(p1 + Vector2(0, -1.2), origin, scale), CRACK_LIP, maxf(1.0, 1.0 * scale))
+				ci.draw_line(_scr(p0, origin, scale), _scr(p1, origin, scale), CRACK, maxf(1.0, 1.6 * scale))
+	# Dôme d'air : la coque de l'onde se soulève puis se brise (3 dessins).
+	if back and T <= 8.0:
+		var dgone: float = [0.0, 0.0, 0.25, 0.5, 0.75][int(T / 2.0)]
+		var dh := rx * (0.62 - 0.1 * T / 8.0)
 		var segs := []
+		var n := 18
 		for i in n:
-			if _erased(i, n, gone):
+			if _erased(i, n, dgone):
 				continue
-			# Moitié du fond (au-dessus du centre à l'écran) : calque arrière.
-			if (sin(TAU * (i + 0.5) / n) > 0.0) != back:
-				continue
-			var t0 := TAU * i / n
-			var t1 := TAU * (i + 1) / n
-			var q := []
-			for th in [t0, t1]:
-				var side := 1.0 if cos(th) >= 0.0 else -1.0
-				q.append(c + Vector2(cos(th) * rx * reach[side], sin(th) * ry))
-			segs.append(q)
-		_strokes(ci, segs, w, core, AIR[3], origin, scale)
+			var t0 := PI * i / n
+			var t1 := PI * (i + 1) / n
+			var w := (4.0 - 0.35 * T) * k * (0.45 + 0.55 * sin(PI * (i + 0.5) / n))
+			segs.append([cc + Vector2(cos(t0) * rx * reach * 1.04, sin(t0) * dh),
+				cc + Vector2(cos(t1) * rx * reach * 1.04, sin(t1) * dh), w])
+		_strokes(ci, segs, AIR[0] if T <= 2.0 else AIR[1], AIR[3], origin, scale, 1.0)
+	# Second anneau : plus petit, plus mince, il suit le front et s'efface avant.
+	if T >= 4.0 and T <= 18.0:
+		var rx2 := rx * 0.68
+		var g2 := clampf((T - 8.0) / 10.0, 0.0, 1.0)
+		_air_ring(ci, c + Vector2(shift * rx2, 0.0), Vector2(rx2 * reach, 0.0), Vector2(0.0, rx2 * 0.2),
+			(2.4 - 1.0 * u) * k, 0.55, g2, AIR_OLD, back, origin, scale, 24, 1)
+	# Front : épais devant, mince au fond, de plus en plus mince et troué.
+	var gone := clampf((T - 11.0) / 15.0, 0.0, 1.0)
+	_air_band(ci, cc, ax, ay, (9.0 - 6.0 * u) * k, 0.45, gone, pal, back, origin, scale, 32, core_i)
+	# Mur de poussière qui roule avec le front, en retard sur lui.
+	var crown := []
+	var dg := clampf((T - 10.0) / 16.0, 0.0, 1.0)
+	for cw in CROWN:
+		var ang := deg_to_rad(float(cw[0]))
+		if (sin(ang) > 0.0) != back:
+			continue
+		var rr := rx * 0.9
+		var base := c + Vector2(shift * rr + cos(ang) * rr * reach, sin(ang) * rr * 0.2)
+		var r: float = float(cw[1]) * k * (3.0 + 7.0 * _out(T, 4.0)) * (1.0 - 0.35 * dg)
+		var lift := k * 10.0 * _out(T, 6.0) * float(cw[1])
+		crown.append([base + Vector2(0, r * 0.6 + lift), r, dg])
+	for cw in crown:
+		_cloud(ci, _puff_blobs(cw[0], cw[1], cw[2], cw[2], k), _dust_pal(T - 2.0), origin, scale)
 	if back:
 		return
-	# Éclats de sol aux deux bouts, en paraboles, de plus en plus petits.
+	# Cailloux aux deux bouts, en paraboles : dessus clair, face, trait.
 	for side in [1.0, -1.0]:
-		var m: float = reach[side]
+		var m: float = 1.0 + 0.35 * s * side
 		for ch in CHIPS:
-			var t := float(a)
 			var ang := deg_to_rad(float(ch[0]))
 			var sp: float = float(ch[1]) * k * m
-			var p := Vector2(c.x + side * (16.0 * k * m + cos(ang) * sp * t), c.y + sin(ang) * sp * t - 0.2 * t * t)
-			if p.y < 0.0:
+			var p := Vector2(c.x + side * (float(ch[3]) * 20.0 * k * m + cos(ang) * sp * T),
+				sin(ang) * sp * T - 0.22 * T * T)
+			if p.y < 0.0 or T > 20.0:
 				continue
-			var size: float = float(ch[2]) * k * (1.0 if a < 8 else 0.6)
-			_square(ci, p, size + 1.2, DUST[2], origin, scale)
-			_square(ci, p, size, DUST[0] if a < 8 else DUST[1], origin, scale)
+			var size: float = float(ch[2]) * k * (1.0 if T < 11.0 else 0.65)
+			p = p.round()
+			_square(ci, p, size + 2.0, ROCK[2], origin, scale)
+			_square(ci, p, size, ROCK[1], origin, scale)
+			_square(ci, p + Vector2(-size * 0.2, size * 0.25), size * 0.5, ROCK[0], origin, scale)
 
 
-static func _boom(ci: CanvasItem, v: Dictionary, origin: Vector2, scale: float) -> void:
-	var a: int = int(v.age) - int(v.age) % 2
+# --- Bang d'air (propulsion) ---------------------------------------------------
+
+static func _boom(ci: CanvasItem, v: Dictionary, origin: Vector2, scale: float, layer := "devant") -> void:
+	var back := layer == "derriere"
+	var T := float(_key("choc", int(v.age)))
 	var k: float = v.taille
-	var d: float = v.dir
-	var dv := _dirv(d)
+	var dv := _dirv(v.dir)
+	var pv := Vector2(-dv.y, dv.x)          # perpendiculaire au vol
 	var c: Vector2 = v.pos
-	if a == 0:
-		# Flash : un seul croissant blanc, épais, au point de départ.
-		var fl := []
-		for i in 8:
-			var b0 := d - 60.0 + 15.0 * i
-			fl.append([c + _dirv(b0) * 20.0 * k, c + _dirv(b0 + 15.0) * 20.0 * k])
-		_strokes(ci, fl, 7.0 * k, AIR[0], AIR[2], origin, scale)
+	if T == 0.0:
+		# Image d'impact : disque d'air comprimé et lame blanche en travers du vol.
+		if back:
+			ci.draw_circle(_scr(c, origin, scale), 24.0 * k * scale, AIR[3])
+			ci.draw_circle(_scr(c, origin, scale), 22.5 * k * scale, AIR[2])
+			ci.draw_circle(_scr(c - dv * 3.0 * k, origin, scale), 17.0 * k * scale, AIR[1])
+			ci.draw_circle(_scr(c - dv * 5.0 * k, origin, scale), 11.0 * k * scale, AIR[0])
+		else:
+			_star(ci, c, v.dir + 90.0, 60.0 * k, 14.0 * k, 4.5 * k, AIR[3], origin, scale)
+			_star(ci, c, v.dir + 90.0, 55.0 * k, 11.0 * k, 3.0 * k, AIR[0], origin, scale)
 		return
-	# Trois croissants : le premier devant et large, les suivants plus en arrière
-	# et plus petits ; chacun apparaît une image après le précédent.
+	# Cône : deux lignes qui relient le bord des anneaux vers le corps.
+	if back and T <= 9.0:
+		var R0 := (16.0 + 26.0 * _out(T, 4.0)) * k
+		var tip := c + dv * 46.0 * k
+		var cg: float = [0.0, 0.0, 0.0, 0.34, 0.67][int(T / 2.0)] if T < 10.0 else 1.0
+		for sd in [1.0, -1.0]:
+			var a: Vector2 = c + pv * R0 * sd
+			var b: Vector2 = tip + pv * 7.0 * k * sd
+			var segs := []
+			for i in 6:
+				if _erased(i, 6, cg):
+					continue
+				segs.append([a.lerp(b, i / 6.0), a.lerp(b, (i + 1) / 6.0), (2.2 - 1.6 * i / 6.0) * k])
+			_strokes(ci, segs, AIR[1], AIR[3], origin, scale, 1.0)
+	# Trois anneaux laissés sur place, du plus grand (départ) au plus petit.
 	for j in 3:
-		var aj := a - 2 * j
-		if aj < 0:
+		var t := T - 2.0 * j
+		if t < 0.0:
 			continue
-		var uj := float(aj) / 12.0
-		var r := (26.0 - 5.0 * j + 16.0 * uj) * k
-		var cc := c - dv * (13.0 * j + 6.0 * uj) * k
-		var span := 58.0 - 8.0 * j
-		var w := (5.0 - 1.0 * j - 3.2 * uj) * k
-		if w < 0.6:
-			continue
-		var core: Color = AIR[0] if aj <= 2 else (AIR[1] if aj <= 6 else AIR[2])
-		var gone := clampf((float(aj) - 6.0) / 6.0, 0.0, 1.0)
-		var n := 8
-		var segs := []
-		for i in n:
-			if _erased(i, n, gone):
-				continue
-			var b0 := d - span + 2.0 * span * i / n
-			var b1 := d - span + 2.0 * span * (i + 1) / n
-			segs.append([cc + _dirv(b0) * r, cc + _dirv(b1) * r])
-		_strokes(ci, segs, w, core, AIR[3], origin, scale)
+		var cc := c + dv * 16.0 * j * k
+		var R := ((15.0 - 3.0 * j) + (26.0 - 6.0 * j) * _out(t, 4.0)) * k
+		var u := clampf(t / 16.0, 0.0, 1.0)
+		var w := (7.5 - 1.2 * j) * k * (1.0 - 0.7 * u)
+		var gone := clampf((t - 5.0) / 10.0, 0.0, 1.0)
+		var pal: Array = AIR if t <= 4.0 else AIR_OLD
+		var core_i := 0 if t <= 2.0 else 1
+		_air_band(ci, cc, pv * R, dv * R * 0.3, w, 0.5, gone, pal, back, origin, scale, 24, core_i)
