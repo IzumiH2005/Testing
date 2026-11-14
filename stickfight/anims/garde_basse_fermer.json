@@ -1,0 +1,12 @@
+{
+  "nom": "garde_basse_fermer",
+  "boucle": false,
+  "base": "garde_ouverte",
+  "suivante": "garde_basse",
+  "decalage": {"armN": 0, "foreN": 1, "armF": 1, "foreF": 2},
+  "cles": [
+    {"f": 0, "nom": "accroupi", "fixe": {"x": 0.0, "y": 57.0}, "plus": {"root": 6.0, "spineLow": 5.0, "chest": 3.0, "neck": -7.0, "armN": 3.0, "foreN": 3.0, "armF": 2.0, "foreF": 2.0}, "vise": {"legN": [41.93, 7.5], "legF": [-17.0, 11.5]}},
+    {"f": 4, "nom": "serre", "fixe": {"x": 0.0, "y": 52.5}, "plus": {"root": 9.5, "spineLow": 9.0, "chest": 8.0, "neck": -18.0}, "vise": {"legN": [41.93, 7.5], "legF": [-17.0, 11.5], "armN": [59.0, 97.0], "armF": [47.0, 106.0]}, "courbe": "dec", "pose": "garde"},
+    {"f": 8, "fixe": {"x": 0.0, "y": 54.0}, "plus": {"root": 9.5, "spineLow": 9.0, "chest": 7.0, "neck": -16.0}, "vise": {"legN": [41.93, 7.5], "legF": [-17.0, 11.5], "armN": [59.0, 97.0], "armF": [47.0, 106.0]}, "pose": "garde"}
+  ]
+}

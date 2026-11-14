@@ -1,0 +1,14 @@
+{
+  "nom": "garde_basse",
+  "boucle": true,
+  "longueur": 96,
+  "base": "garde",
+  "decalage": {"chest": 3, "neck": 4, "armN": 5, "foreN": 6, "armF": 7, "foreF": 8},
+  "cles": [
+    {"f": 0, "nom": "garde basse", "fixe": {"x": 0.0, "y": 54.0}, "plus": {"root": 9.5, "spineLow": 9.0, "chest": 7.0, "neck": -16.0}, "vise": {"legN": [41.93, 7.5], "legF": [-17.0, 11.5], "armN": [59.0, 97.0], "armF": [47.0, 106.0]}},
+    {"f": 20, "nom": "expire", "fixe": {"x": 0.0, "y": 52.2}, "plus": {"root": 9.5, "spineLow": 9.0, "chest": 8.0, "neck": -16.8}, "vise": {"legN": [41.93, 7.5], "legF": [-17.0, 11.5], "armN": [59.0, 95.6], "armF": [47.0, 104.6]}},
+    {"f": 48, "nom": "inspire", "fixe": {"x": 0.0, "y": 54.3}, "plus": {"root": 9.5, "spineLow": 9.0, "chest": 6.7, "neck": -15.5}, "vise": {"legN": [41.93, 7.5], "legF": [-17.0, 11.5], "armN": [59.0, 97.3], "armF": [47.0, 106.3]}},
+    {"f": 70, "nom": "expire", "fixe": {"x": 0.0, "y": 52.6}, "plus": {"root": 9.5, "spineLow": 9.0, "chest": 7.8, "neck": -16.6}, "vise": {"legN": [41.93, 7.5], "legF": [-17.0, 11.5], "armN": [59.0, 95.9], "armF": [47.0, 104.9]}},
+    {"f": 96, "nom": "garde basse", "fixe": {"x": 0.0, "y": 54.0}, "plus": {"root": 9.5, "spineLow": 9.0, "chest": 7.0, "neck": -16.0}, "vise": {"legN": [41.93, 7.5], "legF": [-17.0, 11.5], "armN": [59.0, 97.0], "armF": [47.0, 106.0]}}
+  ]
+}

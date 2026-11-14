@@ -1,0 +1,13 @@
+{
+  "nom": "garde_basse_sortie",
+  "boucle": false,
+  "base": "garde",
+  "suivante": "garde_idle",
+  "decalage": {"chest": 2, "neck": 3, "armN": 1, "foreN": 2, "armF": 2, "foreF": 3},
+  "cles": [
+    {"f": 0, "nom": "garde basse", "fixe": {"x": 0.0, "y": 54.0}, "plus": {"root": 9.5, "spineLow": 9.0, "chest": 7.0, "neck": -16.0}, "vise": {"legN": [41.93, 7.5], "legF": [-17.0, 11.5], "armN": [59.0, 97.0], "armF": [47.0, 106.0]}, "courbe": "auto"},
+    {"f": 3, "nom": "appui", "fixe": {"x": 0.0, "y": 52.5}, "plus": {"root": 9.5, "spineLow": 9.0, "chest": 8.0, "neck": -16.6}, "vise": {"legN": [41.93, 7.5], "legF": [-17.0, 11.5], "armN": [59.0, 95.5], "armF": [47.0, 104.5]}, "courbe": "acc-dec"},
+    {"f": 9, "nom": "poussée, le pied arrière recule", "courbe": "auto", "fixe": {"x": 12.8, "y": 73.73}, "plus": {"root": -0.8, "spineLow": -0.6, "chest": -0.8, "neck": 0.8}, "vise": {"legN": [41.93, 7.5], "legF": [-28.0, 10.5]}},
+    {"f": 16, "nom": "garde", "fixe": {"x": 12.0}, "ancre": false}
+  ]
+}

@@ -140,6 +140,11 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `accroupi_entree` | 12 i, recule 12 | Depuis la garde ouverte ou fermée (↓ maintenu) : le pied arrière glisse vers l'avant sur la pointe, le bassin descend et recule pour que le genou arrière reste décollé du sol, le buste se penche, petit écrasement puis `accroupi_idle` |
 | `accroupi_idle` | 96 i, en boucle | Accroupi en garde ouverte : respiration lente (le bassin s'abaisse et le dos se voûte à l'expiration), garde haute qui suit avec retard |
 | `accroupi_sortie` | 16 i, avance 12 | ↓ relâché : appui bref, poussée des jambes, le pied arrière recule à sa place de garde, puis `garde_ouverte_idle` |
+| `garde_basse` | 96 i, en boucle | Garde basse : accroupi comme `accroupi_idle`, garde fermée. Le buste se penche plus, les avant-bras se dressent devant le visage, coudes posés près du genou avant pour couvrir le ventre. Même respiration, les bras suivent avec retard |
+| `garde_basse_entree` | 12 i, recule 12 | Depuis la garde (↓ + ← maintenus) : même descente qu'`accroupi_entree`, les poings remontent devant le visage pendant l'écrasement, puis `garde_basse` |
+| `garde_basse_fermer` | 8 i | Accroupi en garde ouverte, ← : le buste se penche et les bras se referment devant le visage, puis `garde_basse` |
+| `garde_basse_ouvrir` | 12 i | 10 images sans ← en garde basse : le buste se redresse et la garde se rouvre, puis `accroupi_idle` |
+| `garde_basse_sortie` | 16 i, avance 12 | ↓ relâché : même relevé qu'`accroupi_sortie`, la garde reste fermée, puis `garde_idle` |
 | `accroupi_repos_entree` | 28 i, recule 3 | Depuis le repos (↓ maintenu), sans passer par la garde : les genoux cèdent, la main avant part devant et se pose au sol devant le pied avant, le pied arrière monte sur la pointe, petit tassement sur la main puis `accroupi_repos_idle` |
 | `accroupi_repos_idle` | 104 i, en boucle | Accroupi détendu, une main au sol : respiration lente (le dos se voûte à l'expiration), le bras libre suit avec retard. La main et les pieds restent fixes |
 | `accroupi_repos_sortie` | 30 i, avance 3 | ↓ relâché : appui sur la main, poussée qui la décolle, le buste se relève, léger dépassement puis `idle_repos` |
@@ -246,7 +251,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | ↑ | Depuis le repos : saut sur place ; ↑ + → saut avant, ↑ + ← saut arrière (↑ reste accepté dans les 6 premières images d'un départ de marche). Réception, puis retour au repos |
 | Maj + ↑ | Saut boosté sur place ; avec → ou ←, saut boosté avant ou arrière (accepté aussi au début d'un départ de marche ou de course). Atterrissage sur trois appuis, réception lourde, puis repos |
 | ↓ tenu, puis → ou ← | Propulsion rasante avant ou arrière depuis l'accroupi ; avec ↑ en plus, propulsion haute. Le combattant revient accroupi |
-| G maintenu | Mise en garde (garde ouverte) ; avec →, marche en garde ; ← ferme la garde (défensive) puis recule, et la garde se rouvre après 10 images sans ← ; → → ou ← ← (double appui rapide) : dash avant ou arrière ; ↓ maintenu : accroupi en garde ; relâché, sortie de garde et retour au repos |
+| G maintenu | Mise en garde (garde ouverte) ; avec →, marche en garde ; ← ferme la garde (défensive) puis recule, et la garde se rouvre après 10 images sans ← ; → → ou ← ← (double appui rapide) : dash avant ou arrière ; ↓ maintenu : accroupi en garde ; ↓ + ← : garde basse (accroupi, garde fermée), et ← ferme aussi la garde quand on est déjà accroupi ; elle se rouvre après 10 images sans ←, et se relève en garde fermée quand ↓ est relâché ; G relâché, sortie de garde et retour au repos |
 | T | Demi-tour (en garde) : le combattant se retrouve tourné de l'autre côté. Les flèches restent celles de l'écran : retourné, → recule et ← avance |
 | B | Blocage bas (en garde) |
 | K | Duo coup de pied / blocage (en boucle) |

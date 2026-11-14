@@ -1,0 +1,13 @@
+{
+  "nom": "garde_basse_entree",
+  "boucle": false,
+  "base": "garde",
+  "suivante": "garde_basse",
+  "decalage": {"chest": 2, "neck": 3, "armN": 1, "foreN": 2, "armF": 2, "foreF": 3},
+  "cles": [
+    {"f": 0, "courbe": "auto"},
+    {"f": 3, "nom": "le pied arrière glisse", "courbe": "auto", "fixe": {"x": -5.4, "y": 65.32}, "plus": {"root": 3.5, "spineLow": 3.5, "chest": 2.5, "neck": -6.0}, "vise": {"legN": [29.93, 7.5], "legF": [-40.0, 10.0]}},
+    {"f": 6, "nom": "écrasé", "fixe": {"x": -12.0, "y": 51.5}, "plus": {"root": 10.0, "spineLow": 10.0, "chest": 8.5, "neck": -17.5}, "vise": {"legN": [29.93, 7.5], "legF": [-29.0, 11.5], "armN": [47.0, 95.5], "armF": [35.0, 104.5]}, "courbe": "acc-dec"},
+    {"f": 12, "nom": "garde basse", "fixe": {"x": -12.0, "y": 54.0}, "plus": {"root": 9.5, "spineLow": 9.0, "chest": 7.0, "neck": -16.0}, "vise": {"legN": [29.93, 7.5], "legF": [-29.0, 11.5], "armN": [47.0, 97.0], "armF": [35.0, 106.0]}}
+  ]
+}

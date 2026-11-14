@@ -1,0 +1,12 @@
+{
+  "nom": "garde_basse_ouvrir",
+  "boucle": false,
+  "base": "garde",
+  "suivante": "accroupi_idle",
+  "decalage": {"chest": 1, "neck": 2, "armN": 2, "foreN": 3, "armF": 3, "foreF": 4},
+  "cles": [
+    {"f": 0, "nom": "garde basse", "fixe": {"x": 0.0, "y": 54.0}, "plus": {"root": 9.5, "spineLow": 9.0, "chest": 7.0, "neck": -16.0}, "vise": {"legN": [41.93, 7.5], "legF": [-17.0, 11.5], "armN": [59.0, 97.0], "armF": [47.0, 106.0]}},
+    {"f": 6, "nom": "relache", "pose": "garde_ouverte", "courbe": "acc-dec", "fixe": {"x": 0.0, "y": 56.2}, "plus": {"root": 6.0, "spineLow": 5.0, "chest": 3.0, "neck": -7.0, "armN": 1.0, "foreN": 0.0, "armF": 1.0, "foreF": 0.0}, "vise": {"legN": [41.93, 7.5], "legF": [-17.0, 11.5]}},
+    {"f": 12, "nom": "accroupi", "pose": "garde_ouverte", "fixe": {"x": 0.0, "y": 57.0}, "plus": {"root": 6.0, "spineLow": 5.0, "chest": 3.0, "neck": -7.0, "armN": 3.0, "foreN": 3.0, "armF": 2.0, "foreF": 2.0}, "vise": {"legN": [41.93, 7.5], "legF": [-17.0, 11.5]}}
+  ]
+}

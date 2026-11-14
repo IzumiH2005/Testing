@@ -11,6 +11,7 @@ extends Control
 ##   G  maintenu : mise en garde (garde ouverte) ; avec →, marche en garde ;
 ##      ← ferme la garde (défensive) et recule ; → → (double
 ##      appui) dash avant, ← ← dash arrière ; ↓ maintenu, accroupi ;
+##      ↓ + ←, garde basse (accroupi, garde fermée) ;
 ##      relâché, le combattant sort de la garde et revient au repos.
 ##   ↓  maintenu depuis le repos : accroupi, une main au sol ; relâché, il se
 ##      relève au repos.
@@ -32,7 +33,7 @@ const SAUT_TOLERANCE := 6
 ## Images minimales passées dans accroupi_repos_idle avant qu'une propulsion
 ## puisse partir (le fondu de retour de la propulsion précédente se termine).
 const PROPULSION_DELAI := 4
-const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   ↑ sauter (+ → / ← : avant / arrière)   Maj + ↑ saut boosté   ↓ puis → / ← propulsion (+ ↑ haute)   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, B blocage bas, T demi-tour)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   ↑ sauter (+ → / ← : avant / arrière)   Maj + ↑ saut boosté   ↓ puis → / ← propulsion (+ ↑ haute)   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, ↓ + ← garde basse, B blocage bas, T demi-tour)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
 var planche: Planche
 var help: Label
@@ -54,6 +55,8 @@ var dash_req := false
 var backdash_req := false
 ## T appuyé (demi-tour), consommé de la même façon.
 var tour_req := false
+## Images passées en garde basse sans ←, pour la rouvrir après ROUVRIR.
+var gb_sans_recul := 0
 ## Centre de la caméra en solo (suit le bassin avec un peu de retard).
 var cam_x := 8.0
 ## Vitesse lissée du bassin : la caméra regarde devant quand on court.
@@ -203,6 +206,9 @@ const ARRETS := {
 ##   lancée par le premier appui ; il revient en garde ouverte. ← ← lance le
 ##   dash arrière, qui ferme la garde ;
 ## - ↓ tenu en garde : accroupi, qui se relève en garde ouverte ;
+## - ↓ + ← en garde : garde basse (accroupi, garde fermée), qui se relève en
+##   garde fermée. Accroupi en garde ouverte, ← ferme la garde basse ; sans ←
+##   pendant ROUVRIR images, elle se rouvre en accroupi ;
 ## - T en garde : demi-tour sur place, qui finit en garde ouverte tournée de
 ##   l'autre côté. Les flèches restent celles de l'écran : retourné, → recule
 ##   et ← avance.
@@ -274,9 +280,18 @@ func _control_input() -> void:
 				f.play(ARRETS[nom][phase], 0)
 		"garde_ouverte_idle", "garde_ouvrir", "garde_idle", "garde_fermer":
 			_guard_input(f, nom, guard, fwd, back, down, dash, backdash, tour)
-		"accroupi_idle":
+		"accroupi_idle", "garde_basse_ouvrir":
 			if not (down and guard):
-				f.play("accroupi_sortie", 3)
+				f.play("accroupi_sortie", 3 if nom == "accroupi_idle" else 5)
+			elif back:
+				gb_sans_recul = 0
+				f.play("garde_basse_fermer", 0 if nom == "accroupi_idle" else 4)
+		"garde_basse":
+			gb_sans_recul = 0 if back else gb_sans_recul + 1
+			if not (down and guard):
+				f.play("garde_basse_sortie", 3)
+			elif gb_sans_recul >= ROUVRIR:
+				f.play("garde_basse_ouvrir", 0)
 		"marche_avant", "marche_arriere":
 			if dash and guard and nom == "marche_avant" and f.t < DOUBLE_APPUI:
 				f.play("dash_avant", 4)
@@ -298,6 +313,9 @@ func _guard_input(f: Fighter, nom: String, guard: bool, fwd: bool, back: bool,
 	var ouverte := nom in ["garde_ouverte_idle", "garde_ouvrir"]
 	if not guard:
 		f.play("sortie_de_garde", 6)
+	elif down and back:
+		gb_sans_recul = 0
+		f.play("garde_basse_entree", 5 if ouverte else 3)
 	elif down:
 		f.play("accroupi_entree", 3 if ouverte else 5)
 	elif dash:

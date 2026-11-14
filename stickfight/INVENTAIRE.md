@@ -155,7 +155,7 @@ par sa propre version (marquées ✱ quand c'est presque toujours le cas).
 | # | Animation | État |
 |---|---|---|
 | 1 | Garde haute tenue | fait (garde fermée) |
-| 2 | Garde accroupie tenue | |
+| 2 | Garde accroupie tenue | fait (`garde_basse`) |
 | 3 | Blocage bas debout | fait |
 | 4-9 | Recul sur garde léger, moyen, lourd × haut et bas | |
 | 10 | Garde repoussée (gros coup bloqué, les pieds glissent) | |
@@ -498,7 +498,7 @@ mêmes jambes : seuls le buste et les bras changent.
 | Déplacements | Propulsion avant, arrière, rasante ou haute, depuis l'accroupi main au sol | `propulsion_*` | fait |
 | Déplacements | Demi-tour | `demi_tour` | fait |
 | Défense | Garde haute tenue (garde fermée) | `garde_idle` | fait |
-| Défense | Garde accroupie tenue | `garde_basse` | |
+| Défense | Garde accroupie tenue : boucle, entrée, sortie, fermer, ouvrir | `garde_basse*` | fait |
 | Défense | Recul sur garde haut et bas | `recul_garde_haut`, `recul_garde_bas` | |
 | Défense | Parade haute, parade basse | `parade_haute`, `parade_basse` | |
 | Défense | Esquive buste en arrière (sway), se baisser | `esquive_sway`, `esquive_baisse` | |
