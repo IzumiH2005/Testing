@@ -20,6 +20,8 @@ extends Control
 ##      bas en garde basse) ; H léger, Maj + H moyen, Ctrl + H lourd ;
 ##      Ctrl + Maj + H : très gros coup, la garde est repoussée (les pieds
 ##      glissent loin ; en garde basse, recul lourd).
+##   J  en garde : coup qui brise la garde (bras ouverts, vulnérable ;
+##      en garde basse, recul lourd).
 ##   B  blocage bas (en garde)   K  duo coup de pied direct + blocage bas
 ##   R  repos (remise à zéro)
 ##   Espace  pause    → / ←  image suivante / précédente (en pause)
@@ -37,7 +39,7 @@ const SAUT_TOLERANCE := 6
 ## Images minimales passées dans accroupi_repos_idle avant qu'une propulsion
 ## puisse partir (le fondu de retour de la propulsion précédente se termine).
 const PROPULSION_DELAI := 4
-const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   ↑ sauter (+ → / ← : avant / arrière)   Maj + ↑ saut boosté   ↓ puis → / ← propulsion (+ ↑ haute)   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, ↓ + ← garde basse, B blocage bas, T demi-tour, H / Maj + H / Ctrl + H coup bloqué, Ctrl + Maj + H garde repoussée)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   ↑ sauter (+ → / ← : avant / arrière)   Maj + ↑ saut boosté   ↓ puis → / ← propulsion (+ ↑ haute)   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, ↓ + ← garde basse, B blocage bas, T demi-tour, H / Maj + H / Ctrl + H coup bloqué, Ctrl + Maj + H garde repoussée, J garde brisée)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
 var planche: Planche
 var help: Label
@@ -250,11 +252,12 @@ func _control_input() -> void:
 	if coup != "":
 		if nom in ["garde_basse", "garde_basse_fermer"] or nom.begins_with("recul_garde_bas_"):
 			gb_sans_recul = 0
-			f.play("recul_garde_bas_" + ("lourd" if coup == "repousse" else coup), 1)
+			f.play("recul_garde_bas_" + ("lourd" if coup in ["repousse", "brise"] else coup), 1)
 			return
 		if nom in ["garde_ouverte_idle", "garde_ouvrir", "garde_idle", "garde_fermer"] \
 				or nom.begins_with("recul_garde_haut_") or nom == "garde_repoussee":
-			f.play("garde_repoussee" if coup == "repousse" else "recul_garde_haut_" + coup, 1)
+			f.play("garde_brisee" if coup == "brise" else "garde_repoussee" if coup == "repousse" \
+					else "recul_garde_haut_" + coup, 1)
 			return
 	match nom:
 		"idle_repos":
@@ -439,6 +442,9 @@ func _gui_input(ev: InputEvent) -> void:
 			if not ev.echo:
 				coup_req = ("repousse" if ev.shift_pressed else "lourd") if ev.ctrl_pressed \
 						else "moyen" if ev.shift_pressed else "leger"
+		KEY_J:
+			if not ev.echo:
+				coup_req = "brise"
 		KEY_L:
 			slow = 4 if slow == 1 else 1
 			_refresh()
