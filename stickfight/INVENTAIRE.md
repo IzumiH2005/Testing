@@ -489,7 +489,7 @@ mêmes jambes : seuls le buste et les bras changent.
 | Postures | Debout → accroupi | `accroupi_entree` | fait |
 | Postures | Accroupi, respiration (boucle) | `accroupi_idle` | fait |
 | Postures | Accroupi → debout | `accroupi_sortie` | fait |
-| Postures | Accroupi depuis le repos, une main au sol : entrée, respiration, sortie | `accroupi_repos_*` | |
+| Postures | Accroupi depuis le repos, une main au sol : entrée, respiration, sortie | `accroupi_repos_*` | fait |
 | Postures | Sortie de garde (garde → repos) | `sortie_de_garde` | fait |
 | Déplacements | Saut neutre, avant, arrière | `saut_*` | |
 | Déplacements | Réception légère | `reception` | |

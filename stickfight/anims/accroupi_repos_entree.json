@@ -1,0 +1,468 @@
+{
+ "nom": "accroupi_repos_entree",
+ "boucle": false,
+ "base": "repos",
+ "suivante": "accroupi_repos_idle",
+ "decalage": {
+  "neck": 2,
+  "armF": 2,
+  "foreF": 3
+ },
+ "cles": [
+  {
+   "f": 0,
+   "nom": "repos",
+   "courbe": "acc"
+  },
+  {
+   "f": 4,
+   "nom": "les genoux cèdent",
+   "courbe": "auto",
+   "fixe": {
+    "x": -0.3,
+    "y": 84.5,
+    "root": -8,
+    "spineLow": 8,
+    "chest": 10,
+    "neck": 6,
+    "armN": -4,
+    "foreN": 12,
+    "armF": 6,
+    "foreF": 12
+   },
+   "vise": {
+    "legN": [
+     -20.8,
+     8.2
+    ],
+    "legF": [
+     21.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 10,
+   "nom": "descente, la main part devant",
+   "courbe": "auto",
+   "fixe": {
+    "x": -1.8,
+    "y": 61,
+    "root": 0,
+    "spineLow": 17,
+    "chest": 15,
+    "neck": -16,
+    "armN": 38,
+    "foreN": 22,
+    "armF": 16,
+    "foreF": 50
+   },
+   "vise": {
+    "legN": [
+     -18,
+     12.5
+    ],
+    "legF": [
+     21.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 14,
+   "nom": "la main approche du sol",
+   "courbe": "auto",
+   "fixe": {
+    "x": -2.8,
+    "y": 43.5,
+    "root": 4,
+    "spineLow": 26,
+    "chest": 22,
+    "neck": -36,
+    "armF": 22,
+    "foreF": 95
+   },
+   "vise": {
+    "armN": [
+     56.5,
+     17
+    ],
+    "legN": [
+     -15.5,
+     15.4
+    ],
+    "legF": [
+     21.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 16,
+   "nom": "contact de la main",
+   "courbe": "lin",
+   "fixe": {
+    "x": -3.0,
+    "y": 39.2,
+    "root": 6.0,
+    "spineLow": 29.0,
+    "chest": 25.0,
+    "neck": -44.0,
+    "armF": 24.0,
+    "foreF": 110.0
+   },
+   "vise": {
+    "armN": [
+     56.0,
+     8.5
+    ],
+    "legN": [
+     -15.0,
+     15.9
+    ],
+    "legF": [
+     21.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 17,
+   "courbe": "lin",
+   "fixe": {
+    "x": -3.0,
+    "y": 38.101,
+    "root": 6.257,
+    "spineLow": 30.124,
+    "chest": 26.124,
+    "neck": -47.125,
+    "armF": 24.8,
+    "foreF": 114.238
+   },
+   "vise": {
+    "armN": [
+     56.0,
+     8.5
+    ],
+    "legN": [
+     -15.0,
+     15.9
+    ],
+    "legF": [
+     21.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 18,
+   "courbe": "lin",
+   "fixe": {
+    "x": -3.0,
+    "y": 37.245,
+    "root": 6.434,
+    "spineLow": 31.09,
+    "chest": 27.09,
+    "neck": -49.84,
+    "armF": 25.5,
+    "foreF": 117.619
+   },
+   "vise": {
+    "armN": [
+     56.0,
+     8.5
+    ],
+    "legN": [
+     -15.0,
+     15.9
+    ],
+    "legF": [
+     21.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 19,
+   "nom": "tassement",
+   "courbe": "lin",
+   "fixe": {
+    "x": -3.0,
+    "y": 36.9,
+    "root": 6.5,
+    "spineLow": 31.5,
+    "chest": 27.5,
+    "neck": -51.0,
+    "armF": 25.8,
+    "foreF": 119.0
+   },
+   "vise": {
+    "armN": [
+     56.0,
+     8.5
+    ],
+    "legN": [
+     -15.0,
+     15.9
+    ],
+    "legF": [
+     21.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 20,
+   "courbe": "lin",
+   "fixe": {
+    "x": -3.0,
+    "y": 36.938,
+    "root": 6.483,
+    "spineLow": 31.449,
+    "chest": 27.449,
+    "neck": -50.897,
+    "armF": 25.778,
+    "foreF": 118.845
+   },
+   "vise": {
+    "armN": [
+     56.0,
+     8.5
+    ],
+    "legN": [
+     -15.0,
+     15.9
+    ],
+    "legF": [
+     21.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 21,
+   "courbe": "lin",
+   "fixe": {
+    "x": -3.0,
+    "y": 37.039,
+    "root": 6.437,
+    "spineLow": 31.311,
+    "chest": 27.311,
+    "neck": -50.621,
+    "armF": 25.72,
+    "foreF": 118.428
+   },
+   "vise": {
+    "armN": [
+     56.0,
+     8.5
+    ],
+    "legN": [
+     -15.0,
+     15.9
+    ],
+    "legF": [
+     21.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 22,
+   "courbe": "lin",
+   "fixe": {
+    "x": -3.0,
+    "y": 37.185,
+    "root": 6.37,
+    "spineLow": 31.111,
+    "chest": 27.111,
+    "neck": -50.222,
+    "armF": 25.637,
+    "foreF": 117.826
+   },
+   "vise": {
+    "armN": [
+     56.0,
+     8.5
+    ],
+    "legN": [
+     -15.0,
+     15.9
+    ],
+    "legF": [
+     21.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 23,
+   "courbe": "lin",
+   "fixe": {
+    "x": -3.0,
+    "y": 37.359,
+    "root": 6.291,
+    "spineLow": 30.874,
+    "chest": 26.874,
+    "neck": -49.749,
+    "armF": 25.537,
+    "foreF": 117.111
+   },
+   "vise": {
+    "armN": [
+     56.0,
+     8.5
+    ],
+    "legN": [
+     -15.0,
+     15.9
+    ],
+    "legF": [
+     21.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 24,
+   "courbe": "lin",
+   "fixe": {
+    "x": -3.0,
+    "y": 37.541,
+    "root": 6.209,
+    "spineLow": 30.626,
+    "chest": 26.626,
+    "neck": -49.251,
+    "armF": 25.433,
+    "foreF": 116.359
+   },
+   "vise": {
+    "armN": [
+     56.0,
+     8.5
+    ],
+    "legN": [
+     -15.0,
+     15.9
+    ],
+    "legF": [
+     21.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 25,
+   "courbe": "lin",
+   "fixe": {
+    "x": -3.0,
+    "y": 37.715,
+    "root": 6.13,
+    "spineLow": 30.389,
+    "chest": 26.389,
+    "neck": -48.778,
+    "armF": 25.333,
+    "foreF": 115.644
+   },
+   "vise": {
+    "armN": [
+     56.0,
+     8.5
+    ],
+    "legN": [
+     -15.0,
+     15.9
+    ],
+    "legF": [
+     21.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 26,
+   "courbe": "lin",
+   "fixe": {
+    "x": -3.0,
+    "y": 37.861,
+    "root": 6.063,
+    "spineLow": 30.189,
+    "chest": 26.189,
+    "neck": -48.379,
+    "armF": 25.25,
+    "foreF": 115.042
+   },
+   "vise": {
+    "armN": [
+     56.0,
+     8.5
+    ],
+    "legN": [
+     -15.0,
+     15.9
+    ],
+    "legF": [
+     21.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 27,
+   "courbe": "lin",
+   "fixe": {
+    "x": -3.0,
+    "y": 37.962,
+    "root": 6.017,
+    "spineLow": 30.051,
+    "chest": 26.051,
+    "neck": -48.103,
+    "armF": 25.192,
+    "foreF": 114.625
+   },
+   "vise": {
+    "armN": [
+     56.0,
+     8.5
+    ],
+    "legN": [
+     -15.0,
+     15.9
+    ],
+    "legF": [
+     21.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 28,
+   "nom": "accroupi",
+   "courbe": "lin",
+   "fixe": {
+    "x": -3,
+    "y": 38,
+    "root": 6,
+    "spineLow": 30,
+    "chest": 26,
+    "neck": -48,
+    "armF": 25.17,
+    "foreF": 114.47
+   },
+   "vise": {
+    "armN": [
+     56.0,
+     8.5
+    ],
+    "legN": [
+     -15.0,
+     15.9
+    ],
+    "legF": [
+     21.1,
+     7.5
+    ]
+   }
+  }
+ ]
+}

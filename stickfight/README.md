@@ -140,6 +140,9 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `accroupi_entree` | 12 i, recule 12 | Depuis la garde ouverte ou fermée (↓ maintenu) : le pied arrière glisse vers l'avant sur la pointe, le bassin descend et recule pour que le genou arrière reste décollé du sol, le buste se penche, petit écrasement puis `accroupi_idle` |
 | `accroupi_idle` | 96 i, en boucle | Accroupi en garde ouverte : respiration lente (le bassin s'abaisse et le dos se voûte à l'expiration), garde haute qui suit avec retard |
 | `accroupi_sortie` | 16 i, avance 12 | ↓ relâché : appui bref, poussée des jambes, le pied arrière recule à sa place de garde, puis `garde_ouverte_idle` |
+| `accroupi_repos_entree` | 28 i, recule 3 | Depuis le repos (↓ maintenu), sans passer par la garde : les genoux cèdent, la main avant part devant et se pose au sol devant le pied avant, le pied arrière monte sur la pointe, petit tassement sur la main puis `accroupi_repos_idle` |
+| `accroupi_repos_idle` | 104 i, en boucle | Accroupi détendu, une main au sol : respiration lente (le dos se voûte à l'expiration), le bras libre suit avec retard. La main et les pieds restent fixes |
+| `accroupi_repos_sortie` | 30 i, avance 3 | ↓ relâché : appui sur la main, poussée qui la décolle, le buste se relève, léger dépassement puis `idle_repos` |
 
 Une clé part d'une pose (`poses/`), applique des réglages (`plus`, `fixe`,
 `vise` pour placer une main ou un pied en cinématique inverse), et choisit la
@@ -190,7 +193,8 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | → ou ← maintenu | Depuis le repos : marche détendue avant ou arrière ; relâché, le pas en cours se termine et le combattant s'arrête au repos. La caméra suit |
 | Maj + → maintenus | Depuis le repos : départ de course puis course ; relâchés, le combattant freine au prochain appui et revient au repos |
 | Ctrl + → maintenus | Depuis le repos : départ de sprint puis sprint ; relâchés, freinage en glissade au prochain appui et retour au repos. La caméra regarde devant en proportion de la vitesse |
-| G maintenu | Mise en garde (garde ouverte) ; avec →, marche en garde ; ← ferme la garde (défensive) puis recule, et la garde se rouvre après 10 images sans ← ; → → ou ← ← (double appui rapide) : dash avant ou arrière ; ↓ maintenu : accroupi ; relâché, sortie de garde et retour au repos |
+| ↓ maintenu | Depuis le repos : accroupi détendu, une main posée au sol ; relâché, le combattant se relève au repos |
+| G maintenu | Mise en garde (garde ouverte) ; avec →, marche en garde ; ← ferme la garde (défensive) puis recule, et la garde se rouvre après 10 images sans ← ; → → ou ← ← (double appui rapide) : dash avant ou arrière ; ↓ maintenu : accroupi en garde ; relâché, sortie de garde et retour au repos |
 | B | Blocage bas (en garde) |
 | K | Duo coup de pied / blocage (en boucle) |
 | R | Repos (remise à zéro) |

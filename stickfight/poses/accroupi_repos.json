@@ -1,0 +1,23 @@
+{
+  "nom": "accroupi_repos",
+  "style": "epais",
+  "x": -3,
+  "y": 38,
+  "facing": 1,
+  "angles": {
+    "root": 6,
+    "spineLow": 30,
+    "chest": 26,
+    "neck": -48,
+    "armF": 25.17,
+    "foreF": 114.47,
+    "armN": 70.09,
+    "foreN": 30.81,
+    "thighF": 107.63,
+    "shinF": 124.26,
+    "footF": 22.63,
+    "thighN": 55.61,
+    "shinN": 146.84,
+    "footN": 30
+  }
+}

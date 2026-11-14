@@ -12,6 +12,8 @@ extends Control
 ##      ← ferme la garde (défensive) et recule ; → → (double
 ##      appui) dash avant, ← ← dash arrière ; ↓ maintenu, accroupi ;
 ##      relâché, le combattant sort de la garde et revient au repos.
+##   ↓  maintenu depuis le repos : accroupi, une main au sol ; relâché, il se
+##      relève au repos.
 ##   B  blocage bas (en garde)   K  duo coup de pied direct + blocage bas
 ##   R  repos (remise à zéro)
 ##   Espace  pause    → / ←  image suivante / précédente (en pause)
@@ -23,7 +25,7 @@ const HISTORY_MAX := 600
 const DOUBLE_APPUI := 14
 ## Images en garde fermée, sans ← ni action, avant qu'elle se rouvre.
 const ROUVRIR := 10
-const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
 var planche: Planche
 var help: Label
@@ -168,6 +170,8 @@ const ARRETS := {
 ##   elle freine à la prochaine pose d'appui (image 0 ou 20) et revient au repos ;
 ## - Ctrl + → depuis le repos lance le sprint ; relâchées, il freine en
 ##   glissade à la prochaine pose d'appui (image 0 ou 14) ;
+## - ↓ tenu depuis le repos : accroupi détendu, une main posée au sol ;
+##   relâché, il se relève au repos ;
 ## - G tenu met en garde (depuis le repos) : garde ouverte, prête à se battre ;
 ##   → y fait la marche en garde, qui s'arrête à l'image 0 de son cycle ;
 ## - ← en garde ouverte ferme la garde (garde défensive, comme on bloque en
@@ -204,6 +208,11 @@ func _control_input() -> void:
 				f.play("marche_detendue_depart", 6)
 			elif back:
 				f.play("marche_detendue_arriere_depart", 6)
+			elif down:
+				f.play("accroupi_repos_entree", 4)
+		"accroupi_repos_idle":
+			if not down:
+				f.play("accroupi_repos_sortie", 3)
 		"marche_detendue", "marche_detendue_arriere", "course", "sprint":
 			var held: bool = {"marche_detendue": fwd, "marche_detendue_arriere": back,
 					"course": fwd and run, "sprint": fwd and sprint}[nom]

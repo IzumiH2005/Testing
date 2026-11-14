@@ -1,0 +1,284 @@
+{
+ "nom": "accroupi_repos_sortie",
+ "boucle": false,
+ "base": "repos",
+ "suivante": "idle_repos",
+ "decalage": {
+  "neck": 2,
+  "armF": 2,
+  "foreF": 3
+ },
+ "cles": [
+  {
+   "f": 0,
+   "nom": "accroupi",
+   "courbe": "lin",
+   "fixe": {
+    "x": 0,
+    "y": 38,
+    "root": 6,
+    "spineLow": 30,
+    "chest": 26,
+    "neck": -48,
+    "armF": 25.17,
+    "foreF": 114.47
+   },
+   "vise": {
+    "armN": [
+     59.0,
+     8.5
+    ],
+    "legN": [
+     -12.0,
+     15.9
+    ],
+    "legF": [
+     24.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 1,
+   "courbe": "lin",
+   "fixe": {
+    "x": 0.0,
+    "y": 37.812,
+    "root": 6.0,
+    "spineLow": 30.234,
+    "chest": 26.312,
+    "neck": -48.391,
+    "armF": 25.326,
+    "foreF": 114.939
+   },
+   "vise": {
+    "armN": [
+     59.0,
+     8.5
+    ],
+    "legN": [
+     -12.0,
+     15.9
+    ],
+    "legF": [
+     24.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 2,
+   "courbe": "lin",
+   "fixe": {
+    "x": 0.0,
+    "y": 37.4,
+    "root": 6.0,
+    "spineLow": 30.75,
+    "chest": 27.0,
+    "neck": -49.25,
+    "armF": 25.67,
+    "foreF": 115.97
+   },
+   "vise": {
+    "armN": [
+     59.0,
+     8.5
+    ],
+    "legN": [
+     -12.0,
+     15.9
+    ],
+    "legF": [
+     24.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 3,
+   "courbe": "lin",
+   "fixe": {
+    "x": 0.0,
+    "y": 36.987,
+    "root": 6.0,
+    "spineLow": 31.266,
+    "chest": 27.688,
+    "neck": -50.109,
+    "armF": 26.014,
+    "foreF": 117.001
+   },
+   "vise": {
+    "armN": [
+     59.0,
+     8.5
+    ],
+    "legN": [
+     -12.0,
+     15.9
+    ],
+    "legF": [
+     24.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 4,
+   "nom": "appui sur la main",
+   "courbe": "lin",
+   "fixe": {
+    "x": 0.0,
+    "y": 36.8,
+    "root": 6.0,
+    "spineLow": 31.5,
+    "chest": 28.0,
+    "neck": -50.5,
+    "armF": 26.17,
+    "foreF": 117.47
+   },
+   "vise": {
+    "armN": [
+     59.0,
+     8.5
+    ],
+    "legN": [
+     -12.0,
+     15.9
+    ],
+    "legF": [
+     24.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 5,
+   "courbe": "lin",
+   "fixe": {
+    "x": 0.062,
+    "y": 38.277,
+    "root": 5.48,
+    "spineLow": 30.408,
+    "chest": 26.856,
+    "neck": -47.952,
+    "armF": 25.32,
+    "foreF": 112.533
+   },
+   "vise": {
+    "armN": [
+     59.0,
+     8.5
+    ],
+    "legN": [
+     -12.0,
+     15.9
+    ],
+    "legF": [
+     24.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 9,
+   "nom": "poussée, la main quitte le sol",
+   "courbe": "auto",
+   "fixe": {
+    "x": 0.6,
+    "y": 51,
+    "root": 1,
+    "spineLow": 21,
+    "chest": 17,
+    "neck": -26,
+    "armF": 18,
+    "foreF": 70
+   },
+   "vise": {
+    "armN": [
+     51.5,
+     28
+    ],
+    "legN": [
+     -12.5,
+     15.2
+    ],
+    "legF": [
+     24.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 15,
+   "nom": "le buste se relève",
+   "courbe": "auto",
+   "fixe": {
+    "x": 2,
+    "y": 74,
+    "root": -6,
+    "spineLow": 10,
+    "chest": 11,
+    "neck": -2,
+    "armN": 14,
+    "foreN": 24,
+    "armF": 9,
+    "foreF": 26
+   },
+   "vise": {
+    "legN": [
+     -16.5,
+     10.5
+    ],
+    "legF": [
+     24.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 21,
+   "nom": "debout, léger dépassement",
+   "courbe": "dec",
+   "fixe": {
+    "x": 3.2,
+    "y": 88.4,
+    "root": -12.5,
+    "spineLow": 5,
+    "chest": 8,
+    "neck": 9.5,
+    "armN": -12,
+    "foreN": 13,
+    "armF": 6,
+    "foreF": 10
+   },
+   "vise": {
+    "legN": [
+     -18.1,
+     7.5
+    ],
+    "legF": [
+     24.1,
+     7.5
+    ]
+   }
+  },
+  {
+   "f": 30,
+   "nom": "repos",
+   "pose": "repos",
+   "vise": {
+    "legN": [
+     -18.1,
+     7.5
+    ],
+    "legF": [
+     24.1,
+     7.5
+    ]
+   },
+   "fixe": {
+    "x": 3
+   }
+  }
+ ]
+}
