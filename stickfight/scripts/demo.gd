@@ -14,6 +14,7 @@ extends Control
 ##      relâché, le combattant sort de la garde et revient au repos.
 ##   ↓  maintenu depuis le repos : accroupi, une main au sol ; relâché, il se
 ##      relève au repos.
+##   ↑  depuis le repos : saut sur place ; ↑ + → saut avant, ↑ + ← saut arrière.
 ##   B  blocage bas (en garde)   K  duo coup de pied direct + blocage bas
 ##   R  repos (remise à zéro)
 ##   Espace  pause    → / ←  image suivante / précédente (en pause)
@@ -25,7 +26,10 @@ const HISTORY_MAX := 600
 const DOUBLE_APPUI := 14
 ## Images en garde fermée, sans ← ni action, avant qu'elle se rouvre.
 const ROUVRIR := 10
-const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+## Images au début d'un départ de marche pendant lesquelles ↑ le change
+## encore en saut (→ ou ← enfoncée un peu avant ↑).
+const SAUT_TOLERANCE := 6
+const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   ↑ sauter (+ → / ← : avant / arrière)   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, B blocage bas)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
 var planche: Planche
 var help: Label
@@ -172,6 +176,10 @@ const ARRETS := {
 ##   glissade à la prochaine pose d'appui (image 0 ou 14) ;
 ## - ↓ tenu depuis le repos : accroupi détendu, une main posée au sol ;
 ##   relâché, il se relève au repos ;
+## - ↑ depuis le repos : saut sur place ; ↑ + → saut avant, ↑ + ← saut arrière.
+##   Chaque saut finit accroupi sur la pose d'amorti commune, puis enchaîne
+##   la réception (reception) et le repos. ↑ dans les SAUT_TOLERANCE
+##   premières images d'un départ de marche le change en saut avant / arrière ;
 ## - G tenu met en garde (depuis le repos) : garde ouverte, prête à se battre ;
 ##   → y fait la marche en garde, qui s'arrête à l'image 0 de son cycle ;
 ## - ← en garde ouverte ferme la garde (garde défensive, comme on bloque en
@@ -195,10 +203,13 @@ func _control_input() -> void:
 	var run := Input.is_physical_key_pressed(KEY_SHIFT)
 	var sprint := Input.is_physical_key_pressed(KEY_CTRL)
 	var down := Input.is_physical_key_pressed(KEY_DOWN)
+	var up := Input.is_physical_key_pressed(KEY_UP)
 	var nom := f.anim_name()
 	match nom:
 		"idle_repos":
-			if guard:
+			if up:
+				f.play("saut_avant" if fwd else "saut_arriere" if back else "saut_neutre", 4)
+			elif guard:
 				f.play("mise_en_garde", 4)
 			elif fwd and sprint:
 				f.play("sprint_depart", 6)
@@ -210,6 +221,9 @@ func _control_input() -> void:
 				f.play("marche_detendue_arriere_depart", 6)
 			elif down:
 				f.play("accroupi_repos_entree", 4)
+		"marche_detendue_depart", "marche_detendue_arriere_depart":
+			if up and f.t < SAUT_TOLERANCE:
+				f.play("saut_avant" if nom == "marche_detendue_depart" else "saut_arriere", 3)
 		"accroupi_repos_idle":
 			if not down:
 				f.play("accroupi_repos_sortie", 3)

@@ -143,6 +143,10 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `accroupi_repos_entree` | 28 i, recule 3 | Depuis le repos (↓ maintenu), sans passer par la garde : les genoux cèdent, la main avant part devant et se pose au sol devant le pied avant, le pied arrière monte sur la pointe, petit tassement sur la main puis `accroupi_repos_idle` |
 | `accroupi_repos_idle` | 104 i, en boucle | Accroupi détendu, une main au sol : respiration lente (le dos se voûte à l'expiration), le bras libre suit avec retard. La main et les pieds restent fixes |
 | `accroupi_repos_sortie` | 30 i, avance 3 | ↓ relâché : appui sur la main, poussée qui la décolle, le buste se relève, léger dépassement puis `idle_repos` |
+| `saut_neutre` | 69 i, recule 16 | ↑ depuis le repos : flexion et bras en arrière, puis extension, les bras lancés vers le haut, et le talon quitte le sol avant la pointe. En vol, le centre de gravité suit une parabole exacte (g = 0,2725 par image²), les genoux remontent, puis les jambes se tendent vers le sol. Contact sur la pointe du pied avant, le second pied 2 images plus tard, talons qui retombent, amorti sans rebond jusqu'à la pose basse commune, puis `reception` |
+| `saut_avant` | 72 i, avance 87 | ↑ + → : même mécanique, avec une poussée plus inclinée vers l'avant et les genoux groupés plus haut. Le pied avant touche le premier, devant le centre de gravité, ce qui le freine |
+| `saut_arriere` | 70 i, recule 92 | ↑ + ← : la poussée part en arrière, le buste se redresse et les bras équilibrent vers l'avant. Le pied arrière touche le premier, puis le pied avant se pose |
+| `reception` | 19 i, avance 17 | Commune aux trois sauts : depuis la pose basse d'amorti, le bassin remonte au-dessus des pieds et le buste se redresse jusqu'au repos, puis `idle_repos` |
 
 Une clé part d'une pose (`poses/`), applique des réglages (`plus`, `fixe`,
 `vise` pour placer une main ou un pied en cinématique inverse), et choisit la
@@ -194,6 +198,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | Maj + → maintenus | Depuis le repos : départ de course puis course ; relâchés, le combattant freine au prochain appui et revient au repos |
 | Ctrl + → maintenus | Depuis le repos : départ de sprint puis sprint ; relâchés, freinage en glissade au prochain appui et retour au repos. La caméra regarde devant en proportion de la vitesse |
 | ↓ maintenu | Depuis le repos : accroupi détendu, une main posée au sol ; relâché, le combattant se relève au repos |
+| ↑ | Depuis le repos : saut sur place ; ↑ + → saut avant, ↑ + ← saut arrière (↑ reste accepté dans les 6 premières images d'un départ de marche). Réception, puis retour au repos |
 | G maintenu | Mise en garde (garde ouverte) ; avec →, marche en garde ; ← ferme la garde (défensive) puis recule, et la garde se rouvre après 10 images sans ← ; → → ou ← ← (double appui rapide) : dash avant ou arrière ; ↓ maintenu : accroupi en garde ; relâché, sortie de garde et retour au repos |
 | B | Blocage bas (en garde) |
 | K | Duo coup de pied / blocage (en boucle) |

@@ -491,8 +491,8 @@ mêmes jambes : seuls le buste et les bras changent.
 | Postures | Accroupi → debout | `accroupi_sortie` | fait |
 | Postures | Accroupi depuis le repos, une main au sol : entrée, respiration, sortie | `accroupi_repos_*` | fait |
 | Postures | Sortie de garde (garde → repos) | `sortie_de_garde` | fait |
-| Déplacements | Saut neutre, avant, arrière | `saut_*` | |
-| Déplacements | Réception légère | `reception` | |
+| Déplacements | Saut neutre, avant, arrière | `saut_*` | fait |
+| Déplacements | Réception légère | `reception` | fait |
 | Déplacements | Demi-tour | `demi_tour` | |
 | Défense | Garde haute tenue (garde fermée) | `garde_idle` | fait |
 | Défense | Garde accroupie tenue | `garde_basse` | |
