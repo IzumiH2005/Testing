@@ -121,6 +121,8 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `blocage_bas` | 44 i | Les mains descendent frapper le pied d'un coup visant le ventre, sans se baisser : armé (f4), contact (f8, arrêt sur impact 7 i, étincelle, secousse), écrasé, tenue, retour en garde |
 | `coup_de_pied_ventre` | 56 i | Pied direct (teep) de la jambe avant, pour le duo : pas glissé, genou armé, contact (f17), pied rabattu vers le bas par le blocage, reprise de distance |
 | `duo_blocage` | 110 i | Les deux ensemble : les contacts sont calés sur la même image globale |
+| `armure_encaisse` | 19 i, couche | Armure (Power Crush) : encaisser sans broncher. Ce n'est pas une animation qui remplace la courante mais une **couche** posée par-dessus : le combattant continue ce qu'il faisait (marche, garde, coup). À l'impact, le buste est déjà tassé de 2,5 en arrière et de 1,5 vers le bas, la tête part en avant, les bras se serrent ; arrêt sur impact 11 i pendant lequel il tremble, puis tout revient en 19 i. Les pieds au sol ne bougent pas (la jambe est recalculée pour garder la cheville en place). Le corps s'entoure d'un liseré rouge qui s'éteint en 16 i, étincelle rouge au ventre, secousse |
+| `duo_armure` | 150 i | B marche en garde, encaisse le pied direct de A sous armure sans s'arrêter, puis se pose en garde ouverte ; A, dont le coup a rebondi, recule en backdash |
 | `sortie_de_garde` | 60 i | De la garde ouverte au repos, sur place : le poids bascule en arrière, le pied avant revient en se posant par la pointe, puis le pied arrière repasse devant et le bassin remonte ; les mains retombent le long du corps, le bras du pied qui avance passe devant (contrepoids) ; enchaîne sur `idle_repos` |
 | `marche_detendue` | 56 i, en boucle, avance 76 | Marche normale depuis le repos, sans garde : bras ballants en opposition des jambes, bassin qui monte et descend sur chaque appui |
 | `marche_detendue_depart` | — | Du repos à la boucle : transfert de poids, premier pas plus court |
@@ -257,8 +259,18 @@ sol ; `"articulation": "pieds"` la centre entre les deux chevilles),
 parade ou une esquive, le moment où une contre-attaque peut annuler la fin
 de l'animation ; `"nom": "esquive"` marque les images où le corps est hors
 de la trajectoire du coup ; `Fighter.en_fenetre(nom)` le teste). L'étincelle a trois
-genres : `garde` (coup bloqué, bleu), `coup` (touché, orange) et `parade`
-(coup dévié, vert d'eau).
+genres : `garde` (coup bloqué, bleu), `coup` (touché, orange), `parade`
+(coup dévié, vert d'eau) et `armure` (coup encaissé sous armure, rouge).
+`eclat` (`"n"` images, `"couleur"`) entoure tout le corps d'un liseré
+coloré qui s'amincit jusqu'à disparaître, sans compter les images d'arrêt
+sur impact.
+
+Une animation marquée `"couche": true` se joue **par-dessus** l'animation
+courante (`Fighter.couche(nom)`, `Combat.couche(f, nom)`) : pour chaque
+angle, on ajoute l'écart entre l'image de la couche et sa dernière image
+(la couche peut donc commencer déjà déformée et doit finir sur sa pose de
+base). Les cuisses, tibias et pieds ne sont pas ajoutés : un pied posé au
+sol reste à sa place, la jambe se replie pour le suivre.
 
 Les effets (`scripts/vfx.gd`) suivent la méthode pixel art du dépôt
 (`methode-pixel-art/`) : aplats sans tramage, rampes à décalage de teinte
@@ -280,7 +292,8 @@ mesure que l'effet ralentit, disparition par trous et jamais en fondu.
 
 Un **duo** (`anims/duo_*.json`) place plusieurs combattants et leur programme :
 `{"contact": 33, "anim": "blocage_bas", "fondu": 3}` démarre l'animation pour
-que son événement `contact` tombe à l'image 33.
+que son événement `contact` tombe à l'image 33, `{"g": 60, "couche":
+"armure_encaisse"}` pose une couche à l'image 60.
 
 ### Démo
 
@@ -305,7 +318,8 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | J | Coup qui brise la garde : garde brisée, bras ouverts et vulnérable (en garde basse : recul lourd) |
 | P, Maj + P, Ctrl + P, Ctrl + Maj + P | Parade en garde : coup de poing haut, coup de pied haut, coup moyen, coup bas. Pendant la fenêtre de contre d'une parade, une nouvelle parade peut l'annuler (à la place de la contre-attaque, qui sera propre à chaque personnage) |
 | 1 à 7 | Esquive détendue (au repos, en marche ou en garde), une par type de coup : 1 sway (direct au visage), 2 slip (direct), 3 se baisser (crochet ou circulaire à la tête), 4 retrait du ventre (crochet au corps), 5 pas de côté, pivot face caméra (coup de pied appuyé), 6 saut arrière (coup de pied hache), 7 saut sur place (balayage). Sans garde, bras pendants, elle finit toujours au repos. Elle peut aussi partir pendant la fenêtre de contre d'une parade ou d'une autre esquive. Touches provisoires, comme P |
-| K | Duo coup de pied / blocage (en boucle) |
+| U | Armure : encaisse un coup sans broncher, par-dessus ce qu'il fait (repos, marche, garde, course…) |
+| K, Maj + K | Duo coup de pied / blocage, ou coup de pied encaissé sous armure (en boucle) |
 | R | Repos (remise à zéro) |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |
 | L | Ralenti ×4 |

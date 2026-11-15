@@ -168,7 +168,7 @@ par sa propre version (marquées ✱ quand c'est presque toujours le cas).
 | 16 c | Pas de côté (pivot face caméra) | fait (`esquive_cote`, contre un coup de pied appuyé ; pivot 3D projeté) |
 | 16 d | Saut arrière d'esquive | fait (`esquive_saut_arriere`, contre un coup de pied hache) |
 | 16 e | Saut sur place | fait (`esquive_saut_balayage`, contre un balayage) |
-| 17 | Armure : encaisser sans broncher (Power Crush) | |
+| 17 | Armure : encaisser sans broncher (Power Crush) | fait (`armure_encaisse`, couche par-dessus l'animation courante) |
 | 18 | Casser une projection (celui qui se dégage) | |
 | 19 | Projection cassée (celui qui est repoussé) | |
 | 20 | Être paré (déséquilibré après la parade adverse) | |
@@ -513,6 +513,7 @@ mêmes jambes : seuls le buste et les bras changent.
 | Défense | Recul sur garde haut et bas, léger, moyen, lourd | `recul_garde_{haut,bas}_{leger,moyen,lourd}` | fait |
 | Défense | Parade selon le coup : poing haut, pied haut, moyen, bas ; fenêtre de contre | `parade_haute_poing`, `parade_haute_pied`, `parade_moyenne`, `parade_basse` | fait |
 | Défense | Esquives selon le coup : sway, slip, se baisser, retrait du ventre, pas de côté, saut arrière, saut sur place ; fenêtres esquive et contre | `esquive_sway`, `esquive_slip`, `esquive_baisse`, `esquive_retrait`, `esquive_cote`, `esquive_saut_arriere`, `esquive_saut_balayage` | fait |
+| Défense | Armure (Power Crush) : encaisser sans broncher, en couche | `armure_encaisse` | fait |
 | Réactions | Tête légère, tête lourde | `touche_tete_*` | |
 | Réactions | Ventre léger, plié en deux | `touche_ventre_*` | |
 | Réactions | Jambe légère, fauché | `touche_jambe`, `fauche` | |

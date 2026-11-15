@@ -1,0 +1,23 @@
+{
+  "nom": "armure_encaisse",
+  "couche": true,
+  "boucle": false,
+  "base": "repos",
+  "decalage": {"neck": 2, "armN": 2, "foreN": 3, "armF": 2, "foreF": 3},
+  "cles": [
+    {"f": 0, "nom": "impact : le ventre rentre d'un rien, le bassin recule à peine", "fixe": {"x": -2.5},
+     "plus": {"y": -1.5, "root": 1, "spineLow": 4, "chest": 4, "neck": -3, "armN": 6, "foreN": 8, "armF": 5, "foreF": 6}},
+    {"f": 3, "nom": "la tête suit, le buste absorbe", "fixe": {"x": -3},
+     "plus": {"y": -2, "root": 1, "spineLow": 3, "chest": 3, "neck": 2, "armN": 3, "foreN": 4, "armF": 3, "foreF": 3}, "courbe": "dec"},
+    {"f": 8, "nom": "déjà reparti", "fixe": {"x": -1.2},
+     "plus": {"y": -0.7, "spineLow": 1, "chest": 1, "neck": 0.5}, "courbe": "acc-dec"},
+    {"f": 16, "nom": "comme si de rien n'était", "fixe": {"x": 0}}
+  ],
+  "evenements": [
+    {"f": 0, "type": "contact"},
+    {"f": 0, "type": "hitstop", "n": 11, "tremble": 1.2},
+    {"f": 0, "type": "eclat", "n": 16, "couleur": "#e03131"},
+    {"f": 0, "type": "etincelle", "articulation": "waist", "dec": [7, 2], "dir": 180, "genre": "armure", "taille": 1.35},
+    {"f": 0, "type": "secousse", "n": 8, "force": 2.5}
+  ]
+}

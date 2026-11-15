@@ -521,14 +521,15 @@ static func depth_point(p: Dictionary, v: Vector2) -> Vector2:
 
 ## Dessine une pose sur n'importe quel CanvasItem (à appeler depuis _draw).
 ## Traits à bouts et jointures ronds : segments + disques aux articulations.
-static func draw_pose(ci: CanvasItem, p: Dictionary, origin: Vector2, scale: float, color := Color("#111111"), far_shade := 1.0) -> void:
+## grow : élargit tous les traits (liseré dessiné sous la silhouette).
+static func draw_pose(ci: CanvasItem, p: Dictionary, origin: Vector2, scale: float, color := Color("#111111"), far_shade := 1.0, grow := 0.0) -> void:
 	var dz := depth(p)
 	var k: float = dz.k
 	var o: Vector2 = origin + to_screen(dz.pivot, Vector2.ZERO, scale) * (1.0 - k) + Vector2(0.0, -dz.lift * scale)
 	scale *= k
 	for pr in primitives(p, color, far_shade):
 		if pr.type == "path":
-			var w: float = pr.width * scale
+			var w: float = (pr.width + grow) * scale
 			var pts := PackedVector2Array()
 			for v in pr.points:
 				pts.append(to_screen(v, o, scale))
@@ -537,7 +538,7 @@ static func draw_pose(ci: CanvasItem, p: Dictionary, origin: Vector2, scale: flo
 			for v in pts:
 				ci.draw_circle(v, w / 2.0, pr.color)
 		else:
-			ci.draw_circle(to_screen(pr.c, o, scale), pr.r * scale, pr.color)
+			ci.draw_circle(to_screen(pr.c, o, scale), (pr.r + grow / 2.0) * scale, pr.color)
 
 
 # ---------- Fichiers ----------

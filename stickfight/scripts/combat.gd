@@ -19,6 +19,8 @@ extends RefCounted
 ##   {"f": 29, "type": "onde", "articulation": "pieds", "dir": -90, "taille": 1.4}  (posée au sol sous l'articulation ;
 ##       "pieds" = milieu des deux chevilles, valable pour tous les effets)
 ##   {"f": 28, "type": "choc", "articulation": "hip", "dir": 10, "taille": 1}
+##   {"f": 0, "type": "eclat", "n": 10, "couleur": "#ff4d4d"}  (le corps entier
+##       s'entoure d'un liseré coloré qui s'amincit : armure, coup encaissé)
 ##   {"f": 8, "type": "contact"}  (repère de synchronisation, ne fait rien)
 ##   {"f": 9, "type": "fenetre", "nom": "contre", "n": 20}  (fenêtre ouverte de f
 ##       à f + n − 1 : ici, après une parade ou une esquive, la contre-attaque
@@ -46,9 +48,11 @@ func add(f: Fighter) -> Fighter:
 
 ## Combat décrit par un fichier « duo » :
 ## {"nom", "longueur", "acteurs": [{"x", "facing", "couleur", "anim", "t0",
-##   "programme": [{"g": 30, "anim": "...", "fondu": 4} | {"contact": 52, "anim": "..."}]}]}
+##   "programme": [{"g": 30, "anim": "...", "fondu": 4} | {"contact": 52, "anim": "..."}
+##                 | {"g": 52, "couche": "armure_encaisse"}]}]}
 ## « contact » cale l'animation pour que son événement contact tombe à
-## l'image globale donnée.
+## l'image globale donnée. « couche » superpose une réaction à l'animation
+## en cours sans l'interrompre (voir Fighter.couche).
 static func from_duo(data: Dictionary) -> Combat:
 	var c := Combat.new()
 	for i in data.acteurs.size():
@@ -58,6 +62,9 @@ static func from_duo(data: Dictionary) -> Combat:
 		c.add(f)
 		for e in a.get("programme", []):
 			var gg := int(e.get("g", 0))
+			if e.has("couche"):
+				c.programme.append({"g": gg, "acteur": i, "couche": str(e.couche)})
+				continue
 			if e.has("contact"):
 				var an := StickAnim.load_named(str(e.anim))
 				gg = int(e.contact) - int(StickAnim.event_frame(an, "contact"))
@@ -93,7 +100,17 @@ func step() -> void:
 func start_programmed() -> void:
 	for e in programme:
 		if e.g == g:
-			fighters[e.acteur].play(e.anim, e.fondu)
+			if e.has("couche"):
+				couche(fighters[e.acteur], e.couche)
+			else:
+				fighters[e.acteur].play(e.anim, e.fondu)
+
+
+## Superpose une couche de réaction et traite tout de suite ses événements
+## de l'image 0 (l'arrêt sur impact commence à cette image).
+func couche(f: Fighter, nom: String) -> void:
+	for ev in f.couche(nom):
+		_handle(f, ev)
 
 
 func _world_dir(f: Fighter, d: float) -> float:
@@ -106,6 +123,10 @@ func _handle(f: Fighter, ev: Dictionary) -> void:
 			hitstop = maxi(hitstop, int(ev.get("n", 6)))
 			f.shake_n = int(ev.get("n", 6))
 			f.shake_amp = float(ev.get("tremble", 0.0))
+		"eclat":
+			f.eclat_n = int(ev.get("n", 10))
+			f.eclat_len = f.eclat_n
+			f.eclat_color = Color(str(ev.get("couleur", "#ff4d4d")))
 		"secousse":
 			cam_n = int(ev.get("n", 6))
 			cam_len = cam_n
@@ -135,7 +156,8 @@ func record() -> Dictionary:
 	var figs := []
 	for f in fighters:
 		figs.append({"pose": f.world_pose(), "color": f.color, "smears": f.smears(),
-			"anim": f.anim_name(), "t": f.t})
+			"anim": f.anim_name(), "t": f.t,
+			"eclat": float(f.eclat_n) / float(f.eclat_len), "eclat_color": f.eclat_color})
 	return {"g": g, "cam": camera_offset(), "hitstop": hitstop, "fighters": figs, "vfx": vfx.duplicate(true)}
 
 
@@ -153,6 +175,10 @@ static func draw_record(ci: CanvasItem, rec: Dictionary, origin: Vector2, scale:
 	figs.sort_custom(func(a, b): return a[0] > b[0] or (a[0] == b[0] and a[1] < b[1]))
 	figs = figs.map(func(e): return e[2])
 	for fig in figs:
+		# Éclat d'armure : liseré épais, puis de plus en plus fin, puis rien.
+		var ec: float = fig.get("eclat", 0.0)
+		if ec > 0.0:
+			StickRig.draw_pose(ci, fig.pose, o, scale, fig.eclat_color, 1.0, 3.0 + 9.0 * ec)
 		for sm in fig.smears:
 			if not sm.proche:
 				_draw_smear(ci, sm, o, scale, fig.color)
