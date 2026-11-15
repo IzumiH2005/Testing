@@ -1,0 +1,250 @@
+{
+ "nom": "projection_cassee",
+ "boucle": false,
+ "base": "garde",
+ "suivante": "garde_idle",
+ "decalage": {
+  "neck": 2,
+  "foreN": 1,
+  "foreF": 1
+ },
+ "cles": [
+  {
+   "f": 0,
+   "vise_rel": {
+    "legN": [
+     0,
+     0
+    ],
+    "legF": [
+     0,
+     0
+    ]
+   },
+   "courbe": "acc"
+  },
+  {
+   "f": 4,
+   "nom": "il entre, les mains partent",
+   "fixe": {
+    "x": 16
+   },
+   "plus": {
+    "y": 1,
+    "spineLow": 2,
+    "chest": 3
+   },
+   "vise": {
+    "armN": [
+     80,
+     118
+    ],
+    "armF": [
+     76,
+     120
+    ]
+   },
+   "vise_rel": {
+    "legN": [
+     20,
+     7
+    ],
+    "legF": [
+     2,
+     0
+    ]
+   }
+  },
+  {
+   "f": 8,
+   "nom": "saisie : les deux mains au cou",
+   "fixe": {
+    "x": 34
+   },
+   "plus": {
+    "y": -2,
+    "root": 2,
+    "spineLow": 4,
+    "chest": 7,
+    "neck": -3
+   },
+   "vise": {
+    "armN": [
+     113,
+     120
+    ],
+    "armF": [
+     110,
+     116
+    ]
+   },
+   "vise_rel": {
+    "legN": [
+     34,
+     0
+    ],
+    "legF": [
+     16,
+     0
+    ]
+   },
+   "courbe": "lin"
+  },
+  {
+   "f": 12,
+   "nom": "il commence à tirer",
+   "fixe": {
+    "x": 31
+   },
+   "plus": {
+    "y": -3,
+    "root": 1,
+    "spineLow": 2,
+    "chest": 4,
+    "neck": -2
+   },
+   "vise": {
+    "armN": [
+     108,
+     119
+    ],
+    "armF": [
+     105,
+     115
+    ]
+   },
+   "vise_rel": {
+    "legN": [
+     34,
+     0
+    ],
+    "legF": [
+     16,
+     0
+    ]
+   },
+   "courbe": "dec"
+  },
+  {
+   "f": 14,
+   "nom": "cassé : les bras chassés vers le haut",
+   "fixe": {
+    "x": 28
+   },
+   "plus": {
+    "y": -1,
+    "root": -3,
+    "spineLow": -4,
+    "chest": -8,
+    "neck": -6
+   },
+   "vise": {
+    "armN": [
+     84,
+     164
+    ],
+    "armF": [
+     76,
+     160
+    ]
+   },
+   "vise_rel": {
+    "legN": [
+     34,
+     0
+    ],
+    "legF": [
+     16,
+     0
+    ]
+   },
+   "courbe": "dec"
+  },
+  {
+   "f": 20,
+   "nom": "repoussé, les pieds glissent",
+   "fixe": {
+    "x": 10
+   },
+   "plus": {
+    "y": -3,
+    "root": -2,
+    "spineLow": -2,
+    "chest": -4,
+    "neck": -2
+   },
+   "vise": {
+    "armN": [
+     56,
+     140
+    ],
+    "armF": [
+     46,
+     138
+    ]
+   },
+   "vise_rel": {
+    "legN": [
+     18,
+     0
+    ],
+    "legF": [
+     4,
+     0
+    ]
+   }
+  },
+  {
+   "f": 27,
+   "nom": "il se rattrape",
+   "fixe": {
+    "x": 6
+   },
+   "plus": {
+    "y": -4,
+    "root": 1,
+    "spineLow": 1,
+    "chest": 2
+   },
+   "vise_rel": {
+    "legN": [
+     6,
+     0
+    ],
+    "legF": [
+     6,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 38,
+   "nom": "garde",
+   "fixe": {
+    "x": 6
+   },
+   "ancre": false
+  }
+ ],
+ "evenements": [
+  {
+   "f": 8,
+   "type": "contact"
+  },
+  {
+   "f": 15,
+   "type": "poussiere",
+   "articulation": "ankleN",
+   "dir": 180,
+   "taille": 0.5
+  },
+  {
+   "f": 17,
+   "type": "poussiere",
+   "articulation": "ankleF",
+   "dir": 180,
+   "taille": 0.4
+  }
+ ]
+}

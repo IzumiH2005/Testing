@@ -1,0 +1,34 @@
+{
+ "nom": "duo_projection_cassee",
+ "longueur": 90,
+ "acteurs": [
+  {
+   "x": 0,
+   "facing": 1,
+   "couleur": "#111111",
+   "anim": "garde_idle",
+   "t0": 0,
+   "programme": [
+    {
+     "contact": 20,
+     "anim": "projection_cassee",
+     "fondu": 4
+    }
+   ]
+  },
+  {
+   "x": 125.0,
+   "facing": -1,
+   "couleur": "#1d3f8f",
+   "anim": "idle_repos",
+   "t0": 0,
+   "programme": [
+    {
+     "contact": 20,
+     "anim": "casse_projection",
+     "fondu": 3
+    }
+   ]
+  }
+ ]
+}

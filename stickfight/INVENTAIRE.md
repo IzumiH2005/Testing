@@ -168,8 +168,8 @@ par sa propre version (marquées ✱ quand c'est presque toujours le cas).
 | 16 d | Saut arrière d'esquive | fait (`esquive_saut_arriere`, contre un coup de pied hache) |
 | 16 e | Saut sur place | fait (`esquive_saut_balayage`, contre un balayage) |
 | 17 | Armure : encaisser sans broncher (Power Crush) | fait (`armure_encaisse`, couche par-dessus l'animation courante) |
-| 18 | Casser une projection (celui qui se dégage) | |
-| 19 | Projection cassée (celui qui est repoussé) | |
+| 18 | Casser une projection (celui qui se dégage) | fait (`casse_projection`, depuis le repos, duo `duo_projection_cassee`) |
+| 19 | Projection cassée (celui qui est repoussé) | fait (`projection_cassee`, la saisie de face est incluse) |
 | 20 | Être paré (déséquilibré après la parade adverse) | |
 
 ### 3.4 Réactions aux coups, debout — 24
