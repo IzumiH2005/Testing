@@ -21,8 +21,10 @@ extends RefCounted
 ##   {"f": 28, "type": "choc", "articulation": "hip", "dir": 10, "taille": 1}
 ##   {"f": 8, "type": "contact"}  (repère de synchronisation, ne fait rien)
 ##   {"f": 9, "type": "fenetre", "nom": "contre", "n": 20}  (fenêtre ouverte de f
-##       à f + n − 1 : ici, après une parade, la contre-attaque propre au
-##       personnage peut annuler la fin de l'animation ; voir Fighter.en_fenetre)
+##       à f + n − 1 : ici, après une parade ou une esquive, la contre-attaque
+##       propre au personnage peut annuler la fin de l'animation ; "esquive"
+##       marque les images où le corps est hors de la trajectoire ; voir
+##       Fighter.en_fenetre)
 ## Les angles « dir » sont donnés dans le repère du personnage (0 = devant,
 ## -90 = vers le bas) et retournés s'il regarde à gauche.
 
@@ -143,7 +145,14 @@ static func draw_record(ci: CanvasItem, rec: Dictionary, origin: Vector2, scale:
 	var o: Vector2 = origin + rec.cam * scale * Vector2(1, -1)
 	for v in rec.vfx:
 		Vfx.draw(ci, v, o, scale, "derriere")
-	for fig in rec.fighters:
+	# Le plus loin de la caméra d'abord (profondeur z, voir StickRig.depth).
+	# Tri stable : à profondeur égale, l'ordre des acteurs est gardé.
+	var figs: Array = []
+	for i in rec.fighters.size():
+		figs.append([float(rec.fighters[i].pose.get("z", 0.0)), i, rec.fighters[i]])
+	figs.sort_custom(func(a, b): return a[0] > b[0] or (a[0] == b[0] and a[1] < b[1]))
+	figs = figs.map(func(e): return e[2])
+	for fig in figs:
 		for sm in fig.smears:
 			if not sm.proche:
 				_draw_smear(ci, sm, o, scale, fig.color)

@@ -404,7 +404,7 @@ static func other_side(id: String) -> String:
 ## Canal qui porte la même information dans la pose miroir, et son signe :
 ## [canal, signe]. Voir mirror_pose.
 static func mirror_channel(c: String) -> Array:
-	if c == "x" or c == "y":
+	if c == "x" or c == "y" or c == "z":
 		return [c, 1.0]
 	if c.begins_with("etire:"):
 		return ["etire:" + other_side(c.substr(6)), 1.0]
@@ -437,6 +437,8 @@ static func lerp_pose(a: Dictionary, b: Dictionary, t: float) -> Dictionary:
 	var q := clone_pose(a)
 	q.x = lerpf(float(a.x), float(b.x), t)
 	q.y = lerpf(float(a.y), float(b.y), t)
+	if a.has("z") or b.has("z"):
+		q.z = lerpf(float(a.get("z", 0.0)), float(b.get("z", 0.0)), t)
 	for k in b.angles:
 		var va := angle(a, k)
 		q.angles[k] = va + norm180(angle(b, k) - va) * t
@@ -499,21 +501,43 @@ static func to_screen(v: Vector2, origin: Vector2, scale: float) -> Vector2:
 	return origin + Vector2(v.x, -v.y) * scale
 
 
+## Profondeur (pose.z, négatif = vers la caméra) : vue en perspective, le
+## personnage grossit et descend sur le sol quand il s'approche de la caméra,
+## rapetisse et remonte quand il s'en éloigne. Le dessin est mis à l'échelle
+## k autour du point du sol sous le bassin (pivot), puis décalé de lift.
+const DEPTH_FOCALE := 300.0
+const DEPTH_SOL := 0.3
+
+static func depth(p: Dictionary) -> Dictionary:
+	var z := float(p.get("z", 0.0))
+	return {"k": DEPTH_FOCALE / (DEPTH_FOCALE + z), "lift": z * DEPTH_SOL, "pivot": Vector2(float(p.x), 0.0)}
+
+
+## Point du monde → point dessiné, profondeur comprise.
+static func depth_point(p: Dictionary, v: Vector2) -> Vector2:
+	var dz := depth(p)
+	return dz.pivot + (v - dz.pivot) * float(dz.k) + Vector2(0.0, dz.lift)
+
+
 ## Dessine une pose sur n'importe quel CanvasItem (à appeler depuis _draw).
 ## Traits à bouts et jointures ronds : segments + disques aux articulations.
 static func draw_pose(ci: CanvasItem, p: Dictionary, origin: Vector2, scale: float, color := Color("#111111"), far_shade := 1.0) -> void:
+	var dz := depth(p)
+	var k: float = dz.k
+	var o: Vector2 = origin + to_screen(dz.pivot, Vector2.ZERO, scale) * (1.0 - k) + Vector2(0.0, -dz.lift * scale)
+	scale *= k
 	for pr in primitives(p, color, far_shade):
 		if pr.type == "path":
 			var w: float = pr.width * scale
 			var pts := PackedVector2Array()
 			for v in pr.points:
-				pts.append(to_screen(v, origin, scale))
+				pts.append(to_screen(v, o, scale))
 			for i in range(pts.size() - 1):
 				ci.draw_line(pts[i], pts[i + 1], pr.color, w, true)
 			for v in pts:
 				ci.draw_circle(v, w / 2.0, pr.color)
 		else:
-			ci.draw_circle(to_screen(pr.c, origin, scale), pr.r * scale, pr.color)
+			ci.draw_circle(to_screen(pr.c, o, scale), pr.r * scale, pr.color)
 
 
 # ---------- Fichiers ----------

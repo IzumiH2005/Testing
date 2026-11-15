@@ -1,0 +1,167 @@
+{
+  "nom": "esquive_slip",
+  "boucle": false,
+  "base": "garde",
+  "suivante": "garde_idle",
+  "decalage": {
+    "neck": 2,
+    "chest": 1,
+    "foreN": 1,
+    "armF": 1,
+    "foreF": 2
+  },
+  "cles": [
+    {
+      "f": 0,
+      "vise_rel": {
+        "legN": [
+          0,
+          0
+        ],
+        "legF": [
+          0,
+          0
+        ]
+      },
+      "courbe": "dec"
+    },
+    {
+      "f": 3,
+      "nom": "la tête glisse sous le poing, épaule avant rentrée",
+      "fixe": {
+        "x": 3,
+        "z": -8
+      },
+      "plus": {
+        "y": -9,
+        "root": 3,
+        "spineLow": 6,
+        "chest": 10,
+        "neck": -10
+      },
+      "vise_rel": {
+        "legN": [
+          0,
+          0
+        ],
+        "legF": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "f": 6,
+      "nom": "le bras adverse passe au-dessus de l'épaule",
+      "fixe": {
+        "x": 3.5,
+        "z": -8
+      },
+      "plus": {
+        "y": -10,
+        "root": 3,
+        "spineLow": 7,
+        "chest": 11,
+        "neck": -11
+      },
+      "vise_rel": {
+        "legN": [
+          0,
+          0
+        ],
+        "legF": [
+          0,
+          0
+        ]
+      },
+      "courbe": "palier"
+    },
+    {
+      "f": 9,
+      "fixe": {
+        "x": 3.5,
+        "z": -8
+      },
+      "plus": {
+        "y": -10,
+        "root": 3,
+        "spineLow": 7,
+        "chest": 11,
+        "neck": -11
+      },
+      "vise_rel": {
+        "legN": [
+          0,
+          0
+        ],
+        "legF": [
+          0,
+          0
+        ]
+      },
+      "courbe": "acc-dec"
+    },
+    {
+      "f": 15,
+      "nom": "remonte à l'intérieur, prêt à contrer",
+      "fixe": {
+        "x": 3,
+        "z": -2
+      },
+      "plus": {
+        "y": -3,
+        "root": 1,
+        "spineLow": 2,
+        "chest": 4,
+        "neck": -2
+      },
+      "vise_rel": {
+        "legN": [
+          0,
+          0
+        ],
+        "legF": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "f": 24,
+      "nom": "garde",
+      "fixe": {
+        "x": 0,
+        "z": 0
+      },
+      "vise_rel": {
+        "legN": [
+          0,
+          0
+        ],
+        "legF": [
+          0,
+          0
+        ]
+      },
+      "ancre": false
+    }
+  ],
+  "evenements": [
+    {
+      "f": 6,
+      "type": "contact"
+    },
+    {
+      "f": 1,
+      "type": "fenetre",
+      "nom": "esquive",
+      "n": 9
+    },
+    {
+      "f": 9,
+      "type": "fenetre",
+      "nom": "contre",
+      "n": 12
+    }
+  ]
+}

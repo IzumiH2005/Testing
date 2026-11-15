@@ -157,6 +157,13 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `parade_haute_pied` | 40 i | Maj + P : dévie un coup de pied haut (tempe, mâchoire). Contact plus tard (f7) et plus lourd (arrêt 8 i, grosse étincelle, secousse) : le buste cède en arrière, le bassin recule de quelques unités, l'avant-bras balaie la jambe vers le haut et loin au-dessus de la tête, puis il se replace |
 | `parade_moyenne` | 36 i | Ctrl + P : dévie un coup au ventre. La main avant descend devant le plexus, le buste se penche un peu en avant au contact (f5, arrêt 7 i) et l'avant-bras chasse le coup vers le bas et sur le côté, puis remonte en garde |
 | `parade_basse` | 36 i | Ctrl + Maj + P : dévie un coup bas (tibia). Le combattant fléchit les genoux (le talon arrière se lève), la main avant descend frapper le pied à l'image 6 (arrêt 7 i) et le rabat vers le sol, l'autre main protège le visage, puis il se relève en garde |
+| `esquive_sway` | 30 i | 1 en garde : contre un direct au visage. Le bassin recule de 9 et le buste part en arrière, la tête passe hors de portée au contact (f7) ; le poing s'arrête à une quinzaine d'unités du visage, puis le buste revient un peu au-delà de la garde avant `garde_idle` |
+| `esquive_slip` | 24 i | 2 : contre un direct. La tête glisse sur le côté et vers l'avant, genoux un peu fléchis, le corps avancé vers la caméra (z −8) : le poing passe à côté de la tête, derrière elle à l'écran (f6). Très court, pensé pour contrer aussitôt |
+| `esquive_baisse` | 34 i | 3 : contre un crochet ou un circulaire à la tête. Le bassin descend de 25 en 5 images, le buste plonge sous la trajectoire (f8), les mains restent devant le visage ; il se relève en remontant un peu en avant |
+| `esquive_retrait` | 26 i | 4 : contre un crochet au corps. Petit pas arrière (bassin −13) et ventre creusé : le bassin part en arrière, les épaules restent au-dessus, les coudes descendent protéger les côtes ; le poing passe devant le ventre (f7) |
+| `esquive_cote` | 36 i | 5 : contre un coup de pied appuyé. Pas de côté en profondeur : le combattant sort de la ligne vers la caméra (z jusqu'à −40, il paraît plus grand et passe devant), le pied adverse file derrière lui (f12), puis il revient dans l'axe |
+| `esquive_saut_arriere` | 32 i, recule 42 | 6 : contre un coup de pied hache (descendant). Se baisser serait inutile : il saute en arrière (impulsion f3-6, sommet f10) et laisse le talon frapper le sol devant lui (f12), puis se reçoit en amorti, prêt à revenir |
+| `esquive_saut_balayage` | 28 i | 7 : contre un balayage. Petit saut sur place, genoux remontés, la jambe adverse passe sous les pieds (f10) ; réception souple et `garde_idle` |
 | `accroupi_repos_entree` | 28 i, recule 3 | Depuis le repos (↓ maintenu), sans passer par la garde : les genoux cèdent, la main avant part devant et se pose au sol devant le pied avant, le pied arrière monte sur la pointe, petit tassement sur la main puis `accroupi_repos_idle` |
 | `accroupi_repos_idle` | 104 i, en boucle | Accroupi détendu, une main au sol : respiration lente (le dos se voûte à l'expiration), le bras libre suit avec retard. La main et les pieds restent fixes |
 | `accroupi_repos_sortie` | 30 i, avance 3 | ↓ relâché : appui sur la main, poussée qui la décolle, le buste se relève, léger dépassement puis `idle_repos` |
@@ -215,6 +222,14 @@ raccourcis ; les genoux sont recalculés en 3D.
 $GODOT --headless --path . -s res://tools/gen_demi_tour.gd
 ```
 
+**Profondeur.** Une clé peut donner `z` (dans `fixe` ou `plus`) : la
+profondeur du combattant, négative vers la caméra. `StickRig.depth` en tire
+une échelle (300 / (300 + z)) et un léger décalage vers le bas (z × 0,3) :
+un combattant à z −40 paraît plus grand et plus bas, donc plus près. Le
+combat dessine d'abord le combattant le plus loin. C'est ce qui donne
+l'impression de 3D au pas de côté (`esquive_cote`) et au slip. Le miroir et
+les fondus conservent z.
+
 Une boucle qui fait avancer le personnage déclare son `avance` (en unités
 par cycle) : chaque cycle reprend décalé d'autant, et le combattant
 (`scripts/fighter.gd`) reporte ce déplacement dans sa position. Quand une
@@ -226,8 +241,9 @@ impact global, la figure qui l'émet tremble), `etincelle`, `poussiere`,
 sol ; `"articulation": "pieds"` la centre entre les deux chevilles),
 `choc` (onde d'air dans la direction `dir`), `secousse` (caméra),
 `fenetre` (intervalle d'images nommé : `"nom": "contre"` marque, après une
-parade, le moment où une contre-attaque peut annuler la fin de
-l'animation ; `Fighter.en_fenetre(nom)` le teste). L'étincelle a trois
+parade ou une esquive, le moment où une contre-attaque peut annuler la fin
+de l'animation ; `"nom": "esquive"` marque les images où le corps est hors
+de la trajectoire du coup ; `Fighter.en_fenetre(nom)` le teste). L'étincelle a trois
 genres : `garde` (coup bloqué, bleu), `coup` (touché, orange) et `parade`
 (coup dévié, vert d'eau).
 
@@ -275,6 +291,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | Ctrl + Maj + H | Très gros coup bloqué en garde : garde repoussée, les pieds glissent loin (en garde basse : recul lourd) |
 | J | Coup qui brise la garde : garde brisée, bras ouverts et vulnérable (en garde basse : recul lourd) |
 | P, Maj + P, Ctrl + P, Ctrl + Maj + P | Parade en garde : coup de poing haut, coup de pied haut, coup moyen, coup bas. Pendant la fenêtre de contre d'une parade, une nouvelle parade peut l'annuler (à la place de la contre-attaque, qui sera propre à chaque personnage) |
+| 1 à 7 | Esquive en garde, une par type de coup : 1 sway (direct au visage), 2 slip (direct), 3 se baisser (crochet ou circulaire à la tête), 4 retrait du ventre (crochet au corps), 5 pas de côté (coup de pied appuyé), 6 saut arrière (coup de pied hache), 7 saut sur place (balayage). Elle peut aussi partir pendant la fenêtre de contre d'une parade ou d'une autre esquive. Touches provisoires, comme P |
 | K | Duo coup de pied / blocage (en boucle) |
 | R | Repos (remise à zéro) |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |

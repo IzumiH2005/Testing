@@ -1,0 +1,186 @@
+{
+  "nom": "esquive_sway",
+  "boucle": false,
+  "base": "garde",
+  "suivante": "garde_idle",
+  "decalage": {
+    "neck": 2,
+    "chest": 1,
+    "foreN": 1,
+    "armF": 1,
+    "foreF": 2
+  },
+  "cles": [
+    {
+      "f": 0,
+      "vise_rel": {
+        "legN": [
+          0,
+          0
+        ],
+        "legF": [
+          0,
+          0
+        ]
+      },
+      "courbe": "dec"
+    },
+    {
+      "f": 4,
+      "nom": "le buste part en arrière, le poids passe sur la jambe arrière",
+      "fixe": {
+        "x": -7
+      },
+      "plus": {
+        "y": -3,
+        "root": -6,
+        "spineLow": -8,
+        "chest": -12,
+        "neck": 4
+      },
+      "vise_rel": {
+        "legN": [
+          0,
+          0
+        ],
+        "legF": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "f": 7,
+      "nom": "le coup passe devant le visage",
+      "fixe": {
+        "x": -9
+      },
+      "plus": {
+        "y": -4,
+        "root": -7,
+        "spineLow": -10,
+        "chest": -15,
+        "neck": 6
+      },
+      "vise_rel": {
+        "legN": [
+          0,
+          0
+        ],
+        "legF": [
+          0,
+          0
+        ]
+      },
+      "courbe": "palier"
+    },
+    {
+      "f": 10,
+      "fixe": {
+        "x": -9
+      },
+      "plus": {
+        "y": -4,
+        "root": -7,
+        "spineLow": -10,
+        "chest": -15,
+        "neck": 6
+      },
+      "vise_rel": {
+        "legN": [
+          0,
+          0
+        ],
+        "legF": [
+          0,
+          0
+        ]
+      },
+      "courbe": "acc-dec"
+    },
+    {
+      "f": 17,
+      "nom": "retour en ressort : le poids revient devant",
+      "fixe": {
+        "x": 2
+      },
+      "plus": {
+        "y": -4,
+        "root": 2,
+        "spineLow": 2,
+        "chest": 4,
+        "neck": -1
+      },
+      "vise_rel": {
+        "legN": [
+          0,
+          0
+        ],
+        "legF": [
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "f": 22,
+      "nom": "prêt à contrer",
+      "fixe": {
+        "x": 1.5
+      },
+      "plus": {
+        "y": -3,
+        "root": 1,
+        "spineLow": 1,
+        "chest": 3
+      },
+      "vise_rel": {
+        "legN": [
+          0,
+          0
+        ],
+        "legF": [
+          0,
+          0
+        ]
+      },
+      "courbe": "acc-dec"
+    },
+    {
+      "f": 30,
+      "nom": "garde",
+      "fixe": {
+        "x": 0
+      },
+      "vise_rel": {
+        "legN": [
+          0,
+          0
+        ],
+        "legF": [
+          0,
+          0
+        ]
+      },
+      "ancre": false
+    }
+  ],
+  "evenements": [
+    {
+      "f": 7,
+      "type": "contact"
+    },
+    {
+      "f": 2,
+      "type": "fenetre",
+      "nom": "esquive",
+      "n": 10
+    },
+    {
+      "f": 12,
+      "type": "fenetre",
+      "nom": "contre",
+      "n": 14
+    }
+  ]
+}

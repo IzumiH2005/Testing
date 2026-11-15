@@ -35,7 +35,7 @@ extends RefCounted
 ##
 ## Une clé part de « pose » (nom de fichier dans poses/, « = » pour la clé
 ## précédente, absente = la base), puis applique dans l'ordre :
-##   fixe     {canal: valeur}       valeur absolue (angles, x, y)
+##   fixe     {canal: valeur}       valeur absolue (angles, x, y, z)
 ##   plus     {canal: delta}        valeur relative
 ##   etire    {os: facteur}         longueur de l'os × facteur
 ##   vise     {membre: [x, y]}      cinématique inverse vers un point (repère local)
@@ -60,6 +60,8 @@ extends RefCounted
 ## pas : n > 1 tient chaque image n images (animation « en deux », style pixel).
 ##
 ## Repère local : le personnage regarde vers +x, bassin de la base en x = 0.
+## z = profondeur (négatif = vers la caméra), pour les pas de côté : voir
+## StickRig.depth.
 
 const DIR := "res://anims/"
 const POSE_DIR := "res://poses/"
@@ -104,6 +106,7 @@ static func build(data: Dictionary) -> Dictionary:
 		"trainees": data.get("trainees", []),
 		"cles": [],
 		"etire_ids": [],
+		"profondeur": false,
 	}
 	for k in data.get("decalage", {}):
 		a.decalage[k] = float(data.decalage[k])
@@ -123,6 +126,8 @@ static func build(data: Dictionary) -> Dictionary:
 			"chevilles": {"N": J.ankleN, "F": J.ankleF},
 			"facing": StickRig.facing(pose),
 		})
+		if absf(float(pose.get("z", 0.0))) > 0.0:
+			a.profondeur = true
 		for e in pose.get("etire", {}):
 			if not e in a.etire_ids:
 				a.etire_ids.append(e)
@@ -331,8 +336,8 @@ static func _side_of(channel: String) -> String:
 
 
 static func _apply_channel(p: Dictionary, k: String, v: float, rel: bool) -> void:
-	if k in ["x", "y"]:
-		p[k] = float(p[k]) + v if rel else v
+	if k in ["x", "y", "z"]:
+		p[k] = float(p.get(k, 0.0)) + v if rel else v
 	else:
 		p.angles[k] = StickRig.angle(p, k) + v if rel else v
 
@@ -397,8 +402,8 @@ static func _resolve(kd: Dictionary, base: Dictionary, prev: Dictionary) -> Dict
 
 static func _value(key: Dictionary, c: String) -> float:
 	var p: Dictionary = key.pose
-	if c == "x" or c == "y":
-		return float(p[c])
+	if c == "x" or c == "y" or c == "z":
+		return float(p.get(c, 0.0))
 	if c.begins_with("etire:"):
 		return float(p.get("etire", {}).get(c.substr(6), 1.0))
 	return StickRig.angle(p, c)
@@ -538,6 +543,10 @@ static func sample(a: Dictionary, t: float) -> Dictionary:
 		p.angles[c] = _channel(a, c, t - lag.get(c, 0.0), f)
 	p.x = _channel(a, "x", t - lag.get("x", 0.0), f)
 	p.y = _channel(a, "y", t - lag.get("y", 0.0), f)
+	if a.profondeur:
+		p.z = _channel(a, "z", t - lag.get("z", 0.0), f)
+	else:
+		p.erase("z")
 	if not a.etire_ids.is_empty():
 		var e := {}
 		for b in a.etire_ids:

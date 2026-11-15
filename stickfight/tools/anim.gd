@@ -110,18 +110,23 @@ func _simulate(path: String, boucles := 1) -> Dictionary:
 func _default_view(recs: Array) -> Rect2:
 	var x0 := INF
 	var x1 := -INF
+	var y0 := 0.0
 	var y1 := 0.0
 	for r in recs:
 		for fig in r.fighters:
 			var J: Dictionary = StickRig.solve(fig.pose).joints
 			for k in J:
-				x0 = minf(x0, J[k].x)
-				x1 = maxf(x1, J[k].x)
-				y1 = maxf(y1, J[k].y)
+				var v := StickRig.depth_point(fig.pose, J[k])
+				x0 = minf(x0, v.x)
+				x1 = maxf(x1, v.x)
+				y0 = minf(y0, v.y)
+				y1 = maxf(y1, v.y)
 	x0 -= 30.0
 	x1 += 30.0
-	var h := maxf(212.0, y1 + 50.0)
-	return Rect2(floorf(x0 / 10.0) * 10.0, -12.0, ceilf((x1 - x0) / 10.0) * 10.0, h)
+	# Un pas vers la caméra (profondeur) descend sous la ligne de sol.
+	var bas := minf(-12.0, floorf(y0 - 10.0))
+	var h := maxf(212.0, y1 + 50.0) - 12.0 - bas
+	return Rect2(floorf(x0 / 10.0) * 10.0, bas, ceilf((x1 - x0) / 10.0) * 10.0, h)
 
 
 func _caption(r: Dictionary) -> String:
