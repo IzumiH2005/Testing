@@ -1,0 +1,23 @@
+{
+ "nom": "au_sol",
+ "boucle": true,
+ "longueur": 80,
+ "base": "au_sol",
+ "cles": [
+  {
+   "f": 0
+  },
+  {
+   "f": 40,
+   "plus": {
+    "chest": 2,
+    "neck": 2,
+    "armN": 2
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 80
+  }
+ ]
+}

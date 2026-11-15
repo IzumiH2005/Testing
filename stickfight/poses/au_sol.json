@@ -1,0 +1,23 @@
+{
+  "nom": "au_sol",
+  "style": "epais",
+  "x": 0,
+  "y": 9,
+  "facing": 1,
+  "angles": {
+    "root": -86,
+    "spineLow": 0,
+    "chest": 8,
+    "neck": 16,
+    "armN": 8,
+    "foreN": 30,
+    "armF": 150,
+    "foreF": 40,
+    "thighN": 55,
+    "shinN": 100,
+    "footN": 0,
+    "thighF": 8,
+    "shinF": 6,
+    "footF": 0
+  }
+}

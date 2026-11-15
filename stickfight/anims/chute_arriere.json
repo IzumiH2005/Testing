@@ -1,0 +1,253 @@
+{
+ "nom": "chute_arriere",
+ "boucle": false,
+ "base": "garde",
+ "suivante": "au_sol",
+ "decalage": {
+  "neck": 2,
+  "armN": 1,
+  "foreN": 2,
+  "armF": 2,
+  "foreF": 3
+ },
+ "cles": [
+  {
+   "f": 0,
+   "courbe": "lin"
+  },
+  {
+   "f": 1,
+   "nom": "impact : la poitrine est enfoncée, les bras s'envolent",
+   "fixe": {
+    "x": -3,
+    "armN": 62,
+    "foreN": 70,
+    "armF": 72,
+    "foreF": 84
+   },
+   "plus": {
+    "y": -1,
+    "root": -5,
+    "spineLow": -6,
+    "chest": -12,
+    "neck": 10
+   },
+   "vise_rel": {
+    "legN": [
+     -1,
+     0
+    ],
+    "legF": [
+     -1,
+     0
+    ]
+   },
+   "courbe": "dec"
+  },
+  {
+   "f": 6,
+   "nom": "arraché du sol, la jambe avant fouette",
+   "fixe": {
+    "x": -20,
+    "y": 80,
+    "root": -22,
+    "spineLow": -10,
+    "chest": -16,
+    "neck": -24,
+    "armN": 112,
+    "foreN": 46,
+    "armF": 98,
+    "foreF": 40,
+    "thighN": 62,
+    "shinN": 30,
+    "thighF": 18,
+    "shinF": 46
+   },
+   "ancre": false,
+   "courbe": "lin"
+  },
+  {
+   "f": 14,
+   "nom": "en vol, il bascule en arrière",
+   "fixe": {
+    "x": -44,
+    "y": 58,
+    "root": -38,
+    "spineLow": -10,
+    "chest": -10,
+    "neck": -14,
+    "armN": 140,
+    "foreN": 40,
+    "armF": 122,
+    "foreF": 50,
+    "thighN": 76,
+    "shinN": 40,
+    "thighF": 56,
+    "shinF": 50
+   },
+   "ancre": false,
+   "courbe": "auto"
+  },
+  {
+   "f": 22,
+   "nom": "il rentre le menton avant le sol",
+   "fixe": {
+    "x": -72,
+    "y": 24,
+    "root": -66,
+    "spineLow": -4,
+    "chest": 0,
+    "neck": 14,
+    "armN": 128,
+    "foreN": 30,
+    "armF": 150,
+    "foreF": 24,
+    "thighN": 82,
+    "shinN": 46,
+    "thighF": 70,
+    "shinF": 56
+   },
+   "ancre": false,
+   "courbe": "acc"
+  },
+  {
+   "f": 26,
+   "nom": "le dos frappe le sol, les bras claquent",
+   "fixe": {
+    "x": -86,
+    "y": 11,
+    "root": -88,
+    "spineLow": 2,
+    "chest": 6,
+    "neck": 22,
+    "armN": 60,
+    "foreN": 20,
+    "armF": 168,
+    "foreF": 14,
+    "thighN": 74,
+    "shinN": 52,
+    "thighF": 58,
+    "shinF": 64
+   },
+   "ancre": false,
+   "courbe": "dec"
+  },
+  {
+   "f": 31,
+   "nom": "rebond : les jambes retombent",
+   "fixe": {
+    "x": -89,
+    "y": 17,
+    "root": -84,
+    "spineLow": 0,
+    "chest": 6,
+    "neck": 30,
+    "armN": 40,
+    "foreN": 30,
+    "armF": 160,
+    "foreF": 30,
+    "thighN": 62,
+    "shinN": 50,
+    "thighF": 44,
+    "shinF": 34
+   },
+   "ancre": false,
+   "courbe": "acc"
+  },
+  {
+   "f": 38,
+   "nom": "les talons touchent",
+   "fixe": {
+    "x": -90,
+    "y": 9,
+    "root": -87,
+    "spineLow": 0,
+    "chest": 8,
+    "neck": 12,
+    "armN": 14,
+    "foreN": 26,
+    "armF": 152,
+    "foreF": 36,
+    "thighN": 56,
+    "shinN": 96,
+    "thighF": 14,
+    "shinF": 10
+   },
+   "ancre": false,
+   "courbe": "dec"
+  },
+  {
+   "f": 48,
+   "nom": "au sol",
+   "pose": "au_sol",
+   "fixe": {
+    "x": -90
+   },
+   "ancre": false
+  }
+ ],
+ "evenements": [
+  {
+   "f": 1,
+   "type": "contact"
+  },
+  {
+   "f": 1,
+   "type": "hitstop",
+   "n": 12,
+   "tremble": 2.2
+  },
+  {
+   "f": 1,
+   "type": "etincelle",
+   "articulation": "waist",
+   "dec": [
+    8,
+    6
+   ],
+   "dir": 180,
+   "genre": "coup",
+   "taille": 1.7
+  },
+  {
+   "f": 1,
+   "type": "secousse",
+   "n": 8,
+   "force": 2.0
+  },
+  {
+   "f": 6,
+   "type": "poussiere",
+   "articulation": "ankleF",
+   "dir": 180,
+   "taille": 0.5
+  },
+  {
+   "f": 26,
+   "type": "secousse",
+   "n": 9,
+   "force": 2.6
+  },
+  {
+   "f": 26,
+   "type": "poussiere",
+   "articulation": "waist",
+   "dir": 0,
+   "taille": 0.9
+  },
+  {
+   "f": 26,
+   "type": "poussiere",
+   "articulation": "shoulder",
+   "dir": 180,
+   "taille": 0.7
+  },
+  {
+   "f": 38,
+   "type": "poussiere",
+   "articulation": "ankleF",
+   "dir": 0,
+   "taille": 0.35
+  }
+ ]
+}
