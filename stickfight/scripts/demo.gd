@@ -64,7 +64,7 @@ const DUOS := ["res://anims/duo_blocage.json", "res://anims/duo_armure.json",
 		"res://anims/duo_touche_jambe.json", "res://anims/duo_touche_accroupi.json",
 		"res://anims/duo_sonne.json", "res://anims/duo_chute_arriere.json", "res://anims/duo_fauche.json", "res://anims/duo_effondrement.json",
 		"res://anims/duo_touche_au_sol.json", "res://anims/duo_releve.json", "res://anims/duo_releve_roulade.json",
-		"res://anims/duo_ko.json"]
+		"res://anims/duo_ko.json", "res://anims/duo_coup_de_poing_rue.json"]
 const HISTORY_MAX := 600
 ## Écart maximal, en images, entre les deux appuis sur → d'un dash.
 const DOUBLE_APPUI := 14
@@ -76,7 +76,7 @@ const SAUT_TOLERANCE := 6
 ## Images minimales passées dans accroupi_repos_idle avant qu'une propulsion
 ## puisse partir (le fondu de retour de la propulsion précédente se termine).
 const PROPULSION_DELAI := 4
-const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   ↑ sauter (+ → / ← : avant / arrière)   Maj + ↑ saut boosté   ↓ puis → / ← propulsion (+ ↑ haute)   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, ↓ + ← garde basse, B blocage bas, T demi-tour, H / Maj + H / Ctrl + H coup bloqué, Ctrl + Maj + H garde repoussée, J garde brisée, P / Maj + P / Ctrl + P / Ctrl + Maj + P parade haute poing / haute pied / moyenne / basse)   1 à 6 esquive détendue sway / slip / baisse / côté / saut arrière / saut balayage   U armure (encaisse sans broncher)   K duo blocage   Maj + K duo armure   Ctrl + K duo projection cassée   Alt + K / Alt + Maj + K duo paré haut / milieu   Y / Maj + Y / Ctrl + Y duo touché tête (garde / repos / lourd)   O / Maj + O duo touché ventre (léger / plié en deux)   I / Maj + I duo touché jambe / accroupi   N duo sonné   C / Maj + C / Ctrl + C / Ctrl + Maj + C duo chute arrière / fauché / effondrement / frappé au sol   Alt + C / Alt + Maj + C / Alt + Ctrl + C duo relevé / relevé en roulade / KO   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   ↑ sauter (+ → / ← : avant / arrière)   Maj + ↑ saut boosté   ↓ puis → / ← propulsion (+ ↑ haute)   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, ↓ + ← garde basse, B blocage bas, T demi-tour, H / Maj + H / Ctrl + H coup bloqué, Ctrl + Maj + H garde repoussée, J garde brisée, P / Maj + P / Ctrl + P / Ctrl + Maj + P parade haute poing / haute pied / moyenne / basse)   1 à 6 esquive détendue sway / slip / baisse / côté / saut arrière / saut balayage   U armure (encaisse sans broncher)   K duo blocage   Maj + K duo armure   Ctrl + K duo projection cassée   Alt + K / Alt + Maj + K duo paré haut / milieu   Y / Maj + Y / Ctrl + Y duo touché tête (garde / repos / lourd)   O / Maj + O duo touché ventre (léger / plié en deux)   I / Maj + I duo touché jambe / accroupi   N duo sonné   C / Maj + C / Ctrl + C / Ctrl + Maj + C duo chute arrière / fauché / effondrement / frappé au sol   Alt + C / Alt + Maj + C / Alt + Ctrl + C duo relevé / relevé en roulade / KO   F duo coup de poing de rue   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
 ## Esquives des touches 1 à 6, dans l'ordre.
 const ESQUIVES := ["sway", "slip", "baisse", "cote", "saut_arriere", "saut_balayage"]
@@ -511,6 +511,8 @@ func _gui_input(ev: InputEvent) -> void:
 				_duo(DUOS[15])
 			else:
 				_duo(DUOS[14] if ev.shift_pressed else DUOS[13])
+		KEY_F:
+			_duo(DUOS[20])
 		KEY_U:
 			if mode == "solo" and not ev.echo:
 				combat.couche(combat.fighters[0], "armure_encaisse")

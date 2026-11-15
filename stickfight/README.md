@@ -146,6 +146,7 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `releve` | 52 i, puis `garde_idle` | Relevé normal depuis `au_sol` (couché sur le dos). Le bras loin descend au sol derrière lui (f4), il se redresse en appui sur la main (f9) et s'assoit, le pied loin ramené contre lui (f17). Il pousse sur la main et les pieds, le bassin passe au-dessus des pieds (f24), accroupi (f30), le pied arrière recule (f36) et il se remet en garde (f42, poussière) un peu plus loin que sa tête, du côté des pieds |
 | `releve_roulade` | 44 i, puis `garde_idle` | Relevé en roulade arrière (tech roll) depuis `au_sol`. Genoux à la poitrine, mains près des oreilles (f5), le bassin passe au-dessus des épaules, jambes par-dessus la tête et mains qui poussent (f10), les pieds touchent derrière la tête (f15, poussière), à quatre pattes (f18), accroupi (f23), il se redresse (f29) et se remet en garde (f35, poussière) environ 100 px plus loin, du côté de sa tête, donc loin de l'adversaire |
 | `ko_au_sol` | 240 i, en boucle | Inconscient sur le dos, après une chute (KO). Tout est relâché : jambes à plat, genou proche retombé, pieds tombés, bras proche le long du corps, bras loin jeté derrière la tête, tête un peu renversée. Une seule respiration courte et lente par boucle (inspiration jusqu'à f70, expiration jusqu'à f150, puis pause), le buste et les bras suivent à peine (décalage) |
+| `coup_de_poing_rue` | 64 i, avance 30 | Premier vrai coup travaillé : coup de poing de rue du bras arrière, depuis la garde ouverte. Prise d'élan (le poids recule, f8), armé (f16 : buste renversé, poing derrière l'oreille, la main avant mesure la distance), tension tenue jusqu'à f22 ; le coude tombe derrière l'omoplate (f24), le poing passe dans le buste et ressort devant la poitrine (f25-26) pendant que la hanche part et que le pied avant vole ; contact f29 (arrêt sur impact 9 i, gros choc, poussière sous le pied avant), le corps entier projeté, tête droite au-dessus du bras ; il va trop loin (f34), le pied arrière décolle pour se rattraper (f41), revient sous le corps (f47) et `garde_ouverte_idle` 30 plus loin |
 | `duo_pare_haut` | 100 i | Alt + K : A lance un direct, B le pare vers le haut (fenêtre de contre), A est repoussé |
 | `duo_pare_bas` | 110 i | Alt + Maj + K : A lance le pied direct, B le pare au milieu, A est repoussé en sautillant |
 | `duo_touche_tete` | 80 i | Y : A lance un direct, B en garde le prend au visage |
@@ -163,6 +164,7 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `duo_releve` | 230 i | Alt + C : B prend un coup de pied au ventre, tombe sur le dos (`chute_arriere`), reste au sol (`au_sol`) puis se relève en garde (`releve`) |
 | `duo_releve_roulade` | 225 i | Alt + Maj + C : même chute que `duo_releve`, puis B se relève par une roulade arrière (`releve_roulade`), loin de A |
 | `duo_ko` | 240 i | Alt + Ctrl + C : même chute que `duo_releve`, puis B se relâche (fondu de 20 i depuis `au_sol`) et reste inconscient (`ko_au_sol`) |
+| `duo_coup_de_poing_rue` | 115 i | F : A en garde ouverte lance `coup_de_poing_rue`, B en garde le prend au menton (`touche_tete_lourd`) |
 | `sortie_de_garde` | 60 i | De la garde ouverte au repos, sur place : le poids bascule en arrière, le pied avant revient en se posant par la pointe, puis le pied arrière repasse devant et le bassin remonte ; les mains retombent le long du corps, le bras du pied qui avance passe devant (contrepoids) ; enchaîne sur `idle_repos` |
 | `marche_detendue` | 56 i, en boucle, avance 76 | Marche normale depuis le repos, sans garde : bras ballants en opposition des jambes, bassin qui monte et descend sur chaque appui |
 | `marche_detendue_depart` | — | Du repos à la boucle : transfert de poids, premier pas plus court |
@@ -368,6 +370,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | Alt + C | Duo relevé : B tombe sur le dos après un coup de pied au ventre, reste au sol, puis se relève et se remet en garde |
 | Alt + Maj + C | Duo relevé en roulade : même chute, puis B roule en arrière par-dessus ses épaules et se remet en garde plus loin |
 | Alt + Ctrl + C | Duo KO : même chute, puis B perd connaissance et reste inerte au sol, à peine une respiration |
+| F | Duo coup de poing de rue : A prend son élan et frappe en se projetant, B le prend au menton (en boucle) |
 | R | Repos (remise à zéro) |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |
 | L | Ralenti ×4 |
