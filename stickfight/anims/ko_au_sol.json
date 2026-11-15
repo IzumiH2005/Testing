@@ -1,0 +1,106 @@
+{
+ "nom": "ko_au_sol",
+ "boucle": true,
+ "longueur": 240,
+ "base": "au_sol",
+ "decalage": {
+  "neck": 6,
+  "armN": 4,
+  "foreN": 8,
+  "armF": 4,
+  "foreF": 8
+ },
+ "cles": [
+  {
+   "f": 0,
+   "fixe": {
+    "x": 0,
+    "y": 9.0,
+    "root": -87,
+    "spineLow": 0.0,
+    "chest": 5.0,
+    "neck": 30.0,
+    "thighN": 27.0,
+    "shinN": 47.4,
+    "thighF": 5.2,
+    "shinF": 5.6,
+    "armN": -0.5,
+    "foreN": 22.0,
+    "armF": 185.4,
+    "foreF": 6.3,
+    "footN": 18,
+    "footF": 22
+   },
+   "ancre": false
+  },
+  {
+   "f": 70,
+   "fixe": {
+    "x": 0,
+    "y": 9.4,
+    "root": -87,
+    "spineLow": 0.6,
+    "chest": 6.6,
+    "neck": 28.8,
+    "thighN": 27.0,
+    "shinN": 47.4,
+    "thighF": 5.2,
+    "shinF": 5.6,
+    "armN": 0.3,
+    "foreN": 22.0,
+    "armF": 184.8,
+    "foreF": 6.3,
+    "footN": 18,
+    "footF": 22
+   },
+   "ancre": false,
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 150,
+   "fixe": {
+    "x": 0,
+    "y": 9.02,
+    "root": -87,
+    "spineLow": 0.0,
+    "chest": 5.1,
+    "neck": 29.9,
+    "thighN": 27.0,
+    "shinN": 47.4,
+    "thighF": 5.2,
+    "shinF": 5.6,
+    "armN": -0.5,
+    "foreN": 22.0,
+    "armF": 185.4,
+    "foreF": 6.3,
+    "footN": 18,
+    "footF": 22
+   },
+   "ancre": false,
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 240,
+   "fixe": {
+    "x": 0,
+    "y": 9.0,
+    "root": -87,
+    "spineLow": 0.0,
+    "chest": 5.0,
+    "neck": 30.0,
+    "thighN": 27.0,
+    "shinN": 47.4,
+    "thighF": 5.2,
+    "shinF": 5.6,
+    "armN": -0.5,
+    "foreN": 22.0,
+    "armF": 185.4,
+    "foreF": 6.3,
+    "footN": 18,
+    "footF": 22
+   },
+   "ancre": false,
+   "courbe": "acc-dec"
+  }
+ ]
+}
