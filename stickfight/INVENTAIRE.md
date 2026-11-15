@@ -170,7 +170,7 @@ par sa propre version (marquées ✱ quand c'est presque toujours le cas).
 | 17 | Armure : encaisser sans broncher (Power Crush) | fait (`armure_encaisse`, couche par-dessus l'animation courante) |
 | 18 | Casser une projection (celui qui se dégage) | fait (`casse_projection`, depuis le repos, duo `duo_projection_cassee`) |
 | 19 | Projection cassée (celui qui est repoussé) | fait (`projection_cassee`, la saisie de face est incluse) |
-| 20 | Être paré (déséquilibré après la parade adverse) | |
+| 20 | Être paré (déséquilibré après la parade adverse) | fait (`etre_pare_haut`, `etre_pare_bas`) |
 
 ### 3.4 Réactions aux coups, debout — 24
 

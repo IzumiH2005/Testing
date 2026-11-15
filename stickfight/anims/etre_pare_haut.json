@@ -1,0 +1,340 @@
+{
+ "nom": "etre_pare_haut",
+ "boucle": false,
+ "base": "garde",
+ "suivante": "garde_idle",
+ "decalage": {
+  "neck": 2,
+  "chest": 1,
+  "foreN": 2,
+  "armF": 1,
+  "foreF": 2
+ },
+ "cles": [
+  {
+   "f": 0,
+   "nom": "chassé : le bras part vers le haut",
+   "fixe": {
+    "x": 0
+   },
+   "plus": {
+    "y": -3,
+    "root": 3,
+    "spineLow": 1,
+    "chest": 2,
+    "neck": -8
+   },
+   "vise": {
+    "armN": [
+     56,
+     160
+    ],
+    "armF": [
+     30,
+     128
+    ],
+    "legN": [
+     32,
+     8
+    ],
+    "legF": [
+     -50,
+     8
+    ]
+   },
+   "courbe": "dec"
+  },
+  {
+   "f": 4,
+   "nom": "repoussé : le bras passe au-dessus de la tête, le buste s'ouvre",
+   "fixe": {
+    "x": -4,
+    "armN": 168,
+    "foreN": 14,
+    "armF": -10,
+    "foreF": 40
+   },
+   "plus": {
+    "y": -2,
+    "root": -4,
+    "spineLow": -5,
+    "chest": -10,
+    "neck": -12
+   },
+   "vise": {
+    "legN": [
+     31,
+     8
+    ],
+    "legF": [
+     -53,
+     13
+    ]
+   }
+  },
+  {
+   "f": 9,
+   "nom": "emporté en arrière, le pied arrière décolle",
+   "fixe": {
+    "x": -11,
+    "armN": 172,
+    "foreN": 22,
+    "armF": -38,
+    "foreF": 30
+   },
+   "plus": {
+    "y": -3,
+    "root": -7,
+    "spineLow": -9,
+    "chest": -15,
+    "neck": -14
+   },
+   "vise": {
+    "legN": [
+     29,
+     8
+    ],
+    "legF": [
+     -68,
+     20
+    ]
+   },
+   "courbe": "acc"
+  },
+  {
+   "f": 13,
+   "nom": "le pied arrière se pose loin, l'avant glisse",
+   "fixe": {
+    "x": -17,
+    "armN": 152,
+    "foreN": 40,
+    "armF": -30,
+    "foreF": 34
+   },
+   "plus": {
+    "y": -6,
+    "root": -5,
+    "spineLow": -7,
+    "chest": -11,
+    "neck": -8
+   },
+   "vise": {
+    "legN": [
+     25,
+     8
+    ],
+    "legF": [
+     -82,
+     8
+    ]
+   },
+   "courbe": "dec"
+  },
+  {
+   "f": 19,
+   "nom": "les genoux absorbent, le coude se plie",
+   "fixe": {
+    "x": -20,
+    "armN": 140,
+    "foreN": 62,
+    "armF": -20,
+    "foreF": 30
+   },
+   "plus": {
+    "y": -9,
+    "root": -2,
+    "spineLow": -3,
+    "chest": -5,
+    "neck": -2
+   },
+   "vise": {
+    "legN": [
+     25,
+     8
+    ],
+    "legF": [
+     -82,
+     8
+    ]
+   }
+  },
+  {
+   "f": 21,
+   "nom": "le bras tient encore",
+   "fixe": {
+    "x": -20,
+    "armN": 136,
+    "foreN": 70,
+    "armF": -18,
+    "foreF": 28
+   },
+   "plus": {
+    "y": -9,
+    "root": -2,
+    "spineLow": -3,
+    "chest": -5,
+    "neck": -1
+   },
+   "vise": {
+    "legN": [
+     25,
+     8
+    ],
+    "legF": [
+     -82,
+     8
+    ]
+   },
+   "courbe": "acc"
+  },
+  {
+   "f": 23,
+   "nom": "le bras retombe d'un coup",
+   "fixe": {
+    "x": -20,
+    "armN": 18,
+    "foreN": 28,
+    "armF": -5,
+    "foreF": 22
+   },
+   "plus": {
+    "y": -9,
+    "root": 0,
+    "spineLow": -1,
+    "chest": -3,
+    "neck": 4
+   },
+   "vise": {
+    "legN": [
+     25,
+     8
+    ],
+    "legF": [
+     -82,
+     8
+    ]
+   }
+  },
+  {
+   "f": 28,
+   "nom": "ouvert : les bras bas, vulnérable",
+   "fixe": {
+    "x": -20,
+    "armN": 15,
+    "foreN": 22,
+    "armF": -5,
+    "foreF": 22
+   },
+   "plus": {
+    "y": -8,
+    "root": 0,
+    "spineLow": -1,
+    "chest": -2,
+    "neck": 5
+   },
+   "vise": {
+    "legN": [
+     25,
+     8
+    ],
+    "legF": [
+     -82,
+     8
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 33,
+   "nom": "les mains remontent, le pied avant revient",
+   "fixe": {
+    "x": -26,
+    "armN": 38,
+    "foreN": 100,
+    "armF": 50,
+    "foreF": 128
+   },
+   "plus": {
+    "y": -6,
+    "root": 1,
+    "spineLow": 1,
+    "chest": 1,
+    "neck": 2
+   },
+   "vise": {
+    "legN": [
+     12,
+     14
+    ],
+    "legF": [
+     -82,
+     8
+    ]
+   },
+   "courbe": "dec"
+  },
+  {
+   "f": 38,
+   "nom": "le pied avant se pose : garde",
+   "fixe": {
+    "x": -37,
+    "armN": 37.5,
+    "foreN": 115,
+    "armF": 63.5,
+    "foreF": 139
+   },
+   "plus": {
+    "y": -3,
+    "root": 1,
+    "spineLow": 1,
+    "chest": 2,
+    "neck": 1
+   },
+   "vise": {
+    "legN": [
+     -7,
+     8
+    ],
+    "legF": [
+     -80,
+     12
+    ]
+   }
+  },
+  {
+   "f": 46,
+   "nom": "garde",
+   "fixe": {
+    "x": -37
+   },
+   "ancre": false
+  }
+ ],
+ "evenements": [
+  {
+   "f": 0,
+   "type": "contact"
+  },
+  {
+   "f": 13,
+   "type": "poussiere",
+   "articulation": "ankleF",
+   "dir": 180,
+   "taille": 0.6
+  },
+  {
+   "f": 13,
+   "type": "poussiere",
+   "articulation": "ankleN",
+   "dir": 180,
+   "taille": 0.3
+  },
+  {
+   "f": 38,
+   "type": "poussiere",
+   "articulation": "ankleN",
+   "dir": 180,
+   "taille": 0.3
+  }
+ ]
+}

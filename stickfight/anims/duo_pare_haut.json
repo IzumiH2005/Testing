@@ -1,0 +1,39 @@
+{
+ "nom": "duo_pare_haut",
+ "longueur": 100,
+ "acteurs": [
+  {
+   "x": 0,
+   "facing": 1,
+   "couleur": "#111111",
+   "anim": "garde_idle",
+   "t0": 0,
+   "programme": [
+    {
+     "contact": 30,
+     "anim": "direct",
+     "fondu": 3
+    },
+    {
+     "g": 31,
+     "anim": "etre_pare_haut",
+     "fondu": 2
+    }
+   ]
+  },
+  {
+   "x": 150,
+   "facing": -1,
+   "couleur": "#1d3f8f",
+   "anim": "garde_idle",
+   "t0": 37,
+   "programme": [
+    {
+     "contact": 30,
+     "anim": "parade_haute_poing",
+     "fondu": 3
+    }
+   ]
+  }
+ ]
+}

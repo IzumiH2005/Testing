@@ -126,6 +126,11 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `projection_cassee` | 38 i, avance 6 | Celui dont la projection est cassée : grand pas glissé depuis la garde, les deux mains saisissent le col (contact f8), il commence à tirer, puis ses bras sont chassés vers le haut (f14), le buste part en arrière et les pieds glissent ; il se rattrape en garde |
 | `casse_projection` | 38 i, recule 11 | Celui qui casse : saisi au repos (f8), tiré vers l'avant, les mains montent entre les bras adverses et les avant-bras les chassent vers le haut (f14, arrêt 6 i, étincelle de parade) ; il glisse en arrière, les bras retombent, `idle_repos` |
 | `duo_projection_cassee` | 90 i | Ctrl + K : les deux ensemble, à 125 de distance, saisie et casse calées sur la même image |
+| `direct` | 22 i, avance 12 | Direct du bras avant, provisoire, pour le duo : pas glissé, contact au visage (f6, arrêt 6 i), retour en garde |
+| `etre_pare_haut` | 46 i, recule 37 | Être paré vers le haut (après `parade_haute_poing` ou `parade_haute_pied`) : réaction réutilisable, jouée à l'image qui suit le contact avec un fondu depuis la pose du coup. Le bras est chassé au-dessus de la tête, le buste s'ouvre en arrière, il est repoussé : le pied arrière décolle et se pose loin (f13), l'avant glisse ; le bras retombe, il reste ouvert, bras bas, pendant la fenêtre de contre de la parade, puis ramène le pied avant en garde |
+| `etre_pare_bas` | 44 i, recule 21 | Être paré au milieu ou en bas (après `parade_moyenne` ou `parade_basse`) : même usage. La jambe est chassée, il sautille en arrière sur l'appui, la jambe repliée, les bras battent l'air (f4) ; le pied retombe (f8), il absorbe, ouvert, bras bas, puis se remet en garde sur place |
+| `duo_pare_haut` | 100 i | Alt + K : A lance un direct, B le pare vers le haut (fenêtre de contre), A est repoussé |
+| `duo_pare_bas` | 110 i | Alt + Maj + K : A lance le pied direct, B le pare au milieu, A est repoussé en sautillant |
 | `sortie_de_garde` | 60 i | De la garde ouverte au repos, sur place : le poids bascule en arrière, le pied avant revient en se posant par la pointe, puis le pied arrière repasse devant et le bassin remonte ; les mains retombent le long du corps, le bras du pied qui avance passe devant (contrepoids) ; enchaîne sur `idle_repos` |
 | `marche_detendue` | 56 i, en boucle, avance 76 | Marche normale depuis le repos, sans garde : bras ballants en opposition des jambes, bassin qui monte et descend sur chaque appui |
 | `marche_detendue_depart` | — | Du repos à la boucle : transfert de poids, premier pas plus court |
@@ -322,7 +327,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | P, Maj + P, Ctrl + P, Ctrl + Maj + P | Parade en garde : coup de poing haut, coup de pied haut, coup moyen, coup bas. Pendant la fenêtre de contre d'une parade, une nouvelle parade peut l'annuler (à la place de la contre-attaque, qui sera propre à chaque personnage) |
 | 1 à 6 | Esquive détendue (au repos, en marche ou en garde), une par type de coup : 1 sway (direct au visage), 2 slip (direct), 3 se baisser (crochet ou circulaire à la tête), 4 pas de côté, pivot face caméra (coup de pied appuyé), 5 saut arrière (coup de pied hache), 6 saut sur place (balayage). Sans garde, bras pendants, elle finit toujours au repos. Elle peut aussi partir pendant la fenêtre de contre d'une parade ou d'une autre esquive. Touches provisoires, comme P |
 | U | Armure : encaisse un coup sans broncher, par-dessus ce qu'il fait (repos, marche, garde, course…) |
-| K, Maj + K, Ctrl + K | Duo coup de pied / blocage, coup de pied encaissé sous armure, ou projection cassée (en boucle) |
+| K, Maj + K, Ctrl + K, Alt + K, Alt + Maj + K | Duo coup de pied / blocage, coup de pied encaissé sous armure, projection cassée, direct paré en haut, pied paré au milieu (en boucle) |
 | R | Repos (remise à zéro) |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |
 | L | Ralenti ×4 |
