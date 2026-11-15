@@ -18,8 +18,8 @@ combat. Les petites transitions d'une même action ne comptent pas à part :
 - entrée, boucle et sortie d'une posture ;
 - réception d'un saut.
 
-Les fichiers sont donc plus nombreux que les animations. Aujourd'hui, 60 animations
-communes sont faites, ce qui représente 83 fichiers dans `anims/`.
+Les fichiers sont donc plus nombreux que les animations. Aujourd'hui, 61 animations
+communes sont faites, ce qui représente 84 fichiers dans `anims/`.
 
 ### Repères
 
@@ -143,12 +143,12 @@ sa propre version ; ce remplacement compte alors dans son budget propre (§ 4).
 Les variantes « moyen » se font en jouant la légère plus fort, ou la lourde plus court ; on
 n'en fait pas de fichier.
 
-### 3.5 Chutes, au sol, relevés, KO : 8, 1 faite
+### 3.5 Chutes, au sol, relevés, KO : 8, 2 faites
 
 | Animation | Fichier prévu |
 |---|---|
 | Propulsé en arrière, chute sur le dos (fait) | `chute_arriere` |
-| Fauché (les jambes partent, tombe sur le dos) | `fauche` |
+| Fauché (les jambes partent, tombe sur le dos) (fait) | `fauche` |
 | Effondrement lent vers l'avant (crumple) | `effondrement` |
 | Au sol sur le dos (boucle) | `au_sol` |
 | Touché au sol | `touche_au_sol` |
@@ -184,10 +184,10 @@ Le ralenti final est géré par le moteur.
 | 3.2 Déplacements | 19 | 0 |
 | 3.3 Défense | 26 | 0 |
 | 3.4 Réactions debout | 7 | 0 |
-| 3.5 Chutes, sol, relevés, KO | 1 | 7 |
+| 3.5 Chutes, sol, relevés, KO | 2 | 6 |
 | 3.6 En l'air et mur | 0 | 4 |
 | 3.7 Universelles | 0 | 3 |
-| **Total : 74** | **60** | **14** |
+| **Total : 74** | **61** | **13** |
 
 ---
 
@@ -237,7 +237,7 @@ Le premier personnage les reprendra ou les refera selon les règles du § 2.
 
 | | Animations |
 |---|---|
-| Communes | 74 (60 faites, 14 à faire) |
+| Communes | 74 (61 faites, 13 à faire) |
 | Propres à un personnage | 42 |
 | **Par personnage** | **116** |
 
@@ -298,7 +298,7 @@ Ce qu'il reste à produire :
 | Phase | Contenu | Animations | État |
 |---|---|---|---|
 | 1. Socle de déplacement et de défense | postures, déplacements, défense | 52 | fait |
-| 2. Encaisser | réactions debout (7), chutes, sol, relevés, KO (8) | 15 | en cours (8/15) |
+| 2. Encaisser | réactions debout (7), chutes, sol, relevés, KO (8) | 15 | en cours (9/15) |
 | 3. Personnage 1, le cœur | boutons seuls, directions, accroupi, chaînes, course et saut | 23 | |
 | 4. Jongles et mur | en l'air (3), plaqué au mur (1), testés avec le lanceur du personnage 1 | 4 | |
 | 5. Personnage 1, le reste | projections, spéciaux, Power Crush, contre, Heat Smash, Rage Art, mise en scène, remplacements | 19 | |
@@ -307,7 +307,7 @@ Ce qu'il reste à produire :
 
 On s'arrête à la fin de chaque phase pour tester en jeu avant d'aller plus loin.
 
-**En cours, phase 2.** Les 7 réactions debout sont faites : `touche_tete_leger`, `touche_tete_lourd` (duos contre `direct`), `touche_ventre_leger` et `touche_ventre_lourd` (duos contre `coup_de_pied_ventre`), `touche_jambe` (duo contre `pied_bas`), `touche_accroupi` (duo contre `coup_de_pied_ventre`), `sonne` (duo après `touche_tete_lourd`). Chutes (3.5) : `chute_arriere` (duo contre `coup_de_pied_ventre`, avec la pose `au_sol`). La suivante : `fauche`.
+**En cours, phase 2.** Les 7 réactions debout sont faites : `touche_tete_leger`, `touche_tete_lourd` (duos contre `direct`), `touche_ventre_leger` et `touche_ventre_lourd` (duos contre `coup_de_pied_ventre`), `touche_jambe` (duo contre `pied_bas`), `touche_accroupi` (duo contre `coup_de_pied_ventre`), `sonne` (duo après `touche_tete_lourd`). Chutes (3.5) : `chute_arriere` (duo contre `coup_de_pied_ventre`, avec la pose `au_sol`), `fauche` (duo contre `pied_bas`). La suivante : `effondrement`.
 
 ---
 

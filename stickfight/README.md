@@ -138,6 +138,7 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `touche_accroupi` | 21 i, recule 11 | Touché accroupi : depuis `accroupi_idle` ou `garde_basse` (fondu 1). Contact dès l'image 1 (arrêt sur impact 6 i, étincelle de coup à l'épaule) : le buste et la tête partent en arrière, la garde s'ouvre ; les deux pieds glissent ensemble (f4, poussière) sans se relever, les bras rejetés vers le bas ; il rebondit en avant, les genoux absorbent (f9), les mains remontent par le haut, puis `accroupi_idle` |
 | `sonne` | 64 i, en boucle | Sonné, titubant : à jouer après un contre ou une garde brisée (fondu 10 depuis la réaction), puis `garde_idle` avec un fondu de 14 quand il se reprend. Genoux pliés, buste tassé, tête qui pend, bras ballants bas. Le poids part en arrière et la tête bascule (f14), il titube en avant : le pied avant décolle et se repose un peu devant (f24-30), il plonge sur les genoux (f40), puis le pied avant revient à sa place (f50). Pieds et bassin reviennent exactement au départ, la boucle ne dérive pas |
 | `chute_arriere` | 48 i, puis `au_sol` | Propulsé en arrière par un coup lourd, il retombe sur le dos. Impact (f1, hitstop 12) : poitrine enfoncée, bras qui s'envolent. Arraché du sol (f6), la jambe avant fouette ; il bascule en arrière en vol (f14) et rentre le menton avant le sol (f22). Le dos frappe le sol (f26, secousse et poussière), petit rebond des jambes (f31), les talons touchent (f38), puis la pose `au_sol` (f48), environ 90 px derrière son point de départ |
+| `fauche` | 34 i, puis `au_sol` | Jambes balayées, il tombe sur le dos presque sur place (environ 15 px en arrière). Impact (f1, hitstop 9) : le pied avant est arraché vers le haut, les bras s'envolent. Les deux jambes partent (f5), il passe à l'horizontale en l'air, jambes hautes (f10), et le dos frappe le sol à plat (f14, secousse et poussière). Rebond des jambes (f19), talons au sol (f25), puis la pose `au_sol` (f34) |
 | `duo_pare_haut` | 100 i | Alt + K : A lance un direct, B le pare vers le haut (fenêtre de contre), A est repoussé |
 | `duo_pare_bas` | 110 i | Alt + Maj + K : A lance le pied direct, B le pare au milieu, A est repoussé en sautillant |
 | `duo_touche_tete` | 80 i | Y : A lance un direct, B en garde le prend au visage |
@@ -149,6 +150,7 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `duo_touche_accroupi` | 90 i | Maj + I : A lance le coup de pied direct, B accroupi le prend à l'épaule |
 | `duo_sonne` | 200 i | N : A lance un direct, B le prend en coup lourd (`touche_tete_lourd`), enchaîne sur `sonne` (g52) puis se remet en garde (g180) |
 | `duo_chute_arriere` | 150 i | C : A lance un coup de pied au ventre, B est propulsé (`chute_arriere`) et reste au sol (`au_sol`) |
+| `duo_fauche` | 110 i | Maj + C : A lance un coup de pied bas, B est fauché (`fauche`) et reste au sol (`au_sol`) |
 | `sortie_de_garde` | 60 i | De la garde ouverte au repos, sur place : le poids bascule en arrière, le pied avant revient en se posant par la pointe, puis le pied arrière repasse devant et le bassin remonte ; les mains retombent le long du corps, le bras du pied qui avance passe devant (contrepoids) ; enchaîne sur `idle_repos` |
 | `marche_detendue` | 56 i, en boucle, avance 76 | Marche normale depuis le repos, sans garde : bras ballants en opposition des jambes, bassin qui monte et descend sur chaque appui |
 | `marche_detendue_depart` | — | Du repos à la boucle : transfert de poids, premier pas plus court |
@@ -350,7 +352,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | O, Maj + O | Duo coup de pied direct pris au ventre, B en garde : léger / plié en deux (en boucle) |
 | I, Maj + I | Duo touché : coup de pied bas pris dans le tibia, B en garde / pied direct pris accroupi (en boucle) |
 | N | Duo sonné : B prend un direct lourd, titube sonné pendant deux boucles, puis se remet en garde (en boucle) |
-| C | Duo chute arrière : B prend un coup de pied au ventre, est propulsé et retombe sur le dos, puis reste au sol (en boucle) |
+| C, Maj + C | Duo chute : B prend un coup de pied au ventre, est propulsé et retombe sur le dos / B est fauché par un coup de pied bas, les jambes partent et il tombe à plat ; puis il reste au sol (en boucle) |
 | R | Repos (remise à zéro) |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |
 | L | Ralenti ×4 |

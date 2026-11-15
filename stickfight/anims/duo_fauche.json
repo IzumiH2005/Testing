@@ -1,0 +1,34 @@
+{
+ "nom": "duo_fauche",
+ "longueur": 110,
+ "acteurs": [
+  {
+   "x": 0,
+   "facing": 1,
+   "couleur": "#111111",
+   "anim": "garde_idle",
+   "t0": 0,
+   "programme": [
+    {
+     "contact": 30,
+     "anim": "pied_bas",
+     "fondu": 3
+    }
+   ]
+  },
+  {
+   "x": 132,
+   "facing": -1,
+   "couleur": "#1d3f8f",
+   "anim": "garde_idle",
+   "t0": 37,
+   "programme": [
+    {
+     "contact": 30,
+     "anim": "fauche",
+     "fondu": 1
+    }
+   ]
+  }
+ ]
+}
