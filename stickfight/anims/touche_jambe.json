@@ -1,0 +1,228 @@
+{
+ "nom": "touche_jambe",
+ "boucle": false,
+ "base": "garde",
+ "suivante": "garde_idle",
+ "decalage": {
+  "neck": 1,
+  "chest": 1,
+  "armN": 1,
+  "foreN": 2,
+  "armF": 2,
+  "foreF": 3
+ },
+ "cles": [
+  {
+   "f": 0,
+   "courbe": "lin"
+  },
+  {
+   "f": 1,
+   "nom": "impact : le pied avant est fauché",
+   "fixe": {
+    "x": -1,
+    "armN": 26,
+    "foreN": 58,
+    "armF": 20,
+    "foreF": 60
+   },
+   "plus": {
+    "y": -4,
+    "root": 3,
+    "spineLow": 3,
+    "chest": 5,
+    "neck": -4
+   },
+   "vise_rel": {
+    "legN": [
+     -9,
+     5
+    ],
+    "legF": [
+     0,
+     0
+    ]
+   },
+   "courbe": "dec"
+  },
+  {
+   "f": 5,
+   "nom": "déséquilibré, le buste bascule",
+   "fixe": {
+    "x": -3,
+    "armN": 22,
+    "foreN": 44,
+    "armF": -24,
+    "foreF": 40
+   },
+   "plus": {
+    "y": -8,
+    "root": 6,
+    "spineLow": 6,
+    "chest": 9,
+    "neck": -8
+   },
+   "vise_rel": {
+    "legN": [
+     -18,
+     4
+    ],
+    "legF": [
+     0,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 9,
+   "nom": "le pied se repose",
+   "fixe": {
+    "x": -5,
+    "armN": 14,
+    "foreN": 40,
+    "armF": -14,
+    "foreF": 34
+   },
+   "plus": {
+    "y": -8,
+    "root": 4,
+    "spineLow": 4,
+    "chest": 6,
+    "neck": -4
+   },
+   "vise_rel": {
+    "legN": [
+     -20,
+     0
+    ],
+    "legF": [
+     -2,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 15,
+   "nom": "le pied repart en place",
+   "fixe": {
+    "x": -6,
+    "armN": 2,
+    "foreN": 124,
+    "armF": 6,
+    "foreF": 130
+   },
+   "plus": {
+    "y": -4,
+    "root": 1,
+    "spineLow": 2,
+    "chest": 3
+   },
+   "vise_rel": {
+    "legN": [
+     -12,
+     6
+    ],
+    "legF": [
+     -6,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 20,
+   "nom": "pied posé, les mains montent",
+   "fixe": {
+    "x": -6,
+    "armN": 4,
+    "foreN": 136,
+    "armF": 10,
+    "foreF": 140
+   },
+   "plus": {
+    "y": -3,
+    "spineLow": 2,
+    "chest": 2
+   },
+   "vise_rel": {
+    "legN": [
+     -6,
+     0
+    ],
+    "legF": [
+     -6,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 26,
+   "nom": "les mains remontent",
+   "fixe": {
+    "x": -6,
+    "armN": 34,
+    "foreN": 108,
+    "armF": 58,
+    "foreF": 132
+   },
+   "plus": {
+    "y": -1,
+    "spineLow": 1,
+    "chest": 1
+   },
+   "vise_rel": {
+    "legN": [
+     -6,
+     0
+    ],
+    "legF": [
+     -6,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 32,
+   "nom": "garde",
+   "fixe": {
+    "x": -6
+   },
+   "ancre": false
+  }
+ ],
+ "evenements": [
+  {
+   "f": 1,
+   "type": "contact"
+  },
+  {
+   "f": 1,
+   "type": "hitstop",
+   "n": 7,
+   "tremble": 1.4
+  },
+  {
+   "f": 1,
+   "type": "etincelle",
+   "articulation": "ankleN",
+   "dec": [
+    2,
+    18
+   ],
+   "dir": 180,
+   "genre": "coup",
+   "taille": 1.0
+  },
+  {
+   "f": 9,
+   "type": "poussiere",
+   "articulation": "ankleN",
+   "dir": 180,
+   "taille": 0.4
+  }
+ ]
+}

@@ -127,12 +127,14 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `casse_projection` | 38 i, recule 11 | Celui qui casse : saisi au repos (f8), tiré vers l'avant, les mains montent entre les bras adverses et les avant-bras les chassent vers le haut (f14, arrêt 6 i, étincelle de parade) ; il glisse en arrière, les bras retombent, `idle_repos` |
 | `duo_projection_cassee` | 90 i | Ctrl + K : les deux ensemble, à 125 de distance, saisie et casse calées sur la même image |
 | `direct` | 22 i, avance 12 | Direct du bras avant, provisoire, pour le duo : pas glissé, contact au visage (f6, arrêt 6 i), retour en garde |
+| `pied_bas` | 30 i | Coup de pied bas de la jambe avant dans le tibia, provisoire, pour le duo : charge, genou armé (f7), contact (f10), tenu, retour en garde |
 | `etre_pare_haut` | 46 i, recule 37 | Être paré vers le haut (après `parade_haute_poing` ou `parade_haute_pied`) : réaction réutilisable, jouée à l'image qui suit le contact avec un fondu depuis la pose du coup. Le bras est chassé au-dessus de la tête, le buste s'ouvre en arrière, il est repoussé : le pied arrière décolle et se pose loin (f13), l'avant glisse ; le bras retombe, il reste ouvert, bras bas, pendant la fenêtre de contre de la parade, puis ramène le pied avant en garde |
 | `etre_pare_bas` | 44 i, recule 21 | Être paré au milieu ou en bas (après `parade_moyenne` ou `parade_basse`) : même usage. La jambe est chassée, il sautille en arrière sur l'appui, la jambe repliée, les bras battent l'air (f4) ; le pied retombe (f8), il absorbe, ouvert, bras bas, puis se remet en garde sur place |
 | `touche_tete_leger` | 22 i, recule 10 | Touché à la tête par un coup léger. Contact dès l'image 1 (arrêt sur impact 6 i, tremblement 1,3, étincelle de coup sur la tête) : la tête part en arrière, la garde s'ouvre ; le buste suit la tête (f4) et les bras retombent, ouverts ; les pieds glissent d'un pas, la tête revient (f9), puis les mains remontent et `garde_idle`. Marche depuis la garde (fondu 1, la garde est cassée) comme depuis le repos (fondu 3, les bras sont déjà bas) |
 | `touche_tete_lourd` | 36 i, recule 29 | Touché à la tête par un coup lourd. Contact dès l'image 1 (arrêt sur impact 10 i, tremblement 2, secousse, grosse étincelle de coup) : la tête est arrachée en arrière, le buste se cambre, le bras avant s'envole vers le haut et l'arrière retombe ; le pied arrière décolle (f5) et se pose loin derrière (f10, poussière), l'avant traîne pour le rejoindre (f16) pendant que la tête retombe en avant ; les genoux absorbent, bras ballants, puis les mains remontent et `garde_idle` |
 | `touche_ventre_leger` | 24 i, recule 12 | Touché au ventre, léger. Contact dès l'image 1 (arrêt sur impact 6 i, étincelle de coup à la taille) : le bassin part en arrière, le buste se plie et la tête vient en avant ; les mains se referment bas vers le ventre (f5), le pied avant recule pendant que le buste se redresse, mains serrées contre le corps, puis elles remontent en diagonale vers la garde et `garde_idle` |
 | `touche_ventre_lourd` | 46 i, recule 33 | Plié en deux. Contact dès l'image 1 (arrêt sur impact 10 i, tremblement 2, secousse, grosse étincelle à la taille) : le buste se plie d'un coup, les deux pieds glissent en arrière (poussière), plié en deux les mains serrées sur le ventre ; le pied arrière décolle et se replace (f12-16), il reste plié, vulnérable, jusqu'à f26, puis se redresse, mains contre la poitrine, le pied avant revient, les mains remontent et `garde_idle` |
+| `touche_jambe` | 32 i, recule 6 | Touché à la jambe (coup bas dans le tibia). Contact dès l'image 1 (arrêt sur impact 7 i, tremblement 1,4, étincelle sur le tibia) : le pied avant est chassé en arrière et décolle à peine, les genoux plient, le buste tombe en avant et la tête aussi ; les mains s'ouvrent pour l'équilibre (f5), le pied se repose (f9, poussière), il se relève en remontant les mains serrées contre le corps, puis `garde_idle` |
 | `duo_pare_haut` | 100 i | Alt + K : A lance un direct, B le pare vers le haut (fenêtre de contre), A est repoussé |
 | `duo_pare_bas` | 110 i | Alt + Maj + K : A lance le pied direct, B le pare au milieu, A est repoussé en sautillant |
 | `duo_touche_tete` | 80 i | Y : A lance un direct, B en garde le prend au visage |
@@ -140,6 +142,7 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `duo_touche_tete_lourd` | 90 i | Ctrl + Y : B en garde prend le direct en coup lourd (le coup du duo reste le direct, en attendant les coups du personnage 1) |
 | `duo_touche_ventre` | 100 i | O : A lance le coup de pied direct, B en garde le prend au ventre (léger) |
 | `duo_touche_ventre_lourd` | 110 i | Maj + O : A lance le coup de pied direct, B en garde le prend en plein ventre et se plie en deux |
+| `duo_touche_jambe` | 80 i | I : A lance un coup de pied bas, B en garde le prend dans le tibia |
 | `sortie_de_garde` | 60 i | De la garde ouverte au repos, sur place : le poids bascule en arrière, le pied avant revient en se posant par la pointe, puis le pied arrière repasse devant et le bassin remonte ; les mains retombent le long du corps, le bras du pied qui avance passe devant (contrepoids) ; enchaîne sur `idle_repos` |
 | `marche_detendue` | 56 i, en boucle, avance 76 | Marche normale depuis le repos, sans garde : bras ballants en opposition des jambes, bassin qui monte et descend sur chaque appui |
 | `marche_detendue_depart` | — | Du repos à la boucle : transfert de poids, premier pas plus court |
@@ -339,6 +342,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | K, Maj + K, Ctrl + K, Alt + K, Alt + Maj + K | Duo coup de pied / blocage, coup de pied encaissé sous armure, projection cassée, direct paré en haut, pied paré au milieu (en boucle) |
 | Y, Maj + Y, Ctrl + Y | Duo direct pris au visage : B en garde, au repos, coup lourd (en boucle) |
 | O, Maj + O | Duo coup de pied direct pris au ventre, B en garde : léger / plié en deux (en boucle) |
+| I | Duo coup de pied bas pris dans le tibia, B en garde (en boucle) |
 | R | Repos (remise à zéro) |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |
 | L | Ralenti ×4 |
