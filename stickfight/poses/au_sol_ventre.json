@@ -1,0 +1,23 @@
+{
+  "nom": "au_sol_ventre",
+  "style": "epais",
+  "x": 0,
+  "y": 10.5,
+  "facing": 1,
+  "angles": {
+    "root": 86,
+    "spineLow": 0,
+    "chest": -6,
+    "neck": -34,
+    "armN": -21.9,
+    "foreN": 30.6,
+    "armF": -10.4,
+    "foreF": 6.3,
+    "thighN": -1.9,
+    "shinN": 14.4,
+    "footN": 0,
+    "thighF": -5.6,
+    "shinF": 5.6,
+    "footF": 0
+  }
+}
