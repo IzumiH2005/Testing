@@ -28,12 +28,11 @@ extends Control
 ##      une autre parade peut l'annuler (la contre-attaque, elle, sera propre
 ##      à chaque personnage). Touches provisoires : les commandes finales
 ##      seront à la manette, façon Tekken (□ △ × ○ = 1 2 3 4).
-##   1 à 7  au repos (ou en garde) : esquive détendue, sans garde, façon
+##   1 à 6  au repos (ou en garde) : esquive détendue, sans garde, façon
 ##      « ultra instinct », qui finit au repos (varie selon le coup) ; 1 sway (direct au
 ##      visage), 2 slip (direct, la tête passe à côté), 3 baisse (crochet ou
-##      circulaire à la tête), 4 retrait du ventre (crochet au corps),
-##      5 pas de côté, pivot face caméra (coup de pied appuyé), 6 saut arrière (coup de pied
-##      hache), 7 saut sur place (balayage). Pendant la fenêtre de contre
+##      circulaire à la tête), 4 pas de côté, pivot face caméra (coup de pied
+##      appuyé), 5 saut arrière (coup de pied hache), 6 saut sur place (balayage). Pendant la fenêtre de contre
 ##      d'une parade ou d'une esquive, une esquive peut partir. Touches
 ##      provisoires, comme P.
 ##   B  blocage bas (en garde)   K  duo coup de pied direct + blocage bas
@@ -53,10 +52,10 @@ const SAUT_TOLERANCE := 6
 ## Images minimales passées dans accroupi_repos_idle avant qu'une propulsion
 ## puisse partir (le fondu de retour de la propulsion précédente se termine).
 const PROPULSION_DELAI := 4
-const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   ↑ sauter (+ → / ← : avant / arrière)   Maj + ↑ saut boosté   ↓ puis → / ← propulsion (+ ↑ haute)   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, ↓ + ← garde basse, B blocage bas, T demi-tour, H / Maj + H / Ctrl + H coup bloqué, Ctrl + Maj + H garde repoussée, J garde brisée, P / Maj + P / Ctrl + P / Ctrl + Maj + P parade haute poing / haute pied / moyenne / basse)   1 à 7 esquive détendue sway / slip / baisse / retrait / côté / saut arrière / saut balayage   U armure (encaisse sans broncher)   K duo blocage   Maj + K duo armure   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   ↑ sauter (+ → / ← : avant / arrière)   Maj + ↑ saut boosté   ↓ puis → / ← propulsion (+ ↑ haute)   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, ↓ + ← garde basse, B blocage bas, T demi-tour, H / Maj + H / Ctrl + H coup bloqué, Ctrl + Maj + H garde repoussée, J garde brisée, P / Maj + P / Ctrl + P / Ctrl + Maj + P parade haute poing / haute pied / moyenne / basse)   1 à 6 esquive détendue sway / slip / baisse / côté / saut arrière / saut balayage   U armure (encaisse sans broncher)   K duo blocage   Maj + K duo armure   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
-## Esquives des touches 1 à 7, dans l'ordre.
-const ESQUIVES := ["sway", "slip", "baisse", "retrait", "cote", "saut_arriere", "saut_balayage"]
+## Esquives des touches 1 à 6, dans l'ordre.
+const ESQUIVES := ["sway", "slip", "baisse", "cote", "saut_arriere", "saut_balayage"]
 
 var planche: Planche
 var help: Label
@@ -83,7 +82,7 @@ var tour_req := false
 var coup_req := ""
 ## P appuyé : parade à jouer ("" = aucune), consommée de même.
 var parade_req := ""
-## 1 à 7 appuyé : esquive à jouer ("" = aucune), consommée de même.
+## 1 à 6 appuyé : esquive à jouer ("" = aucune), consommée de même.
 var esquive_req := ""
 ## Images passées en garde basse sans ←, pour la rouvrir après ROUVRIR.
 var gb_sans_recul := 0
@@ -499,7 +498,7 @@ func _gui_input(ev: InputEvent) -> void:
 				parade_req = ("parade_basse" if ev.shift_pressed else "parade_moyenne") \
 						if ev.ctrl_pressed else "parade_haute_pied" if ev.shift_pressed \
 						else "parade_haute_poing"
-		KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6, KEY_7:
+		KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6:
 			if not ev.echo:
 				esquive_req = "esquive_" + ESQUIVES[ev.keycode - KEY_1]
 		KEY_L:

@@ -15,11 +15,18 @@ extends SceneTree
 ##     autour de ce point d'un quart de tour, poitrine vers la caméra ;
 ##   - la jambe arrière (côté caméra) balaie un arc derrière lui (loin de la caméra), pied
 ##     soulevé au milieu de l'arc, un peu en retard sur le bassin ;
-##   - le bassin s'abaisse à peine et se retrouve en retrait, hors de la ligne
-##     du coup : le pied adverse passe devant son ventre ;
-##   - le haut du corps devance le bassin et s'incline à peine loin du coup ;
-##   - les bras restent pendus, mains basses, à peine décollées du corps par
-##     la rotation ; retour en repos par le même pivot à l'envers.
+##   - au bout du quart de tour il est entièrement de face : bassin au milieu
+##     des appuis, jambes légèrement écartées en A, pointes un peu ouvertes,
+##     bras décollés du corps de part et d'autre ; il tient cette pose pendant
+##     que le coup passe, hors de la ligne : le pied adverse passe devant son
+##     ventre ;
+##   - le haut du corps devance le bassin ;
+##   - retour en repos par le même pivot à l'envers.
+##
+## Le pied d'appui est épinglé à l'écran : après la perspective, toute la
+## figure est recalée pour que sa pointe soit dessinée exactement au même
+## point à chaque image (sinon la perspective, centrée sous le bassin qui
+## bouge, le fait glisser et trembler).
 ##
 ## La perspective est calculée articulation par articulation (même focale et
 ## même remontée au sol que StickRig.depth). La clé porte une petite
@@ -35,8 +42,9 @@ const LEAD_UP := 1.5    # avance du haut du corps sur le bassin (images)
 const LEAD_HEAD := 1.0  # avance de la tête sur le buste
 const LAG_REAR := 1.5   # retard de la jambe arrière
 const LIFT_REAR := 7.0  # hauteur du pied arrière au milieu de l'arc
-const STEP_SIDE := -32.0 # face caméra, le pied arrière se pose de côté (vers -x : jambe proche)
-const STEP_IN := 0.5    # ... et moins loin derrière (fraction de l'arc gardée)
+const W_FRONT := 15.0   # de face : demi-écart des chevilles (bassin au milieu)
+const TURN := 22.0      # de face : pointes ouvertes vers l'extérieur (degrés)
+const ARM_OUT := 24.0   # de face : bras écartés du corps (degrés)
 const Z_TRI := 0.3      # profondeur de tri portée par la clé (fraction du bassin)
 
 var g: Dictionary       # pose de base
@@ -44,6 +52,8 @@ var s: Dictionary       # style
 var J0: Dictionary      # articulations du repos
 var C: Vector3          # axe du pivot : plante du pied avant
 var shift: Vector3      # recentrage du bassin entre les appuis, face caméra
+var AF_END: Vector3     # cheville avant, de face
+var TOE_2D: Vector2     # pointe du pied d'appui, dessinée (épinglée)
 
 
 func _initialize() -> void:
@@ -52,11 +62,12 @@ func _initialize() -> void:
 	J0 = StickRig.solve(g).joints
 	# En repos, le pied avant est celui de la jambe éloignée (F, z > 0).
 	C = Vector3(float(J0.toeF.x), 0.0, Z_HIP)
-	# Face caméra, le bassin se place au-dessus du milieu des deux appuis.
-	var an_end := _front_ankle(-90.0, _pitch(J0, "F"))
-	var af_end := _rear_ankle(-90.0)
+	TOE_2D = J0.toeF
+	# Face caméra, le bassin se place au-dessus du milieu des deux appuis :
+	# le pied d'appui (côté +x de face) et le pied arrière posé à 2 W_FRONT.
+	AF_END = _front_ankle(-90.0, _pitch(J0, "F"), TURN)
 	var h_end := around(_v3(J0.hip, 0.0), -90.0)
-	shift = (an_end + af_end) / 2.0 - h_end
+	shift = Vector3(AF_END.x - W_FRONT, 0.0, AF_END.z) - h_end
 	shift.y = 0.0
 	var cles := []
 	for i in N + 1:
@@ -104,27 +115,27 @@ static func _interp(keys: Array, t: float) -> float:
 ## Rotation (degrés, négatif = poitrine vers la caméra) : petit armé, quart de
 ## tour, léger dépassement, tenue pendant le passage du coup, retour.
 static func theta(t: float) -> float:
-	return _interp([[0.0, 0.0], [3.0, 2.0], [10.0, -88.0], [13.0, -90.0], [19.0, -89.0], [29.0, -3.0], [33.0, 0.0]], t)
+	return _interp([[0.0, 0.0], [3.0, 2.0], [10.0, -90.0], [20.0, -90.0], [29.0, -3.0], [33.0, 0.0]], t)
 
 
 ## Hauteur du bassin : il s'abaisse en tournant, reste bas, remonte.
 static func hip_dy(t: float) -> float:
-	return _interp([[0.0, 0.0], [3.0, -1.5], [9.0, -6.0], [13.0, -5.5], [19.0, -5.5], [28.0, -1.0], [33.0, 0.0]], t)
+	return _interp([[0.0, 0.0], [3.0, -1.5], [9.0, -2.5], [14.0, -2.0], [20.0, -2.5], [28.0, -1.0], [33.0, 0.0]], t)
 
 
 ## Inclinaison latérale du buste, loin du coup (degrés).
 static func lean(t: float) -> float:
-	return _interp([[0.0, 0.0], [4.0, 0.0], [11.0, 5.0], [19.0, 4.5], [28.0, 0.0]], t)
+	return _interp([[0.0, 0.0], [4.0, 0.0], [11.0, 2.5], [19.0, 2.0], [28.0, 0.0]], t)
 
 
-## Bras : 0 = bras du repos, 1 = mains à peine décollées par la rotation.
+## Bras : 0 = bras du repos, 1 = bras écartés de face.
 static func arms(t: float) -> float:
-	return _interp([[0.0, 0.0], [4.0, 0.1], [11.0, 1.0], [19.0, 1.0], [29.0, 0.15], [34.0, 0.0]], t)
+	return _interp([[0.0, 0.0], [4.0, 0.1], [11.0, 1.0], [20.0, 1.0], [29.0, 0.1], [34.0, 0.0]], t)
 
 
 ## Talon avant levé pendant que le pied tourne sur la plante (degrés).
 static func heel(t: float) -> float:
-	return _interp([[0.0, 0.0], [5.0, -14.0], [10.0, -4.0], [19.0, -4.0], [24.0, -12.0], [30.0, 0.0]], t)
+	return _interp([[0.0, 0.0], [5.0, -12.0], [10.0, 0.0], [20.0, 0.0], [24.0, -10.0], [30.0, 0.0]], t)
 
 
 # ---------- 3D ----------
@@ -168,21 +179,24 @@ static func _pitch(J: Dictionary, side: String) -> float:
 	return rad_to_deg(atan2(d.y, d.x))
 
 
-## Cheville avant : la plante reste posée, le pied tourne autour d'elle.
-func _front_ankle(th: float, phi: float) -> Vector3:
+## Cheville avant : la plante reste posée, le pied tourne autour d'elle
+## (turn : pointe ouverte vers l'extérieur, degrés).
+func _front_ankle(th: float, phi: float, turn: float) -> Vector3:
 	var L: float = s.foot
 	var toe := Vector3(float(J0.toeF.x), float(J0.toeF.y), Z_HIP)
-	var fw := rot(Vector3(L * cos(deg_to_rad(phi)), 0.0, 0.0), th)
+	var fw := rot(Vector3(L * cos(deg_to_rad(phi)), 0.0, 0.0), th + turn)
 	return toe - Vector3(fw.x, L * sin(deg_to_rad(phi)), fw.z)
 
 
-## Cheville arrière (au sol) : arc autour du pivot qui se resserre et
-## s'écarte sur le côté, pour finir en appuis de face (largeur d'épaules).
+## Cheville arrière (au sol) : arc autour du pivot, qui se referme sur la
+## place de face (à 2 W_FRONT de la cheville avant, même profondeur).
 func _rear_ankle(th: float) -> Vector3:
 	var p := _smooth(absf(th) / 90.0)
-	var r := rot(Vector3(float(J0.ankleN.x), 0.0, -Z_HIP) - Vector3(C.x, 0.0, C.z), th)
-	r *= lerpf(1.0, STEP_IN, p)
-	return Vector3(C.x, float(J0.ankleN.y), C.z) + r + Vector3(STEP_SIDE * p, 0.0, 0.0)
+	var arc := around(Vector3(float(J0.ankleN.x), float(J0.ankleN.y), -Z_HIP), th)
+	# (+0,3 : la pointe, ouverte vers l'extérieur, ne doit pas affleurer le
+	# sol, sinon le rendu la croit enfoncée et la redresse vers l'avant.)
+	var end := Vector3(AF_END.x - 2.0 * W_FRONT, AF_END.y + 0.3, AF_END.z)
+	return arc.lerp(end, p)
 
 
 # ---------- Une image ----------
@@ -213,16 +227,18 @@ func _key(i: int) -> Dictionary:
 	P.shoulder = H + rot(sh, th_up)
 	P.head = H + rot(tilt(_v3(B.head, 0.0), ln * 1.2), th_head)
 
-	# Bras : ils pendent ; la rotation les décolle à peine du corps, la main
-	# traîne un peu derrière (inertie).
-	var drift := {"N": Vector3(-2.0, 2.0, -5.0), "F": Vector3(-2.0, 2.0, 5.0)}
-	var pole_r := {"N": Vector3(-1.0, -0.2, -0.4), "F": Vector3(-1.0, -0.2, 0.4)}
+	# Bras : ils pendent ; de face ils s'écartent du corps de part et d'autre
+	# (rotation autour de l'axe avant du buste), coudes à peine pliés vers
+	# l'extérieur.
+	var out_z := {"N": -1.0, "F": 1.0}
 	for side in ["N", "F"]:
+		var sh0 := _v3(B.shoulder, 0.0)
 		var hand_g := _v3(B["hand" + side], 0.0)
 		var elbow_g := _v3(B["elbow" + side], 0.0)
-		var target: Vector3 = hand_g + drift[side] * m
-		var pole: Vector3 = (elbow_g - _v3(B.shoulder, 0.0)).normalized().lerp(pole_r[side].normalized(), m * 0.5)
-		var sh0 := _v3(B.shoulder, 0.0)
+		var hv := hand_g - sh0
+		hv = Vector3(hv.x * (1.0 - 0.6 * m), hv.y, hv.z)
+		var target: Vector3 = sh0 + tilt(hv, -float(out_z[side]) * ARM_OUT * m)
+		var pole: Vector3 = (elbow_g - sh0).normalized() + Vector3(-0.3, 0.0, float(out_z[side])) * m
 		var el := knee(sh0, target, s.upperArm, s.forearm, pole)
 		var dir := (target - sh0)
 		var hd := sh0 + dir.normalized() * minf(dir.length(), s.upperArm + s.forearm - 0.01)
@@ -232,27 +248,36 @@ func _key(i: int) -> Dictionary:
 
 	# Jambes.
 	var L: float = s.foot
-	var pole_k := rot(Vector3(1, 0, 0), th)
+	var p := _smooth(absf(th) / 90.0)
+	var p_rear := _smooth(absf(th_rear) / 90.0)
 	# Pied avant (jambe éloignée) : la plante reste au sol, le pied tourne
-	# avec le bassin.
+	# avec le bassin, et la pointe s'ouvre un peu de face.
+	var turnF := TURN * p
 	var phiF := _pitch(J0, "F") + heel(t)
 	var toeF := Vector3(float(J0.toeF.x), float(J0.toeF.y), Z_HIP)
-	var AF := _front_ankle(th, phiF)
+	var AF := _front_ankle(th, phiF, turnF)
 	# Pied arrière (jambe proche) : arc derrière lui, soulevé au milieu.
-	var phiN := _pitch(J0, "N")
+	var turnN := -TURN * p_rear
+	var phiN := lerpf(_pitch(J0, "N"), _pitch(J0, "F"), p_rear)
 	var lift := LIFT_REAR * sin(PI * clampf(absf(th_rear) / 90.0, 0.0, 1.0))
 	var AN := _rear_ankle(th_rear) + Vector3(0.0, lift, 0.0)
-	var fwN := rot(Vector3(L * cos(deg_to_rad(phiN)), 0.0, 0.0), th_rear)
+	var fwN := rot(Vector3(L * cos(deg_to_rad(phiN)), 0.0, 0.0), th_rear + turnN)
 	var toeN := AN + Vector3(fwN.x, L * sin(deg_to_rad(phiN)), fwN.z)
+	# Genoux vers l'avant du bassin : de face ils restent dans l'axe des
+	# jambes (un genou écarté vers -x serait, pour le rendu de profil, une
+	# hyperextension : la butée le replierait à l'envers quand le pied est
+	# planté).
+	var in_x := {"N": 0.45, "F": -0.2}
 	for pr in [["N", AN, toeN, -1.0], ["F", AF, toeF, 1.0]]:
 		var side: String = pr[0]
 		var A: Vector3 = pr[1]
 		var S := H + rot(Vector3(0, 0, float(pr[3]) * Z_HIP), th)
 		P["ankle" + side] = A
 		P["toe" + side] = pr[2]
+		var pole_k := rot(Vector3(1, 0, 0), th) + Vector3(float(in_x[side]) * p, 0.0, 0.0)
 		P["knee" + side] = knee(S, A, s.thigh, s.shin, pole_k)
 
-	return _fit(i, _project(P, H, _smooth(absf(th) / 90.0)))
+	return _fit(i, _project(P, H, p))
 
 
 # ---------- Perspective par articulation ----------
@@ -265,12 +290,16 @@ func _project(P: Dictionary, H: Vector3, amount: float) -> Dictionary:
 	var px := H.x
 	var zk := StickRig.round2(maxf(H.z, 0.0) * Z_TRI)
 	var fig := StickRig.depth({"x": px, "z": zk})
-	var out := {"_z": zk}
+	var W := {}
 	for k in P:
 		var v: Vector3 = P[k]
 		var d := StickRig.depth({"x": px, "z": v.z * amount})
-		var w := Vector2(px, 0.0) + (Vector2(v.x, v.y) - Vector2(px, 0.0)) * float(d.k) + Vector2(0.0, d.lift)
-		out[k] = fig.pivot + (w - Vector2(0.0, fig.lift) - fig.pivot) / float(fig.k)
+		W[k] = Vector2(px, 0.0) + (Vector2(v.x, v.y) - Vector2(px, 0.0)) * float(d.k) + Vector2(0.0, d.lift)
+	# Pied d'appui épinglé : sa pointe est dessinée au même point à chaque image.
+	var pin: Vector2 = TOE_2D - W.toeF
+	var out := {"_z": zk}
+	for k in W:
+		out[k] = fig.pivot + (W[k] + pin - Vector2(0.0, fig.lift) - fig.pivot) / float(fig.k)
 	return out
 
 

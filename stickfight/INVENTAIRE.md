@@ -164,7 +164,6 @@ par sa propre version (marquées ✱ quand c'est presque toujours le cas).
 | 14 | Esquive buste en arrière (sway) | fait (`esquive_sway`, contre un direct ; toutes les esquives sont détendues, sans garde, depuis et vers le repos) |
 | 15 | Esquive en se baissant sous un coup haut | fait (`esquive_baisse`, contre un crochet ou un circulaire à la tête) |
 | 16 | Esquive de la tête sur le côté (slip) | fait (`esquive_slip`, contre un direct) |
-| 16 b | Esquive du ventre (retrait) | fait (`esquive_retrait`, contre un crochet au corps) |
 | 16 c | Pas de côté (pivot face caméra) | fait (`esquive_cote`, contre un coup de pied appuyé ; pivot 3D projeté) |
 | 16 d | Saut arrière d'esquive | fait (`esquive_saut_arriere`, contre un coup de pied hache) |
 | 16 e | Saut sur place | fait (`esquive_saut_balayage`, contre un balayage) |
@@ -512,7 +511,7 @@ mêmes jambes : seuls le buste et les bras changent.
 | Défense | Garde accroupie tenue : boucle, entrée, sortie, fermer, ouvrir | `garde_basse*` | fait |
 | Défense | Recul sur garde haut et bas, léger, moyen, lourd | `recul_garde_{haut,bas}_{leger,moyen,lourd}` | fait |
 | Défense | Parade selon le coup : poing haut, pied haut, moyen, bas ; fenêtre de contre | `parade_haute_poing`, `parade_haute_pied`, `parade_moyenne`, `parade_basse` | fait |
-| Défense | Esquives selon le coup : sway, slip, se baisser, retrait du ventre, pas de côté, saut arrière, saut sur place ; fenêtres esquive et contre | `esquive_sway`, `esquive_slip`, `esquive_baisse`, `esquive_retrait`, `esquive_cote`, `esquive_saut_arriere`, `esquive_saut_balayage` | fait |
+| Défense | Esquives selon le coup : sway, slip, se baisser, pas de côté, saut arrière, saut sur place ; fenêtres esquive et contre | `esquive_sway`, `esquive_slip`, `esquive_baisse`, `esquive_cote`, `esquive_saut_arriere`, `esquive_saut_balayage` | fait |
 | Défense | Armure (Power Crush) : encaisser sans broncher, en couche | `armure_encaisse` | fait |
 | Réactions | Tête légère, tête lourde | `touche_tete_*` | |
 | Réactions | Ventre léger, plié en deux | `touche_ventre_*` | |
