@@ -130,10 +130,12 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `etre_pare_haut` | 46 i, recule 37 | Être paré vers le haut (après `parade_haute_poing` ou `parade_haute_pied`) : réaction réutilisable, jouée à l'image qui suit le contact avec un fondu depuis la pose du coup. Le bras est chassé au-dessus de la tête, le buste s'ouvre en arrière, il est repoussé : le pied arrière décolle et se pose loin (f13), l'avant glisse ; le bras retombe, il reste ouvert, bras bas, pendant la fenêtre de contre de la parade, puis ramène le pied avant en garde |
 | `etre_pare_bas` | 44 i, recule 21 | Être paré au milieu ou en bas (après `parade_moyenne` ou `parade_basse`) : même usage. La jambe est chassée, il sautille en arrière sur l'appui, la jambe repliée, les bras battent l'air (f4) ; le pied retombe (f8), il absorbe, ouvert, bras bas, puis se remet en garde sur place |
 | `touche_tete_leger` | 22 i, recule 10 | Touché à la tête par un coup léger. Contact dès l'image 1 (arrêt sur impact 6 i, tremblement 1,3, étincelle de coup sur la tête) : la tête part en arrière, la garde s'ouvre ; le buste suit la tête (f4) et les bras retombent, ouverts ; les pieds glissent d'un pas, la tête revient (f9), puis les mains remontent et `garde_idle`. Marche depuis la garde (fondu 1, la garde est cassée) comme depuis le repos (fondu 3, les bras sont déjà bas) |
+| `touche_tete_lourd` | 36 i, recule 29 | Touché à la tête par un coup lourd. Contact dès l'image 1 (arrêt sur impact 10 i, tremblement 2, secousse, grosse étincelle de coup) : la tête est arrachée en arrière, le buste se cambre, le bras avant s'envole vers le haut et l'arrière retombe ; le pied arrière décolle (f5) et se pose loin derrière (f10, poussière), l'avant traîne pour le rejoindre (f16) pendant que la tête retombe en avant ; les genoux absorbent, bras ballants, puis les mains remontent et `garde_idle` |
 | `duo_pare_haut` | 100 i | Alt + K : A lance un direct, B le pare vers le haut (fenêtre de contre), A est repoussé |
 | `duo_pare_bas` | 110 i | Alt + Maj + K : A lance le pied direct, B le pare au milieu, A est repoussé en sautillant |
 | `duo_touche_tete` | 80 i | Y : A lance un direct, B en garde le prend au visage |
 | `duo_touche_tete_repos` | 80 i | Maj + Y : le même, B au repos (fondu de 3 i qui le met en position de garde pendant l'impact) |
+| `duo_touche_tete_lourd` | 90 i | Ctrl + Y : B en garde prend le direct en coup lourd (le coup du duo reste le direct, en attendant les coups du personnage 1) |
 | `sortie_de_garde` | 60 i | De la garde ouverte au repos, sur place : le poids bascule en arrière, le pied avant revient en se posant par la pointe, puis le pied arrière repasse devant et le bassin remonte ; les mains retombent le long du corps, le bras du pied qui avance passe devant (contrepoids) ; enchaîne sur `idle_repos` |
 | `marche_detendue` | 56 i, en boucle, avance 76 | Marche normale depuis le repos, sans garde : bras ballants en opposition des jambes, bassin qui monte et descend sur chaque appui |
 | `marche_detendue_depart` | — | Du repos à la boucle : transfert de poids, premier pas plus court |
@@ -331,7 +333,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | 1 à 6 | Esquive détendue (au repos, en marche ou en garde), une par type de coup : 1 sway (direct au visage), 2 slip (direct), 3 se baisser (crochet ou circulaire à la tête), 4 pas de côté, pivot face caméra (coup de pied appuyé), 5 saut arrière (coup de pied hache), 6 saut sur place (balayage). Sans garde, bras pendants, elle finit toujours au repos. Elle peut aussi partir pendant la fenêtre de contre d'une parade ou d'une autre esquive. Touches provisoires, comme P |
 | U | Armure : encaisse un coup sans broncher, par-dessus ce qu'il fait (repos, marche, garde, course…) |
 | K, Maj + K, Ctrl + K, Alt + K, Alt + Maj + K | Duo coup de pied / blocage, coup de pied encaissé sous armure, projection cassée, direct paré en haut, pied paré au milieu (en boucle) |
-| Y, Maj + Y | Duo direct pris au visage, B en garde / au repos (en boucle) |
+| Y, Maj + Y, Ctrl + Y | Duo direct pris au visage : B en garde, au repos, coup lourd (en boucle) |
 | R | Repos (remise à zéro) |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |
 | L | Ralenti ×4 |
