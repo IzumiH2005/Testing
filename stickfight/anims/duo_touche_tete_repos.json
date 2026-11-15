@@ -1,0 +1,34 @@
+{
+ "nom": "duo_touche_tete_repos",
+ "longueur": 80,
+ "acteurs": [
+  {
+   "x": 0,
+   "facing": 1,
+   "couleur": "#111111",
+   "anim": "garde_idle",
+   "t0": 0,
+   "programme": [
+    {
+     "contact": 30,
+     "anim": "direct",
+     "fondu": 3
+    }
+   ]
+  },
+  {
+   "x": 132,
+   "facing": -1,
+   "couleur": "#1d3f8f",
+   "anim": "idle_repos",
+   "t0": 20,
+   "programme": [
+    {
+     "contact": 30,
+     "anim": "touche_tete_leger",
+     "fondu": 3
+    }
+   ]
+  }
+ ]
+}

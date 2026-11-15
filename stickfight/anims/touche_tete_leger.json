@@ -1,0 +1,167 @@
+{
+ "nom": "touche_tete_leger",
+ "boucle": false,
+ "base": "garde",
+ "suivante": "garde_idle",
+ "decalage": {
+  "neck": 1,
+  "chest": 1,
+  "armN": 1,
+  "foreN": 2,
+  "armF": 2,
+  "foreF": 3
+ },
+ "cles": [
+  {
+   "f": 0,
+   "courbe": "lin"
+  },
+  {
+   "f": 1,
+   "nom": "impact : la tête part en arrière, la garde s'ouvre",
+   "fixe": {
+    "x": -2,
+    "armN": 36,
+    "foreN": 90,
+    "armF": 48,
+    "foreF": 112
+   },
+   "plus": {
+    "y": -1,
+    "root": -3,
+    "spineLow": -3,
+    "chest": -7,
+    "neck": -26
+   },
+   "vise_rel": {
+    "legN": [
+     -1,
+     0
+    ],
+    "legF": [
+     -1,
+     0
+    ]
+   },
+   "courbe": "dec"
+  },
+  {
+   "f": 4,
+   "nom": "emporté : le buste suit la tête",
+   "fixe": {
+    "x": -6,
+    "armN": 16,
+    "foreN": 34,
+    "armF": 24,
+    "foreF": 50
+   },
+   "plus": {
+    "y": -2,
+    "root": -6,
+    "spineLow": -5,
+    "chest": -12,
+    "neck": -30
+   },
+   "vise_rel": {
+    "legN": [
+     -4,
+     0
+    ],
+    "legF": [
+     -3,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 9,
+   "nom": "le pied arrière rattrape, la tête revient",
+   "fixe": {
+    "x": -10,
+    "armN": 14,
+    "foreN": 40,
+    "armF": 20,
+    "foreF": 58
+   },
+   "plus": {
+    "y": -4,
+    "root": -1,
+    "spineLow": 1,
+    "chest": 1,
+    "neck": 4
+   },
+   "vise_rel": {
+    "legN": [
+     -9,
+     0
+    ],
+    "legF": [
+     -9,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 15,
+   "nom": "les mains remontent",
+   "fixe": {
+    "x": -10,
+    "armN": 34,
+    "foreN": 108,
+    "armF": 58,
+    "foreF": 132
+   },
+   "plus": {
+    "y": -2,
+    "spineLow": 1,
+    "chest": 2,
+    "neck": 2
+   },
+   "vise_rel": {
+    "legN": [
+     -10,
+     0
+    ],
+    "legF": [
+     -10,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 22,
+   "nom": "garde",
+   "fixe": {
+    "x": -10
+   },
+   "ancre": false
+  }
+ ],
+ "evenements": [
+  {
+   "f": 1,
+   "type": "contact"
+  },
+  {
+   "f": 1,
+   "type": "hitstop",
+   "n": 6,
+   "tremble": 1.3
+  },
+  {
+   "f": 1,
+   "type": "etincelle",
+   "articulation": "head",
+   "dec": [
+    4,
+    0
+   ],
+   "dir": 180,
+   "genre": "coup",
+   "taille": 1.0
+  }
+ ]
+}
