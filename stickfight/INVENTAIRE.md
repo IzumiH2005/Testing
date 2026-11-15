@@ -161,7 +161,7 @@ par sa propre version (marquées ✱ quand c'est presque toujours le cas).
 | 10 | Garde repoussée (gros coup bloqué, les pieds glissent) | fait (`garde_repoussee`) |
 | 11 | Garde brisée (bras ouverts, vulnérable) | fait (`garde_brisee`) |
 | 12-13 | Parade haute, parade basse (dévier un coup) | fait : 4 variantes selon le coup (`parade_*`), fenêtre de contre |
-| 14 | Esquive buste en arrière (sway) | fait (`esquive_sway`, contre un direct) |
+| 14 | Esquive buste en arrière (sway) | fait (`esquive_sway`, contre un direct ; toutes les esquives sont détendues, sans garde, depuis et vers le repos) |
 | 15 | Esquive en se baissant sous un coup haut | fait (`esquive_baisse`, contre un crochet ou un circulaire à la tête) |
 | 16 | Esquive de la tête sur le côté (slip) | fait (`esquive_slip`, contre un direct) |
 | 16 b | Esquive du ventre (retrait) | fait (`esquive_retrait`, contre un crochet au corps) |

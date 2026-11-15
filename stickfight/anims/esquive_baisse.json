@@ -1,206 +1,96 @@
 {
   "nom": "esquive_baisse",
   "boucle": false,
-  "base": "garde_ouverte",
-  "suivante": "garde_ouverte_idle",
+  "base": "repos",
+  "suivante": "idle_repos",
   "decalage": {
-    "neck": 2,
-    "chest": 1,
-    "foreN": 1,
-    "armF": 1,
-    "foreF": 2
+    "neck": 1,
+    "armN": 2,
+    "armF": 2,
+    "foreN": 3,
+    "foreF": 3
   },
   "cles": [
     {
       "f": 0,
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ]
-      },
       "courbe": "dec"
     },
     {
       "f": 5,
-      "nom": "il plonge : genoux pliés, buste penché ; les bras tombent devant les genoux",
+      "nom": "le buste plonge, les genoux plient : le coup passe au-dessus de la tête",
       "fixe": {
-        "x": -2
+        "x": -10
       },
       "plus": {
-        "y": -22,
-        "root": 5,
-        "spineLow": 10,
-        "chest": 13,
-        "neck": -16
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          3,
-          -1
-        ],
-        "armN": [
-          -14,
-          -20
-        ],
-        "armF": [
-          -6,
-          -22
-        ]
+        "y": -27,
+        "root": 17,
+        "spineLow": 13,
+        "chest": 11,
+        "neck": -20.6,
+        "armN": 39,
+        "armF": 39,
+        "foreN": 8,
+        "foreF": 8
       }
     },
     {
       "f": 8,
-      "nom": "le coup passe au-dessus de la tête",
       "fixe": {
-        "x": -3
+        "x": -10.4
       },
       "plus": {
-        "y": -25,
-        "root": 6,
-        "spineLow": 11,
-        "chest": 15,
-        "neck": -17
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          3,
-          -1
-        ],
-        "armN": [
-          -16,
-          -22
-        ],
-        "armF": [
-          -8,
-          -24
-        ]
-      },
-      "courbe": "palier"
-    },
-    {
-      "f": 11,
-      "fixe": {
-        "x": -3
-      },
-      "plus": {
-        "y": -25,
-        "root": 6,
-        "spineLow": 11,
-        "chest": 15,
-        "neck": -17
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          3,
-          -1
-        ],
-        "armN": [
-          -16,
-          -22
-        ],
-        "armF": [
-          -8,
-          -24
-        ]
+        "y": -28,
+        "root": 17.5,
+        "spineLow": 13.5,
+        "chest": 11.5,
+        "neck": -21.5,
+        "armN": 41.5,
+        "armF": 41.5,
+        "foreN": 8,
+        "foreF": 8
       },
       "courbe": "acc-dec"
     },
     {
-      "f": 20,
-      "nom": "il remonte en poussant sur les jambes, les mains remontent",
+      "f": 12,
       "fixe": {
-        "x": 2
+        "x": -10.4
       },
       "plus": {
-        "y": -6,
-        "root": 2,
-        "spineLow": 4,
-        "chest": 6,
-        "neck": -4
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ],
-        "armN": [
-          -6,
-          -8
-        ],
-        "armF": [
-          -4,
-          -10
-        ]
-      }
-    },
-    {
-      "f": 26,
-      "nom": "prêt à contrer",
-      "fixe": {
-        "x": 1.5
-      },
-      "plus": {
-        "y": -4,
-        "root": 1,
-        "spineLow": 1,
-        "chest": 3
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ],
-        "armN": [
-          -2,
-          -3
-        ],
-        "armF": [
-          -1,
-          -4
-        ]
+        "y": -28,
+        "root": 17.5,
+        "spineLow": 13.5,
+        "chest": 11.5,
+        "neck": -21.5,
+        "armN": 43.5,
+        "armF": 43.5,
+        "foreN": 8,
+        "foreF": 8
       },
       "courbe": "acc-dec"
     },
     {
-      "f": 34,
-      "nom": "garde ouverte",
+      "f": 25,
+      "nom": "se redresse en douceur",
+      "fixe": {
+        "x": 0.2
+      },
+      "plus": {
+        "y": -1,
+        "root": 0.5,
+        "spineLow": 0.5,
+        "chest": 0.5,
+        "neck": -1.2,
+        "armN": 0.5,
+        "armF": 0.5
+      },
+      "courbe": "acc-dec"
+    },
+    {
+      "f": 33,
+      "nom": "repos",
       "fixe": {
         "x": 0
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ]
       },
       "ancre": false
     }
@@ -211,13 +101,13 @@
       "type": "contact"
     },
     {
-      "f": 3,
+      "f": 2,
       "type": "fenetre",
       "nom": "esquive",
       "n": 12
     },
     {
-      "f": 14,
+      "f": 13,
       "type": "fenetre",
       "nom": "contre",
       "n": 16

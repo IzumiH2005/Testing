@@ -157,13 +157,13 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `parade_haute_pied` | 40 i | Maj + P : dévie un coup de pied haut (tempe, mâchoire). Contact plus tard (f7) et plus lourd (arrêt 8 i, grosse étincelle, secousse) : le buste cède en arrière, le bassin recule de quelques unités, l'avant-bras balaie la jambe vers le haut et loin au-dessus de la tête, puis il se replace |
 | `parade_moyenne` | 36 i | Ctrl + P : dévie un coup au ventre. La main avant descend devant le plexus, le buste se penche un peu en avant au contact (f5, arrêt 7 i) et l'avant-bras chasse le coup vers le bas et sur le côté, puis remonte en garde |
 | `parade_basse` | 36 i | Ctrl + Maj + P : dévie un coup bas (tibia). Le combattant fléchit les genoux (le talon arrière se lève), la main avant descend frapper le pied à l'image 6 (arrêt 7 i) et le rabat vers le sol, l'autre main protège le visage, puis il se relève en garde |
-| `esquive_sway` | 30 i | 1 en garde : contre un direct au visage. Le bassin recule de 9 et le buste part en arrière, la tête passe hors de portée au contact (f7). Les bras lâchent la garde : la main avant pend devant, l'arrière s'écarte et descend pour l'équilibre ; puis le buste revient un peu au-delà de la garde, les bras avec retard, et `garde_ouverte_idle` |
-| `esquive_slip` | 24 i | 2 : contre un direct. La tête glisse sur le côté et vers l'avant, genoux un peu fléchis, le corps avancé vers la caméra (z −8), les mains descendent : le poing passe à côté de la tête, derrière elle à l'écran (f6). Très court, pensé pour contrer aussitôt |
-| `esquive_baisse` | 34 i | 3 : contre un crochet ou un circulaire à la tête. Le bassin descend de 25 en 5 images, le buste plonge sous la trajectoire (f8) et les bras tombent devant les genoux ; il se relève en poussant sur les jambes, les mains remontent en garde ouverte |
-| `esquive_retrait` | 26 i | 4 : contre un crochet au corps. Petit pas arrière (bassin −13) et ventre creusé : le bassin part en arrière, les épaules restent au-dessus et les bras restent en avant en contrepoids ; le poing passe devant le ventre (f7) |
-| `esquive_cote` | 35 i | 5 : contre un coup de pied appuyé. Pivot sur la plante du pied avant : le corps fait un quart de tour et se retrouve poitrine face à la caméra (f9), la jambe arrière balaie un arc derrière lui et se pose de côté, le bassin s'abaisse, hors de la ligne. Le pied adverse passe devant son ventre (f12, il est dessiné derrière l'attaquant). Bras relâchés, mains basses écartées pour l'équilibre ; retour par le même pivot. Généré par `tools/gen_esquive_cote.gd` |
-| `esquive_saut_arriere` | 32 i, recule 42 | 6 : contre un coup de pied hache (descendant). Se baisser serait inutile : il saute en arrière (bras descendus à la flexion, lancés à l'impulsion f3-6, ouverts devant en l'air, sommet f10) et laisse le talon frapper le sol devant lui (f12), puis se reçoit en amorti, prêt à revenir |
-| `esquive_saut_balayage` | 28 i | 7 : contre un balayage. Petit saut sur place, les bras montent, genoux remontés, la jambe adverse passe sous les pieds (f10) ; réception souple, bras qui retombent, `garde_ouverte_idle` |
+| `esquive_sway` | 30 i | 1 au repos : contre un direct au visage. Esquive détendue, sans garde, façon « ultra instinct » : le buste se penche juste assez en arrière, au dernier moment (f4), le bassin recule de 3, la tête passe hors de portée au contact (f7). Les bras restent pendants, le regard ne quitte pas l'adversaire ; il tient la pose un instant, puis revient calmement au repos et `idle_repos` |
+| `esquive_slip` | 26 i | 2 : contre un direct. Un simple déport de la tête sur le côté, genoux à peine fléchis, le corps glissé vers la caméra (z −10), mains basses : le poing passe à côté de la tête, derrière elle à l'écran (f6). Très court, sans un geste de trop |
+| `esquive_baisse` | 33 i | 3 : contre un crochet ou un circulaire à la tête. Il se plie aux hanches, genoux fléchis (bassin −27), le buste part en avant sous la trajectoire (f8), les bras pendent devant ; il se redresse sans hâte jusqu'au repos |
+| `esquive_retrait` | 30 i | 4 : contre un crochet au corps. Le bassin recule de 9, le ventre se creuse, les épaules restent au-dessus, les bras pendants ; le poing passe devant le ventre (f7) |
+| `esquive_cote` | 34 i | 5 : contre un coup de pied appuyé. Pivot sur la plante du pied avant : le corps fait un quart de tour et se retrouve poitrine face à la caméra (f10), la jambe arrière décrit un arc derrière lui et se pose de côté, le bassin s'abaisse à peine, hors de la ligne. Le pied adverse passe devant son ventre (f12, il est dessiné derrière l'attaquant). Bras relâchés le long du corps ; retour par le même pivot, puis `idle_repos`. Généré par `tools/gen_esquive_cote.gd` |
+| `esquive_saut_arriere` | 30 i, recule 26 | 6 : contre un coup de pied hache (descendant). Se baisser serait inutile : petit saut en arrière, bras ballants, qui laisse le talon frapper le sol devant lui (f12) ; réception souple, debout, au repos |
+| `esquive_saut_balayage` | 26 i | 7 : contre un balayage. Petit saut sur place, genoux remontés juste ce qu'il faut, la jambe adverse passe sous les pieds (f10) ; réception souple, bras pendants, `idle_repos` |
 | `accroupi_repos_entree` | 28 i, recule 3 | Depuis le repos (↓ maintenu), sans passer par la garde : les genoux cèdent, la main avant part devant et se pose au sol devant le pied avant, le pied arrière monte sur la pointe, petit tassement sur la main puis `accroupi_repos_idle` |
 | `accroupi_repos_idle` | 104 i, en boucle | Accroupi détendu, une main au sol : respiration lente (le dos se voûte à l'expiration), le bras libre suit avec retard. La main et les pieds restent fixes |
 | `accroupi_repos_sortie` | 30 i, avance 3 | ↓ relâché : appui sur la main, poussée qui la décolle, le buste se relève, léger dépassement puis `idle_repos` |
@@ -219,15 +219,20 @@ de l'axe vertical, projetée, puis relue en angles 2D avec étirement des os
 raccourcis ; les genoux sont recalculés en 3D. `esquive_cote` suit le même
 principe (`tools/gen_esquive_cote.gd`) : quart de tour autour de la plante du
 pied avant, avec une perspective calculée articulation par articulation.
+Les autres esquives sont écrites par un script Python hors dépôt : chaque clé
+compense l'inclinaison du tronc sur les bras (ils pendent) et sur le cou (le
+regard reste à l'horizontale).
 
 ```sh
 $GODOT --headless --path . -s res://tools/gen_demi_tour.gd
 $GODOT --headless --path . -s res://tools/gen_esquive_cote.gd
 ```
 
-Toutes les esquives partent de la garde ouverte et y reviennent
-(`garde_ouverte_idle`) : pendant l'esquive, les bras ne tiennent pas la
-garde, ils suivent le corps (élan, équilibre).
+Les esquives n'ont pas de garde, ni pendant ni après : elles partent du repos
+(`repos`) et finissent dans `idle_repos`. Le style est celui d'un combattant
+détendu, façon « ultra instinct » : le corps bouge le moins possible et le
+plus tard possible, les bras pendent, la tête reste droite et le regard fixe
+l'adversaire.
 
 **Profondeur.** Une clé peut donner `z` (dans `fixe` ou `plus`) : la
 profondeur du combattant, négative vers la caméra. `StickRig.depth` en tire
@@ -299,7 +304,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | Ctrl + Maj + H | Très gros coup bloqué en garde : garde repoussée, les pieds glissent loin (en garde basse : recul lourd) |
 | J | Coup qui brise la garde : garde brisée, bras ouverts et vulnérable (en garde basse : recul lourd) |
 | P, Maj + P, Ctrl + P, Ctrl + Maj + P | Parade en garde : coup de poing haut, coup de pied haut, coup moyen, coup bas. Pendant la fenêtre de contre d'une parade, une nouvelle parade peut l'annuler (à la place de la contre-attaque, qui sera propre à chaque personnage) |
-| 1 à 7 | Esquive (G tenu), une par type de coup : 1 sway (direct au visage), 2 slip (direct), 3 se baisser (crochet ou circulaire à la tête), 4 retrait du ventre (crochet au corps), 5 pas de côté, pivot face caméra (coup de pied appuyé), 6 saut arrière (coup de pied hache), 7 saut sur place (balayage). Toujours depuis et vers la garde ouverte, bras libres. Elle peut aussi partir pendant la fenêtre de contre d'une parade ou d'une autre esquive. Touches provisoires, comme P |
+| 1 à 7 | Esquive détendue (au repos, en marche ou en garde), une par type de coup : 1 sway (direct au visage), 2 slip (direct), 3 se baisser (crochet ou circulaire à la tête), 4 retrait du ventre (crochet au corps), 5 pas de côté, pivot face caméra (coup de pied appuyé), 6 saut arrière (coup de pied hache), 7 saut sur place (balayage). Sans garde, bras pendants, elle finit toujours au repos. Elle peut aussi partir pendant la fenêtre de contre d'une parade ou d'une autre esquive. Touches provisoires, comme P |
 | K | Duo coup de pied / blocage (en boucle) |
 | R | Repos (remise à zéro) |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |

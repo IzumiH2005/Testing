@@ -1,206 +1,85 @@
 {
   "nom": "esquive_sway",
   "boucle": false,
-  "base": "garde_ouverte",
-  "suivante": "garde_ouverte_idle",
+  "base": "repos",
+  "suivante": "idle_repos",
   "decalage": {
-    "neck": 2,
-    "chest": 1,
-    "foreN": 1,
-    "armF": 1,
-    "foreF": 2
+    "neck": 1,
+    "armN": 2,
+    "armF": 2,
+    "foreN": 3,
+    "foreF": 3
   },
   "cles": [
     {
       "f": 0,
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ]
-      },
       "courbe": "dec"
     },
     {
       "f": 4,
-      "nom": "le buste part en arrière, les mains traînent un peu derrière lui",
+      "nom": "le buste s'efface en arrière, juste hors de portée ; les mains restent pendues",
       "fixe": {
-        "x": -7
+        "x": -3
       },
       "plus": {
-        "y": -3,
         "root": -6,
-        "spineLow": -8,
-        "chest": -12,
-        "neck": 4
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ],
-        "armN": [
-          4,
-          -16
-        ],
-        "armF": [
-          -6,
-          -22
-        ]
+        "spineLow": -5,
+        "chest": -6,
+        "neck": 13.6,
+        "armN": -14,
+        "armF": -14
       }
     },
     {
       "f": 7,
-      "nom": "le coup passe devant le visage ; la main avant pend devant, l'arrière s'écarte pour l'équilibre",
+      "nom": "le poing s'arrête à un doigt du visage ; immobile",
       "fixe": {
-        "x": -9
+        "x": -3.3
       },
       "plus": {
-        "y": -4,
-        "root": -7,
-        "spineLow": -10,
-        "chest": -15,
-        "neck": 6
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ],
-        "armN": [
-          8,
-          -28
-        ],
-        "armF": [
-          -14,
-          -34
-        ]
-      },
-      "courbe": "palier"
-    },
-    {
-      "f": 10,
-      "fixe": {
-        "x": -9
-      },
-      "plus": {
-        "y": -4,
-        "root": -7,
-        "spineLow": -10,
-        "chest": -15,
-        "neck": 6
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ],
-        "armN": [
-          8,
-          -28
-        ],
-        "armF": [
-          -14,
-          -34
-        ]
+        "root": -6.5,
+        "spineLow": -5.5,
+        "chest": -6.5,
+        "neck": 14.8,
+        "armN": -16.5,
+        "armF": -16.5
       },
       "courbe": "acc-dec"
     },
     {
-      "f": 17,
-      "nom": "retour en ressort : le poids revient devant, les bras suivent avec retard",
+      "f": 11,
       "fixe": {
-        "x": 2
+        "x": -3.3
       },
       "plus": {
-        "y": -4,
-        "root": 2,
-        "spineLow": 2,
-        "chest": 4,
-        "neck": -1
+        "root": -6.5,
+        "spineLow": -5.5,
+        "chest": -6.5,
+        "neck": 14.8,
+        "armN": -17.5,
+        "armF": -17.5
       },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ],
-        "armN": [
-          -6,
-          -10
-        ],
-        "armF": [
-          -4,
-          -12
-        ]
-      }
+      "courbe": "acc-dec"
     },
     {
       "f": 22,
-      "nom": "prêt à contrer",
+      "nom": "revient sans hâte",
       "fixe": {
-        "x": 1.5
+        "x": 0.3
       },
       "plus": {
-        "y": -3,
-        "root": 1,
-        "spineLow": 1,
-        "chest": 3
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ],
-        "armN": [
-          -2,
-          -4
-        ],
-        "armF": [
-          -1,
-          -5
-        ]
+        "root": 0.4,
+        "spineLow": 0.3,
+        "chest": 0.3,
+        "neck": -0.8
       },
       "courbe": "acc-dec"
     },
     {
       "f": 30,
-      "nom": "garde ouverte",
+      "nom": "repos",
       "fixe": {
         "x": 0
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ]
       },
       "ancre": false
     }
@@ -211,13 +90,13 @@
       "type": "contact"
     },
     {
-      "f": 2,
+      "f": 1,
       "type": "fenetre",
       "nom": "esquive",
       "n": 10
     },
     {
-      "f": 12,
+      "f": 11,
       "type": "fenetre",
       "nom": "contre",
       "n": 14

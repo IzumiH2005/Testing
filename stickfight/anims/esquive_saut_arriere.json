@@ -1,241 +1,183 @@
 {
   "nom": "esquive_saut_arriere",
   "boucle": false,
-  "base": "garde_ouverte",
-  "suivante": "garde_ouverte_idle",
+  "base": "repos",
+  "suivante": "idle_repos",
   "decalage": {
-    "neck": 2,
-    "chest": 1,
-    "foreN": 1,
-    "armF": 1,
-    "foreF": 2
+    "neck": 1,
+    "armN": 2,
+    "armF": 2,
+    "foreN": 3,
+    "foreF": 3
   },
   "cles": [
     {
       "f": 0,
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ]
-      },
       "courbe": "dec"
     },
     {
       "f": 3,
-      "nom": "flexion d'élan, les bras descendent",
+      "nom": "genoux souples",
       "fixe": {
-        "x": -3
+        "x": -1
       },
       "plus": {
-        "y": -8,
-        "root": -2,
-        "spineLow": -2,
-        "chest": -4,
-        "neck": 2
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ],
-        "armN": [
-          -8,
-          -20
-        ],
-        "armF": [
-          -6,
-          -22
-        ]
+        "y": -4,
+        "root": 1,
+        "neck": -0.8,
+        "armN": 1,
+        "armF": 1
       },
       "courbe": "acc"
     },
     {
       "f": 6,
-      "nom": "poussée de la jambe avant, les bras lancent vers le haut",
+      "nom": "décolle sans effort",
       "fixe": {
-        "x": -12
+        "x": -8
       },
       "plus": {
-        "y": 6,
-        "root": -3,
-        "spineLow": -4,
-        "chest": -6,
-        "neck": 3
+        "y": 3,
+        "root": -1,
+        "spineLow": -1,
+        "neck": 1.6,
+        "armN": 1,
+        "armF": 1,
+        "foreN": 4,
+        "foreF": 4
       },
       "vise_rel": {
         "legN": [
-          -3,
-          2
+          -6,
+          3
         ],
         "legF": [
-          -12,
-          14
-        ],
-        "armN": [
-          -14,
-          6
-        ],
-        "armF": [
-          -12,
-          4
+          -5,
+          5
         ]
       },
       "courbe": "lin"
     },
     {
-      "f": 10,
-      "nom": "en l'air, genoux rentrés, bras ouverts devant pour l'équilibre",
+      "f": 9,
+      "nom": "flotte, pieds sous lui",
       "fixe": {
-        "x": -28
+        "x": -17
       },
       "plus": {
-        "y": 24,
+        "y": 6,
         "root": -1,
-        "spineLow": -2,
-        "chest": -3,
-        "neck": 2
+        "spineLow": -1,
+        "chest": -1,
+        "neck": 2.4,
+        "armN": 2,
+        "armF": 2,
+        "foreN": 6,
+        "foreF": 6
       },
       "vise_rel": {
         "legN": [
-          -26,
-          30
+          -15,
+          8
         ],
         "legF": [
-          -34,
-          26
-        ],
-        "armN": [
-          2,
-          -6
-        ],
-        "armF": [
-          0,
-          -10
+          -17,
+          9
         ]
       },
       "courbe": "auto"
     },
     {
-      "f": 14,
-      "nom": "réception : le pied arrière touche en premier, les bras tombent devant",
+      "f": 12,
+      "nom": "se pose sur l'avant des pieds ; la hache frappe le sol devant lui",
       "fixe": {
-        "x": -40
+        "x": -25
       },
       "plus": {
-        "y": -7,
-        "root": 3,
-        "spineLow": 4,
-        "chest": 6,
-        "neck": -3
+        "y": -3,
+        "root": 1,
+        "spineLow": 1,
+        "chest": 1,
+        "neck": -2.4,
+        "armN": 4,
+        "armF": 4,
+        "foreN": 3,
+        "foreF": 3
       },
       "vise_rel": {
         "legN": [
-          -36,
-          6
-        ],
-        "legF": [
-          -42,
+          -26,
           0
         ],
-        "armN": [
-          4,
-          -18
-        ],
-        "armF": [
-          2,
-          -20
+        "legF": [
+          -25,
+          3
         ]
       },
       "courbe": "dec"
     },
     {
-      "f": 17,
-      "nom": "pied avant posé, amorti",
+      "f": 14,
+      "nom": "amorti",
       "fixe": {
-        "x": -42
+        "x": -26
       },
       "plus": {
-        "y": -9,
-        "root": 3,
-        "spineLow": 5,
-        "chest": 7,
-        "neck": -4
+        "y": -5,
+        "root": 2,
+        "spineLow": 1,
+        "chest": 1,
+        "neck": -3.2,
+        "armN": 3,
+        "armF": 3,
+        "foreN": 2,
+        "foreF": 2
       },
       "vise_rel": {
         "legN": [
-          -42,
+          -26,
           0
         ],
         "legF": [
-          -42,
+          -26,
           0
-        ],
-        "armN": [
-          0,
-          -16
-        ],
-        "armF": [
-          -2,
-          -18
         ]
       },
       "courbe": "acc-dec"
     },
     {
       "f": 24,
-      "nom": "prêt à repartir",
       "fixe": {
-        "x": -42
+        "x": -26
       },
       "plus": {
-        "y": -2,
-        "root": 1,
-        "spineLow": 1,
-        "chest": 2,
-        "neck": -1
+        "y": -0.5
       },
       "vise_rel": {
         "legN": [
-          -42,
+          -26,
           0
         ],
         "legF": [
-          -42,
+          -26,
           0
-        ],
-        "armN": [
-          -2,
-          -5
-        ],
-        "armF": [
-          -1,
-          -6
         ]
       },
       "courbe": "acc-dec"
     },
     {
-      "f": 32,
-      "nom": "garde ouverte",
+      "f": 30,
+      "nom": "repos",
       "fixe": {
-        "x": -42
+        "x": -26
       },
       "vise_rel": {
         "legN": [
-          -42,
+          -26,
           0
         ],
         "legF": [
-          -42,
+          -26,
           0
         ]
       }
@@ -250,27 +192,20 @@
       "f": 3,
       "type": "fenetre",
       "nom": "esquive",
-      "n": 12
+      "n": 11
     },
     {
-      "f": 17,
+      "f": 15,
       "type": "fenetre",
       "nom": "contre",
       "n": 12
     },
     {
-      "f": 6,
+      "f": 12,
       "type": "poussiere",
       "articulation": "ankleN",
-      "dir": 0,
-      "taille": 0.6
-    },
-    {
-      "f": 14,
-      "type": "poussiere",
-      "articulation": "ankleF",
       "dir": 180,
-      "taille": 0.6
+      "taille": 0.3
     }
   ]
 }

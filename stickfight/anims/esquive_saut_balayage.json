@@ -1,72 +1,41 @@
 {
   "nom": "esquive_saut_balayage",
   "boucle": false,
-  "base": "garde_ouverte",
-  "suivante": "garde_ouverte_idle",
+  "base": "repos",
+  "suivante": "idle_repos",
   "decalage": {
-    "neck": 2,
-    "chest": 1,
-    "foreN": 1,
-    "armF": 1,
-    "foreF": 2
+    "neck": 1,
+    "armN": 2,
+    "armF": 2,
+    "foreN": 3,
+    "foreF": 3
   },
   "cles": [
     {
       "f": 0,
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ]
-      },
       "courbe": "dec"
     },
     {
       "f": 3,
-      "nom": "flexion courte, les bras descendent",
-      "fixe": {
-        "x": 0
-      },
+      "nom": "genoux souples",
       "plus": {
-        "y": -9,
+        "y": -5,
         "root": 1,
-        "spineLow": 2,
-        "chest": 4,
-        "neck": -2
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ],
-        "armN": [
-          -10,
-          -18
-        ],
-        "armF": [
-          -6,
-          -20
-        ]
+        "neck": -0.8,
+        "armN": 1,
+        "armF": 1
       },
       "courbe": "acc"
     },
     {
       "f": 6,
-      "nom": "décollage sur place, les bras montent",
-      "fixe": {
-        "x": 1
-      },
+      "nom": "décolle",
       "plus": {
         "y": 6,
-        "chest": 1
+        "armN": -2,
+        "armF": -2,
+        "foreN": 4,
+        "foreF": 4
       },
       "vise_rel": {
         "legN": [
@@ -74,65 +43,48 @@
           6
         ],
         "legF": [
-          2,
-          10
-        ],
-        "armN": [
-          -6,
-          10
-        ],
-        "armF": [
-          -4,
-          8
+          0,
+          7
         ]
       },
       "courbe": "dec"
     },
     {
       "f": 10,
-      "nom": "genoux ramenés, la jambe adverse passe dessous",
-      "fixe": {
-        "x": 1
-      },
+      "nom": "pieds repliés, la jambe adverse passe dessous",
       "plus": {
-        "y": 20,
-        "root": 2,
-        "spineLow": 4,
-        "chest": 6,
-        "neck": -3
+        "y": 11,
+        "root": 1,
+        "spineLow": 1,
+        "chest": 1,
+        "neck": -2.4,
+        "foreN": 6,
+        "foreF": 6
       },
       "vise_rel": {
         "legN": [
-          -4,
-          34
+          -3,
+          22
         ],
         "legF": [
-          4,
-          30
-        ],
-        "armN": [
-          0,
-          4
-        ],
-        "armF": [
-          0,
-          2
+          3,
+          22
         ]
       },
       "courbe": "acc"
     },
     {
-      "f": 15,
-      "nom": "réception, les bras retombent",
-      "fixe": {
-        "x": 1
-      },
+      "f": 14,
+      "nom": "se pose",
       "plus": {
-        "y": -8,
-        "root": 2,
-        "spineLow": 3,
-        "chest": 5,
-        "neck": -2
+        "y": -4,
+        "root": 1,
+        "spineLow": 1,
+        "neck": -1.6,
+        "armN": 3,
+        "armF": 3,
+        "foreN": 3,
+        "foreF": 3
       },
       "vise_rel": {
         "legN": [
@@ -142,30 +94,20 @@
         "legF": [
           0,
           0
-        ],
-        "armN": [
-          -2,
-          -16
-        ],
-        "armF": [
-          -2,
-          -18
         ]
       },
       "courbe": "dec"
     },
     {
-      "f": 20,
+      "f": 17,
       "nom": "amorti",
-      "fixe": {
-        "x": 1
-      },
       "plus": {
-        "y": -6,
+        "y": -5,
         "root": 1,
-        "spineLow": 2,
-        "chest": 3,
-        "neck": -1
+        "spineLow": 1,
+        "neck": -1.6,
+        "armN": 2,
+        "armF": 2
       },
       "vise_rel": {
         "legN": [
@@ -175,34 +117,13 @@
         "legF": [
           0,
           0
-        ],
-        "armN": [
-          -2,
-          -8
-        ],
-        "armF": [
-          -1,
-          -10
         ]
       },
       "courbe": "acc-dec"
     },
     {
-      "f": 28,
-      "nom": "garde ouverte",
-      "fixe": {
-        "x": 0
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ]
-      },
+      "f": 26,
+      "nom": "repos",
       "ancre": false
     }
   ],
@@ -212,30 +133,23 @@
       "type": "contact"
     },
     {
-      "f": 5,
+      "f": 4,
       "type": "fenetre",
       "nom": "esquive",
       "n": 10
     },
     {
-      "f": 16,
+      "f": 15,
       "type": "fenetre",
       "nom": "contre",
       "n": 12
     },
     {
-      "f": 6,
-      "type": "poussiere",
-      "articulation": "ankleN",
-      "dir": 90,
-      "taille": 0.4
-    },
-    {
-      "f": 15,
+      "f": 14,
       "type": "poussiere",
       "articulation": "ankleF",
       "dir": 90,
-      "taille": 0.4
+      "taille": 0.3
     }
   ]
 }

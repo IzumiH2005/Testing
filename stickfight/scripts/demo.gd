@@ -28,7 +28,8 @@ extends Control
 ##      une autre parade peut l'annuler (la contre-attaque, elle, sera propre
 ##      à chaque personnage). Touches provisoires : les commandes finales
 ##      seront à la manette, façon Tekken (□ △ × ○ = 1 2 3 4).
-##   1 à 7  en garde : esquive (varie selon le coup) ; 1 sway (direct au
+##   1 à 7  au repos (ou en garde) : esquive détendue, sans garde, façon
+##      « ultra instinct », qui finit au repos (varie selon le coup) ; 1 sway (direct au
 ##      visage), 2 slip (direct, la tête passe à côté), 3 baisse (crochet ou
 ##      circulaire à la tête), 4 retrait du ventre (crochet au corps),
 ##      5 pas de côté, pivot face caméra (coup de pied appuyé), 6 saut arrière (coup de pied
@@ -52,7 +53,7 @@ const SAUT_TOLERANCE := 6
 ## Images minimales passées dans accroupi_repos_idle avant qu'une propulsion
 ## puisse partir (le fondu de retour de la propulsion précédente se termine).
 const PROPULSION_DELAI := 4
-const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   ↑ sauter (+ → / ← : avant / arrière)   Maj + ↑ saut boosté   ↓ puis → / ← propulsion (+ ↑ haute)   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, ↓ + ← garde basse, B blocage bas, T demi-tour, H / Maj + H / Ctrl + H coup bloqué, Ctrl + Maj + H garde repoussée, J garde brisée, P / Maj + P / Ctrl + P / Ctrl + Maj + P parade haute poing / haute pied / moyenne / basse, 1 à 7 esquive sway / slip / baisse / retrait / côté / saut arrière / saut balayage)   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
+const HELP := "→ ← marcher   Maj + → courir   Ctrl + → sprinter   ↓ accroupi   ↑ sauter (+ → / ← : avant / arrière)   Maj + ↑ saut boosté   ↓ puis → / ← propulsion (+ ↑ haute)   G tenu : garde (→ avancer, ← fermer et reculer, → → dash, ← ← backdash, ↓ accroupi, ↓ + ← garde basse, B blocage bas, T demi-tour, H / Maj + H / Ctrl + H coup bloqué, Ctrl + Maj + H garde repoussée, J garde brisée, P / Maj + P / Ctrl + P / Ctrl + Maj + P parade haute poing / haute pied / moyenne / basse)   1 à 7 esquive détendue sway / slip / baisse / retrait / côté / saut arrière / saut balayage   K duo   R repos   ·   Espace pause   ← → image par image   L ralenti   D squelette"
 
 ## Esquives des touches 1 à 7, dans l'ordre.
 const ESQUIVES := ["sway", "slip", "baisse", "retrait", "cote", "saut_arriere", "saut_balayage"]
@@ -292,10 +293,12 @@ func _control_input() -> void:
 				or (nom.begins_with("parade_") and f.en_fenetre("contre")):
 			f.play(parade, 2)
 			return
-	# Esquive : depuis la garde debout, ou pendant la fenêtre de contre d'une
-	# parade ou d'une autre esquive.
+	# Esquive : depuis le repos (esquive détendue, sans garde), la marche
+	# détendue, la garde debout, ou pendant la fenêtre de contre d'une parade
+	# ou d'une autre esquive. Elle se termine toujours dans idle_repos.
 	if esquive != "":
-		if nom in ["garde_ouverte_idle", "garde_ouvrir", "garde_idle", "garde_fermer"] \
+		if nom in ["idle_repos", "garde_ouverte_idle", "garde_ouvrir", "garde_idle", "garde_fermer"] \
+				or nom.begins_with("marche_detendue") \
 				or nom.begins_with("recul_garde_haut_") \
 				or ((nom.begins_with("parade_") or nom.begins_with("esquive_")) and f.en_fenetre("contre")):
 			f.play(esquive, 2)

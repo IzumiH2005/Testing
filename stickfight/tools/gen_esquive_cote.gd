@@ -4,28 +4,29 @@ extends SceneTree
 ##
 ##   $GODOT --headless --path . -s res://tools/gen_esquive_cote.gd
 ##
-## Comme le demi-tour, c'est un mouvement en profondeur : la garde ouverte est
+## Comme le demi-tour, c'est un mouvement en profondeur : la pose de repos est
 ## remontée en 3D (z négatif = vers la caméra), tournée image par image autour
 ## de l'axe vertical, projetée, puis relue en angles 2D (os raccourcis étirés).
 ##
 ## Ce qui se passe :
-##   - le pied avant reste planté et tourne sur la plante (talon qui se lève
-##     un peu au passage) ; tout le reste tourne autour de ce point d'un quart
-##     de tour, poitrine vers la caméra (« face écran ») ;
-##   - la jambe arrière balaie un arc derrière lui (loin de la caméra), pied
+##   - il reste détendu, sans garde : l'esquive part de repos et y revient ;
+##   - le pied avant (jambe éloignée en repos) reste planté et tourne sur la
+##     plante (talon qui se lève un peu au passage) ; tout le reste tourne
+##     autour de ce point d'un quart de tour, poitrine vers la caméra ;
+##   - la jambe arrière (côté caméra) balaie un arc derrière lui (loin de la caméra), pied
 ##     soulevé au milieu de l'arc, un peu en retard sur le bassin ;
-##   - le bassin s'abaisse et se retrouve en retrait, hors de la ligne du coup :
-##     le pied adverse passe devant son ventre ;
-##   - le haut du corps devance le bassin et s'incline un peu loin du coup ;
-##   - les bras lâchent la garde : mains basses, écartées pour l'équilibre,
-##     puis retour en garde ouverte par le même pivot à l'envers.
+##   - le bassin s'abaisse à peine et se retrouve en retrait, hors de la ligne
+##     du coup : le pied adverse passe devant son ventre ;
+##   - le haut du corps devance le bassin et s'incline à peine loin du coup ;
+##   - les bras restent pendus, mains basses, à peine décollées du corps par
+##     la rotation ; retour en repos par le même pivot à l'envers.
 ##
 ## La perspective est calculée articulation par articulation (même focale et
 ## même remontée au sol que StickRig.depth). La clé porte une petite
 ## profondeur z pour que le combat le dessine derrière l'attaquant ; les
 ## points sont pré-compensés pour que cette profondeur ne déforme pas le dessin.
 
-const BASE := "garde_ouverte"
+const BASE := "repos"
 const OUT := "res://anims/esquive_cote.json"
 const N := 34           # dernière image
 const CONTACT := 12     # le pied adverse passe devant le ventre
@@ -33,14 +34,14 @@ const Z_HIP := 9.0      # demi-largeur du bassin
 const LEAD_UP := 1.5    # avance du haut du corps sur le bassin (images)
 const LEAD_HEAD := 1.0  # avance de la tête sur le buste
 const LAG_REAR := 1.5   # retard de la jambe arrière
-const LIFT_REAR := 9.0  # hauteur du pied arrière au milieu de l'arc
-const STEP_SIDE := 34.0 # face caméra, le pied arrière se pose de côté...
+const LIFT_REAR := 7.0  # hauteur du pied arrière au milieu de l'arc
+const STEP_SIDE := -32.0 # face caméra, le pied arrière se pose de côté (vers -x : jambe proche)
 const STEP_IN := 0.5    # ... et moins loin derrière (fraction de l'arc gardée)
 const Z_TRI := 0.3      # profondeur de tri portée par la clé (fraction du bassin)
 
 var g: Dictionary       # pose de base
 var s: Dictionary       # style
-var J0: Dictionary      # articulations de la garde
+var J0: Dictionary      # articulations du repos
 var C: Vector3          # axe du pivot : plante du pied avant
 var shift: Vector3      # recentrage du bassin entre les appuis, face caméra
 
@@ -49,9 +50,10 @@ func _initialize() -> void:
 	g = StickRig.load_pose("res://poses/%s.json" % BASE)
 	s = StickRig.get_style(g.style)
 	J0 = StickRig.solve(g).joints
-	C = Vector3(float(J0.toeN.x), 0.0, -Z_HIP)
+	# En repos, le pied avant est celui de la jambe éloignée (F, z > 0).
+	C = Vector3(float(J0.toeF.x), 0.0, Z_HIP)
 	# Face caméra, le bassin se place au-dessus du milieu des deux appuis.
-	var an_end := _front_ankle(-90.0, _pitch(J0, "N"))
+	var an_end := _front_ankle(-90.0, _pitch(J0, "F"))
 	var af_end := _rear_ankle(-90.0)
 	var h_end := around(_v3(J0.hip, 0.0), -90.0)
 	shift = (an_end + af_end) / 2.0 - h_end
@@ -63,12 +65,12 @@ func _initialize() -> void:
 		"nom": "esquive_cote",
 		"boucle": false,
 		"base": BASE,
-		"suivante": "garde_ouverte_idle",
+		"suivante": "idle_repos",
 		"pieds_auto": false,
 		"genere_par": "tools/gen_esquive_cote.gd",
 		"evenements": [
 			{"f": CONTACT, "type": "contact"},
-			{"f": 3, "type": "fenetre", "nom": "esquive", "n": 15},
+			{"f": 4, "type": "fenetre", "nom": "esquive", "n": 14},
 			{"f": 21, "type": "fenetre", "nom": "contre", "n": 10},
 		],
 		"cles": cles,
@@ -102,22 +104,22 @@ static func _interp(keys: Array, t: float) -> float:
 ## Rotation (degrés, négatif = poitrine vers la caméra) : petit armé, quart de
 ## tour, léger dépassement, tenue pendant le passage du coup, retour.
 static func theta(t: float) -> float:
-	return _interp([[0.0, 0.0], [2.0, 4.0], [9.0, -86.0], [12.0, -92.0], [18.0, -88.0], [28.0, -4.0], [32.0, 0.0]], t)
+	return _interp([[0.0, 0.0], [3.0, 2.0], [10.0, -88.0], [13.0, -90.0], [19.0, -89.0], [29.0, -3.0], [33.0, 0.0]], t)
 
 
 ## Hauteur du bassin : il s'abaisse en tournant, reste bas, remonte.
 static func hip_dy(t: float) -> float:
-	return _interp([[0.0, 0.0], [2.0, -2.5], [8.0, -10.0], [13.0, -9.0], [19.0, -9.0], [27.0, -2.0], [32.0, 0.0]], t)
+	return _interp([[0.0, 0.0], [3.0, -1.5], [9.0, -6.0], [13.0, -5.5], [19.0, -5.5], [28.0, -1.0], [33.0, 0.0]], t)
 
 
 ## Inclinaison latérale du buste, loin du coup (degrés).
 static func lean(t: float) -> float:
-	return _interp([[0.0, 0.0], [3.0, 0.0], [10.0, 9.0], [18.0, 8.0], [27.0, 0.0]], t)
+	return _interp([[0.0, 0.0], [4.0, 0.0], [11.0, 5.0], [19.0, 4.5], [28.0, 0.0]], t)
 
 
-## Bras : 0 = garde ouverte, 1 = bras relâchés écartés.
+## Bras : 0 = bras du repos, 1 = mains à peine décollées par la rotation.
 static func arms(t: float) -> float:
-	return _interp([[0.0, 0.0], [2.0, 0.15], [8.0, 1.0], [19.0, 1.0], [29.0, 0.1], [33.0, 0.0]], t)
+	return _interp([[0.0, 0.0], [4.0, 0.1], [11.0, 1.0], [19.0, 1.0], [29.0, 0.15], [34.0, 0.0]], t)
 
 
 ## Talon avant levé pendant que le pied tourne sur la plante (degrés).
@@ -160,7 +162,7 @@ static func _v3(v: Vector2, z: float) -> Vector3:
 	return Vector3(v.x, v.y, z)
 
 
-## Tangage du pied dans la garde (degrés, négatif = talon levé).
+## Tangage du pied dans la pose de base (degrés, négatif = talon levé).
 static func _pitch(J: Dictionary, side: String) -> float:
 	var d: Vector2 = J["toe" + side] - J["ankle" + side]
 	return rad_to_deg(atan2(d.y, d.x))
@@ -169,7 +171,7 @@ static func _pitch(J: Dictionary, side: String) -> float:
 ## Cheville avant : la plante reste posée, le pied tourne autour d'elle.
 func _front_ankle(th: float, phi: float) -> Vector3:
 	var L: float = s.foot
-	var toe := Vector3(float(J0.toeN.x), float(J0.toeN.y), -Z_HIP)
+	var toe := Vector3(float(J0.toeF.x), float(J0.toeF.y), Z_HIP)
 	var fw := rot(Vector3(L * cos(deg_to_rad(phi)), 0.0, 0.0), th)
 	return toe - Vector3(fw.x, L * sin(deg_to_rad(phi)), fw.z)
 
@@ -178,9 +180,9 @@ func _front_ankle(th: float, phi: float) -> Vector3:
 ## s'écarte sur le côté, pour finir en appuis de face (largeur d'épaules).
 func _rear_ankle(th: float) -> Vector3:
 	var p := _smooth(absf(th) / 90.0)
-	var r := rot(Vector3(float(J0.ankleF.x), 0.0, Z_HIP) - Vector3(C.x, 0.0, C.z), th)
+	var r := rot(Vector3(float(J0.ankleN.x), 0.0, -Z_HIP) - Vector3(C.x, 0.0, C.z), th)
 	r *= lerpf(1.0, STEP_IN, p)
-	return Vector3(C.x, float(J0.ankleF.y), C.z) + r + Vector3(STEP_SIDE * p, 0.0, 0.0)
+	return Vector3(C.x, float(J0.ankleN.y), C.z) + r + Vector3(STEP_SIDE * p, 0.0, 0.0)
 
 
 # ---------- Une image ----------
@@ -211,14 +213,15 @@ func _key(i: int) -> Dictionary:
 	P.shoulder = H + rot(sh, th_up)
 	P.head = H + rot(tilt(_v3(B.head, 0.0), ln * 1.2), th_head)
 
-	# Bras : de la garde (dans le plan du buste) aux mains basses écartées.
-	var relax := {"N": Vector3(4.0, 8.0, -30.0), "F": Vector3(-4.0, 13.0, 30.0)}
-	var pole_r := {"N": Vector3(-1.0, -0.2, -0.7), "F": Vector3(-1.0, -0.2, 0.7)}
+	# Bras : ils pendent ; la rotation les décolle à peine du corps, la main
+	# traîne un peu derrière (inertie).
+	var drift := {"N": Vector3(-2.0, 2.0, -5.0), "F": Vector3(-2.0, 2.0, 5.0)}
+	var pole_r := {"N": Vector3(-1.0, -0.2, -0.4), "F": Vector3(-1.0, -0.2, 0.4)}
 	for side in ["N", "F"]:
 		var hand_g := _v3(B["hand" + side], 0.0)
 		var elbow_g := _v3(B["elbow" + side], 0.0)
-		var target: Vector3 = hand_g.lerp(relax[side], m)
-		var pole: Vector3 = (elbow_g - _v3(B.shoulder, 0.0)).normalized().lerp(pole_r[side].normalized(), m)
+		var target: Vector3 = hand_g + drift[side] * m
+		var pole: Vector3 = (elbow_g - _v3(B.shoulder, 0.0)).normalized().lerp(pole_r[side].normalized(), m * 0.5)
 		var sh0 := _v3(B.shoulder, 0.0)
 		var el := knee(sh0, target, s.upperArm, s.forearm, pole)
 		var dir := (target - sh0)
@@ -230,16 +233,17 @@ func _key(i: int) -> Dictionary:
 	# Jambes.
 	var L: float = s.foot
 	var pole_k := rot(Vector3(1, 0, 0), th)
-	# Pied avant : la plante reste au sol, le pied tourne avec le bassin.
-	var phiN := _pitch(J0, "N") + heel(t)
-	var toeN := Vector3(float(J0.toeN.x), float(J0.toeN.y), -Z_HIP)
-	var AN := _front_ankle(th, phiN)
-	# Pied arrière : arc derrière lui, soulevé au milieu.
-	var phiF := _pitch(J0, "F")
+	# Pied avant (jambe éloignée) : la plante reste au sol, le pied tourne
+	# avec le bassin.
+	var phiF := _pitch(J0, "F") + heel(t)
+	var toeF := Vector3(float(J0.toeF.x), float(J0.toeF.y), Z_HIP)
+	var AF := _front_ankle(th, phiF)
+	# Pied arrière (jambe proche) : arc derrière lui, soulevé au milieu.
+	var phiN := _pitch(J0, "N")
 	var lift := LIFT_REAR * sin(PI * clampf(absf(th_rear) / 90.0, 0.0, 1.0))
-	var AF := _rear_ankle(th_rear) + Vector3(0.0, lift, 0.0)
-	var fwF := rot(Vector3(L * cos(deg_to_rad(phiF)), 0.0, 0.0), th_rear)
-	var toeF := AF + Vector3(fwF.x, L * sin(deg_to_rad(phiF)), fwF.z)
+	var AN := _rear_ankle(th_rear) + Vector3(0.0, lift, 0.0)
+	var fwN := rot(Vector3(L * cos(deg_to_rad(phiN)), 0.0, 0.0), th_rear)
+	var toeN := AN + Vector3(fwN.x, L * sin(deg_to_rad(phiN)), fwN.z)
 	for pr in [["N", AN, toeN, -1.0], ["F", AF, toeF, 1.0]]:
 		var side: String = pr[0]
 		var A: Vector3 = pr[1]
