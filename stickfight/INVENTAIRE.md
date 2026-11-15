@@ -1,539 +1,319 @@
 # Inventaire des animations par personnage
 
-Ce document fixe **combien d'animations** il faut par personnage et **lesquelles**,
-avant de commencer la production. Il s'appuie sur Tekken 8, qui sert de référence,
-et sur les deux vidéos de stickman analysées (clinch, sol, objets, pouvoirs, foule).
+Ce document fixe **combien d'animations** il faut par personnage, **lesquelles**, et dans
+quel ordre on les fait.
 
-À valider avant de toucher aux animations : les questions ouvertes sont en § 7.
+**Budget : 100 à 120 animations par personnage, communes et propres comprises.** Nous
+sommes deux à produire, tout à la main, donc on garde seulement ce qui sert vraiment au
+combat en duel. Le reste est coupé (§ 6).
 
 ---
 
-## 1. Les chiffres de Tekken 8
+## 1. Comment on compte
 
-### Combien de coups par personnage
+**Une animation = une action que le joueur voit**, comme dans les décomptes des jeux de
+combat. Les petites transitions d'une même action ne comptent pas à part :
 
-| Personnage | Coups (movelist) | Remarque |
-|---|---|---|
-| Yoshimitsu | 313 | le plus gros, beaucoup de postures |
-| King | 217 | lutteur, beaucoup de projections et de chaînes de chopes |
-| Hwoarang | 210 | 4 postures de jambes |
-| Claudio | 102 | personnage simple |
-| Shaheen | 91 | le plus petit |
-| **Moyenne** | **≈ 145** | sur environ 40 personnages |
-| **Total du jeu** | **≈ 6 200 à 6 400** | selon la façon de compter |
+- départ, boucle et arrêt d'une marche ;
+- entrée, boucle et sortie d'une posture ;
+- réception d'un saut.
 
-Comment ces chiffres sont comptés (TekkenDocs, d'après les movelists du wiki Wavu) :
+Les fichiers sont donc plus nombreux que les animations. Aujourd'hui, 52 animations
+communes sont faites, ce qui représente 75 fichiers dans `anims/`.
 
-- chaque coup d'une chaîne compte à part : `1,2,1` = 3 coups ;
-- les projections comptent ;
-- les variantes renforcées en Heat ne comptent pas toujours, d'où l'écart entre les sources ;
-- les chaînes automatiques de 10 coups ne comptent pas.
+### Repères
 
-### Ce que ces chiffres ne comptent pas
-
-La movelist ne liste que ce que le joueur **déclenche**. Tout le reste est en plus :
-
-- les animations communes du système : marcher, sauter, bloquer, se relever, etc. ;
-- les **réactions** aux coups : être touché, lancé, plaqué au mur, mis au sol ;
-- les **victimes** des projections, de la Heat Smash et de la Rage Art, qui sont des animations à deux ;
-- les transitions d'entrée et de sortie des postures ;
-- l'intro, les poses de victoire et de défaite, les provocations.
-
-Un personnage de Tekken représente donc nettement plus d'animations que ses 145 coups.
-Les communes sont faites une seule fois et partagées. Chaque personnage peut aussi
-remplacer certaines communes par sa propre version (sa garde, sa marche, son intro).
-
-### Mécaniques de Tekken 8 qui demandent des animations
-
-| Mécanique | Ce qu'il faut animer |
+| Jeu | Actions par personnage |
 |---|---|
-| **Heat** (une fois par round) | activation (Heat Burst), Heat Dash, Heat Engager, Heat Smash |
-| **Rage Art** | une attaque cinématique à deux, propre à chaque personnage |
-| **Power Crush** | coup avec armure : on encaisse sans broncher |
-| **Tornado** | la vrille en l'air qui prolonge un combo, une fois par combo |
-| **Murs** | wall splat, wall bound, wall break, hard wall break (2 coups), balcony break |
-| **Sol** | floor break, floor blast, bound (rebond au sol) |
-| **Au sol** | tech roll, quickrise, roulades, coups en se relevant, rester au sol |
-| **Projections** | casse avec 1, 2 ou 1+2, saisies de face, de côté et de dos |
+| Hollow Knight (personnage d'action, pas un jeu de combat) | 35 à 40 |
+| Street Fighter 6 | 60 à 85 |
+| Tekken 8 | 120 à 180 (movelist moyenne ≈ 145 coups, sans les communes) |
+| **Nous** | **100 à 120, communes comprises** |
 
-Production chez Bandai Namco : capture de mouvement **retravaillée à la main**, pas pour
-tous les personnages (les Mishima sont animés à la main), sous Maya et MotionBuilder, avec
-plusieurs équipes. Nous animons tout à la main, en poses-clés : c'est notre force pour le
-style « animation stickman », mais cela demande un inventaire strict.
+Le minimum pour un jeu de combat complet (SF6, Guilty Gear Strive, Tekken 8) tourne
+autour de 50 à 70 actions :
+
+| Catégorie | Actions |
+|---|---|
+| Déplacements | 10 à 12 |
+| Défense et réactions | 10 à 15 |
+| Normaux au sol | 12 à 18 |
+| Aériens | 6 à 9 |
+| Choppes et universelles | 4 à 6 |
+| Spéciaux et super | 6 à 15 |
+| Mise en scène | 3 à 5 |
+
+Notre déplacement et notre défense dépassent déjà ces repères, parce que c'est là que le
+style « stickman animé » se voit le plus. Ils sont faits, on les garde. Le reste est donc
+serré au plus juste.
 
 ---
 
-## 2. Ce que montrent les deux vidéos
+## 2. Règles à appliquer à toutes les attaques
 
-### Vidéo 1 : *StickFight – More practice* (noir contre rouge, puis d'autres combattants)
+Ce sont tes retours ; ils valent pour toute la suite.
 
-- **Pas de garde permanente.** Les combattants sont bas, penchés vers l'avant, les mains
-  souvent basses. Ils se mettent en garde seulement à l'approche ou pour encaisser.
-- **Tout le corps frappe.** Pour un coup de pied, le buste part en contrepoids, les bras
-  balancent et le pied d'appui pivote.
-- **Clinch et lutte.** Saisies, poussées et tirages au contact, genoux, amenées au sol.
-- **Combat au sol.** Monture, coups au sol (ground-and-pound), écrasements au pied.
-- **Chutes lourdes.** Les corps tombent à plat et s'empilent. Un combattant se relève
-  pendant qu'un autre reste au sol.
-- **Plusieurs adversaires** qui arrivent l'un après l'autre.
-- Un peu de sang rouge.
-
-### Vidéo 2 : bleu contre une foule de stickmen blancs
-
-- **Objets du décor.** Il prend une chaise, frappe avec, se protège avec, puis s'assoit dessus.
-- **Acrobaties.** Saltos, coups de pied sautés, déplacements flous très rapides.
-- **Arme.** Un bâton lumineux qui tournoie et taille en arcs.
-- **Pouvoirs.**
-  - Télékinésie électrique.
-  - Bouclier de cristal de glace qui arrête une balle.
-  - Bloc de cristal lancé qui écrase un groupe d'ennemis.
-- **Ennemis armés** : pistolet, couteau.
-- **Foule.** Beaucoup d'ennemis en même temps, des corps qui volent, des débris.
-
-### Règles à appliquer à toutes les attaques
-
-Ce sont tes retours ; ils valent pour toute la suite :
-
-1. **La garde se défait pendant l'attaque.** Le bras qui ne frappe pas recule et sert de
-   contrepoids (les épaules tournent). La garde revient seulement pendant la récupération,
-   et ce retour *est* la fenêtre où l'on peut être puni.
+1. **La garde se défait pendant l'attaque.**
+   - Le bras qui ne frappe pas recule et sert de contrepoids : les épaules tournent.
+   - La garde revient seulement pendant la récupération.
+   - Ce retour *est* la fenêtre où l'on peut être puni.
 2. **Chaîne du mouvement, des pieds vers le poing.** Le pied d'appui pivote, puis la hanche
    tourne, puis l'épaule, puis le bras ou la jambe. Pour un coup de pied :
    - le buste penche en arrière ;
    - le bras opposé balance ;
    - la hanche s'ouvre ;
    - le pied d'appui tourne sur la plante.
-3. **La garde n'est affichée qu'au neutre**, et elle peut être basse ou relâchée selon le
-   personnage, comme dans les vidéos.
-4. Chaque coup se découpe en **démarrage, actif, récupération**, avec une anticipation lisible.
-5. Le coup de pied du duo de blocage actuel était un test. Il sera refait avec ces règles.
+3. **La garde n'est affichée qu'au neutre.** Elle peut être basse ou relâchée selon le
+   personnage.
+4. **Trois phases par coup** : démarrage, actif, récupération, avec une anticipation lisible.
+5. **Le repos est l'état par défaut, pas la garde.**
+   - Le personnage se déplace depuis son repos, de façon détendue.
+   - La garde n'apparaît que si le joueur la maintient.
+   - Il en ressort dès qu'il la relâche.
+6. **Deux gardes.**
+   - G tenu donne la garde **ouverte** : prêt à se battre, mains avancées.
+   - La garde **fermée** sert seulement à bloquer : poings devant le visage. On la prend en
+     reculant (← en garde, comme dans Tekken), avant et après un blocage.
+   - Les deux gardes ont les mêmes jambes : seuls le buste et les bras changent.
+7. **Une animation à la fois.**
+   - Chaque animation est faite pose par pose, puis vérifiée en planche et en stroboscopie.
+   - Elle doit marcher dans toutes les situations où elle sert. Par exemple, une parade doit
+     paraître naturelle contre un coup de poing comme contre un coup de pied, haut ou moyen.
 
 ---
 
-## 3. Animations communes (tous les personnages)
+## 3. Animations communes : 74
 
-Faites une fois, partagées par tous. Un personnage peut remplacer n'importe laquelle
-par sa propre version (marquées ✱ quand c'est presque toujours le cas).
+Faites une fois, partagées par tous les personnages. Un personnage peut en remplacer une par
+sa propre version ; ce remplacement compte alors dans son budget propre (§ 4).
 
-### 3.1 Postures et repos — 10
+### 3.1 Postures : 7, toutes faites
 
-| # | Animation | État |
+| Animation | Fichiers |
+|---|---|
+| Repos (état par défaut) | `idle_repos` |
+| Mise en garde (repos → garde) | `mise_en_garde` |
+| Sortie de garde (garde → repos) | `sortie_de_garde` |
+| Garde ouverte, respiration | `garde_ouverte_idle`, `garde_ouvrir` |
+| Garde fermée, respiration | `garde_idle`, `garde_fermer` |
+| Accroupi : entrée, respiration, sortie | `accroupi_entree`, `accroupi_idle`, `accroupi_sortie` |
+| Accroupi depuis le repos, une main au sol | `accroupi_repos_*` |
+
+### 3.2 Déplacements : 19, tous faits
+
+| Animation | Fichiers |
+|---|---|
+| Marche détendue avant : départ, boucle, arrêt court, arrêt en un pas | `marche_detendue`, `marche_detendue_depart`, `marche_detendue_arret_*` |
+| Marche détendue arrière : départ, boucle, arrêt en un pas, arrêt en deux pas | `marche_detendue_arriere*` |
+| Marche avant en garde, marche arrière en garde | `marche_avant`, `marche_arriere` |
+| Course : départ, boucle, arrêt depuis chaque pied | `course*` |
+| Sprint : départ, boucle, freinage en glissade | `sprint*` |
+| Pas chassé avant, pas chassé arrière | `dash_avant`, `dash_arriere` |
+| Saut neutre, avant, arrière ; réception légère | `saut_*`, `reception` |
+| Saut boosté neutre, avant, arrière ; réception lourde | `saut_booste_*`, `reception_lourde` |
+| Propulsion avant et arrière, rasante ou haute (4) | `propulsion_*` |
+| Demi-tour | `demi_tour` |
+
+### 3.3 Défense : 26, toute faite
+
+| Animation | Fichiers |
+|---|---|
+| Garde accroupie tenue : boucle, entrée, sortie, fermer, ouvrir | `garde_basse*` |
+| Blocage bas debout | `blocage_bas` |
+| Recul sur garde, haut et bas × léger, moyen, lourd (6) | `recul_garde_*` |
+| Garde repoussée, garde brisée | `garde_repoussee`, `garde_brisee` |
+| Parades : poing haut, pied haut, moyen, bas (4) ; fenêtre de contre | `parade_*` |
+| Esquives : sway, slip, se baisser, pas de côté, saut arrière, saut sur place (6) | `esquive_*` |
+| Armure (Power Crush), en couche | `armure_encaisse` |
+| Casser une projection, projection cassée | `casse_projection`, `projection_cassee` |
+| Être paré, haut et milieu (2) | `etre_pare_haut`, `etre_pare_bas` |
+
+### 3.4 Réactions debout : 7, à faire
+
+| Animation | Fichier prévu |
+|---|---|
+| Touché à la tête, léger | `touche_tete_leger` |
+| Touché à la tête, lourd (la tête part, recul d'un pas) | `touche_tete_lourd` |
+| Touché au ventre, léger | `touche_ventre_leger` |
+| Plié en deux (ventre lourd) | `touche_ventre_lourd` |
+| Touché à la jambe | `touche_jambe` |
+| Touché accroupi | `touche_accroupi` |
+| Sonné, titubant (après un contre ou une garde brisée, boucle courte) | `sonne` |
+
+Les variantes « moyen » se font en jouant la légère plus fort, ou la lourde plus court ; on
+n'en fait pas de fichier.
+
+### 3.5 Chutes, au sol, relevés, KO : 8, à faire
+
+| Animation | Fichier prévu |
+|---|---|
+| Propulsé en arrière, chute sur le dos | `chute_arriere` |
+| Fauché (les jambes partent, tombe sur le dos) | `fauche` |
+| Effondrement lent vers l'avant (crumple) | `effondrement` |
+| Au sol sur le dos (boucle) | `au_sol` |
+| Touché au sol | `touche_au_sol` |
+| Relevé normal | `releve` |
+| Relevé en roulade arrière (tech roll) | `releve_roulade` |
+| Inconscient au sol (KO, boucle) | `ko_au_sol` |
+
+Le KO lui-même n'a pas d'animation propre : c'est la chute qui l'a causé, puis `ko_au_sol`.
+Le ralenti final est géré par le moteur.
+
+### 3.6 En l'air et mur : 4, à faire
+
+| Animation | Fichier prévu |
+|---|---|
+| Lancé en l'air (par un lanceur) | `lance` |
+| Touché en l'air (jongle) | `touche_en_lair` |
+| Retombée au sol avec rebond | `retombee` |
+| Plaqué au mur, puis glisse au sol | `plaque_mur` |
+
+### 3.7 Universelles : 3, à faire
+
+| Animation | Fichier prévu |
+|---|---|
+| Saisie dans le vide (projection ratée) | `saisie_ratee` |
+| Frapper un adversaire au sol | `frappe_au_sol` |
+| Activation de la Heat, si on garde cette mécanique | `heat_activation` |
+
+### Total des communes
+
+| Bloc | Faites | À faire |
 |---|---|---|
-| 1 | Repos (hors combat) | fait |
-| 2 | Mise en garde (repos → garde) | fait |
-| 3 | Garde, respiration ✱ (garde ouverte, prête ; garde fermée, défensive ; passage de l'une à l'autre) | fait |
-| 4 | Sortie de garde (garde → repos) | fait |
-| 5 | Accroupi, respiration | fait |
-| 6 | Debout → accroupi | fait |
-| 7 | Accroupi → debout | fait |
-| 8 | Garde essoufflée (vie basse) | |
-| 9 | Garde en Rage / Heat (couche d'aura) | |
-| 10 | Dos tourné, respiration | |
-
-### 3.2 Déplacements — 26
-
-| # | Animation |
-|---|---|
-| 1-2 | Marche avant ✱, marche arrière ✱ |
-| 3-4 | Pas chassé avant (dash), pas chassé arrière (backdash) |
-| 5-7 | Course : départ, boucle, freinage en glissade |
-| 8 | Dash accroupi (avancer bas, comme un crouch dash) |
-| 9-11 | Saut neutre, saut avant, saut arrière |
-| 12-13 | Réception légère, réception lourde |
-| 14 | Petit saut (passe au-dessus d'un coup bas) |
-| 15 | Demi-tour (l'adversaire est passé derrière) |
-| 16 | Se retourner depuis dos tourné |
-| ~~17-19~~ | ~~Pas de côté~~ : retirés, le jeu est en 2D pure (§ 7) |
-| 20-21 | Roulade avant, roulade arrière |
-| 22-23 | Salto avant, salto arrière (esquive acrobatique, vidéo 2) |
-| 24 | Rebond sur un mur (wall jump) |
-| 25 | Course sur le mur (2 ou 3 pas) |
-| 26 | Enjamber ou sauter par-dessus un adversaire au sol |
-
-### 3.3 Défense — 20
-
-| # | Animation | État |
-|---|---|---|
-| 1 | Garde haute tenue | fait (garde fermée) |
-| 2 | Garde accroupie tenue | fait (`garde_basse`) |
-| 3 | Blocage bas debout | fait |
-| 4-9 | Recul sur garde léger, moyen, lourd × haut et bas | fait (`recul_garde_*`) |
-| 10 | Garde repoussée (gros coup bloqué, les pieds glissent) | fait (`garde_repoussee`) |
-| 11 | Garde brisée (bras ouverts, vulnérable) | fait (`garde_brisee`) |
-| 12-13 | Parade haute, parade basse (dévier un coup) | fait : 4 variantes selon le coup (`parade_*`), fenêtre de contre |
-| 14 | Esquive buste en arrière (sway) | fait (`esquive_sway`, contre un direct ; toutes les esquives sont détendues, sans garde, depuis et vers le repos) |
-| 15 | Esquive en se baissant sous un coup haut | fait (`esquive_baisse`, contre un crochet ou un circulaire à la tête) |
-| 16 | Esquive de la tête sur le côté (slip) | fait (`esquive_slip`, contre un direct) |
-| 16 c | Pas de côté (pivot face caméra) | fait (`esquive_cote`, contre un coup de pied appuyé ; pivot 3D projeté) |
-| 16 d | Saut arrière d'esquive | fait (`esquive_saut_arriere`, contre un coup de pied hache) |
-| 16 e | Saut sur place | fait (`esquive_saut_balayage`, contre un balayage) |
-| 17 | Armure : encaisser sans broncher (Power Crush) | fait (`armure_encaisse`, couche par-dessus l'animation courante) |
-| 18 | Casser une projection (celui qui se dégage) | fait (`casse_projection`, depuis le repos, duo `duo_projection_cassee`) |
-| 19 | Projection cassée (celui qui est repoussé) | fait (`projection_cassee`, la saisie de face est incluse) |
-| 20 | Être paré (déséquilibré après la parade adverse) | fait (`etre_pare_haut`, `etre_pare_bas`) |
-
-### 3.4 Réactions aux coups, debout — 24
-
-| Zone | Animations | Nombre |
-|---|---|---|
-| Tête | légère, moyenne, lourde, par derrière | 4 |
-| Ventre | léger, moyen, lourd, plié en deux | 4 |
-| Jambes | légère, lourde (genou qui plie), fauché (tombe) | 3 |
-| Accroupi touché | léger, lourd | 2 |
-| États spéciaux (contres, gros coups) | vrille sur place, recul titubant, sonné (boucle), effondrement lent (crumple), tombe à genoux, pivote dos tourné, souffle coupé (boucle), recul glissé au sol, tête qui part en arrière | 9 |
-| Projeté | propulsé loin, propulsé en vrille | 2 |
-
-### 3.5 En l'air (jongles) — 12
-
-| # | Animation |
-|---|---|
-| 1-2 | Lancé à la verticale, lancé en vrille |
-| 3-4 | Touché en l'air léger, lourd |
-| 5 | Culbute en l'air |
-| 6 | Tornado (vrille horizontale qui prolonge le combo) |
-| 7-8 | Rebond au sol sur le dos, sur le ventre (bound) |
-| 9-10 | Retombée sur le dos, sur le ventre |
-| 11 | Plié en deux en l'air |
-| 12 | Écrasé vers le sol (frappé vers le bas) |
-
-### 3.6 Murs, sol et décor — 14
-
-| # | Animation |
-|---|---|
-| 1-2 | Plaqué au mur dos au mur, plaqué face au mur (wall splat) |
-| 3 | Glisse le long du mur |
-| 4 | Rebond sur le mur (wall bound) |
-| 5 | Affalé assis contre le mur |
-| 6-7 | Traverse le mur, traverse en force (hard wall break) |
-| 8 | Bascule par-dessus une rambarde (balcony break) |
-| 9 | Le sol cède (floor break) |
-| 10 | Écrasé contre le sol (floor blast) |
-| 11 | Percute un autre combattant (foule) |
-| 12 | Rebond sur un objet du décor |
-| 13 | Chute d'un étage |
-| 14 | Se relever après la chute d'un étage |
-
-### 3.7 Au sol et relevés — 22
-
-| Groupe | Animations | Nombre |
-|---|---|---|
-| Positions au sol | sur le dos pieds vers l'adversaire, sur le dos pieds loin, sur le ventre × 2 | 4 |
-| Chutes | en arrière, en avant, sur le côté | 3 |
-| Touché au sol | sur le dos, sur le ventre | 2 |
-| Relevés | normal depuis le dos, normal depuis le ventre, relevé rapide (quickrise), kip-up (relevé sauté) | 4 |
-| Tech roll | sur le côté, en arrière | 2 |
-| Roulades au sol | arrière, avant, de côté | 3 |
-| Coups en se relevant | coup de pied bas, coup de pied moyen | 2 |
-| Autres | se retourner au sol, ramper (blessé, vidéo 1) | 2 |
-
-### 3.8 KO — 6
-
-KO en arrière, KO effondré en avant, KO en vrille, KO contre le mur, KO qui glisse au sol,
-inconscient au sol (boucle). Le ralenti final est géré par le moteur, il ne demande pas
-d'animation.
-
-### 3.9 Projections de base — 13
-
-Une projection est un **duo** : une animation pour celui qui saisit, une pour celui qui subit.
-
-| Projection | Animations |
-|---|---|
-| Saisie de face, type 1 | 2 |
-| Saisie de face, type 2 | 2 |
-| Saisie de côté gauche, de côté droit | 4 |
-| Saisie de dos | 2 |
-| Saisie accroupie (sur un adversaire baissé) | 2 |
-| Saisie ratée (dans le vide) | 1 |
-
-Dans Tekken, chaque personnage a ses propres projections. Celles-ci servent de lot par
-défaut ; les personnages les remplacent ou en ajoutent (voir § 4).
-
-### 3.10 Clinch et lutte debout (vidéo 1) — 15
-
-| Duo | Animations |
-|---|---|
-| Entrer en clinch (saisir nuque ou col) | 2 |
-| Clinch tenu (boucle, chacun pousse) | 2 |
-| Genou en clinch | 2 |
-| Coup court en clinch (coude, crochet) | 2 |
-| Repousser hors du clinch | 2 |
-| Amenée au sol (takedown) | 2 |
-| Fauchage depuis le clinch | 2 |
-| Se dégager seul | 1 |
-
-### 3.11 Combat au sol (vidéo 1) — 13
-
-| Duo | Animations |
-|---|---|
-| Monter sur l'adversaire (mount) | 2 |
-| Frapper en monture (ground-and-pound) | 2 |
-| Renverser celui qui est dessus | 2 |
-| Écraser au pied (stomp) | 2 |
-| Saisir une jambe depuis le sol (l'autre trébuche) | 2 |
-| Coup de pied dans un adversaire au sol | 1 |
-| Plonger sur un adversaire au sol | 1 |
-| S'asseoir sur l'adversaire (provocation) | 1 |
-
-### 3.12 Système (Heat, Rage) — 4
-
-Activation de la Heat (onde de choc), victime repoussée par l'onde, Heat Dash, sortie de
-Heat. La Heat Smash et la Rage Art sont propres à chaque personnage (§ 4).
-
-### 3.13 Plusieurs adversaires (vidéo 2) — 5
-
-Se retourner vite vers un deuxième ennemi, coup en arrière sans se retourner, coup de pied
-écarté des deux côtés, pousser un ennemi sur un autre, tenir un ennemi comme bouclier.
-
-### 3.14 Présentation — 6
-
-Intro ✱, victoire ✱ × 2, défaite au temps, provocation ✱, attente à l'écran de sélection ✱.
-Elles sont presque toujours remplacées par celles du personnage.
-
-### Total du socle commun
-
-| Bloc | Nombre |
-|---|---|
-| 3.1 Postures | 10 |
-| 3.2 Déplacements | 26 |
-| 3.3 Défense | 20 |
-| 3.4 Réactions debout | 24 |
-| 3.5 En l'air | 12 |
-| 3.6 Murs, sol, décor | 14 |
-| 3.7 Au sol et relevés | 22 |
-| 3.8 KO | 6 |
-| 3.9 Projections de base | 13 |
-| 3.10 Clinch | 15 |
-| 3.11 Combat au sol | 13 |
-| 3.12 Système | 4 |
-| 3.13 Plusieurs adversaires | 5 |
-| 3.14 Présentation | 6 |
-| **Total** | **190** |
-
-### 3.15 Couche « objets et armes » (vidéo 2) — environ 87
-
-**Objets** (15, communs à tous) :
-
-- ramasser au sol, ramasser en hauteur, attraper au vol, lâcher ;
-- lancer par-dessus l'épaule, de côté, à deux mains (objet lourd) ;
-- porter un objet lourd (respiration, marche), poser ;
-- frapper avec un objet en horizontal et en vertical ;
-- se protéger avec un objet ;
-- briser l'objet sur la cible ;
-- s'asseoir sur une chaise.
-
-**Armes : un lot par famille** (6 familles × environ 12 = 72) :
-
-- les familles :
-  - contondante courte (matraque, pied de chaise) ;
-  - longue (bâton, lance : le bâton lumineux de la vidéo) ;
-  - lame courte (couteau) ;
-  - lame longue (sabre) ;
-  - arme à feu (pistolet) ;
-  - bouclier ;
-- le lot de chaque famille :
-  - garde et respiration avec l'arme ;
-  - bras porteur pendant la marche ;
-  - 3 coups de base ;
-  - une chaîne de 3 ;
-  - une attaque chargée ;
-  - une parade ;
-  - dégainer ;
-  - ranger ;
-  - être désarmé.
-
-Un personnage « maître d'arme » ajoute ses propres coups par-dessus, comme un style à part
-entière.
-
-### 3.16 Couche « pouvoirs » (vidéo 2) — environ 22
-
-| Groupe | Animations |
-|---|---|
-| Charge | canaliser (boucle), relâcher |
-| Projectiles | à une main, à deux mains, rafale (boucle), frapper le sol (onde) |
-| Bouclier | invoquer, tenir, encaisser un impact, dissiper |
-| Télékinésie | saisir à distance, soulever et tenir, projeter, écraser vers le bas |
-| Téléportation | disparaître, réapparaître |
-| Transformation | activer l'aura |
-| Victime | soulevée par télékinésie (boucle), électrocutée (boucle), gelée, brûlée, repoussée par une onde |
-
-Les effets visuels (éclairs, cristaux, onde) sont à part : ils se dessinent dans `vfx.gd`,
-pas dans le squelette.
-
-**Socle commun complet : environ 300 animations** (190 + 87 + 22).
+| 3.1 Postures | 7 | 0 |
+| 3.2 Déplacements | 19 | 0 |
+| 3.3 Défense | 26 | 0 |
+| 3.4 Réactions debout | 0 | 7 |
+| 3.5 Chutes, sol, relevés, KO | 0 | 8 |
+| 3.6 En l'air et mur | 0 | 4 |
+| 3.7 Universelles | 0 | 3 |
+| **Total : 74** | **52** | **22** |
 
 ---
 
-## 4. Animations propres à chaque personnage
+## 4. Animations propres à chaque personnage : 42
 
-C'est l'équivalent de la movelist Tekken. Mêmes boutons pour tous, mais chaque personnage
-y met **ses** coups. Gabarit pour un personnage « moyen » (≈ 145 coups, comme la moyenne
-Tekken) ; un personnage simple peut descendre vers 90, un personnage à postures monter
-au-delà de 200.
+C'est sa movelist. Les boutons sont les mêmes pour tous, mais chaque personnage y met
+**ses** coups. Quatre boutons, comme Tekken : □ = 1 poing gauche, △ = 2 poing droit,
+× = 3 pied gauche, ○ = 4 pied droit.
 
-| Catégorie | Exemples de commandes | Coups |
+| Catégorie | Contenu | Nombre |
 |---|---|---|
-| Boutons seuls | 1, 2, 3, 4, 1+2, 3+4, 1+4, 2+3 | 8 |
-| Directions + bouton | avant, avant-bas, bas, arrière-bas, arrière, arrière-haut, haut, avant-haut × 4 boutons | 24 |
-| Accroupi et en se relevant | accroupi + bouton, en se relevant + bouton | 10 |
-| En courant | avant-avant + bouton, course + bouton | 6 |
-| En saut | haut + bouton, coups aériens | 5 |
-| **Suites de chaînes** | les 2e, 3e et 4e coups des enchaînements | 35 |
-| **Postures propres** | 1 à 3 postures : entrée, respiration, sortie, annulation, et leurs coups | 25 |
-| Dos tourné | coups depuis le dos tourné | 6 |
-| Après esquive | coups après un pas de côté, un salto ou une esquive | 4 |
-| Sur un adversaire au sol | coups au sol | 3 |
-| Projections propres | duos propres au personnage | 8 |
-| Heat | Heat Engager (2), Heat Smash (1), coups renforcés en Heat (4) | 7 |
-| Rage Art | attaque cinématique à deux | 1 |
-| Power Crush | coups avec armure | 2 |
-| Parades et contres propres | contre-attaques lancées dans la fenêtre `contre` d'une parade commune, parades spéciales (attrape-jambe, parade à deux mains…) | 2 |
-| **Total des coups** | | **≈ 146** |
+| Boutons seuls | 1, 2, 3, 4 | 4 |
+| Direction + bouton | 6 coups choisis : un lanceur, un coup bas, un coup qui avance, un coup lourd lent… | 6 |
+| Accroupi et en se relevant | 3 coups accroupi (dont un balayage), 1 coup en se relevant | 4 |
+| Suites de chaînes | les 2e et 3e coups de 2 ou 3 enchaînements | 6 |
+| En courant, en saut | 1 coup en courant, 2 coups sautés | 3 |
+| Spéciaux | les coups signature ; arme ou pouvoir ici pour les personnages qui en ont | 5 |
+| Power Crush | 1 coup avec armure | 1 |
+| Contre après parade | part dans la fenêtre `contre` des parades communes | 1 |
+| Projections | 2 duos (celui qui saisit + celui qui subit) | 4 |
+| Heat Smash et Rage Art | 1 Heat Smash, 1 Rage Art en duo (2) | 3 |
+| Mise en scène | intro, victoire, provocation | 3 |
+| Remplacements | sa garde ouverte et son repos | 2 |
+| **Total** | | **42** |
 
-**En animations**, cela fait un peu plus que les coups :
-
-| | Nombre |
-|---|---|
-| Coups | ≈ 146 |
-| Victimes des projections propres, de la Heat Smash et de la Rage Art | ≈ 12 |
-| Transitions des postures (entrées et sorties supplémentaires) | ≈ 10 |
-| Remplacements des communes (garde, marches, intro, victoires, provocation, sélection) | ≈ 8 |
-| **Total propre au personnage** | **≈ 175** |
-
-Une chaîne comme `1,2,4` donne 3 animations qui s'enchaînent :
+Les suites de chaînes réutilisent les boutons seuls. Une chaîne `1,2,4` coûte donc seulement
+2 animations de plus que le `1` :
 
 - chaque coup peut finir seul (récupération courte) ;
-- chaque coup peut aussi partir vers la suite (annulation) ;
-- c'est ce qui permet aux bons joueurs de varier leurs combos.
+- chaque coup peut aussi partir vers la suite (annulation).
+
+**Armes et pouvoirs.** Pas de couche commune. Comme tous les coups d'un personnage lui sont
+propres, un personnage à bâton fait simplement ses normaux avec le bâton, et un personnage à
+pouvoir met ses pouvoirs dans ses 5 spéciaux. Ça reste dans les 42.
+
+- Les effets (éclairs, cristaux, onde) se dessinent dans `vfx.gd` et ne comptent pas.
+- Les réactions des victimes restent les communes.
+- Un personnage très chargé peut prendre jusqu'à 10 animations de plus sur une seule
+  catégorie (spéciaux ou chaînes). Il reste ainsi sous 120.
+
+**Déjà là.** `direct` et `coup_de_pied_ventre` sont deux coups de test qui servent aux duos.
+Le premier personnage les reprendra ou les refera selon les règles du § 2.
 
 ---
 
-## 5. Le total par personnage
+## 5. Le total
 
 | | Animations |
 |---|---|
-| Socle commun de combat (§ 3.1 à 3.14) | 190 |
-| Couche objets et armes | ≈ 87 |
-| Couche pouvoirs | ≈ 22 |
-| **Communes, faites une fois** | **≈ 300** |
-| Propres à un personnage moyen | ≈ 175 |
-| **Disponibles pour un personnage moyen** | **≈ 475** |
-| Sans armes ni pouvoirs | ≈ 365 |
+| Communes | 74 (52 faites, 22 à faire) |
+| Propres à un personnage | 42 |
+| **Par personnage** | **116** |
 
-Ce qu'il faut produire :
+Ce qu'il reste à produire :
 
-- **le 1er personnage** : ≈ 365 animations (socle de combat + ses coups), puis ≈ 110 pour
-  les armes et les pouvoirs ;
-- **chaque personnage suivant** : ≈ 175 seulement, puisque les communes existent déjà.
-
-Pour comparer : Tekken ≈ 145 coups par personnage, nous ≈ 146 coups plus les couches de
-clinch, de sol, d'objets et de pouvoirs que Tekken n'a pas.
+- **1er personnage** : 22 communes + 42 propres = **64** ;
+- **chaque personnage suivant** : **42** seulement, puisque les communes existent déjà ;
+- **version jouable à 2 personnages** : 64 + 42 = **106**.
 
 ---
 
-## 6. Ordre de production proposé
+## 6. Ce qui a été coupé, et pourquoi
 
-| Phase | Contenu | Animations |
+| Coupé | Avant | Raison |
 |---|---|---|
-| 1. Socle jouable | Postures 5, marche et dash 4, saut 2, accroupi 2, défense 6, réactions 8, chute + au sol + relevé 6, KO 2, 1 projection (2), et 15 coups d'un premier personnage | ≈ 52 |
-| 2. Combat Tekken | Jongles, murs, tech roll, chaînes, postures, Heat, Rage Art : on complète le socle et le 1er personnage | ≈ 280 de plus |
-| 3. Vidéo 1 | Clinch, lutte, combat au sol, plusieurs adversaires | ≈ 33 |
-| 4. Vidéo 2 | Objets, armes, pouvoirs, effets | ≈ 110 |
-| 5. Personnage 2 | Ses ≈ 175 animations propres | 175 |
-
-On s'arrête à la fin de chaque phase pour tester en jeu avant d'aller plus loin.
+| Couche objets et armes | 87 | Les armes sont propres à certains personnages et passent dans leurs coups (§ 4). Pas d'objets du décor. |
+| Couche pouvoirs | 22 | Même chose : les pouvoirs sont des spéciaux. Les effets sont dans `vfx.gd`. |
+| Plusieurs adversaires, foule | 5 | Le jeu est un duel. |
+| Clinch et lutte debout | 15 | Un lutteur peut en faire une de ses 2 projections. |
+| Combat au sol (monture, stomp…) | 13 → 1 | On garde une seule frappe au sol commune. |
+| Murs et décor (traverser, balcon, étage, sol qui cède…) | 14 → 1 | On garde seulement le plaqué au mur. |
+| En l'air (vrille, Tornado, culbute, plié en l'air…) | 12 → 3 | Un lancé, un touché, une retombée suffisent pour jongler. |
+| KO | 6 → 1 | Le KO réutilise la chute qui l'a causé. |
+| Réactions, chutes, au sol et relevés (positions, roulades, ramper…) | 24 + 22 → 14 | Les « moyens » se déduisent des légers et des lourds ; une seule position au sol, un relevé normal, un relevé rapide. |
+| Projections communes | 13 → 1 | Les projections sont propres à chaque personnage, 2 chacun. |
+| Postures restantes : essoufflée, aura de Heat, dos tourné | 3 | L'essoufflement et l'aura se font en couche ou en effet ; le demi-tour suffit pour le dos tourné. |
+| Déplacements restants : roulades, saltos, mur, dash accroupi, petit saut, enjamber | 9 | Les esquives faites couvrent ces besoins ; un acrobate peut en mettre un dans ses spéciaux. |
+| Heat (Dash, sortie, victime de l'onde) | 4 → 1 | La victime de l'onde réutilise `chute_arriere`. |
+| Movelist façon Tekken | 175 → 42 | Taille d'un personnage de Street Fighter, pas de Tekken. |
 
 ---
 
 ## 7. Décisions prises
 
-1. **2D pure.** Pas de pas de côté ni de profondeur : les communes 3.2 #17-19 sont retirées
-   (socle commun : 187). Les esquives (sway, se baisser, salto, roulade) remplacent le pas
-   de côté.
-2. **Commandes à la manette, comme Tekken** : quatre boutons d'attaque sur la croix de la
-   manette PS5 (□ = 1 poing gauche, △ = 2 poing droit, × = 3 pied gauche, ○ = 4 pied
-   droit), plus les directions ; on reprend les commandes des jeux de combat existants au
-   lieu d'en inventer. Les touches du clavier de la démo sont provisoires. Le reste du game
-   design est décidé plus tard.
-6. **Parades et contre-attaques** : seules les parades de base (une par type de coup :
-   poing haut, pied haut, moyen, bas) sont communes. Les contre-attaques qui suivent une
-   parade, et les parades spéciales, sont propres à chaque personnage : la parade commune
-   ouvre seulement une fenêtre `contre` où elles pourront partir.
-3. **Chutes animées à la main** en duel. Physique de chiffon en option, seulement pour les
-   corps projetés dans les scènes de foule.
-4. **Objets** : presque tous les personnages auront quelques gestes d'objets ; certains
-   s'y spécialiseront (comme un style de combat). À affiner plus tard.
+1. **2D pure.** Pas de pas de côté ni de profondeur. Le seul pivot (`esquive_cote`) est une
+   esquive vue de face.
+2. **Commandes à la manette, comme Tekken.** Quatre boutons d'attaque plus les directions,
+   sur la manette PS5. On reprend les commandes des jeux de combat existants au lieu d'en
+   inventer. Les touches du clavier de la démo sont provisoires. Le reste du game design est
+   décidé plus tard.
+3. **Chutes animées à la main**, sans physique de chiffon.
+4. **Parades et contre-attaques.**
+   - Seules les parades de base sont communes, une par type de coup : poing haut, pied haut,
+     moyen, bas.
+   - Les contre-attaques qui suivent une parade sont propres à chaque personnage.
+   - La parade commune ouvre seulement une fenêtre `contre` où elles peuvent partir.
 5. **2 personnages** pour la première version jouable.
+6. **Budget de 100 à 120 animations par personnage**, communes comprises : 74 communes et
+   42 propres.
+7. **Armes, pouvoirs et objets** : pas de couche commune. Ils vivent dans les coups propres
+   des personnages qui en ont.
+8. **Duel seulement** : pas de foule ni d'adversaires multiples.
 
 ---
 
-## 8. Première passe des communes
+## 8. Ordre de production
 
-On ne fait pas tous les nombres d'un coup : juste assez par bloc pour un premier jeu
-fluide. Chaque animation est faite **une à une**, pose par pose, vérifiée en planche et en
-stroboscopie, et doit marcher dans toutes les situations où elle sert (une parade doit
-paraître naturelle contre un coup de poing comme contre un coup de pied, haut ou moyen).
-
-**Le repos est l'état par défaut, pas la garde.** Le personnage se déplace depuis son
-repos, de façon détendue ; la garde n'apparaît que si le joueur la maintient (pendant un
-déplacement par exemple), et il en ressort dès qu'il la relâche. Chaque déplacement existe
-donc en deux versions : détendue (depuis le repos) et en garde maintenue.
-
-**Deux gardes.** G tenu donne la garde **ouverte** (prêt à se battre, mains avancées) ;
-la garde **fermée** (défensive, poings devant le visage) ne sert que pour bloquer : en
-reculant (← en garde, comme dans Tekken), avant et après un blocage. Les deux ont les
-mêmes jambes : seuls le buste et les bras changent.
-
-| Bloc | Animation | Fichier | État |
+| Phase | Contenu | Animations | État |
 |---|---|---|---|
-| Déplacements | Marche détendue avant : départ, boucle, arrêt court, arrêt en un pas | `marche_detendue*` | fait |
-| Déplacements | Marche détendue arrière : départ, boucle, arrêt en un pas, arrêt en deux pas | `marche_detendue_arriere*` | fait |
-| Postures | Garde ouverte, respiration (boucle) | `garde_ouverte_idle` | fait |
-| Postures | Garde fermée, respiration (boucle) | `garde_idle` | fait |
-| Postures | Garde ouverte → fermée, fermée → ouverte | `garde_fermer`, `garde_ouvrir` | fait |
-| Déplacements | Marche avant en garde maintenue (boucle) | `marche_avant` | fait |
-| Déplacements | Marche arrière en garde maintenue (boucle) | `marche_arriere` | fait |
-| Déplacements | Course à vitesse moyenne : départ, boucle, arrêt depuis chaque pied | `course*` | fait |
-| Déplacements | Course à pleine vitesse (sprint) : départ, boucle, freinage en glissade | `sprint*` | fait |
-| Déplacements | Pas chassé avant (dash) | `dash_avant` | fait |
-| Déplacements | Pas chassé arrière (backdash) | `dash_arriere` | fait |
-| Postures | Debout → accroupi | `accroupi_entree` | fait |
-| Postures | Accroupi, respiration (boucle) | `accroupi_idle` | fait |
-| Postures | Accroupi → debout | `accroupi_sortie` | fait |
-| Postures | Accroupi depuis le repos, une main au sol : entrée, respiration, sortie | `accroupi_repos_*` | fait |
-| Postures | Sortie de garde (garde → repos) | `sortie_de_garde` | fait |
-| Déplacements | Saut neutre, avant, arrière | `saut_*` | fait |
-| Déplacements | Réception légère | `reception` | fait |
-| Déplacements | Saut boosté neutre, avant, arrière (atterrissage sur trois appuis) | `saut_booste_*` | fait |
-| Déplacements | Réception lourde | `reception_lourde` | fait |
-| Déplacements | Propulsion avant, arrière, rasante ou haute, depuis l'accroupi main au sol | `propulsion_*` | fait |
-| Déplacements | Demi-tour | `demi_tour` | fait |
-| Défense | Garde haute tenue (garde fermée) | `garde_idle` | fait |
-| Défense | Garde accroupie tenue : boucle, entrée, sortie, fermer, ouvrir | `garde_basse*` | fait |
-| Défense | Recul sur garde haut et bas, léger, moyen, lourd | `recul_garde_{haut,bas}_{leger,moyen,lourd}` | fait |
-| Défense | Parade selon le coup : poing haut, pied haut, moyen, bas ; fenêtre de contre | `parade_haute_poing`, `parade_haute_pied`, `parade_moyenne`, `parade_basse` | fait |
-| Défense | Esquives selon le coup : sway, slip, se baisser, pas de côté, saut arrière, saut sur place ; fenêtres esquive et contre | `esquive_sway`, `esquive_slip`, `esquive_baisse`, `esquive_cote`, `esquive_saut_arriere`, `esquive_saut_balayage` | fait |
-| Défense | Armure (Power Crush) : encaisser sans broncher, en couche | `armure_encaisse` | fait |
-| Réactions | Tête légère, tête lourde | `touche_tete_*` | |
-| Réactions | Ventre léger, plié en deux | `touche_ventre_*` | |
-| Réactions | Jambe légère, fauché | `touche_jambe`, `fauche` | |
-| Réactions | Accroupi touché, recul titubant, effondrement lent | | |
-| En l'air | Lancé, touché en l'air, retombée sur le dos | | |
-| Au sol | Chute arrière, chute avant, au sol (boucle), relevé, tech roll | | |
-| KO | KO en arrière, inconscient au sol | | |
-| Projections | Saisie de face (duo), saisie ratée | | |
+| 1. Socle de déplacement et de défense | postures, déplacements, défense | 52 | fait |
+| 2. Encaisser | réactions debout (7), chutes, sol, relevés, KO (8) | 15 | |
+| 3. Personnage 1, le cœur | boutons seuls, directions, accroupi, chaînes, course et saut | 23 | |
+| 4. Jongles et mur | en l'air (3), plaqué au mur (1), testés avec le lanceur du personnage 1 | 4 | |
+| 5. Personnage 1, le reste | projections, spéciaux, Power Crush, contre, Heat Smash, Rage Art, mise en scène, remplacements | 19 | |
+| 6. Universelles | saisie ratée, frappe au sol, activation de la Heat | 3 | |
+| 7. Personnage 2 | ses 42 animations propres | 42 | |
 
-Environ 45 animations. Le reste du socle vient en phase 2.
+On s'arrête à la fin de chaque phase pour tester en jeu avant d'aller plus loin.
+
+**La suivante, phase 2.** On commence par `touche_tete_leger`, testé en duo contre `direct`.
 
 ---
 
 ## Sources
 
+- Recherche partagée sur SF6, Guilty Gear Strive, Tekken 8 et Hollow Knight : actions minimales
+  par catégorie, et décompte par jeu.
 - [TekkenDocs, statistiques Tekken 8 (nombre de coups par personnage)](https://tekkendocs.com/t8/stats)
-- [Décompte 2026 : 6 210 coups sur 40 personnages](https://x.com/VolSkimmer/status/2018862362170937745)
-- [Dotesports, movelist de King par catégories](https://dotesports.com/tekken/news/tekken-8-king-movelist-all-combos-and-moves)
-- [Tekken Wiki, Wall Break](https://tekken.fandom.com/wiki/Wall_Break) et [Balcony Break](https://tekken.fandom.com/wiki/Balcony_Break)
 - [Iron Fist Insights, glossaire (tech roll, quickrise, Heat, Tornado…)](https://ironfistinsights.com/docs/glossary/)
-- [Tekken8.org, mécaniques du jeu](https://tekken8.org/mechanics/) (à recouper, certaines affirmations sont approximatives)
-- [Entretien avec Harada sur la production des animations](https://www.fightersgeneration.com/news1/tekken7-harada-interview-march2020.htm)
-- [Autodesk, Tekken 8 avec Maya et Unreal Engine](https://blogs.autodesk.com/media-and-entertainment/2025/01/28/tekken-8-legacy-meets-innovation-with-the-combined-power-of-maya-and-unreal-engine/)
-- [Guinness, record du plus grand nombre de coups (Tekken Tag Tournament 2, pour le contexte)](https://www.guinnessworldrecords.com/world-records/109941-most-moves-in-a-fighting-videogame)
