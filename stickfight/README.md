@@ -144,6 +144,7 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `touche_au_sol` | 36 i, puis `au_sol` | Couché sur le dos, frappé au ventre. Impact (f1, hitstop 10, secousse) : écrasé contre le sol, le menton rentre et les bras s'écartent. Le choc se propage (f6) : les épaules et les jambes décollent, les bras se replient ; il retombe à plat (f12, poussière) avec un petit rebond (f16), puis s'affaisse dans la pose `au_sol` (f36). Presque pas de glissement : le coup écrase vers le bas |
 | `frappe_au_sol` | 58 i, puis `garde_idle` | Piétinement du talon sur un adversaire couché, depuis la garde. Le pied arrière se ramène (pas rassemblé, f11), le genou avant monte haut, pied sous le genou (f18), puis le talon descend presque à la verticale, le buste au-dessus (f22, contact) et appuie (f28). Le pied remonte, repasse au-dessus de l'adversaire et se repose devant lui (f40), le pied arrière recule (f48) : retour en garde à peu près à la place de départ, pour ne pas finir debout sur lui |
 | `releve` | 52 i, puis `garde_idle` | Relevé normal depuis `au_sol` (couché sur le dos). Le bras loin descend au sol derrière lui (f4), il se redresse en appui sur la main (f9) et s'assoit, le pied loin ramené contre lui (f17). Il pousse sur la main et les pieds, le bassin passe au-dessus des pieds (f24), accroupi (f30), le pied arrière recule (f36) et il se remet en garde (f42, poussière) un peu plus loin que sa tête, du côté des pieds |
+| `releve_roulade` | 44 i, puis `garde_idle` | Relevé en roulade arrière (tech roll) depuis `au_sol`. Genoux à la poitrine, mains près des oreilles (f5), le bassin passe au-dessus des épaules, jambes par-dessus la tête et mains qui poussent (f10), les pieds touchent derrière la tête (f15, poussière), à quatre pattes (f18), accroupi (f23), il se redresse (f29) et se remet en garde (f35, poussière) environ 100 px plus loin, du côté de sa tête, donc loin de l'adversaire |
 | `duo_pare_haut` | 100 i | Alt + K : A lance un direct, B le pare vers le haut (fenêtre de contre), A est repoussé |
 | `duo_pare_bas` | 110 i | Alt + Maj + K : A lance le pied direct, B le pare au milieu, A est repoussé en sautillant |
 | `duo_touche_tete` | 80 i | Y : A lance un direct, B en garde le prend au visage |
@@ -159,6 +160,7 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `duo_effondrement` | 160 i | Ctrl + C : A lance un coup de pied au ventre, B s'effondre (`effondrement`) et reste à plat ventre |
 | `duo_touche_au_sol` | 120 i | Ctrl + Maj + C : B est couché sur le dos, A s'approche et lui écrase le ventre du talon (`frappe_au_sol`), B encaisse (`touche_au_sol`) |
 | `duo_releve` | 230 i | Alt + C : B prend un coup de pied au ventre, tombe sur le dos (`chute_arriere`), reste au sol (`au_sol`) puis se relève en garde (`releve`) |
+| `duo_releve_roulade` | 225 i | Alt + Maj + C : même chute que `duo_releve`, puis B se relève par une roulade arrière (`releve_roulade`), loin de A |
 | `sortie_de_garde` | 60 i | De la garde ouverte au repos, sur place : le poids bascule en arrière, le pied avant revient en se posant par la pointe, puis le pied arrière repasse devant et le bassin remonte ; les mains retombent le long du corps, le bras du pied qui avance passe devant (contrepoids) ; enchaîne sur `idle_repos` |
 | `marche_detendue` | 56 i, en boucle, avance 76 | Marche normale depuis le repos, sans garde : bras ballants en opposition des jambes, bassin qui monte et descend sur chaque appui |
 | `marche_detendue_depart` | — | Du repos à la boucle : transfert de poids, premier pas plus court |
@@ -362,6 +364,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | N | Duo sonné : B prend un direct lourd, titube sonné pendant deux boucles, puis se remet en garde (en boucle) |
 | C, Maj + C, Ctrl + C, Ctrl + Maj + C | Duo chute : B prend un coup de pied au ventre, est propulsé et retombe sur le dos / B est fauché par un coup de pied bas, les jambes partent et il tombe à plat ; puis il reste au sol (en boucle) / B prend le coup de pied au ventre, recule en titubant, tombe à genoux puis face contre terre et reste à plat ventre / A s'approche et écrase du talon le ventre de B, couché sur le dos |
 | Alt + C | Duo relevé : B tombe sur le dos après un coup de pied au ventre, reste au sol, puis se relève et se remet en garde |
+| Alt + Maj + C | Duo relevé en roulade : même chute, puis B roule en arrière par-dessus ses épaules et se remet en garde plus loin |
 | R | Repos (remise à zéro) |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |
 | L | Ralenti ×4 |
