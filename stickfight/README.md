@@ -131,11 +131,13 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `etre_pare_bas` | 44 i, recule 21 | Être paré au milieu ou en bas (après `parade_moyenne` ou `parade_basse`) : même usage. La jambe est chassée, il sautille en arrière sur l'appui, la jambe repliée, les bras battent l'air (f4) ; le pied retombe (f8), il absorbe, ouvert, bras bas, puis se remet en garde sur place |
 | `touche_tete_leger` | 22 i, recule 10 | Touché à la tête par un coup léger. Contact dès l'image 1 (arrêt sur impact 6 i, tremblement 1,3, étincelle de coup sur la tête) : la tête part en arrière, la garde s'ouvre ; le buste suit la tête (f4) et les bras retombent, ouverts ; les pieds glissent d'un pas, la tête revient (f9), puis les mains remontent et `garde_idle`. Marche depuis la garde (fondu 1, la garde est cassée) comme depuis le repos (fondu 3, les bras sont déjà bas) |
 | `touche_tete_lourd` | 36 i, recule 29 | Touché à la tête par un coup lourd. Contact dès l'image 1 (arrêt sur impact 10 i, tremblement 2, secousse, grosse étincelle de coup) : la tête est arrachée en arrière, le buste se cambre, le bras avant s'envole vers le haut et l'arrière retombe ; le pied arrière décolle (f5) et se pose loin derrière (f10, poussière), l'avant traîne pour le rejoindre (f16) pendant que la tête retombe en avant ; les genoux absorbent, bras ballants, puis les mains remontent et `garde_idle` |
+| `touche_ventre_leger` | 24 i, recule 12 | Touché au ventre, léger. Contact dès l'image 1 (arrêt sur impact 6 i, étincelle de coup à la taille) : le bassin part en arrière, le buste se plie et la tête vient en avant ; les mains se referment bas vers le ventre (f5), le pied avant recule pendant que le buste se redresse, mains serrées contre le corps, puis elles remontent en diagonale vers la garde et `garde_idle` |
 | `duo_pare_haut` | 100 i | Alt + K : A lance un direct, B le pare vers le haut (fenêtre de contre), A est repoussé |
 | `duo_pare_bas` | 110 i | Alt + Maj + K : A lance le pied direct, B le pare au milieu, A est repoussé en sautillant |
 | `duo_touche_tete` | 80 i | Y : A lance un direct, B en garde le prend au visage |
 | `duo_touche_tete_repos` | 80 i | Maj + Y : le même, B au repos (fondu de 3 i qui le met en position de garde pendant l'impact) |
 | `duo_touche_tete_lourd` | 90 i | Ctrl + Y : B en garde prend le direct en coup lourd (le coup du duo reste le direct, en attendant les coups du personnage 1) |
+| `duo_touche_ventre` | 100 i | O : A lance le coup de pied direct, B en garde le prend au ventre (léger) |
 | `sortie_de_garde` | 60 i | De la garde ouverte au repos, sur place : le poids bascule en arrière, le pied avant revient en se posant par la pointe, puis le pied arrière repasse devant et le bassin remonte ; les mains retombent le long du corps, le bras du pied qui avance passe devant (contrepoids) ; enchaîne sur `idle_repos` |
 | `marche_detendue` | 56 i, en boucle, avance 76 | Marche normale depuis le repos, sans garde : bras ballants en opposition des jambes, bassin qui monte et descend sur chaque appui |
 | `marche_detendue_depart` | — | Du repos à la boucle : transfert de poids, premier pas plus court |
@@ -334,6 +336,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | U | Armure : encaisse un coup sans broncher, par-dessus ce qu'il fait (repos, marche, garde, course…) |
 | K, Maj + K, Ctrl + K, Alt + K, Alt + Maj + K | Duo coup de pied / blocage, coup de pied encaissé sous armure, projection cassée, direct paré en haut, pied paré au milieu (en boucle) |
 | Y, Maj + Y, Ctrl + Y | Duo direct pris au visage : B en garde, au repos, coup lourd (en boucle) |
+| O | Duo coup de pied direct pris au ventre, B en garde (en boucle) |
 | R | Repos (remise à zéro) |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |
 | L | Ralenti ×4 |
