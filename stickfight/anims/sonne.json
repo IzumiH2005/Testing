@@ -1,0 +1,248 @@
+{
+ "nom": "sonne",
+ "boucle": true,
+ "longueur": 64,
+ "base": "garde",
+ "decalage": {
+  "chest": 2,
+  "neck": 5,
+  "armN": 6,
+  "foreN": 8,
+  "armF": 7,
+  "foreF": 9
+ },
+ "cles": [
+  {
+   "f": 0,
+   "nom": "tassé, la tête pend",
+   "fixe": {
+    "x": 0,
+    "armN": 18,
+    "foreN": 22,
+    "armF": -14,
+    "foreF": 20
+   },
+   "plus": {
+    "y": -7,
+    "root": 2,
+    "spineLow": 4,
+    "chest": 6,
+    "neck": 14
+   },
+   "vise_rel": {
+    "legN": [
+     0,
+     0
+    ],
+    "legF": [
+     0,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 14,
+   "nom": "le poids part en arrière, la tête bascule",
+   "fixe": {
+    "x": -6,
+    "armN": 8,
+    "foreN": 30,
+    "armF": -22,
+    "foreF": 26
+   },
+   "plus": {
+    "y": -6,
+    "root": -4,
+    "spineLow": -4,
+    "chest": -5,
+    "neck": -12
+   },
+   "vise_rel": {
+    "legN": [
+     0,
+     0
+    ],
+    "legF": [
+     0,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 24,
+   "nom": "il titube en avant, le pied avant décolle",
+   "fixe": {
+    "x": 2,
+    "armN": 24,
+    "foreN": 18,
+    "armF": -4,
+    "foreF": 16
+   },
+   "plus": {
+    "y": -6,
+    "root": 5,
+    "spineLow": 7,
+    "chest": 10,
+    "neck": 20
+   },
+   "vise_rel": {
+    "legN": [
+     8,
+     8
+    ],
+    "legF": [
+     0,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 30,
+   "nom": "le pied se repose devant",
+   "fixe": {
+    "x": 5,
+    "armN": 26,
+    "foreN": 20,
+    "armF": -2,
+    "foreF": 18
+   },
+   "plus": {
+    "y": -9,
+    "root": 6,
+    "spineLow": 8,
+    "chest": 11,
+    "neck": 22
+   },
+   "vise_rel": {
+    "legN": [
+     10,
+     0
+    ],
+    "legF": [
+     0,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 40,
+   "nom": "il plonge sur les genoux",
+   "fixe": {
+    "x": 3,
+    "armN": 20,
+    "foreN": 24,
+    "armF": -10,
+    "foreF": 22
+   },
+   "plus": {
+    "y": -12,
+    "root": 4,
+    "spineLow": 7,
+    "chest": 9,
+    "neck": 14
+   },
+   "vise_rel": {
+    "legN": [
+     10,
+     0
+    ],
+    "legF": [
+     0,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 50,
+   "nom": "le pied avant revient",
+   "fixe": {
+    "x": -1,
+    "armN": 14,
+    "foreN": 24,
+    "armF": -16,
+    "foreF": 20
+   },
+   "plus": {
+    "y": -8,
+    "root": 1,
+    "spineLow": 3,
+    "chest": 4,
+    "neck": 8
+   },
+   "vise_rel": {
+    "legN": [
+     3,
+     6
+    ],
+    "legF": [
+     0,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 56,
+   "nom": "posé",
+   "fixe": {
+    "x": -1,
+    "armN": 16,
+    "foreN": 22,
+    "armF": -15,
+    "foreF": 20
+   },
+   "plus": {
+    "y": -7,
+    "root": 2,
+    "spineLow": 4,
+    "chest": 6,
+    "neck": 12
+   },
+   "vise_rel": {
+    "legN": [
+     0,
+     0
+    ],
+    "legF": [
+     0,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 64,
+   "nom": "tassé, la tête pend",
+   "fixe": {
+    "x": 0,
+    "armN": 18,
+    "foreN": 22,
+    "armF": -14,
+    "foreF": 20
+   },
+   "plus": {
+    "y": -7,
+    "root": 2,
+    "spineLow": 4,
+    "chest": 6,
+    "neck": 14
+   },
+   "vise_rel": {
+    "legN": [
+     0,
+     0
+    ],
+    "legF": [
+     0,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  }
+ ]
+}

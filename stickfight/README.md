@@ -136,6 +136,7 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `touche_ventre_lourd` | 46 i, recule 33 | Plié en deux. Contact dès l'image 1 (arrêt sur impact 10 i, tremblement 2, secousse, grosse étincelle à la taille) : le buste se plie d'un coup, les deux pieds glissent en arrière (poussière), plié en deux les mains serrées sur le ventre ; le pied arrière décolle et se replace (f12-16), il reste plié, vulnérable, jusqu'à f26, puis se redresse, mains contre la poitrine, le pied avant revient, les mains remontent et `garde_idle` |
 | `touche_jambe` | 32 i, recule 6 | Touché à la jambe (coup bas dans le tibia). Contact dès l'image 1 (arrêt sur impact 7 i, tremblement 1,4, étincelle sur le tibia) : le pied avant est chassé en arrière et décolle à peine, les genoux plient, le buste tombe en avant et la tête aussi ; les mains s'ouvrent pour l'équilibre (f5), le pied se repose (f9, poussière), il se relève en remontant les mains serrées contre le corps, puis `garde_idle` |
 | `touche_accroupi` | 21 i, recule 11 | Touché accroupi : depuis `accroupi_idle` ou `garde_basse` (fondu 1). Contact dès l'image 1 (arrêt sur impact 6 i, étincelle de coup à l'épaule) : le buste et la tête partent en arrière, la garde s'ouvre ; les deux pieds glissent ensemble (f4, poussière) sans se relever, les bras rejetés vers le bas ; il rebondit en avant, les genoux absorbent (f9), les mains remontent par le haut, puis `accroupi_idle` |
+| `sonne` | 64 i, en boucle | Sonné, titubant : à jouer après un contre ou une garde brisée (fondu 10 depuis la réaction), puis `garde_idle` avec un fondu de 14 quand il se reprend. Genoux pliés, buste tassé, tête qui pend, bras ballants bas. Le poids part en arrière et la tête bascule (f14), il titube en avant : le pied avant décolle et se repose un peu devant (f24-30), il plonge sur les genoux (f40), puis le pied avant revient à sa place (f50). Pieds et bassin reviennent exactement au départ, la boucle ne dérive pas |
 | `duo_pare_haut` | 100 i | Alt + K : A lance un direct, B le pare vers le haut (fenêtre de contre), A est repoussé |
 | `duo_pare_bas` | 110 i | Alt + Maj + K : A lance le pied direct, B le pare au milieu, A est repoussé en sautillant |
 | `duo_touche_tete` | 80 i | Y : A lance un direct, B en garde le prend au visage |
@@ -145,6 +146,7 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `duo_touche_ventre_lourd` | 110 i | Maj + O : A lance le coup de pied direct, B en garde le prend en plein ventre et se plie en deux |
 | `duo_touche_jambe` | 80 i | I : A lance un coup de pied bas, B en garde le prend dans le tibia |
 | `duo_touche_accroupi` | 90 i | Maj + I : A lance le coup de pied direct, B accroupi le prend à l'épaule |
+| `duo_sonne` | 200 i | N : A lance un direct, B le prend en coup lourd (`touche_tete_lourd`), enchaîne sur `sonne` (g52) puis se remet en garde (g180) |
 | `sortie_de_garde` | 60 i | De la garde ouverte au repos, sur place : le poids bascule en arrière, le pied avant revient en se posant par la pointe, puis le pied arrière repasse devant et le bassin remonte ; les mains retombent le long du corps, le bras du pied qui avance passe devant (contrepoids) ; enchaîne sur `idle_repos` |
 | `marche_detendue` | 56 i, en boucle, avance 76 | Marche normale depuis le repos, sans garde : bras ballants en opposition des jambes, bassin qui monte et descend sur chaque appui |
 | `marche_detendue_depart` | — | Du repos à la boucle : transfert de poids, premier pas plus court |
@@ -345,6 +347,7 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | Y, Maj + Y, Ctrl + Y | Duo direct pris au visage : B en garde, au repos, coup lourd (en boucle) |
 | O, Maj + O | Duo coup de pied direct pris au ventre, B en garde : léger / plié en deux (en boucle) |
 | I, Maj + I | Duo touché : coup de pied bas pris dans le tibia, B en garde / pied direct pris accroupi (en boucle) |
+| N | Duo sonné : B prend un direct lourd, titube sonné pendant deux boucles, puis se remet en garde (en boucle) |
 | R | Repos (remise à zéro) |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |
 | L | Ralenti ×4 |

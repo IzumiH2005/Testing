@@ -1,0 +1,44 @@
+{
+ "nom": "duo_sonne",
+ "longueur": 200,
+ "acteurs": [
+  {
+   "x": 0,
+   "facing": 1,
+   "couleur": "#111111",
+   "anim": "garde_idle",
+   "t0": 0,
+   "programme": [
+    {
+     "contact": 30,
+     "anim": "direct",
+     "fondu": 3
+    }
+   ]
+  },
+  {
+   "x": 132,
+   "facing": -1,
+   "couleur": "#1d3f8f",
+   "anim": "garde_idle",
+   "t0": 37,
+   "programme": [
+    {
+     "contact": 30,
+     "anim": "touche_tete_lourd",
+     "fondu": 1
+    },
+    {
+     "g": 52,
+     "anim": "sonne",
+     "fondu": 10
+    },
+    {
+     "g": 180,
+     "anim": "garde_idle",
+     "fondu": 14
+    }
+   ]
+  }
+ ]
+}
