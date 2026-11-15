@@ -1,237 +1,46 @@
 {
   "nom": "esquive_cote",
   "boucle": false,
-  "base": "garde",
-  "suivante": "garde_idle",
-  "decalage": {
-    "neck": 2,
-    "chest": 1,
-    "foreN": 1,
-    "armF": 1,
-    "foreF": 2
-  },
+  "base": "garde_ouverte",
+  "suivante": "garde_ouverte_idle",
+  "pieds_auto": false,
+  "genere_par": "tools/gen_esquive_cote.gd",
+  "evenements": [{"f":12,"type":"contact"},{"f":3,"n":15,"nom":"esquive","type":"fenetre"},{"f":21,"n":10,"nom":"contre","type":"fenetre"}],
   "cles": [
-    {
-      "f": 0,
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ]
-      },
-      "courbe": "dec"
-    },
-    {
-      "f": 3,
-      "nom": "flexion, le poids se charge",
-      "fixe": {
-        "x": 0
-      },
-      "plus": {
-        "y": -6,
-        "spineLow": 1,
-        "chest": 2
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ]
-      },
-      "courbe": "acc"
-    },
-    {
-      "f": 6,
-      "nom": "petit pas chassé vers la caméra",
-      "fixe": {
-        "x": -2,
-        "z": -18
-      },
-      "plus": {
-        "y": -1,
-        "root": -1,
-        "chest": 1
-      },
-      "vise_rel": {
-        "legN": [
-          -1,
-          4
-        ],
-        "legF": [
-          -2,
-          4
-        ]
-      },
-      "courbe": "lin"
-    },
-    {
-      "f": 10,
-      "nom": "posé de côté, de trois-quarts",
-      "fixe": {
-        "x": -3,
-        "z": -40
-      },
-      "plus": {
-        "y": -7,
-        "root": -2,
-        "spineLow": -2,
-        "chest": -3,
-        "neck": 2
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ]
-      },
-      "courbe": "dec"
-    },
-    {
-      "f": 14,
-      "nom": "le pied adverse passe derrière lui",
-      "fixe": {
-        "x": -3,
-        "z": -40
-      },
-      "plus": {
-        "y": -6,
-        "root": -2,
-        "spineLow": -2,
-        "chest": -3,
-        "neck": 2
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ]
-      },
-      "courbe": "palier"
-    },
-    {
-      "f": 20,
-      "fixe": {
-        "x": -2,
-        "z": -40
-      },
-      "plus": {
-        "y": -6,
-        "root": -1,
-        "spineLow": -1,
-        "chest": -1,
-        "neck": 1
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ]
-      },
-      "courbe": "acc-dec"
-    },
-    {
-      "f": 25,
-      "nom": "retour en pas chassé",
-      "fixe": {
-        "x": -1,
-        "z": -18
-      },
-      "plus": {
-        "y": -1
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          4
-        ],
-        "legF": [
-          -1,
-          4
-        ]
-      },
-      "courbe": "lin"
-    },
-    {
-      "f": 29,
-      "fixe": {
-        "x": 0,
-        "z": 0
-      },
-      "plus": {
-        "y": -5,
-        "root": 1,
-        "spineLow": 1,
-        "chest": 2,
-        "neck": -1
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ]
-      },
-      "courbe": "acc-dec"
-    },
-    {
-      "f": 36,
-      "nom": "garde",
-      "fixe": {
-        "x": 0,
-        "z": 0
-      },
-      "vise_rel": {
-        "legN": [
-          0,
-          0
-        ],
-        "legF": [
-          0,
-          0
-        ]
-      },
-      "ancre": false
-    }
-  ],
-  "evenements": [
-    {
-      "f": 12,
-      "type": "contact"
-    },
-    {
-      "f": 4,
-      "type": "fenetre",
-      "nom": "esquive",
-      "n": 17
-    },
-    {
-      "f": 12,
-      "type": "fenetre",
-      "nom": "contre",
-      "n": 11
-    }
+    {"f":0,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":0,"y":72.13,"root":3,"spineLow":7,"chest":7,"neck":10,"armF":47.2,"foreF":127.66,"armN":62.29,"foreN":77.17,"thighF":-2.82,"shinF":62.5,"footF":11.96,"thighN":59.31,"shinN":61.79,"footN":5.48}},
+    {"f":1,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":-0.27,"y":70.88,"root":3,"spineLow":6.99,"chest":6.98,"neck":9.96,"armF":39.24,"foreF":134.04,"armN":54.07,"foreN":87.42,"thighF":-1.76,"shinF":65.44,"footF":13.84,"thighN":61.85,"shinN":65.58,"footN":5.27},"etire":{"thighN":1.01}},
+    {"f":2,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":-0.46,"y":69.63,"root":3,"spineLow":7,"chest":6.99,"neck":9,"armF":30.73,"foreF":138.98,"armN":45.61,"foreN":96.57,"thighF":-1.14,"shinF":68.05,"footF":15.83,"thighN":64.77,"shinN":69.88,"footN":3.17},"etire":{"armN":0.99,"thighN":1.01}},
+    {"f":3,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":0.17,"y":69.06,"z":0.2,"root":3,"spineLow":6.8,"chest":5.52,"neck":0.42,"armF":22.41,"foreF":141.54,"armN":32.2,"foreN":110.06,"thighF":-2.09,"shinF":68.79,"footF":17.47,"thighN":66.22,"shinN":71.99,"footN":-0.3},"etire":{"chest":0.99,"armN":0.96,"foreN":0.94,"foreF":0.99,"thighF":0.99}},
+    {"f":4,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":4.11,"y":67.53,"z":2.53,"root":3,"spineLow":5.79,"chest":2.5,"neck":-6.19,"armF":2.08,"foreF":141.75,"armN":-1.05,"foreN":134.51,"thighF":-10.01,"shinF":57.01,"footF":13.66,"thighN":66.86,"shinN":74.51,"footN":-2.46},"etire":{"chest":0.98,"armN":0.97,"foreN":0.83,"thighN":0.94,"shinN":1.01,"footN":0.98,"armF":0.96,"foreF":0.95,"thighF":0.93,"footF":1.01}},
+    {"f":5,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":14.08,"y":65.85,"z":4.67,"root":3,"spineLow":3.43,"chest":-1.83,"neck":-9.08,"armF":-12.57,"foreF":110.53,"armN":-39.76,"foreN":133.44,"thighF":-22.9,"shinF":42.13,"footF":11.21,"thighN":62.46,"shinN":73.94,"footN":-3.99},"etire":{"spineLow":0.99,"chest":0.97,"armN":1.01,"foreN":0.58,"thighN":0.81,"footN":0.9,"armF":0.59,"foreF":0.73,"thighF":0.89,"shinF":0.96}},
+    {"f":6,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":28.99,"y":64.64,"z":5.77,"root":3,"spineLow":0.04,"chest":-5.69,"neck":-6.18,"armF":47.37,"foreF":-8.01,"armN":-60.42,"foreN":75.27,"thighF":-24.33,"shinF":48.49,"footF":15.58,"thighN":45.62,"shinN":61.27,"footN":-9.92},"etire":{"spineLow":0.96,"chest":0.95,"armN":0.86,"foreN":0.53,"thighN":0.64,"shinN":0.94,"footN":0.74,"armF":0.26,"foreF":0.73,"thighF":0.86,"shinF":0.74,"footF":0.95}},
+    {"f":7,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":44.18,"y":63.84,"z":5.82,"root":3,"spineLow":-3.29,"chest":-7.59,"neck":-0.71,"armF":71.96,"foreF":-49.19,"armN":-66.1,"foreN":49.02,"thighF":-14.23,"shinF":81.07,"footF":31.47,"thighN":13.39,"shinN":29.73,"footN":-28.71},"etire":{"spineLow":0.94,"chest":0.94,"armN":0.72,"foreN":0.77,"thighN":0.55,"shinN":0.86,"footN":0.54,"armF":0.43,"foreF":0.85,"thighF":0.87,"shinF":0.39,"footF":0.91}},
+    {"f":8,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":54.88,"y":63.47,"z":5.44,"root":3,"spineLow":-5.54,"chest":-7.62,"neck":-3.21,"armF":71.82,"foreF":-50.45,"armN":-66.16,"foreN":44.11,"thighF":4.53,"shinF":135.83,"footF":60.08,"thighN":-13.93,"shinN":-0.69,"footN":-58.57},"etire":{"spineLow":0.94,"chest":0.94,"armN":0.69,"foreN":0.84,"thighN":0.59,"shinN":0.81,"footN":0.41,"armF":0.49,"foreF":0.88,"thighF":0.93,"shinF":0.22,"footF":0.9}},
+    {"f":9,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":58.71,"y":63.55,"z":5.23,"root":3,"spineLow":-6.89,"chest":-8.78,"neck":-4.1,"armF":71.1,"foreF":-51.82,"armN":-65.83,"foreN":40.94,"thighF":23.21,"shinF":133.38,"footF":32.33,"thighN":-22.65,"shinN":-11.43,"footN":-74.77},"etire":{"spineLow":0.94,"chest":0.95,"armN":0.66,"foreN":0.85,"thighN":0.63,"shinN":0.81,"footN":0.36,"armF":0.52,"foreF":0.88,"thighF":0.97,"shinF":0.1,"footF":0.91}},
+    {"f":10,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":59.86,"y":63.78,"z":5.16,"root":3,"spineLow":-7.51,"chest":-9.73,"neck":-2.37,"armF":70.32,"foreF":-52.98,"armN":-65.17,"foreN":37.72,"thighF":30.2,"shinF":43.46,"footF":-68.93,"thighN":-24.95,"shinN":-14.46,"footN":-80.67},"etire":{"spineLow":0.94,"chest":0.95,"armN":0.63,"foreN":0.85,"thighN":0.65,"shinN":0.81,"footN":0.35,"armF":0.56,"foreF":0.87,"thighF":0.98,"shinF":0.08,"footF":0.92}},
+    {"f":11,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":61.91,"y":64.03,"z":5.03,"root":3,"spineLow":-7.78,"chest":-9.3,"neck":-1.7,"armF":70.35,"foreF":-52.99,"armN":-64.71,"foreN":37.17,"thighF":26.77,"shinF":11,"footF":-99,"thighN":-29.13,"shinN":-19.88,"footN":-91.23},"etire":{"spineLow":0.94,"chest":0.95,"armN":0.63,"foreN":0.85,"thighN":0.68,"shinN":0.81,"footN":0.36,"armF":0.57,"foreF":0.87,"thighF":0.98,"shinF":0.08,"footF":0.92}},
+    {"f":12,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":63,"y":64.25,"z":4.95,"root":3,"spineLow":-7.81,"chest":-8.77,"neck":-1.38,"armF":70.55,"foreF":-52.6,"armN":-64.65,"foreN":37.78,"thighF":26.08,"shinF":-3.51,"footF":-114.16,"thighN":-31.16,"shinN":-22.58,"footN":-96.65},"etire":{"spineLow":0.94,"chest":0.95,"armN":0.64,"foreN":0.85,"thighN":0.69,"shinN":0.82,"footN":0.37,"armF":0.56,"foreF":0.87,"thighF":0.98,"shinF":0.1,"footF":0.92}},
+    {"f":13,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":62.79,"y":64.35,"z":4.96,"root":3,"spineLow":-7.63,"chest":-8.41,"neck":-1.09,"armF":70.79,"foreF":-52.14,"armN":-64.85,"foreN":38.87,"thighF":28.33,"shinF":-0.43,"footF":-114.55,"thighN":-30.69,"shinN":-22.02,"footN":-95.67},"etire":{"spineLow":0.94,"chest":0.95,"armN":0.65,"foreN":0.85,"thighN":0.69,"shinN":0.82,"footN":0.37,"armF":0.55,"foreF":0.88,"thighF":0.99,"shinF":0.13,"footF":0.92}},
+    {"f":14,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":62.28,"y":64.36,"z":5,"root":3,"spineLow":-7.38,"chest":-8.07,"neck":-0.99,"armF":71.05,"foreF":-51.66,"armN":-65.1,"foreN":40.09,"thighF":29.73,"shinF":4.58,"footF":-111.07,"thighN":-29.67,"shinN":-20.7,"footN":-93.13},"etire":{"spineLow":0.94,"chest":0.95,"armN":0.66,"foreN":0.85,"thighN":0.69,"shinN":0.82,"footN":0.36,"armF":0.53,"foreF":0.88,"thighF":0.99,"shinF":0.14,"footF":0.92}},
+    {"f":15,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":61.6,"y":64.38,"z":5.05,"root":3,"spineLow":-7.12,"chest":-7.79,"neck":-1.11,"armF":71.26,"foreF":-51.23,"armN":-65.31,"foreN":41.17,"thighF":30.81,"shinF":10.95,"footF":-105.46,"thighN":-28.3,"shinN":-18.96,"footN":-89.75},"etire":{"spineLow":0.94,"chest":0.95,"armN":0.66,"foreN":0.84,"thighN":0.68,"shinN":0.81,"footN":0.36,"armF":0.52,"foreF":0.88,"thighF":0.99,"shinF":0.14,"footF":0.92}},
+    {"f":16,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":60.92,"y":64.39,"z":5.09,"root":3,"spineLow":-6.9,"chest":-7.63,"neck":-0.78,"armF":71.39,"foreF":-50.97,"armN":-65.44,"foreN":41.83,"thighF":31.66,"shinF":17.22,"footF":-99.55,"thighN":-26.9,"shinN":-17.17,"footN":-86.29},"etire":{"spineLow":0.94,"chest":0.95,"armN":0.67,"foreN":0.84,"thighN":0.67,"shinN":0.81,"footN":0.35,"armF":0.51,"foreF":0.88,"thighF":0.99,"shinF":0.14,"footF":0.92}},
+    {"f":17,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":60.39,"y":64.4,"z":5.13,"root":3,"spineLow":-6.71,"chest":-7.44,"neck":3.64,"armF":71.53,"foreF":-50.62,"armN":-65.58,"foreN":42.65,"thighF":32.16,"shinF":22.33,"footF":-94.39,"thighN":-25.79,"shinN":-15.77,"footN":-83.59},"etire":{"spineLow":0.94,"chest":0.94,"armN":0.68,"foreN":0.84,"thighN":0.67,"shinN":0.81,"footN":0.35,"armF":0.5,"foreF":0.88,"thighF":0.99,"shinF":0.14,"footF":0.92}},
+    {"f":18,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":60.18,"y":64.4,"z":5.14,"root":3,"spineLow":-6.25,"chest":-6.03,"neck":8.64,"armF":72.27,"foreF":-48.23,"armN":-66.05,"foreN":47.6,"thighF":32.08,"shinF":25.35,"footF":-90.84,"thighN":-25.34,"shinN":-15.21,"footN":-82.5},"etire":{"spineLow":0.94,"chest":0.94,"armN":0.72,"foreN":0.84,"thighN":0.66,"shinN":0.81,"footN":0.35,"armF":0.44,"foreF":0.89,"thighF":0.99,"shinF":0.13,"footF":0.92}},
+    {"f":19,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":58.45,"y":64.42,"z":5.25,"root":3,"spineLow":-5.14,"chest":-3.46,"neck":13.24,"armF":72.38,"foreF":-43,"armN":-65.81,"foreN":55.83,"thighF":35.34,"shinF":36.57,"footF":-82.46,"thighN":-21.65,"shinN":-10.61,"footN":-73.71},"etire":{"spineLow":0.94,"chest":0.93,"armN":0.8,"foreN":0.84,"thighN":0.65,"shinN":0.81,"footN":0.35,"armF":0.32,"foreF":0.9,"thighF":0.99,"shinF":0.16,"footF":0.92}},
+    {"f":20,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":53.48,"y":64.71,"z":5.51,"root":3,"spineLow":-3.17,"chest":-0.19,"neck":16.36,"armF":62.34,"foreF":-25.78,"armN":-63.96,"foreN":68.29,"thighF":44.07,"shinF":49.95,"footF":-77.06,"thighN":-10.45,"shinN":2.74,"footN":-51.24},"etire":{"spineLow":0.94,"chest":0.93,"armN":0.89,"foreN":0.82,"thighN":0.61,"shinN":0.83,"footN":0.38,"armF":0.15,"foreF":0.9,"shinF":0.25,"footF":0.92}},
+    {"f":21,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":45.64,"y":65.36,"z":5.79,"root":3,"spineLow":-0.66,"chest":3.08,"neck":17.11,"armF":-48.36,"foreF":95.32,"armN":-59.91,"foreN":87.99,"thighF":53.77,"shinF":61.79,"footF":-72.19,"thighN":8.16,"shinN":23.36,"footN":-28.1},"etire":{"spineLow":0.94,"chest":0.94,"armN":0.96,"foreN":0.79,"thighN":0.58,"shinN":0.86,"footN":0.48,"armF":0.13,"foreF":0.91,"thighF":1.02,"shinF":0.36,"footF":0.91}},
+    {"f":22,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":35.74,"y":66.15,"z":5.89,"root":3,"spineLow":1.91,"chest":5.6,"neck":15.84,"armF":-59.25,"foreF":121.81,"armN":-52.7,"foreN":111.03,"thighF":62.17,"shinF":74.2,"footF":-63.82,"thighN":29.89,"shinN":45.41,"footN":-13.19},"etire":{"spineLow":0.96,"chest":0.96,"foreN":0.83,"thighN":0.61,"shinN":0.91,"footN":0.63,"armF":0.38,"foreF":0.92,"thighF":1.04,"shinF":0.47,"footF":0.9}},
+    {"f":23,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":25.18,"y":67,"z":5.62,"root":3,"spineLow":4.1,"chest":6.99,"neck":13.67,"armF":-48.68,"foreF":134.06,"armN":-39.94,"foreN":126.14,"thighF":67.11,"shinF":89.81,"footF":-47.88,"thighN":47.19,"shinN":60.9,"footN":-6.02},"etire":{"spineLow":0.98,"chest":0.98,"armN":0.97,"foreN":0.94,"thighN":0.7,"shinN":0.96,"footN":0.78,"armF":0.66,"foreF":0.95,"thighF":1.06,"shinF":0.57,"footF":0.9}},
+    {"f":24,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":15.58,"y":67.93,"z":4.86,"root":3,"spineLow":5.64,"chest":7.44,"neck":11.64,"armF":-29.96,"foreF":143.81,"armN":-18.26,"foreN":127.76,"thighF":66.01,"shinF":106.23,"footF":-24.86,"thighN":57.19,"shinN":67.99,"footN":-3.25},"etire":{"spineLow":0.99,"armN":0.92,"thighN":0.8,"footN":0.88,"armF":0.89,"foreF":0.99,"thighF":1.08,"shinF":0.69,"footF":0.91}},
+    {"f":25,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":8.25,"y":68.9,"z":3.69,"root":3,"spineLow":6.51,"chest":7.34,"neck":10.38,"armF":-8.28,"foreF":147.86,"armN":7.91,"foreN":120.28,"thighF":56.1,"shinF":113.67,"footF":-2.63,"thighN":61.59,"shinN":69.57,"footN":-1.83},"etire":{"chest":1.01,"armN":0.93,"foreN":1.01,"thighN":0.89,"shinN":1.01,"footN":0.95,"armF":0.98,"thighF":1.06,"shinF":0.84,"footF":0.94}},
+    {"f":26,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":3.65,"y":69.69,"z":2.35,"root":3,"spineLow":6.87,"chest":7.13,"neck":9.96,"armF":10.87,"foreF":146.18,"armN":27.72,"foreN":110.78,"thighF":38.05,"shinF":106.24,"footF":11.57,"thighN":62.92,"shinN":68.92,"footN":-0.29},"etire":{"spineLow":1.01,"chest":1.01,"armN":0.97,"foreN":1.01,"thighN":0.95,"shinN":1.01,"footN":0.99,"shinF":0.95,"footF":0.97}},
+    {"f":27,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":1.42,"y":70.05,"z":1.25,"root":3,"spineLow":6.96,"chest":7.02,"neck":10.02,"armF":25.24,"foreF":141.46,"armN":40.39,"foreN":101.49,"thighF":18.99,"shinF":90.9,"footF":17.34,"thighN":63.08,"shinN":68.06,"footN":1.92},"etire":{"armN":0.99,"thighN":0.98,"thighF":0.98,"shinF":0.99,"footF":0.99}},
+    {"f":28,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":0.8,"y":70.29,"z":0.81,"root":3,"spineLow":6.98,"chest":7,"neck":10.03,"armF":33.79,"foreF":137.26,"armN":48.32,"foreN":93.84,"thighF":6.23,"shinF":77.83,"footF":17.89,"thighN":62.38,"shinN":66.78,"footN":4.28},"etire":{"thighN":0.99,"thighF":0.99}},
+    {"f":29,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":0.65,"y":70.79,"z":0.69,"root":3,"spineLow":6.99,"chest":7.01,"neck":10.01,"armF":36.67,"foreF":135.58,"armN":51.24,"foreN":90.68,"thighF":0.76,"shinF":70.2,"footF":15.99,"thighN":61.12,"shinN":64.84,"footN":5.83},"etire":{"thighN":0.99}},
+    {"f":30,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":0.36,"y":71.4,"z":0.41,"root":3,"spineLow":7,"chest":7,"neck":10,"armF":38.38,"foreF":134.49,"armN":53,"foreN":88.68,"thighF":0.13,"shinF":68.33,"footF":14.78,"thighN":60.15,"shinN":63.25,"footN":6.09},"etire":{"thighN":0.99}},
+    {"f":31,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":0.1,"y":71.91,"z":0.13,"root":3,"spineLow":7,"chest":7,"neck":10,"armF":42.11,"foreF":131.82,"armN":56.76,"foreN":84.23,"thighF":-0.78,"shinF":66.17,"footF":13.55,"thighN":59.56,"shinN":62.22,"footN":5.66}},
+    {"f":32,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":0,"y":72.13,"root":3,"spineLow":7,"chest":7,"neck":10,"armF":45.65,"foreF":128.99,"armN":60.54,"foreN":79.46,"thighF":-1.94,"shinF":64.02,"footF":12.59,"thighN":59.31,"shinN":61.79,"footN":5.48}},
+    {"f":33,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":0,"y":72.13,"root":3,"spineLow":7,"chest":7,"neck":10,"armF":47.2,"foreF":127.66,"armN":62.29,"foreN":77.17,"thighF":-2.71,"shinF":62.7,"footF":12.05,"thighN":59.31,"shinN":61.79,"footN":5.48}},
+    {"f":34,"facing":1,"courbe":"lin","ancre":false,"fixe":{"x":0,"y":72.13,"root":3,"spineLow":7,"chest":7,"neck":10,"armF":47.2,"foreF":127.66,"armN":62.29,"foreN":77.17,"thighF":-2.82,"shinF":62.5,"footF":11.96,"thighN":59.31,"shinN":61.79,"footN":5.48}}
   ]
 }

@@ -1,8 +1,8 @@
 {
   "nom": "esquive_saut_arriere",
   "boucle": false,
-  "base": "garde",
-  "suivante": "garde_idle",
+  "base": "garde_ouverte",
+  "suivante": "garde_ouverte_idle",
   "decalage": {
     "neck": 2,
     "chest": 1,
@@ -27,7 +27,7 @@
     },
     {
       "f": 3,
-      "nom": "flexion d'élan, buste qui recule déjà",
+      "nom": "flexion d'élan, les bras descendent",
       "fixe": {
         "x": -3
       },
@@ -46,13 +46,21 @@
         "legF": [
           0,
           0
+        ],
+        "armN": [
+          -8,
+          -20
+        ],
+        "armF": [
+          -6,
+          -22
         ]
       },
       "courbe": "acc"
     },
     {
       "f": 6,
-      "nom": "poussée de la jambe avant",
+      "nom": "poussée de la jambe avant, les bras lancent vers le haut",
       "fixe": {
         "x": -12
       },
@@ -71,13 +79,21 @@
         "legF": [
           -12,
           14
+        ],
+        "armN": [
+          -14,
+          6
+        ],
+        "armF": [
+          -12,
+          4
         ]
       },
       "courbe": "lin"
     },
     {
       "f": 10,
-      "nom": "en l'air, genoux rentrés",
+      "nom": "en l'air, genoux rentrés, bras ouverts devant pour l'équilibre",
       "fixe": {
         "x": -28
       },
@@ -96,13 +112,21 @@
         "legF": [
           -34,
           26
+        ],
+        "armN": [
+          2,
+          -6
+        ],
+        "armF": [
+          0,
+          -10
         ]
       },
       "courbe": "auto"
     },
     {
       "f": 14,
-      "nom": "réception : le pied arrière touche en premier",
+      "nom": "réception : le pied arrière touche en premier, les bras tombent devant",
       "fixe": {
         "x": -40
       },
@@ -121,6 +145,14 @@
         "legF": [
           -42,
           0
+        ],
+        "armN": [
+          4,
+          -18
+        ],
+        "armF": [
+          2,
+          -20
         ]
       },
       "courbe": "dec"
@@ -146,6 +178,14 @@
         "legF": [
           -42,
           0
+        ],
+        "armN": [
+          0,
+          -16
+        ],
+        "armF": [
+          -2,
+          -18
         ]
       },
       "courbe": "acc-dec"
@@ -171,13 +211,21 @@
         "legF": [
           -42,
           0
+        ],
+        "armN": [
+          -2,
+          -5
+        ],
+        "armF": [
+          -1,
+          -6
         ]
       },
       "courbe": "acc-dec"
     },
     {
       "f": 32,
-      "nom": "garde",
+      "nom": "garde ouverte",
       "fixe": {
         "x": -42
       },

@@ -31,7 +31,7 @@ extends Control
 ##   1 à 7  en garde : esquive (varie selon le coup) ; 1 sway (direct au
 ##      visage), 2 slip (direct, la tête passe à côté), 3 baisse (crochet ou
 ##      circulaire à la tête), 4 retrait du ventre (crochet au corps),
-##      5 pas de côté (coup de pied appuyé), 6 saut arrière (coup de pied
+##      5 pas de côté, pivot face caméra (coup de pied appuyé), 6 saut arrière (coup de pied
 ##      hache), 7 saut sur place (balayage). Pendant la fenêtre de contre
 ##      d'une parade ou d'une esquive, une esquive peut partir. Touches
 ##      provisoires, comme P.

@@ -1,8 +1,8 @@
 {
   "nom": "esquive_retrait",
   "boucle": false,
-  "base": "garde",
-  "suivante": "garde_idle",
+  "base": "garde_ouverte",
+  "suivante": "garde_ouverte_idle",
   "decalage": {
     "neck": 2,
     "chest": 1,
@@ -27,7 +27,7 @@
     },
     {
       "f": 4,
-      "nom": "le bassin recule, le ventre se creuse",
+      "nom": "le bassin recule, le ventre se creuse ; les bras restent en avant (contrepoids)",
       "fixe": {
         "x": -12
       },
@@ -46,6 +46,14 @@
         "legF": [
           0,
           0
+        ],
+        "armN": [
+          4,
+          -14
+        ],
+        "armF": [
+          4,
+          -12
         ]
       },
       "courbe": "dec"
@@ -71,6 +79,14 @@
         "legF": [
           0,
           0
+        ],
+        "armN": [
+          6,
+          -16
+        ],
+        "armF": [
+          5,
+          -14
         ]
       },
       "courbe": "palier"
@@ -95,6 +111,14 @@
         "legF": [
           0,
           0
+        ],
+        "armN": [
+          6,
+          -16
+        ],
+        "armF": [
+          5,
+          -14
         ]
       },
       "courbe": "acc-dec"
@@ -119,12 +143,20 @@
         "legF": [
           0,
           0
+        ],
+        "armN": [
+          -3,
+          -5
+        ],
+        "armF": [
+          -2,
+          -6
         ]
       }
     },
     {
       "f": 26,
-      "nom": "garde",
+      "nom": "garde ouverte",
       "fixe": {
         "x": 0
       },

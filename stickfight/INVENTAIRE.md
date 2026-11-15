@@ -165,7 +165,7 @@ par sa propre version (marquées ✱ quand c'est presque toujours le cas).
 | 15 | Esquive en se baissant sous un coup haut | fait (`esquive_baisse`, contre un crochet ou un circulaire à la tête) |
 | 16 | Esquive de la tête sur le côté (slip) | fait (`esquive_slip`, contre un direct) |
 | 16 b | Esquive du ventre (retrait) | fait (`esquive_retrait`, contre un crochet au corps) |
-| 16 c | Pas de côté en profondeur | fait (`esquive_cote`, contre un coup de pied appuyé ; canal z) |
+| 16 c | Pas de côté (pivot face caméra) | fait (`esquive_cote`, contre un coup de pied appuyé ; pivot 3D projeté) |
 | 16 d | Saut arrière d'esquive | fait (`esquive_saut_arriere`, contre un coup de pied hache) |
 | 16 e | Saut sur place | fait (`esquive_saut_balayage`, contre un balayage) |
 | 17 | Armure : encaisser sans broncher (Power Crush) | |

@@ -1,8 +1,8 @@
 {
   "nom": "esquive_sway",
   "boucle": false,
-  "base": "garde",
-  "suivante": "garde_idle",
+  "base": "garde_ouverte",
+  "suivante": "garde_ouverte_idle",
   "decalage": {
     "neck": 2,
     "chest": 1,
@@ -27,7 +27,7 @@
     },
     {
       "f": 4,
-      "nom": "le buste part en arrière, le poids passe sur la jambe arrière",
+      "nom": "le buste part en arrière, les mains traînent un peu derrière lui",
       "fixe": {
         "x": -7
       },
@@ -46,12 +46,20 @@
         "legF": [
           0,
           0
+        ],
+        "armN": [
+          4,
+          -16
+        ],
+        "armF": [
+          -6,
+          -22
         ]
       }
     },
     {
       "f": 7,
-      "nom": "le coup passe devant le visage",
+      "nom": "le coup passe devant le visage ; la main avant pend devant, l'arrière s'écarte pour l'équilibre",
       "fixe": {
         "x": -9
       },
@@ -70,6 +78,14 @@
         "legF": [
           0,
           0
+        ],
+        "armN": [
+          8,
+          -28
+        ],
+        "armF": [
+          -14,
+          -34
         ]
       },
       "courbe": "palier"
@@ -94,13 +110,21 @@
         "legF": [
           0,
           0
+        ],
+        "armN": [
+          8,
+          -28
+        ],
+        "armF": [
+          -14,
+          -34
         ]
       },
       "courbe": "acc-dec"
     },
     {
       "f": 17,
-      "nom": "retour en ressort : le poids revient devant",
+      "nom": "retour en ressort : le poids revient devant, les bras suivent avec retard",
       "fixe": {
         "x": 2
       },
@@ -119,6 +143,14 @@
         "legF": [
           0,
           0
+        ],
+        "armN": [
+          -6,
+          -10
+        ],
+        "armF": [
+          -4,
+          -12
         ]
       }
     },
@@ -142,13 +174,21 @@
         "legF": [
           0,
           0
+        ],
+        "armN": [
+          -2,
+          -4
+        ],
+        "armF": [
+          -1,
+          -5
         ]
       },
       "courbe": "acc-dec"
     },
     {
       "f": 30,
-      "nom": "garde",
+      "nom": "garde ouverte",
       "fixe": {
         "x": 0
       },

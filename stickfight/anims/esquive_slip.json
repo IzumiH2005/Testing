@@ -1,8 +1,8 @@
 {
   "nom": "esquive_slip",
   "boucle": false,
-  "base": "garde",
-  "suivante": "garde_idle",
+  "base": "garde_ouverte",
+  "suivante": "garde_ouverte_idle",
   "decalage": {
     "neck": 2,
     "chest": 1,
@@ -27,7 +27,7 @@
     },
     {
       "f": 3,
-      "nom": "la tête glisse sous le poing, épaule avant rentrée",
+      "nom": "la tête glisse sous le poing, l'épaule avant rentre ; les mains descendent",
       "fixe": {
         "x": 3,
         "z": -8
@@ -47,6 +47,14 @@
         "legF": [
           0,
           0
+        ],
+        "armN": [
+          -10,
+          -10
+        ],
+        "armF": [
+          -4,
+          -12
         ]
       }
     },
@@ -72,6 +80,14 @@
         "legF": [
           0,
           0
+        ],
+        "armN": [
+          -12,
+          -12
+        ],
+        "armF": [
+          -5,
+          -14
         ]
       },
       "courbe": "palier"
@@ -97,6 +113,14 @@
         "legF": [
           0,
           0
+        ],
+        "armN": [
+          -12,
+          -12
+        ],
+        "armF": [
+          -5,
+          -14
         ]
       },
       "courbe": "acc-dec"
@@ -123,12 +147,20 @@
         "legF": [
           0,
           0
+        ],
+        "armN": [
+          -4,
+          -4
+        ],
+        "armF": [
+          -2,
+          -5
         ]
       }
     },
     {
       "f": 24,
-      "nom": "garde",
+      "nom": "garde ouverte",
       "fixe": {
         "x": 0,
         "z": 0

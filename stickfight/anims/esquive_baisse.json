@@ -1,8 +1,8 @@
 {
   "nom": "esquive_baisse",
   "boucle": false,
-  "base": "garde",
-  "suivante": "garde_idle",
+  "base": "garde_ouverte",
+  "suivante": "garde_ouverte_idle",
   "decalage": {
     "neck": 2,
     "chest": 1,
@@ -27,7 +27,7 @@
     },
     {
       "f": 5,
-      "nom": "il plonge : genoux pliés, buste penché, regard sur l'adversaire",
+      "nom": "il plonge : genoux pliés, buste penché ; les bras tombent devant les genoux",
       "fixe": {
         "x": -2
       },
@@ -46,6 +46,14 @@
         "legF": [
           3,
           -1
+        ],
+        "armN": [
+          -14,
+          -20
+        ],
+        "armF": [
+          -6,
+          -22
         ]
       }
     },
@@ -70,6 +78,14 @@
         "legF": [
           3,
           -1
+        ],
+        "armN": [
+          -16,
+          -22
+        ],
+        "armF": [
+          -8,
+          -24
         ]
       },
       "courbe": "palier"
@@ -94,13 +110,21 @@
         "legF": [
           3,
           -1
+        ],
+        "armN": [
+          -16,
+          -22
+        ],
+        "armF": [
+          -8,
+          -24
         ]
       },
       "courbe": "acc-dec"
     },
     {
       "f": 20,
-      "nom": "il remonte en poussant sur les jambes",
+      "nom": "il remonte en poussant sur les jambes, les mains remontent",
       "fixe": {
         "x": 2
       },
@@ -119,6 +143,14 @@
         "legF": [
           0,
           0
+        ],
+        "armN": [
+          -6,
+          -8
+        ],
+        "armF": [
+          -4,
+          -10
         ]
       }
     },
@@ -142,13 +174,21 @@
         "legF": [
           0,
           0
+        ],
+        "armN": [
+          -2,
+          -3
+        ],
+        "armF": [
+          -1,
+          -4
         ]
       },
       "courbe": "acc-dec"
     },
     {
       "f": 34,
-      "nom": "garde",
+      "nom": "garde ouverte",
       "fixe": {
         "x": 0
       },
