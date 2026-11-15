@@ -1,0 +1,34 @@
+{
+ "nom": "duo_touche_au_sol",
+ "longueur": 120,
+ "acteurs": [
+  {
+   "x": 0,
+   "facing": 1,
+   "couleur": "#111111",
+   "anim": "garde_idle",
+   "t0": 0,
+   "programme": [
+    {
+     "contact": 30,
+     "anim": "frappe_au_sol",
+     "fondu": 0
+    }
+   ]
+  },
+  {
+   "x": 135.0,
+   "facing": 1,
+   "couleur": "#1d3f8f",
+   "anim": "au_sol",
+   "t0": 0,
+   "programme": [
+    {
+     "contact": 30,
+     "anim": "touche_au_sol",
+     "fondu": 1
+    }
+   ]
+  }
+ ]
+}

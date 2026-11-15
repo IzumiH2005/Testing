@@ -1,0 +1,260 @@
+{
+ "nom": "frappe_au_sol",
+ "boucle": false,
+ "base": "garde",
+ "suivante": "garde_idle",
+ "decalage": {
+  "neck": 1,
+  "armN": 2,
+  "foreN": 2,
+  "armF": 2,
+  "foreF": 3
+ },
+ "cles": [
+  {
+   "f": 0,
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 4,
+   "nom": "le poids part devant",
+   "plus": {
+    "x": 8,
+    "y": -2,
+    "chest": 2
+   },
+   "courbe": "acc"
+  },
+  {
+   "f": 8,
+   "nom": "le pied arrière passe",
+   "plus": {
+    "x": 20,
+    "y": 1,
+    "chest": 2
+   },
+   "vise": {
+    "legN": [
+     30,
+     7.6
+    ],
+    "legF": [
+     -4,
+     30
+    ]
+   },
+   "courbe": "lin"
+  },
+  {
+   "f": 11,
+   "nom": "pas rassemblé",
+   "plus": {
+    "x": 34,
+    "y": -2,
+    "chest": 3
+   },
+   "vise": {
+    "legN": [
+     30,
+     7.6
+    ],
+    "legF": [
+     25,
+     15.8
+    ]
+   },
+   "courbe": "dec"
+  },
+  {
+   "f": 18,
+   "nom": "genou armé haut",
+   "plus": {
+    "x": 50,
+    "y": 3,
+    "root": -6,
+    "spineLow": -3,
+    "chest": -2,
+    "neck": 4,
+    "armN": -10,
+    "foreN": 6,
+    "armF": 8
+   },
+   "vise": {
+    "legN": [
+     76,
+     60
+    ],
+    "legF": [
+     25,
+     15.8
+    ]
+   },
+   "courbe": "acc"
+  },
+  {
+   "f": 22,
+   "nom": "le talon écrase",
+   "plus": {
+    "x": 62,
+    "y": -7,
+    "root": 12,
+    "spineLow": 6,
+    "chest": 4,
+    "neck": 10,
+    "armN": 12,
+    "foreN": -14,
+    "armF": -6,
+    "foreF": 6
+   },
+   "vise": {
+    "legN": [
+     112,
+     22
+    ],
+    "legF": [
+     25,
+     15.8
+    ]
+   },
+   "courbe": "dec"
+  },
+  {
+   "f": 28,
+   "nom": "appuie",
+   "plus": {
+    "x": 62,
+    "y": -8,
+    "root": 13,
+    "spineLow": 7,
+    "chest": 5,
+    "neck": 11,
+    "armN": 10,
+    "foreN": -10,
+    "armF": -4,
+    "foreF": 4
+   },
+   "vise": {
+    "legN": [
+     112,
+     21
+    ],
+    "legF": [
+     25,
+     15.8
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 34,
+   "nom": "retire le pied",
+   "plus": {
+    "x": 50,
+    "y": 1,
+    "root": -2,
+    "spineLow": -1,
+    "chest": 0,
+    "neck": 3
+   },
+   "vise": {
+    "legN": [
+     84,
+     58
+    ],
+    "legF": [
+     25,
+     15.8
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 40,
+   "nom": "repasse devant lui",
+   "plus": {
+    "x": 30,
+    "y": -2,
+    "chest": 2
+   },
+   "vise": {
+    "legN": [
+     36,
+     7.6
+    ],
+    "legF": [
+     25,
+     15.8
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 44,
+   "nom": "le pied arrière recule",
+   "plus": {
+    "x": 18,
+    "y": 1
+   },
+   "vise": {
+    "legN": [
+     36,
+     7.6
+    ],
+    "legF": [
+     -8,
+     28
+    ]
+   },
+   "courbe": "lin"
+  },
+  {
+   "f": 48,
+   "nom": "en appui",
+   "plus": {
+    "x": 8,
+    "y": -1
+   },
+   "vise": {
+    "legN": [
+     36,
+     7.6
+    ],
+    "legF": [
+     -37,
+     15.8
+    ]
+   },
+   "courbe": "dec"
+  },
+  {
+   "f": 58,
+   "nom": "en garde",
+   "plus": {
+    "x": 6
+   },
+   "courbe": "auto",
+   "ancre": false
+  }
+ ],
+ "trainees": [
+  {
+   "articulation": "ankleN",
+   "coude": "kneeN",
+   "de": 19,
+   "a": 22
+  }
+ ],
+ "evenements": [
+  {
+   "f": 22,
+   "type": "contact"
+  },
+  {
+   "f": 11,
+   "type": "poussiere",
+   "articulation": "ankleF",
+   "dir": 180,
+   "taille": 0.4
+  }
+ ]
+}

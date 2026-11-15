@@ -1,0 +1,164 @@
+{
+ "nom": "touche_au_sol",
+ "boucle": false,
+ "base": "au_sol",
+ "suivante": "au_sol",
+ "decalage": {
+  "neck": 1,
+  "armN": 1,
+  "foreN": 2,
+  "armF": 1,
+  "foreF": 2
+ },
+ "cles": [
+  {
+   "f": 0,
+   "courbe": "lin"
+  },
+  {
+   "f": 1,
+   "nom": "impact : écrasé contre le sol",
+   "plus": {
+    "x": 0,
+    "y": -0.5,
+    "chest": 0,
+    "spineLow": -1,
+    "neck": 8,
+    "armN": 14,
+    "foreN": 10,
+    "armF": -12,
+    "thighN": -6,
+    "shinN": -4
+   },
+   "ancre": false,
+   "courbe": "dec"
+  },
+  {
+   "f": 6,
+   "nom": "secousse : épaules et jambes décollent",
+   "plus": {
+    "x": 1,
+    "y": 4,
+    "chest": 8,
+    "spineLow": 4,
+    "neck": 12,
+    "armN": 32,
+    "foreN": 24,
+    "armF": -26,
+    "foreF": 12,
+    "thighN": 14,
+    "shinN": 10,
+    "thighF": 22,
+    "shinF": 20
+   },
+   "ancre": false,
+   "courbe": "acc"
+  },
+  {
+   "f": 12,
+   "nom": "retombe à plat",
+   "plus": {
+    "x": 2,
+    "y": 0,
+    "chest": 1,
+    "spineLow": 0,
+    "neck": 4,
+    "armN": 10,
+    "foreN": 4,
+    "armF": -8,
+    "thighN": 3,
+    "shinN": 2,
+    "thighF": 4,
+    "shinF": 4
+   },
+   "ancre": false,
+   "courbe": "dec"
+  },
+  {
+   "f": 16,
+   "nom": "petit rebond",
+   "plus": {
+    "x": 2,
+    "y": 1.5,
+    "chest": 5,
+    "spineLow": 2,
+    "neck": 6,
+    "armN": 14,
+    "foreN": 8,
+    "armF": -10,
+    "thighN": 6,
+    "shinN": 4,
+    "thighF": 9,
+    "shinF": 8
+   },
+   "ancre": false,
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 24,
+   "nom": "s'affaisse",
+   "plus": {
+    "x": 2,
+    "chest": 0,
+    "neck": 1,
+    "armN": 3,
+    "thighF": 1,
+    "shinF": 1
+   },
+   "ancre": false,
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 36,
+   "nom": "au sol",
+   "plus": {
+    "x": 2
+   },
+   "ancre": false,
+   "courbe": "lin"
+  }
+ ],
+ "evenements": [
+  {
+   "f": 1,
+   "type": "contact"
+  },
+  {
+   "f": 1,
+   "type": "hitstop",
+   "n": 10,
+   "tremble": 2.0
+  },
+  {
+   "f": 1,
+   "type": "etincelle",
+   "articulation": "waist",
+   "dec": [
+    0,
+    4
+   ],
+   "dir": -90,
+   "genre": "coup",
+   "taille": 1.4
+  },
+  {
+   "f": 1,
+   "type": "secousse",
+   "n": 6,
+   "force": 1.5
+  },
+  {
+   "f": 12,
+   "type": "poussiere",
+   "articulation": "waist",
+   "dir": 0,
+   "taille": 0.6
+  },
+  {
+   "f": 12,
+   "type": "secousse",
+   "n": 3,
+   "force": 0.8
+  }
+ ]
+}
