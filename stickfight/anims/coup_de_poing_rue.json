@@ -4,7 +4,7 @@
  "longueur": 72,
  "base": "garde_ouverte",
  "suivante": "garde_ouverte_idle",
- "note": "Coup de poing de rue du bras arrière (bras proche), construit avec BIBLE_ANIMATION.md (méthode B, A bis). Trois niveaux d'anticipation : il se ramasse (3), recule le pied avant et charge la jambe arrière (8-12), puis s'enfonce et recule le poing d'un cran (26). Armé tenu 16-24 : buste en arrière, coude bas, avant-bras complètement replié, poing serré derrière la tête, l'autre bras vise. Départ par la jambe arrière (27), puis l'épaule et le coude (28), poing en dernier au contact (29), écarts croissants jusqu'au contact. Le buste continue deux images après le bras (31), pose de fin tenue (35-46), le pied arrière passe devant, garde (72).",
+ "note": "Coup de poing de rue du bras arrière (bras proche), construit avec BIBLE_ANIMATION.md (méthode B, A bis). Trois niveaux d'anticipation : il se ramasse (3), recule le pied avant et charge la jambe arrière (8-12), puis s'enfonce et recule le poing d'un cran (26). Armé tenu 16-24 : buste en arrière, coude bas, avant-bras complètement replié, coude tiré en arrière, poing serré sous le menton, l'autre bras vise. Départ par la jambe arrière (27), puis l'épaule et le coude (28), poing en dernier au contact (29), écarts croissants jusqu'au contact. Le buste continue deux images après le bras (31), pose de fin tenue (35-46), le pied arrière passe devant, garde (72).",
  "cles": [
   {
    "f": 0,
@@ -51,8 +51,8 @@
     "spineLow": 2,
     "chest": 0,
     "neck": 14,
-    "armN": -40,
-    "foreN": 120,
+    "armN": -30,
+    "foreN": 110,
     "armF": 68,
     "foreF": 55
    },
@@ -92,11 +92,11 @@
     ],
     "armN": {
      "cible": [
-      -18,
-      2
+      12,
+      -10
      ],
      "repere": "shoulder",
-     "coude": "bas"
+     "coude": "arriere"
     }
    }
   },
@@ -125,11 +125,11 @@
     ],
     "armN": {
      "cible": [
-      -20,
-      3
+      14,
+      -9
      ],
      "repere": "shoulder",
-     "coude": "bas"
+     "coude": "arriere"
     }
    }
   },
@@ -158,11 +158,11 @@
     ],
     "armN": {
      "cible": [
-      -21,
-      3
+      14,
+      -10
      ],
      "repere": "shoulder",
-     "coude": "bas"
+     "coude": "arriere"
     }
    }
   },
@@ -191,11 +191,11 @@
     ],
     "armN": {
      "cible": [
-      -23,
-      4
+      12,
+      -12
      ],
      "repere": "shoulder",
-     "coude": "bas"
+     "coude": "arriere"
     }
    }
   },
@@ -224,11 +224,11 @@
     ],
     "armN": {
      "cible": [
-      -20,
-      3
+      16,
+      -8
      ],
      "repere": "shoulder",
-     "coude": "bas"
+     "coude": "arriere"
     }
    }
   },
@@ -243,8 +243,8 @@
     "spineLow": 5,
     "chest": 2,
     "neck": 6,
-    "armN": 35,
-    "foreN": 115,
+    "armN": 40,
+    "foreN": 100,
     "armF": 48,
     "foreF": 100
    },

@@ -206,6 +206,12 @@ pas trouvé de conseils écrits de Hyun's Dojo : je ne leur attribue donc rien d
     arrière, sur le côté), et le reste de la pose la suit. Les genoux restent un peu pliés,
     sinon le personnage a l'air d'une statue.
 11. **Un pied posé ne bouge pas** tant qu'il n'est pas soulevé.
+12. **L'armé doit être celui d'un vrai bras qui va se déplier.** Pour un coup droit, le coude
+    est tiré en arrière, l'avant-bras replié vers l'avant et le poing près du menton ; au
+    départ, le coude se déplie vers la cible, l'angle du coude ne fait que diminuer jusqu'au
+    contact. Un poing derrière la nuque, coude en bas, n'est pas un armé : pour revenir devant,
+    l'avant-bras devrait faire un tour complet, ce qui ne ressemble à rien. Le contrôle
+    `--verifier` donne l'angle du coude aux poses clés : il doit décroître de l'armé au contact.
 
 **Sources**
 
