@@ -66,6 +66,33 @@ coude. Canaux : `armN` (dans le plan), `armN_p` (vers la caméra = écarté pour
 `armN_r` (rotation sur l'axe). Le squelette vérifie la direction du bras dans le cône ci-dessus
 (`StickRig.amplitudes`), pas chaque canal séparément.
 
+### 4 bis. Décrire l'épaule à l'instant T
+
+Pour chaque pose clé, on écrit l'épaule avec **tous** ses axes, sinon la pose est bancale et la
+profondeur fausse :
+
+| Axe | Question | Canal |
+|---|---|---|
+| Élévation | à quelle hauteur est le coude (le long du corps, épaule, au-dessus) ? | `armN` et `armN_p` ensemble |
+| Plan d'élévation | le bras est-il devant, sur le côté, ou sur le côté **et en arrière** (abduction horizontale) ? | rapport entre `armN` (avant-arrière) et `armN_p` (côté) |
+| Rotation sur l'axe | où pointe l'avant-bras quand le coude plie (vers l'avant, le haut, le bas) ? | `armN_r` |
+| Omoplate | l'épaule est-elle tirée en arrière, poussée en avant, haussée ? | `epauleN_av`, `epauleN_haut` |
+| Coude | combien est-il plié ? | `foreN` |
+
+Exemples vus sur un mannequin articulé (PoseIt) :
+
+- **Bras sur le côté, avant-bras vers l'avant** : élévation à l'horizontale, plan sur le côté,
+  rotation qui envoie l'avant-bras vers l'avant, coude à 90°. De profil : le bras disparaît
+  (il pointe vers la caméra), l'avant-bras se voit en entier vers l'avant.
+- **Armé d'un coup de poing** : le même bras, mais le plan part **en arrière** du côté (abduction
+  horizontale 30 à 50° derrière), le coude un peu plus haut, l'omoplate tirée en arrière, le coude
+  plus plié (110 à 130°). De profil : le coude dépasse derrière l'épaule, l'avant-bras revient vers
+  l'avant, le poing près de la poitrine ou du menton.
+- **Départ du direct** : l'omoplate revient en avant, le plan du bras passe de « côté et arrière »
+  à « devant » (adduction horizontale), et **en même temps** le coude se déplie jusqu'au contact.
+- **Crochet** : le buste tourne beaucoup plus, l'épaule avance encore plus (omoplate en avant), le
+  plan du bras reste sur le côté et balaie vers l'avant, mais le coude **reste plié** (90° environ).
+
 ## 5. Le coude et l'avant-bras
 
 | Mouvement | Amplitude | Canal |

@@ -10,6 +10,9 @@
      et comment elle passe d'un segment à l'autre ;
    - les phases, et pour chacune la position de chaque partie du corps (pieds, genoux, bassin et
      sa torsion, buste et sa torsion, épaules, coudes, poings, tête, regard) ;
+   - pour chaque pose clé, chaque articulation décrite avec **tous ses axes** à cet instant
+     (épaule : élévation, plan devant/côté/arrière, rotation, omoplate ; coude ; hanche…),
+     voir `analyses/anatomie.md` § 4 bis ;
    - ce qui se voit de profil et comment le rig le montre (torsion, cibles, coude imposé) ;
    - les références des vidéos étudiées (`etudes/`) et les règles de `BIBLE_ANIMATION.md` qui
      s'appliquent ;
