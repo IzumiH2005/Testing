@@ -52,7 +52,9 @@ const STYLES := {
 }
 
 ## Bassin : son angle incline tout le tronc (les jambes n'en dépendent pas).
-const ROOT := {"id": "root", "rest": 90.0, "sign": -1.0, "lim": Vector2(-90, 90), "label": "Bascule du bassin"}
+## Le bassin porte l'orientation de tout le tronc dans l'espace (pas une
+## articulation) : un corps qui roule ou tombe tête en bas dépasse 90°.
+const ROOT := {"id": "root", "rest": 90.0, "sign": -1.0, "lim": Vector2(-720, 720), "label": "Bascule du bassin"}
 
 ## Hiérarchie des os, parents avant enfants. rest = angle de repos relatif au
 ## parent (degrés, sens trigonométrique, y vers le haut) ; sign = conversion
@@ -68,10 +70,10 @@ const BONES := [
 	{"id": "foreN",    "parent": "armN",     "len": "forearm",  "rest": 0.0,   "sign": 1.0,  "lim": Vector2(0, 150),   "label": "Coude (proche)"},
 	{"id": "thighF",   "parent": "root",     "len": "thigh",    "rest": 180.0, "sign": 1.0,  "lim": Vector2(-30, 140), "label": "Hanche (loin)"},
 	{"id": "shinF",    "parent": "thighF",   "len": "shin",     "rest": 0.0,   "sign": -1.0, "lim": Vector2(0, 150),   "label": "Genou (loin)"},
-	{"id": "footF",    "parent": "shinF",    "len": "foot",     "rest": 90.0,  "sign": 1.0,  "lim": Vector2(-50, 30),  "label": "Cheville (loin)"},
+	{"id": "footF",    "parent": "shinF",    "len": "foot",     "rest": 90.0,  "sign": 1.0,  "lim": Vector2(-50, 65),  "label": "Cheville (loin)"},
 	{"id": "thighN",   "parent": "root",     "len": "thigh",    "rest": 180.0, "sign": 1.0,  "lim": Vector2(-30, 140), "label": "Hanche (proche)"},
 	{"id": "shinN",    "parent": "thighN",   "len": "shin",     "rest": 0.0,   "sign": -1.0, "lim": Vector2(0, 150),   "label": "Genou (proche)"},
-	{"id": "footN",    "parent": "shinN",    "len": "foot",     "rest": 90.0,  "sign": 1.0,  "lim": Vector2(-50, 30),  "label": "Cheville (proche)"},
+	{"id": "footN",    "parent": "shinN",    "len": "foot",     "rest": 90.0,  "sign": 1.0,  "lim": Vector2(-50, 65),  "label": "Cheville (proche)"},
 ]
 
 ## Troisième dimension (« 2D et demie ») : la vue reste de profil, mais chaque
@@ -331,6 +333,10 @@ static func set_foot(p: Dictionary, side: String, phi: float, limits := true) ->
 	p.angles["foot" + side] = clamp_angle("foot" + side, a) if limits else a
 
 
+## Le pied du stickman est un seul segment, de la cheville à la pointe : sur
+## la plante (talon levé), il représente l'avant-pied, et l'angle mesuré
+## additionne la cheville (20° de flexion dorsale) et les orteils repliés
+## (jusqu'à 70°). D'où la limite à 65° de la cheville dans BONES.
 ## Flexion maximale de la cheville (pointe vers le tibia), en degrés.
 const MAX_DORSI := 30.0
 
