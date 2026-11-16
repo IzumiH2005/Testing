@@ -517,12 +517,16 @@ static func primitives(p: Dictionary, color := Color("#111111"), far_shade := 1.
 	var w: float = s.stroke
 	var out := []
 	var leg := func(side: String, c: Color) -> void:
-		var pts := [J["hip" + side], J["knee" + side], J["ankle" + side]]
+		# La jambe part du bassin (colonne) puis de sa hanche : quand le bassin
+		# est tourné, ce petit segment relie la hanche décalée au tronc.
+		var pts := [J.hip, J["hip" + side], J["knee" + side], J["ankle" + side]]
 		if s.foot > 0.0:
 			pts.append(J["toe" + side])
 		out.append({"type": "path", "points": pts, "width": w, "color": c, "part": "leg" + side})
 	var arm := func(side: String, c: Color) -> void:
-		out.append({"type": "path", "points": [J["shoulder" + side], J["elbow" + side], J["hand" + side]], "width": w, "color": c, "part": "arm" + side})
+		# Le bras part de la colonne puis de son épaule : quand le buste est
+		# tourné, ce segment (la clavicule) relie l'épaule décalée au tronc.
+		out.append({"type": "path", "points": [J.shoulder, J["shoulder" + side], J["elbow" + side], J["hand" + side]], "width": w, "color": c, "part": "arm" + side})
 		if s.hand > w / 2.0:
 			out.append({"type": "circle", "c": J["hand" + side], "r": s.hand, "color": c, "part": "hand" + side})
 	arm.call("F", far)
