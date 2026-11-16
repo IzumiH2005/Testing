@@ -427,9 +427,10 @@ image à la fin, parce que lire des images coûte beaucoup plus cher que lire du
 
 Deux canaux de **torsion** font tourner le corps autour de la colonne, vu de profil :
 `torsion` (épaules) et `torsionBassin`, en degrés (positif = l'épaule ou la hanche proche passe
-devant). Ils décalent les épaules (`shoulderN`, `shoulderF`) et les hanches (`hipN`, `hipF`) de
-leur demi-largeur (`"epaules"`, `"hanches"` dans le style), sans changer le dessin quand ils
-valent 0.
+devant). Ils peuvent décaler les épaules (`shoulderN`, `shoulderF`) et les hanches (`hipN`, `hipF`) de
+leur demi-largeur (`"epaules"`, `"hanches"` dans le style), mais ces largeurs valent 0 : bras
+et jambes partent d'un seul point du tronc, ils en sont le prolongement, et la torsion ne
+change pas le dessin. On garde les valeurs dans les poses pour décrire le mouvement.
 
 Avant chaque nouvelle animation, on écrit son analyse dans `analyses/` (voir `CLAUDE.md`).
 

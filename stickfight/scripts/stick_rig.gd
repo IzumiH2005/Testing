@@ -40,8 +40,11 @@ const STYLES := {
 		"upperArm": 34.0, "forearm": 32.0,
 		"thigh": 41.0, "shin": 42.0,
 		"foot": 10.0,      # pied : petit crochet du trait, de la cheville vers l'avant
-		"epaules": 9.0,    # demi-largeur des épaules, pour la torsion (vue de profil)
-		"hanches": 6.0,    # demi-largeur du bassin, pour la torsion
+		# Pas de largeur d'épaules ni de hanches : bras et jambes partent d'un seul
+		# point du tronc, ils en sont le prolongement. Les canaux torsion et
+		# torsionBassin restent dans les poses, sans effet sur le dessin.
+		"epaules": 0.0,
+		"hanches": 0.0,
 	},
 	"fin": {
 		"label": "Fin (petite tête, trait léger)",

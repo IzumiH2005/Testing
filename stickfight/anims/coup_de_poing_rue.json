@@ -51,18 +51,18 @@
    "nom": "le pied avant se soulève",
    "courbe": "lin",
    "fixe": {
-    "chest": 5.55,
-    "spineLow": 6.25,
-    "foreF": 21.0,
-    "foreN": 38.5,
-    "y": 70.33,
-    "root": 2.55,
     "neck": 10.65,
-    "armF": 21.0,
-    "torsion": -8.75,
     "x": -8.5,
-    "armN": -10.5,
-    "torsionBassin": -4.2
+    "torsion": -8.75,
+    "root": 2.55,
+    "armF": 51.68,
+    "y": 70.33,
+    "armN": 29.99,
+    "foreF": 103.98,
+    "spineLow": 6.25,
+    "chest": 5.55,
+    "torsionBassin": -4.2,
+    "foreN": 88.66
    },
    "vise": {
     "legN": [
@@ -460,18 +460,18 @@
    "nom": "le pied descend",
    "courbe": "dec",
    "fixe": {
-    "chest": 7.25,
-    "spineLow": 8.25,
-    "foreF": 123.75,
-    "foreN": 81.25,
-    "y": 66.25,
-    "root": 16.25,
     "neck": 6.25,
-    "armF": 36.25,
-    "torsion": 10.0,
     "x": 44.75,
+    "torsion": 10.0,
+    "root": 16.25,
+    "y": 66.25,
+    "armF": 36.25,
     "armN": 65.25,
-    "torsionBassin": 5.25
+    "foreF": 123.75,
+    "spineLow": 8.25,
+    "chest": 7.25,
+    "torsionBassin": 5.25,
+    "foreN": 81.25
    },
    "vise": {
     "legF": [
