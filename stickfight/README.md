@@ -146,7 +146,7 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `releve` | 52 i, puis `garde_idle` | Relevé normal depuis `au_sol` (couché sur le dos). Le bras loin descend au sol derrière lui (f4), il se redresse en appui sur la main (f9) et s'assoit, le pied loin ramené contre lui (f17). Il pousse sur la main et les pieds, le bassin passe au-dessus des pieds (f24), accroupi (f30), le pied arrière recule (f36) et il se remet en garde (f42, poussière) un peu plus loin que sa tête, du côté des pieds |
 | `releve_roulade` | 44 i, puis `garde_idle` | Relevé en roulade arrière (tech roll) depuis `au_sol`. Genoux à la poitrine, mains près des oreilles (f5), le bassin passe au-dessus des épaules, jambes par-dessus la tête et mains qui poussent (f10), les pieds touchent derrière la tête (f15, poussière), à quatre pattes (f18), accroupi (f23), il se redresse (f29) et se remet en garde (f35, poussière) environ 100 px plus loin, du côté de sa tête, donc loin de l'adversaire |
 | `ko_au_sol` | 240 i, en boucle | Inconscient sur le dos, après une chute (KO). Tout est relâché : jambes à plat, genou proche retombé, pieds tombés, bras proche le long du corps, bras loin jeté derrière la tête, tête un peu renversée. Une seule respiration courte et lente par boucle (inspiration jusqu'à f70, expiration jusqu'à f150, puis pause), le buste et les bras suivent à peine (décalage) |
-| `coup_de_poing_rue` | 72 i, avance 45 | Coup de poing de rue du bras arrière (bras proche), construit avec `BIBLE_ANIMATION.md` (méthode B et § A bis). Trois niveaux d'anticipation : il se ramasse (3), recule le pied avant et charge la jambe arrière (8-12), puis s'enfonce et recule le poing d'un cran (26). Armé tenu (16-24) : buste en arrière, avant-bras complètement replié, coude tiré en arrière, poing serré sous le menton, l'autre bras vise. La jambe arrière pousse (27), l'épaule et le coude partent (28), le poing arrive en dernier au contact (29), avec des écarts croissants jusqu'au contact. Le buste continue deux images après le bras (31), pose de fin tenue (35-46), le pied arrière passe devant, garde (72) |
+| `coup_de_poing_rue` | 72 i, avance 45 | Coup de poing de rue du bras arrière (bras proche). Analyse complète : `analyses/coup_de_poing_rue.md`. Recul du pied avant qui charge la jambe arrière ; armé avec torsion (bassin −30°, épaules −60°), coude tiré en arrière, avant-bras replié, bras avant qui vise ; la jambe arrière pousse et le bassin revient (27), les épaules suivent et le coude se déplie (28), contact (29) avec les épaules tournées (+50°), le bras avant replié contre le menton et la tête droite ; dépassement, pose tenue, le pied arrière passe devant, garde |
 | `duo_pare_haut` | 100 i | Alt + K : A lance un direct, B le pare vers le haut (fenêtre de contre), A est repoussé |
 | `duo_pare_bas` | 110 i | Alt + Maj + K : A lance le pied direct, B le pare au milieu, A est repoussé en sautillant |
 | `duo_touche_tete` | 80 i | Y : A lance un direct, B en garde le prend au visage |
@@ -424,6 +424,14 @@ image à la fin, parce que lire des images coûte beaucoup plus cher que lire du
    appuis, et au contact la distance du poing à la tête adverse.
 3. Une seule image à la fin : `tools/anim.sh anims/x.json --cles -o planche.png --scale 1`
    ne rend que les images clés et le contact.
+
+Deux canaux de **torsion** font tourner le corps autour de la colonne, vu de profil :
+`torsion` (épaules) et `torsionBassin`, en degrés (positif = l'épaule ou la hanche proche passe
+devant). Ils décalent les épaules (`shoulderN`, `shoulderF`) et les hanches (`hipN`, `hipF`) de
+leur demi-largeur (`"epaules"`, `"hanches"` dans le style), sans changer le dessin quand ils
+valent 0.
+
+Avant chaque nouvelle animation, on écrit son analyse dans `analyses/` (voir `CLAUDE.md`).
 
 Un style peut ajouter un fin **liseré** clair sous les membres proches (`"lisere": 1.3` dans
 `StickRig.STYLES`) ; aucun style ne l'utilise, l'apparence des personnages ne change pas.

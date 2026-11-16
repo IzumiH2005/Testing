@@ -78,6 +78,13 @@ Preuves : V1 140, 181 ; V2 312-335 (§ 3, § 7).
 
 ### A3. La force vient du sol et passe de segment en segment
 
+**Torsion.** Le bassin et les épaules tournent autour de la colonne : à l'armé, ils tournent
+vers l'arrière (les épaules plus que le bassin) ; au départ, le bassin revient d'abord, les
+épaules ensuite, et l'écart entre les deux fait ressort. Quand une épaule avance, l'autre recule
+d'autant, et le bras de ce côté se replie. Le rig le montre de profil avec les canaux `torsion`
+(épaules) et `torsionBassin`.
+
+
 Le pied pousse sur le sol, la hanche tourne, puis le buste, puis l'épaule, puis le bras ou la
 jambe. Chaque segment part quand le précédent atteint sa vitesse maximale, puis il freine
 pour lui passer la vitesse. L'extrémité (poing, pied, lame) part donc **en dernier** et va
@@ -227,6 +234,11 @@ pas trouvé de conseils écrits de Hyun's Dojo : je ne leur attribue donc rien d
 
 ## B. Méthode : construire une animation qu'on n'a jamais vue
 
+0. **Analyse écrite avant tout** (`analyses/<nom>.md`, voir `CLAUDE.md` du projet) : la logique
+   de chaque partie du mouvement, l'anatomie (articulations, muscles, d'où vient la force), la
+   position de chaque partie du corps à chaque phase, et les contrôles à faire. On ne pose rien
+   tant que le mouvement n'est pas compris. Ensuite on pose **clé par clé**, en vérifiant chaque
+   pose avant de passer à la suivante, comme on bougerait un mannequin.
 1. **Intention.** Que fait le mouvement dans le jeu ? Coup haut, moyen ou bas, coup qui
    pousse, qui lance, blocage, déplacement. Quelle force, de 1 à 5 (§ C) ? Qui le fait (lourd
    ou léger, § 12) ?

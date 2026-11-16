@@ -40,6 +40,8 @@ const STYLES := {
 		"upperArm": 34.0, "forearm": 32.0,
 		"thigh": 41.0, "shin": 42.0,
 		"foot": 10.0,      # pied : petit crochet du trait, de la cheville vers l'avant
+		"epaules": 9.0,    # demi-largeur des épaules, pour la torsion (vue de profil)
+		"hanches": 6.0,    # demi-largeur du bassin, pour la torsion
 	},
 	"fin": {
 		"label": "Fin (petite tête, trait léger)",
@@ -74,12 +76,24 @@ const BONES := [
 	{"id": "footN",    "parent": "shinN",    "len": "foot",     "rest": 90.0,  "sign": 1.0,  "lim": Vector2(-50, 30),  "label": "Cheville (proche)"},
 ]
 
+## Torsions (rotation autour de l'axe de la colonne, vue de profil) : elles ne
+## tournent aucun os dans le plan, elles écartent les deux épaules (ou les deux
+## hanches) le long de l'avant du buste. Positif = l'épaule (la hanche) proche
+## passe devant, la loin derrière ; négatif = l'inverse. À 90°, chaque épaule
+## est à sa demi-largeur de la colonne (style : "epaules", "hanches"). Les bras
+## partent de shoulderN / shoulderF, les jambes de hipN / hipF ; shoulder et
+## hip restent les points de la colonne.
+const TWISTS := [
+	{"id": "torsion", "lim": Vector2(-90, 90), "label": "Torsion des épaules"},
+	{"id": "torsionBassin", "lim": Vector2(-90, 90), "label": "Torsion du bassin"},
+]
+
 ## Chaînes à deux os pour la cinématique inverse.
 const LIMBS := {
-	"armN": {"upper": "armN", "lower": "foreN", "base": "shoulder", "tip": "handN", "label": "Bras proche"},
-	"armF": {"upper": "armF", "lower": "foreF", "base": "shoulder", "tip": "handF", "label": "Bras loin"},
-	"legN": {"upper": "thighN", "lower": "shinN", "base": "hip", "tip": "ankleN", "label": "Jambe proche"},
-	"legF": {"upper": "thighF", "lower": "shinF", "base": "hip", "tip": "ankleF", "label": "Jambe loin"},
+	"armN": {"upper": "armN", "lower": "foreN", "base": "shoulderN", "tip": "handN", "label": "Bras proche"},
+	"armF": {"upper": "armF", "lower": "foreF", "base": "shoulderF", "tip": "handF", "label": "Bras loin"},
+	"legN": {"upper": "thighN", "lower": "shinN", "base": "hipN", "tip": "ankleN", "label": "Jambe proche"},
+	"legF": {"upper": "thighF", "lower": "shinF", "base": "hipF", "tip": "ankleF", "label": "Jambe loin"},
 }
 
 ## Paires proche / loin, pour échanger les côtés.
@@ -92,6 +106,9 @@ static func bone(id: String) -> Dictionary:
 	for b in BONES:
 		if b.id == id:
 			return b
+	for t in TWISTS:
+		if t.id == id:
+			return t
 	return {}
 
 
@@ -99,6 +116,8 @@ static func angle_ids() -> Array:
 	var ids := ["root"]
 	for b in BONES:
 		ids.append(b.id)
+	for t in TWISTS:
+		ids.append(t.id)
 	return ids
 
 
@@ -164,10 +183,21 @@ static func solve(p: Dictionary) -> Dictionary:
 	var tip := {}
 	world["root"] = ROOT.rest + ROOT.sign * angle(p, "root")
 	tip["root"] = Vector2.ZERO
+	# Torsions : les épaules et les hanches s'écartent le long de l'avant du
+	# buste (ou du bassin), la proche vers l'avant pour une torsion positive.
+	var base := {}
 	for b in BONES:
 		var w: float = world[b.parent] + b.rest + b.sign * angle(p, b.id)
 		world[b.id] = w
 		var o: Vector2 = tip[b.parent]
+		if b.id.begins_with("arm") or b.id.begins_with("thigh"):
+			var bras: bool = b.id.begins_with("arm")
+			var tw := angle(p, "torsion" if bras else "torsionBassin")
+			var demi := float(s.get("epaules" if bras else "hanches", 0.0))
+			var wa: float = world[b.parent] - 90.0
+			var sg := 1.0 if b.id.ends_with("N") else -1.0
+			o += Vector2(cos(deg_to_rad(wa)), sin(deg_to_rad(wa))) * demi * sin(deg_to_rad(tw)) * sg
+			base[b.id] = o
 		var l := bone_len(p, s, b.id)
 		tip[b.id] = o + Vector2(cos(deg_to_rad(w)), sin(deg_to_rad(w))) * l
 
@@ -185,6 +215,8 @@ static func solve(p: Dictionary) -> Dictionary:
 		"shoulder": W.call(tip["chest"]),
 		"neckTop": W.call(tip["neck"]),
 		"head": W.call(head),
+		"shoulderN": W.call(base["armN"]), "shoulderF": W.call(base["armF"]),
+		"hipN": W.call(base["thighN"]), "hipF": W.call(base["thighF"]),
 		"elbowN": W.call(tip["armN"]), "handN": W.call(tip["foreN"]),
 		"elbowF": W.call(tip["armF"]), "handF": W.call(tip["foreF"]),
 		"kneeN": W.call(tip["thighN"]), "ankleN": W.call(tip["shinN"]), "toeN": W.call(tip["footN"]),
@@ -373,8 +405,8 @@ static func aim(p: Dictionary, bone_id: String, target: Vector2, limits := true)
 		var ar := round2(norm180((w_root - ROOT.rest) * ROOT.sign))
 		q.angles.root = clamp_angle("root", ar) if limits else ar
 		return q
-	var start_joint := {"spineLow": "hip", "chest": "waist", "neck": "shoulder", "armN": "shoulder", "armF": "shoulder",
-		"foreN": "elbowN", "foreF": "elbowF", "thighN": "hip", "thighF": "hip", "shinN": "kneeN", "shinF": "kneeF",
+	var start_joint := {"spineLow": "hip", "chest": "waist", "neck": "shoulder", "armN": "shoulderN", "armF": "shoulderF",
+		"foreN": "elbowN", "foreF": "elbowF", "thighN": "hipN", "thighF": "hipF", "shinN": "kneeN", "shinF": "kneeF",
 		"footN": "ankleN", "footF": "ankleF"}
 	if not start_joint.has(bone_id):
 		return q
@@ -395,6 +427,8 @@ static func swap_sides(p: Dictionary) -> Dictionary:
 		var tmp = q.angles.get(pr[0], 0.0)
 		q.angles[pr[0]] = q.angles.get(pr[1], 0.0)
 		q.angles[pr[1]] = tmp
+	for t in TWISTS:
+		q.angles[t.id] = -float(q.angles.get(t.id, 0.0))
 	return q
 
 
@@ -483,12 +517,12 @@ static func primitives(p: Dictionary, color := Color("#111111"), far_shade := 1.
 	var w: float = s.stroke
 	var out := []
 	var leg := func(side: String, c: Color) -> void:
-		var pts := [J.hip, J["knee" + side], J["ankle" + side]]
+		var pts := [J["hip" + side], J["knee" + side], J["ankle" + side]]
 		if s.foot > 0.0:
 			pts.append(J["toe" + side])
 		out.append({"type": "path", "points": pts, "width": w, "color": c, "part": "leg" + side})
 	var arm := func(side: String, c: Color) -> void:
-		out.append({"type": "path", "points": [J.shoulder, J["elbow" + side], J["hand" + side]], "width": w, "color": c, "part": "arm" + side})
+		out.append({"type": "path", "points": [J["shoulder" + side], J["elbow" + side], J["hand" + side]], "width": w, "color": c, "part": "arm" + side})
 		if s.hand > w / 2.0:
 			out.append({"type": "circle", "c": J["hand" + side], "r": s.hand, "color": c, "part": "hand" + side})
 	arm.call("F", far)

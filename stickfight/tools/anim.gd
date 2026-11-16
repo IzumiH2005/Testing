@@ -402,6 +402,7 @@ func _verifier(recs: Array) -> String:
 				var ang := "coudes %d/%d genoux %d/%d buste %d" % [roundi(StickRig.angle(fig.pose, "foreN")), roundi(StickRig.angle(fig.pose, "foreF")),
 					roundi(StickRig.angle(fig.pose, "shinN")), roundi(StickRig.angle(fig.pose, "shinF")),
 					roundi(StickRig.angle(fig.pose, "root") + StickRig.angle(fig.pose, "spineLow") + StickRig.angle(fig.pose, "chest"))]
+				ang += "  torsion %d/%d  tête y %d" % [roundi(StickRig.angle(fig.pose, "torsion")), roundi(StickRig.angle(fig.pose, "torsionBassin")), roundi(J.head.y)]
 				L.append("%s  %s  poingN(%d,%d)%s" % [tag, ang, roundi(J.handN.x), roundi(J.handN.y), contact])
 			prev = {"J": J, "anim": fig.anim, "t": fig.t}
 		for tp in tips:

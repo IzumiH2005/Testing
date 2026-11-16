@@ -15,8 +15,8 @@ const GRID_STRONG := Color(0, 0, 0, 0.2)
 const DEBUG_COLORS := {"N": Color("#e8590c"), "F": Color("#1971c2"), "T": Color("#2f9e44")}
 const DEBUG_BONES := [
 	["hip", "waist", "T"], ["waist", "shoulder", "T"], ["shoulder", "neckTop", "T"], ["neckTop", "head", "T"],
-	["shoulder", "elbowN", "N"], ["elbowN", "handN", "N"], ["hip", "kneeN", "N"], ["kneeN", "ankleN", "N"],
-	["shoulder", "elbowF", "F"], ["elbowF", "handF", "F"], ["hip", "kneeF", "F"], ["kneeF", "ankleF", "F"],
+	["shoulderN", "elbowN", "N"], ["elbowN", "handN", "N"], ["hipN", "kneeN", "N"], ["kneeN", "ankleN", "N"],
+	["shoulderF", "elbowF", "F"], ["elbowF", "handF", "F"], ["hipF", "kneeF", "F"], ["kneeF", "ankleF", "F"],
 ]
 
 @export var view := Rect2(-120, -12, 240, 212):

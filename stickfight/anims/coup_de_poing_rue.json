@@ -37,7 +37,42 @@
     "root": 5,
     "spineLow": 8,
     "chest": 8,
-    "neck": 13
+    "neck": 11
+   },
+   "vise": {
+    "legN": [
+     30.1,
+     7.6
+    ]
+   }
+  },
+  {
+   "f": 5,
+   "nom": "le pied avant se soulève",
+   "courbe": "lin",
+   "fixe": {
+    "chest": 5.55,
+    "spineLow": 6.25,
+    "foreF": 21.0,
+    "foreN": 38.5,
+    "y": 70.33,
+    "root": 2.55,
+    "neck": 10.65,
+    "armF": 21.0,
+    "torsion": -8.75,
+    "x": -8.5,
+    "armN": -10.5,
+    "torsionBassin": -4.2
+   },
+   "vise": {
+    "legN": [
+     22,
+     20
+    ],
+    "legF": [
+     -43,
+     12
+    ]
    }
   },
   {
@@ -47,14 +82,16 @@
    "fixe": {
     "x": -28,
     "y": 70,
-    "root": -3,
-    "spineLow": 2,
-    "chest": 0,
-    "neck": 14,
+    "root": -2,
+    "spineLow": 3,
+    "chest": 1,
+    "neck": 10,
     "armN": -30,
     "foreN": 110,
-    "armF": 68,
-    "foreF": 55
+    "armF": 60,
+    "foreF": 60,
+    "torsion": -25,
+    "torsionBassin": -12
    },
    "vise": {
     "legN": [
@@ -74,12 +111,14 @@
    "fixe": {
     "x": -64,
     "y": 65,
-    "root": -10,
-    "spineLow": -4,
-    "chest": -7,
-    "neck": 20,
-    "armF": 80,
-    "foreF": 20
+    "root": -8,
+    "spineLow": -2,
+    "chest": -3,
+    "neck": 12,
+    "armF": 72,
+    "foreF": 40,
+    "torsion": -50,
+    "torsionBassin": -25
    },
    "vise": {
     "legN": [
@@ -92,10 +131,10 @@
     ],
     "armN": {
      "cible": [
-      12,
-      -10
+      2,
+      -7
      ],
-     "repere": "shoulder",
+     "repere": "shoulderN",
      "coude": "arriere"
     }
    }
@@ -105,14 +144,16 @@
    "nom": "armé : buste en arrière, coude bas, poing serré derrière la tête",
    "courbe": "dec",
    "fixe": {
-    "x": -70,
+    "x": -68,
     "y": 64,
-    "root": -13,
-    "spineLow": -5,
-    "chest": -8,
-    "neck": 22,
-    "armF": 78,
-    "foreF": 10
+    "root": -10,
+    "spineLow": -3,
+    "chest": -4,
+    "neck": 13,
+    "armF": 74,
+    "foreF": 35,
+    "torsion": -58,
+    "torsionBassin": -30
    },
    "vise": {
     "legN": [
@@ -125,10 +166,10 @@
     ],
     "armN": {
      "cible": [
-      14,
-      -9
+      -1,
+      -8
      ],
-     "repere": "shoulder",
+     "repere": "shoulderN",
      "coude": "arriere"
     }
    }
@@ -138,14 +179,16 @@
    "nom": "armé tenu, il se ramasse encore",
    "courbe": "acc",
    "fixe": {
-    "x": -73,
+    "x": -70,
     "y": 63,
-    "root": -15,
-    "spineLow": -6,
-    "chest": -9,
-    "neck": 23,
-    "armF": 79,
-    "foreF": 9
+    "root": -11,
+    "spineLow": -3,
+    "chest": -5,
+    "neck": 14,
+    "armF": 75,
+    "foreF": 33,
+    "torsion": -60,
+    "torsionBassin": -30
    },
    "vise": {
     "legN": [
@@ -158,10 +201,10 @@
     ],
     "armN": {
      "cible": [
-      14,
-      -10
+      -2,
+      -8
      ],
-     "repere": "shoulder",
+     "repere": "shoulderN",
      "coude": "arriere"
     }
    }
@@ -171,14 +214,16 @@
    "nom": "micro-anticipation : il s'enfonce, le poing recule d'un cran",
    "courbe": "lin",
    "fixe": {
-    "x": -74,
-    "y": 61.5,
-    "root": -16,
-    "spineLow": -6,
-    "chest": -9,
-    "neck": 26,
-    "armF": 74,
-    "foreF": 18
+    "x": -71,
+    "y": 62,
+    "root": -12,
+    "spineLow": -3,
+    "chest": -5,
+    "neck": 15,
+    "armF": 76,
+    "foreF": 32,
+    "torsion": -64,
+    "torsionBassin": -32
    },
    "vise": {
     "legN": [
@@ -191,10 +236,10 @@
     ],
     "armN": {
      "cible": [
-      12,
-      -12
+      -3,
+      -9
      ],
-     "repere": "shoulder",
+     "repere": "shoulderN",
      "coude": "arriere"
     }
    }
@@ -204,14 +249,16 @@
    "nom": "la jambe arrière pousse, la hanche part",
    "courbe": "lin",
    "fixe": {
-    "x": -62,
-    "y": 62,
+    "x": -60,
+    "y": 62.5,
     "root": -6,
-    "spineLow": -3,
-    "chest": -6,
-    "neck": 18,
-    "armF": 62,
-    "foreF": 45
+    "spineLow": -2,
+    "chest": -4,
+    "neck": 13,
+    "armF": 70,
+    "foreF": 45,
+    "torsion": -55,
+    "torsionBassin": -5
    },
    "vise": {
     "legN": [
@@ -224,10 +271,10 @@
     ],
     "armN": {
      "cible": [
-      16,
-      -8
+      0,
+      -7
      ],
-     "repere": "shoulder",
+     "repere": "shoulderN",
      "coude": "arriere"
     }
    }
@@ -237,16 +284,18 @@
    "nom": "l'épaule part, le coude mène",
    "courbe": "lin",
    "fixe": {
-    "x": -28,
+    "x": -25,
     "y": 62,
-    "root": 18,
-    "spineLow": 5,
+    "root": 10,
+    "spineLow": 4,
     "chest": 2,
-    "neck": 6,
-    "armN": 40,
+    "neck": 2,
+    "armN": 45,
     "foreN": 100,
-    "armF": 48,
-    "foreF": 100
+    "armF": 50,
+    "foreF": 95,
+    "torsion": 5,
+    "torsionBassin": 20
    },
    "vise": {
     "legN": [
@@ -264,14 +313,16 @@
    "nom": "contact : pied arrière, bassin, épaule et poing alignés",
    "courbe": "dec",
    "fixe": {
-    "x": 30,
-    "y": 60,
-    "root": 36,
-    "spineLow": 8,
-    "chest": 4,
-    "neck": -4,
-    "armF": 15,
-    "foreF": 150
+    "x": 36,
+    "y": 62,
+    "root": 24,
+    "spineLow": 5,
+    "chest": 2,
+    "neck": -10,
+    "armF": 30,
+    "foreF": 135,
+    "torsion": 50,
+    "torsionBassin": 30
    },
    "vise": {
     "armN": [
@@ -295,14 +346,16 @@
    "fixe": {
     "x": 36,
     "y": 59,
-    "root": 42,
+    "root": 30,
     "spineLow": 10,
     "chest": 6,
     "neck": 0,
     "armN": 120,
     "foreN": 4,
-    "armF": 10,
-    "foreF": 145
+    "armF": 25,
+    "foreF": 138,
+    "torsion": 62,
+    "torsionBassin": 34
    },
    "vise": {
     "legF": [
@@ -322,14 +375,16 @@
    "fixe": {
     "x": 40,
     "y": 58,
-    "root": 46,
+    "root": 33,
     "spineLow": 10,
     "chest": 7,
     "neck": 0,
     "armN": 104,
     "foreN": 15,
-    "armF": 6,
-    "foreF": 135
+    "armF": 22,
+    "foreF": 132,
+    "torsion": 60,
+    "torsionBassin": 32
    },
    "vise": {
     "legF": [
@@ -349,14 +404,16 @@
    "fixe": {
     "x": 42,
     "y": 60,
-    "root": 40,
+    "root": 30,
     "spineLow": 10,
     "chest": 7,
     "neck": 2,
     "armN": 96,
     "foreN": 26,
     "armF": 10,
-    "foreF": 130
+    "foreF": 130,
+    "torsion": 48,
+    "torsionBassin": 26
    },
    "vise": {
     "legF": [
@@ -383,7 +440,9 @@
     "armN": 75,
     "foreN": 70,
     "armF": 25,
-    "foreF": 120
+    "foreF": 120,
+    "torsion": 22,
+    "torsionBassin": 12
    },
    "vise": {
     "legF": [
@@ -393,6 +452,35 @@
     "legN": [
      35,
      26
+    ]
+   }
+  },
+  {
+   "f": 56,
+   "nom": "le pied descend",
+   "courbe": "dec",
+   "fixe": {
+    "chest": 7.25,
+    "spineLow": 8.25,
+    "foreF": 123.75,
+    "foreN": 81.25,
+    "y": 66.25,
+    "root": 16.25,
+    "neck": 6.25,
+    "armF": 36.25,
+    "torsion": 10.0,
+    "x": 44.75,
+    "armN": 65.25,
+    "torsionBassin": 5.25
+   },
+   "vise": {
+    "legF": [
+     45,
+     7.6
+    ],
+    "legN": [
+     70,
+     13
     ]
    }
   },
@@ -410,7 +498,9 @@
     "armN": 62,
     "foreN": 85,
     "armF": 40,
-    "foreF": 125
+    "foreF": 125,
+    "torsion": 6,
+    "torsionBassin": 3
    },
    "vise": {
     "legF": [
@@ -437,7 +527,9 @@
     "armN": 62,
     "foreN": 78,
     "armF": 46,
-    "foreF": 127
+    "foreF": 127,
+    "torsion": 0,
+    "torsionBassin": 0
    },
    "vise": {
     "legF": [
@@ -464,7 +556,9 @@
     "armN": 62.29,
     "foreN": 77.17,
     "armF": 47.2,
-    "foreF": 127.66
+    "foreF": 127.66,
+    "torsion": 0,
+    "torsionBassin": 0
    },
    "vise": {
     "legF": [
@@ -554,8 +648,6 @@
  },
  "decalage": {
   "neck": 2,
-  "chest": 1,
-  "armF": 1,
-  "foreF": 2
+  "chest": 1
  }
 }
