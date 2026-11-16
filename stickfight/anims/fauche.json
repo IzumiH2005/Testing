@@ -32,7 +32,9 @@
     "thighN": 62,
     "shinN": 74,
     "thighF": 0,
-    "shinF": 46
+    "shinF": 46,
+    "armN_p": 22,
+    "armF_p": -15
    },
    "ancre": false,
    "courbe": "dec"
@@ -54,7 +56,9 @@
     "thighN": 98,
     "shinN": 46,
     "thighF": 70,
-    "shinF": 36
+    "shinF": 36,
+    "armN_p": 22,
+    "armF_p": -15
    },
    "ancre": false,
    "courbe": "lin"
@@ -76,7 +80,9 @@
     "thighN": 96,
     "shinN": 20,
     "thighF": 84,
-    "shinF": 30
+    "shinF": 30,
+    "armN_p": 12,
+    "armF_p": -8
    },
    "ancre": false,
    "courbe": "acc"
