@@ -425,8 +425,8 @@ image à la fin, parce que lire des images coûte beaucoup plus cher que lire du
 3. Une seule image à la fin : `tools/anim.sh anims/x.json --cles -o planche.png --scale 1`
    ne rend que les images clés et le contact.
 
-Le style `epais` dessine un fin **liseré** clair sous les membres proches (`"lisere"` dans
-`StickRig.STYLES`, 0 pour l'enlever) : un bras qui passe devant le corps ou la tête reste lisible.
+Un style peut ajouter un fin **liseré** clair sous les membres proches (`"lisere": 1.3` dans
+`StickRig.STYLES`) ; aucun style ne l'utilise, l'apparence des personnages ne change pas.
 
 ### Régler une animation en ligne de commande
 

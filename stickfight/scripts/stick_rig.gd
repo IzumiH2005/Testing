@@ -40,7 +40,6 @@ const STYLES := {
 		"upperArm": 34.0, "forearm": 32.0,
 		"thigh": 41.0, "shin": 42.0,
 		"foot": 10.0,      # pied : petit crochet du trait, de la cheville vers l'avant
-		"lisere": 1.3,     # contour clair sous les membres proches (0 = aucun)
 	},
 	"fin": {
 		"label": "Fin (petite tête, trait léger)",
