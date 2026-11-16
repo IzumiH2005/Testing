@@ -397,6 +397,11 @@ func _verifier(recs: Array) -> String:
 				return false
 			if pres.call(J.kneeN) and pres.call(J.ankleN):
 				warn.append("jambes superposées")
+			for v in StickRig.amplitudes(fig.pose):
+				warn.append(str(v.label))
+			for v in StickRig.violations(fig.pose):
+				if float(v.value) < float(v.lim.x) - 1.0 or float(v.value) > float(v.lim.y) + 1.0:
+					warn.append("%s hors amplitude" % str(v.label))
 			if StickRig.lowest_y(fig.pose) < -1.0:
 				warn.append("sous le sol")
 			# Déséquilibre : deux pieds au sol, bassin hors de la base d'appui.

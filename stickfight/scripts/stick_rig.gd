@@ -62,9 +62,9 @@ const BONES := [
 	{"id": "spineLow", "parent": "root",     "len": "spineLow", "rest": 0.0,   "sign": -1.0, "lim": Vector2(-25, 45),  "label": "Bas du dos"},
 	{"id": "chest",    "parent": "spineLow", "len": "chest",    "rest": 0.0,   "sign": -1.0, "lim": Vector2(-25, 45),  "label": "Poitrine"},
 	{"id": "neck",     "parent": "chest",    "len": "neck",     "rest": 0.0,   "sign": -1.0, "lim": Vector2(-60, 50),  "label": "Cou / tête"},
-	{"id": "armF",     "parent": "chest",    "len": "upperArm", "rest": 180.0, "sign": 1.0,  "lim": Vector2(-60, 180), "label": "Épaule (loin)"},
+	{"id": "armF",     "parent": "chest",    "len": "upperArm", "rest": 180.0, "sign": 1.0,  "lim": Vector2(-180, 180), "label": "Épaule (loin)"},
 	{"id": "foreF",    "parent": "armF",     "len": "forearm",  "rest": 0.0,   "sign": 1.0,  "lim": Vector2(0, 150),   "label": "Coude (loin)"},
-	{"id": "armN",     "parent": "chest",    "len": "upperArm", "rest": 180.0, "sign": 1.0,  "lim": Vector2(-60, 180), "label": "Épaule (proche)"},
+	{"id": "armN",     "parent": "chest",    "len": "upperArm", "rest": 180.0, "sign": 1.0,  "lim": Vector2(-180, 180), "label": "Épaule (proche)"},
 	{"id": "foreN",    "parent": "armN",     "len": "forearm",  "rest": 0.0,   "sign": 1.0,  "lim": Vector2(0, 150),   "label": "Coude (proche)"},
 	{"id": "thighF",   "parent": "root",     "len": "thigh",    "rest": 180.0, "sign": 1.0,  "lim": Vector2(-30, 140), "label": "Hanche (loin)"},
 	{"id": "shinF",    "parent": "thighF",   "len": "shin",     "rest": 0.0,   "sign": -1.0, "lim": Vector2(0, 150),   "label": "Genou (loin)"},
@@ -90,7 +90,13 @@ const TWISTS := [
 	{"id": "torsion", "lim": Vector2(-90, 90), "label": "Torsion des épaules"},
 	{"id": "torsionBassin", "lim": Vector2(-90, 90), "label": "Torsion du bassin"},
 	{"id": "lacet", "lim": Vector2(-180, 180), "label": "Corps tourné vers la caméra"},
+	# Omoplate (ceinture scapulaire) : déplacement de l'épaule, en unités.
+	{"id": "epauleN_av", "lim": Vector2(-7, 7), "label": "Épaule proche : avance (+) / recule (−)"},
+	{"id": "epauleF_av", "lim": Vector2(-7, 7), "label": "Épaule loin : avance (+) / recule (−)"},
+	{"id": "epauleN_haut", "lim": Vector2(-3, 7), "label": "Épaule proche : haussée (+) / abaissée (−)"},
+	{"id": "epauleF_haut", "lim": Vector2(-3, 7), "label": "Épaule loin : haussée (+) / abaissée (−)"},
 ]
+const SCAPULA := ["epauleN_av", "epauleF_av", "epauleN_haut", "epauleF_haut"]
 const PROF := "_p"
 ## Rotation d'un membre autour de son propre axe (bras : rotation de
 ## l'humérus, cuisse : rotation du fémur). Elle oriente le plan dans lequel le
@@ -106,7 +112,7 @@ const CHARNIERES := ["foreN", "foreF", "shinN", "shinF"]
 ## abduction 45°, adduction 30°. Rotation du bras ±80°, de la cuisse ±45°.
 ## Buste et bassin : inclinaison latérale ±30°. Cheville : ±25°.
 const LIM_3D := {
-	"_p:arm": Vector2(-40, 90), "_p:thigh": Vector2(-30, 45), "_p:root": Vector2(-30, 30),
+	"_p:arm": Vector2(-90, 90), "_p:thigh": Vector2(-30, 45), "_p:root": Vector2(-30, 30),
 	"_p:spineLow": Vector2(-30, 30), "_p:chest": Vector2(-30, 30), "_p:neck": Vector2(-40, 40),
 	"_p:foot": Vector2(-25, 25), "_r:arm": Vector2(-80, 80), "_r:thigh": Vector2(-45, 45),
 }
@@ -120,7 +126,8 @@ const LIMBS := {
 }
 
 ## Paires proche / loin, pour échanger les côtés.
-const SIDE_PAIRS := [["armN", "armF"], ["foreN", "foreF"], ["thighN", "thighF"], ["shinN", "shinF"], ["footN", "footF"]]
+const SIDE_PAIRS := [["armN", "armF"], ["foreN", "foreF"], ["thighN", "thighF"], ["shinN", "shinF"], ["footN", "footF"],
+	["epauleN_av", "epauleF_av"], ["epauleN_haut", "epauleF_haut"]]
 
 
 static func bone(id: String) -> Dictionary:
@@ -218,6 +225,7 @@ static func solve(p: Dictionary) -> Dictionary:
 	var world := {}
 	var tip := {}
 	var basis := {}
+	var base3 := {}
 	var deg := func(a: float) -> float: return deg_to_rad(a)
 	var RZ := func(a: float) -> Basis: return Basis(Vector3(0, 0, 1), deg.call(a))
 	var RY := func(a: float) -> Basis: return Basis(Vector3(0, 1, 0), deg.call(a))
@@ -234,7 +242,14 @@ static func solve(p: Dictionary) -> Dictionary:
 		if b.id == "chest":
 			B = B * RX.call(angle(p, "torsion"))
 		basis[b.id] = B
-		tip[b.id] = tip[b.parent] + B.x * bone_len(p, s, b.id)
+		var o3: Vector3 = tip[b.parent]
+		if b.id.begins_with("arm"):
+			# Omoplate : l'épaule avance (vers l'avant du thorax) ou monte.
+			var side: String = b.id.substr(3)
+			var Bc: Basis = basis["chest"]
+			o3 = o3 + (-Bc.y) * angle(p, "epaule%s_av" % side) + Bc.x * angle(p, "epaule%s_haut" % side)
+			base3[b.id] = o3
+		tip[b.id] = o3 + B.x * bone_len(p, s, b.id)
 	# Angle projeté de chaque os (pour la cinématique inverse, qui reste dans le plan).
 	world["root"] = rad_to_deg(atan2(basis["root"].x.y, basis["root"].x.x))
 	for b in BONES:
@@ -259,12 +274,14 @@ static func solve(p: Dictionary) -> Dictionary:
 		joints[k] = W.call(pts3[k])
 		prof[k] = float(pts3[k].z)
 	# Les membres partent d'un seul point du tronc : ils en sont le prolongement.
+	# Seule l'omoplate déplace un peu l'épaule (7 unités au plus, moins que la
+	# demi-épaisseur du trait : le bras reste attaché au buste).
 	for side in ["N", "F"]:
-		joints["shoulder" + side] = joints.shoulder
+		joints["shoulder" + side] = W.call(base3["arm" + side])
 		joints["hip" + side] = joints.hip
-		prof["shoulder" + side] = prof.shoulder
+		prof["shoulder" + side] = float(base3["arm" + side].z)
 		prof["hip" + side] = prof.hip
-	return {"joints": joints, "prof": prof, "world": world, "style": s, "facing": f, "head_r": r}
+	return {"joints": joints, "prof": prof, "basis": basis, "world": world, "style": s, "facing": f, "head_r": r}
 
 
 ## Point le plus bas du dessin (en tenant compte de l'épaisseur du trait).
@@ -453,7 +470,13 @@ static func _hors_plan(p: Dictionary) -> bool:
 ## à plat, et les pas restent petits).
 static func _affine(p: Dictionary, limb: Dictionary, target: Vector2, limits: bool, ids: Array) -> Dictionary:
 	var q := clone_pose(p)
-	var err := func(pp: Dictionary) -> float: return solve(pp).joints[limb.tip].distance_squared_to(target)
+	var err := func(pp: Dictionary) -> float:
+		var e0: float = solve(pp).joints[limb.tip].distance_squared_to(target)
+		if limits:
+			for v in amplitudes(pp):
+				if str(v.id) == str(limb.upper):
+					e0 += 4000.0
+		return e0
 	var e: float = err.call(q)
 	var pas := 4.0
 	for it in 80:
@@ -519,7 +542,8 @@ static func swap_sides(p: Dictionary) -> Dictionary:
 		q.angles[pr[0]] = q.angles.get(pr[1], 0.0)
 		q.angles[pr[1]] = tmp
 	for t in TWISTS:
-		q.angles[t.id] = -float(q.angles.get(t.id, 0.0))
+		if not t.id in SCAPULA:
+			q.angles[t.id] = -float(q.angles.get(t.id, 0.0))
 	for suf in [PROF, ROT]:
 		for pr in SIDE_PAIRS:
 			var a: String = pr[0] + suf
@@ -552,6 +576,8 @@ static func mirror_channel(c: String) -> Array:
 		return [c, 1.0]
 	if c.begins_with("etire:"):
 		return ["etire:" + other_side(c.substr(6)), 1.0]
+	if c in SCAPULA:
+		return [other_side(c), 1.0]
 	return [other_side(c), 1.0 if (c.begins_with("foot") and not c.ends_with(PROF)) else -1.0]
 
 
@@ -596,6 +622,50 @@ static func lerp_pose(a: Dictionary, b: Dictionary, t: float) -> Dictionary:
 	return q
 
 
+## Amplitudes des rotules (épaule, hanche) : la direction du bras ou de la
+## cuisse doit rester dans la zone qu'atteint un vrai corps (voir
+## analyses/anatomie.md). Renvoie [{id, label}] des articulations hors zone.
+static func amplitudes(p: Dictionary) -> Array:
+	var out := []
+	var sol := solve(p)
+	var B: Dictionary = sol.basis
+	for side in ["N", "F"]:
+		var sg := -1.0 if side == "N" else 1.0
+		var nom := "proche" if side == "N" else "loin"
+		# Repère du thorax : avant, haut, dehors (côté du membre).
+		var Bc: Basis = B["chest"]
+		var d: Vector3 = B["arm" + side].x
+		var fw := d.dot(-Bc.y)
+		var up := d.dot(Bc.x)
+		var ou := d.dot(Bc.z * sg)
+		# Angle entre le bras et la verticale basse (bras pendant = 0).
+		var depuis_bas := rad_to_deg(acos(clampf(-up, -1.0, 1.0)))
+		if absf(up) < 0.85 and Vector2(fw, ou).length() > 0.2:
+			var az := rad_to_deg(atan2(ou, fw))
+			if az < -55.0:
+				out.append({"id": "arm" + side, "label": "bras %s croisé trop loin devant le buste" % nom})
+			# Vers l'arrière : jusqu'à 60° depuis le bras pendant (extension),
+			# ou jusqu'à 40° derrière le côté quand le bras est écarté.
+			elif az > 130.0 and depuis_bas > 62.0:
+				out.append({"id": "arm" + side, "label": "bras %s trop loin derrière" % nom})
+		if fw < -0.3 and ou < -0.3 and up > -0.9:
+			out.append({"id": "arm" + side, "label": "bras %s derrière le dos, de l'autre côté" % nom})
+		# Hanche, dans le repère du bassin.
+		var Br: Basis = B["root"]
+		var t: Vector3 = B["thigh" + side].x
+		var fl := rad_to_deg(atan2(t.dot(-Br.y), t.dot(-Br.x)))
+		var ab := rad_to_deg(asin(clampf(t.dot(Br.z * sg), -1.0, 1.0)))
+		if fl > 130.0:
+			out.append({"id": "thigh" + side, "label": "cuisse %s trop fléchie" % nom})
+		elif fl < -35.0:
+			out.append({"id": "thigh" + side, "label": "cuisse %s trop loin derrière" % nom})
+		if ab > 50.0:
+			out.append({"id": "thigh" + side, "label": "cuisse %s trop écartée" % nom})
+		elif ab < -35.0:
+			out.append({"id": "thigh" + side, "label": "cuisse %s croisée trop loin" % nom})
+	return out
+
+
 ## Articulations hors amplitude humaine : [{id, label, value, lim}].
 static func violations(p: Dictionary) -> Array:
 	var out := []
@@ -635,7 +705,7 @@ static func primitives(p: Dictionary, color := Color("#111111"), far_shade := 1.
 			lower.append("toe" + side)
 		items.append({"z": bl + (Z["knee" + side] + Z["ankle" + side]) / 2.0, "type": "path", "points": lower.map(func(k): return J[k]),
 			"width": w, "color": c, "part": "leg" + side})
-		seg.call("shoulder", "elbow" + side, ba, c, "arm" + side)
+		seg.call("shoulder" + side, "elbow" + side, ba, c, "arm" + side)
 		seg.call("elbow" + side, "hand" + side, ba, c, "arm" + side)
 		if s.hand > w / 2.0:
 			items.append({"z": ba + Z["hand" + side] - 0.01, "type": "circle", "c": J["hand" + side], "r": s.hand, "color": c, "part": "hand" + side})

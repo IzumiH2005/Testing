@@ -1,0 +1,115 @@
+# Anatomie du squelette : ce que chaque articulation peut faire, en 3D
+
+Référence pour poser n'importe quel mouvement. Pour chaque articulation : ses degrés de liberté
+réels, leurs amplitudes, les couplages (une articulation qui en entraîne une autre), ce qui se
+voit de profil, et le canal du squelette qui la commande. Valeurs pour un adulte (AAOS et tables
+cliniques, voir les sources) ; un combattant force un peu au-delà.
+
+Repère : le personnage regarde vers +x (l'avant), y vers le haut, la profondeur vers la caméra
+ou à l'opposé. « Côté caméra » = côté proche (N), « côté opposé » = côté loin (F).
+
+## 1. Ce qu'on avait mal compris
+
+Un membre n'a pas deux directions indépendantes (« avant-arrière » et « sur le côté »). L'épaule
+et la hanche sont des **rotules** : le bras peut pointer dans n'importe quelle direction d'une
+**zone** de l'espace (un cône déformé), et en plus tourner sur lui-même. Les limites ne sont pas
+« ±90° sur chaque axe » : elles dépendent de la direction. Par exemple, le bras peut aller loin
+derrière quand il est écarté sur le côté, mais presque pas quand il est le long du corps ; il peut
+croiser devant le buste, pas derrière le dos.
+
+Le coude et le genou sont des **charnières** : un seul plan de pliage. Ce plan, c'est la rotation
+du segment au-dessus (l'humérus, le fémur) qui le choisit : c'est pour ça qu'on peut avoir le
+coude vers le bas, vers l'extérieur ou vers l'arrière avec le même pliage.
+
+## 2. Le tronc
+
+| Articulation | Mouvement | Amplitude | Canal |
+|---|---|---|---|
+| Colonne lombaire + thoracique | flexion (se pencher en avant) / extension | 80° / 30° au total, répartis sur les deux os | `spineLow`, `chest` |
+| | inclinaison sur le côté | 35° de chaque côté au total | `spineLow_p`, `chest_p` |
+| | rotation (torsion) | 45° de chaque côté, surtout dans le thorax | `torsion` |
+| Bassin (sur les hanches) | bascule avant / arrière, inclinaison, rotation | suit les jambes | `root`, `root_p`, `torsionBassin` |
+| Cou | flexion / extension | 50° / 60° | `neck` |
+| | inclinaison / rotation | 45° / 80° (la rotation ne se voit pas : tête ronde) | `neck_p` |
+
+Couplages : quand on tourne les épaules, le bassin suit d'environ la moitié (ou résiste, et
+c'est le ressort d'un coup). Le regard reste sur la cible : le cou compense la torsion.
+
+## 3. La ceinture scapulaire (omoplate et clavicule)
+
+L'épaule n'est pas fixée au thorax : l'omoplate glisse. C'est elle qui donne de l'allonge à un
+coup de poing et qui permet de hausser les épaules.
+
+| Mouvement | Amplitude (déplacement de l'épaule) | Canal |
+|---|---|---|
+| Protraction (l'épaule avance) / rétraction (elle recule) | environ ±7 unités (≈ 7 cm) | `epauleN_av`, `epauleF_av` |
+| Élévation (hausser) / abaissement | +7 / −3 unités | `epauleN_haut`, `epauleF_haut` |
+
+Rythme scapulo-huméral : au-delà de 90° d'élévation du bras, l'omoplate tourne et monte avec lui
+(environ 1° d'omoplate pour 2° de bras) : un bras levé au-dessus de la tête hausse l'épaule.
+
+## 4. L'épaule (rotule) et le bras
+
+Direction du bras (cône) :
+
+| Mouvement | Amplitude |
+|---|---|
+| Flexion (bras devant, jusqu'à la verticale) | 180° |
+| Extension (bras derrière, le long du corps) | 60° |
+| Abduction (bras sur le côté, jusqu'à la verticale) | 180° (avec l'omoplate) |
+| Adduction horizontale (bras qui croise devant le buste, à hauteur d'épaule) | 45 à 50° au-delà de l'avant |
+| Abduction horizontale (bras qui part derrière, à hauteur d'épaule) | 30 à 45° au-delà du côté |
+| Le bras ne passe jamais derrière le dos de l'autre côté | — |
+
+Rotation sur son axe (avec le bras écarté à 90°) : 70° interne, 90° externe ; elle oriente le
+coude. Canaux : `armN` (dans le plan), `armN_p` (vers la caméra = écarté pour le bras proche),
+`armN_r` (rotation sur l'axe). Le squelette vérifie la direction du bras dans le cône ci-dessus
+(`StickRig.amplitudes`), pas chaque canal séparément.
+
+## 5. Le coude et l'avant-bras
+
+| Mouvement | Amplitude | Canal |
+|---|---|---|
+| Flexion (charnière) | 0 à 150° | `foreN` |
+| Hyperextension | 0 (5° au plus, pas chez nous) | — |
+| Pronation / supination (rotation de l'avant-bras) | 80° / 80° | aucun : elle ne se voit pas sur un poing rond |
+| Pliage de côté | **impossible** | — |
+
+## 6. La hanche (rotule) et la jambe
+
+| Mouvement | Amplitude |
+|---|---|
+| Flexion (genou vers la poitrine) | 120° genou plié, 90° jambe tendue |
+| Extension (jambe derrière) | 20 à 30° |
+| Abduction (jambe sur le côté) | 45° |
+| Adduction (jambe qui croise devant l'autre) | 30° |
+| Rotation interne / externe | 40° / 50° (oriente le genou et le pied) |
+
+Canaux : `thighN`, `thighN_p`, `thighN_r`.
+
+## 7. Le genou, la cheville
+
+| Articulation | Mouvement | Amplitude | Canal |
+|---|---|---|---|
+| Genou | flexion (charnière) | 0 à 150° | `shinN` |
+| | rotation quand il est plié | 30° environ, invisible de profil | aucun |
+| Cheville | flexion dorsale / plantaire | 20° / 50° | `footN` |
+| | inversion / éversion (pied qui roule sur le côté) | 25° / 15° | `footN_p` |
+
+## 8. Ce qui se voit de profil, et donc ce qu'il faut régler
+
+- **Visible** : flexion de tout, raccourci des bras et des jambes quand ils s'écartent ou
+  croisent (épaule, hanche), protraction et élévation de l'épaule (le point d'attache bouge un
+  peu), inclinaison du buste (le buste raccourcit).
+- **Invisible mais logique** : rotation du bras et de la cuisse (elle choisit le plan du coude et
+  du genou, donc elle compte dès que le coude ou le genou plie), torsion du buste (elle se voit
+  par les bras), pronation.
+
+## Sources
+
+- [WikEM, amplitudes articulaires](https://wikem.org/wiki/Joint_ROM_(Table))
+- [Physiotutors, amplitudes passives de l'épaule](https://www.physiotutors.com/wiki/shoulder-passive-range-of-motion/)
+- [ABMP, rythme scapulo-huméral](https://www-b.abmp.com/massage-and-bodywork-magazine/issues/marchapril-2021/scapulohumeral-rhythm)
+- [Table d'amplitudes de l'épaule chez l'adulte sain (PMC)](https://pmc.ncbi.nlm.nih.gov/articles/PMC3785041/table/T2)
+- [Valeurs normales d'amplitude (SNCC)](https://www.sncc.ca/resources/Documents/Dragon%20Boat/2024%20CCWCs/range%20of%20motion%20normal%20values.pdf)
+- `RECHERCHE.md` (§ 2) pour les amplitudes déjà utilisées dans le plan.

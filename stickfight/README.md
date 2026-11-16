@@ -440,15 +440,15 @@ passer derrière la tête ou devant le buste, une jambe croiser l'autre. Canaux,
 | `torsionBassin` | le bassin tourne autour de la colonne (hanches) |
 | `lacet` | tout le corps tourne vers la caméra (vue de trois quarts) |
 | `armN_r`, `armF_r`, `thighN_r`, `thighF_r` | rotation du bras (de la cuisse) autour de son axe : oriente le plan où plie le coude (le genou) — coude vers le bas, vers l'extérieur, vers l'arrière |
+| `epauleN_av`, `epauleN_haut` (et `F`) | omoplate : l'épaule avance ou recule (±7), se hausse (+7) ou s'abaisse (−3) ; c'est l'allonge d'un coup de poing |
 
-Le squelette suit les articulations réelles : le coude et le genou sont des **charnières** (ils
-ne plient que dans un plan, sans profondeur propre) ; l'épaule et la hanche ont trois degrés
-de liberté (flexion dans le plan, écartement en profondeur, rotation autour de l'axe du membre) ;
-le buste et le bassin s'inclinent sur le côté (`spineLow_p`, `chest_p`, `root_p`) et tournent
-(`torsion`, `torsionBassin`). Chaque canal 3D a ses limites (`StickRig.LIM_3D`) : bras écarté
-jusqu'à 90°, ramené devant le buste jusqu'à 40°, cuisse écartée 45° et ramenée 30°, rotation du
-bras ±80°, de la cuisse ±45°. La cinématique inverse respecte toujours ces limites, même quand
-on impose le côté du coude.
+Le squelette suit l'anatomie (détail et sources : `analyses/anatomie.md`) : le coude et le genou
+sont des **charnières** ; l'épaule et la hanche sont des **rotules**, contrôlées par la direction
+du membre dans l'espace (`StickRig.amplitudes`) et non canal par canal — le bras peut croiser
+devant le buste jusqu'à 55°, partir derrière jusqu'à 60° depuis le bras pendant (plus s'il est
+écarté), jamais derrière le dos de l'autre côté ; la cuisse se plie jusqu'à 130°, part derrière
+jusqu'à 35°, s'écarte de 50° et croise de 35°. La cinématique inverse respecte ces zones, et
+`--verifier` signale tout membre qui en sort.
 
 Avec tout à 0, le dessin est exactement le profil plat d'avant : les animations existantes ne
 changent pas. Bras et jambes partent toujours d'un seul point du tronc. La cinématique inverse
