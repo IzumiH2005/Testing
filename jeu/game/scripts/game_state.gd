@@ -30,9 +30,20 @@ var data := {
 	"vibration": true,
 	"tuto_done": false,
 	"tuto_turn_done": false,
+	"start_level": 0,       # niveau de départ de l'ascension libre (index dans LEVELS)
 	"runs": 0,
 	"total_m": 0,
 }
+
+## Niveaux de la tour (biomes, cf. Tower.BIOMES) : l'ascension libre peut commencer à n'importe lequel.
+const LEVELS := [
+	{"fr": "CRYPTE DES VEILLEURS", "en": "WATCHERS' CRYPT"},
+	{"fr": "FONDERIE FROIDE", "en": "COLD FOUNDRY"},
+	{"fr": "BIBLIOTHÈQUE NOYÉE", "en": "SUNKEN LIBRARY"},
+	{"fr": "JARDIN DE CRISTAL", "en": "CRYSTAL GARDEN"},
+	{"fr": "CLOCHER DES VENTS", "en": "WIND BELFRY"},
+	{"fr": "SOMMET CÉLESTE", "en": "SKY SUMMIT"},
+]
 
 var lang := "fr"
 
@@ -157,6 +168,18 @@ func buy(id: String) -> bool:
 		return true
 	return false
 
+# ---------------------------------------------------------------- niveau de départ
+
+func start_level() -> int:
+	return clampi(int(data.get("start_level", 0)), 0, LEVELS.size() - 1)
+
+func set_start_level(i: int) -> void:
+	data.start_level = clampi(i, 0, LEVELS.size() - 1)
+	save()
+
+func level_name(i: int) -> String:
+	return String(LEVELS[clampi(i, 0, LEVELS.size() - 1)]["fr" if lang == "fr" else "en"])
+
 # ---------------------------------------------------------------- réglages
 
 func set_lang(l: String) -> void:
@@ -231,6 +254,8 @@ const T := {
 	"extra_q": ["UNE VIDÉO POUR\nUNE 5E VIE ?", "WATCH A VIDEO\nFOR A 5TH LIFE?"],
 	"last_days": ["7 DERNIERS JOURS", "LAST 7 DAYS"],
 	"doubled": ["DOUBLÉ !", "DOUBLED!"],
+	"level": ["NIVEAU", "LEVEL"],
+	"start_at": ["DÉPART", "START"],
 }
 
 func t(key: String) -> String:

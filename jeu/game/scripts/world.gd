@@ -161,20 +161,24 @@ func _vh() -> float:
 
 # ------------------------------------------------------------------ cycle de vie
 
-func setup_demo(seed_v: int) -> void:
+## start_level : le décor du menu défile dans le biome du niveau de départ choisi.
+func setup_demo(seed_v: int, start_level := 0) -> void:
 	tower = Tower.new(seed_v)
 	state = S.DEMO
 	player.visible = false
 	for e in echo_nodes:
 		e.visible = false
-	cam_y = -_vh() + 40.0
+	var m0: int = Tower.BIOMES[clampi(start_level, 0, Tower.BIOMES.size() - 1)].start
+	cam_y = -_vh() + 40.0 - float(m0) * TILE
 	tide_y = 99999.0
 	neutral.clear()
 	graves.clear()
 	taken.clear()
 	altars_on.clear()
 
-func start_ascension(seed_v: int, record_m: int) -> void:
+## start_level : index du biome (niveau) de départ, 0 = sol de la tour. Au-delà, le héros
+## commence accroché à l'autel d'entrée de ce biome, comme après une reprise.
+func start_ascension(seed_v: int, record_m: int, start_level := 0) -> void:
 	tower = Tower.new(seed_v)
 	neutral.clear()
 	engraving.clear()
@@ -191,8 +195,30 @@ func start_ascension(seed_v: int, record_m: int) -> void:
 	burins = 0
 	burins_taken = 0
 	record_line = record_m
+	_spawn_at_level(start_level)
 	apply_skin()
 	start_life()
+
+## Place le point de reprise sur l'autel d'entrée du biome demandé (les autels du dessous
+## sont considérés comme déjà allumés). Renvoie l'altitude de départ (m).
+func _spawn_at_level(level: int) -> int:
+	level = clampi(level, 0, Tower.BIOMES.size() - 1)
+	if level == 0:
+		return 0
+	var m0: int = Tower.BIOMES[level].start
+	tower.ensure(-float(m0 + 40) * TILE)
+	var best := {}
+	for e in tower.altars:
+		if int(e.m) >= m0 and (best.is_empty() or int(e.m) < int(best.m)):
+			best = e
+	if best.is_empty():
+		return 0
+	for e in tower.altars:
+		if int(e.m) <= int(best.m):
+			altars_on[e.id] = true
+	spawn_altar = int(best.id)
+	ascension_best = int(best.m)
+	return int(best.m)
 
 func spawn_pos() -> Vector2:
 	if spawn_altar >= 0:
