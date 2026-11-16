@@ -40,11 +40,6 @@ const STYLES := {
 		"upperArm": 34.0, "forearm": 32.0,
 		"thigh": 41.0, "shin": 42.0,
 		"foot": 10.0,      # pied : petit crochet du trait, de la cheville vers l'avant
-		# Pas de largeur d'épaules ni de hanches : bras et jambes partent d'un seul
-		# point du tronc, ils en sont le prolongement. Les canaux torsion et
-		# torsionBassin restent dans les poses, sans effet sur le dessin.
-		"epaules": 0.0,
-		"hanches": 0.0,
 	},
 	"fin": {
 		"label": "Fin (petite tête, trait léger)",
@@ -79,17 +74,24 @@ const BONES := [
 	{"id": "footN",    "parent": "shinN",    "len": "foot",     "rest": 90.0,  "sign": 1.0,  "lim": Vector2(-50, 30),  "label": "Cheville (proche)"},
 ]
 
-## Torsions (rotation autour de l'axe de la colonne, vue de profil) : elles ne
-## tournent aucun os dans le plan, elles écartent les deux épaules (ou les deux
-## hanches) le long de l'avant du buste. Positif = l'épaule (la hanche) proche
-## passe devant, la loin derrière ; négatif = l'inverse. À 90°, chaque épaule
-## est à sa demi-largeur de la colonne (style : "epaules", "hanches"). Les bras
-## partent de shoulderN / shoulderF, les jambes de hipN / hipF ; shoulder et
-## hip restent les points de la colonne.
+## Troisième dimension (« 2D et demie ») : la vue reste de profil, mais chaque
+## os peut sortir du plan de l'écran. On ne voit que la projection : un os qui
+## pointe vers la caméra raccourcit, et l'ordre de dessin suit la profondeur.
+##   <os>_p         profondeur de l'os : rotation hors du plan, en degrés,
+##                  positive = vers la caméra (comme pose.z négatif). Elle se
+##                  transmet aux os enfants, comme les angles dans le plan.
+##   torsion        rotation du buste autour de la colonne (épaules), relative
+##                  au bassin ; positif = l'épaule proche passe devant
+##   torsionBassin  rotation du bassin autour de la colonne (hanches)
+##   lacet          tout le corps tourne autour de la verticale ; positif = il
+##                  se tourne vers la caméra (vue de trois quarts)
+## Avec tout à 0, le dessin est exactement celui du profil plat.
 const TWISTS := [
 	{"id": "torsion", "lim": Vector2(-90, 90), "label": "Torsion des épaules"},
 	{"id": "torsionBassin", "lim": Vector2(-90, 90), "label": "Torsion du bassin"},
+	{"id": "lacet", "lim": Vector2(-180, 180), "label": "Corps tourné vers la caméra"},
 ]
+const PROF := "_p"
 
 ## Chaînes à deux os pour la cinématique inverse.
 const LIMBS := {
@@ -112,6 +114,10 @@ static func bone(id: String) -> Dictionary:
 	for t in TWISTS:
 		if t.id == id:
 			return t
+	if id.ends_with(PROF):
+		var b0 := bone(id.trim_suffix(PROF))
+		if not b0.is_empty():
+			return {"id": id, "lim": Vector2(-90, 90), "label": "Profondeur : " + str(b0.label)}
 	return {}
 
 
@@ -121,6 +127,9 @@ static func angle_ids() -> Array:
 		ids.append(b.id)
 	for t in TWISTS:
 		ids.append(t.id)
+	ids.append("root" + PROF)
+	for b in BONES:
+		ids.append(b.id + PROF)
 	return ids
 
 
@@ -184,48 +193,50 @@ static func solve(p: Dictionary) -> Dictionary:
 	var s := get_style(p.get("style", "epais"))
 	var world := {}
 	var tip := {}
-	world["root"] = ROOT.rest + ROOT.sign * angle(p, "root")
-	tip["root"] = Vector2.ZERO
-	# Torsions : les épaules et les hanches s'écartent le long de l'avant du
-	# buste (ou du bassin), la proche vers l'avant pour une torsion positive.
-	var base := {}
+	var basis := {}
+	var deg := func(a: float) -> float: return deg_to_rad(a)
+	var RZ := func(a: float) -> Basis: return Basis(Vector3(0, 0, 1), deg.call(a))
+	var RY := func(a: float) -> Basis: return Basis(Vector3(0, 1, 0), deg.call(a))
+	var RX := func(a: float) -> Basis: return Basis(Vector3(1, 0, 0), deg.call(a))
+	var root_w: float = ROOT.rest + ROOT.sign * angle(p, "root")
+	basis["root"] = RY.call(angle(p, "lacet")) * RZ.call(root_w) * RY.call(angle(p, "root" + PROF)) * RX.call(angle(p, "torsionBassin"))
+	tip["root"] = Vector3.ZERO
 	for b in BONES:
-		var w: float = world[b.parent] + b.rest + b.sign * angle(p, b.id)
-		world[b.id] = w
-		var o: Vector2 = tip[b.parent]
-		if b.id.begins_with("arm") or b.id.begins_with("thigh"):
-			var bras: bool = b.id.begins_with("arm")
-			var tw := angle(p, "torsion" if bras else "torsionBassin")
-			var demi := float(s.get("epaules" if bras else "hanches", 0.0))
-			var wa: float = world[b.parent] - 90.0
-			var sg := 1.0 if b.id.ends_with("N") else -1.0
-			o += Vector2(cos(deg_to_rad(wa)), sin(deg_to_rad(wa))) * demi * sin(deg_to_rad(tw)) * sg
-			base[b.id] = o
-		var l := bone_len(p, s, b.id)
-		tip[b.id] = o + Vector2(cos(deg_to_rad(w)), sin(deg_to_rad(w))) * l
-
+		var B: Basis = basis[b.parent] * RZ.call(b.rest + b.sign * angle(p, b.id)) * RY.call(angle(p, b.id + PROF))
+		if b.id == "chest":
+			B = B * RX.call(angle(p, "torsion"))
+		basis[b.id] = B
+		tip[b.id] = tip[b.parent] + B.x * bone_len(p, s, b.id)
+	# Angle projeté de chaque os (pour la cinématique inverse, qui reste dans le plan).
+	world["root"] = rad_to_deg(atan2(basis["root"].x.y, basis["root"].x.x))
+	for b in BONES:
+		var v: Vector3 = basis[b.id].x
+		world[b.id] = rad_to_deg(atan2(v.y, v.x)) if Vector2(v.x, v.y).length() > 1e-6 else world[b.parent] + b.rest
 	var r: float = s.head / 2.0
-	var hw: float = world["neck"]
 	var head_dist: float = r * (1.0 - s.get("headSink", 0.0))
-	var head: Vector2 = tip["neck"] + Vector2(cos(deg_to_rad(hw)), sin(deg_to_rad(hw))) * head_dist
+	var head3: Vector3 = tip["neck"] + basis["neck"].x * head_dist
 
 	var f := facing(p)
 	var origin := Vector2(float(p.x), float(p.y))
-	var W := func(v: Vector2) -> Vector2: return origin + Vector2(f * v.x, v.y)
-	var joints := {
-		"hip": W.call(tip["root"]),
-		"waist": W.call(tip["spineLow"]),
-		"shoulder": W.call(tip["chest"]),
-		"neckTop": W.call(tip["neck"]),
-		"head": W.call(head),
-		"shoulderN": W.call(base["armN"]), "shoulderF": W.call(base["armF"]),
-		"hipN": W.call(base["thighN"]), "hipF": W.call(base["thighF"]),
-		"elbowN": W.call(tip["armN"]), "handN": W.call(tip["foreN"]),
-		"elbowF": W.call(tip["armF"]), "handF": W.call(tip["foreF"]),
-		"kneeN": W.call(tip["thighN"]), "ankleN": W.call(tip["shinN"]), "toeN": W.call(tip["footN"]),
-		"kneeF": W.call(tip["thighF"]), "ankleF": W.call(tip["shinF"]), "toeF": W.call(tip["footF"]),
+	var W := func(v: Vector3) -> Vector2: return origin + Vector2(f * v.x, v.y)
+	var pts3 := {
+		"hip": tip["root"], "waist": tip["spineLow"], "shoulder": tip["chest"], "neckTop": tip["neck"], "head": head3,
+		"elbowN": tip["armN"], "handN": tip["foreN"], "elbowF": tip["armF"], "handF": tip["foreF"],
+		"kneeN": tip["thighN"], "ankleN": tip["shinN"], "toeN": tip["footN"],
+		"kneeF": tip["thighF"], "ankleF": tip["shinF"], "toeF": tip["footF"],
 	}
-	return {"joints": joints, "world": world, "style": s, "facing": f, "head_r": r}
+	var joints := {}
+	var prof := {}
+	for k in pts3:
+		joints[k] = W.call(pts3[k])
+		prof[k] = float(pts3[k].z)
+	# Les membres partent d'un seul point du tronc : ils en sont le prolongement.
+	for side in ["N", "F"]:
+		joints["shoulder" + side] = joints.shoulder
+		joints["hip" + side] = joints.hip
+		prof["shoulder" + side] = prof.shoulder
+		prof["hip" + side] = prof.hip
+	return {"joints": joints, "prof": prof, "world": world, "style": s, "facing": f, "head_r": r}
 
 
 ## Point le plus bas du dessin (en tenant compte de l'épaisseur du trait).
@@ -389,6 +400,55 @@ static func reach(p: Dictionary, limb_id: String, target: Vector2, limits := tru
 		a2f = clamp_angle(limb.lower, a2f)
 	q.angles[limb.upper] = a1f
 	q.angles[limb.lower] = a2f
+	# Avec de la profondeur (os hors du plan, torsion, lacet), le calcul à plat
+	# n'est plus exact : on corrige les deux angles par petits pas, en mesurant
+	# le bout du membre sur la projection réelle.
+	if _hors_plan(q):
+		q = _affine(q, limb, target, limits and coude == "", [limb.upper, limb.lower])
+		# Hors de portée (le membre pointe en partie vers la caméra ou à
+		# l'opposé) : on laisse aussi la profondeur du premier os se corriger,
+		# comme un vrai bras qui se tend vers une cible devant lui.
+		if solve(q).joints[limb.tip].distance_to(target) > 1.0:
+			q = _affine(q, limb, target, limits and coude == "", [limb.upper, limb.lower, limb.upper + PROF])
+	return q
+
+
+static func _hors_plan(p: Dictionary) -> bool:
+	for k in p.angles:
+		if (k in ["torsion", "torsionBassin", "lacet"] or str(k).ends_with(PROF)) and absf(float(p.angles[k])) > 0.01:
+			return true
+	return false
+
+
+## Descente de gradient sur les deux angles du membre : le bout projeté va
+## vers la cible. Garde le sens de pliage de départ (on part de la solution
+## à plat, et les pas restent petits).
+static func _affine(p: Dictionary, limb: Dictionary, target: Vector2, limits: bool, ids: Array) -> Dictionary:
+	var q := clone_pose(p)
+	var err := func(pp: Dictionary) -> float: return solve(pp).joints[limb.tip].distance_squared_to(target)
+	var e: float = err.call(q)
+	var pas := 4.0
+	for it in 80:
+		if e < 0.05:
+			break
+		var mieux := false
+		for id in ids:
+			for d in [pas, -pas]:
+				var r := clone_pose(q)
+				r.angles[id] = float(r.angles.get(id, 0.0)) + d
+				if limits:
+					r.angles[id] = clamp_angle(id, float(r.angles[id]))
+				var e2: float = err.call(r)
+				if e2 < e:
+					q = r
+					e = e2
+					mieux = true
+		if not mieux:
+			pas *= 0.5
+			if pas < 0.05:
+				break
+	for id in ids:
+		q.angles[id] = round2(float(q.angles.get(id, 0.0)))
 	return q
 
 
@@ -432,12 +492,20 @@ static func swap_sides(p: Dictionary) -> Dictionary:
 		q.angles[pr[1]] = tmp
 	for t in TWISTS:
 		q.angles[t.id] = -float(q.angles.get(t.id, 0.0))
+	for pr in SIDE_PAIRS:
+		var a: String = pr[0] + PROF
+		var b: String = pr[1] + PROF
+		var tmp2 = q.angles.get(a, 0.0)
+		q.angles[a] = q.angles.get(b, 0.0)
+		q.angles[b] = tmp2
 	return q
 
 
 ## Mélange deux poses (t entre 0 et 1), angle par angle, par le plus court chemin.
 ## Côté opposé d'un os (armN ↔ armF…), ou l'os lui-même s'il est central.
 static func other_side(id: String) -> String:
+	if id.ends_with(PROF):
+		return other_side(id.trim_suffix(PROF)) + PROF
 	for pr in SIDE_PAIRS:
 		if id == pr[0]:
 			return pr[1]
@@ -453,7 +521,7 @@ static func mirror_channel(c: String) -> Array:
 		return [c, 1.0]
 	if c.begins_with("etire:"):
 		return ["etire:" + other_side(c.substr(6)), 1.0]
-	return [other_side(c), 1.0 if c.begins_with("foot") else -1.0]
+	return [other_side(c), 1.0 if (c.begins_with("foot") and not c.ends_with(PROF)) else -1.0]
 
 
 ## Même dessin, décrit depuis l'autre côté : sens inversé, proche et loin
@@ -515,47 +583,41 @@ static func violations(p: Dictionary) -> Array:
 static func primitives(p: Dictionary, color := Color("#111111"), far_shade := 1.0) -> Array:
 	var sol := solve(p)
 	var J: Dictionary = sol.joints
+	var Z: Dictionary = sol.prof
 	var s: Dictionary = sol.style
 	var far := color if is_equal_approx(far_shade, 1.0) else Color(color.r * far_shade, color.g * far_shade, color.b * far_shade, color.a)
 	var w: float = s.stroke
-	var out := []
-	var leg := func(side: String, c: Color) -> void:
-		# La jambe part du bassin (colonne) puis de sa hanche : quand le bassin
-		# est tourné, ce petit segment relie la hanche décalée au tronc.
-		var pts := [J.hip, J["hip" + side], J["knee" + side], J["ankle" + side]]
+	# Ordre de dessin : profondeur réelle du segment (positive = loin) plus un
+	# décalage de base qui donne l'ordre du profil plat (bras loin, jambe loin,
+	# tronc, tête, jambe proche, bras proche). Tant qu'aucun os ne sort du
+	# plan, l'ordre reste exactement celui-là.
+	var items := []
+	var seg := func(a: String, b: String, base: float, c: Color, part: String) -> void:
+		items.append({"z": base + (Z[a] + Z[b]) / 2.0, "type": "path", "points": [J[a], J[b]], "width": w, "color": c, "part": part})
+	for side in ["F", "N"]:
+		var c := far if side == "F" else color
+		var ba := 30.0 if side == "F" else -30.0
+		var bl := 20.0 if side == "F" else -20.0
+		seg.call("hip", "knee" + side, bl, c, "leg" + side)
+		var lower := ["knee" + side, "ankle" + side]
 		if s.foot > 0.0:
-			pts.append(J["toe" + side])
-		out.append({"type": "path", "points": pts, "width": w, "color": c, "part": "leg" + side})
-	var arm := func(side: String, c: Color) -> void:
-		# Le bras part de la colonne puis de son épaule : quand le buste est
-		# tourné, ce segment (la clavicule) relie l'épaule décalée au tronc.
-		out.append({"type": "path", "points": [J.shoulder, J["shoulder" + side], J["elbow" + side], J["hand" + side]], "width": w, "color": c, "part": "arm" + side})
+			lower.append("toe" + side)
+		items.append({"z": bl + (Z["knee" + side] + Z["ankle" + side]) / 2.0, "type": "path", "points": lower.map(func(k): return J[k]),
+			"width": w, "color": c, "part": "leg" + side})
+		seg.call("shoulder", "elbow" + side, ba, c, "arm" + side)
+		seg.call("elbow" + side, "hand" + side, ba, c, "arm" + side)
 		if s.hand > w / 2.0:
-			out.append({"type": "circle", "c": J["hand" + side], "r": s.hand, "color": c, "part": "hand" + side})
-	arm.call("F", far)
-	leg.call("F", far)
-	var lis: float = float(s.get("lisere", 0.0))
+			items.append({"z": ba + Z["hand" + side] - 0.01, "type": "circle", "c": J["hand" + side], "r": s.hand, "color": c, "part": "hand" + side})
 	var torso := [J.hip, J.waist, J.shoulder]
 	if s.neck > 0.0:
 		torso.append(J.neckTop)
-	out.append({"type": "path", "points": torso, "width": w, "color": color, "part": "torso"})
-	out.append({"type": "circle", "c": J.head, "r": sol.head_r, "color": color, "part": "head"})
-	# Liseré : un fin contour plus clair sous les membres proches, pour qu'un
-	# bras ou une jambe qui passe devant le corps reste lisible (noir sur noir).
-	if lis > 0.0:
-		var rim := color.lerp(Color.WHITE, 0.38)
-		var n0 := out.size()
-		leg.call("N", rim)
-		arm.call("N", rim)
-		for i in range(n0, out.size()):
-			if out[i].type == "path":
-				out[i].width = w + 2.0 * lis
-			else:
-				out[i].r = float(out[i].r) + lis
-			out[i].part = "lisere"
-	leg.call("N", color)
-	arm.call("N", color)
-	return out
+	items.append({"z": (Z.hip + Z.shoulder) / 2.0, "type": "path", "points": torso, "width": w, "color": color, "part": "torso"})
+	items.append({"z": Z.head - 1.0, "type": "circle", "c": J.head, "r": sol.head_r, "color": color, "part": "head"})
+	# Tri stable, du plus loin au plus proche.
+	for i in items.size():
+		items[i].rang = i
+	items.sort_custom(func(a, b): return a.z > b.z or (a.z == b.z and a.rang < b.rang))
+	return items
 
 
 ## Monde (y vers le haut) → écran Godot (y vers le bas).

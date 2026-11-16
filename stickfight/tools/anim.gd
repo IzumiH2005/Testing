@@ -403,6 +403,12 @@ func _verifier(recs: Array) -> String:
 					roundi(StickRig.angle(fig.pose, "shinN")), roundi(StickRig.angle(fig.pose, "shinF")),
 					roundi(StickRig.angle(fig.pose, "root") + StickRig.angle(fig.pose, "spineLow") + StickRig.angle(fig.pose, "chest"))]
 				ang += "  torsion %d/%d  tête y %d" % [roundi(StickRig.angle(fig.pose, "torsion")), roundi(StickRig.angle(fig.pose, "torsionBassin")), roundi(J.head.y)]
+				var prof := []
+				for k in fig.pose.angles:
+					if (str(k).ends_with(StickRig.PROF) or k == "lacet") and absf(float(fig.pose.angles[k])) > 0.5:
+						prof.append("%s %d" % [k, roundi(float(fig.pose.angles[k]))])
+				if not prof.is_empty():
+					ang += "  profondeur " + " ".join(prof)
 				L.append("%s  %s  poingN(%d,%d)%s" % [tag, ang, roundi(J.handN.x), roundi(J.handN.y), contact])
 			prev = {"J": J, "anim": fig.anim, "t": fig.t}
 		for tp in tips:

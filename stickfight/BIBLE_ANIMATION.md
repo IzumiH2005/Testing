@@ -81,8 +81,12 @@ Preuves : V1 140, 181 ; V2 312-335 (§ 3, § 7).
 **Torsion.** Le bassin et les épaules tournent autour de la colonne : à l'armé, ils tournent
 vers l'arrière (les épaules plus que le bassin) ; au départ, le bassin revient d'abord, les
 épaules ensuite, et l'écart entre les deux fait ressort. Quand une épaule avance, l'autre recule
-d'autant, et le bras de ce côté se replie. Le rig le montre de profil avec les canaux `torsion`
-(épaules) et `torsionBassin`.
+d'autant, et le bras de ce côté se replie. Le rig est en 3D vu de profil : `torsion` (épaules)
+et `torsionBassin` font vraiment tourner le corps, et chaque os peut sortir du plan (`<os>_p`).
+Ce qu'on voit, comme dans les vidéos de référence : des membres qui raccourcissent quand ils
+pointent vers la caméra ou à l'opposé, et un ordre de dessin qui change (un bras qui passe
+derrière la tête). On ne voit jamais d'écart entre les épaules : les membres partent d'un seul
+point du tronc.
 
 
 Le pied pousse sur le sol, la hanche tourne, puis le buste, puis l'épaule, puis le bras ou la

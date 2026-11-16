@@ -4,7 +4,7 @@
  "longueur": 72,
  "base": "garde_ouverte",
  "suivante": "garde_ouverte_idle",
- "note": "Coup de poing de rue du bras arrière (bras proche), construit avec BIBLE_ANIMATION.md (méthode B, A bis). Trois niveaux d'anticipation : il se ramasse (3), recule le pied avant et charge la jambe arrière (8-12), puis s'enfonce et recule le poing d'un cran (26). Armé tenu 16-24 : buste en arrière, coude bas, avant-bras complètement replié, coude tiré en arrière, poing serré sous le menton, l'autre bras vise. Départ par la jambe arrière (27), puis l'épaule et le coude (28), poing en dernier au contact (29), écarts croissants jusqu'au contact. Le buste continue deux images après le bras (31), pose de fin tenue (35-46), le pied arrière passe devant, garde (72).",
+ "note": "Coup de poing de rue du bras arrière (bras proche), construit avec BIBLE_ANIMATION.md (méthode B, A bis). Trois niveaux d'anticipation : il se ramasse (3), recule le pied avant et charge la jambe arrière (8-12), puis s'enfonce et recule le poing d'un cran (26). Armé tenu 16-24 : buste en arrière, coude bas, avant-bras complètement replié, coude tiré en arrière, poing serré sous le menton, l'autre bras vise. Départ par la jambe arrière (27), puis l'épaule et le coude (28), poing en dernier au contact (29), écarts croissants jusqu'au contact. Le buste continue deux images après le bras (31), pose de fin tenue (35-46), le pied arrière passe devant, garde (72). Les torsions de l'analyse ne sont pas encore posées : elles le seront avec la profondeur 3D.",
  "cles": [
   {
    "f": 0,
@@ -53,7 +53,6 @@
    "fixe": {
     "neck": 10.65,
     "x": -8.5,
-    "torsion": -8.75,
     "root": 2.55,
     "armF": 51.68,
     "y": 70.33,
@@ -61,7 +60,6 @@
     "foreF": 103.98,
     "spineLow": 6.25,
     "chest": 5.55,
-    "torsionBassin": -4.2,
     "foreN": 88.66
    },
    "vise": {
@@ -89,9 +87,7 @@
     "armN": -30,
     "foreN": 110,
     "armF": 60,
-    "foreF": 60,
-    "torsion": -25,
-    "torsionBassin": -12
+    "foreF": 60
    },
    "vise": {
     "legN": [
@@ -116,9 +112,7 @@
     "chest": -3,
     "neck": 12,
     "armF": 72,
-    "foreF": 40,
-    "torsion": -50,
-    "torsionBassin": -25
+    "foreF": 40
    },
    "vise": {
     "legN": [
@@ -151,9 +145,7 @@
     "chest": -4,
     "neck": 13,
     "armF": 74,
-    "foreF": 35,
-    "torsion": -58,
-    "torsionBassin": -30
+    "foreF": 35
    },
    "vise": {
     "legN": [
@@ -186,9 +178,7 @@
     "chest": -5,
     "neck": 14,
     "armF": 75,
-    "foreF": 33,
-    "torsion": -60,
-    "torsionBassin": -30
+    "foreF": 33
    },
    "vise": {
     "legN": [
@@ -221,9 +211,7 @@
     "chest": -5,
     "neck": 15,
     "armF": 76,
-    "foreF": 32,
-    "torsion": -64,
-    "torsionBassin": -32
+    "foreF": 32
    },
    "vise": {
     "legN": [
@@ -256,9 +244,7 @@
     "chest": -4,
     "neck": 13,
     "armF": 70,
-    "foreF": 45,
-    "torsion": -55,
-    "torsionBassin": -5
+    "foreF": 45
    },
    "vise": {
     "legN": [
@@ -293,9 +279,7 @@
     "armN": 45,
     "foreN": 100,
     "armF": 50,
-    "foreF": 95,
-    "torsion": 5,
-    "torsionBassin": 20
+    "foreF": 95
    },
    "vise": {
     "legN": [
@@ -320,9 +304,7 @@
     "chest": 2,
     "neck": -10,
     "armF": 30,
-    "foreF": 135,
-    "torsion": 50,
-    "torsionBassin": 30
+    "foreF": 135
    },
    "vise": {
     "armN": [
@@ -353,9 +335,7 @@
     "armN": 120,
     "foreN": 4,
     "armF": 25,
-    "foreF": 138,
-    "torsion": 62,
-    "torsionBassin": 34
+    "foreF": 138
    },
    "vise": {
     "legF": [
@@ -382,9 +362,7 @@
     "armN": 104,
     "foreN": 15,
     "armF": 22,
-    "foreF": 132,
-    "torsion": 60,
-    "torsionBassin": 32
+    "foreF": 132
    },
    "vise": {
     "legF": [
@@ -411,9 +389,7 @@
     "armN": 96,
     "foreN": 26,
     "armF": 10,
-    "foreF": 130,
-    "torsion": 48,
-    "torsionBassin": 26
+    "foreF": 130
    },
    "vise": {
     "legF": [
@@ -440,9 +416,7 @@
     "armN": 75,
     "foreN": 70,
     "armF": 25,
-    "foreF": 120,
-    "torsion": 22,
-    "torsionBassin": 12
+    "foreF": 120
    },
    "vise": {
     "legF": [
@@ -462,7 +436,6 @@
    "fixe": {
     "neck": 6.25,
     "x": 44.75,
-    "torsion": 10.0,
     "root": 16.25,
     "y": 66.25,
     "armF": 36.25,
@@ -470,7 +443,6 @@
     "foreF": 123.75,
     "spineLow": 8.25,
     "chest": 7.25,
-    "torsionBassin": 5.25,
     "foreN": 81.25
    },
    "vise": {
@@ -498,9 +470,7 @@
     "armN": 62,
     "foreN": 85,
     "armF": 40,
-    "foreF": 125,
-    "torsion": 6,
-    "torsionBassin": 3
+    "foreF": 125
    },
    "vise": {
     "legF": [
@@ -527,9 +497,7 @@
     "armN": 62,
     "foreN": 78,
     "armF": 46,
-    "foreF": 127,
-    "torsion": 0,
-    "torsionBassin": 0
+    "foreF": 127
    },
    "vise": {
     "legF": [
@@ -556,9 +524,7 @@
     "armN": 62.29,
     "foreN": 77.17,
     "armF": 47.2,
-    "foreF": 127.66,
-    "torsion": 0,
-    "torsionBassin": 0
+    "foreF": 127.66
    },
    "vise": {
     "legF": [

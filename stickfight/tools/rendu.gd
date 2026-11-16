@@ -69,7 +69,7 @@ func _apply_edits(pose: Dictionary, a: Dictionary) -> Dictionary:
 	var p := StickRig.clone_pose(pose)
 	var J0: Dictionary = StickRig.solve(p).joints
 	var limits: bool = not a.free
-	var re_set := RegEx.create_from_string("^([A-Za-z]+)([+-]?)=(.+)$")
+	var re_set := RegEx.create_from_string("^([A-Za-z_]+)([+-]?)=(.+)$")
 	for s in a.set:
 		var m := re_set.search(s)
 		if m == null:

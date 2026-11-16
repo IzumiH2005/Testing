@@ -425,12 +425,23 @@ image à la fin, parce que lire des images coûte beaucoup plus cher que lire du
 3. Une seule image à la fin : `tools/anim.sh anims/x.json --cles -o planche.png --scale 1`
    ne rend que les images clés et le contact.
 
-Deux canaux de **torsion** font tourner le corps autour de la colonne, vu de profil :
-`torsion` (épaules) et `torsionBassin`, en degrés (positif = l'épaule ou la hanche proche passe
-devant). Ils peuvent décaler les épaules (`shoulderN`, `shoulderF`) et les hanches (`hipN`, `hipF`) de
-leur demi-largeur (`"epaules"`, `"hanches"` dans le style), mais ces largeurs valent 0 : bras
-et jambes partent d'un seul point du tronc, ils en sont le prolongement, et la torsion ne
-change pas le dessin. On garde les valeurs dans les poses pour décrire le mouvement.
+**Profondeur (2D et demie).** La vue reste de profil, mais le squelette est en 3D : chaque os
+peut sortir du plan de l'écran, et on dessine sa projection. Un os qui pointe vers la caméra
+raccourcit (raccourci de perspective), et l'ordre de dessin suit la profondeur : un bras peut
+passer derrière la tête ou devant le buste, une jambe croiser l'autre. Canaux, en degrés :
+
+| Canal | Effet |
+|---|---|
+| `<os>_p` (`armN_p`, `foreF_p`, `thighN_p`…) | l'os sort du plan, positif = vers la caméra ; ses enfants suivent |
+| `torsion` | le buste tourne autour de la colonne (épaules), par rapport au bassin |
+| `torsionBassin` | le bassin tourne autour de la colonne (hanches) |
+| `lacet` | tout le corps tourne vers la caméra (vue de trois quarts) |
+
+Avec tout à 0, le dessin est exactement le profil plat d'avant : les animations existantes ne
+changent pas. Bras et jambes partent toujours d'un seul point du tronc. La cinématique inverse
+(`vise`) tient compte de la profondeur : elle corrige les angles sur la projection réelle et,
+si la cible est hors de portée, la profondeur du premier os. Ces canaux se posent comme les
+autres angles (`"fixe": {"armN_p": 40}`) et se règlent avec `tools/rendu.sh … --set armN_p=40`.
 
 Avant chaque nouvelle animation, on écrit son analyse dans `analyses/` (voir `CLAUDE.md`).
 
