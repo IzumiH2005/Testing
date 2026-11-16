@@ -419,7 +419,7 @@ image à la fin, parce que lire des images coûte beaucoup plus cher que lire du
    une articulation (`head`, `shoulder`, `hip`, `handF`…) ; `coude` (haut, bas, avant, arriere)
    choisit le côté du pli, ce qui évite le bras plié à l'envers par erreur.
 2. Contrôler en texte : `tools/anim.sh anims/x.json --verifier`. Il affiche les angles des poses
-   clés, les images où un poing ou un pied va vite (pour vérifier que le trajet tient en 1 à
+   clés (avec la longueur vue de chaque membre raccourci par la profondeur), les images où un poing ou un pied va vite (pour vérifier que le trajet tient en 1 à
    3 images), les pieds qui glissent, le poing proche caché dans la tête, le bassin hors des
    appuis, les bras ou jambes trop raccourcis par la profondeur (ils se fondent dans le corps),
    un bras confondu avec le corps (coude et main dans le tronc ou la tête), un bras proche peu

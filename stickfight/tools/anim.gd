@@ -453,6 +453,16 @@ func _verifier(recs: Array) -> String:
 						prof.append("%s %d" % [k, roundi(float(fig.pose.angles[k]))])
 				if not prof.is_empty():
 					ang += "  profondeur " + " ".join(prof)
+				# Longueur apparente de chaque membre (100 = de profil, à plat).
+				var app := []
+				for m in [["brasN", "shoulder", "elbowN", "handN", "upperArm", "forearm"], ["brasF", "shoulder", "elbowF", "handF", "upperArm", "forearm"],
+						["jambeN", "hip", "kneeN", "ankleN", "thigh", "shin"], ["jambeF", "hip", "kneeF", "ankleF", "thigh", "shin"]]:
+					var vrai2: float = float(sol.style[m[4]]) + float(sol.style[m[5]])
+					var vu2: float = J[m[1]].distance_to(J[m[2]]) + J[m[2]].distance_to(J[m[3]])
+					if vu2 < 0.97 * vrai2:
+						app.append("%s %d %%" % [m[0], roundi(100.0 * vu2 / vrai2)])
+				if not app.is_empty():
+					ang += "  longueur vue " + " ".join(app)
 				L.append("%s  %s  poingN(%d,%d)%s" % [tag, ang, roundi(J.handN.x), roundi(J.handN.y), contact])
 			prev = {"J": J, "anim": fig.anim, "t": fig.t}
 		for tp in tips:

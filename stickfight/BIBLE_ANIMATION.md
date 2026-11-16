@@ -108,6 +108,48 @@ Dans ces images, aucun bras ne longe le buste et aucune jambe ne se cache derri�
 Le contrôle `--verifier` signale un bras confondu avec le corps (coude et main dans le tronc ou la
 tête) et des jambes superposées.
 
+**La 2,5D avec notre squelette : ce qui se voit et ce qui ne se voit pas** (recherche et essais
+du 16 novembre 2026, sources en fin de paragraphe).
+
+Le dessin donne cinq indices de profondeur : le raccourci, le chevauchement (ce qui est proche
+cache ce qui est loin), la taille (ce qui est proche est plus grand), la convergence des lignes
+et le voile atmosphérique. Un stickman noir de profil n'en garde presque aucun :
+
+| Indice | Chez nous | Conséquence |
+|---|---|---|
+| Raccourci | oui : longueur vue = longueur × cos(profondeur) | 20° → 94 % (invisible), 40° → 77 %, 60° → 50 %, 75° → 26 % |
+| Chevauchement | invisible : noir sur noir, aucun contour | un bras devant le buste ne se voit pas « devant », il disparaît |
+| Taille selon la distance | non (le poing proche n'est pas plus gros) | un bras raccourci immobile se lit comme un bras **court**, pas comme un bras tourné vers nous |
+| Convergence, voile | non | — |
+
+D'où les règles :
+
+1. **Une profondeur se lit surtout en mouvement.** Un membre qui raccourcit progressivement
+   pendant qu'il bouge se lit comme un membre qui tourne vers nous ; le même membre court sur une
+   pose tenue se lit comme une erreur. On fait donc varier la profondeur pendant les trajets
+   (armé, coup, pas) et on revient près de 0 sur les poses tenues.
+2. **Le bout du membre reste hors de la silhouette.** Puisque le chevauchement ne se voit pas, le
+   seul moyen de montrer qu'un bras passe devant le corps, c'est que son poing ressorte de l'autre
+   côté (bord de la tête, devant le buste).
+3. **Moins de 25° ne sert à rien de profil**, sauf pour la cohérence 3D (largeur des pieds, poing
+   sur l'axe). **Plus de 55° fait disparaître le membre** : on ne le fait que sur une ou deux
+   images de passage.
+4. **L'asymétrie casse l'effet découpage.** Deux membres d'une paire n'ont jamais la même longueur
+   vue : l'un un peu vers nous, l'autre un peu à l'opposé (10 à 30°), comme les avant-bras du bleu
+   en V3 1490-1496.
+5. **On décide la profondeur avant les angles.** Pour chaque pose clé : vers où regarde le corps
+   (lacet), où est chaque main et chaque pied dans l'espace (devant, derrière, côté caméra ou
+   côté opposé), puis on choisit les angles. Le contrôle `--verifier` donne pour chaque pose clé
+   la **longueur vue** de chaque membre (en % de sa longueur) : on vérifie qu'elle correspond à
+   l'intention.
+
+Sources : [Proko, 5 astuces pour un dessin en 3D](https://proko.com/course-lesson/5-tricks-to-make-your-drawings-look-3d),
+[Proko, l'illusion de profondeur](https://www.proko.com/lesson/the-illusion-of-depth-perspective-details-and-overlapping-forms/),
+[Peter Han, poses grand angle (Proko)](https://www.proko.com/lesson/how-to-draw-wide-angle-poses-with-peter-han),
+[PoseMyArt, raccourci sans rétrécir les membres](https://posemy.art/blog/how-to-draw-foreshortening-avoid-shrinking-limbs/),
+[Art in Context, le raccourci](https://artincontext.org/foreshortening/),
+[Toon Boom, ordre des calques dans un pantin découpé](https://docs.toonboom.com/help/harmony-22/advanced/getting-started/character-building.html).
+
 **Doser la profondeur** (étude de « Strength vs Speed, Round 2 », `etudes/03_…`) :
 
 - On tourne peu : `torsion` 20 à 30°, `torsionBassin` la moitié, `lacet` 30 à 50°. Au-delà,
