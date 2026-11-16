@@ -357,7 +357,7 @@ static func _vise(p: Dictionary, limb: String, v) -> Dictionary:
 			var J: Dictionary = StickRig.solve(p).joints
 			var f := StickRig.facing(p)
 			t = J[str(v.repere)] + Vector2(f * t.x, t.y)
-		return StickRig.reach(p, limb, t, not v.has("coude"), str(v.get("coude", "")))
+		return StickRig.reach(p, limb, t, true, str(v.get("coude", "")))
 	return StickRig.reach(p, limb, _vec(v))
 
 

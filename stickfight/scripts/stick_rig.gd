@@ -92,6 +92,24 @@ const TWISTS := [
 	{"id": "lacet", "lim": Vector2(-180, 180), "label": "Corps tourné vers la caméra"},
 ]
 const PROF := "_p"
+## Rotation d'un membre autour de son propre axe (bras : rotation de
+## l'humérus, cuisse : rotation du fémur). Elle oriente le plan dans lequel le
+## coude ou le genou se plie : coude vers le bas, vers l'extérieur, vers
+## l'arrière. Positif = le coude (genou) part vers la caméra.
+const ROT := "_r"
+## Coude, genou : charnières. Ils ne plient que dans un plan (celui que donne
+## la rotation du segment parent) : pas de profondeur propre.
+const CHARNIERES := ["foreN", "foreF", "shinN", "shinF"]
+## Limites des canaux 3D (degrés), par « canal:os sans côté ». Profondeur du
+## bras : vers la caméra = abduction (bras écarté du corps, jusqu'à 90°), à
+## l'opposé = adduction (bras qui passe devant le buste, 40°). Cuisse :
+## abduction 45°, adduction 30°. Rotation du bras ±80°, de la cuisse ±45°.
+## Buste et bassin : inclinaison latérale ±30°. Cheville : ±25°.
+const LIM_3D := {
+	"_p:arm": Vector2(-40, 90), "_p:thigh": Vector2(-30, 45), "_p:root": Vector2(-30, 30),
+	"_p:spineLow": Vector2(-30, 30), "_p:chest": Vector2(-30, 30), "_p:neck": Vector2(-40, 40),
+	"_p:foot": Vector2(-25, 25), "_r:arm": Vector2(-80, 80), "_r:thigh": Vector2(-45, 45),
+}
 
 ## Chaînes à deux os pour la cinématique inverse.
 const LIMBS := {
@@ -114,10 +132,12 @@ static func bone(id: String) -> Dictionary:
 	for t in TWISTS:
 		if t.id == id:
 			return t
-	if id.ends_with(PROF):
-		var b0 := bone(id.trim_suffix(PROF))
+	if id.ends_with(PROF) or id.ends_with(ROT):
+		var base_id := id.trim_suffix(PROF).trim_suffix(ROT)
+		var b0 := bone(base_id)
 		if not b0.is_empty():
-			return {"id": id, "lim": Vector2(-90, 90), "label": "Profondeur : " + str(b0.label)}
+			var lim: Vector2 = LIM_3D.get(id.right(2) + ":" + base_id.rstrip("NF"), Vector2(-90, 90))
+			return {"id": id, "lim": lim, "label": ("Rotation : " if id.ends_with(ROT) else "Profondeur : ") + str(b0.label)}
 	return {}
 
 
@@ -129,7 +149,11 @@ static func angle_ids() -> Array:
 		ids.append(t.id)
 	ids.append("root" + PROF)
 	for b in BONES:
-		ids.append(b.id + PROF)
+		if not b.id in CHARNIERES:
+			ids.append(b.id + PROF)
+	for b in BONES:
+		if b.id.begins_with("arm") or b.id.begins_with("thigh"):
+			ids.append(b.id + ROT)
 	return ids
 
 
@@ -202,7 +226,11 @@ static func solve(p: Dictionary) -> Dictionary:
 	basis["root"] = RY.call(angle(p, "lacet")) * RZ.call(root_w) * RY.call(angle(p, "root" + PROF)) * RX.call(angle(p, "torsionBassin"))
 	tip["root"] = Vector3.ZERO
 	for b in BONES:
-		var B: Basis = basis[b.parent] * RZ.call(b.rest + b.sign * angle(p, b.id)) * RY.call(angle(p, b.id + PROF))
+		# Charnière (coude, genou) : aucune profondeur propre.
+		var prof_os: float = 0.0 if b.id in CHARNIERES else angle(p, b.id + PROF)
+		var B: Basis = basis[b.parent] * RZ.call(b.rest + b.sign * angle(p, b.id)) * RY.call(prof_os)
+		if b.id.begins_with("arm") or b.id.begins_with("thigh"):
+			B = B * RX.call(angle(p, b.id + ROT))
 		if b.id == "chest":
 			B = B * RX.call(angle(p, "torsion"))
 		basis[b.id] = B
@@ -385,8 +413,8 @@ static func reach(p: Dictionary, limb_id: String, target: Vector2, limits := tru
 		if coude != "":
 			# Position du coude dans le repère local (x vers l'avant, y vers le haut).
 			var dir := {"haut": Vector2(0, 1), "bas": Vector2(0, -1), "avant": Vector2(1, 0), "arriere": Vector2(-1, 0)}
-			pen += -e.dot(dir.get(coude, Vector2.ZERO)) * 1000.0
-		elif limits:
+			pen += -e.dot(dir.get(coude, Vector2.ZERO)) * 10.0
+		if limits:
 			pen += maxf(0.0, up.lim.x - a1) + maxf(0.0, a1 - up.lim.y)
 			pen += maxf(0.0, lo.lim.x - a2) + maxf(0.0, a2 - lo.lim.y)
 			pen *= 1000.0
@@ -395,7 +423,7 @@ static func reach(p: Dictionary, limb_id: String, target: Vector2, limits := tru
 			best = {"a1": a1, "a2": a2, "pen": pen}
 	var a1f := round2(best.a1)
 	var a2f := round2(best.a2)
-	if limits and coude == "":
+	if limits:
 		a1f = clamp_angle(limb.upper, a1f)
 		a2f = clamp_angle(limb.lower, a2f)
 	q.angles[limb.upper] = a1f
@@ -404,18 +432,18 @@ static func reach(p: Dictionary, limb_id: String, target: Vector2, limits := tru
 	# n'est plus exact : on corrige les deux angles par petits pas, en mesurant
 	# le bout du membre sur la projection réelle.
 	if _hors_plan(q):
-		q = _affine(q, limb, target, limits and coude == "", [limb.upper, limb.lower])
+		q = _affine(q, limb, target, limits, [limb.upper, limb.lower])
 		# Hors de portée (le membre pointe en partie vers la caméra ou à
 		# l'opposé) : on laisse aussi la profondeur du premier os se corriger,
 		# comme un vrai bras qui se tend vers une cible devant lui.
 		if solve(q).joints[limb.tip].distance_to(target) > 1.0:
-			q = _affine(q, limb, target, limits and coude == "", [limb.upper, limb.lower, limb.upper + PROF])
+			q = _affine(q, limb, target, limits, [limb.upper, limb.lower, limb.upper + PROF])
 	return q
 
 
 static func _hors_plan(p: Dictionary) -> bool:
 	for k in p.angles:
-		if (k in ["torsion", "torsionBassin", "lacet"] or str(k).ends_with(PROF)) and absf(float(p.angles[k])) > 0.01:
+		if (k in ["torsion", "torsionBassin", "lacet"] or str(k).ends_with(PROF) or str(k).ends_with(ROT)) and absf(float(p.angles[k])) > 0.01:
 			return true
 	return false
 
@@ -492,12 +520,13 @@ static func swap_sides(p: Dictionary) -> Dictionary:
 		q.angles[pr[1]] = tmp
 	for t in TWISTS:
 		q.angles[t.id] = -float(q.angles.get(t.id, 0.0))
-	for pr in SIDE_PAIRS:
-		var a: String = pr[0] + PROF
-		var b: String = pr[1] + PROF
-		var tmp2 = q.angles.get(a, 0.0)
-		q.angles[a] = q.angles.get(b, 0.0)
-		q.angles[b] = tmp2
+	for suf in [PROF, ROT]:
+		for pr in SIDE_PAIRS:
+			var a: String = pr[0] + suf
+			var b: String = pr[1] + suf
+			var tmp2 = q.angles.get(a, 0.0)
+			q.angles[a] = q.angles.get(b, 0.0)
+			q.angles[b] = tmp2
 	return q
 
 
@@ -506,6 +535,8 @@ static func swap_sides(p: Dictionary) -> Dictionary:
 static func other_side(id: String) -> String:
 	if id.ends_with(PROF):
 		return other_side(id.trim_suffix(PROF)) + PROF
+	if id.ends_with(ROT):
+		return other_side(id.trim_suffix(ROT)) + ROT
 	for pr in SIDE_PAIRS:
 		if id == pr[0]:
 			return pr[1]

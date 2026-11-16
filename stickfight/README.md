@@ -439,6 +439,16 @@ passer derrière la tête ou devant le buste, une jambe croiser l'autre. Canaux,
 | `torsion` | le buste tourne autour de la colonne (épaules), par rapport au bassin |
 | `torsionBassin` | le bassin tourne autour de la colonne (hanches) |
 | `lacet` | tout le corps tourne vers la caméra (vue de trois quarts) |
+| `armN_r`, `armF_r`, `thighN_r`, `thighF_r` | rotation du bras (de la cuisse) autour de son axe : oriente le plan où plie le coude (le genou) — coude vers le bas, vers l'extérieur, vers l'arrière |
+
+Le squelette suit les articulations réelles : le coude et le genou sont des **charnières** (ils
+ne plient que dans un plan, sans profondeur propre) ; l'épaule et la hanche ont trois degrés
+de liberté (flexion dans le plan, écartement en profondeur, rotation autour de l'axe du membre) ;
+le buste et le bassin s'inclinent sur le côté (`spineLow_p`, `chest_p`, `root_p`) et tournent
+(`torsion`, `torsionBassin`). Chaque canal 3D a ses limites (`StickRig.LIM_3D`) : bras écarté
+jusqu'à 90°, ramené devant le buste jusqu'à 40°, cuisse écartée 45° et ramenée 30°, rotation du
+bras ±80°, de la cuisse ±45°. La cinématique inverse respecte toujours ces limites, même quand
+on impose le côté du coude.
 
 Avec tout à 0, le dessin est exactement le profil plat d'avant : les animations existantes ne
 changent pas. Bras et jambes partent toujours d'un seul point du tronc. La cinématique inverse
