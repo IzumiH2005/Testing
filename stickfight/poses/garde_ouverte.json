@@ -18,6 +18,14 @@
     "footF": 11.96,
     "thighN": 59.31,
     "shinN": 61.79,
-    "footN": 5.48
+    "footN": 5.48,
+    "thighN_p": 6,
+    "thighF_p": -6,
+    "thighN_r": -5,
+    "thighF_r": -35,
+    "torsionBassin": 15,
+    "torsion": 8,
+    "armN_p": -5,
+    "armF_p": 12
   }
 }

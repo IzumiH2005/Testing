@@ -18,6 +18,10 @@
     "footF": 22.63,
     "thighN": 55.61,
     "shinN": 146.84,
-    "footN": 30
+    "footN": 30,
+    "thighN_p": 14,
+    "thighF_p": -14,
+    "thighN_r": 20,
+    "thighF_r": -20
   }
 }

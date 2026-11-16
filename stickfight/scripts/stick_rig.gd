@@ -469,38 +469,78 @@ static func _hors_plan(p: Dictionary) -> bool:
 ## vers la cible. Garde le sens de pliage de départ (on part de la solution
 ## à plat, et les pas restent petits).
 static func _affine(p: Dictionary, limb: Dictionary, target: Vector2, limits: bool, ids: Array) -> Dictionary:
+	# Gauss-Newton amorti : jacobien numérique du bout du membre (projeté) par
+	# rapport aux angles, quelques itérations suffisent (bien plus rapide que
+	# la recherche pas à pas, qui appelait solve des centaines de fois).
 	var q := clone_pose(p)
-	var err := func(pp: Dictionary) -> float:
-		var e0: float = solve(pp).joints[limb.tip].distance_squared_to(target)
-		if limits:
-			for v in amplitudes(pp):
-				if str(v.id) == str(limb.upper):
-					e0 += 4000.0
-		return e0
-	var e: float = err.call(q)
-	var pas := 4.0
-	for it in 80:
-		if e < 0.05:
+	var tip: String = limb.tip
+	var bout := func(pp: Dictionary) -> Vector2: return solve(pp).joints[tip]
+	var cur: Vector2 = bout.call(q)
+	for it in 12:
+		var r: Vector2 = target - cur
+		if r.length_squared() < 0.05:
 			break
-		var mieux := false
+		var cols := []
 		for id in ids:
-			for d in [pas, -pas]:
-				var r := clone_pose(q)
-				r.angles[id] = float(r.angles.get(id, 0.0)) + d
-				if limits:
-					r.angles[id] = clamp_angle(id, float(r.angles[id]))
-				var e2: float = err.call(r)
-				if e2 < e:
-					q = r
-					e = e2
-					mieux = true
-		if not mieux:
-			pas *= 0.5
-			if pas < 0.05:
-				break
+			var t := clone_pose(q)
+			t.angles[id] = float(t.angles.get(id, 0.0)) + 0.5
+			cols.append((bout.call(t) - cur) / 0.5)
+		# Moindres carrés amortis : (JᵀJ + λI) δ = Jᵀ r, résolu par descente
+		# sur chaque colonne (2 ou 3 inconnues).
+		var n := ids.size()
+		var A := []
+		var b := []
+		for a in n:
+			var row := []
+			for c in n:
+				row.append(cols[a].dot(cols[c]) + (0.05 if a == c else 0.0))
+			A.append(row)
+			b.append(cols[a].dot(r))
+		var dlt := _resout(A, b)
+		var q2 := clone_pose(q)
+		for k in n:
+			var id: String = ids[k]
+			var v: float = float(q2.angles.get(id, 0.0)) + clampf(float(dlt[k]), -25.0, 25.0)
+			if limits:
+				v = clamp_angle(id, v)
+			q2.angles[id] = v
+		var c2: Vector2 = bout.call(q2)
+		if c2.distance_squared_to(target) >= cur.distance_squared_to(target):
+			break
+		q = q2
+		cur = c2
+	if limits:
+		for v in amplitudes(q):
+			if str(v.id) == str(limb.upper):
+				return p
 	for id in ids:
 		q.angles[id] = round2(float(q.angles.get(id, 0.0)))
 	return q
+
+
+## Petit système linéaire (Gauss), n ≤ 3.
+static func _resout(A: Array, b: Array) -> Array:
+	var n := b.size()
+	var M := []
+	for i in n:
+		M.append(A[i].duplicate() + [b[i]])
+	for c in n:
+		var piv := c
+		for r in range(c + 1, n):
+			if absf(M[r][c]) > absf(M[piv][c]):
+				piv = r
+		var tmp = M[c]; M[c] = M[piv]; M[piv] = tmp
+		if absf(M[c][c]) < 1e-9:
+			return b.map(func(_x): return 0.0)
+		for r in n:
+			if r != c:
+				var k: float = M[r][c] / M[c][c]
+				for cc in range(c, n + 1):
+					M[r][cc] -= k * M[c][cc]
+	var x := []
+	for i in n:
+		x.append(M[i][n] / M[i][i])
+	return x
 
 
 ## Oriente un os pour qu'il pointe vers un point du monde (cinématique directe

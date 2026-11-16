@@ -409,7 +409,8 @@ func _verifier(recs: Array) -> String:
 					tot += 1
 					if not dedans.call(pt):
 						vis += 1
-			if vis < 0.35 * tot:
+			# Un bras qui pend le long du corps (main sous la taille) est normal.
+			if vis < 0.35 * tot and J.handN.y > J.waist.y:
 				warn.append("bras proche peu visible (moins de 35 % hors du corps)")
 			var jF := [J.hip, J.kneeF, J.ankleF]
 			var pres := func(v: Vector2) -> bool:
