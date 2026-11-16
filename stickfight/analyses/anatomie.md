@@ -27,10 +27,10 @@ coude vers le bas, vers l'extérieur ou vers l'arrière avec le même pliage.
 |---|---|---|---|
 | Colonne lombaire + thoracique | flexion (se pencher en avant) / extension | 80° / 30° au total, répartis sur les deux os | `spineLow`, `chest` |
 | | inclinaison sur le côté | 35° de chaque côté au total | `spineLow_p`, `chest_p` |
-| | rotation (torsion) | 45° de chaque côté, surtout dans le thorax | `torsion` |
-| Bassin (sur les hanches) | bascule avant / arrière, inclinaison, rotation | suit les jambes | `root`, `root_p`, `torsionBassin` |
+| | rotation (torsion) | 45° de chaque côté ; le squelette la répartit 20 % dans le bas du dos, 80 % dans le thorax | `torsion` (limité à ±45°) |
+| Bassin (sur les hanches) | bascule avant / arrière, inclinaison, rotation | rotation 60° au plus, pieds posés | `root`, `root_p`, `torsionBassin` (±60°) |
 | Cou | flexion / extension | 50° / 60° | `neck` |
-| | inclinaison / rotation | 45° / 80° (la rotation ne se voit pas : tête ronde) | `neck_p` |
+| | inclinaison / rotation | 45° / 80° (la rotation ne se voit presque pas : tête ronde) | `neck_p`, `neck_r` |
 
 Couplages : quand on tourne les épaules, le bassin suit d'environ la moitié (ou résiste, et
 c'est le ressort d'un coup). Le regard reste sur la cible : le cou compense la torsion.

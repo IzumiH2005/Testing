@@ -67,17 +67,18 @@
     "x": -1
    },
    "plus": {
-    "y": -3,
-    "root": -2,
-    "spineLow": -2,
-    "chest": -3,
-    "neck": -2,
     "armN": 70,
     "foreN": -110,
     "armF": 62,
-    "foreF": -100
+    "foreF": -100,
+    "y": 0,
+    "root": -3,
+    "spineLow": -4,
+    "chest": -6,
+    "neck": -4
    },
-   "courbe": "dec"
+   "courbe": "dec",
+   "pose": "="
   },
   {
    "f": 20,

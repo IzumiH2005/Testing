@@ -87,8 +87,11 @@ const BONES := [
 ##                  se tourne vers la caméra (vue de trois quarts)
 ## Avec tout à 0, le dessin est exactement celui du profil plat.
 const TWISTS := [
-	{"id": "torsion", "lim": Vector2(-90, 90), "label": "Torsion des épaules"},
-	{"id": "torsionBassin", "lim": Vector2(-90, 90), "label": "Torsion du bassin"},
+	# Torsion du tronc entre bassin et épaules : 45° de chaque côté au total,
+	# répartie 20 % dans le bas du dos (lombaires), 80 % dans le thorax.
+	{"id": "torsion", "lim": Vector2(-45, 45), "label": "Torsion des épaules"},
+	# Rotation du bassin sur les hanches (les pieds restent posés) : 60°.
+	{"id": "torsionBassin", "lim": Vector2(-60, 60), "label": "Torsion du bassin"},
 	{"id": "lacet", "lim": Vector2(-180, 180), "label": "Corps tourné vers la caméra"},
 	# Omoplate (ceinture scapulaire) : déplacement de l'épaule, en unités.
 	{"id": "epauleN_av", "lim": Vector2(-7, 7), "label": "Épaule proche : avance (+) / recule (−)"},
@@ -115,6 +118,7 @@ const LIM_3D := {
 	"_p:arm": Vector2(-90, 90), "_p:thigh": Vector2(-30, 45), "_p:root": Vector2(-30, 30),
 	"_p:spineLow": Vector2(-30, 30), "_p:chest": Vector2(-30, 30), "_p:neck": Vector2(-40, 40),
 	"_p:foot": Vector2(-25, 25), "_r:arm": Vector2(-80, 80), "_r:thigh": Vector2(-45, 45),
+	"_r:neck": Vector2(-80, 80),
 }
 
 ## Chaînes à deux os pour la cinématique inverse.
@@ -159,7 +163,7 @@ static func angle_ids() -> Array:
 		if not b.id in CHARNIERES:
 			ids.append(b.id + PROF)
 	for b in BONES:
-		if b.id.begins_with("arm") or b.id.begins_with("thigh"):
+		if b.id.begins_with("arm") or b.id.begins_with("thigh") or b.id == "neck":
 			ids.append(b.id + ROT)
 	return ids
 
@@ -239,8 +243,12 @@ static func solve(p: Dictionary) -> Dictionary:
 		var B: Basis = basis[b.parent] * RZ.call(b.rest + b.sign * angle(p, b.id)) * RY.call(prof_os)
 		if b.id.begins_with("arm") or b.id.begins_with("thigh"):
 			B = B * RX.call(angle(p, b.id + ROT))
+		if b.id == "spineLow":
+			B = B * RX.call(-0.2 * angle(p, "torsion"))
 		if b.id == "chest":
-			B = B * RX.call(-angle(p, "torsion"))
+			B = B * RX.call(-0.8 * angle(p, "torsion"))
+		if b.id == "neck":
+			B = B * RX.call(-angle(p, "neck" + ROT))
 		basis[b.id] = B
 		var o3: Vector3 = tip[b.parent]
 		if b.id.begins_with("arm"):
