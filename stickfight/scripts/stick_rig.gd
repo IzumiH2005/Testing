@@ -696,7 +696,9 @@ static func amplitudes(p: Dictionary) -> Array:
 		var depuis_bas := rad_to_deg(acos(clampf(-up, -1.0, 1.0)))
 		if absf(up) < 0.85 and Vector2(fw, ou).length() > 0.2:
 			var az := rad_to_deg(atan2(ou, fw))
-			if az < -55.0:
+			# Croisé devant : vers l'avant (pas un bras derrière le corps, déjà
+			# traité plus bas) et plus de 55° vers l'intérieur.
+			if az < -55.0 and az > -125.0:
 				out.append({"id": "arm" + side, "label": "bras %s croisé trop loin devant le buste" % nom})
 			# Vers l'arrière : jusqu'à 60° depuis le bras pendant (extension),
 			# ou jusqu'à 40° derrière le côté quand le bras est écarté.
