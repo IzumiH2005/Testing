@@ -1,14 +1,17 @@
 # Bible d'animation de stickman
 
 Ce document dit **comment animer** un stickman qui se bat pour que ce soit naturel, lisible
-et cool. Il est tiré de l'étude image par image de vidéos de référence faites par de bons
-animateurs. Chaque règle renvoie aux images qui la prouvent.
+et cool, **y compris pour des mouvements qu'aucune référence ne montre**.
+
+- **Partie I** : neuf principes, une méthode pour construire n'importe quelle animation, une
+  échelle de force, et quatre exemples construits sans référence. C'est par là qu'on commence.
+- **Partie II** : ce qu'on a mesuré image par image dans des vidéos faites par de bons
+  animateurs. Ce sont les preuves des principes, et des valeurs de départ.
 
 - `INVENTAIRE.md` dit **quelles** animations faire. Ce document dit **comment** les faire.
 - Quand une règle d'ici contredit une animation existante, c'est l'animation qu'on corrige.
-- Le document grossit à chaque nouvelle vidéo étudiée (§ 15).
-- **Confirmée** : vue dans plusieurs vidéos. **V1** ou **V2** : vue dans une seule.
-  **Selon le registre** : les vidéos font des choix différents, voir § 0.
+- Dans la partie II : **Confirmée** veut dire vue dans les deux vidéos ; **V1** ou **V2**, vue
+  dans une seule ; **selon le registre**, les vidéos font des choix différents (§ 0).
 
 ## Vidéos étudiées
 
@@ -33,6 +36,269 @@ l'image 176 de la vidéo 1.
 | i60 | 2 ou 3 | 5 | 7 ou 8 | 10 | 12 ou 13 | 15 | 20 | 30 | 35 |
 
 ---
+
+# Partie I : principes et méthode
+
+Cette partie sert à animer **n'importe quel mouvement**, y compris ceux qu'aucune vidéo ne
+montre. Elle dit pourquoi les animations des références marchent, puis comment s'en servir
+pour fabriquer une animation nouvelle. La partie II donne les mesures qui le prouvent, et des
+valeurs de départ.
+
+## A. Les neuf principes
+
+Chaque principe est une cause, pas une recette. Quand un cas n'est pas dans la partie II, on
+le construit à partir d'ici.
+
+### A1. La vitesse se voit par contraste
+
+L'œil ne mesure pas une vitesse : il compare. Un mouvement paraît rapide parce qu'il est
+entouré d'immobilité, et puissant parce qu'on a eu le temps de voir ce qui allait partir.
+
+- Tout mouvement fort se construit en **tenue → rafale → tenue**. La rafale dure 1 à 3 i24 ;
+  les tenues qui l'encadrent durent au moins deux à trois fois plus.
+- Les images entre deux poses éloignées ne servent à rien : l'œil ne les lit pas. On les
+  remplace par une traînée qui montre le chemin (§ 10.1).
+- Un mouvement « moyen », à vitesse constante, est mou. S'il n'y a pas de tenue, il n'y a pas
+  de vitesse.
+
+Preuves : V1 176-182, V2 1797-1811 (§ 2).
+
+### A2. Pour aller quelque part, on part d'abord dans l'autre sens
+
+Toute action est précédée d'un mouvement opposé : on recule le poing avant de frapper, on
+s'accroupit avant de sauter, la tête descend avant de se relever, le monstre se ramasse avant
+de bondir.
+
+- Plus l'action est forte, plus l'anticipation est grande et longue.
+- Un coup rapide garde une anticipation, mais minuscule : 1 image, quelques pixels.
+- Un coup sans aucune anticipation est un coup de surprise : c'est un choix de caractère
+  (le rapide), pas un oubli.
+
+Preuves : V1 140, 181 ; V2 312-335 (§ 3, § 7).
+
+### A3. La force vient du sol et passe de segment en segment
+
+Le pied pousse sur le sol, la hanche tourne, puis le buste, puis l'épaule, puis le bras ou la
+jambe. Chaque segment part quand le précédent atteint sa vitesse maximale, puis il freine
+pour lui passer la vitesse. L'extrémité (poing, pied, lame) part donc **en dernier** et va
+**le plus vite**.
+
+- Pour un coup de pied : le pied d'appui pivote, la hanche s'ouvre, le genou monte, puis la
+  jambe se déplie.
+- Pour une projection : les jambes plient et poussent, la hanche tourne, puis les bras tirent.
+- Même un blocage suit la chaîne : les pieds se calent avant que les bras se ferment.
+- Et à l'arrivée, la chaîne s'inverse : l'extrémité s'arrête en premier, le reste du corps
+  continue et la rattrape (dépassement).
+
+Preuves : V1 128-142 ; V2 806-819 (§ 4).
+
+### A4. Ce qui est lancé doit être arrêté, et ça se voit
+
+Une masse qui bouge vite ne s'arrête pas d'elle-même. Il faut que quelque chose l'arrête, et
+c'est ce « quelque chose » qui rend le mouvement crédible :
+
+- **la cible** : le coup s'y enfonce, la traverse ou la pousse ;
+- **un contrepoids** : le bras libre, la jambe opposée ou le buste partent dans l'autre sens ;
+- **le dépassement** : le membre continue sa course, le corps est emporté, puis revient ;
+- **un appui** : un pas de rattrapage, une main au sol, une glissade qui freine.
+
+Un coup qui s'arrête net, sans rien de tout ça, paraît sans poids. Un coup raté se paie, parce
+que rien ne l'arrête.
+
+Preuves : V1 142-146, 224-229 ; V2 812-819, 1418-1425 (§ 4, § 8).
+
+### A5. Le poids se lit dans les durées, pas dans la taille
+
+Une masse lourde met longtemps à partir et longtemps à s'arrêter. Un personnage lourd a donc
+une anticipation longue, une récupération longue, et réagit peu aux coups. Un léger part tout
+de suite, s'arrête tout de suite, et s'envole quand on le frappe.
+
+- Le centre de gravité doit être au-dessus de la zone d'appui. S'il en sort, la pose suivante
+  est forcément un pas, un saut ou une chute.
+- L'amplitude d'une réaction dépend du rapport entre la force du coup et le poids du touché.
+
+Preuves : V1 (costaud contre rapide, § 12) ; V2 (le boss encaisse, les héros volent).
+
+### A6. Une pose = une idée, lisible en silhouette
+
+Chaque pose clé dit une seule chose (je prépare, je frappe, je suis touché, je récupère) et
+se lit en silhouette noire, sans détail :
+
+- une ligne d'action simple et penchée (diagonale, C, S) ;
+- des membres qui ne se recouvrent pas ;
+- des poses extrêmes : on pousse l'anticipation et l'extension plus loin que la réalité ;
+- deux personnages aux lignes opposées sur la même image.
+
+Preuves : V1 136-152 ; V2 807, 864 (§ 3).
+
+### A7. Le touché raconte le coup
+
+La réaction est la moitié du coup. Elle reprend la direction et la force de l'attaque :
+
+- la partie touchée part en premier, le reste du corps traîne d'une image ;
+- le corps se plie autour du point d'impact ;
+- le déplacement est maximal sur l'image du contact ou la suivante, puis divisé par 1,5 à 2 à
+  chaque image ;
+- la réaction ne se répète jamais à l'identique.
+
+Preuves : V1 152-171, 358-394 ; V2 813-817 (§ 8).
+
+### A8. Rien ne s'arrête tout à fait
+
+Une pose tenue reste vivante : elle dérive d'un ou deux pixels, elle se tasse à la fin, ou
+bien ce sont les éléments secondaires (cheveux, ceinture, queue, lumière, particules, caméra)
+qui bougent. Seules l'inconscience et la pose de fin de combat sont totalement figées.
+
+Preuves : V1 176-180, 411-422 ; V2 920-961, 1250-1343 (§ 2).
+
+### A9. Les effets amplifient, ils ne remplacent pas
+
+Un effet ne rattrape pas une pose ratée : il renforce une information que le mouvement donne
+déjà (le chemin du membre, le point d'impact, la force, le poids). Plus le moment compte, plus
+on empile d'effets. Les plus forts sont rares, sinon ils ne veulent plus rien dire.
+
+Preuves : V1 (sobre) et V2 (chargé) suivent la même échelle, chacune à son niveau (§ 0, § 10).
+
+## B. Méthode : construire une animation qu'on n'a jamais vue
+
+1. **Intention.** Que fait le mouvement dans le jeu ? Coup haut, moyen ou bas, coup qui
+   pousse, qui lance, blocage, déplacement. Quelle force, de 1 à 5 (§ C) ? Qui le fait (lourd
+   ou léger, § 12) ?
+2. **Plan physique.** Où sont les appuis au départ et à l'arrivée ? Où va la masse ? D'où
+   vient la force (quel pied pousse) et comment elle remonte jusqu'à l'extrémité (A3) ? Qu'est-
+   ce qui arrête le mouvement (A4) ?
+3. **Poses clés**, quatre ou cinq, dessinées d'abord, chacune lisible en silhouette (A6) :
+   - départ (garde ou repos) ;
+   - anticipation extrême, dans le sens opposé à l'action (A2) ;
+   - contact ou extension, la pose la plus longue ;
+   - dépassement, là où l'élan emporte le corps (A4) ;
+   - retour.
+4. **Durées**, prises dans l'échelle de force (§ C) puis multipliées par le caractère (§ 12).
+5. **Espacement** entre les poses : départ qui double, arrêt qui divise par deux, rien de
+   linéaire (§ 9). Le trajet de l'extrémité ne prend pas d'intervalle : une traînée (A1).
+6. **Décalages.** Pour chaque segment, une image de retard sur le segment qui le pousse (A3) ;
+   la tête, le bras libre, les cheveux et la ceinture suivent avec 1 à 2 images de retard.
+7. **Réaction** de l'adversaire, construite avec les mêmes étapes (A7).
+8. **Effets** selon la force (§ C, § 10.14).
+9. **Contrôle** : planche, stroboscopie, et liste du § 14.
+
+## C. Échelle de force
+
+Les valeurs viennent des deux vidéos (partie II) ; elles servent de point de départ pour
+n'importe quel coup. Durées en i24 (multiplier par 2,5 pour des i60).
+
+| Force | Exemples | Anticipation | Trajet | Contact tenu | Récupération | Recul du touché | Secousse | Effets |
+|---|---|---|---|---|---|---|---|---|
+| 1 | jab, coup de rafale | 0 à 1 | 0 | 1 | 1 | 0,05 H | 0 ou 0,015 H | traînée, petite étoile |
+| 2 | direct, coup de pied bas | 1 à 2 | 0 | 1 à 2 | 2 à 4 | 0,15 H | 0,04 H, 2 i24 | traînée, bouffée |
+| 3 | coup lourd, coup au corps qui pousse | 3 à 5 | 0 à 1 | 2 à 6 | 4 à 7 | 0,3 à 0,5 H | 0,08 H, 4 i24 | traînée longue, anneau, étincelles |
+| 4 | lanceur, coup ample, projection | 4 à 8 | 1 à 3 | 2 à 4 | 6 à 9 | lancé ou projeté | 0,12 H, 6 à 8 i24 | plus flou, zoom |
+| 5 | Heat Smash, Rage Art, coup de KO | 7 à 12 | 1 | 10 à 14 | 9 et plus | expulsé | 0,2 H, 15 à 25 i24 | image d'impact noire puis blanche, éclat final |
+
+Le caractère multiplie ces valeurs : un lourd prend environ 1,5 fois l'anticipation et la
+récupération et 0,5 fois le recul quand il est touché ; un léger l'inverse (§ 12).
+
+## D. Exemples : des cas qu'aucune vidéo ne montre de près
+
+Ces quatre animations sont construites avec la méthode B, sans référence directe. Elles
+servent de modèle de raisonnement.
+
+### D1. Coup de pied circulaire au visage (force 3)
+
+1. **Intention** : coup haut qui balaie de côté, jambe arrière.
+2. **Plan physique** : la force vient du pied d'appui (avant), qui pivote sur la plante ; la
+   hanche tourne d'abord, puis la jambe suit en arc. Ce qui l'arrête : la tête adverse, puis le
+   dépassement (la jambe continue derrière et le corps tourne).
+3. **Poses clés** :
+   - garde ;
+   - anticipation (A2) : le poids passe sur la jambe avant, le genou arrière monte replié
+     contre le ventre, le buste se ferme légèrement vers l'arrière, bras serrés ;
+   - contact : jambe tendue à l'horizontale à hauteur de tête, pied d'appui tourné sur la
+     plante, buste penché à l'opposé de la jambe (40 à 60°), bras opposé tendu en contrepoids,
+     l'autre bras devant le visage ;
+   - dépassement : la jambe a continué de 60 à 90° au-delà de la cible, le dos commence à se
+     tourner vers l'adversaire ;
+   - retour : la jambe se replie et se pose devant (on finit en garde inversée) ou revient
+     derrière.
+4. **Durées** (force 3) : armé 3, trajet 1 (éventail, A1), contact 2, dépassement 2,
+   retour 5 i24.
+5. **Espacement** : le genou monte vite puis ralentit au sommet (écarts 40, 13, 10 px), la
+   jambe fouette en une image.
+6. **Décalages** : la hanche tourne une image avant le départ de la jambe ; la tête reste
+   fixée sur la cible jusqu'au contact, puis suit la rotation.
+7. **Réaction** : la tête part dans le sens de la jambe, le cou et le buste suivent ; recul de
+   0,3 à 0,5 H, le touché tourne d'un quart de tour.
+8. **Effets** : traînée en éventail centrée sur la hanche ; anneau de fumée sur la tête ;
+   secousse de 0,08 H.
+
+### D2. Projection par-dessus la hanche (force 4)
+
+1. **Intention** : saisir, charger l'adversaire sur la hanche, le jeter au sol devant soi.
+2. **Plan physique** : il faut passer **sous** le centre de gravité adverse. La force vient des
+   jambes (on plie, puis on pousse), la hanche sert de pivot, les bras tirent en dernier. Ce
+   qui arrête l'adversaire : le sol. Ce qui arrête le lanceur : il finit en fente, penché sur
+   sa victime.
+3. **Poses clés** :
+   - saisie : une main au col ou au bras, l'autre à la ceinture, pieds près de l'adversaire ;
+   - anticipation : le lanceur tourne le dos et plie fort les genoux, bassin **plus bas** que
+     celui de l'adversaire, dos rond, l'adversaire penché par-dessus lui ;
+   - extension : jambes tendues d'un coup, bassin qui pousse, l'adversaire à l'horizontale
+     au-dessus du dos ;
+   - impact : l'adversaire à plat au sol, le lanceur en fente, buste penché, les mains tenant
+     encore le bras ;
+   - retour : il lâche et se relève en garde.
+4. **Durées** (force 4) : saisie 3 à 4 (une tenue avec un léger tangage), anticipation 4,
+   extension 2, chute de la victime 2 (elle accélère, § 9), impact tenu 3,
+   retour 6 i24.
+5. **Espacement** : l'adversaire monte en ralentissant, passe le sommet en une image, et
+   tombe en doublant sa vitesse.
+6. **Décalages** : les jambes de la victime traînent derrière son buste pendant tout l'arc,
+   comme un fouet.
+7. **Réaction** : le dos de la victime touche le sol, la tête et les jambes rebondissent une
+   image après.
+8. **Effets** : secousse de 0,12 H à l'impact au sol, ellipse de poussière sous la victime,
+   flou du corps pendant l'arc.
+
+### D3. Recul sur garde (force 2 reçue)
+
+1. **Intention** : montrer que le coup est arrêté, mais qu'il pousse.
+2. **Plan physique** : le coup arrive sur les avant-bras. Le choc passe par les bras dans le
+   buste puis dans les jambes : les pieds glissent. Ce qui l'arrête : le frottement des pieds.
+3. **Poses clés** : garde fermée ; contact (avant-bras serrés, tête rentrée derrière, buste
+   repoussé de 10 à 15°) ; glissade (même pose, pieds qui glissent en arrière) ; retour (le
+   buste revient en avant d'une image, puis la garde se rouvre).
+4. **Durées** : contact 1, tenue 2 à 4 (plus long que le coup, A4), glissade sur 3 à 4 images
+   à pas qui se divisent par deux, retour 2 i24.
+5. **Décalages** : la tête recule une image après les bras ; le pied arrière glisse avant le
+   pied avant.
+6. **Effets** : anneaux gris au point de contact, petite poussière sous les pieds, secousse de
+   0,04 H ; aucune étoile (le coup n'a pas touché).
+
+### D4. KO après un coup final (force 5 reçue)
+
+1. **Intention** : finir le combat ; le corps n'oppose plus aucune résistance.
+2. **Plan physique** : toute la force du coup passe dans le corps, rien ne la freine. Le
+   touché ne se rattrape pas : **aucun pas de rattrapage, aucune main au sol** (A4 : c'est
+   l'absence d'arrêt qui dit qu'il est inconscient).
+3. **Poses clés** : impact (corps plié autour du point touché, tête en retard) ; envol (corps
+   droit, membres qui traînent mous, plus de raideur) ; premier contact au sol (dos ou épaule,
+   les membres continuent leur course) ; rebond (le corps décolle un peu, les membres flottent) ;
+   pose finale (étalé, une jambe pliée, bras jetés, tête tournée).
+4. **Durées** : impact tenu 10 à 14 (image d'impact noire puis blanche avant), envol 6 à 10,
+   premier contact 1, rebond 3 à 4, retombée 2, puis immobile.
+5. **Espacement** : la montée freine, la chute double ; le rebond fait environ un tiers de la
+   hauteur de chute.
+6. **Décalages** : la tête et les mains ont toujours une à deux images de retard : c'est ce
+   qui fait « corps mou ».
+7. **Effets** : éclat final, secousse de 0,2 H qui décroît sur 20 i24, poussière au premier
+   contact au sol et au rebond. Après l'arrêt, aucun mouvement du tout (A8 : seule exception).
+
+---
+
+# Partie II : références mesurées
+
+Les sections suivantes donnent ce qu'on a mesuré dans les vidéos. Elles servent de preuves
+pour les principes de la partie I, et de valeurs de départ quand on construit un mouvement.
 
 ## 0. Deux registres
 
@@ -59,7 +325,7 @@ Cette échelle est détaillée au § 9.10.
 
 ---
 
-## 1. Les douze règles
+## 1. Les douze règles observées
 
 1. **Un coup court, c'est deux dessins** : la pose armée, puis la pose de contact, sans
    dessin du membre à mi-chemin. Un coup **ample** (coup de pied haut, uppercut, coup chargé)
@@ -804,17 +1070,16 @@ V2 confirme : le boss prépare peu mais frappe lourd et encaisse sans tomber ; l
 
 ---
 
-## 15. Ce qui reste à apprendre
+## 15. Limites
 
-- Les **coups de pied circulaires** vus de près (V2 en montre, mais en plan large et en 360p).
-- Les **projections** de près : V2 en montre deux, rapides et peu lisibles.
-- Les **chutes au sol** complètes et le KO vu de près.
-- L'**alternance bras gauche et bras droit**, illisible sur un personnage d'une seule couleur.
-- Une référence de **vrai jeu de combat** (hitstop, recul sur garde, enchaînements) : les deux
-  vidéos sont des films, pas des jeux.
-- Ce qui change à **60 images par seconde** : les deux vidéos sont à 24, et leur côté sec vient
-  en partie de là. Il faudra décider si nos coups tiennent leurs poses par paliers de 2 ou
-  3 i60.
+Les principes de la partie I suffisent pour construire les mouvements qu'aucune vidéo ne
+montre (§ D). Deux choses restent à décider en jeu, pas à apprendre d'une vidéo :
+
+- **60 images par seconde.** Les deux références sont à 24, et leur côté sec vient en partie
+  de là. À essayer : tenir les poses par paliers de 2 ou 3 i60 dans les coups, en uns ailleurs.
+- **Le confort du joueur.** Les références sont des films. Un jeu a besoin d'un arrêt sur image
+  et de durées fixes pour que le joueur puisse réagir ; les durées de l'échelle de force (§ C)
+  devront être ajustées en jouant.
 
 ### Lectures incertaines
 
