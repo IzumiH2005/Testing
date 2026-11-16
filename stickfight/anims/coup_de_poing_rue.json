@@ -355,13 +355,11 @@
     "spineLow": 4,
     "chest": 2,
     "neck": 2,
-    "armN": 50,
-    "foreN": 55,
     "armF": 50,
     "foreF": 95,
     "torsion": 0,
     "torsionBassin": 10,
-    "armN_p": -12,
+    "armN_p": 0,
     "armF_p": -20,
     "thighN_p": 7,
     "thighF_p": -7
@@ -374,7 +372,15 @@
     "legF": [
      0,
      18
-    ]
+    ],
+    "armN": {
+     "cible": [
+      33,
+      -8
+     ],
+     "repere": "head",
+     "coude": "bas"
+    }
    }
   },
   {

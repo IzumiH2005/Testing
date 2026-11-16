@@ -93,6 +93,27 @@ décolle. On tient la pose emportée, en la laissant dériver.
 ### Retour (46-72)
 Le pied arrière passe devant et se pose, l'autre recule, les torsions reviennent à 0, garde.
 
+## 3 bis. Le trajet du poing dans l'espace
+
+On décrit le trajet en 3D avant de penser au dessin :
+
+- À l'armé, le poing est près de la joue, sur le côté du corps (côté caméra), le coude derrière
+  et un peu écarté.
+- Au départ, le poing va **en ligne droite vers la cible** : de la joue au menton adverse, il
+  monte légèrement et ne descend jamais. C'est le chemin le plus court, celui qui transmet la force.
+- Le coude suit le poing, **derrière et un peu sous lui**, et se déplie au fur et à mesure ; il
+  ne passe pas devant le poing.
+- Pendant ce trajet, le bras passe le long du côté de la tête. De profil, il recouvre en partie la
+  tête : on le montre en plaçant le poing **juste devant le visage** sur l'image du milieu, pas en
+  faisant plonger le bras pour qu'il « se voie ».
+
+Erreur corrigée (réflexe 2D) : l'image 28 faisait descendre le poing et le coude sous l'épaule
+pour sortir le bras de la silhouette, puis le poing remontait vers la cible. Le poing décrivait
+un creux sans raison physique.
+
+Contrôle : `--strobe … --suivre handN,elbowN` ; la trajectoire du poing monte sans creux de
+l'armé au contact, celle du coude reste derrière.
+
 ## 4. Ce qui se voit de profil
 
 - Les torsions du bassin et des épaules se voient par le décalage des hanches et des épaules

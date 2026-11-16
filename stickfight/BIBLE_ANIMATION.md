@@ -108,6 +108,12 @@ Dans ces images, aucun bras ne longe le buste et aucune jambe ne se cache derri�
 Le contrôle `--verifier` signale un bras confondu avec le corps (coude et main dans le tronc ou la
 tête) et des jambes superposées.
 
+**Le trajet d'abord, la lisibilité ensuite.** On trace d'abord le chemin réel de l'extrémité dans
+l'espace (pour un coup droit : une ligne droite de l'armé à la cible), puis on rend chaque image
+lisible **sur ce chemin** (le poing juste devant le visage plutôt que dedans). On ne déforme
+jamais le chemin pour la lisibilité : un poing qui plonge puis remonte n'a pas de raison physique.
+Contrôle : `--strobe … --suivre handN,elbowN`.
+
 **La 2,5D avec notre squelette : ce qui se voit et ce qui ne se voit pas** (recherche et essais
 du 16 novembre 2026, sources en fin de paragraphe).
 
