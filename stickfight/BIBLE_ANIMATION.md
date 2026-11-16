@@ -108,6 +108,19 @@ Dans ces images, aucun bras ne longe le buste et aucune jambe ne se cache derri�
 Le contrôle `--verifier` signale un bras confondu avec le corps (coude et main dans le tronc ou la
 tête) et des jambes superposées.
 
+**Doser la profondeur** (étude de « Strength vs Speed, Round 2 », `etudes/03_…`) :
+
+- On tourne peu : `torsion` 20 à 30°, `torsionBassin` la moitié, `lacet` 30 à 50°. Au-delà,
+  les bras tournent avec le buste et se raccourcissent jusqu'à disparaître.
+- Quand le buste tourne, le bras qui doit rester lisible **compense** : on lui donne une
+  profondeur dans le sens opposé (il continue de viser la cible, comme un vrai bras).
+- Le raccourci sert à dire « vers nous » : un genou levé vers la caméra (`thighN_p` 40 à 60°)
+  sur une seule image, puis la jambe se déplie en reprenant sa longueur.
+- Un membre ne change de couche (devant ou derrière le corps, devant ou derrière l'adversaire)
+  que sur une ou deux images, et un seul à la fois.
+- Le dessin ne montre jamais d'écart entre les épaules : la profondeur se lit par les longueurs
+  et par l'ordre de dessin.
+
 **Attention à la lisibilité.** Un membre qui pointe vers la caméra ou à l'opposé raccourcit : vers
 60° de profondeur, il ne fait plus que la moitié de sa longueur et, noir sur noir, il se fond dans
 le buste ou la tête. Un membre qui passe derrière le corps disparaît complètement. On s'en sert

@@ -4,7 +4,7 @@
  "longueur": 72,
  "base": "garde_ouverte",
  "suivante": "garde_ouverte_idle",
- "note": "Coup de poing de rue du bras arrière (bras proche), construit avec BIBLE_ANIMATION.md (méthode B, A bis). Trois niveaux d'anticipation : il se ramasse (3), recule le pied avant et charge la jambe arrière (8-12), puis s'enfonce et recule le poing d'un cran (26). Armé tenu 16-24 : buste en arrière, coude bas, avant-bras complètement replié, coude tiré en arrière, poing serré sous le menton, l'autre bras vise. Départ par la jambe arrière (27), puis l'épaule et le coude (28), poing en dernier au contact (29), écarts croissants jusqu'au contact. Le buste continue deux images après le bras (31), pose de fin tenue (35-46), le pied arrière passe devant, garde (72). Les torsions de l'analyse ne sont pas encore posées : elles le seront avec la profondeur 3D.",
+ "note": "Coup de poing de rue du bras arrière (bras proche), construit avec BIBLE_ANIMATION.md (méthode B, A bis). Trois niveaux d'anticipation : il se ramasse (3), recule le pied avant et charge la jambe arrière (8-12), puis s'enfonce et recule le poing d'un cran (26). Armé tenu 16-24 : buste en arrière, coude bas, avant-bras complètement replié, coude tiré en arrière, poing serré sous le menton, l'autre bras vise. Départ par la jambe arrière (27), puis l'épaule et le coude (28), poing en dernier au contact (29), écarts croissants jusqu'au contact. Le buste continue deux images après le bras (31), pose de fin tenue (35-46), le pied arrière passe devant, garde (72). Profondeur légère : buste tourné de 25° à l'armé et de 20° au contact, bras avant qui compense en profondeur pour rester lisible.",
  "cles": [
   {
    "f": 0,
@@ -112,7 +112,11 @@
     "chest": -3,
     "neck": 12,
     "armF": 72,
-    "foreF": 40
+    "foreF": 40,
+    "torsion": -18,
+    "torsionBassin": -8,
+    "armN_p": -15,
+    "armF_p": 12
    },
    "vise": {
     "legN": [
@@ -145,7 +149,11 @@
     "chest": -4,
     "neck": 13,
     "armF": 74,
-    "foreF": 35
+    "foreF": 35,
+    "torsion": -24,
+    "torsionBassin": -10,
+    "armN_p": -18,
+    "armF_p": 14
    },
    "vise": {
     "legN": [
@@ -178,7 +186,11 @@
     "chest": -5,
     "neck": 14,
     "armF": 75,
-    "foreF": 33
+    "foreF": 33,
+    "torsion": -25,
+    "torsionBassin": -10,
+    "armN_p": -18,
+    "armF_p": 14
    },
    "vise": {
     "legN": [
@@ -211,7 +223,11 @@
     "chest": -5,
     "neck": 15,
     "armF": 76,
-    "foreF": 32
+    "foreF": 32,
+    "torsion": -27,
+    "torsionBassin": -11,
+    "armN_p": -20,
+    "armF_p": 15
    },
    "vise": {
     "legN": [
@@ -244,7 +260,11 @@
     "chest": -4,
     "neck": 13,
     "armF": 70,
-    "foreF": 45
+    "foreF": 45,
+    "torsion": -20,
+    "torsionBassin": 0,
+    "armN_p": -12,
+    "armF_p": 12
    },
    "vise": {
     "legN": [
@@ -279,7 +299,11 @@
     "armN": 45,
     "foreN": 100,
     "armF": 50,
-    "foreF": 95
+    "foreF": 95,
+    "torsion": 0,
+    "torsionBassin": 10,
+    "armN_p": 0,
+    "armF_p": 8
    },
    "vise": {
     "legN": [
@@ -304,7 +328,11 @@
     "chest": 2,
     "neck": -10,
     "armF": 30,
-    "foreF": 135
+    "foreF": 135,
+    "torsion": 20,
+    "torsionBassin": 12,
+    "armN_p": 0,
+    "armF_p": -10
    },
    "vise": {
     "armN": [
@@ -335,7 +363,10 @@
     "armN": 120,
     "foreN": 4,
     "armF": 25,
-    "foreF": 138
+    "foreF": 138,
+    "torsion": 24,
+    "torsionBassin": 14,
+    "armF_p": -10
    },
    "vise": {
     "legF": [
@@ -362,7 +393,10 @@
     "armN": 104,
     "foreN": 15,
     "armF": 22,
-    "foreF": 132
+    "foreF": 132,
+    "torsion": 22,
+    "torsionBassin": 12,
+    "armF_p": -8
    },
    "vise": {
     "legF": [
@@ -389,7 +423,10 @@
     "armN": 96,
     "foreN": 26,
     "armF": 10,
-    "foreF": 130
+    "foreF": 130,
+    "torsion": 18,
+    "torsionBassin": 10,
+    "armF_p": -6
    },
    "vise": {
     "legF": [
@@ -416,7 +453,10 @@
     "armN": 75,
     "foreN": 70,
     "armF": 25,
-    "foreF": 120
+    "foreF": 120,
+    "torsion": 8,
+    "torsionBassin": 4,
+    "armF_p": 0
    },
    "vise": {
     "legF": [

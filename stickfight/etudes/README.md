@@ -7,6 +7,7 @@ détail qui les justifie.
 | Dossier | Vidéo | Contenu |
 |---|---|---|
 | `01_strength_vs_speed/` | « Strength vs Speed » (Stick Nodes), 24 i/s, 494 images | 5 rapports, mesures par image, 10 planches zoomées |
+| `03_strength_vs_speed_round_2/` | « Strength vs Speed, Round 2 » (Stick Nodes), 24 i/s, 6 779 images | rapport sur la profondeur, 5 planches |
 | `02_rai_zen_armagon/` | « Rai and Zen vs Armagon » (Rai Lukasha, Stick Nodes), 24 i/s, 3 713 images | 6 rapports, 13 planches zoomées |
 
 Dans chaque dossier :
