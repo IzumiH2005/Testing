@@ -421,7 +421,8 @@ image à la fin, parce que lire des images coûte beaucoup plus cher que lire du
 2. Contrôler en texte : `tools/anim.sh anims/x.json --verifier`. Il affiche les angles des poses
    clés, les images où un poing ou un pied va vite (pour vérifier que le trajet tient en 1 à
    3 images), les pieds qui glissent, le poing proche caché dans la tête, le bassin hors des
-   appuis, et au contact la distance du poing à la tête adverse.
+   appuis, les bras ou jambes trop raccourcis par la profondeur (ils se fondent dans le corps),
+   et au contact la distance du poing à la tête adverse.
 3. Une seule image à la fin : `tools/anim.sh anims/x.json --cles -o planche.png --scale 1`
    ne rend que les images clés et le contact.
 

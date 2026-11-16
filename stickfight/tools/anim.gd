@@ -353,6 +353,14 @@ func _verifier(recs: Array) -> String:
 			# loin derrière la tête est normal (garde) : on ne le signale pas.
 			if J.handN.distance_to(J.head) < sol.head_r - float(sol.style.hand) * 0.5:
 				warn.append("poing proche caché dans la tête")
+			# Membre presque invisible : trop raccourci par la profondeur (il pointe
+			# vers la caméra ou à l'opposé), il se fond dans le corps.
+			for side in ["N", "F"]:
+				for pair in [["arm", "shoulder", "elbow" + side, "hand" + side, "upperArm", "forearm"], ["jambe", "hip", "knee" + side, "ankle" + side, "thigh", "shin"]]:
+					var vrai: float = float(sol.style[pair[4]]) + float(sol.style[pair[5]])
+					var vu: float = J[pair[1]].distance_to(J[pair[2]]) + J[pair[2]].distance_to(J[pair[3]])
+					if vu < 0.55 * vrai:
+						warn.append("%s %s raccourci à moins de 55 %% de sa longueur" % ["bras" if pair[0] == "arm" else "jambe", "proche" if side == "N" else "loin"])
 			if StickRig.lowest_y(fig.pose) < -1.0:
 				warn.append("sous le sol")
 			# Déséquilibre : deux pieds au sol, bassin hors de la base d'appui.

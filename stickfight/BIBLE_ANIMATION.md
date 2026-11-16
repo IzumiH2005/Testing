@@ -87,6 +87,12 @@ Ce qu'on voit, comme dans les vidéos de référence : des membres qui raccourci
 pointent vers la caméra ou à l'opposé, et un ordre de dessin qui change (un bras qui passe
 derrière la tête). On ne voit jamais d'écart entre les épaules : les membres partent d'un seul
 point du tronc.
+**Attention à la lisibilité.** Un membre qui pointe vers la caméra ou à l'opposé raccourcit : vers
+60° de profondeur, il ne fait plus que la moitié de sa longueur et, noir sur noir, il se fond dans
+le buste ou la tête. Un membre qui passe derrière le corps disparaît complètement. On s'en sert
+pour un instant voulu (un bras qui passe derrière la tête pendant un armé), jamais sur une pose
+clé où le membre doit se lire. Le contrôle `--verifier` signale un membre raccourci à moins de
+55 % de sa longueur.
 
 
 Le pied pousse sur le sol, la hanche tourne, puis le buste, puis l'épaule, puis le bras ou la
