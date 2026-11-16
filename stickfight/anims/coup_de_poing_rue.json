@@ -4,60 +4,7 @@
  "longueur": 64,
  "base": "garde_ouverte",
  "suivante": "garde_ouverte_idle",
- "decalage": {
-  "neck": 2,
-  "chest": 1,
-  "armN": 1,
-  "foreN": 2
- },
- "trainees": [
-  {
-   "articulation": "handF",
-   "coude": "elbowF",
-   "de": 27,
-   "a": 31
-  }
- ],
- "evenements": [
-  {
-   "f": 8,
-   "type": "poussiere",
-   "articulation": "ankleF",
-   "dir": 180,
-   "taille": 0.35
-  },
-  {
-   "f": 29,
-   "type": "contact"
-  },
-  {
-   "f": 29,
-   "type": "hitstop",
-   "n": 9,
-   "tremble": 1.2
-  },
-  {
-   "f": 29,
-   "type": "choc",
-   "articulation": "handF",
-   "dir": -10,
-   "taille": 1.1
-  },
-  {
-   "f": 29,
-   "type": "poussiere",
-   "articulation": "ankleN",
-   "dir": 0,
-   "taille": 0.9
-  },
-  {
-   "f": 47,
-   "type": "poussiere",
-   "articulation": "ankleF",
-   "dir": 0,
-   "taille": 0.5
-  }
- ],
+ "note": "Coup de poing de rue du bras arrière, refait selon BIBLE_ANIMATION.md (méthode B). Élan : le pied avant recule et le poids passe derrière (0-9). Armé : buste en arrière, coude derrière, avant-bras complètement replié, poing contre la tête ; le bras avant vise (13-20). Déclenchement (22). Trajet en deux images avec traînée calculée : la hanche part, le coude mène, le poing passe par-dessus (23-24). Contact (25) : pied arrière, bassin, épaule et poing alignés. Dépassement et pose emportée (29-34), le pied arrière passe devant (42-48), garde (64).",
  "cles": [
   {
    "f": 0,
@@ -77,336 +24,467 @@
     "foreN": 77.17,
     "armF": 47.2,
     "foreF": 127.66
-   },
-   "etire": {
-    "armF": 1.0
-   },
-   "ancre": false
+   }
   },
   {
-   "f": 8,
-   "nom": "poids derrière",
+   "f": 5,
+   "nom": "le pied avant recule",
    "fixe": {
-    "x": -6,
-    "y": 70.6,
-    "root": -2,
-    "spineLow": 3,
-    "chest": 2,
-    "neck": 13,
-    "thighN": 57.1,
-    "shinN": 57.9,
-    "thighF": -2.1,
-    "shinF": 65.2,
-    "armN": 60.9,
-    "foreN": 75.6,
-    "armF": -21.8,
-    "foreF": 184.66
+    "x": -24,
+    "y": 70,
+    "root": -3,
+    "spineLow": 2,
+    "chest": 0,
+    "neck": 14,
+    "armN": -40,
+    "foreN": 120,
+    "armF": 68,
+    "foreF": 55
    },
-   "etire": {
-    "armF": 0.95
+   "vise": {
+    "legN": [
+     -30,
+     24
+    ],
+    "legF": [
+     -43,
+     9
+    ]
    },
-   "ancre": false,
-   "courbe": "auto"
-  },
-  {
-   "f": 16,
-   "nom": "armé",
-   "fixe": {
-    "x": -12,
-    "y": 68.6,
-    "root": -9,
-    "spineLow": -3,
-    "chest": -5,
-    "neck": 19,
-    "thighN": 52.7,
-    "shinN": 53.4,
-    "thighF": -3.6,
-    "shinF": 67.3,
-    "armN": 59.1,
-    "foreN": 46.4,
-    "armF": -101,
-    "foreF": 276
-   },
-   "etire": {
-    "armF": 0.95
-   },
-   "ancre": false,
-   "courbe": "dec"
-  },
-  {
-   "f": 22,
-   "nom": "tension",
-   "fixe": {
-    "x": -14,
-    "y": 68.0,
-    "root": -11,
-    "spineLow": -4,
-    "chest": -6,
-    "neck": 21,
-    "thighN": 51.1,
-    "shinN": 51.4,
-    "thighF": -2.5,
-    "shinF": 70.9,
-    "armN": 62.2,
-    "foreN": 34.9,
-    "armF": -109,
-    "foreF": 284
-   },
-   "etire": {
-    "armF": 0.97
-   },
-   "ancre": false,
-   "courbe": "acc-dec"
-  },
-  {
-   "f": 24,
-   "nom": "coude tombe",
-   "fixe": {
-    "x": -11,
-    "y": 68.3,
-    "root": -7,
-    "spineLow": -2,
-    "chest": -4,
-    "neck": 16,
-    "thighN": 55.4,
-    "shinN": 55.9,
-    "thighF": -2.7,
-    "shinF": 66.7,
-    "armN": 52.7,
-    "foreN": 62.9,
-    "armF": -48,
-    "foreF": 265
-   },
-   "etire": {
-    "armF": 1.0
-   },
-   "ancre": false,
    "courbe": "acc"
   },
   {
-   "f": 25,
-   "nom": "départ",
+   "f": 9,
+   "nom": "pied posé derrière, le coude part en arrière",
    "fixe": {
-    "x": -4,
-    "y": 69.0,
-    "root": 2,
-    "spineLow": 1,
-    "chest": -1,
+    "x": -64,
+    "y": 65,
+    "root": -10,
+    "spineLow": -4,
+    "chest": -7,
+    "neck": 20,
+    "armN": -80,
+    "foreN": 195,
+    "armF": 80,
+    "foreF": 20
+   },
+   "vise": {
+    "legN": [
+     -100,
+     14
+    ],
+    "legF": [
+     -43,
+     7.6
+    ]
+   },
+   "courbe": "dec"
+  },
+  {
+   "f": 13,
+   "nom": "armé : coude derrière, avant-bras replié",
+   "fixe": {
+    "x": -70,
+    "y": 64,
+    "root": -13,
+    "spineLow": -5,
+    "chest": -8,
+    "neck": 22,
+    "armN": -88,
+    "foreN": 205,
+    "armF": 76,
+    "foreF": 12
+   },
+   "vise": {
+    "legN": [
+     -100,
+     14
+    ],
+    "legF": [
+     -43,
+     7.6
+    ]
+   },
+   "courbe": "dec"
+  },
+  {
+   "f": 20,
+   "nom": "armé tenu, il se ramasse encore",
+   "fixe": {
+    "x": -72,
+    "y": 63,
+    "root": -15,
+    "spineLow": -6,
+    "chest": -9,
+    "neck": 23,
+    "armN": -90,
+    "foreN": 208,
+    "armF": 78,
+    "foreF": 10
+   },
+   "vise": {
+    "legN": [
+     -100,
+     14
+    ],
+    "legF": [
+     -43,
+     7.6
+    ]
+   },
+   "courbe": "acc"
+  },
+  {
+   "f": 22,
+   "nom": "déclenchement",
+   "fixe": {
+    "x": -69,
+    "y": 62,
+    "root": -9,
+    "spineLow": -4,
+    "chest": -8,
+    "neck": 18,
+    "armN": -100,
+    "foreN": 210,
+    "armF": 65,
+    "foreF": 40
+   },
+   "vise": {
+    "legN": [
+     -100,
+     15
+    ],
+    "legF": [
+     -43,
+     7.6
+    ]
+   },
+   "courbe": "lin"
+  },
+  {
+   "f": 23,
+   "nom": "poussée : la hanche part, le coude mène",
+   "fixe": {
+    "x": -40,
+    "y": 62,
+    "root": 8,
+    "spineLow": 2,
+    "chest": 0,
     "neck": 8,
-    "thighN": 71.8,
-    "shinN": 64.8,
-    "thighF": -1.2,
-    "shinF": 61.4,
-    "armN": 27.2,
-    "foreN": 121.6,
-    "armF": -13,
-    "foreF": 140
+    "armN": -30,
+    "foreN": 178,
+    "armF": 45,
+    "foreF": 105
    },
-   "etire": {
-    "armF": 1.0
+   "vise": {
+    "legN": [
+     -90,
+     17
+    ],
+    "legF": [
+     -18,
+     20
+    ]
    },
-   "ancre": false,
    "courbe": "lin"
   },
   {
-   "f": 26,
-   "nom": "sortie",
+   "f": 24,
+   "nom": "le poing passe par-dessus",
    "fixe": {
-    "x": 4,
-    "y": 68.4,
-    "root": 9,
-    "spineLow": 4,
-    "chest": 1,
-    "neck": 2,
-    "thighN": 79.4,
-    "shinN": 62.9,
-    "thighF": -2.9,
-    "shinF": 55.3,
-    "armN": 19.3,
-    "foreN": 138.6,
-    "armF": 49,
-    "foreF": 90
-   },
-   "etire": {
-    "armF": 1.0
-   },
-   "ancre": false,
-   "courbe": "lin"
-  },
-  {
-   "f": 27,
-   "nom": "montée",
-   "fixe": {
-    "x": 10,
-    "y": 67.5,
-    "root": 14,
+    "x": -6,
+    "y": 62,
+    "root": 22,
     "spineLow": 6,
-    "chest": 2,
-    "neck": -2,
-    "thighN": 82.4,
-    "shinN": 58.8,
-    "thighF": -4.2,
-    "shinF": 51.6,
-    "armN": 16.3,
-    "foreN": 143.8,
-    "armF": 87,
-    "foreF": 50
+    "chest": 3,
+    "neck": 0,
+    "armN": 50,
+    "foreN": 95,
+    "armF": 25,
+    "foreF": 138
    },
-   "etire": {
-    "armF": 1.0
+   "vise": {
+    "legN": [
+     -70,
+     17
+    ],
+    "legF": [
+     20,
+     16
+    ]
    },
-   "ancre": false,
    "courbe": "lin"
+  },
+  {
+   "f": 25,
+   "nom": "contact",
+   "fixe": {
+    "x": 30,
+    "y": 60,
+    "root": 36,
+    "spineLow": 8,
+    "chest": 4,
+    "neck": -6,
+    "armF": 15,
+    "foreF": 148
+   },
+   "vise": {
+    "armN": [
+     126,
+     130
+    ],
+    "legF": [
+     45,
+     7.6
+    ],
+    "legN": [
+     -38,
+     14
+    ]
+   },
+   "courbe": "dec"
   },
   {
    "f": 29,
-   "nom": "contact",
+   "nom": "dépassement",
    "fixe": {
-    "x": 19,
-    "y": 65.5,
-    "root": 22,
-    "spineLow": 7,
-    "chest": 2,
-    "neck": -6,
-    "thighN": 88.9,
-    "shinN": 62.3,
-    "thighF": -7.5,
-    "shinF": 42.7,
-    "armN": 16.9,
-    "foreN": 150.0,
-    "armF": 129,
-    "foreF": 6
+    "x": 37,
+    "y": 58,
+    "root": 44,
+    "spineLow": 10,
+    "chest": 6,
+    "neck": -2,
+    "armN": 110,
+    "foreN": 6,
+    "armF": 8,
+    "foreF": 140
    },
-   "etire": {
-    "armF": 1.0
+   "vise": {
+    "legF": [
+     45,
+     7.6
+    ],
+    "legN": [
+     -30,
+     22
+    ]
    },
-   "ancre": false,
    "courbe": "dec"
   },
   {
    "f": 34,
-   "nom": "trop loin",
+   "nom": "emporté",
    "fixe": {
-    "x": 29,
-    "y": 61.5,
-    "root": 30,
-    "spineLow": 8,
-    "chest": 4,
-    "neck": -4,
-    "thighN": 102.0,
-    "shinN": 82.8,
-    "thighF": -6.3,
-    "shinF": 40.7,
-    "armN": -30.0,
-    "foreN": 102.7,
-    "armF": 124,
-    "foreF": 5
+    "x": 40,
+    "y": 59,
+    "root": 42,
+    "spineLow": 10,
+    "chest": 7,
+    "neck": 0,
+    "armN": 100,
+    "foreN": 20,
+    "armF": 5,
+    "foreF": 130
    },
-   "etire": {
-    "armF": 1.0
+   "vise": {
+    "legF": [
+     45,
+     7.6
+    ],
+    "legN": [
+     -22,
+     30
+    ]
    },
-   "ancre": false,
    "courbe": "dec"
   },
   {
-   "f": 41,
-   "nom": "rattrapé",
+   "f": 42,
+   "nom": "rattrapé, le pied arrière passe",
    "fixe": {
-    "x": 33,
-    "y": 64.5,
-    "root": 22,
+    "x": 42,
+    "y": 63,
+    "root": 30,
     "spineLow": 9,
-    "chest": 7,
-    "neck": 2,
-    "thighN": 88.6,
-    "shinN": 81.2,
-    "thighF": 7.6,
-    "shinF": 77.2,
-    "armN": -11.3,
-    "foreN": 132.4,
-    "armF": 96,
-    "foreF": 52
+    "chest": 8,
+    "neck": 3,
+    "armN": 75,
+    "foreN": 70,
+    "armF": 25,
+    "foreF": 120
    },
-   "etire": {
-    "armF": 1.0
+   "vise": {
+    "legF": [
+     45,
+     7.6
+    ],
+    "legN": [
+     30,
+     30
+    ]
    },
-   "ancre": false,
    "courbe": "acc-dec"
   },
   {
-   "f": 47,
-   "nom": "pied ramené",
+   "f": 48,
+   "nom": "pied posé devant",
    "fixe": {
-    "x": 31,
-    "y": 70.4,
-    "root": 7,
-    "spineLow": 7,
-    "chest": 6,
-    "neck": 9,
-    "thighN": 65.8,
-    "shinN": 67.0,
-    "thighF": 0.7,
-    "shinF": 64.4,
-    "armN": 54.0,
-    "foreN": 105.0,
-    "armF": 44.2,
-    "foreF": 147.66
+    "x": 44,
+    "y": 67,
+    "root": 14,
+    "spineLow": 8,
+    "chest": 7,
+    "neck": 7,
+    "armN": 62,
+    "foreN": 85,
+    "armF": 40,
+    "foreF": 125
    },
-   "etire": {
-    "armF": 1.0
+   "vise": {
+    "legF": [
+     45,
+     7.6
+    ],
+    "legN": [
+     75,
+     7.6
+    ]
    },
-   "ancre": false,
    "courbe": "dec"
   },
   {
-   "f": 54,
-   "nom": "tassé",
+   "f": 56,
+   "nom": "l'autre pied recule",
    "fixe": {
-    "x": 30.0,
-    "y": 71.4,
-    "root": 4,
+    "x": 45,
+    "y": 71,
+    "root": 5,
     "spineLow": 8,
     "chest": 8,
-    "neck": 11,
-    "thighN": 61.5,
-    "shinN": 63.5,
-    "thighF": -1.4,
-    "shinF": 64.0,
-    "armN": 65.29,
-    "foreN": 74.17,
-    "armF": 52.2,
-    "foreF": 122.66
+    "neck": 10,
+    "armN": 62,
+    "foreN": 78,
+    "armF": 46,
+    "foreF": 127
    },
-   "etire": {
-    "armF": 1.0
+   "vise": {
+    "legF": [
+     2,
+     15.8
+    ],
+    "legN": [
+     75.1,
+     7.6
+    ]
    },
-   "ancre": false,
    "courbe": "acc-dec"
   },
   {
    "f": 64,
    "nom": "garde",
    "fixe": {
-    "x": 30.0,
+    "x": 45,
     "y": 72.13,
     "root": 3,
     "spineLow": 7,
     "chest": 7,
     "neck": 10,
-    "thighN": 59.31,
-    "shinN": 61.79,
-    "thighF": -2.82,
-    "shinF": 62.5,
     "armN": 62.29,
     "foreN": 77.17,
     "armF": 47.2,
     "foreF": 127.66
    },
-   "etire": {
-    "armF": 1.0
+   "vise": {
+    "legF": [
+     1.8,
+     15.8
+    ],
+    "legN": [
+     75.1,
+     7.6
+    ]
    },
-   "ancre": false,
    "courbe": "acc-dec"
   }
- ]
+ ],
+ "evenements": [
+  {
+   "f": 25,
+   "type": "contact"
+  },
+  {
+   "f": 25,
+   "type": "hitstop",
+   "n": 5
+  },
+  {
+   "f": 25,
+   "type": "secousse",
+   "mode": "coup",
+   "amp": 0.07,
+   "n": 10
+  },
+  {
+   "f": 25,
+   "type": "impact",
+   "forme": "etoile",
+   "articulation": "handN",
+   "dec": [
+    6,
+    0
+   ]
+  },
+  {
+   "f": 25,
+   "type": "impact",
+   "forme": "bouffee",
+   "articulation": "handN",
+   "dir": 10,
+   "dec": [
+    40,
+    0
+   ]
+  },
+  {
+   "f": 9,
+   "type": "poussiere",
+   "articulation": "ankleN",
+   "dir": 180,
+   "taille": 0.4
+  },
+  {
+   "f": 25,
+   "type": "poussiere",
+   "articulation": "ankleF",
+   "dir": 0,
+   "taille": 0.8
+  },
+  {
+   "f": 25,
+   "type": "poussiere",
+   "articulation": "ankleN",
+   "dir": 180,
+   "taille": 0.4
+  },
+  {
+   "f": 48,
+   "type": "poussiere",
+   "articulation": "ankleN",
+   "dir": 0,
+   "taille": 0.4
+  }
+ ],
+ "filtres": {
+  "fantomes": false,
+  "membres": [
+   "handN"
+  ],
+  "seuil_trainee": 18
+ },
+ "decalage": {
+  "neck": 2,
+  "chest": 1,
+  "armF": 1,
+  "foreF": 2
+ }
 }

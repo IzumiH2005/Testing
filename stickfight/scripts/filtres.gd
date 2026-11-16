@@ -10,7 +10,7 @@ extends RefCounted
 ##   fantomes    copies pâles du corps quand tout le corps va vite (§ 10.4)
 ##   poussiere   petits dômes laissés au sol par un pied qui glisse (§ 10.10)
 ## Une animation peut les régler ou les couper :
-##   "filtres": {"trainee": false, "seuil_trainee": 20, "etirement": false,
+##   "filtres": {"trainee": false, "seuil_trainee": 20, "membres": ["handF"], "etirement": false,
 ##               "fantomes": false, "poussiere": false}
 ##
 ## Par événement (dans "evenements", voir Combat) :
@@ -35,7 +35,8 @@ const BG := Color("#9a9a9a")
 const AUTO := {
 	"trainee": true,
 	"seuil_trainee": 13.0,   # l'extrémité doit avancer d'au moins ça en une image
-	"duree_trainee": 4,      # nombre d'images que couvre le ruban
+	"duree_trainee": 3,      # nombre d'images que couvre le ruban
+	"membres": [],           # extrémités qui peuvent laisser une traînée (vide = toutes) : handN, handF, toeN, toeF
 	"etirement": true,
 	"seuil_etirement": 22.0,
 	"etirement_max": 0.3,    # bras jusqu'à 1,3 fois sa longueur
@@ -71,13 +72,14 @@ static func trainees(poses: Array, anim: Dictionary) -> Array:
 	var sols := poses.map(func(p): return StickRig.solve(p))
 	var w: float = sols[0].style.stroke
 	var sol_g: float = sols[0].style.stroke * 2.0
+	var membres: Array = reglage(anim, "membres")
 	for tip in TIPS:
-		if not sols[0].joints.has(tip):
+		if not sols[0].joints.has(tip) or (not membres.is_empty() and not tip in membres):
 			continue
 		# Un pied qui avance au ras du sol (un pas) ne laisse pas de traînée.
 		if tip.begins_with("toe") and sols[0].joints[tip].y < sol_g:
 			continue
-		var pts: Array = [sols[0].joints[tip]]
+		var pts: Array = [_bout(sols[0], tip)]
 		var ages: Array = [0.0]
 		for k in n:
 			var a: Dictionary = poses[k + 1]
@@ -93,11 +95,24 @@ static func trainees(poses: Array, anim: Dictionary) -> Array:
 			for j in range(1, m + 1):
 				var u := float(j) / m
 				var q := StickRig.lerp_pose(b, a, u)
-				pts.append(StickRig.solve(q).joints[tip])
+				pts.append(_bout(StickRig.solve(q), tip))
 				ages.append(k + u)
 		if pts.size() >= 3:
-			out.append({"proche": TIPS[tip].proche, "points": pts, "ages": ages, "duree": float(n), "largeur": w})
+			# Le ruban a la largeur du poing (ou du trait pour un pied).
+			var lg: float = 2.0 * float(sols[0].style.hand) if tip.begins_with("hand") else w
+			out.append({"proche": TIPS[tip].proche, "points": pts, "ages": ages, "duree": float(n), "largeur": lg})
 	return out
+
+
+## Bout du membre : le devant du poing (dans le prolongement de l'avant-bras),
+## pas le poignet ; la pointe du pied.
+static func _bout(sol: Dictionary, tip: String) -> Vector2:
+	var J: Dictionary = sol.joints
+	if tip.begins_with("hand"):
+		var side := tip.substr(4)
+		var d: Vector2 = (J[tip] - J["elbow" + side]).normalized()
+		return J[tip] + d * float(sol.style.hand)
+	return J[tip]
 
 
 ## Étirement du membre qui se détend vite : renvoie la pose à dessiner.

@@ -44,7 +44,7 @@ var hitstop := 0
 ## Images écoulées depuis le début de l'arrêt sur image en cours.
 var hitstop_age := 0
 ## Pendant un arrêt, la traînée reste quelques images, les fantômes moins.
-const TRAINEE_ARRET := 5
+const TRAINEE_ARRET := 2
 const FANTOMES_ARRET := 2
 ## Secousses de caméra en cours : [{mode, amp, n, age, pas, decroissance}].
 var secousses: Array = []
