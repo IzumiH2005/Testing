@@ -40,6 +40,7 @@ const STYLES := {
 		"upperArm": 34.0, "forearm": 32.0,
 		"thigh": 41.0, "shin": 42.0,
 		"foot": 10.0,      # pied : petit crochet du trait, de la cheville vers l'avant
+		"lisere": 1.3,     # contour clair sous les membres proches (0 = aucun)
 	},
 	"fin": {
 		"label": "Fin (petite tête, trait léger)",
@@ -301,7 +302,11 @@ static func auto_feet(p: Dictionary) -> Dictionary:
 ## Cinématique inverse à deux os (loi des cosinus) : le bout du membre va vers
 ## la cible (coordonnées du monde). Des deux sens de pliage possibles, garde
 ## celui qui respecte les amplitudes, puis le plus proche de la pose actuelle.
-static func reach(p: Dictionary, limb_id: String, target: Vector2, limits := true) -> Dictionary:
+## coude = "haut", "bas", "avant" ou "arriere" : impose le côté où pointe le
+## coude (ou le genou), vu à l'écran, sans tenir compte des amplitudes. En
+## profil, un bras tourné (coude écarté, poing à l'oreille) se dessine comme
+## un coude plié « à l'envers » : c'est ce que permet ce choix.
+static func reach(p: Dictionary, limb_id: String, target: Vector2, limits := true, coude := "") -> Dictionary:
 	var limb: Dictionary = LIMBS[limb_id]
 	var q := clone_pose(p)
 	var sol := solve(q)
@@ -332,7 +337,11 @@ static func reach(p: Dictionary, limb_id: String, target: Vector2, limits := tru
 		var a1 := norm180((w1 - parent_world - up.rest) * up.sign)
 		var a2 := norm180((w2 - w1 - lo.rest) * lo.sign)
 		var pen := 0.0
-		if limits:
+		if coude != "":
+			# Position du coude dans le repère local (x vers l'avant, y vers le haut).
+			var dir := {"haut": Vector2(0, 1), "bas": Vector2(0, -1), "avant": Vector2(1, 0), "arriere": Vector2(-1, 0)}
+			pen += -e.dot(dir.get(coude, Vector2.ZERO)) * 1000.0
+		elif limits:
 			pen += maxf(0.0, up.lim.x - a1) + maxf(0.0, a1 - up.lim.y)
 			pen += maxf(0.0, lo.lim.x - a2) + maxf(0.0, a2 - lo.lim.y)
 			pen *= 1000.0
@@ -341,7 +350,7 @@ static func reach(p: Dictionary, limb_id: String, target: Vector2, limits := tru
 			best = {"a1": a1, "a2": a2, "pen": pen}
 	var a1f := round2(best.a1)
 	var a2f := round2(best.a2)
-	if limits:
+	if limits and coude == "":
 		a1f = clamp_angle(limb.upper, a1f)
 		a2f = clamp_angle(limb.lower, a2f)
 	q.angles[limb.upper] = a1f
@@ -485,11 +494,25 @@ static func primitives(p: Dictionary, color := Color("#111111"), far_shade := 1.
 			out.append({"type": "circle", "c": J["hand" + side], "r": s.hand, "color": c, "part": "hand" + side})
 	arm.call("F", far)
 	leg.call("F", far)
+	var lis: float = float(s.get("lisere", 0.0))
 	var torso := [J.hip, J.waist, J.shoulder]
 	if s.neck > 0.0:
 		torso.append(J.neckTop)
 	out.append({"type": "path", "points": torso, "width": w, "color": color, "part": "torso"})
 	out.append({"type": "circle", "c": J.head, "r": sol.head_r, "color": color, "part": "head"})
+	# Liseré : un fin contour plus clair sous les membres proches, pour qu'un
+	# bras ou une jambe qui passe devant le corps reste lisible (noir sur noir).
+	if lis > 0.0:
+		var rim := color.lerp(Color.WHITE, 0.38)
+		var n0 := out.size()
+		leg.call("N", rim)
+		arm.call("N", rim)
+		for i in range(n0, out.size()):
+			if out[i].type == "path":
+				out[i].width = w + 2.0 * lis
+			else:
+				out[i].r = float(out[i].r) + lis
+			out[i].part = "lisere"
 	leg.call("N", color)
 	arm.call("N", color)
 	return out

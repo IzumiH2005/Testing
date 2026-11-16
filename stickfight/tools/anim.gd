@@ -24,6 +24,10 @@ extends SceneTree
 ## --scale n     pixels par unité (2 par défaut)
 ## --debug       squelette coloré par-dessus
 ## --print       positions des articulations, angles hors amplitude
+## --verifier    contrôle en texte, sans image (voir _verifier) : poses clés,
+##               images de trajet rapide, pieds qui glissent, poing caché,
+##               déséquilibre, distance du poing à la tête adverse au contact
+## --cles        planche des seules images clés (et du contact), pas toutes
 ##
 ## Une animation seule est jouée sans enchaîner sur « suivante ».
 
@@ -47,7 +51,8 @@ func _abs(path: String) -> String:
 
 func _parse(argv: PackedStringArray) -> Dictionary:
 	var a := {"file": "", "out": "", "strobe": "", "images": "", "de": -1, "a": -1, "pas": 1, "cols": 6,
-		"suivre": [], "vue": [], "scale": 2.0, "debug": false, "print": false, "boucles": 1}
+		"suivre": [], "vue": [], "scale": 2.0, "debug": false, "print": false, "boucles": 1,
+		"verifier": false, "cles": false}
 	var i := 0
 	while i < argv.size():
 		var k := argv[i]
@@ -70,7 +75,7 @@ func _parse(argv: PackedStringArray) -> Dictionary:
 			"--vue":
 				i += 1
 				a.vue = Array(argv[i].split(",")).map(func(s): return float(s))
-			"--debug", "--print":
+			"--debug", "--print", "--verifier", "--cles":
 				a[k.substr(2)] = true
 			_:
 				a.file = k
@@ -194,8 +199,11 @@ func _run() -> void:
 	var sel := []
 	var g := de
 	while g <= fin:
-		sel.append(recs[g])
-		g += a.pas
+		if not a.cles or _est_cle(recs, g):
+			sel.append(recs[g])
+		g += (1 if a.cles else a.pas)
+	if a.verifier:
+		print(_verifier(recs.slice(de, fin + 1)))
 	if sel.is_empty():
 		_fail("Aucune image dans l'intervalle.")
 		return
@@ -298,3 +306,125 @@ func _run() -> void:
 			n += 1
 		print("Images : %d dans %s" % [n, a.images])
 	quit(0)
+
+
+## Image clé : un combattant est sur une clé de son animation (première image
+## où il l'atteint) ou sur son événement contact.
+func _est_cle(recs: Array, g: int) -> bool:
+	for i in recs[g].fighters.size():
+		var fig: Dictionary = recs[g].fighters[i]
+		var t := float(fig.t)
+		if g > 0 and recs[g - 1].fighters[i].anim == fig.anim and float(recs[g - 1].fighters[i].t) == t:
+			continue
+		var an := StickAnim.load_named(str(fig.anim))
+		if an.is_empty():
+			continue
+		for k in an.cles:
+			if float(k.f) == t:
+				return true
+		if StickAnim.event_frame(an, "contact") == t:
+			return true
+	return false
+
+
+## Contrôle en texte d'une animation ou d'un duo. Les seuils suivent
+## BIBLE_ANIMATION.md : trajet rapide = plus de 12 unités par image.
+func _verifier(recs: Array) -> String:
+	var L := []
+	var tips := ["handN", "handF", "toeN", "toeF"]
+	var nf: int = recs[0].fighters.size()
+	for i in nf:
+		var nom := "ABCD"[i]
+		L.append("== %s ==" % nom)
+		var vites := {}
+		for tp in tips:
+			vites[tp] = []
+		var glisse := []
+		var alertes := {}
+		var prev: Dictionary = {}
+		for r in recs:
+			var fig: Dictionary = r.fighters[i]
+			var sol := StickRig.solve(fig.pose)
+			var J: Dictionary = sol.joints
+			var g0: float = sol.style.stroke / 2.0
+			var tag := "%d (%s %d)" % [r.g, fig.anim, int(fig.t)]
+			var warn := []
+			# Poing proche caché dans la tête (même couleur : illisible). Le poing
+			# loin derrière la tête est normal (garde) : on ne le signale pas.
+			if J.handN.distance_to(J.head) < sol.head_r - float(sol.style.hand) * 0.5:
+				warn.append("poing proche caché dans la tête")
+			if StickRig.lowest_y(fig.pose) < -1.0:
+				warn.append("sous le sol")
+			# Déséquilibre : deux pieds au sol, bassin hors de la base d'appui.
+			if J.ankleN.y < g0 + 2.0 and J.ankleF.y < g0 + 2.0:
+				var lo := minf(J.ankleN.x, J.ankleF.x) - 8.0
+				var hi := maxf(J.ankleN.x, J.ankleF.x) + 8.0
+				if J.hip.x < lo or J.hip.x > hi:
+					warn.append("bassin hors des appuis")
+			if not prev.is_empty():
+				var J0: Dictionary = prev.J
+				for tp in tips:
+					var d: float = J[tp].distance_to(J0[tp])
+					if d > 12.0:
+						vites[tp].append("%d:%d" % [r.g, roundi(d)])
+				for side in ["N", "F"]:
+					var a1: Vector2 = J["ankle" + side]
+					var a0: Vector2 = J0["ankle" + side]
+					if a1.y < g0 + 1.0 and a0.y < g0 + 1.0 and absf(a1.x - a0.x) > 1.5 and r.hitstop == 0:
+						glisse.append("%s%d" % [side, r.g])
+			# Contact : distance des poings et des pieds à la tête et au buste adverses.
+			var an := StickAnim.load_named(str(fig.anim))
+			var cf := StickAnim.event_frame(an, "contact") if not an.is_empty() else -1.0
+			var debut: bool = prev.is_empty() or prev.anim != fig.anim or float(prev.t) != float(fig.t)
+			if cf >= 0.0 and float(fig.t) == cf and debut:
+				for j in nf:
+					if j == i:
+						continue
+					var Jb: Dictionary = StickRig.solve(r.fighters[j].pose).joints
+					var best := ""
+					var bd := INF
+					for tp in tips:
+						for cible in ["head", "shoulder", "waist"]:
+							var d2: float = J[tp].distance_to(Jb[cible])
+							if d2 < bd:
+								bd = d2
+								best = "%s → %s de %s" % [tp, cible, "ABCD"[j]]
+					warn.append("contact : %s à %d" % [best, roundi(bd)])
+			var contact := ""
+			for w in warn:
+				if w.begins_with("contact"):
+					contact = "  ⚠ " + w
+				else:
+					if not alertes.has(w):
+						alertes[w] = []
+					alertes[w].append(r.g)
+			if _est_cle(recs, recs.find(r)) or contact != "":
+				var ang := "coudes %d/%d genoux %d/%d buste %d" % [roundi(StickRig.angle(fig.pose, "foreN")), roundi(StickRig.angle(fig.pose, "foreF")),
+					roundi(StickRig.angle(fig.pose, "shinN")), roundi(StickRig.angle(fig.pose, "shinF")),
+					roundi(StickRig.angle(fig.pose, "root") + StickRig.angle(fig.pose, "spineLow") + StickRig.angle(fig.pose, "chest"))]
+				L.append("%s  %s  poingN(%d,%d)%s" % [tag, ang, roundi(J.handN.x), roundi(J.handN.y), contact])
+			prev = {"J": J, "anim": fig.anim, "t": fig.t}
+		for tp in tips:
+			if not vites[tp].is_empty():
+				L.append("trajet rapide %s : %s" % [tp, " ".join(vites[tp])])
+		if not glisse.is_empty():
+			L.append("pied qui glisse : " + " ".join(glisse))
+		for w in alertes:
+			L.append("⚠ %s : images %s" % [w, _plages(alertes[w])])
+	return "\n".join(L)
+
+
+## [3, 4, 5, 9] → "3-5 9"
+func _plages(gs: Array) -> String:
+	var out := []
+	var a: int = gs[0]
+	var b: int = gs[0]
+	for k in range(1, gs.size()):
+		if gs[k] == b + 1:
+			b = gs[k]
+		else:
+			out.append(str(a) if a == b else "%d-%d" % [a, b])
+			a = gs[k]
+			b = gs[k]
+	out.append(str(a) if a == b else "%d-%d" % [a, b])
+	return " ".join(out)

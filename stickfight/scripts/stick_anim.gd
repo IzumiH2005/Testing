@@ -40,6 +40,9 @@ extends RefCounted
 ##   plus     {canal: delta}        valeur relative
 ##   etire    {os: facteur}         longueur de l'os × facteur
 ##   vise     {membre: [x, y]}      cinématique inverse vers un point (repère local)
+##            ou {membre: {"cible": [dx, dy], "repere": "head", "coude": "arriere"}} :
+##            point relatif à une articulation (dx vers l'avant), et côté où
+##            pointe le coude ou le genou (haut, bas, avant, arriere)
 ##   vise_rel {membre: [dx, dy]}   idem, relatif à la position actuelle du bout
 ##   ancre    true / false / "N" / "F"  par défaut true : si le bassin bouge,
 ##            les jambes se replient pour garder les chevilles de la pose
@@ -344,6 +347,20 @@ static func _apply_channel(p: Dictionary, k: String, v: float, rel: bool) -> voi
 		p.angles[k] = StickRig.angle(p, k) + v if rel else v
 
 
+## Cible d'un membre : [x, y] dans le repère local, ou
+## {"cible": [x, y], "repere": "head", "coude": "arriere"} : point relatif à
+## une articulation de la pose (dx vers l'avant du personnage), coude imposé.
+static func _vise(p: Dictionary, limb: String, v) -> Dictionary:
+	if v is Dictionary:
+		var t := _vec(v.get("cible", [0, 0]))
+		if v.has("repere"):
+			var J: Dictionary = StickRig.solve(p).joints
+			var f := StickRig.facing(p)
+			t = J[str(v.repere)] + Vector2(f * t.x, t.y)
+		return StickRig.reach(p, limb, t, not v.has("coude"), str(v.get("coude", "")))
+	return StickRig.reach(p, limb, _vec(v))
+
+
 static func _vec(v) -> Vector2:
 	return Vector2(float(v[0]), float(v[1]))
 
@@ -384,7 +401,7 @@ static func _resolve(kd: Dictionary, base: Dictionary, prev: Dictionary) -> Dict
 	for side in ["N", "F"]:
 		var limb: String = "leg" + side
 		if vise.has(limb):
-			p = StickRig.reach(p, limb, _vec(vise[limb]))
+			p = _vise(p, limb, vise[limb])
 		elif vise_rel.has(limb):
 			p = StickRig.reach(p, limb, J0["ankle" + side] + _vec(vise_rel[limb]))
 		elif not touched[side] and (ancre is bool and ancre or str(ancre) == side):
@@ -393,7 +410,7 @@ static func _resolve(kd: Dictionary, base: Dictionary, prev: Dictionary) -> Dict
 	for side in ["N", "F"]:
 		var limb: String = "arm" + side
 		if vise.has(limb):
-			p = StickRig.reach(p, limb, _vec(vise[limb]))
+			p = _vise(p, limb, vise[limb])
 		elif vise_rel.has(limb):
 			p = StickRig.reach(p, limb, J1["hand" + side] + _vec(vise_rel[limb]))
 	p.nom = str(kd.get("nom", "f%d" % int(kd.f)))

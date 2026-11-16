@@ -408,6 +408,26 @@ Une animation peut les régler ou les couper :
 | `{"f": 29, "type": "image_impact", "version": "complete", "articulation": "handF"}` | séquence des coups décisifs : image noire (silhouettes blanches, rayons), blanche, délavée, puis zoom ; les corps restent figés pendant ce temps. `version` : `complete` ou `courte` ; `tenue` ajoute des images figées |
 | `{"f": 20, "type": "fantomes", "n": 8}`, `{"f": 20, "type": "flou", "n": 4}` | fantômes ou flou de mouvement forcés pendant n images |
 
+### Méthode rapide pour créer ou corriger une animation
+
+Le but est de régler une animation surtout **en texte** et de ne regarder qu'une seule petite
+image à la fin, parce que lire des images coûte beaucoup plus cher que lire du texte.
+
+1. Écrire les clés avec des **cibles** plutôt qu'avec des angles quand on sait où doit aller un
+   poing ou un pied : `"vise": {"armN": {"cible": [-20, 6], "repere": "head", "coude": "arriere"}}`
+   place le poing 20 unités derrière la tête et 6 au-dessus, coude vers l'arrière. `repere` est
+   une articulation (`head`, `shoulder`, `hip`, `handF`…) ; `coude` (haut, bas, avant, arriere)
+   choisit le côté du pli, ce qui évite le bras plié à l'envers par erreur.
+2. Contrôler en texte : `tools/anim.sh anims/x.json --verifier`. Il affiche les angles des poses
+   clés, les images où un poing ou un pied va vite (pour vérifier que le trajet tient en 1 à
+   3 images), les pieds qui glissent, le poing proche caché dans la tête, le bassin hors des
+   appuis, et au contact la distance du poing à la tête adverse.
+3. Une seule image à la fin : `tools/anim.sh anims/x.json --cles -o planche.png --scale 1`
+   ne rend que les images clés et le contact.
+
+Le style `epais` dessine un fin **liseré** clair sous les membres proches (`"lisere"` dans
+`StickRig.STYLES`, 0 pour l'enlever) : un bras qui passe devant le corps ou la tête reste lisible.
+
 ### Régler une animation en ligne de commande
 
 `tools/anim.sh` simule l'animation (ou le duo) avec le code du jeu et la
@@ -421,6 +441,8 @@ tools/anim.sh anims/garde_idle.json --print          # articulations image par i
 tools/anim.sh anims/duo_blocage.json --gif /tmp/duo.gif --video /tmp/duo.mp4
 tools/anim.sh anims/duo_blocage.json --gif /tmp/lent.gif --lent 3
 tools/anim.sh anims/marche_avant.json --strobe /tmp/marche.png --boucles 2
+tools/anim.sh anims/duo_coup_de_poing_rue.json --verifier      # contrôle en texte
+tools/anim.sh anims/duo_coup_de_poing_rue.json --cles -o /tmp/cles.png --scale 1
 ```
 
 La planche contact montre chaque image numérotée ; la stroboscopie superpose
