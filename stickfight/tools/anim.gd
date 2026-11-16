@@ -431,7 +431,8 @@ func _verifier(recs: Array) -> String:
 			if J.ankleN.y < g0 + 2.0 and J.ankleF.y < g0 + 2.0:
 				var lo := minf(J.ankleN.x, J.ankleF.x) - 8.0
 				var hi := maxf(J.ankleN.x, J.ankleF.x) + 8.0
-				if J.hip.x < lo or J.hip.x > hi:
+				# Seulement debout : un corps couché n'a pas d'appui à respecter.
+				if (J.hip.x < lo or J.hip.x > hi) and J.hip.y > 45.0:
 					warn.append("bassin hors des appuis")
 			if not prev.is_empty():
 				var J0: Dictionary = prev.J

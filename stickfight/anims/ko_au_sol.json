@@ -26,10 +26,11 @@
     "shinF": 5.6,
     "armN": -0.5,
     "foreN": 22.0,
-    "armF": 185.4,
+    "armF": 178.0,
     "foreF": 6.3,
     "footN": 18,
-    "footF": 22
+    "footF": 22,
+    "epauleF_haut": 4
    },
    "ancre": false
   },
@@ -48,10 +49,11 @@
     "shinF": 5.6,
     "armN": 0.3,
     "foreN": 22.0,
-    "armF": 184.8,
+    "armF": 178.0,
     "foreF": 6.3,
     "footN": 18,
-    "footF": 22
+    "footF": 22,
+    "epauleF_haut": 4
    },
    "ancre": false,
    "courbe": "acc-dec"
@@ -71,10 +73,11 @@
     "shinF": 5.6,
     "armN": -0.5,
     "foreN": 22.0,
-    "armF": 185.4,
+    "armF": 178.0,
     "foreF": 6.3,
     "footN": 18,
-    "footF": 22
+    "footF": 22,
+    "epauleF_haut": 4
    },
    "ancre": false,
    "courbe": "acc-dec"
@@ -94,10 +97,11 @@
     "shinF": 5.6,
     "armN": -0.5,
     "foreN": 22.0,
-    "armF": 185.4,
+    "armF": 178.0,
     "foreF": 6.3,
     "footN": 18,
-    "footF": 22
+    "footF": 22,
+    "epauleF_haut": 4
    },
    "ancre": false,
    "courbe": "acc-dec"
