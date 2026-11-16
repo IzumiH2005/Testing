@@ -28,6 +28,9 @@ extends SceneTree
 ##               images de trajet rapide, pieds qui glissent, poing caché,
 ##               déséquilibre, distance du poing à la tête adverse au contact
 ## --cles        planche des seules images clés (et du contact), pas toutes
+## --vues        chaque image sous trois angles, une ligne par angle : de face,
+##               de trois quarts, de profil (le corps tourne sur place, lacet
+##               +90°, +45°, +0°) ; pour vérifier qu'aucun axe n'est oublié
 ##
 ## Une animation seule est jouée sans enchaîner sur « suivante ».
 
@@ -52,7 +55,7 @@ func _abs(path: String) -> String:
 func _parse(argv: PackedStringArray) -> Dictionary:
 	var a := {"file": "", "out": "", "strobe": "", "images": "", "de": -1, "a": -1, "pas": 1, "cols": 6,
 		"suivre": [], "vue": [], "scale": 2.0, "debug": false, "print": false, "boucles": 1,
-		"verifier": false, "cles": false}
+		"verifier": false, "cles": false, "vues": false}
 	var i := 0
 	while i < argv.size():
 		var k := argv[i]
@@ -75,7 +78,7 @@ func _parse(argv: PackedStringArray) -> Dictionary:
 			"--vue":
 				i += 1
 				a.vue = Array(argv[i].split(",")).map(func(s): return float(s))
-			"--debug", "--print", "--verifier", "--cles":
+			"--debug", "--print", "--verifier", "--cles", "--vues":
 				a[k.substr(2)] = true
 			_:
 				a.file = k
@@ -204,6 +207,25 @@ func _run() -> void:
 		g += (1 if a.cles else a.pas)
 	if a.verifier:
 		print(_verifier(recs.slice(de, fin + 1)))
+	if a.vues:
+		# Une ligne par angle de vue ; sans effets (ils ont été calculés de profil).
+		var n0 := sel.size()
+		var lignes := []
+		for lac in [90.0, 45.0, 0.0]:
+			for r in sel:
+				var r2: Dictionary = r.duplicate(true)
+				r2.vfx = []
+				r2.effets = []
+				r2.ecrans = []
+				for fig in r2.fighters:
+					fig.pose.angles.lacet = float(fig.pose.angles.get("lacet", 0.0)) + lac
+					fig.trainees = []
+					fig.smears = []
+					fig.fantomes = []
+					fig.flou = []
+				lignes.append(r2)
+		sel = lignes
+		a.cols = n0
 	if sel.is_empty():
 		_fail("Aucune image dans l'intervalle.")
 		return

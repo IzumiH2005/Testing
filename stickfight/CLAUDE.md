@@ -18,10 +18,15 @@
      s'appliquent ;
    - les contrôles chiffrés à vérifier.
    Faire des recherches (anatomie, biomécanique, sport) quand le mouvement n'est pas évident.
-2. **Construire pose par pose, comme un mannequin.** Poser la première clé, la vérifier, la
+2. **Poser chaque pose clé en trois vues, profil en dernier.** On place d'abord la pose vue de
+   face, puis de trois quarts, pour vérifier qu'aucun axe n'est oublié (largeur des pieds, bras
+   sur le côté ou en arrière, rotation du coude, torsion), et seulement ensuite on revient de
+   profil : `tools/anim.sh anims/x.json --cles --vues -o vues.png --scale 1` (une ligne par vue :
+   face, trois quarts, profil). Pour une pose seule : `tools/rendu.sh … --set lacet=90`, puis 45.
+3. **Construire pose par pose, comme un mannequin.** Poser la première clé, la vérifier, la
    corriger, puis seulement passer à la suivante. Vérifier en texte (`tools/anim.sh … --verifier`)
    et regarder une seule petite image par groupe de clés (`--cles --scale 1`).
-3. **Logique avant esthétique.** Une pose qui « rend bien » mais qu'un vrai corps ne prendrait
+4. **Logique avant esthétique.** Une pose qui « rend bien » mais qu'un vrai corps ne prendrait
    pas est fausse : un armé doit pouvoir se déplier vers la cible, la tête ne tombe pas sans
    raison, l'autre bras et l'autre épaule réagissent à la rotation du corps.
-4. Ne pas changer l'apparence des personnages (style, épaisseur, couleurs) sans qu'on le demande.
+5. Ne pas changer l'apparence des personnages (style, épaisseur, couleurs) sans qu'on le demande.

@@ -425,7 +425,10 @@ image à la fin, parce que lire des images coûte beaucoup plus cher que lire du
    un bras confondu avec le corps (coude et main dans le tronc ou la tête), un bras proche peu
    visible (moins de 35 % hors du corps), des jambes superposées,
    et au contact la distance du poing à la tête adverse.
-3. Une seule image à la fin : `tools/anim.sh anims/x.json --cles -o planche.png --scale 1`
+3. Vérifier les poses clés sous trois angles : `tools/anim.sh anims/x.json --cles --vues -o
+   vues.png --scale 1` (de face, de trois quarts, de profil ; le corps tourne sur place). Une pose
+   qui n'a de sens que de profil s'y voit tout de suite.
+4. Une seule image à la fin : `tools/anim.sh anims/x.json --cles -o planche.png --scale 1`
    ne rend que les images clés et le contact.
 
 **Profondeur (2D et demie).** La vue reste de profil, mais le squelette est en 3D : chaque os
