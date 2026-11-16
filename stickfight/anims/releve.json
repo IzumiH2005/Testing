@@ -54,7 +54,7 @@
     "spineLow": 10,
     "chest": 12,
     "neck": 22,
-    "armF": 258.1,
+    "armF": 300.0,
     "foreF": 117.0
    },
    "vise": {
@@ -83,7 +83,7 @@
     "spineLow": 8,
     "chest": 8,
     "neck": 14,
-    "armF": 275.9,
+    "armF": 304.0,
     "foreF": 95.1
    },
    "vise": {
@@ -92,7 +92,7 @@
      9.2
     ],
     "legF": [
-     30,
+     38,
      10.5
     ],
     "armN": [
@@ -107,7 +107,7 @@
    "nom": "pousse : bassin au-dessus des pieds",
    "fixe": {
     "x": 28,
-    "y": 34,
+    "y": 37,
     "root": 26,
     "spineLow": 10,
     "chest": 6,

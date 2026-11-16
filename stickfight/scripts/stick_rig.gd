@@ -709,7 +709,8 @@ static func amplitudes(p: Dictionary) -> Array:
 		var t: Vector3 = B["thigh" + side].x
 		var fl := rad_to_deg(atan2(t.dot(-Br.y), t.dot(-Br.x)))
 		var ab := rad_to_deg(asin(clampf(t.dot(Br.z * sg), -1.0, 1.0)))
-		if fl > 130.0:
+		# Flexion de hanche genou plié : 135° (passive, jusqu'à 140).
+		if fl > 136.0:
 			out.append({"id": "thigh" + side, "label": "cuisse %s trop fléchie" % nom})
 		elif fl < -35.0:
 			out.append({"id": "thigh" + side, "label": "cuisse %s trop loin derrière" % nom})
@@ -726,6 +727,9 @@ static func violations(p: Dictionary) -> Array:
 	for id in angle_ids():
 		var v := angle(p, id)
 		var b := bone(id)
+		# Rotules et orientation (épaule, bassin) : l'angle se lit modulo 360.
+		if id.begins_with("arm") and not id.ends_with(PROF) and not id.ends_with(ROT):
+			v = norm180(v)
 		if v < b.lim.x or v > b.lim.y:
 			out.append({"id": id, "label": b.label, "value": v, "lim": b.lim})
 	return out
