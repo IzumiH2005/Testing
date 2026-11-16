@@ -85,6 +85,27 @@ func _ready() -> void:
 func _process(_dt: float) -> void:
 	if scr == Scr.PLAY or scr == Scr.PAUSE:
 		hud_h.text = "%d M" % world.life_best
+	_update_music()
+
+## Ambiance de la musique selon l'écran ; en partie, le tempo suit la vitesse du héros.
+func _update_music() -> void:
+	var mood: int = Sfx.Mood.MENU
+	match scr:
+		Scr.PLAY:
+			if world.state == world.S.PLAY:
+				mood = Sfx.Mood.PLAY
+			elif world.state == world.S.DYING:
+				mood = Sfx.Mood.DEATH
+			else:
+				mood = Sfx.Mood.READY
+		Scr.PAUSE:
+			mood = Sfx.Mood.PAUSE
+		Scr.LOST, Scr.OFFER:
+			mood = Sfx.Mood.DEATH
+		Scr.SUMMARY:
+			mood = Sfx.Mood.SUMMARY
+	Sfx.set_mood(mood)
+	Sfx.feed_speed(world.vel.length() if mood == Sfx.Mood.PLAY else 0.0)
 
 # =================================================================== entrées
 
@@ -313,7 +334,7 @@ func show_menu() -> void:
 	get_tree().paused = false
 	scr = Scr.MENU
 	hud.visible = false
-	world.setup_demo(Game.daily_seed())
+	world.setup_demo(Game.daily_seed(), Game.start_level())
 	_clear_screen()
 	screen = UIK.full(Control.new())
 	screen.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -371,7 +392,7 @@ func show_menu() -> void:
 		fl.modulate = Color(1, 1, 1, 0.4)
 	stb.add_child(fl)
 
-	v.add_child(UIK.spacer(18))
+	v.add_child(UIK.spacer(8))
 	var logo_tx := A.tex("ui/logo")
 	if logo_tx:
 		var lg := TextureRect.new()
@@ -427,7 +448,9 @@ func show_menu() -> void:
 	bf.pressed.connect(func(): start_run(false))
 	v.add_child(_center(bf))
 	v.add_child(UIK.label("%s %d M" % [Game.t("best"), int(Game.data.best_free)], A.P.l))
-	v.add_child(UIK.spacer(10))
+	v.add_child(UIK.spacer(2))
+	v.add_child(_center(_level_picker()))
+	v.add_child(UIK.spacer(6))
 
 	var icons := UIK.hbox(10)
 	v.add_child(icons)
@@ -443,6 +466,49 @@ func show_menu() -> void:
 	v.add_child(UIK.spacer(4))
 	v.add_child(UIK.label(Game.t("echo_tip"), A.P.m))
 
+## Sélecteur du niveau de départ de l'ascension libre : ← [NIVEAU n · m M / nom du biome] →
+var _lvl_title: Label
+var _lvl_name: Label
+
+func _level_picker() -> Control:
+	# largeur utile du menu : 172 px = 22 + 2 + 124 (cadre du nom) + 2 + 22
+	var row := UIK.hbox(2)
+	row.add_child(_arrow_button("←", -1))
+	var col := UIK.vbox(0)
+	col.custom_minimum_size.x = 106
+	_lvl_title = UIK.label("", A.P.c)
+	_lvl_name = UIK.label("", A.P.p)
+	col.add_child(_lvl_title)
+	col.add_child(_lvl_name)
+	var lslot := UIK.slot(col, 0)
+	lslot.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	row.add_child(lslot)
+	row.add_child(_arrow_button("→", 1))
+	_refresh_level()
+	return row
+
+func _arrow_button(txt: String, dir: int) -> Button:
+	var b := UIK.button(txt, "alt", -1, 22)
+	b.custom_minimum_size = Vector2(22, 24)
+	b.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	for st in ["normal", "hover", "pressed", "hover_pressed", "disabled"]:
+		var sb := b.get_theme_stylebox(st)
+		sb.content_margin_left = 7
+		sb.content_margin_right = 7
+	b.pressed.connect(func(): _set_level(Game.start_level() + dir))
+	return b
+
+func _set_level(i: int) -> void:
+	var n := Game.LEVELS.size()
+	Game.set_start_level((i + n) % n)  # boucle : après le sommet, on revient à la crypte
+	_refresh_level()
+	world.setup_demo(Game.daily_seed(), Game.start_level())
+
+func _refresh_level() -> void:
+	var i := Game.start_level()
+	_lvl_title.text = "%s %d · %d M" % [Game.t("level"), i + 1, int(Tower.BIOMES[i].start)]
+	_lvl_name.text = Game.level_name(i)
+
 # =================================================================== partie
 
 func start_run(is_daily: bool) -> void:
@@ -456,7 +522,8 @@ func start_run(is_daily: bool) -> void:
 	extra_used = false
 	doubled = false
 	life_heights.clear()
-	world.start_ascension(seed_v, start_record)
+	# la tour du jour part toujours du sol (même épreuve pour tout le monde)
+	world.start_ascension(seed_v, start_record, 0 if daily else Game.start_level())
 	scr = Scr.PLAY
 	hud.visible = true
 	hud_shards.text = "0"
