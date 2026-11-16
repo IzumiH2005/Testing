@@ -762,10 +762,14 @@ multiplier par 1,5.
 
 ## 10. Effets
 
-Les effets des deux vidéos sont des dégradés, des transparences et des formes simples. On peut
-donc les **calculer** au lieu de les dessiner, à partir des positions du squelette à l'image
-précédente et à l'image courante. Chaque effet ci-dessous donne ce qu'on voit, puis ce que la
-fonction doit faire.
+Les effets des deux vidéos sont des dégradés, des transparences et des formes simples. On les
+**calcule** au lieu de les dessiner, à partir des positions du squelette à l'image précédente et
+à l'image courante. Chaque effet ci-dessous donne ce qu'on voit, puis ce que la fonction fait.
+
+**C'est codé** dans `scripts/filtres.gd` (mode d'emploi : `README.md`, « Effets calculés »).
+Traînée, étirement, fantômes et poussière de glissade sont automatiques ; éclats, secousses,
+zoom, filtres d'écran et image d'impact se posent comme événements dans l'animation. Pas encore
+codés : arcs d'arme (§ 10.2), lignes de vitesse en bande (§ 10.5), aura, énergie (§ 10.9).
 
 ### 10.1 Traînée de membre (smear)
 

@@ -1,0 +1,34 @@
+{
+ "nom": "duo_vitrine_effets_coup",
+ "longueur": 115,
+ "acteurs": [
+  {
+   "x": 0,
+   "facing": 1,
+   "couleur": "#111111",
+   "anim": "garde_ouverte_idle",
+   "t0": 0,
+   "programme": [
+    {
+     "contact": 40,
+     "anim": "vitrine_effets_coup",
+     "fondu": 3
+    }
+   ]
+  },
+  {
+   "x": 158,
+   "facing": -1,
+   "couleur": "#1d3f8f",
+   "anim": "garde_idle",
+   "t0": 37,
+   "programme": [
+    {
+     "contact": 40,
+     "anim": "touche_tete_lourd",
+     "fondu": 1
+    }
+   ]
+  }
+ ]
+}

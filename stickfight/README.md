@@ -165,6 +165,7 @@ Le dossier `anims/` contient des animations par poses clés, jouées à
 | `duo_releve_roulade` | 225 i | Alt + Maj + C : même chute que `duo_releve`, puis B se relève par une roulade arrière (`releve_roulade`), loin de A |
 | `duo_ko` | 240 i | Alt + Ctrl + C : même chute que `duo_releve`, puis B se relâche (fondu de 20 i depuis `au_sol`) et reste inconscient (`ko_au_sol`) |
 | `duo_coup_de_poing_rue` | 115 i | F : A en garde ouverte lance `coup_de_poing_rue`, B en garde le prend au menton (`touche_tete_lourd`) |
+| `duo_vitrine_effets_coup`, `duo_vitrine_effets_decisif` | 115 i, 130 i | E et Maj + E : le même duo, avec `vitrine_effets_coup` ou `vitrine_effets_decisif` (copies du coup de poing de rue sans ses dessins intermédiaires) pour montrer les effets calculés. Ce ne sont pas des coups du jeu |
 | `sortie_de_garde` | 60 i | De la garde ouverte au repos, sur place : le poids bascule en arrière, le pied avant revient en se posant par la pointe, puis le pied arrière repasse devant et le bassin remonte ; les mains retombent le long du corps, le bras du pied qui avance passe devant (contrepoids) ; enchaîne sur `idle_repos` |
 | `marche_detendue` | 56 i, en boucle, avance 76 | Marche normale depuis le repos, sans garde : bras ballants en opposition des jambes, bassin qui monte et descend sur chaque appui |
 | `marche_detendue_depart` | — | Du repos à la boucle : transfert de poids, premier pas plus court |
@@ -371,10 +372,41 @@ Le repos est l'état par défaut ; la garde ne dure que tant que G est tenu.
 | Alt + Maj + C | Duo relevé en roulade : même chute, puis B roule en arrière par-dessus ses épaules et se remet en garde plus loin |
 | Alt + Ctrl + C | Duo KO : même chute, puis B perd connaissance et reste inerte au sol, à peine une respiration |
 | F | Duo coup de poing de rue : A prend son élan et frappe en se projetant, B le prend au menton (en boucle) |
+| E, Maj + E | Vitrine des effets calculés : coup lourd (traînée, étirement, fantômes, étoile, étincelles, anneau, bouffée, secousse) / coup décisif (image d'impact noire puis blanche, éclat final, zoom, secousse longue) |
+| V | Effets calculés activés ou coupés, pour comparer |
 | R | Repos (remise à zéro) |
 | Espace | Pause ; en pause, ← → reculent ou avancent d'une image |
 | L | Ralenti ×4 |
 | D | Squelette coloré |
+
+### Effets calculés
+
+`scripts/filtres.gd` produit les effets à partir des poses du squelette, sans rien
+dessiner à la main (règles et mesures : `BIBLE_ANIMATION.md`, § 10).
+
+**Automatiques**, sur toutes les animations :
+
+| Effet | Quand |
+|---|---|
+| Traînée | un poing ou un pied en l'air avance de plus de 13 unités en une image : un ruban suit son arc (angles interpolés), opaque près du membre, transparent au bout |
+| Étirement | un bras ou une jambe presque tendu se détend très vite : il s'allonge jusqu'à 1,3 fois sur cette image |
+| Fantômes | le bassin avance de plus de 16 unités en une image : trois copies pâles des poses précédentes |
+| Poussière | un pied posé glisse : petits dômes laissés au sol |
+
+Pendant un arrêt sur image, la traînée reste 5 images et les fantômes 2.
+Une animation peut les régler ou les couper :
+`"filtres": {"trainee": false, "seuil_trainee": 20, "etirement": false, "fantomes": false, "poussiere": false}`.
+
+**Par événement** (dans `"evenements"`) :
+
+| Événement | Effet |
+|---|---|
+| `{"f": 29, "type": "impact", "forme": "etoile", "articulation": "handF"}` | éclat au point d'impact. Formes : `etoile`, `anneau`, `bouffee` (vers `dir`, à mettre dans le dos du touché), `etincelles`, `sphere`, `final`. Options : `dir`, `taille`, `couleur`, `dec` |
+| `{"f": 29, "type": "secousse", "mode": "coup", "amp": 0.08, "n": 10}` | secousse verticale ; `amp` en hauteur de personnage. Modes : `coup` (1, −0,6, 0,35, −0,2, 0,1), `decroit` (× `decroissance` à chaque pas), `grondement` (constante). Sans `mode` : l'ancienne secousse |
+| `{"f": 29, "type": "zoom", "force": 1.3, "n": 15, "articulation": "handF"}` | zoom d'un coup sur le point, retour en douceur |
+| `{"f": 29, "type": "ecran", "mode": "flash", "n": 3}` | filtre plein écran : `blanc`, `delave`, `assombrir`, `teinte`, `flash` (`force`, `couleur`) |
+| `{"f": 29, "type": "image_impact", "version": "complete", "articulation": "handF"}` | séquence des coups décisifs : image noire (silhouettes blanches, rayons), blanche, délavée, puis zoom ; les corps restent figés pendant ce temps. `version` : `complete` ou `courte` ; `tenue` ajoute des images figées |
+| `{"f": 20, "type": "fantomes", "n": 8}`, `{"f": 20, "type": "flou", "n": 4}` | fantômes ou flou de mouvement forcés pendant n images |
 
 ### Régler une animation en ligne de commande
 

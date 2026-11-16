@@ -1,0 +1,313 @@
+{
+ "nom": "vitrine_effets_decisif",
+ "boucle": false,
+ "longueur": 64,
+ "base": "garde_ouverte",
+ "suivante": "garde_ouverte_idle",
+ "decalage": {
+  "neck": 2,
+  "chest": 1,
+  "armN": 1,
+  "foreN": 2
+ },
+ "evenements": [
+  {
+   "f": 8,
+   "type": "poussiere",
+   "articulation": "ankleF",
+   "dir": 180,
+   "taille": 0.35
+  },
+  {
+   "f": 29,
+   "type": "contact"
+  },
+  {
+   "f": 29,
+   "type": "poussiere",
+   "articulation": "ankleN",
+   "dir": 0,
+   "taille": 0.9
+  },
+  {
+   "f": 47,
+   "type": "poussiere",
+   "articulation": "ankleF",
+   "dir": 0,
+   "taille": 0.5
+  },
+  {
+   "f": 29,
+   "articulation": "handF",
+   "type": "image_impact",
+   "version": "complete",
+   "tenue": 6
+  },
+  {
+   "f": 29,
+   "articulation": "handF",
+   "type": "impact",
+   "forme": "final",
+   "couleur": "#ffd43b"
+  },
+  {
+   "f": 29,
+   "type": "secousse",
+   "mode": "decroit",
+   "amp": 0.12,
+   "n": 30
+  }
+ ],
+ "cles": [
+  {
+   "f": 0,
+   "nom": "garde",
+   "fixe": {
+    "x": 0.0,
+    "y": 72.13,
+    "root": 3,
+    "spineLow": 7,
+    "chest": 7,
+    "neck": 10,
+    "thighN": 59.31,
+    "shinN": 61.79,
+    "thighF": -2.82,
+    "shinF": 62.5,
+    "armN": 62.29,
+    "foreN": 77.17,
+    "armF": 47.2,
+    "foreF": 127.66
+   },
+   "etire": {
+    "armF": 1.0
+   },
+   "ancre": false
+  },
+  {
+   "f": 8,
+   "nom": "poids derrière",
+   "fixe": {
+    "x": -6,
+    "y": 70.6,
+    "root": -2,
+    "spineLow": 3,
+    "chest": 2,
+    "neck": 13,
+    "thighN": 57.1,
+    "shinN": 57.9,
+    "thighF": -2.1,
+    "shinF": 65.2,
+    "armN": 60.9,
+    "foreN": 75.6,
+    "armF": -21.8,
+    "foreF": 184.66
+   },
+   "etire": {
+    "armF": 0.95
+   },
+   "ancre": false,
+   "courbe": "auto"
+  },
+  {
+   "f": 16,
+   "nom": "armé",
+   "fixe": {
+    "x": -12,
+    "y": 68.6,
+    "root": -9,
+    "spineLow": -3,
+    "chest": -5,
+    "neck": 19,
+    "thighN": 52.7,
+    "shinN": 53.4,
+    "thighF": -3.6,
+    "shinF": 67.3,
+    "armN": 59.1,
+    "foreN": 46.4,
+    "armF": -101,
+    "foreF": 276
+   },
+   "etire": {
+    "armF": 0.95
+   },
+   "ancre": false,
+   "courbe": "dec"
+  },
+  {
+   "f": 22,
+   "nom": "tension",
+   "fixe": {
+    "x": -14,
+    "y": 68.0,
+    "root": -11,
+    "spineLow": -4,
+    "chest": -6,
+    "neck": 21,
+    "thighN": 51.1,
+    "shinN": 51.4,
+    "thighF": -2.5,
+    "shinF": 70.9,
+    "armN": 62.2,
+    "foreN": 34.9,
+    "armF": -109,
+    "foreF": 284
+   },
+   "etire": {
+    "armF": 0.97
+   },
+   "ancre": false,
+   "courbe": "palier"
+  },
+  {
+   "f": 29,
+   "nom": "contact",
+   "fixe": {
+    "x": 19,
+    "y": 65.5,
+    "root": 22,
+    "spineLow": 7,
+    "chest": 2,
+    "neck": -6,
+    "thighN": 88.9,
+    "shinN": 62.3,
+    "thighF": -7.5,
+    "shinF": 42.7,
+    "armN": 16.9,
+    "foreN": 150.0,
+    "armF": 129,
+    "foreF": 6
+   },
+   "etire": {
+    "armF": 1.0
+   },
+   "ancre": false,
+   "courbe": "dec"
+  },
+  {
+   "f": 34,
+   "nom": "trop loin",
+   "fixe": {
+    "x": 29,
+    "y": 61.5,
+    "root": 30,
+    "spineLow": 8,
+    "chest": 4,
+    "neck": -4,
+    "thighN": 102.0,
+    "shinN": 82.8,
+    "thighF": -6.3,
+    "shinF": 40.7,
+    "armN": -30.0,
+    "foreN": 102.7,
+    "armF": 124,
+    "foreF": 5
+   },
+   "etire": {
+    "armF": 1.0
+   },
+   "ancre": false,
+   "courbe": "dec"
+  },
+  {
+   "f": 41,
+   "nom": "rattrapé",
+   "fixe": {
+    "x": 33,
+    "y": 64.5,
+    "root": 22,
+    "spineLow": 9,
+    "chest": 7,
+    "neck": 2,
+    "thighN": 88.6,
+    "shinN": 81.2,
+    "thighF": 7.6,
+    "shinF": 77.2,
+    "armN": -11.3,
+    "foreN": 132.4,
+    "armF": 96,
+    "foreF": 52
+   },
+   "etire": {
+    "armF": 1.0
+   },
+   "ancre": false,
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 47,
+   "nom": "pied ramené",
+   "fixe": {
+    "x": 31,
+    "y": 70.4,
+    "root": 7,
+    "spineLow": 7,
+    "chest": 6,
+    "neck": 9,
+    "thighN": 65.8,
+    "shinN": 67.0,
+    "thighF": 0.7,
+    "shinF": 64.4,
+    "armN": 54.0,
+    "foreN": 105.0,
+    "armF": 44.2,
+    "foreF": 147.66
+   },
+   "etire": {
+    "armF": 1.0
+   },
+   "ancre": false,
+   "courbe": "dec"
+  },
+  {
+   "f": 54,
+   "nom": "tassé",
+   "fixe": {
+    "x": 30.0,
+    "y": 71.4,
+    "root": 4,
+    "spineLow": 8,
+    "chest": 8,
+    "neck": 11,
+    "thighN": 61.5,
+    "shinN": 63.5,
+    "thighF": -1.4,
+    "shinF": 64.0,
+    "armN": 65.29,
+    "foreN": 74.17,
+    "armF": 52.2,
+    "foreF": 122.66
+   },
+   "etire": {
+    "armF": 1.0
+   },
+   "ancre": false,
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 64,
+   "nom": "garde",
+   "fixe": {
+    "x": 30.0,
+    "y": 72.13,
+    "root": 3,
+    "spineLow": 7,
+    "chest": 7,
+    "neck": 10,
+    "thighN": 59.31,
+    "shinN": 61.79,
+    "thighF": -2.82,
+    "shinF": 62.5,
+    "armN": 62.29,
+    "foreN": 77.17,
+    "armF": 47.2,
+    "foreF": 127.66
+   },
+   "etire": {
+    "armF": 1.0
+   },
+   "ancre": false,
+   "courbe": "acc-dec"
+  }
+ ],
+ "note": "Vitrine des effets calculés (scripts/filtres.gd), sur une copie de coup_de_poing_rue sans ses dessins intermédiaires. Ce n'est pas un coup du jeu."
+}

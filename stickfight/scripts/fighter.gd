@@ -19,8 +19,16 @@ var blend_t := 0
 ## Tremblement pendant l'arrêt sur impact (images restantes, amplitude).
 var shake_n := 0
 var shake_amp := 0.0
-## Poses locales des images précédentes (pour les traînées).
+## Poses locales des images précédentes (pour les traînées dessinées).
 var history: Array = []
+## Poses dans l'arène des images précédentes, de la plus récente à la plus
+## ancienne (pour les filtres : traînée, étirement, fantômes, poussière).
+## Contrairement à history, elle continue d'une animation à la suivante.
+var trace: Array = []
+const TRACE_MAX := 8
+## Fantômes ou flou forcés par un événement : images restantes.
+var fantomes_n := 0
+var flou_n := 0
 ## Couches de réaction superposées à l'animation en cours, sans l'arrêter
 ## (armure : le coup est encaissé pendant que l'attaque ou la marche
 ## continue). [{anim, t, p0}] ; voir couche().
@@ -102,6 +110,13 @@ func step() -> Array:
 	history.push_front(local_pose())
 	if history.size() > 3:
 		history.pop_back()
+	trace.push_front(to_world(local_pose()))
+	if trace.size() > TRACE_MAX:
+		trace.pop_back()
+	if fantomes_n > 0:
+		fantomes_n -= 1
+	if flou_n > 0:
+		flou_n -= 1
 	var t0 := t
 	t += 1.0
 	if anim.boucle and float(anim.avance) != 0.0:
@@ -188,6 +203,20 @@ func world_pose() -> Dictionary:
 ## Point local (repère du personnage) → arène.
 func point_to_world(v: Vector2) -> Vector2:
 	return Vector2(x + facing * v.x, v.y)
+
+
+## Ce que les filtres automatiques ajoutent à l'image courante (voir Filtres).
+func filtres() -> Dictionary:
+	var cur := to_world(local_pose())
+	var poses := [cur] + trace
+	var avant: Dictionary = trace[0] if not trace.is_empty() else {}
+	var fl: Array = Filtres.flou(poses) if flou_n > 0 else []
+	return {
+		"pose": Filtres.etirement(world_pose(), avant, anim),
+		"trainees": Filtres.trainees(poses, anim),
+		"fantomes": Filtres.fantomes(poses, anim, fantomes_n > 0),
+		"flou": fl,
+	}
 
 
 ## Traînées actives : formes en coordonnées de l'arène.

@@ -30,7 +30,8 @@ extends RefCounted
 ##     {"f": 12, "pose": "=", "vise_rel": {"armN": [0, -6]}}
 ##   ],
 ##   "evenements": [{"f": 8, "type": "hitstop", "n": 8}],
-##   "trainees": [{"articulation": "handN", "coude": "elbowN", "de": 5, "a": 8}]
+##   "trainees": [{"articulation": "handN", "coude": "elbowN", "de": 5, "a": 8}],
+##   "filtres": {"trainee": false}         réglage des effets automatiques (voir Filtres)
 ## }
 ##
 ## Une clé part de « pose » (nom de fichier dans poses/, « = » pour la clé
@@ -104,6 +105,7 @@ static func build(data: Dictionary) -> Dictionary:
 		"decalage": {},
 		"evenements": data.get("evenements", []),
 		"trainees": data.get("trainees", []),
+		"filtres": data.get("filtres", {}),
 		"cles": [],
 		"etire_ids": [],
 		"profondeur": false,

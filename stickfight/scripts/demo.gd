@@ -64,7 +64,8 @@ const DUOS := ["res://anims/duo_blocage.json", "res://anims/duo_armure.json",
 		"res://anims/duo_touche_jambe.json", "res://anims/duo_touche_accroupi.json",
 		"res://anims/duo_sonne.json", "res://anims/duo_chute_arriere.json", "res://anims/duo_fauche.json", "res://anims/duo_effondrement.json",
 		"res://anims/duo_touche_au_sol.json", "res://anims/duo_releve.json", "res://anims/duo_releve_roulade.json",
-		"res://anims/duo_ko.json", "res://anims/duo_coup_de_poing_rue.json"]
+		"res://anims/duo_ko.json", "res://anims/duo_coup_de_poing_rue.json",
+		"res://anims/duo_vitrine_effets_coup.json", "res://anims/duo_vitrine_effets_decisif.json"]
 const HISTORY_MAX := 600
 ## Écart maximal, en images, entre les deux appuis sur → d'un dash.
 const DOUBLE_APPUI := 14
@@ -87,6 +88,7 @@ var combat: Combat
 var mode := "solo"
 var duo_len := 0
 var duo_path: String = DUOS[0]
+var filtres_actifs := true
 ## Images déjà jouées (records de Combat), pour revenir en arrière en pause.
 var history: Array = []
 ## Image affichée dans l'historique quand on recule ; -1 = image en cours.
@@ -162,6 +164,7 @@ func _solo(nom: String, fondu: int) -> void:
 	if mode != "solo" or combat == null:
 		mode = "solo"
 		combat = Combat.new()
+		combat.filtres_actifs = filtres_actifs
 		combat.add(Fighter.new(0.0, 1))
 		combat.fighters[0].play(nom)
 		cam_x = 8.0
@@ -183,6 +186,7 @@ func _duo(path: String = duo_path) -> void:
 	mode = "duo"
 	duo_len = int(data.get("longueur", 110))
 	combat = Combat.from_duo(data)
+	combat.filtres_actifs = filtres_actifs
 	_fit()
 	_restart_history()
 
@@ -513,6 +517,12 @@ func _gui_input(ev: InputEvent) -> void:
 				_duo(DUOS[14] if ev.shift_pressed else DUOS[13])
 		KEY_F:
 			_duo(DUOS[20])
+		KEY_E:
+			_duo(DUOS[22] if ev.shift_pressed else DUOS[21])
+		KEY_V:
+			# Effets calculés (traînée, étirement, fantômes…) : avec ou sans.
+			filtres_actifs = not filtres_actifs
+			combat.filtres_actifs = filtres_actifs
 		KEY_U:
 			if mode == "solo" and not ev.echo:
 				combat.couche(combat.fighters[0], "armure_encaisse")
