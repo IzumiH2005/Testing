@@ -159,6 +159,66 @@ on empile d'effets. Les plus forts sont rares, sinon ils ne veulent plus rien di
 
 Preuves : V1 (sobre) et V2 (chargé) suivent la même échelle, chacune à son niveau (§ 0, § 10).
 
+## A bis. Ce que disent la biomécanique et les animateurs
+
+Recherche du 16 novembre 2026. Ces points complètent les principes A1 à A9 ; les sources sont
+en fin de section. Les conseils d'Alan Becker viennent de résumés de ses tutoriels, et je n'ai
+pas trouvé de conseils écrits de Hyun's Dojo : je ne leur attribue donc rien de précis.
+
+**Le corps humain : un coup droit du bras arrière**
+
+1. **Le moteur est la jambe arrière.** Chez les boxeurs, le direct du bras arrière est le coup
+   le plus fort, et c'est l'extension de la jambe arrière, avec celle du coude, qui fait la
+   différence entre les meilleurs et les autres. Les forces au sol sont nettement plus fortes
+   sous le pied arrière que sous le pied avant, et seulement pour ce coup-là.
+   → À l'image où le coup part, la jambe arrière se **tend** et le talon arrière **décolle**.
+2. **Le direct arrière est une translation, le crochet une rotation.** Le corps entier avance
+   vers la cible pendant le direct arrière ; le crochet et l'uppercut font surtout tourner le
+   corps sur place.
+   → Pour un direct arrière, le bassin avance beaucoup (≈ 0,45 H, § 4) ; pour un crochet, il
+   tourne et avance peu.
+3. **Les bons frappeurs partent des hanches, les débutants des épaules.** Les meilleurs boxeurs
+   tirent davantage de force de la rotation des hanches, les plus jeunes davantage de l'épaule.
+   → La hanche part **une image avant** l'épaule, l'épaule une image avant le poing. Un coup qui
+   part de l'épaule a l'air faible ou amateur, ce qui peut servir pour un personnage maladroit.
+
+**L'animation**
+
+4. **On accélère jusqu'au contact, on ne ralentit jamais avant.** Un marteau qui frappe un clou
+   ne freine pas avant l'impact ; si l'on fait ralentir (« ease in ») un coup avant le contact,
+   on tue sa force. → Écarts du poing **croissants** jusqu'au contact ; le ralenti vient
+   **après** (A1, § 9).
+5. **Le coup sort beaucoup plus vite que la charge.** Dans l'animation japonaise d'action, le
+   bras qui part ne prend qu'une ou deux images, puis viennent beaucoup d'images de réaction du
+   touché. → Trajet en 1 à 3 i60, charge en 10 à 20 i60.
+6. **Plusieurs niveaux d'anticipation** (Alan Becker). Une grande anticipation peut contenir une
+   petite : on se ramasse un peu avant de reculer, puis on recule, puis le coude remonte d'un
+   cran juste avant de partir.
+7. **Le chevauchement après le coup.** L'épaule part d'abord et le bras suit ; à l'arrivée, le
+   haut du corps continue une ou deux images après que le bras s'est arrêté (dépassement), puis
+   on **tient la pose de fin** plus longtemps que les autres, pour qu'on la lise.
+8. **Pas d'anticipation involontaire.** La tête du touché ne doit pas commencer à partir avant
+   que le poing arrive : la réaction commence à l'image du contact, pas avant.
+9. **Le test de la silhouette.** Si on noircit le personnage, on doit toujours comprendre ce
+   qu'il fait. Le bras qui frappe doit sortir de la silhouette du buste et de la tête, pas se
+   cacher dedans. Le contrôle `--verifier` signale le poing proche caché dans la tête.
+10. **La ligne d'action passe par la colonne.** On choisit une courbe pour le dos (en avant, en
+    arrière, sur le côté), et le reste de la pose la suit. Les genoux restent un peu pliés,
+    sinon le personnage a l'air d'une statue.
+11. **Un pied posé ne bouge pas** tant qu'il n'est pas soulevé.
+
+**Sources**
+
+- [Dinu et Louis 2020, biomécanique des coups chez les boxeurs (Frontiers)](https://www.frontiersin.org/journals/sports-and-active-living/articles/10.3389/fspor.2020.598861/pdf)
+- [Rôle des membres inférieurs dans les coups de boxe (UWS)](https://research-portal.uws.ac.uk/en/publications/the-role-of-lower-limb-kinetics-in-boxing-punches-and-the-impact-/)
+- [Les 12 principes de l'animation dans le jeu vidéo (Game Developer)](https://www.gamedeveloper.com/production/the-12-principles-of-animation-in-video-games)
+- [Anticipation et images d'impact (cours, Google Sites)](https://sites.google.com/view/art379/lessons/anticipation-impacts)
+- [Images d'impact (80.lv)](https://80.lv/articles/learn-how-to-add-accents-to-your-animations-with-impact-frames)
+- [Ligne d'action et poses (Animation Mentor)](https://www.animationmentor.com/?p=96066)
+- [Poses lisibles, silhouettes et ligne d'action](https://cursa.app/en/page/character-animation-starter-kit-readable-poses-silhouettes-and-line-of-action)
+- [Richard Williams, *The Animator's Survival Kit* (table des matières : anticipation, chevauchement, poids)](https://dn721807.ca.archive.org/0/items/taskav-01/The__Animator%27s_Survival_Kit%5B1%5D_text.pdf)
+- [Six animateurs de stick figures (Bloop Animation)](https://www.bloopanimation.com/6-stick-figure-animators-you-should-know/)
+
 ## B. Méthode : construire une animation qu'on n'a jamais vue
 
 1. **Intention.** Que fait le mouvement dans le jeu ? Coup haut, moyen ou bas, coup qui
@@ -175,7 +235,8 @@ Preuves : V1 (sobre) et V2 (chargé) suivent la même échelle, chacune à son n
    - retour.
 4. **Durées**, prises dans l'échelle de force (§ C) puis multipliées par le caractère (§ 12).
 5. **Espacement** entre les poses : départ qui double, arrêt qui divise par deux, rien de
-   linéaire (§ 9). Le trajet de l'extrémité ne prend pas d'intervalle : une traînée (A1).
+   linéaire (§ 9). Jusqu'au contact, les écarts **augmentent** ; on ne ralentit qu'après
+   (A bis 4). Le trajet de l'extrémité ne prend pas d'intervalle : une traînée (A1).
 6. **Décalages.** Pour chaque segment, une image de retard sur le segment qui le pousse (A3) ;
    la tête, le bras libre, les cheveux et la ceinture suivent avec 1 à 2 images de retard.
 7. **Réaction** de l'adversaire, construite avec les mêmes étapes (A7).
