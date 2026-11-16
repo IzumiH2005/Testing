@@ -114,6 +114,31 @@ Exemples vus sur un mannequin articulé (PoseIt) :
 
 Canaux : `thighN`, `thighN_p`, `thighN_r`.
 
+### 6 bis. Décrire la jambe à l'instant T
+
+| Axe | Question | Canal |
+|---|---|---|
+| Flexion de hanche | la cuisse est-elle devant (genou levé), sous le bassin, derrière ? | `thighN` |
+| Écartement | le pied est-il dans l'axe, écarté sur le côté, croisé devant l'autre ? (largeur de la garde) | `thighN_p` |
+| Rotation de hanche | où pointent le genou et le pied : droit devant, vers l'extérieur, vers l'intérieur ? | `thighN_r` |
+| Genou | combien est-il plié ? il pointe toujours dans la direction du pied | `shinN` |
+| Cheville | talon posé ou levé (sur la plante) ? pied qui roule sur le côté ? | `footN` (automatique), `footN_p` |
+| Bassin | penché d'un côté (hanche qui tombe), tourné ? | `root_p`, `torsionBassin` |
+| Appui | quelle jambe porte le poids ? (genou plus plié, bassin au-dessus) | position du bassin |
+
+Couplages à respecter :
+
+- **Le genou suit le pied.** La rotation de hanche oriente les deux à la fois : un genou qui
+  rentre pendant que le pied reste tourné vers l'extérieur abîme le genou, et ça se voit.
+- **Garde de combat** : pieds écartés en largeur (pas sur une ligne), pied arrière tourné vers
+  l'extérieur (rotation externe 30 à 45°), pied avant presque droit vers la cible.
+- **Pivot du pied arrière** dans un coup : quand le bassin tourne vers la cible, le talon arrière
+  se lève et part vers l'extérieur, la hanche arrière passe en rotation interne (le genou rentre
+  vers l'avant), la jambe se tend : c'est la poussée.
+- **Jambe d'appui** : genou plié au-dessus du pied, bassin au-dessus de l'appui.
+- De profil, la rotation se lit par la longueur du pied (un pied tourné vers la caméra paraît
+  court) et par la direction du genou.
+
 ## 7. Le genou, la cheville
 
 | Articulation | Mouvement | Amplitude | Canal |

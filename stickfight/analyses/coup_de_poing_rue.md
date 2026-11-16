@@ -130,6 +130,13 @@ en degrés absolus (positif = épaule ou hanche proche vers l'avant).
 | 29, contact | +25 | +45 | +7 (allonge) | tendu vers la tête adverse | 105° (coude en arrière), −35°, 125°, poing au menton ; omoplate −5 |
 | 31-46 | +28 → +20 | +52 → +38 | +7 → +3 | suit vers le bas | idem, se relâche |
 
+Jambes (rotation de hanche, positif = genou vers la caméra) : en garde, pied avant presque droit
+(−5°), pied arrière tourné vers l'extérieur (−35° pour la jambe loin) ; après le recul, la jambe
+proche devient la jambe arrière, pied tourné dehors (+35°) et largeur de garde (écartement 12°,
+jambe avant −9°) ; au départ, le pied arrière pivote : +35 → +20 → 0 → −15° au contact (le
+genou rentre vers l'avant, la jambe se tend, le talon est levé) ; retour : chaque pied reprend
+son orientation de garde.
+
 Les angles des bras ont été calculés à partir de ces directions (recherche dans l'amplitude de
 l'épaule), pas posés à l'œil. Contrôle : vues de face, trois quarts et profil
 (`--cles --vues`), et trajectoire du poing (`--strobe … --suivre handN,elbowN`) : 105 → 107 →

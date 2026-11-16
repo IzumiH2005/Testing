@@ -26,7 +26,9 @@
     "armF": 47.2,
     "foreF": 127.66,
     "thighN_p": 7,
-    "thighF_p": -7
+    "thighF_p": -7,
+    "thighN_r": -5,
+    "thighF_r": -35
    }
   },
   {
@@ -41,7 +43,9 @@
     "chest": 8,
     "neck": 11,
     "thighN_p": 7,
-    "thighF_p": -7
+    "thighF_p": -7,
+    "thighN_r": -5,
+    "thighF_r": -35
    },
    "vise": {
     "legN": [
@@ -66,7 +70,9 @@
     "chest": 5.55,
     "foreN": 118,
     "thighN_p": 30,
-    "thighF_p": -7
+    "thighF_p": -7,
+    "thighN_r": 10,
+    "thighF_r": -20
    },
    "vise": {
     "legN": [
@@ -95,7 +101,9 @@
     "armF": 60,
     "foreF": 60,
     "thighN_p": 35,
-    "thighF_p": -7
+    "thighF_p": -7,
+    "thighN_r": 25,
+    "thighF_r": -10
    },
    "vise": {
     "legN": [
@@ -133,7 +141,9 @@
     "armF_p": -10,
     "armF_r": -10,
     "armN_p": 48,
-    "armN_r": -49
+    "armN_r": -49,
+    "thighN_r": 30,
+    "thighF_r": 0
    },
    "vise": {
     "legN": [
@@ -171,7 +181,9 @@
     "armF_p": -7,
     "armF_r": -19,
     "armN_p": 57,
-    "armN_r": -61
+    "armN_r": -61,
+    "thighN_r": 35,
+    "thighF_r": 5
    },
    "vise": {
     "legN": [
@@ -209,7 +221,9 @@
     "armF_p": -7,
     "armF_r": -19,
     "armN_p": 55,
-    "armN_r": -72
+    "armN_r": -72,
+    "thighN_r": 35,
+    "thighF_r": 5
    },
    "vise": {
     "legN": [
@@ -247,7 +261,9 @@
     "armF_p": -7,
     "armF_r": -19,
     "armN_p": 55,
-    "armN_r": -72
+    "armN_r": -72,
+    "thighN_r": 35,
+    "thighF_r": 5
    },
    "vise": {
     "legN": [
@@ -285,7 +301,9 @@
     "armF_p": -7,
     "armF_r": -19,
     "armN_p": 52,
-    "armN_r": -80
+    "armN_r": -80,
+    "thighN_r": 35,
+    "thighF_r": 5
    },
    "vise": {
     "legN": [
@@ -323,7 +341,9 @@
     "armF_p": -13,
     "armF_r": -22,
     "armN_p": 58,
-    "armN_r": -69
+    "armN_r": -69,
+    "thighN_r": 20,
+    "thighF_r": 5
    },
    "vise": {
     "legN": [
@@ -361,7 +381,9 @@
     "armN": 99,
     "armN_p": 52,
     "armN_r": 78,
-    "foreN": 70
+    "foreN": 70,
+    "thighN_r": 0,
+    "thighF_r": 5
    },
    "vise": {
     "legN": [
@@ -395,7 +417,9 @@
     "epauleN_haut": 0,
     "epauleF_av": -5,
     "armF_p": -59,
-    "armF_r": 80
+    "armF_r": 80,
+    "thighN_r": -15,
+    "thighF_r": 8
    },
    "vise": {
     "armN": [
@@ -407,8 +431,8 @@
      7.6
     ],
     "legN": [
-     -38,
-     14
+     -28,
+     16
     ]
    }
   },
@@ -435,7 +459,9 @@
     "epauleN_haut": 0,
     "epauleF_av": -5,
     "armF_p": -59,
-    "armF_r": 80
+    "armF_r": 80,
+    "thighN_r": -15,
+    "thighF_r": 8
    },
    "vise": {
     "legF": [
@@ -443,8 +469,8 @@
      7.6
     ],
     "legN": [
-     -32,
-     20
+     -26,
+     21
     ]
    }
   },
@@ -471,7 +497,9 @@
     "epauleN_haut": 0,
     "epauleF_av": -4,
     "armF_p": -59,
-    "armF_r": 72
+    "armF_r": 72,
+    "thighN_r": -12,
+    "thighF_r": 8
    },
    "vise": {
     "legF": [
@@ -507,7 +535,9 @@
     "epauleN_haut": 0,
     "epauleF_av": -2,
     "armF_p": -57,
-    "armF_r": 58
+    "armF_r": 58,
+    "thighN_r": -10,
+    "thighF_r": 8
    },
    "vise": {
     "legF": [
@@ -541,7 +571,9 @@
     "torsion": 6,
     "epauleN_av": 0,
     "epauleN_haut": 0,
-    "epauleF_av": 0
+    "epauleF_av": 0,
+    "thighN_r": -5,
+    "thighF_r": 5
    },
    "vise": {
     "legF": [
@@ -570,7 +602,9 @@
     "chest": 7.25,
     "foreN": 81.25,
     "thighN_p": 15,
-    "thighF_p": -7
+    "thighF_p": -7,
+    "thighN_r": -5,
+    "thighF_r": 0
    },
    "vise": {
     "legF": [
@@ -599,7 +633,9 @@
     "armF": 40,
     "foreF": 125,
     "thighN_p": 7,
-    "thighF_p": -7
+    "thighF_p": -7,
+    "thighN_r": -5,
+    "thighF_r": -10
    },
    "vise": {
     "legF": [
@@ -628,7 +664,9 @@
     "chest": 7.4,
     "foreN": 82.2,
     "thighN_p": 7,
-    "thighF_p": -25
+    "thighF_p": -25,
+    "thighN_r": -5,
+    "thighF_r": -30
    },
    "vise": {
     "legF": [
@@ -657,7 +695,9 @@
     "armF": 46,
     "foreF": 127,
     "thighN_p": 7,
-    "thighF_p": -7
+    "thighF_p": -7,
+    "thighN_r": -5,
+    "thighF_r": -35
    },
    "vise": {
     "legF": [
@@ -686,7 +726,9 @@
     "armF": 47.2,
     "foreF": 127.66,
     "thighN_p": 7,
-    "thighF_p": -7
+    "thighF_p": -7,
+    "thighN_r": -5,
+    "thighF_r": -35
    },
    "vise": {
     "legF": [
