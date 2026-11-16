@@ -2,7 +2,7 @@
  "nom": "releve",
  "boucle": false,
  "base": "au_sol",
- "suivante": "garde_idle",
+ "suivante": "idle_repos",
  "decalage": {
   "neck": 2,
   "armN": 1,
@@ -488,17 +488,19 @@
    "courbe": "acc-dec"
   },
   {
-   "f": 36,
-   "nom": "le pied arrière recule",
+   "f": 37,
+   "nom": "se relève en avançant : le pied arrière passe devant",
    "fixe": {
-    "x": 28,
-    "y": 60,
-    "root": 6,
+    "x": 54,
+    "y": 72,
+    "root": 0,
     "spineLow": 6,
-    "chest": 4,
+    "chest": 6,
     "neck": 6,
-    "armF": 449.3,
-    "foreF": 144.8
+    "armN": 22,
+    "foreN": 30,
+    "armF": 348,
+    "foreF": 22
    },
    "vise": {
     "legN": [
@@ -506,33 +508,45 @@
      9.2
     ],
     "legF": [
-     2,
-     28
-    ],
-    "armN": [
      66,
-     104
+     24
     ]
    },
    "courbe": "lin"
   },
   {
-   "f": 42,
-   "nom": "en garde",
-   "pose": "garde",
-   "plus": {
-    "x": 23,
-    "armF": 360
+   "f": 43,
+   "nom": "pied posé devant",
+   "fixe": {
+    "x": 70,
+    "y": 82,
+    "root": -8,
+    "spineLow": 2,
+    "chest": 8,
+    "neck": 8,
+    "armN": -6,
+    "foreN": 14,
+    "armF": 364,
+    "foreF": 10
    },
-   "ancre": false,
+   "vise": {
+    "legN": [
+     53.4,
+     9.2
+    ],
+    "legF": [
+     95.4,
+     7.5
+    ]
+   },
    "courbe": "dec"
   },
   {
    "f": 52,
-   "nom": "garde",
-   "pose": "garde",
+   "nom": "repos",
+   "pose": "repos",
    "plus": {
-    "x": 23,
+    "x": 74.4,
     "armF": 360
    },
    "ancre": false,
