@@ -87,6 +87,27 @@ Ce qu'on voit, comme dans les vidéos de référence : des membres qui raccourci
 pointent vers la caméra ou à l'opposé, et un ordre de dessin qui change (un bras qui passe
 derrière la tête). On ne voit jamais d'écart entre les épaules : les membres partent d'un seul
 point du tronc.
+**Ne jamais aligner un membre sur le corps** (étude de V1, images 247-258, 286-293, 306-317).
+Dans ces images, aucun bras ne longe le buste et aucune jambe ne se cache derrière l'autre :
+
+- **Un membre qui passe devant le corps le croise**, presque à angle droit, et ses deux bouts
+  dépassent de la silhouette : le poing d'un côté, le coude de l'autre (V1 288, 290).
+- **Le coude dépasse toujours.** Bras replié en garde ou armé, le coude sort derrière ou sous
+  le buste et l'avant-bras part en biais : on lit un L ou un V, jamais un trait collé au tronc
+  (V1 254-258, 306-309).
+- **Un poing près de la tête se pose au bord de la tête** (le menton, la tempe), pas au milieu
+  (V1 289, 311-313).
+- **Même ramassé, le corps reste ouvert** : genoux en avant, coudes écartés (V1 250-252).
+- **Les jambes ne sont jamais parallèles** : en A, l'une pliée, l'autre tendue. Quand une jambe
+  passe devant l'autre (un pas), son genou monte et son pied passe plus haut, pour qu'on voie
+  les deux.
+- **Le correctif est petit** : quelques degrés suffisent. On tourne un peu l'épaule, le coude ou
+  la hanche dans le plan pour décoller le membre du corps, plutôt que de le faire sortir en
+  profondeur.
+
+Le contrôle `--verifier` signale un bras confondu avec le corps (coude et main dans le tronc ou la
+tête) et des jambes superposées.
+
 **Attention à la lisibilité.** Un membre qui pointe vers la caméra ou à l'opposé raccourcit : vers
 60° de profondeur, il ne fait plus que la moitié de sa longueur et, noir sur noir, il se fond dans
 le buste ou la tête. Un membre qui passe derrière le corps disparaît complètement. On s'en sert

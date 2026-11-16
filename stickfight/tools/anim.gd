@@ -361,6 +361,30 @@ func _verifier(recs: Array) -> String:
 					var vu: float = J[pair[1]].distance_to(J[pair[2]]) + J[pair[2]].distance_to(J[pair[3]])
 					if vu < 0.55 * vrai:
 						warn.append("%s %s raccourci à moins de 55 %% de sa longueur" % ["bras" if pair[0] == "arm" else "jambe", "proche" if side == "N" else "loin"])
+			# Membre confondu avec le corps : le coude (ou le genou) et la main (ou
+			# la cheville) sont tous les deux dans le tronc ou la tête. Dans les
+			# vidéos de référence, un membre qui passe devant le corps le croise,
+			# et ses deux bouts dépassent de la silhouette.
+			var tronc := [J.hip, J.waist, J.shoulder]
+			var bande: float = float(sol.style.stroke) * 0.9
+			var dedans := func(v: Vector2) -> bool:
+				if v.distance_to(J.head) < sol.head_r:
+					return true
+				for i2 in tronc.size() - 1:
+					if Geometry2D.get_closest_point_to_segment(v, tronc[i2], tronc[i2 + 1]).distance_to(v) < bande:
+						return true
+				return false
+			for side in ["N", "F"]:
+				if dedans.call(J["elbow" + side]) and dedans.call(J["hand" + side]):
+					warn.append("bras %s confondu avec le corps" % ("proche" if side == "N" else "loin"))
+			var jF := [J.hip, J.kneeF, J.ankleF]
+			var pres := func(v: Vector2) -> bool:
+				for i3 in 2:
+					if Geometry2D.get_closest_point_to_segment(v, jF[i3], jF[i3 + 1]).distance_to(v) < bande:
+						return true
+				return false
+			if pres.call(J.kneeN) and pres.call(J.ankleN):
+				warn.append("jambes superposées")
 			if StickRig.lowest_y(fig.pose) < -1.0:
 				warn.append("sous le sol")
 			# Déséquilibre : deux pieds au sol, bassin hors de la base d'appui.

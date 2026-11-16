@@ -92,7 +92,7 @@
    "vise": {
     "legN": [
      -36,
-     24
+     36
     ],
     "legF": [
      -43,
@@ -424,8 +424,8 @@
      7.6
     ],
     "legN": [
-     35,
-     26
+     50,
+     36
     ]
    }
   },
@@ -479,6 +479,33 @@
     ],
     "legN": [
      75,
+     7.6
+    ]
+   }
+  },
+  {
+   "f": 61,
+   "nom": "le pied avant se soulève et recule",
+   "courbe": "acc-dec",
+   "fixe": {
+    "armF": 42.4,
+    "armN": 62.0,
+    "y": 68.6,
+    "root": 9.8,
+    "neck": 8.2,
+    "foreF": 125.8,
+    "spineLow": 8.0,
+    "x": 45.0,
+    "chest": 7.4,
+    "foreN": 82.2
+   },
+   "vise": {
+    "legF": [
+     24,
+     24
+    ],
+    "legN": [
+     75.1,
      7.6
     ]
    }
