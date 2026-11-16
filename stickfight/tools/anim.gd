@@ -377,6 +377,18 @@ func _verifier(recs: Array) -> String:
 			for side in ["N", "F"]:
 				if dedans.call(J["elbow" + side]) and dedans.call(J["hand" + side]):
 					warn.append("bras %s confondu avec le corps" % ("proche" if side == "N" else "loin"))
+			# Part visible du bras proche : points du bras hors de la tête et du
+			# tronc. Sous 35 %, il se lit à peine (le coude doit dépasser).
+			var vis := 0
+			var tot := 0
+			for segm in [[J.shoulder, J.elbowN], [J.elbowN, J.handN]]:
+				for u in range(1, 11):
+					var pt: Vector2 = segm[0].lerp(segm[1], u / 10.0)
+					tot += 1
+					if not dedans.call(pt):
+						vis += 1
+			if vis < 0.35 * tot:
+				warn.append("bras proche peu visible (moins de 35 % hors du corps)")
 			var jF := [J.hip, J.kneeF, J.ankleF]
 			var pres := func(v: Vector2) -> bool:
 				for i3 in 2:

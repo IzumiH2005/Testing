@@ -121,6 +121,20 @@ tête) et des jambes superposées.
 - Le dessin ne montre jamais d'écart entre les épaules : la profondeur se lit par les longueurs
   et par l'ordre de dessin.
 
+**Penser en 3D, montrer en 2D.** Pour chaque pose, on imagine d'abord où est vraiment le membre
+dans l'espace (devant, sur le côté, derrière le corps), puis on choisit la projection qui le
+montre :
+
+- **Un membre qui passe derrière ou devant le corps ne glisse pas à travers** : on le fait
+  sauter d'un côté à l'autre en une image (le coude passe de devant à derrière l'épaule), comme
+  dans les références. Sinon il disparaît dans le buste pendant plusieurs images.
+- **Pendant qu'il passe, une extrémité reste dehors** : le poing reste devant le menton pendant que
+  le coude part derrière, ou le coude dépasse pendant que le poing est derrière la tête.
+- **En plein trajet**, le bras sort de la silhouette : coude sous l'épaule et devant le buste,
+  avant-bras déjà vers la cible, poing devant la tête.
+
+Le contrôle `--verifier` signale un bras proche dont moins de 35 % du tracé dépasse du corps.
+
 **Attention à la lisibilité.** Un membre qui pointe vers la caméra ou à l'opposé raccourcit : vers
 60° de profondeur, il ne fait plus que la moitié de sa longueur et, noir sur noir, il se fond dans
 le buste ou la tête. Un membre qui passe derrière le corps disparaît complètement. On s'en sert

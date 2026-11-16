@@ -56,11 +56,11 @@
     "root": 2.55,
     "armF": 51.68,
     "y": 70.33,
-    "armN": 29.99,
+    "armN": 40,
     "foreF": 103.98,
     "spineLow": 6.25,
     "chest": 5.55,
-    "foreN": 88.66
+    "foreN": 118
    },
    "vise": {
     "legN": [
@@ -70,6 +70,33 @@
     "legF": [
      -43,
      12
+    ]
+   }
+  },
+  {
+   "f": 6,
+   "nom": "le coude passe derrière, le poing reste à la joue",
+   "courbe": "lin",
+   "fixe": {
+    "x": -21.37,
+    "y": 70.11,
+    "root": -0.45,
+    "spineLow": 4.11,
+    "chest": 2.55,
+    "neck": 10.22,
+    "armN": -50,
+    "foreN": 150,
+    "armF": 60,
+    "foreF": 60
+   },
+   "vise": {
+    "legN": [
+     -25,
+     34
+    ],
+    "legF": [
+     -43,
+     9.5
     ]
    }
   },
@@ -84,8 +111,8 @@
     "spineLow": 3,
     "chest": 1,
     "neck": 10,
-    "armN": -30,
-    "foreN": 110,
+    "armN": -60,
+    "foreN": 125,
     "armF": 60,
     "foreF": 60
    },
@@ -296,8 +323,8 @@
     "spineLow": 4,
     "chest": 2,
     "neck": 2,
-    "armN": 45,
-    "foreN": 100,
+    "armN": 50,
+    "foreN": 55,
     "armF": 50,
     "foreF": 95,
     "torsion": 0,
