@@ -114,6 +114,27 @@ un creux sans raison physique.
 Contrôle : `--strobe … --suivre handN,elbowN` ; la trajectoire du poing monte sans creux de
 l'armé au contact, celle du coude reste derrière.
 
+## 3 ter. Chaque articulation, tous ses axes, à chaque clé (version posée en trois vues)
+
+Repère du thorax : « az » = direction du bras vue de dessus (0 = devant, 90 = sur le côté,
+> 90 = sur le côté et en arrière), « él » = hauteur du coude par rapport à l'épaule. Torsions
+en degrés absolus (positif = épaule ou hanche proche vers l'avant).
+
+| Clé | Bassin | Épaules | Omoplate de frappe | Bras de frappe (az, él, coude) | Bras avant (az, él, coude) |
+|---|---|---|---|---|---|
+| 8, recul | −8 | −18 | −2 | 110°, −45°, 110° | 10°, −20°, 50° |
+| 12-24, armé | −15 à −20 | −30 à −40 | −4 à −6, haussée +1 à +2 | 120-125° (côté et arrière), −15°, 125-135° | 5° (vers la cible), −5°, 30° |
+| 26, dernier cran | −22 | −45 | −7 | 128°, −12°, 140° | idem |
+| 27, la hanche part | −5 | −35 (en retard) | −5 | 120°, −15°, 135° | 10°, −10°, 45° |
+| 28, l'épaule suit | +15 | +10 | 0 | 45°, +8°, 70° (le coude se déplie) | 80°, −35°, 100° (se replie) |
+| 29, contact | +25 | +45 | +7 (allonge) | tendu vers la tête adverse | 105° (coude en arrière), −35°, 125°, poing au menton ; omoplate −5 |
+| 31-46 | +28 → +20 | +52 → +38 | +7 → +3 | suit vers le bas | idem, se relâche |
+
+Les angles des bras ont été calculés à partir de ces directions (recherche dans l'amplitude de
+l'épaule), pas posés à l'œil. Contrôle : vues de face, trois quarts et profil
+(`--cles --vues`), et trajectoire du poing (`--strobe … --suivre handN,elbowN`) : 105 → 107 →
+112 → 137, le poing monte sans creux jusqu'à la cible.
+
 ## 4. Ce qui se voit de profil
 
 - Les torsions du bassin et des épaules se voient par le décalage des hanches et des épaules

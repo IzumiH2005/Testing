@@ -108,6 +108,10 @@ Dans ces images, aucun bras ne longe le buste et aucune jambe ne se cache derri�
 Le contrôle `--verifier` signale un bras confondu avec le corps (coude et main dans le tronc ou la
 tête) et des jambes superposées.
 
+**Correction du moteur (17 novembre 2026)** : le sens des canaux `torsion` et `torsionBassin`
+était inversé (une valeur positive envoyait l'épaule proche en arrière). Il est corrigé :
+positif = l'épaule ou la hanche proche passe devant.
+
 **Le trajet d'abord, la lisibilité ensuite.** On trace d'abord le chemin réel de l'extrémité dans
 l'espace (pour un coup droit : une ligne droite de l'armé à la cible), puis on rend chaque image
 lisible **sur ce chemin** (le poing juste devant le visage plutôt que dedans). On ne déforme

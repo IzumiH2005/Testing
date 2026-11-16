@@ -231,7 +231,7 @@ static func solve(p: Dictionary) -> Dictionary:
 	var RY := func(a: float) -> Basis: return Basis(Vector3(0, 1, 0), deg.call(a))
 	var RX := func(a: float) -> Basis: return Basis(Vector3(1, 0, 0), deg.call(a))
 	var root_w: float = ROOT.rest + ROOT.sign * angle(p, "root")
-	basis["root"] = RY.call(angle(p, "lacet")) * RZ.call(root_w) * RY.call(angle(p, "root" + PROF)) * RX.call(angle(p, "torsionBassin"))
+	basis["root"] = RY.call(angle(p, "lacet")) * RZ.call(root_w) * RY.call(angle(p, "root" + PROF)) * RX.call(-angle(p, "torsionBassin"))
 	tip["root"] = Vector3.ZERO
 	for b in BONES:
 		# Charnière (coude, genou) : aucune profondeur propre.
@@ -240,7 +240,7 @@ static func solve(p: Dictionary) -> Dictionary:
 		if b.id.begins_with("arm") or b.id.begins_with("thigh"):
 			B = B * RX.call(angle(p, b.id + ROT))
 		if b.id == "chest":
-			B = B * RX.call(angle(p, "torsion"))
+			B = B * RX.call(-angle(p, "torsion"))
 		basis[b.id] = B
 		var o3: Vector3 = tip[b.parent]
 		if b.id.begins_with("arm"):
