@@ -43,15 +43,16 @@ SUR = {"root": -5, "spineLow": 3, "chest": 2, "neck": 4, "torsion": 0,
 BRAS_REPOS = {"armN": -10, "foreN": 10, "armF": 8, "foreF": 8,
               "armN_p": 12, "armF_p": -12, "armN_r": 0, "armF_r": 0}
 # Bras de la clé 136 (sortie de resout_mains) : sert au trajet 104 → 136.
-PRETE = {"armN": 23.8, "foreN": 131.5, "armF": 6.5, "foreF": 120.6, "armN_p": 68.9, "armF_p": -54, "armN_r": 34.8, "armF_r": -25.2}
+PRETE = {"armN": 38.7, "foreN": 82.2, "armF": 36.6, "foreF": 57.6, "armN_p": 20, "armF_p": -20, "armN_r": 21.9, "armF_r": -32.3}
 
 
-MAIN_N = tuple(json.loads(os.environ.get("MN", "[25, -8, -7]")))
-MAIN_F = tuple(json.loads(os.environ.get("MF", "[27, -17, 7.5]")))
+MAIN_N = tuple(json.loads(os.environ.get("MN", "[48, -13, -2]")))
+MAIN_F = tuple(json.loads(os.environ.get("MF", "[50, -29, 4]")))
 
 
 # Coudes un peu sous les mains : avant-bras presque horizontaux (l'écartement s'ouvre pour ça).
-COUDE_DY = float(os.environ.get("CD", -3))
+COUDE_DY = float(os.environ.get("CD", -2))
+COUDE_N = float(os.environ.get("CN", -16))  # paume par-dessus : avant-bras N qui monte vers elle
 
 
 # Pendant le craquage, le buste tourne de trois quarts vers la caméra (idée de
@@ -141,12 +142,14 @@ def main():
         # les mains tournent avec le buste (même angle que la torsion, autour de la verticale)
         a = math.radians(SENS * TROIS_QUARTS)
 
-        def tourne(m):
-            x, z = m[0] + dxm, m[2]
-            return [round(x * math.cos(a) - z * math.sin(a), 2), m[1] + dym,
+        def tourne(m, dx=0.0, dy=0.0):
+            x, z = m[0] + dx, m[2]
+            return [round(x * math.cos(a) - z * math.sin(a), 2), m[1] + dy,
                     round(x * math.sin(a) + z * math.cos(a), 2)]
-        c["mains3d"] = {"N": tourne(MAIN_N), "F": tourne(MAIN_F),
-                        "coude_dy": COUDE_DY, "ecart": [coudes, 75]}
+        # le poing F ne bouge pas ; la paume N (posée dessus) appuie et pousse
+        c["mains3d"] = {"N": tourne(MAIN_N, dxm, dym), "F": tourne(MAIN_F),
+                        "coude_dy": [COUDE_N, COUDE_DY], "coude_dx": [19, 19],
+                        "ecart": [float(os.environ.get("EMIN", 20)), float(os.environ.get("EMAX", 40))]}
         if courbe:
             c["courbe"] = courbe
         if p:
@@ -166,13 +169,13 @@ def main():
     cles += [
         craque(136),
         craque(148, courbe="acc-dec"),
-        craque(158, haut=APPUI1, mains=(-2, 2), courbe="acc", p=3),
-        craque(162, dy_bassin=-1.5, haut=CRAC1, mains=(3, -4), coudes=45, courbe="dec"),
-        craque(168, dy_bassin=-1.2, haut=CRAC1, mains=(3, -3), coudes=44, courbe="acc-dec"),
+        craque(158, haut=APPUI1, mains=(-0.5, -0.2), courbe="acc", p=3),
+        craque(160, dy_bassin=-1.5, haut=CRAC1, mains=(3, 0.5), courbe="dec"),
+        craque(168, dy_bassin=-1.2, haut=CRAC1, mains=(2.5, 0.5), courbe="acc-dec"),
         craque(180, haut={"neck": 4}, courbe="acc-dec"),
-        craque(190, haut=APPUI2, mains=(-2, 3), coudes=33, courbe="acc", p=3),
-        craque(195, dy_bassin=-2.5, haut=CRAC2, mains=(4, -6), coudes=50, courbe="dec"),
-        craque(202, dy_bassin=-2.0, haut=CRAC2, mains=(4, -5), coudes=48, courbe="acc-dec"),
+        craque(190, haut=APPUI2, mains=(-0.5, -0.2), courbe="acc", p=3),
+        craque(192, dy_bassin=-2.5, haut=CRAC2, mains=(4, 0.5), courbe="dec"),
+        craque(202, dy_bassin=-2.0, haut=CRAC2, mains=(3.5, 0.5), courbe="acc-dec"),
         craque(214, haut=FIN, courbe="acc-dec"),
         craque(222, haut=FIN, courbe="acc-dec"),
     ]
