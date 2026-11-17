@@ -44,19 +44,17 @@ SUR = {"root": -5, "spineLow": 3, "chest": 2, "neck": 4, "torsion": 0,
 BRAS_REPOS = {"armN": -10, "foreN": 10, "armF": 8, "foreF": 8,
               "armN_p": 12, "armF_p": -12, "armN_r": 0, "armF_r": 0}
 # Bras de la clé 136 (sortie de resout_mains) : sert au trajet 104 → 136.
-PRETE = {"armN": 58, "foreN": 64.7, "armF": 38.2, "foreF": 57.1, "armN_p": 28.2, "armF_p": -21.6, "armN_r": 53.2, "armF_r": -36.9}
+PRETE = {"armN": 26.4, "foreN": 105.1, "armF": 14, "foreF": 112.9, "armN_p": 53.3, "armF_p": -53.7, "armN_r": 41.3, "armF_r": -31.9}
 
 
-MAIN_F = tuple(json.loads(os.environ.get("MF", "[50, -29, 4]")))
-CN_REPOS = float(os.environ.get("CNR", -12))
-CN_APPUI = float(os.environ.get("CNA", -6))
-CN_CRAC = float(os.environ.get("CNC", -16))
-CDX_N = float(os.environ.get("CXN", 6))
-CDX_F = float(os.environ.get("CXF", 24))
+MAIN_F = tuple(json.loads(os.environ.get("MF", "[30, -19, 8.5]")))
+CN_REPOS = float(os.environ.get("CNR", 0))
+CN_APPUI = float(os.environ.get("CNA", 2))
+CN_CRAC = float(os.environ.get("CNC", -2))
 
 
 # Coudes un peu sous les mains : avant-bras presque horizontaux (l'écartement s'ouvre pour ça).
-COUDE_DY = float(os.environ.get("CD", -4))
+COUDE_DY = float(os.environ.get("CD", 0))
 
 
 # Pendant le craquage, le buste tourne de trois quarts vers la caméra (idée de
@@ -135,9 +133,9 @@ def main():
     # Craquage : clés à partir de 136, mains placées en 3D par mains3d (repère de l'épaule).
     # La paume N roule sur les jointures du poing F, toujours à R du centre du poing
     # (contact) : angle th depuis la verticale (0 = juste au-dessus, + = vers l'avant).
-    DZ = float(os.environ.get("DZ", 6.0))  # paume décalée vers la caméra
-    R_H = math.sqrt(17.1 ** 2 - DZ ** 2)  # rayon dans le plan x-y : 17,1 en 3D
-    TH = {"repos": float(os.environ.get("THR", 15)), "appui": float(os.environ.get("THA", 0)), "crac": float(os.environ.get("THC", 38))}
+    DY_N = float(os.environ.get("DYN", 0.0))  # paume N un peu plus haute que le poing
+    R_C = math.sqrt(17.1 ** 2 - DY_N ** 2)  # contact : 17,1 entre les centres en 3D
+    TH = {"repos": float(os.environ.get("THR", 15)), "appui": float(os.environ.get("THA", 0)), "crac": float(os.environ.get("THC", 40))}
 
     def craque(f, dy_bassin=0.0, haut=None, phase="repos", recul=0.0, poing=(0, 0),
                courbe=None, p=None):
@@ -158,15 +156,17 @@ def main():
             return [round(x * math.cos(a) - z * math.sin(a), 2), round(m[1], 2),
                     round(x * math.sin(a) + z * math.cos(a), 2)]
         th = math.radians(TH[phase])
-        fF = [MAIN_F[0] - recul + poing[0], MAIN_F[1] + poing[1] + (1.5 if phase == "appui" else 0), MAIN_F[2]]
-        fN = [fF[0] + R_H * math.sin(th), fF[1] + R_H * math.cos(th), fF[2] - DZ]
-        # coudes séparés de profil : N haut et devant (plus encore à l'appui), F bas
+        # Illustration de l'utilisateur : poing F au milieu de la poitrine, paume N contre
+        # lui côté caméra (côte à côte en profondeur) ; th fait rouler la paume vers l'avant,
+        # sur les jointures (0 = juste à côté, + = devant).
+        fF = [MAIN_F[0] - recul + poing[0], MAIN_F[1] + poing[1], MAIN_F[2]]
+        fN = [fF[0] + R_C * math.sin(th), fF[1] + DY_N + (1.5 if phase == "appui" else 0),
+              fF[2] - R_C * math.cos(th)]
         cn = {"repos": CN_REPOS, "appui": CN_APPUI, "crac": CN_CRAC}[phase]
         c["mains3d"] = {"N": tourne(fN), "F": tourne(fF),
                         "coude_dy": [cn, COUDE_DY],
-                        "ecart": [json.loads(os.environ.get("ECN", "[28, 45]")),
-                                  json.loads(os.environ.get("ECF", "[20, 40]"))]}
-        c["mains3d"]["coude_dx"] = [CDX_N, CDX_F]
+                        "ecart": [json.loads(os.environ.get("ECN", "[40, 75]")),
+                                  json.loads(os.environ.get("ECF", "[40, 75]"))]}
         if courbe:
             c["courbe"] = courbe
         if p:
