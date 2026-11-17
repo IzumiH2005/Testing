@@ -18,6 +18,10 @@
     "footF": 0,
     "thighN": 0,
     "shinN": 0,
-    "footN": 0
+    "footN": 0,
+    "thighN_p": 5,
+    "thighF_p": -5,
+    "armN_p": 12,
+    "armF_p": -12
   }
 }

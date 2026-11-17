@@ -3,6 +3,78 @@
  "boucle": false,
  "base": "repos",
  "suivante": "accroupi_repos_idle",
+ "evenements": [
+  {
+   "f": 19,
+   "type": "poussiere",
+   "articulation": "handN",
+   "dir": 180,
+   "taille": 0.6
+  },
+  {
+   "f": 25,
+   "type": "poussiere",
+   "articulation": "ankleN",
+   "dir": 180,
+   "taille": 1.0
+  },
+  {
+   "f": 28,
+   "type": "onde",
+   "articulation": "toeF",
+   "dir": 180,
+   "taille": 1.2
+  },
+  {
+   "f": 28,
+   "type": "poussiere",
+   "articulation": "ankleF",
+   "dir": 180,
+   "taille": 1.5
+  },
+  {
+   "f": 28,
+   "type": "choc",
+   "articulation": "hip",
+   "dec": [
+    -30,
+    4
+   ],
+   "dir": 10,
+   "taille": 1.0
+  },
+  {
+   "f": 43,
+   "type": "onde",
+   "articulation": "ankleF",
+   "dir": 0,
+   "taille": 0.8
+  },
+  {
+   "f": 43,
+   "type": "poussiere",
+   "articulation": "ankleF",
+   "dir": 0,
+   "taille": 1.3
+  },
+  {
+   "f": 49,
+   "type": "poussiere",
+   "articulation": "ankleN",
+   "dir": 0,
+   "taille": 1.0
+  },
+  {
+   "f": 55,
+   "type": "poussiere",
+   "articulation": "handN",
+   "dir": 0,
+   "taille": 0.6
+  }
+ ],
+ "ecartement": {
+  "jambes": 9
+ },
  "cles": [
   {
    "f": 0,
@@ -1269,75 +1341,6 @@
     "thighF": 107.698,
     "shinF": 124.162
    }
-  }
- ],
- "evenements": [
-  {
-   "f": 19,
-   "type": "poussiere",
-   "articulation": "handN",
-   "dir": 180,
-   "taille": 0.6
-  },
-  {
-   "f": 25,
-   "type": "poussiere",
-   "articulation": "ankleN",
-   "dir": 180,
-   "taille": 1.0
-  },
-  {
-   "f": 28,
-   "type": "onde",
-   "articulation": "toeF",
-   "dir": 180,
-   "taille": 1.2
-  },
-  {
-   "f": 28,
-   "type": "poussiere",
-   "articulation": "ankleF",
-   "dir": 180,
-   "taille": 1.5
-  },
-  {
-   "f": 28,
-   "type": "choc",
-   "articulation": "hip",
-   "dec": [
-    -30,
-    4
-   ],
-   "dir": 10,
-   "taille": 1.0
-  },
-  {
-   "f": 43,
-   "type": "onde",
-   "articulation": "ankleF",
-   "dir": 0,
-   "taille": 0.8
-  },
-  {
-   "f": 43,
-   "type": "poussiere",
-   "articulation": "ankleF",
-   "dir": 0,
-   "taille": 1.3
-  },
-  {
-   "f": 49,
-   "type": "poussiere",
-   "articulation": "ankleN",
-   "dir": 0,
-   "taille": 1.0
-  },
-  {
-   "f": 55,
-   "type": "poussiere",
-   "articulation": "handN",
-   "dir": 0,
-   "taille": 0.6
   }
  ]
 }

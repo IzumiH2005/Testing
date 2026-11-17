@@ -4,6 +4,9 @@
  "longueur": 66,
  "base": "repos",
  "suivante": "course",
+ "ecartement": {
+  "jambes": 7
+ },
  "cles": [
   {
    "f": 0,

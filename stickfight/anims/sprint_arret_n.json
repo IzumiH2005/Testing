@@ -80,6 +80,9 @@
    "taille": 0.45
   }
  ],
+ "ecartement": {
+  "jambes": 7
+ },
  "cles": [
   {
    "f": 0,

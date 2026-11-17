@@ -4,6 +4,9 @@
  "longueur": 44,
  "base": "repos",
  "suivante": "marche_detendue_arriere",
+ "ecartement": {
+  "jambes": 9
+ },
  "cles": [
   {
    "f": 0,

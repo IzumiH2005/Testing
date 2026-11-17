@@ -1,211 +1,214 @@
 {
-  "nom": "esquive_saut_arriere",
-  "boucle": false,
-  "base": "repos",
-  "suivante": "idle_repos",
-  "decalage": {
-    "neck": 1,
+ "nom": "esquive_saut_arriere",
+ "boucle": false,
+ "base": "repos",
+ "suivante": "idle_repos",
+ "decalage": {
+  "neck": 1,
+  "armN": 2,
+  "armF": 2,
+  "foreN": 3,
+  "foreF": 3
+ },
+ "evenements": [
+  {
+   "f": 12,
+   "type": "contact"
+  },
+  {
+   "f": 3,
+   "type": "fenetre",
+   "nom": "esquive",
+   "n": 11
+  },
+  {
+   "f": 15,
+   "type": "fenetre",
+   "nom": "contre",
+   "n": 12
+  },
+  {
+   "f": 12,
+   "type": "poussiere",
+   "articulation": "ankleN",
+   "dir": 180,
+   "taille": 0.3
+  }
+ ],
+ "ecartement": {
+  "jambes": 13
+ },
+ "cles": [
+  {
+   "f": 0,
+   "courbe": "dec"
+  },
+  {
+   "f": 3,
+   "nom": "genoux souples",
+   "fixe": {
+    "x": -1
+   },
+   "plus": {
+    "y": -4,
+    "root": 1,
+    "neck": -0.8,
+    "armN": 1,
+    "armF": 1
+   },
+   "courbe": "acc"
+  },
+  {
+   "f": 6,
+   "nom": "décolle sans effort",
+   "fixe": {
+    "x": -8
+   },
+   "plus": {
+    "y": 3,
+    "root": -1,
+    "spineLow": -1,
+    "neck": 1.6,
+    "armN": 1,
+    "armF": 1,
+    "foreN": 4,
+    "foreF": 4
+   },
+   "vise_rel": {
+    "legN": [
+     -6,
+     3
+    ],
+    "legF": [
+     -5,
+     5
+    ]
+   },
+   "courbe": "lin"
+  },
+  {
+   "f": 9,
+   "nom": "flotte, pieds sous lui",
+   "fixe": {
+    "x": -17
+   },
+   "plus": {
+    "y": 6,
+    "root": -1,
+    "spineLow": -1,
+    "chest": -1,
+    "neck": 2.4,
     "armN": 2,
     "armF": 2,
+    "foreN": 6,
+    "foreF": 6
+   },
+   "vise_rel": {
+    "legN": [
+     -15,
+     8
+    ],
+    "legF": [
+     -17,
+     9
+    ]
+   },
+   "courbe": "auto"
+  },
+  {
+   "f": 12,
+   "nom": "se pose sur l'avant des pieds ; la hache frappe le sol devant lui",
+   "fixe": {
+    "x": -25
+   },
+   "plus": {
+    "y": -3,
+    "root": 1,
+    "spineLow": 1,
+    "chest": 1,
+    "neck": -2.4,
+    "armN": 4,
+    "armF": 4,
     "foreN": 3,
     "foreF": 3
+   },
+   "vise_rel": {
+    "legN": [
+     -26,
+     0
+    ],
+    "legF": [
+     -25,
+     3
+    ]
+   },
+   "courbe": "dec"
   },
-  "cles": [
-    {
-      "f": 0,
-      "courbe": "dec"
-    },
-    {
-      "f": 3,
-      "nom": "genoux souples",
-      "fixe": {
-        "x": -1
-      },
-      "plus": {
-        "y": -4,
-        "root": 1,
-        "neck": -0.8,
-        "armN": 1,
-        "armF": 1
-      },
-      "courbe": "acc"
-    },
-    {
-      "f": 6,
-      "nom": "décolle sans effort",
-      "fixe": {
-        "x": -8
-      },
-      "plus": {
-        "y": 3,
-        "root": -1,
-        "spineLow": -1,
-        "neck": 1.6,
-        "armN": 1,
-        "armF": 1,
-        "foreN": 4,
-        "foreF": 4
-      },
-      "vise_rel": {
-        "legN": [
-          -6,
-          3
-        ],
-        "legF": [
-          -5,
-          5
-        ]
-      },
-      "courbe": "lin"
-    },
-    {
-      "f": 9,
-      "nom": "flotte, pieds sous lui",
-      "fixe": {
-        "x": -17
-      },
-      "plus": {
-        "y": 6,
-        "root": -1,
-        "spineLow": -1,
-        "chest": -1,
-        "neck": 2.4,
-        "armN": 2,
-        "armF": 2,
-        "foreN": 6,
-        "foreF": 6
-      },
-      "vise_rel": {
-        "legN": [
-          -15,
-          8
-        ],
-        "legF": [
-          -17,
-          9
-        ]
-      },
-      "courbe": "auto"
-    },
-    {
-      "f": 12,
-      "nom": "se pose sur l'avant des pieds ; la hache frappe le sol devant lui",
-      "fixe": {
-        "x": -25
-      },
-      "plus": {
-        "y": -3,
-        "root": 1,
-        "spineLow": 1,
-        "chest": 1,
-        "neck": -2.4,
-        "armN": 4,
-        "armF": 4,
-        "foreN": 3,
-        "foreF": 3
-      },
-      "vise_rel": {
-        "legN": [
-          -26,
-          0
-        ],
-        "legF": [
-          -25,
-          3
-        ]
-      },
-      "courbe": "dec"
-    },
-    {
-      "f": 14,
-      "nom": "amorti",
-      "fixe": {
-        "x": -26
-      },
-      "plus": {
-        "y": -5,
-        "root": 2,
-        "spineLow": 1,
-        "chest": 1,
-        "neck": -3.2,
-        "armN": 3,
-        "armF": 3,
-        "foreN": 2,
-        "foreF": 2
-      },
-      "vise_rel": {
-        "legN": [
-          -26,
-          0
-        ],
-        "legF": [
-          -26,
-          0
-        ]
-      },
-      "courbe": "acc-dec"
-    },
-    {
-      "f": 24,
-      "fixe": {
-        "x": -26
-      },
-      "plus": {
-        "y": -0.5
-      },
-      "vise_rel": {
-        "legN": [
-          -26,
-          0
-        ],
-        "legF": [
-          -26,
-          0
-        ]
-      },
-      "courbe": "acc-dec"
-    },
-    {
-      "f": 30,
-      "nom": "repos",
-      "fixe": {
-        "x": -26
-      },
-      "vise_rel": {
-        "legN": [
-          -26,
-          0
-        ],
-        "legF": [
-          -26,
-          0
-        ]
-      }
-    }
-  ],
-  "evenements": [
-    {
-      "f": 12,
-      "type": "contact"
-    },
-    {
-      "f": 3,
-      "type": "fenetre",
-      "nom": "esquive",
-      "n": 11
-    },
-    {
-      "f": 15,
-      "type": "fenetre",
-      "nom": "contre",
-      "n": 12
-    },
-    {
-      "f": 12,
-      "type": "poussiere",
-      "articulation": "ankleN",
-      "dir": 180,
-      "taille": 0.3
-    }
-  ]
+  {
+   "f": 14,
+   "nom": "amorti",
+   "fixe": {
+    "x": -26
+   },
+   "plus": {
+    "y": -5,
+    "root": 2,
+    "spineLow": 1,
+    "chest": 1,
+    "neck": -3.2,
+    "armN": 3,
+    "armF": 3,
+    "foreN": 2,
+    "foreF": 2
+   },
+   "vise_rel": {
+    "legN": [
+     -26,
+     0
+    ],
+    "legF": [
+     -26,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 24,
+   "fixe": {
+    "x": -26
+   },
+   "plus": {
+    "y": -0.5
+   },
+   "vise_rel": {
+    "legN": [
+     -26,
+     0
+    ],
+    "legF": [
+     -26,
+     0
+    ]
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 30,
+   "nom": "repos",
+   "fixe": {
+    "x": -26
+   },
+   "vise_rel": {
+    "legN": [
+     -26,
+     0
+    ],
+    "legF": [
+     -26,
+     0
+    ]
+   }
+  }
+ ]
 }

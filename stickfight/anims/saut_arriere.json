@@ -3,6 +3,9 @@
  "boucle": false,
  "base": "repos",
  "suivante": "reception",
+ "ecartement": {
+  "jambes": 9
+ },
  "cles": [
   {
    "f": 0,

@@ -64,6 +64,9 @@
    "taille": 0.85
   }
  ],
+ "ecartement": {
+  "jambes": 7
+ },
  "cles": [
   {
    "f": 0,

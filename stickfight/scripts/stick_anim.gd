@@ -121,7 +121,7 @@ static func build(data: Dictionary) -> Dictionary:
 	var raw: Array = data.cles.duplicate()
 	raw.sort_custom(func(x, y): return int(x.f) < int(y.f))
 	for kd in raw:
-		var pose := _resolve(kd, base, prev)
+		var pose := _resolve(kd, base, prev, data.get("ecartement", {}))
 		prev = pose
 		var J: Dictionary = StickRig.solve(pose).joints
 		a.cles.append({
@@ -365,7 +365,10 @@ static func _vec(v) -> Vector2:
 	return Vector2(float(v[0]), float(v[1]))
 
 
-static func _resolve(kd: Dictionary, base: Dictionary, prev: Dictionary) -> Dictionary:
+## ecart : {"jambes": deg, "bras": deg}, écartement sur les côtés propre à l'animation
+## (analyses/anatomie.md § 4 bis et 6 bis), appliqué aux clés qui partent de la pose de base
+## ou de la clé précédente et ne règlent pas elles-mêmes cet axe.
+static func _resolve(kd: Dictionary, base: Dictionary, prev: Dictionary, ecart: Dictionary = {}) -> Dictionary:
 	var miroir := bool(kd.get("miroir", false))
 	var src := str(kd.get("pose", "=" if miroir else ""))
 	var p: Dictionary
@@ -378,6 +381,17 @@ static func _resolve(kd: Dictionary, base: Dictionary, prev: Dictionary) -> Dict
 	p.facing = int(kd.facing) if kd.has("facing") else int(StickRig.facing(prev))
 	if miroir:
 		p = StickRig.mirror_pose(p)
+	if src == "" or src == "=":
+		var regles := {}
+		if ecart.has("jambes"):
+			regles["thighN_p"] = float(ecart.jambes)
+			regles["thighF_p"] = -float(ecart.jambes)
+		if ecart.has("bras"):
+			regles["armN_p"] = float(ecart.bras)
+			regles["armF_p"] = -float(ecart.bras)
+		for k in regles:
+			if not kd.get("fixe", {}).has(k) and not kd.get("plus", {}).has(k):
+				p.angles[k] = regles[k]
 	var J0: Dictionary = StickRig.solve(p).joints
 	var touched := {"N": false, "F": false}
 	for k in kd.get("fixe", {}):

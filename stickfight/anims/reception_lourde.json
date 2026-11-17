@@ -3,6 +3,18 @@
  "boucle": false,
  "base": "repos",
  "suivante": "idle_repos",
+ "evenements": [
+  {
+   "f": 10,
+   "type": "poussiere",
+   "articulation": "handN",
+   "dir": 0,
+   "taille": 0.5
+  }
+ ],
+ "ecartement": {
+  "jambes": 13
+ },
  "cles": [
   {
    "f": 0,
@@ -795,15 +807,6 @@
     "x": 2.863
    },
    "pose": "repos"
-  }
- ],
- "evenements": [
-  {
-   "f": 10,
-   "type": "poussiere",
-   "articulation": "handN",
-   "dir": 0,
-   "taille": 0.5
   }
  ]
 }

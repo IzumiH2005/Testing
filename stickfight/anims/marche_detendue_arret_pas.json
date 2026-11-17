@@ -4,6 +4,9 @@
  "longueur": 52,
  "base": "repos",
  "suivante": "idle_repos",
+ "ecartement": {
+  "jambes": 9
+ },
  "cles": [
   {
    "f": 0,

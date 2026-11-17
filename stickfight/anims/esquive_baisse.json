@@ -1,116 +1,119 @@
 {
-  "nom": "esquive_baisse",
-  "boucle": false,
-  "base": "repos",
-  "suivante": "idle_repos",
-  "decalage": {
-    "neck": 1,
-    "armN": 2,
-    "armF": 2,
-    "foreN": 3,
-    "foreF": 3
+ "nom": "esquive_baisse",
+ "boucle": false,
+ "base": "repos",
+ "suivante": "idle_repos",
+ "decalage": {
+  "neck": 1,
+  "armN": 2,
+  "armF": 2,
+  "foreN": 3,
+  "foreF": 3
+ },
+ "evenements": [
+  {
+   "f": 8,
+   "type": "contact"
   },
-  "cles": [
-    {
-      "f": 0,
-      "courbe": "dec"
-    },
-    {
-      "f": 5,
-      "nom": "le buste plonge, les genoux plient : le coup passe au-dessus de la tête",
-      "fixe": {
-        "x": -10
-      },
-      "plus": {
-        "y": -27,
-        "root": 17,
-        "spineLow": 13,
-        "chest": 11,
-        "neck": -20.6,
-        "armN": 39,
-        "armF": 39,
-        "foreN": 8,
-        "foreF": 8
-      }
-    },
-    {
-      "f": 8,
-      "fixe": {
-        "x": -10.4
-      },
-      "plus": {
-        "y": -28,
-        "root": 17.5,
-        "spineLow": 13.5,
-        "chest": 11.5,
-        "neck": -21.5,
-        "armN": 41.5,
-        "armF": 41.5,
-        "foreN": 8,
-        "foreF": 8
-      },
-      "courbe": "acc-dec"
-    },
-    {
-      "f": 12,
-      "fixe": {
-        "x": -10.4
-      },
-      "plus": {
-        "y": -28,
-        "root": 17.5,
-        "spineLow": 13.5,
-        "chest": 11.5,
-        "neck": -21.5,
-        "armN": 43.5,
-        "armF": 43.5,
-        "foreN": 8,
-        "foreF": 8
-      },
-      "courbe": "acc-dec"
-    },
-    {
-      "f": 25,
-      "nom": "se redresse en douceur",
-      "fixe": {
-        "x": 0.2
-      },
-      "plus": {
-        "y": -1,
-        "root": 0.5,
-        "spineLow": 0.5,
-        "chest": 0.5,
-        "neck": -1.2,
-        "armN": 0.5,
-        "armF": 0.5
-      },
-      "courbe": "acc-dec"
-    },
-    {
-      "f": 33,
-      "nom": "repos",
-      "fixe": {
-        "x": 0
-      },
-      "ancre": false
-    }
-  ],
-  "evenements": [
-    {
-      "f": 8,
-      "type": "contact"
-    },
-    {
-      "f": 2,
-      "type": "fenetre",
-      "nom": "esquive",
-      "n": 12
-    },
-    {
-      "f": 13,
-      "type": "fenetre",
-      "nom": "contre",
-      "n": 16
-    }
-  ]
+  {
+   "f": 2,
+   "type": "fenetre",
+   "nom": "esquive",
+   "n": 12
+  },
+  {
+   "f": 13,
+   "type": "fenetre",
+   "nom": "contre",
+   "n": 16
+  }
+ ],
+ "ecartement": {
+  "jambes": 13
+ },
+ "cles": [
+  {
+   "f": 0,
+   "courbe": "dec"
+  },
+  {
+   "f": 5,
+   "nom": "le buste plonge, les genoux plient : le coup passe au-dessus de la tête",
+   "fixe": {
+    "x": -10
+   },
+   "plus": {
+    "y": -27,
+    "root": 17,
+    "spineLow": 13,
+    "chest": 11,
+    "neck": -20.6,
+    "armN": 39,
+    "armF": 39,
+    "foreN": 8,
+    "foreF": 8
+   }
+  },
+  {
+   "f": 8,
+   "fixe": {
+    "x": -10.4
+   },
+   "plus": {
+    "y": -28,
+    "root": 17.5,
+    "spineLow": 13.5,
+    "chest": 11.5,
+    "neck": -21.5,
+    "armN": 41.5,
+    "armF": 41.5,
+    "foreN": 8,
+    "foreF": 8
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 12,
+   "fixe": {
+    "x": -10.4
+   },
+   "plus": {
+    "y": -28,
+    "root": 17.5,
+    "spineLow": 13.5,
+    "chest": 11.5,
+    "neck": -21.5,
+    "armN": 43.5,
+    "armF": 43.5,
+    "foreN": 8,
+    "foreF": 8
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 25,
+   "nom": "se redresse en douceur",
+   "fixe": {
+    "x": 0.2
+   },
+   "plus": {
+    "y": -1,
+    "root": 0.5,
+    "spineLow": 0.5,
+    "chest": 0.5,
+    "neck": -1.2,
+    "armN": 0.5,
+    "armF": 0.5
+   },
+   "courbe": "acc-dec"
+  },
+  {
+   "f": 33,
+   "nom": "repos",
+   "fixe": {
+    "x": 0
+   },
+   "ancre": false
+  }
+ ]
 }

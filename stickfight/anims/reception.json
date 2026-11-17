@@ -3,6 +3,9 @@
  "boucle": false,
  "base": "repos",
  "suivante": "idle_repos",
+ "ecartement": {
+  "jambes": 13
+ },
  "cles": [
   {
    "f": 0,

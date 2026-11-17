@@ -12,6 +12,9 @@
   "armF": 3,
   "foreF": 5
  },
+ "ecartement": {
+  "jambes": 9
+ },
  "cles": [
   {
    "f": 0,
