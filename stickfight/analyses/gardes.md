@@ -52,7 +52,7 @@ genou vers la caméra.
 |---|---|---|
 | Pied avant | à plat, pointe vers la cible (rotation de hanche −5°) | idem |
 | Pied arrière | sur la plante, talon levé, pointe vers l'extérieur (−35°) | idem |
-| Écartement (largeur) | cuisses ±12° en plus de la largeur de hanche (4°, voir anatomie § 6 bis) : pieds écartés d’environ la largeur des épaules | idem |
+| Écartement (largeur) | cuisses ±13° (net ±10° avec la largeur de hanche, voir anatomie § 6 bis) : pieds écartés d’environ la largeur des épaules | idem |
 | Genoux | pliés, au-dessus des pieds | idem, un peu plus (on se tasse de 2) |
 | Bassin | rotation +25 | +22 |
 | Buste (torsion) | +8 | +4 (plus de face : les deux bras devant) |
