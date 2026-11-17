@@ -201,3 +201,12 @@ part.
 12. `--verifier` sur la boucle : aucune traversée, aucun pied qui glisse, rien sous le sol, la
     boucle fermée ; seules alertes admises, à cet angle : « bras proche raccourci » et « bras
     loin confondu avec le corps » (§ 3).
+
+## 8. Révision : coude arrière levé sur le côté
+
+D'après `etudes/postures_trois_quarts/rapport.md` § 2.2 (V1 100 et 120, R2 1456), le bras arrière
+(F) passe en coude levé sur le côté : `armF −5`, `armF_p −80` (abduction ~80°), `armF_r −20`
+(avant-bras qui tombe vers le bas-avant), `foreF 100`. À lacet −45, le bras haut fait une barre
+vers l'arrière à hauteur d'épaule et le poing F sort de la tête. Le bras N ne change pas.
+Le vérificateur ne relève aucune traversée sur l'idle. Le bras N raccourci (< 55 %) est voulu :
+le trois quarts se lit par un bras court et un bras à plat (rapport § 2.1).
