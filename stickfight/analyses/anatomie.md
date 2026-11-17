@@ -78,6 +78,7 @@ profondeur fausse :
 | Rotation sur l'axe | où pointe l'avant-bras quand le coude plie (vers l'avant, le haut, le bas) ? | `armN_r` |
 | Omoplate | l'épaule est-elle tirée en arrière, poussée en avant, haussée ? | `epauleN_av`, `epauleN_haut` |
 | Coude | combien est-il plié ? | `foreN` |
+| Écartement de l'épaule | le bras est-il décollé du buste sur le côté ? Jamais collé : 12° bras ballants (repos), 18 à 24° bras qui s'écartent, gardes : coudes décollés (ouverte : 24° devant, 20° derrière ; fermée : 18° et 16°), avant-bras ramenés vers le centre par la rotation | `armN_p` (+), `armF_p` (−), puis `armN_r` / `armF_r` |
 
 Exemples vus sur un mannequin articulé (PoseIt) :
 

@@ -9,10 +9,10 @@
     "spineLow": 8,
     "chest": 9,
     "neck": 14,
-    "armF": 52.05,
-    "foreF": 132.68,
-    "armN": 71.58,
-    "foreN": 113.37,
+    "armF": 58,
+    "foreF": 136,
+    "armN": 70,
+    "foreN": 122,
     "thighF": 1.83,
     "shinF": 57.85,
     "footF": 11.96,
@@ -25,11 +25,13 @@
     "epauleF_av": 1,
     "epauleN_haut": 4,
     "epauleF_haut": 4,
-    "armF_p": 3,
-    "armN_p": -8,
+    "armF_p": -16,
+    "armN_p": 18,
     "thighF_p": -12,
     "thighN_p": 12,
     "thighF_r": -35,
-    "thighN_r": -5
+    "thighN_r": -5,
+    "armN_r": -24,
+    "armF_r": -24
   }
 }

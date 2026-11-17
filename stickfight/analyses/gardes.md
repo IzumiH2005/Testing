@@ -59,7 +59,7 @@ genou vers la caméra.
 | Penché | dos 7, thorax 8 | dos 8, thorax 9 |
 | Omoplates | haussées +2, avant +2 en avant | haussées +4, en avant +1 |
 | Cou | 12 (menton rentré) | 14 |
-| Bras avant | devant, à peine écarté vers le centre, coude bas, avant-bras vers la cible ; coude ≈ 80° | levé devant le visage, coude serré sous le poing ; ≈ 135° |
+| Bras avant | coude décollé du buste (écartement 24°), avant-bras ramené vers le centre par la rotation, coude bas, avant-bras vers la cible ; coude ≈ 80° | levé devant le visage, coude sous le poing, décollé de 18° (protège les côtes sans coller) ; ≈ 122° |
 | Bras arrière | poing à la joue, coude devant les côtes ; ≈ 128° | poing à la tempe ; ≈ 138° |
 
 Vue de face (contrôle) : pieds écartés, mains devant l'axe du corps (pas sur les côtés), coudes
