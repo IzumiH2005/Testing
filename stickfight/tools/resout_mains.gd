@@ -113,6 +113,8 @@ func _initialize() -> void:
 		var pose: Dictionary = an.cles[i].pose.duplicate(true)
 		var S := _p3(StickRig.solve(pose), "shoulderN")
 		for side in ["N", "F"]:
+			if not m.has(side):
+				continue  # une seule main placée : l'autre garde les angles de la clé
 			var d: Array = m[side]
 			var cd = m.get("coude_dy")
 			if cd is Array:
