@@ -65,13 +65,13 @@ le bras loin), `armF_r` (rotation), `foreF` (pli du coude).
 |---|---|---|---|---|---|---|---|---|---|
 | 0 garde | 12 | 4 | 16 | 0 / −3 | −5, −80, −20, 100 | 31, 40, 40, 95 ; −1 | 15 | 0 | 0 / 84 |
 | 5 ressort | 16 | 10 | 26 | −2 / −3 | −8, −85, −20, 102 | idem | 15 | −6 | −1 / 82,5 |
-| 8 la hanche part | −5 | 30 | 25 (épaules restées en arrière) | −1 / −2 | −2, −80, −15, 100 | 25, 40, 40, 105 ; −1 | 0 | −5 | 1 / 83 |
-| 10 coude devant | −12 | −20 | −32 | 0 / −1 | 75, −72, −50, 90 | 30, 45, 30, 125 ; −2 | −5 | 29 | 2,5 / 83 |
-| 11 extension | −13,5 | −27,5 | −41 | 0 / −0,5 | 86, −60, −45, 46 | 30, 47,5, 30, 130 ; −2,5 | −7,5 | 34,2 | 3,25 / 83 |
-| 12 contact | −15 | −35 | −50 | 0 / 0 | 107, −50, 0, 3 | 30, 50, 30, 135 ; −3 | −10 | 40 | 4 / 83 |
+| 8 la hanche part | −5 | 30 | 25 (épaules restées en arrière) | −1 / −2 | −2, −80, −15, 100 | 25, 40, 40, 105 ; −1 | 0 | −5,4 | 1 / 83 |
+| 10 coude devant | −12 | −20 | −32 | 0 / −1 | 75, −70, −50, 110 | 30, 45, 30, 125 ; −2 | −5 | 28,8 | 2,5 / 83 |
+| 11 extension | −13,5 | −27,5 | −41 | 0 / −0,5 | 76, −75, −48, 84 | 30, 47,5, 30, 130 ; −2,5 | −7,5 | 34,2 | 3,25 / 83 |
+| 12 contact | −15 | −35 | −50 | 0 / 0 | 107, −50, 0, 3 | 30, 50, 30, 135 ; −3 | −10 | 39,6 | 4 / 83 |
 | 16 dépassement | −16 | −38 | −54 | 0 / 0 | 108, −52, 0, 0 | idem | −10 | 42 | 4,5 / 83 |
-| 24 tenue | −15 | −35 | −50 | 0 / 0 | 104, −48, 0, 8 | idem | −10 | 40 | 4 / 83 |
-| 34 retour | 0 | −10 | −10 | 0 / −2 | 50, −75, −40, 95 | 20, 45, 38, 115 ; −2 | 5 | 16 | 2 / 83,5 |
+| 24 tenue | −15 | −35 | −50 | 0 / 0 | 104, −48, 0, 8 | idem | −10 | 39,6 | 4 / 83 |
+| 34 retour | 0 | −10 | −10 | 0 / −2 | 50, −75, −40, 95 | 20, 45, 38, 115 ; −2 | 5 | 15,6 | 2 / 83,5 |
 | 48 garde | 12 | 4 | 16 | 0 / −3 | −5, −80, −20, 100 | 31, 40, 40, 95 ; −1 | 15 | 0 | 0 / 84 |
 
 Lecture de la colonne « épaules absolues » (`torsionBassin` + `torsion`) : de 5 à 8, le bassin
@@ -90,8 +90,10 @@ garde sa place, la cuisse et le genou s'adaptent, `thighN_r` reste à −5, `thi
 jambe arrière (F) pivote : `thighF_r` 15 → −10 (le genou rentre), `thighF_p` −15 ; sa cheville
 est visée à sa place de garde (`vise legF`), le genou s'adapte (flexion entre 30 et 45).
 
-Clé 11 : ajoutée pour que le poing aille droit entre 10 et 12 ; sans elle, l'interpolation
-le fait monter en cloche juste avant l'impact.
+Clé 10 : le coude arrive devant **encore fermé** (`foreF` 110), le poing près du menton :
+le pivot porte le coude, il ne déplie pas le bras. Clé 11 : le poing est sur la droite qui va
+du poing de la clé 10 au contact (pas de cloche). Ainsi le dépliage (10 → 12) garde de la
+course et accélère jusqu'au contact : écarts du poing d'environ 12 puis 18 unités par image.
 
 Retour (24 → 34) : le coude se replie et remonte sur le côté, le poing sort de la ligne de
 frappe (z ≈ +16 vers l'image 28). C'est voulu : le bras reprend sa place de garde.
