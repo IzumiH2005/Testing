@@ -126,21 +126,13 @@ Canaux : `thighN`, `thighN_p`, `thighN_r`.
 | Bassin | penché d'un côté (hanche qui tombe), tourné ? | `root_p`, `torsionBassin` |
 | Appui | quelle jambe porte le poids ? (genou plus plié, bassin au-dessus) | position du bassin |
 
-**Largeur des hanches et des épaules.** Un vrai bassin a deux hanches écartées (environ 1/10
-de la taille), et les épaules sont encore plus larges (environ 1/5). Conséquences, vues de face :
-les jambes partent de deux points et descendent presque verticales, chaque pied sous sa hanche
-(un peu plus près de l'axe en marchant), avec un espace entre les pieds ; le pied qui passe ne
-croise pas la ligne du milieu ; les genoux pointent vers l'avant, dans la direction du pied ; les
-bras pendent à côté du buste, pas dedans.
-
-Notre personnage dessine ses membres depuis un seul point du tronc (son apparence, de profil). Le
-squelette porte donc cette largeur **en profondeur seulement** : `DEMI_HANCHES` (9) et
-`DEMI_EPAULES` (14) dans `stick_rig.gd`, dans le repère qui ne tourne qu'avec le lacet. De profil
-le décalage est perpendiculaire à l'écran, donc invisible (même pendant une torsion ou couché) ;
-de face et de trois quarts, hanches et épaules s'écartent comme sur un vrai corps.
-`LARGEUR_HANCHE` (−3°) rapproche un peu les pieds de l'axe : `thighN_p` / `thighF_p` = 0 donne
-des pieds légèrement à l'intérieur des hanches (marche), +5 des pieds sous les hanches (repos).
-Contrôle : vue de face (`--vues`).
+**Largeur de hanche.** Un vrai bassin a deux hanches écartées (environ 1/10 de la taille) : les
+pieds ne sont jamais l'un derrière l'autre sur une même ligne. Debout, en marche, en course, chaque
+pied reste de son côté, sous sa hanche ; vu de face, on voit un espace entre les pieds, et le
+pied qui passe en avant ne croise pas la ligne du milieu. Nos jambes partent d'un seul point
+(apparence du personnage) : le squelette ouvre donc chaque cuisse de 4° vers l'extérieur
+(`LARGEUR_HANCHE` dans `stick_rig.gd`), et `thighN_p` / `thighF_p` se comptent à partir de cette
+largeur (0 = pied sous sa hanche). Contrôle : vue de face (`--vues`), un espace entre les pieds.
 
 Couplages à respecter :
 

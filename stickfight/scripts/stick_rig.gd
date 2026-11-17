@@ -111,14 +111,8 @@ const ROT := "_r"
 ## Coude, genou : charnières. Ils ne plient que dans un plan (celui que donne
 ## la rotation du segment parent) : pas de profondeur propre.
 const CHARNIERES := ["foreN", "foreF", "shinN", "shinF"]
-## Largeur du corps, en profondeur seulement (voir solve) : demi-écart entre les deux
-## hanches et entre les deux épaules. Invisible de profil (le personnage garde ses membres
-## qui partent d'un seul point), visible de face et de trois quarts.
-const DEMI_HANCHES := 9.0
-const DEMI_EPAULES := 14.0
-## Angle neutre des cuisses vers l'intérieur : debout, les pieds sont un peu plus près
-## de l'axe que les hanches (thigh*_p se compte à partir de là).
-const LARGEUR_HANCHE := -3.0
+## Ouverture neutre de chaque cuisse (degrés) : remplace la largeur du bassin (voir solve).
+const LARGEUR_HANCHE := 4.0
 ## Limites des canaux 3D (degrés), par « canal:os sans côté ». Profondeur du
 ## bras : vers la caméra = abduction (bras écarté du corps, jusqu'à 90°), à
 ## l'opposé = adduction (bras qui passe devant le buste, 40°). Cuisse :
@@ -269,14 +263,6 @@ static func solve(p: Dictionary) -> Dictionary:
 			B = B * RX.call(-angle(p, "neck" + ROT))
 		basis[b.id] = B
 		var o3: Vector3 = tip[b.parent]
-		# Largeur du bassin et des épaules : dans le repère qui ne tourne qu'avec le
-		# lacet, donc purement en profondeur de profil (aucun effet à l'écran), et de
-		# côté quand le corps se tourne vers la caméra. Côté proche (N) = vers la caméra.
-		if b.id.begins_with("thigh") or b.id.begins_with("arm"):
-			var sgn: float = 1.0 if b.id.ends_with("N") else -1.0
-			var lat: Vector3 = RY.call(angle(p, "lacet")) * Vector3(0, 0, -1)
-			o3 = o3 + lat * sgn * (DEMI_HANCHES if b.id.begins_with("thigh") else DEMI_EPAULES)
-			base3[b.id] = o3
 		if b.id.begins_with("arm"):
 			# Omoplate : l'épaule avance (vers l'avant du thorax) ou monte.
 			var side: String = b.id.substr(3)
@@ -312,9 +298,9 @@ static func solve(p: Dictionary) -> Dictionary:
 	# demi-épaisseur du trait : le bras reste attaché au buste).
 	for side in ["N", "F"]:
 		joints["shoulder" + side] = W.call(base3["arm" + side])
-		joints["hip" + side] = W.call(base3["thigh" + side])
+		joints["hip" + side] = joints.hip
 		prof["shoulder" + side] = float(base3["arm" + side].z)
-		prof["hip" + side] = float(base3["thigh" + side].z)
+		prof["hip" + side] = prof.hip
 	return {"joints": joints, "prof": prof, "basis": basis, "world": world, "style": s, "facing": f, "head_r": r}
 
 
