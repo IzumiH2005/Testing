@@ -3,6 +3,7 @@
  "boucle": true,
  "longueur": 96,
  "base": "garde_ouverte_bagarreur",
+ "pieds_auto": false,
  "decalage": {
   "torsion": 3,
   "chest": 3,
@@ -17,63 +18,63 @@
    "f": 0
   },
   {
-   "f": 14,
-   "nom": "la main avant appelle, le poids part devant",
+   "f": 10,
+   "nom": "la main avant appelle (vite), le poids part devant",
    "plus": {
-    "x": 1.0,
-    "y": -0.5,
-    "torsion": 1.5,
-    "armN": 3,
-    "foreN": -10
+    "x": 2.2,
+    "y": -1.2,
+    "torsion": 2.5,
+    "armN": 4,
+    "foreN": -22
    },
    "courbe": "auto"
   },
   {
    "f": 26,
-   "nom": "poids devant, la main revient",
+   "nom": "poids devant, la main revient lentement",
    "plus": {
-    "x": 1.5,
-    "y": -0.3,
-    "torsion": 3,
+    "x": 3.5,
+    "y": -0.6,
+    "torsion": 5,
     "armN": 1,
-    "foreN": -2
+    "foreN": -4
    },
    "courbe": "auto"
   },
   {
    "f": 38,
-   "nom": "passage, expire",
+   "nom": "passage, il expire",
    "plus": {
-    "x": 0.2,
-    "y": -1.0,
-    "torsion": 0.5,
-    "chest": 0.6
+    "x": 0.5,
+    "y": -2.2,
+    "torsion": 1,
+    "chest": 0.8
    },
    "courbe": "auto"
   },
   {
    "f": 50,
-   "nom": "poids derrière, inspire, épaules qui montent",
+   "nom": "poids derrière, il inspire, les épaules montent",
    "plus": {
-    "x": -1.5,
-    "y": -0.3,
-    "torsion": -3,
-    "epauleN_haut": 1,
-    "epauleF_haut": 1,
-    "chest": -0.4
+    "x": -3.5,
+    "y": -0.6,
+    "torsion": -5,
+    "epauleN_haut": 1.5,
+    "epauleF_haut": 1.5,
+    "chest": -0.6
    },
    "courbe": "auto"
   },
   {
    "f": 62,
-   "nom": "menton qui monte : il toise",
+   "nom": "le menton monte : il toise",
    "plus": {
-    "x": -1.2,
-    "y": -0.4,
-    "torsion": -2,
-    "neck": -3,
-    "epauleN_haut": 0.5,
-    "epauleF_haut": 0.5
+    "x": -3,
+    "y": -0.8,
+    "torsion": -4,
+    "neck": -5,
+    "epauleN_haut": 0.8,
+    "epauleF_haut": 0.8
    },
    "courbe": "auto"
   },
@@ -81,19 +82,20 @@
    "f": 74,
    "nom": "passage, le menton redescend",
    "plus": {
-    "x": -0.2,
-    "y": -1.0,
-    "torsion": -0.5,
-    "neck": -0.5,
-    "chest": 0.4
+    "x": -0.5,
+    "y": -2.2,
+    "torsion": -1,
+    "neck": -1,
+    "chest": 0.5
    },
    "courbe": "auto"
   },
   {
    "f": 86,
    "plus": {
-    "x": 0.4,
-    "y": -0.3
+    "x": 1,
+    "y": -0.6,
+    "torsion": 0.5
    },
    "courbe": "auto"
   },
