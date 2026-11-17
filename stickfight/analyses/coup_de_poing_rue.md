@@ -168,3 +168,13 @@ l'épaule), pas posés à l'œil. Contrôle : vues de face, trois quarts et prof
    descend qu'avec le corps (fente plus basse que la garde), pas en se penchant.
 5. Au contact, le poing est à moins de 25 unités du centre de la tête adverse.
 6. Le poing armé n'est pas caché dans la tête.
+
+## Écartement sur les côtés (vue de face)
+
+- Départ et retour : exactement la garde ouverte (jambes ±16°, bras 24° / −20°), sans saut.
+- Recul : le pied qui passe s'écarte (24-26°) pour ne pas croiser la ligne du milieu.
+- Armé : bassin tourné vers l'arrière, ce qui resserre les pieds vus de face ; on ouvre à ±28°
+  pour garder une vraie base large (sinon les jambes se confondent de face). Bras de garde
+  décollé à −20°.
+- Frappe et suivi : jambe arrière 16°, jambe avant −22° (le bassin tourné vers la cible
+  resserre la base ; à −22° le pied avant reste aussi planté sans glisser).
