@@ -26,7 +26,8 @@ extends SceneTree
 ## --print       positions des articulations, angles hors amplitude
 ## --verifier    contrôle en texte, sans image (voir _verifier) : poses clés,
 ##               images de trajet rapide, pieds qui glissent, poing caché,
-##               déséquilibre, distance du poing à la tête adverse au contact
+##               déséquilibre, distance du poing à la tête adverse au contact,
+##               membres qui se traversent (en 3D : mains, avant-bras, bras)
 ## --cles        planche des seules images clés (et du contact), pas toutes
 ## --vues        chaque image sous trois angles, une ligne par angle : de face,
 ##               de trois quarts, de profil (le corps tourne sur place, lacet
@@ -420,6 +421,11 @@ func _verifier(recs: Array) -> String:
 				return false
 			if pres.call(J.kneeN) and pres.call(J.ankleN):
 				warn.append("jambes superposées")
+			# Membres qui se traversent, en 3D (profondeur comprise) : deux parties
+			# du corps peuvent se toucher, pas passer l'une dans l'autre. On compare
+			# les avant-bras et les mains entre eux (trait = capsule, poing = boule).
+			for t3 in _traversees(sol):
+				warn.append(t3)
 			for v in StickRig.amplitudes(fig.pose):
 				warn.append(str(v.label))
 			for v in StickRig.violations(fig.pose):
@@ -502,6 +508,50 @@ func _verifier(recs: Array) -> String:
 		for w in alertes:
 			L.append("⚠ %s : images %s" % [w, _plages(alertes[w])])
 	return "\n".join(L)
+
+
+## Points 3D d'une pose résolue (x, y de l'image, z = profondeur).
+static func _p3(sol: Dictionary, k: String) -> Vector3:
+	return Vector3(sol.joints[k].x, sol.joints[k].y, float(sol.prof.get(k, 0.0)))
+
+
+## Distance la plus courte entre deux segments 3D.
+static func _dist_seg(a0: Vector3, a1: Vector3, b0: Vector3, b1: Vector3) -> float:
+	var pts := Geometry3D.get_closest_points_between_segments(a0, a1, b0, b1)
+	return pts[0].distance_to(pts[1])
+
+
+## Parties des deux bras qui passent l'une dans l'autre (tolérance : 15 % de
+## l'épaisseur, le contact franc est permis). Renvoie aussi la plus petite
+## marge (négative = enfoncement) dans _derniere_marge pour le réglage.
+static var _derniere_marge := INF
+
+
+static func _traversees(sol: Dictionary) -> Array:
+	var out := []
+	var w: float = float(sol.style.stroke) / 2.0
+	var h: float = maxf(float(sol.style.hand), w)
+	var eN := _p3(sol, "elbowN")
+	var hN := _p3(sol, "handN")
+	var eF := _p3(sol, "elbowF")
+	var hF := _p3(sol, "handF")
+	var sN := _p3(sol, "shoulderN")
+	var sF := _p3(sol, "shoulderF")
+	var tests := [
+		["mains qui se traversent", hN.distance_to(hF), 2.0 * h],
+		["avant-bras qui se traversent", _dist_seg(eN, hN, eF, hF), 2.0 * w],
+		["main proche dans l'avant-bras loin", _dist_seg(eF, hF, hN, hN), h + w],
+		["main loin dans l'avant-bras proche", _dist_seg(eN, hN, hF, hF), h + w],
+		["avant-bras proche dans le bras loin", _dist_seg(eN, hN, sF.lerp(eF, 0.3), eF), 2.0 * w],
+		["avant-bras loin dans le bras proche", _dist_seg(eF, hF, sN.lerp(eN, 0.3), eN), 2.0 * w],
+	]
+	_derniere_marge = INF
+	for t in tests:
+		var marge: float = float(t[1]) - float(t[2])
+		_derniere_marge = minf(_derniere_marge, marge)
+		if marge < -0.15 * float(t[2]):
+			out.append(str(t[0]))
+	return out
 
 
 ## [3, 4, 5, 9] → "3-5 9"

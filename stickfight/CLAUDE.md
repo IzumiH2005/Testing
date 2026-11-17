@@ -29,4 +29,14 @@
 4. **Logique avant esthétique.** Une pose qui « rend bien » mais qu'un vrai corps ne prendrait
    pas est fausse : un armé doit pouvoir se déplier vers la cible, la tête ne tombe pas sans
    raison, l'autre bras et l'autre épaule réagissent à la rotation du corps.
-5. Ne pas changer l'apparence des personnages (style, épaisseur, couleurs) sans qu'on le demande.
+5. **Rien ne traverse rien.** Deux parties du corps peuvent se toucher, jamais passer l'une
+   dans l'autre (bras dans bras, main dans main, poing dans la tête ou le tronc…). Quand deux
+   mains travaillent ensemble (craquer un poing, saisir), elles se touchent juste assez, dans la
+   bonne position : la paume posée sur le poing, pas confondue avec lui. Le vérificateur le
+   contrôle en 3D (`--verifier` : « … qui se traversent »).
+6. **Ligne des épaules et stature du personnage.** Chaque personnage a une stature qui se garde
+   dans toutes ses animations. Le bagarreur est droit et sûr de lui : buste droit, poitrine
+   légèrement bombée, ligne des épaules droite ou un peu en arrière (`epaule*_av` ≤ 0), jamais
+   enroulée vers l'avant, même sur un effort (on lit l'effort par les épaules qui montent puis
+   tombent, les coudes, la tête, pas par un dos qui s'arrondit).
+7. Ne pas changer l'apparence des personnages (style, épaisseur, couleurs) sans qu'on le demande.
