@@ -95,6 +95,8 @@ func _simulate(path: String, boucles := 1) -> Dictionary:
 	var combat: Combat
 	var total := 0
 	var single := {}
+	# Décor (démonstration seule) : repère de l'animation = monde (combattant en 0).
+	StickRig.decor = data.get("decor", {}).get("sol", [])
 	if data.has("acteurs"):
 		combat = Combat.from_duo(data)
 		total = int(data.get("longueur", 120))
@@ -114,6 +116,28 @@ func _simulate(path: String, boucles := 1) -> Dictionary:
 		recs.append(combat.record())
 		combat.step()
 	return {"recs": recs, "single": single, "data": data}
+
+
+## Partie du corps dans un bloc du décor (trait compris, tolérance 1) : on
+## échantillonne chaque os, pour voir aussi un tibia qui entre par le côté.
+const OS_DECOR := [["hip", "waist"], ["waist", "shoulder"], ["shoulder", "neckTop"],
+	["shoulder", "elbowN"], ["elbowN", "handN"], ["shoulder", "elbowF"], ["elbowF", "handF"],
+	["hip", "kneeN"], ["kneeN", "ankleN"], ["ankleN", "toeN"], ["hip", "kneeF"], ["kneeF", "ankleF"], ["ankleF", "toeF"]]
+
+func _dans_decor(sol: Dictionary) -> String:
+	var J: Dictionary = sol.joints
+	var r: float = float(sol.style.stroke) / 2.0
+	for o in OS_DECOR:
+		for u in range(0, 11):
+			var v: Vector2 = J[o[0]].lerp(J[o[1]], u / 10.0)
+			if v.y - r < StickRig.sol_h(v.x) - 1.0:
+				return "%s-%s" % [o[0], o[1]]
+	for dx in [-1.0, -0.5, 0.0, 0.5, 1.0]:
+		var hx: float = J.head.x + dx * sol.head_r
+		var hy: float = J.head.y - sol.head_r * sqrt(1.0 - dx * dx)
+		if hy < StickRig.sol_h(hx) - 1.0:
+			return "tête"
+	return ""
 
 
 func _default_view(recs: Array) -> Rect2:
@@ -431,10 +455,17 @@ func _verifier(recs: Array) -> String:
 			for v in StickRig.violations(fig.pose):
 				if float(v.value) < float(v.lim.x) - 1.0 or float(v.value) > float(v.lim.y) + 1.0:
 					warn.append("%s hors amplitude" % str(v.label))
-			if StickRig.lowest_y(fig.pose) < -1.0:
-				warn.append("sous le sol")
+			if StickRig.decor.is_empty():
+				if StickRig.lowest_y(fig.pose) < -1.0:
+					warn.append("sous le sol")
+			else:
+				var dd := _dans_decor(sol)
+				if dd != "":
+					warn.append("traverse le décor (%s)" % dd)
 			# Déséquilibre : deux pieds au sol, bassin hors de la base d'appui.
-			if J.ankleN.y < g0 + 2.0 and J.ankleF.y < g0 + 2.0:
+			var gN: float = g0 + StickRig.sol_h(J.ankleN.x)
+			var gF: float = g0 + StickRig.sol_h(J.ankleF.x)
+			if J.ankleN.y < gN + 2.0 and J.ankleF.y < gF + 2.0:
 				var lo := minf(J.ankleN.x, J.ankleF.x) - 8.0
 				var hi := maxf(J.ankleN.x, J.ankleF.x) + 8.0
 				# Seulement debout : un corps couché n'a pas d'appui à respecter.
@@ -449,7 +480,8 @@ func _verifier(recs: Array) -> String:
 				for side in ["N", "F"]:
 					var a1: Vector2 = J["ankle" + side]
 					var a0: Vector2 = J0["ankle" + side]
-					if a1.y < g0 + 1.0 and a0.y < g0 + 1.0 and absf(a1.x - a0.x) > 1.5 and r.hitstop == 0:
+					var gs: float = g0 + StickRig.sol_h(a1.x)
+					if a1.y < gs + 1.0 and a0.y < gs + 1.0 and absf(a1.x - a0.x) > 1.5 and r.hitstop == 0:
 						glisse.append("%s%d" % [side, r.g])
 			# Contact : distance des poings et des pieds à la tête et au buste adverses.
 			var an := StickAnim.load_named(str(fig.anim))

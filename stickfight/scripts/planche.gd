@@ -84,9 +84,16 @@ func _draw() -> void:
 			var b := world_to_px(Vector2(0, y)).y
 			draw_line(Vector2(0, b), Vector2(sz.x, b), GRID_STRONG if y % 50 == 0 else GRID, 1.0)
 			y += step
-	var g := world_to_px(Vector2.ZERO).y
-	if g < sz.y:
-		draw_rect(Rect2(0, g, sz.x, sz.y - g), GROUND)
+	if StickRig.decor.is_empty():
+		var g := world_to_px(Vector2.ZERO).y
+		if g < sz.y:
+			draw_rect(Rect2(0, g, sz.x, sz.y - g), GROUND)
+	else:
+		for seg in StickRig.decor:
+			var a := world_to_px(Vector2(float(seg[0]), float(seg[2])))
+			var b := world_to_px(Vector2(float(seg[1]), 0.0))
+			if a.y < sz.y:
+				draw_rect(Rect2(a.x, a.y, b.x - a.x, sz.y - a.y), GROUND)
 	for fig in figures:
 		StickRig.draw_pose(self, fig.pose, origin_px(), px_per_unit, fig.get("color", Color("#111111")), fig.get("far_shade", 1.0))
 		if debug:

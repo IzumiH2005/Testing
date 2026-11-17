@@ -324,6 +324,24 @@ static func plant(p: Dictionary) -> Dictionary:
 	return q
 
 
+# ---------- Décor ----------
+## Sol du décor : segments [x0, x1, h] en coordonnées du monde (un bloc plein
+## de hauteur h entre x0 et x1). Hors des segments, c'est le vide. Vide (cas
+## général, le combat) : sol plat à 0 partout, comportement inchangé.
+static var decor: Array = []
+const VIDE := -1000.0
+
+## Hauteur du sol sous x (0 sans décor, VIDE au-dessus d'un trou).
+static func sol_h(x: float) -> float:
+	if decor.is_empty():
+		return 0.0
+	var best := VIDE
+	for seg in decor:
+		if x >= float(seg[0]) and x <= float(seg[1]):
+			best = maxf(best, float(seg[2]))
+	return best
+
+
 # ---------- Pieds ----------
 # Le pied part de la cheville vers l'avant. On le règle par son angle « absolu »
 # phi dans le repère du personnage : 0 = à plat vers l'avant, négatif = pointe
@@ -361,11 +379,11 @@ static func ground_feet(p: Dictionary) -> void:
 	var L: float = s.foot
 	if L <= 0.0:
 		return
-	var g: float = s.stroke / 2.0
 	for side in ["N", "F"]:
 		var sol := solve(p)
 		var ank: Vector2 = sol.joints["ankle" + side]
 		var toe: Vector2 = sol.joints["toe" + side]
+		var g: float = s.stroke / 2.0 + sol_h(ank.x)
 		if toe.y < g - 0.01:
 			var h := clampf((ank.y - g) / L, -1.0, 1.0)
 			set_foot(p, side, -rad_to_deg(asin(h)), false)
@@ -401,10 +419,10 @@ static func auto_feet(p: Dictionary) -> Dictionary:
 	var s := get_style(q.get("style", "epais"))
 	if s.foot <= 0.0:
 		return q
-	var g: float = s.stroke / 2.0
 	for side in ["N", "F"]:
 		var sol := solve(q)
-		var h: float = sol.joints["ankle" + side].y - g
+		var ak: Vector2 = sol.joints["ankle" + side]
+		var h: float = ak.y - s.stroke / 2.0 - sol_h(ak.x)
 		if h < 0.8:
 			set_foot(q, side, 0.0, false)
 		else:

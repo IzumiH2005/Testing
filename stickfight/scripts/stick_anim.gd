@@ -193,7 +193,7 @@ static func _bake_feet(a: Dictionary) -> void:
 		for i in n:
 			var sol := StickRig.solve(sample(a, float(i)))
 			var ank: Vector2 = sol.joints["ankle" + side]
-			h.append(ank.y - g)
+			h.append(ank.y - g - StickRig.sol_h(ank.x))
 			ax.append(ank.x)
 			fs.append(float(sol.facing))
 			dx.append((ank.x - float(sol.joints.hip.x)) * float(sol.facing))
@@ -600,8 +600,9 @@ static func sample(a: Dictionary, t: float) -> Dictionary:
 			p = StickRig.reach(p, "leg" + side, A)
 		else:
 			var ank: Vector2 = StickRig.solve(p).joints["ankle" + side]
-			if ank.y < ground:
-				p = StickRig.reach(p, "leg" + side, Vector2(ank.x, ground))
+			var gs: float = ground + StickRig.sol_h(ank.x)
+			if ank.y < gs:
+				p = StickRig.reach(p, "leg" + side, Vector2(ank.x, gs))
 	if a.has("pieds"):
 		for side in ["N", "F"]:
 			StickRig.set_foot(p, side, _foot_at(a, side, t))
