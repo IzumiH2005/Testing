@@ -503,6 +503,9 @@ scripts/combat.gd         plusieurs combattants, arrêt sur impact, effets, duo
 scripts/vfx.gd            effets en pixel art : étincelle, poussière, onde, choc
 scripts/demo.gd           scène de démo
 tools/rendu.gd, rendu.sh  rendu PNG d'une pose
+tools/mannequin.sh        mannequin 3D réaliste (MakeHuman, CC0) posé comme le stickman, 3 vues
+                          (pose3d.gd exporte la pose 3D, mannequin.py pose et rend ; Python : numpy, scipy, matplotlib)
+mannequin/                maillage, os et poids du mannequin (CC0, voir mannequin/LICENCE.md)
 tools/anim.gd, anim.sh    planche, stroboscopie, GIF, vidéo d'une animation
 tools/gen_demi_tour.gd    génère anims/demi_tour.json (rotation 3D projetée)
 tools/gen_esquive_cote.gd génère anims/esquive_cote.json (pivot face caméra)
