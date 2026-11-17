@@ -127,13 +127,12 @@ Canaux : `thighN`, `thighN_p`, `thighN_r`.
 | Bassin | penché d'un côté (hanche qui tombe), tourné ? | `root_p`, `torsionBassin` |
 | Appui | quelle jambe porte le poids ? (genou plus plié, bassin au-dessus) | position du bassin |
 
-**Largeur de hanche.** Un vrai bassin a deux hanches écartées (environ 1/10 de la taille) : les
-pieds ne sont jamais l'un derrière l'autre sur une même ligne. Debout, en marche, en course, chaque
-pied reste de son côté, sous sa hanche ; vu de face, on voit un espace entre les pieds, et le
-pied qui passe en avant ne croise pas la ligne du milieu. Nos jambes partent d'un seul point
-(apparence du personnage) : le squelette ouvre donc chaque cuisse de 4° vers l'extérieur
-(`LARGEUR_HANCHE` dans `stick_rig.gd`), et `thighN_p` / `thighF_p` se comptent à partir de cette
-largeur (0 = pied sous sa hanche). Contrôle : vue de face (`--vues`), un espace entre les pieds.
+**Écartement des jambes sur les côtés.** Les pieds ne sont jamais l'un derrière l'autre sur une
+même ligne : vu de face, il y a un espace entre eux (un vrai bassin a deux hanches écartées). Les
+jambes partent d'un seul point (apparence du personnage), donc cet écartement se règle dans chaque
+pose par `thighN_p` (+) / `thighF_p` (−) : 5° pieds joints (garde-à-vous), 9° debout détendu
+(repos), 13° et plus base large et ancrée, 16° gardes. Le pied qui passe en marchant ne croise pas
+la ligne du milieu. Contrôle : vue de face (`--vues`).
 
 Couplages à respecter :
 

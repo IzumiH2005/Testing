@@ -112,7 +112,7 @@ const ROT := "_r"
 ## la rotation du segment parent) : pas de profondeur propre.
 const CHARNIERES := ["foreN", "foreF", "shinN", "shinF"]
 ## Ouverture neutre de chaque cuisse (degrés) : remplace la largeur du bassin (voir solve).
-const LARGEUR_HANCHE := 4.0
+const LARGEUR_HANCHE := 0.0
 ## Limites des canaux 3D (degrés), par « canal:os sans côté ». Profondeur du
 ## bras : vers la caméra = abduction (bras écarté du corps, jusqu'à 90°), à
 ## l'opposé = adduction (bras qui passe devant le buste, 40°). Cuisse :
