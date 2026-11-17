@@ -8,10 +8,10 @@
   "torsion": 3,
   "chest": 3,
   "neck": 5,
-  "armN": 6,
-  "foreN": 7,
-  "armF": 7,
-  "foreF": 8
+  "armF": 6,
+  "foreF": 7,
+  "armN": 7,
+  "foreN": 8
  },
  "cles": [
   {
@@ -21,11 +21,11 @@
    "f": 10,
    "nom": "la main avant appelle (vite), le poids part devant",
    "plus": {
+    "torsion": -2.5,
+    "armF": 4,
+    "foreF": -22,
     "x": 2.2,
-    "y": -1.2,
-    "torsion": 2.5,
-    "armN": 4,
-    "foreN": -22
+    "y": -1.2
    },
    "courbe": "auto"
   },
@@ -33,11 +33,11 @@
    "f": 26,
    "nom": "poids devant, la main revient lentement",
    "plus": {
+    "torsion": -5,
+    "armF": 1,
+    "foreF": -4,
     "x": 3.5,
-    "y": -0.6,
-    "torsion": 5,
-    "armN": 1,
-    "foreN": -4
+    "y": -0.6
    },
    "courbe": "auto"
   },
@@ -45,10 +45,10 @@
    "f": 38,
    "nom": "passage, il expire",
    "plus": {
+    "torsion": -1,
+    "chest": 0.8,
     "x": 0.5,
-    "y": -2.2,
-    "torsion": 1,
-    "chest": 0.8
+    "y": -2.2
    },
    "courbe": "auto"
   },
@@ -56,12 +56,12 @@
    "f": 50,
    "nom": "poids derrière, il inspire, les épaules montent",
    "plus": {
-    "x": -3.5,
-    "y": -0.6,
-    "torsion": -5,
-    "epauleN_haut": 1.5,
+    "torsion": 5,
     "epauleF_haut": 1.5,
-    "chest": -0.6
+    "epauleN_haut": 1.5,
+    "chest": -0.6,
+    "x": -3.5,
+    "y": -0.6
    },
    "courbe": "auto"
   },
@@ -69,12 +69,12 @@
    "f": 62,
    "nom": "le menton monte : il toise",
    "plus": {
-    "x": -3,
-    "y": -0.8,
-    "torsion": -4,
+    "torsion": 4,
     "neck": -5,
+    "epauleF_haut": 0.8,
     "epauleN_haut": 0.8,
-    "epauleF_haut": 0.8
+    "x": -3,
+    "y": -0.8
    },
    "courbe": "auto"
   },
@@ -82,20 +82,20 @@
    "f": 74,
    "nom": "passage, le menton redescend",
    "plus": {
-    "x": -0.5,
-    "y": -2.2,
-    "torsion": -1,
+    "torsion": 1,
     "neck": -1,
-    "chest": 0.5
+    "chest": 0.5,
+    "x": -0.5,
+    "y": -2.2
    },
    "courbe": "auto"
   },
   {
    "f": 86,
    "plus": {
+    "torsion": -0.5,
     "x": 1,
-    "y": -0.6,
-    "torsion": 0.5
+    "y": -0.6
    },
    "courbe": "auto"
   },
