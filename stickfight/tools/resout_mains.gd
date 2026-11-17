@@ -4,69 +4,88 @@ extends SceneTree
 ## `vise` ne règle que x et y : la profondeur de la main dépend alors de la rotation du
 ## bras, et deux mains qui doivent se toucher finissent l'une dans l'autre. Ici, une clé
 ## qui porte
-##     "mains3d": {"N": [dx, dy, dz], "F": [dx, dy, dz]}
-## (cible du centre du poing, relative à l'épaule, z = profondeur ; écartement du coude
-## pris dans armN_p / armF_p de la clé) reçoit dans "fixe" les angles arm, fore et arm_r
-## qui y mènent ; "mains3d" est retiré et la cible gardée dans "_mains3d" (relancer
-## l'outil la réutilise). Chaque clé est résolue avec son propre buste.
+##     "mains3d": {"N": [dx, dy, dz], "F": [dx, dy, dz],
+##                 "coude_dy": 0, "ecart": [40, 60]}      (ces deux-là facultatifs)
+## (cible du centre du poing, relative à l'épaule, x devant, y haut, z profondeur,
+## N côté caméra = z négatif) reçoit dans "fixe" les angles arm, fore et arm_r qui y
+## mènent. Sans "coude_dy", l'écartement du coude est celui de la clé (armN_p / armF_p).
+## Avec "coude_dy", le coude est placé à cette hauteur par rapport à la main (0 = avant-bras
+## horizontal) et l'écartement est cherché dans "ecart" (valeur absolue, en degrés).
+## "mains3d" est retiré et gardé dans "_mains3d" (relancer l'outil la réutilise). Chaque
+## clé est résolue avec son propre buste ; les bras repartent de la solution de la clé
+## précédente, pour ne pas changer de branche d'une clé à l'autre.
 ##
 ##     tools/resout_mains.sh anims/x.json
-## Les bras gardent la même branche d'une clé à l'autre (départ = clé précédente).
 ## Bornes : élévation −60..100, coude 40..160, rotation −180..180.
 
-const LO := [-60.0, 40.0, -180.0]
-const HI := [100.0, 160.0, 180.0]
+const LO := [-60.0, 40.0, -180.0, 0.0]
+const HI := [100.0, 160.0, 180.0, 90.0]
 
 
 func _p3(sol: Dictionary, k: String) -> Vector3:
 	return Vector3(sol.joints[k].x, sol.joints[k].y, float(sol.prof.get(k, 0.0)))
 
 
-func _err(pose: Dictionary, side: String, tgt: Vector3) -> float:
-	return _p3(StickRig.solve(pose), "hand" + side).distance_to(tgt)
+func _err(pose: Dictionary, side: String, tgt: Vector3, coude) -> float:
+	var sol := StickRig.solve(pose)
+	var h := _p3(sol, "hand" + side)
+	var e := h.distance_to(tgt)
+	if coude != null:
+		e += absf(sol.joints["elbow" + side].y - h.y - float(coude))
+	return e
 
 
-## Descente depuis `depart` (la solution de la clé précédente, pour que les bras ne
-## changent pas de branche d'une clé à l'autre) ; tirages au hasard seulement si elle
-## n'atteint pas la cible.
-func _resout(pose: Dictionary, side: String, tgt: Vector3, depart: Array) -> Array:
-	var ch := ["arm" + side, "fore" + side, "arm" + side + "_r"]
+func _resout(pose: Dictionary, side: String, tgt: Vector3, depart: Array, coude, ecart: Array) -> Array:
+	var sg_p := 1.0 if side == "N" else -1.0
+	var ch := ["arm" + side, "fore" + side, "arm" + side + "_r", "arm" + side + "_p"]
+	var lo := LO.duplicate()
+	var hi := HI.duplicate()
+	var n := 3
+	if coude != null:
+		n = 4
+		lo[3] = float(ecart[0])
+		hi[3] = float(ecart[1])
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 7
 	var best := INF
 	var bestv := []
-	for essai in 31:
+	var regle := func(c: int, val: float) -> void:
+		pose.angles[ch[c]] = val * sg_p if c == 3 else val
+	for essai in 41:
 		if essai > 0 and best < 0.3:
 			break
 		var v := []
-		for c in 3:
-			v.append(depart[c] if essai == 0 and not depart.is_empty() else rng.randf_range(LO[c], HI[c]))
-			pose.angles[ch[c]] = v[c]
-		var cur := _err(pose, side, tgt)
+		for c in n:
+			if essai == 0 and depart.size() >= n:
+				v.append(clampf(depart[c], lo[c], hi[c]))
+			else:
+				v.append(rng.randf_range(lo[c], hi[c]))
+			regle.call(c, v[c])
+		var cur := _err(pose, side, tgt, coude)
 		var pas := 16.0
 		while pas > 0.05:
 			var mieux := false
-			for c in 3:
+			for c in n:
 				for sg in [-1.0, 1.0]:
 					var nv: float = v[c] + sg * pas
-					if nv < LO[c] or nv > HI[c]:
+					if nv < lo[c] or nv > hi[c]:
 						continue
-					pose.angles[ch[c]] = nv
-					var e := _err(pose, side, tgt)
+					regle.call(c, nv)
+					var e := _err(pose, side, tgt, coude)
 					if e < cur:
 						cur = e
 						v[c] = nv
 						mieux = true
 					else:
-						pose.angles[ch[c]] = v[c]
+						regle.call(c, v[c])
 			if not mieux:
 				pas /= 2.0
 		if cur < best:
 			best = cur
 			bestv = v.duplicate()
-	for c in 3:
-		pose.angles[ch[c]] = snappedf(bestv[c], 0.1)
-	return [ch, bestv, best]
+	for c in n:
+		regle.call(c, snappedf(bestv[c], 0.1))
+	return [ch, bestv, best, n, sg_p]
 
 
 func _initialize() -> void:
@@ -84,21 +103,29 @@ func _initialize() -> void:
 		var k: Dictionary = cles[i]
 		if not k.has("_mains3d"):
 			continue
+		var m: Dictionary = k._mains3d
 		var pose: Dictionary = an.cles[i].pose.duplicate(true)
 		var S := _p3(StickRig.solve(pose), "shoulderN")
 		for side in ["N", "F"]:
-			var d: Array = k._mains3d[side]
-			var r := _resout(pose, side, S + Vector3(d[0], d[1], d[2]), prec[side])
+			var d: Array = m[side]
+			var r := _resout(pose, side, S + Vector3(d[0], d[1], d[2]), prec[side],
+				m.get("coude_dy"), m.get("ecart", [0, 90]))
 			prec[side] = r[1]
-			for c in 3:
-				k.fixe[r[0][c]] = snappedf(r[1][c], 0.1)
-				if k.has("vise"):
-					k.vise.erase("arm" + side)
+			for c in r[3]:
+				var val: float = r[1][c] * (r[4] if c == 3 else 1.0)
+				k.fixe[r[0][c]] = snappedf(val, 0.1)
+			if k.has("vise"):
+				k.vise.erase("arm" + side)
 			if r[2] > 0.5:
 				printerr("clé %d : main %s à %.1f de sa cible" % [int(k.f), side, r[2]])
 		var sol := StickRig.solve(pose)
-		print("clé %d : mains à %.1f, traversées %s (marge %.1f)" % [int(k.f),
-			_p3(sol, "handN").distance_to(_p3(sol, "handF")), AT._traversees(sol), AT._derniere_marge])
+		var J: Dictionary = sol.joints
+		print("clé %d : mains à %.1f, avant-bras %+.0f°/%+.0f°, écart %.0f/%.0f, traversées %s (marge %.1f)" % [int(k.f),
+			_p3(sol, "handN").distance_to(_p3(sol, "handF")),
+			rad_to_deg(atan2(J.handN.y - J.elbowN.y, absf(J.handN.x - J.elbowN.x) + 0.001)),
+			rad_to_deg(atan2(J.handF.y - J.elbowF.y, absf(J.handF.x - J.elbowF.x) + 0.001)),
+			pose.angles.get("armN_p", 0.0), pose.angles.get("armF_p", 0.0),
+			AT._traversees(sol), AT._derniere_marge])
 	var f := FileAccess.open(chemin, FileAccess.WRITE)
 	f.store_string(JSON.stringify(data, " ", false) + "\n")
 	quit()

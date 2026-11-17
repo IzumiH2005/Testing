@@ -48,16 +48,28 @@ proche (N) le couvre.
 
 **Les mains se touchent, elles ne se traversent pas.** Chaque poing est une boule de rayon
 8,5 et chaque avant-bras un trait de 15 d'épaisseur ; deux parties du corps ne passent jamais
-l'une dans l'autre. La paume N est **posée sur** les phalanges du poing F : un peu devant
-(+9), un peu au-dessus (+9) et chacune de son côté en profondeur (N côté caméra −5, F +6).
-Les centres sont à 16,8 l'un de l'autre, juste moins que deux rayons (17) : contact franc, pas
-de vide, pas de chevauchement. Comme chaque main reste de son côté, les deux avant-bras
-arrivent chacun de son coude sans se croiser.
+l'une dans l'autre. La paume N vient **contre** les phalanges du poing F : surtout devant lui
+(+15) et un peu au-dessus (+3), presque à la même profondeur (N −3, F +3). Les centres sont
+à 16,3 l'un de l'autre, juste moins que deux rayons (17) : contact franc, pas de vide, pas de
+chevauchement. De profil, les deux poings sont **côte à côte** à la même hauteur : on voit
+qu'ils se touchent (avec la main N posée au-dessus du poing, elle le cachait de profil).
+
+**Coudes ouverts, avant-bras horizontaux.** Au contact, les coudes s'écartent sur les côtés
+(écartement 45 à 50°) et sont à la hauteur des mains : les avant-bras sont quasiment parallèles
+au sol, ils arrivent l'un vers l'autre comme deux leviers. C'est la position où l'on pousse
+vraiment une main contre l'autre.
+
+**Le choc.** À la prise d'appui la paume N se décolle du poing (elle monte de 7 à 9 et
+recule de 2-3 : un écart de 20 à 23 entre les centres, visible de profil), puis revient le
+**frapper** sèchement au craquement, et les deux mains poussent ensemble devant et en bas.
+Les coudes passent alors un peu au-dessus des mains (avant-bras à −7°) : c'est le coude qui
+appuie.
 
 Cibles (centre du poing, relatives à l'épaule ; x devant, y haut, z profondeur) :
-poing F (24, −20, 6), main N (33, −11, −5). Les angles des bras qui y mènent sont calculés
-en 3D par `tools/resout_mains.sh` (`vise` ne règle que x et y : la profondeur venait de la
-rotation des bras, et les mains finissaient l'une dans l'autre).
+poing F (22, −22, 3), main N (37, −19, −3). Les angles des bras sont calculés en 3D par
+`tools/resout_mains.sh` : main au centre de la cible, coude à la hauteur voulue par rapport à
+la main (`coude_dy` : 0 = avant-bras horizontal, −3 à l'appui, +3 au craquement),
+l'écartement du coude étant cherché entre 40 et 75°.
 
 ## 2 bis. Stature : la ligne des épaules
 
@@ -95,9 +107,9 @@ Repère : angles du squelette (voir `analyses/anatomie.md` § 4 bis et 6 bis).
 | Pose | Bassin, buste | Épaules (omoplates) | Bras proche N | Bras loin F | Tête |
 |---|---|---|---|---|---|
 | Marche sûre | root −5, bas du dos 3, poitrine 2 (buste droit) ; torsion ±4 avec les bras | reculées −2 | balancier de la marche, écarté 16° | idem, −16° | cou 4 (menton horizontal) |
-| Prête | idem, torsion 0 | reculées −2 | main posée sur le poing loin : élévation 19°, coude 116°, écarté 35°, rotation +16° | poing devant le sternum : élévation −8° (coude sous l'épaule), coude 123°, écarté −35°, rotation −10° | cou 4 |
-| Prise d'appui | poitrine 0 (inspire) | haussées +3, reculées −3 | les deux mains 3 plus haut, 3 plus près | idem | cou 3 |
-| Craquement | poitrine 2 (droit), genoux un peu pliés (bassin −1,5) | abaissées −2, reculées −1 | les deux mains 5 plus bas, 3 plus loin ; coudes écartés à 45° | idem, −45° | cou 10 (hochement) |
+| Prête | idem, torsion 0 | reculées −2 | paume contre le poing loin : élévation 36°, coude 102°, écarté 47°, rotation +53° ; avant-bras horizontal | poing devant le sternum : élévation 0°, coude 124°, écarté −50°, rotation −34° ; avant-bras horizontal | cou 4 |
+| Prise d'appui | poitrine 0 (inspire) | haussées +3, reculées −3 | les deux mains 3 plus haut, 3 plus près ; la paume N se décolle (+7 en haut, −2 en arrière) ; coude écarté 54° | idem (sans le décollement) | cou 3 |
+| Craquement | poitrine 2 (droit), genoux un peu pliés (bassin −1,5) | abaissées −2, reculées −1 | la paume frappe le poing, les deux mains 3 plus bas, 2 plus loin ; coude écarté 45°, un peu au-dessus de la main | idem, −49° | cou 10 (hochement) |
 | Fin | repos | 0 | repos | repos | repos |
 
 Les angles du tableau sont ceux que `tools/resout_mains.sh` trouve pour la pose prête ; il
@@ -111,11 +123,13 @@ des épaules les faisait glisser l'une dans l'autre pendant 3 ou 4 images.
 
 ## 5. Ce qui se voit de profil
 
-- La main proche posée sur le poing loin, un peu devant et au-dessus de lui, devant le
-  sternum ; les coudes sous les épaules.
+- Les deux poings côte à côte devant le sternum, la main proche devant le poing loin ; les
+  avant-bras horizontaux.
+- Le choc : la main proche se décolle et monte à la prise d'appui (un vide entre les deux
+  mains), puis revient frapper le poing d'un coup.
 - Le buste droit, épaules en arrière : la ligne du dos ne s'enroule pas.
 - L'écartement des coudes ne se voit que de face et de trois quarts : de profil, le craquement
-  se lit par le haussement puis la chute des épaules, les genoux qui cèdent, le hochement et
+  se lit aussi par le haussement puis la chute des épaules, les genoux qui cèdent, le hochement et
   les mains qui poussent vers l'avant et le bas.
 
 ## 6. Références
@@ -129,7 +143,10 @@ des épaules les faisait glisser l'une dans l'autre pendant 3 ou 4 images.
 1. Pieds : aucun glissement (`--verifier`), mêmes appuis que la marche détendue.
 2. Buste droit pendant la marche : épaules au-dessus du bassin (écart horizontal < 3).
 3. De face (`--vues`), mains jointes au centre pendant le craquage, coudes écartés.
-4. Rien ne se traverse (`--verifier`, contrôle en 3D) : mains à 16,8 l'une de l'autre
-   (contact, deux rayons = 17), avant-bras qui ne se croisent pas, à chaque image.
+4. Rien ne se traverse (`--verifier`, contrôle en 3D) : mains à 16,3 l'une de l'autre au
+   contact (deux rayons = 17), 20 à 23 à la prise d'appui, avant-bras qui ne se croisent pas,
+   à chaque image.
+4 bis. Avant-bras à 0° au contact, −3° à l'appui, −7° au craquement ; coudes écartés de 42 à
+   54° (sortie de `tools/resout_mains.sh`).
 5. Épaules jamais en avant : `epaule*_av` ≤ −1 et poitrine ≤ 2 pendant tout le craquage.
 6. Dernière image identique au repos (pas de saut vers `idle_repos`).

@@ -46,11 +46,14 @@ BRAS_REPOS = {"armN": -10, "foreN": 10, "armF": 8, "foreF": 8,
 # chaque main de son côté en profondeur, sans se traverser (voir l'analyse § 4).
 # Cibles du centre des poings, relatives à l'épaule (x devant, y haut, z profondeur,
 # N côté caméra = z négatif) ; les angles sont résolus par tools/resout_mains.sh.
-MAIN_F = (24, -20, 6)
-MAIN_N = (33, -11, -5)
+MAIN_F = (22, -22, 3)
+MAIN_N = (37, -19, -3)
+# Coudes ouverts sur les côtés : l'écartement est cherché dans cette plage pour que
+# les avant-bras soient horizontaux (coude à la hauteur de la main).
+ECART = [40, 75]
 # Angles de cette position (sortie de resout_mains, clé 148) : sert au trajet 104 → 136.
-PRETE = {"armN": 18.8, "foreN": 115.7, "armF": -8.3, "foreF": 122.5,
-         "armN_p": 35, "armF_p": -35, "armN_r": 16, "armF_r": -9.5}
+PRETE = {"armN": 35.5, "foreN": 101.7, "armF": -0.4, "foreF": 123.7,
+         "armN_p": 46.7, "armF_p": -49.9, "armN_r": 52.5, "armF_r": -33.6}
 
 
 def tronc(f):
@@ -114,16 +117,20 @@ def main():
         cles.append(cle)
 
     # Craquage : clés à partir de 136, mains placées par vise (repère local absolu).
-    def craque(f, dy_bassin=0.0, haut=None, mains=(0, 0), coudes=35, courbe=None, p=None):
+    def craque(f, dy_bassin=0.0, haut=None, mains=(0, 0), n_plus=(0, 0), coude_dy=0,
+               courbe=None, p=None):
+        """mains : décalage des deux mains ensemble ; n_plus : décalage de la main N en
+        plus (elle quitte le poing puis revient le frapper) ; coude_dy : hauteur des coudes
+        par rapport aux mains (0 = avant-bras horizontaux)."""
         h = dict(SUR)
         h.update(haut or {})
         dxm, dym = mains
         c = {"f": f, "fixe": {"x": X, "y": round(Y - 2.5 + dy_bassin, 2)}, "vise": dict(pieds)}
         c["fixe"].update(h)
-        c["fixe"].update({"thighN_p": 13, "thighF_p": -13, "armN_p": coudes, "armF_p": -coudes})
-        # les deux mains bougent ensemble : on décale les deux cibles du même vecteur
-        c["mains3d"] = {"N": [MAIN_N[0] + dxm, MAIN_N[1] + dym, MAIN_N[2]],
-                        "F": [MAIN_F[0] + dxm, MAIN_F[1] + dym, MAIN_F[2]]}
+        c["fixe"].update({"thighN_p": 13, "thighF_p": -13})
+        c["mains3d"] = {"N": [MAIN_N[0] + dxm + n_plus[0], MAIN_N[1] + dym + n_plus[1], MAIN_N[2]],
+                        "F": [MAIN_F[0] + dxm, MAIN_F[1] + dym, MAIN_F[2]],
+                        "coude_dy": coude_dy, "ecart": ECART}
         if courbe:
             c["courbe"] = courbe
         if p:
@@ -146,13 +153,15 @@ def main():
     cles += [
         craque(136),
         craque(148, courbe="acc-dec"),
-        craque(158, haut=APPUI1, mains=(-3, 3), courbe="acc", p=3),
-        craque(162, dy_bassin=-1.5, haut=CRAC1, mains=(3, -5), coudes=45, courbe="dec"),
-        craque(168, dy_bassin=-1.2, haut=CRAC1, mains=(3, -4), coudes=44, courbe="acc-dec"),
+        # appui : les mains remontent vers soi, la paume quitte le poing (écart visible)
+        craque(158, haut=APPUI1, mains=(-3, 3), n_plus=(2, 7), coude_dy=-3, courbe="acc", p=3),
+        # craquement : la paume revient frapper le poing et les deux poussent devant et en bas
+        craque(162, dy_bassin=-1.5, haut=CRAC1, mains=(2, -3), n_plus=(-0.5, -0.5), coude_dy=3, courbe="dec"),
+        craque(168, dy_bassin=-1.2, haut=CRAC1, mains=(2, -2.5), n_plus=(-0.5, -0.5), coude_dy=3, courbe="acc-dec"),
         craque(180, haut={"neck": 4}, courbe="acc-dec"),
-        craque(190, haut=APPUI2, mains=(-4, 5), coudes=33, courbe="acc", p=3),
-        craque(194, dy_bassin=-2.5, haut=CRAC2, mains=(4, -7), coudes=50, courbe="dec"),
-        craque(202, dy_bassin=-2.0, haut=CRAC2, mains=(4, -6), coudes=48, courbe="acc-dec"),
+        craque(190, haut=APPUI2, mains=(-4, 4), n_plus=(3, 9), coude_dy=-4, courbe="acc", p=3),
+        craque(194, dy_bassin=-2.5, haut=CRAC2, mains=(3, -4), n_plus=(-0.5, -0.5), coude_dy=3, courbe="dec"),
+        craque(202, dy_bassin=-2.0, haut=CRAC2, mains=(3, -3.5), n_plus=(-0.5, -0.5), coude_dy=3, courbe="acc-dec"),
         craque(214, haut=FIN, courbe="acc-dec"),
         craque(222, haut=FIN, courbe="acc-dec"),
     ]
