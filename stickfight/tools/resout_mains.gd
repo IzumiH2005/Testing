@@ -108,8 +108,11 @@ func _initialize() -> void:
 		var S := _p3(StickRig.solve(pose), "shoulderN")
 		for side in ["N", "F"]:
 			var d: Array = m[side]
+			var cd = m.get("coude_dy")
+			if cd is Array:
+				cd = cd[0] if side == "N" else cd[1]
 			var r := _resout(pose, side, S + Vector3(d[0], d[1], d[2]), prec[side],
-				m.get("coude_dy"), m.get("ecart", [0, 90]))
+				cd, m.get("ecart", [0, 90]))
 			prec[side] = r[1]
 			for c in r[3]:
 				var val: float = r[1][c] * (r[4] if c == 3 else 1.0)
@@ -132,6 +135,16 @@ func _initialize() -> void:
 			rad_to_deg(atan2(absf(aN.x), absf(aN.z))), rad_to_deg(atan2(absf(aF.x), absf(aF.z))),
 			pose.angles.get("armN_p", 0.0), pose.angles.get("armF_p", 0.0),
 			AT._traversees(sol), AT._derniere_marge])
+		# de profil (x, y) : ce que voit le joueur
+		var pr := func(a: String, b: String) -> float:
+			return Vector2(J[a].x - J[b].x, J[a].y - J[b].y).length()
+		var Sh := _p3(sol, "shoulderN")
+		var abd := func(sd: String) -> float:
+			var e := _p3(sol, "elbow" + sd) - Sh
+			return rad_to_deg(atan2(Vector2(e.x, e.z).length(), -e.y))
+		print("   profil : mains %.1f, coudes %.1f, coudes y %.0f/%.0f ; bras/verticale %.0f°/%.0f°" % [
+			pr.call("handN", "handF"), pr.call("elbowN", "elbowF"),
+			J.elbowN.y - Sh.y, J.elbowF.y - Sh.y, abd.call("N"), abd.call("F")])
 	var f := FileAccess.open(chemin, FileAccess.WRITE)
 	f.store_string(JSON.stringify(data, " ", false) + "\n")
 	quit()

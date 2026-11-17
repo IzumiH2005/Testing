@@ -1,7 +1,7 @@
 {
  "nom": "intro_bagarreur",
  "boucle": false,
- "longueur": 252,
+ "longueur": 264,
  "base": "repos",
  "suivante": "idle_repos",
  "decalage": {
@@ -2612,14 +2612,14 @@
     "epauleF_haut": 0,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 35.7,
-    "foreN": 112.7,
-    "armN_r": 50.8,
-    "armN_p": 59.3,
-    "armF": 4.2,
-    "foreF": 119,
-    "armF_r": -28.9,
-    "armF_p": -54
+    "armN": 49.7,
+    "foreN": 116.7,
+    "armN_r": 64.4,
+    "armN_p": 66,
+    "armF": 4.6,
+    "foreF": 123.2,
+    "armF_r": -23,
+    "armF_p": -55
    },
    "vise": {
     "legN": [
@@ -2633,24 +2633,27 @@
    },
    "_mains3d": {
     "N": [
-     33,
-     -14,
-     -7
+     32,
+     -11,
+     -7.5
     ],
     "F": [
      26,
-     -20,
-     7
+     -16,
+     7.5
     ],
-    "coude_dy": 0,
+    "coude_dy": [
+     2,
+     -4
+    ],
     "ecart": [
-     40,
+     55,
      90
     ]
    }
   },
   {
-   "f": 148,
+   "f": 146,
    "fixe": {
     "x": 197.29,
     "y": 85.28,
@@ -2665,14 +2668,14 @@
     "epauleF_haut": 0,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 35.7,
-    "foreN": 112.7,
-    "armN_r": 50.8,
-    "armN_p": 59.3,
-    "armF": 4.2,
-    "foreF": 119,
-    "armF_r": -28.9,
-    "armF_p": -54
+    "armN": 49.7,
+    "foreN": 116.7,
+    "armN_r": 64.4,
+    "armN_p": 66,
+    "armF": 4.6,
+    "foreF": 123.2,
+    "armF_r": -23,
+    "armF_p": -55
    },
    "vise": {
     "legN": [
@@ -2687,24 +2690,27 @@
    "courbe": "acc-dec",
    "_mains3d": {
     "N": [
-     33,
-     -14,
-     -7
+     32,
+     -11,
+     -7.5
     ],
     "F": [
      26,
-     -20,
-     7
+     -16,
+     7.5
     ],
-    "coude_dy": 0,
+    "coude_dy": [
+     2,
+     -4
+    ],
     "ecart": [
-     40,
+     55,
      90
     ]
    }
   },
   {
-   "f": 158,
+   "f": 162,
    "fixe": {
     "x": 197.29,
     "y": 85.28,
@@ -2719,14 +2725,14 @@
     "epauleF_haut": 3,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 41.9,
-    "foreN": 118.6,
-    "armN_r": 51.3,
-    "armN_p": 63.5,
-    "armF": -6.7,
-    "foreF": 123.5,
-    "armF_r": -18.3,
-    "armF_p": -49.6
+    "armN": 47.8,
+    "foreN": 116.7,
+    "armN_r": 68.2,
+    "armN_p": 66.7,
+    "armF": 0.4,
+    "foreF": 127.5,
+    "armF_r": -23.3,
+    "armF_p": -59.9
    },
    "vise": {
     "legN": [
@@ -2739,27 +2745,29 @@
     ]
    },
    "courbe": "acc",
-   "p": 3,
    "_mains3d": {
     "N": [
-     32,
-     -8,
-     -7
+     31.44,
+     -12.61,
+     -7.5
     ],
     "F": [
      24,
-     -19,
-     7
+     -15,
+     7.5
     ],
-    "coude_dy": -3,
+    "coude_dy": [
+     4,
+     -2
+    ],
     "ecart": [
-     40,
+     55,
      90
     ]
    }
   },
   {
-   "f": 162,
+   "f": 164,
    "fixe": {
     "x": 197.29,
     "y": 83.78,
@@ -2774,14 +2782,14 @@
     "epauleF_haut": -2,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 37.2,
-    "foreN": 107,
-    "armN_r": 56.6,
+    "armN": 39.6,
+    "foreN": 106.8,
+    "armN_r": 54.5,
     "armN_p": 57.5,
-    "armF": 9.8,
-    "foreF": 112.1,
-    "armF_r": -37,
-    "armF_p": -53.4
+    "armF": 9.7,
+    "foreF": 119.7,
+    "armF_r": -27.1,
+    "armF_p": -55
    },
    "vise": {
     "legN": [
@@ -2796,24 +2804,27 @@
    "courbe": "dec",
    "_mains3d": {
     "N": [
-     34.5,
-     -17.5,
-     -7
+     35.58,
+     -15.14,
+     -7.5
     ],
     "F": [
      28,
-     -23,
-     7
+     -17,
+     7.5
     ],
-    "coude_dy": 3,
+    "coude_dy": [
+     1,
+     -4
+    ],
     "ecart": [
-     40,
+     55,
      90
     ]
    }
   },
   {
-   "f": 168,
+   "f": 172,
    "fixe": {
     "x": 197.29,
     "y": 84.08,
@@ -2828,14 +2839,14 @@
     "epauleF_haut": -2,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 38.7,
-    "foreN": 107.4,
-    "armN_r": 57.8,
-    "armN_p": 58,
-    "armF": 11.6,
-    "foreF": 112.8,
-    "armF_r": -38.7,
-    "armF_p": -54.4
+    "armN": 39.6,
+    "foreN": 106.8,
+    "armN_r": 54.5,
+    "armN_p": 57.5,
+    "armF": 9.7,
+    "foreF": 119.7,
+    "armF_r": -27.1,
+    "armF_p": -55
    },
    "vise": {
     "legN": [
@@ -2850,24 +2861,27 @@
    "courbe": "acc-dec",
    "_mains3d": {
     "N": [
-     34.5,
-     -17,
-     -7
+     35.58,
+     -15.14,
+     -7.5
     ],
     "F": [
      28,
-     -22.5,
-     7
+     -17,
+     7.5
     ],
-    "coude_dy": 3,
+    "coude_dy": [
+     1,
+     -4
+    ],
     "ecart": [
-     40,
+     55,
      90
     ]
    }
   },
   {
-   "f": 180,
+   "f": 184,
    "fixe": {
     "x": 197.29,
     "y": 85.28,
@@ -2882,14 +2896,14 @@
     "epauleF_haut": 0,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 36,
-    "foreN": 112.8,
-    "armN_r": 51.1,
-    "armN_p": 59.5,
-    "armF": 4.2,
-    "foreF": 119,
-    "armF_r": -28.9,
-    "armF_p": -54
+    "armN": 48.8,
+    "foreN": 116.7,
+    "armN_r": 63.5,
+    "armN_p": 66.1,
+    "armF": 4.6,
+    "foreF": 123.2,
+    "armF_r": -23,
+    "armF_p": -55
    },
    "vise": {
     "legN": [
@@ -2904,24 +2918,27 @@
    "courbe": "acc-dec",
    "_mains3d": {
     "N": [
-     33,
-     -14,
-     -7
+     32,
+     -11,
+     -7.5
     ],
     "F": [
      26,
-     -20,
-     7
+     -16,
+     7.5
     ],
-    "coude_dy": 0,
+    "coude_dy": [
+     2,
+     -4
+    ],
     "ecart": [
-     40,
+     55,
      90
     ]
    }
   },
   {
-   "f": 190,
+   "f": 204,
    "fixe": {
     "x": 197.29,
     "y": 85.28,
@@ -2936,14 +2953,14 @@
     "epauleF_haut": 5,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 41.6,
-    "foreN": 120.5,
-    "armN_r": 50.2,
-    "armN_p": 64.9,
-    "armF": -10.6,
-    "foreF": 126,
-    "armF_r": -15.7,
-    "armF_p": -49.4
+    "armN": 70.3,
+    "foreN": 128.2,
+    "armN_r": 89.4,
+    "armN_p": 75.6,
+    "armF": -2.1,
+    "foreF": 129.9,
+    "armF_r": -23.8,
+    "armF_p": -63.6
    },
    "vise": {
     "legN": [
@@ -2956,34 +2973,36 @@
     ]
    },
    "courbe": "acc",
-   "p": 3,
    "_mains3d": {
     "N": [
-     31.5,
-     -6,
-     -7
+     26.93,
+     -7.25,
+     -7.5
     ],
     "F": [
      23,
-     -18,
-     7
+     -14,
+     7.5
     ],
-    "coude_dy": -4,
+    "coude_dy": [
+     5,
+     -1
+    ],
     "ecart": [
-     40,
+     55,
      90
     ]
    }
   },
   {
-   "f": 194,
+   "f": 206,
    "fixe": {
     "x": 197.29,
     "y": 82.78,
     "root": -5,
     "spineLow": 3,
     "chest": 2,
-    "neck": 12,
+    "neck": 13,
     "torsion": 0,
     "epauleN_av": -1,
     "epauleF_av": -1,
@@ -2991,14 +3010,14 @@
     "epauleF_haut": -3,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 36.6,
-    "foreN": 104,
-    "armN_r": 55.8,
-    "armN_p": 55.3,
-    "armF": 10,
-    "foreF": 109.2,
-    "armF_r": -36.3,
-    "armF_p": -51.1
+    "armN": 45,
+    "foreN": 116.2,
+    "armN_r": 57.1,
+    "armN_p": 64.3,
+    "armF": 11.6,
+    "foreF": 119,
+    "armF_r": -27.2,
+    "armF_p": -55
    },
    "vise": {
     "legN": [
@@ -3013,72 +3032,21 @@
    "courbe": "dec",
    "_mains3d": {
     "N": [
-     35.5,
-     -18.5,
-     -7
+     32.45,
+     -10.49,
+     -7.5
     ],
     "F": [
      29,
-     -24,
-     7
-    ],
-    "coude_dy": 3,
-    "ecart": [
-     40,
-     90
-    ]
-   }
-  },
-  {
-   "f": 202,
-   "fixe": {
-    "x": 197.29,
-    "y": 83.28,
-    "root": -5,
-    "spineLow": 3,
-    "chest": 2,
-    "neck": 12,
-    "torsion": 0,
-    "epauleN_av": -1,
-    "epauleF_av": -1,
-    "epauleN_haut": -3,
-    "epauleF_haut": -3,
-    "thighN_p": 13,
-    "thighF_p": -13,
-    "armN": 37.7,
-    "foreN": 104.5,
-    "armN_r": 56.6,
-    "armN_p": 56,
-    "armF": 11.1,
-    "foreF": 109.8,
-    "armF_r": -37.4,
-    "armF_p": -52
-   },
-   "vise": {
-    "legN": [
-     176.2,
+     -17.5,
      7.5
     ],
-    "legF": [
-     218.38,
-     7.5
-    ]
-   },
-   "courbe": "acc-dec",
-   "_mains3d": {
-    "N": [
-     35.5,
-     -18,
-     -7
+    "coude_dy": [
+     0,
+     -4
     ],
-    "F": [
-     29,
-     -23.5,
-     7
-    ],
-    "coude_dy": 3,
     "ecart": [
-     40,
+     55,
      90
     ]
    }
@@ -3087,26 +3055,26 @@
    "f": 214,
    "fixe": {
     "x": 197.29,
-    "y": 85.28,
+    "y": 83.28,
     "root": -5,
     "spineLow": 3,
     "chest": 2,
-    "neck": 1,
+    "neck": 13,
     "torsion": 0,
-    "epauleN_av": -2,
-    "epauleF_av": -2,
-    "epauleN_haut": 0,
-    "epauleF_haut": 0,
+    "epauleN_av": -1,
+    "epauleF_av": -1,
+    "epauleN_haut": -3,
+    "epauleF_haut": -3,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 35.9,
-    "foreN": 112.9,
-    "armN_r": 51,
-    "armN_p": 59.6,
-    "armF": 4.2,
+    "armN": 45,
+    "foreN": 116.2,
+    "armN_r": 57.1,
+    "armN_p": 64.3,
+    "armF": 11.6,
     "foreF": 119,
-    "armF_r": -28.9,
-    "armF_p": -54
+    "armF_r": -27.2,
+    "armF_p": -55
    },
    "vise": {
     "legN": [
@@ -3121,24 +3089,27 @@
    "courbe": "acc-dec",
    "_mains3d": {
     "N": [
-     33,
-     -14,
-     -7
+     32.45,
+     -10.49,
+     -7.5
     ],
     "F": [
-     26,
-     -20,
-     7
+     29,
+     -17.5,
+     7.5
     ],
-    "coude_dy": 0,
+    "coude_dy": [
+     0,
+     -4
+    ],
     "ecart": [
-     40,
+     55,
      90
     ]
    }
   },
   {
-   "f": 222,
+   "f": 226,
    "fixe": {
     "x": 197.29,
     "y": 85.28,
@@ -3153,14 +3124,14 @@
     "epauleF_haut": 0,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 35.9,
-    "foreN": 112.9,
-    "armN_r": 51,
-    "armN_p": 59.6,
-    "armF": 4.2,
-    "foreF": 119,
-    "armF_r": -28.9,
-    "armF_p": -54
+    "armN": 49.1,
+    "foreN": 116.7,
+    "armN_r": 63.8,
+    "armN_p": 66,
+    "armF": 4.6,
+    "foreF": 123.2,
+    "armF_r": -23,
+    "armF_p": -55
    },
    "vise": {
     "legN": [
@@ -3175,24 +3146,84 @@
    "courbe": "acc-dec",
    "_mains3d": {
     "N": [
-     33,
-     -14,
-     -7
+     32,
+     -11,
+     -7.5
     ],
     "F": [
      26,
-     -20,
-     7
+     -16,
+     7.5
     ],
-    "coude_dy": 0,
+    "coude_dy": [
+     2,
+     -4
+    ],
     "ecart": [
-     40,
+     55,
      90
     ]
    }
   },
   {
-   "f": 252,
+   "f": 234,
+   "fixe": {
+    "x": 197.29,
+    "y": 85.28,
+    "root": -5,
+    "spineLow": 3,
+    "chest": 2,
+    "neck": 1,
+    "torsion": 0,
+    "epauleN_av": -2,
+    "epauleF_av": -2,
+    "epauleN_haut": 0,
+    "epauleF_haut": 0,
+    "thighN_p": 13,
+    "thighF_p": -13,
+    "armN": 49.1,
+    "foreN": 116.7,
+    "armN_r": 63.8,
+    "armN_p": 66,
+    "armF": 4.6,
+    "foreF": 123.2,
+    "armF_r": -23,
+    "armF_p": -55
+   },
+   "vise": {
+    "legN": [
+     176.2,
+     7.5
+    ],
+    "legF": [
+     218.38,
+     7.5
+    ]
+   },
+   "courbe": "acc-dec",
+   "_mains3d": {
+    "N": [
+     32,
+     -11,
+     -7.5
+    ],
+    "F": [
+     26,
+     -16,
+     7.5
+    ],
+    "coude_dy": [
+     2,
+     -4
+    ],
+    "ecart": [
+     55,
+     90
+    ]
+   }
+  },
+  {
+   "f": 264,
    "fixe": {
     "x": 197.29,
     "y": 87.78,

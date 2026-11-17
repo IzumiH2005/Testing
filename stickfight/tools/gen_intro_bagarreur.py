@@ -42,15 +42,19 @@ SUR = {"root": -5, "spineLow": 3, "chest": 2, "neck": 4, "torsion": 0,
        "epauleN_av": -2, "epauleF_av": -2, "epauleN_haut": 0, "epauleF_haut": 0}
 BRAS_REPOS = {"armN": -10, "foreN": 10, "armF": 8, "foreF": 8,
               "armN_p": 12, "armF_p": -12, "armN_r": 0, "armF_r": 0}
-# Mains en place devant le sternum : la paume N posée sur les phalanges du poing F,
-# chaque main de son côté en profondeur, sans se traverser (voir l'analyse § 4).
+# Mains jointes au milieu devant le sternum : le poing F un peu du côté loin, la main N
+# posée devant et au-dessus de ses phalanges, du côté caméra (voir l'analyse § 2.3).
 # Cibles du centre des poings, relatives à l'épaule (x devant, y haut, z profondeur,
 # N côté caméra = z négatif) ; les angles sont résolus par tools/resout_mains.sh.
-MAIN_F = (26, -20, 7)
-MAIN_N = (33, -14, -7)
-# Coudes ouverts sur les côtés : l'écartement est cherché dans cette plage pour que
-# les avant-bras soient horizontaux (coude à la hauteur de la main).
-ECART = [40, 90]
+# Une partie du décalage entre les mains est dans le plan de profil (x, y) pour que, vu de
+# profil, on voie la boule N posée sur le poing F et pas une seule boule.
+MAIN_F = (26, -16, 7.5)
+MAIN_N = (32, -11, -7.5)
+# Coudes (hauteur par rapport à la main) : N au-dessus de sa main, F en dessous, pour que
+# de profil les deux avant-bras fassent un coin au lieu d'une seule bande.
+COUDES = (2, -4)
+# Écartement des coudes cherché dans cette plage.
+ECART = [55, 90]
 # Angles de cette position (sortie de resout_mains, clé 148) : sert au trajet 104 → 136.
 PRETE = {"armN": 35.7, "foreN": 112.7, "armF": 4.2, "foreF": 119,
          "armN_p": 59.3, "armF_p": -54, "armN_r": 50.8, "armF_r": -28.9}
@@ -116,57 +120,66 @@ def main():
             break
         cles.append(cle)
 
-    # Craquage : clés à partir de 136, mains placées par vise (repère local absolu).
-    def craque(f, dy_bassin=0.0, haut=None, mains=(0, 0), n_plus=(0, 0), coude_dy=0,
+    # Craquage : clés à partir de 136, mains placées par mains3d (repère de l'épaule).
+    def craque(f, dy_bassin=0.0, haut=None, mains=(0, 0), roule=0.0, coudes=(0, 0),
                courbe=None, p=None):
-        """mains : décalage des deux mains ensemble ; n_plus : décalage de la main N en
-        plus (elle quitte le poing puis revient le frapper) ; coude_dy : hauteur des coudes
-        par rapport aux mains (0 = avant-bras horizontaux)."""
+        """mains : décalage des deux mains ensemble ; roule : la main N roule sur le poing F
+        (degrés, + = vers l'avant et le bas, − = vers soi et le haut), en restant au contact ;
+        coudes : ajouté à la hauteur des coudes (+ = plus haut)."""
         h = dict(SUR)
         h.update(haut or {})
         dxm, dym = mains
+        rx, ry = MAIN_N[0] - MAIN_F[0], MAIN_N[1] - MAIN_F[1]
+        a = math.radians(-roule)
+        nx = MAIN_F[0] + rx * math.cos(a) - ry * math.sin(a)
+        ny = MAIN_F[1] + rx * math.sin(a) + ry * math.cos(a)
         c = {"f": f, "fixe": {"x": X, "y": round(Y - 2.5 + dy_bassin, 2)}, "vise": dict(pieds)}
         c["fixe"].update(h)
         c["fixe"].update({"thighN_p": 13, "thighF_p": -13})
-        c["mains3d"] = {"N": [MAIN_N[0] + dxm + n_plus[0], MAIN_N[1] + dym + n_plus[1], MAIN_N[2]],
+        c["mains3d"] = {"N": [round(nx + dxm, 2), round(ny + dym, 2), MAIN_N[2]],
                         "F": [MAIN_F[0] + dxm, MAIN_F[1] + dym, MAIN_F[2]],
-                        "coude_dy": coude_dy, "ecart": ECART}
+                        "coude_dy": [COUDES[0] + coudes[0], COUDES[1] + coudes[1]],
+                        "ecart": ECART}
         if courbe:
             c["courbe"] = courbe
         if p:
             c["p"] = p
         return c
 
-    # Stature : la ligne des épaules reste droite ou en arrière (epaule_av ≤ 0) et le
-    # buste ne s'enroule pas. L'effort se lit par les épaules qui montent puis tombent,
-    # les coudes qui s'écartent, les genoux qui cèdent et le hochement de tête.
-    APPUI1 = {"chest": 0, "neck": 3, "epauleN_haut": 3, "epauleF_haut": 3,
+    # Stature : la ligne des épaules reste droite ou en arrière (epaule_av ≤ 0), le buste
+    # ne s'enroule pas. Le buste tourne un peu vers la caméra (côté du poing F devant) pour
+    # que les coudes ouverts se voient de profil.
+    T = float(os.environ.get("T", -10))
+    PRET = {"torsion": T}
+    APPUI1 = {"torsion": T, "chest": 0, "neck": 3, "epauleN_haut": 3, "epauleF_haut": 3,
               "epauleN_av": -3, "epauleF_av": -3}
-    CRAC1 = {"chest": 2, "neck": 10, "epauleN_haut": -2, "epauleF_haut": -2,
+    CRAC1 = {"torsion": T, "chest": 2, "neck": 10, "epauleN_haut": -2, "epauleF_haut": -2,
              "epauleN_av": -1, "epauleF_av": -1}
-    APPUI2 = {"chest": -1, "neck": 2, "epauleN_haut": 5, "epauleF_haut": 5, "root": -6,
-              "epauleN_av": -3, "epauleF_av": -3}
-    CRAC2 = {"chest": 2, "neck": 12, "epauleN_haut": -3, "epauleF_haut": -3,
+    APPUI2 = {"torsion": T, "chest": -1, "neck": 2, "epauleN_haut": 5, "epauleF_haut": 5,
+              "root": -6, "epauleN_av": -3, "epauleF_av": -3}
+    CRAC2 = {"torsion": T, "chest": 2, "neck": 13, "epauleN_haut": -3, "epauleF_haut": -3,
              "epauleN_av": -1, "epauleF_av": -1}
-    FIN = {"neck": 1}  # menton qui remonte, regard sur l'adversaire
+    FIN = {"torsion": T, "neck": 1}  # menton qui remonte, regard sur l'adversaire
 
     cles += [
-        craque(136),
-        craque(148, courbe="acc-dec"),
-        # appui : les mains remontent vers soi, la paume quitte le poing (écart visible)
-        craque(158, haut=APPUI1, mains=(-2, 1), n_plus=(1, 5), coude_dy=-3, courbe="acc", p=3),
-        # craquement : la paume revient frapper le poing et les deux poussent devant et en bas
-        craque(162, dy_bassin=-1.5, haut=CRAC1, mains=(2, -3), n_plus=(-0.5, -0.5), coude_dy=3, courbe="dec"),
-        craque(168, dy_bassin=-1.2, haut=CRAC1, mains=(2, -2.5), n_plus=(-0.5, -0.5), coude_dy=3, courbe="acc-dec"),
-        craque(180, haut={"neck": 4}, courbe="acc-dec"),
-        craque(190, haut=APPUI2, mains=(-3, 2), n_plus=(1.5, 6), coude_dy=-4, courbe="acc", p=3),
-        craque(194, dy_bassin=-2.5, haut=CRAC2, mains=(3, -4), n_plus=(-0.5, -0.5), coude_dy=3, courbe="dec"),
-        craque(202, dy_bassin=-2.0, haut=CRAC2, mains=(3, -3.5), n_plus=(-0.5, -0.5), coude_dy=3, courbe="acc-dec"),
-        craque(214, haut=FIN, courbe="acc-dec"),
-        craque(222, haut=FIN, courbe="acc-dec"),
+        craque(136, haut={"torsion": T / 2}),
+        craque(146, haut=PRET, courbe="acc-dec"),
+        # appui 1 : on serre lentement, la main N roule vers l'avant sur les phalanges, les
+        # coudes montent, les épaules montent
+        craque(162, haut=APPUI1, mains=(-2, 1), roule=22, coudes=(2, 2), courbe="acc"),
+        # crac 1 : la résistance cède, tout tombe d'un coup de quelques unités
+        craque(164, dy_bassin=-1.5, haut=CRAC1, mains=(2, -1), roule=26, coudes=(-1, 0), courbe="dec"),
+        craque(172, dy_bassin=-1.2, haut=CRAC1, mains=(2, -1), roule=26, coudes=(-1, 0), courbe="acc-dec"),
+        craque(184, haut=dict(PRET, neck=4), courbe="acc-dec"),
+        # appui 2 : plus long et plus fort, la main N roule dans l'autre sens (autres doigts)
+        craque(204, haut=APPUI2, mains=(-3, 2), roule=-20, coudes=(3, 3), courbe="acc"),
+        craque(206, dy_bassin=-2.5, haut=CRAC2, mains=(3, -1.5), roule=-24, coudes=(-2, 0), courbe="dec"),
+        craque(214, dy_bassin=-2.0, haut=CRAC2, mains=(3, -1.5), roule=-24, coudes=(-2, 0), courbe="acc-dec"),
+        craque(226, haut=FIN, courbe="acc-dec"),
+        craque(234, haut=FIN, courbe="acc-dec"),
     ]
     # Retour au repos : les mains se séparent puis descendent.
-    fin = {"f": 252, "fixe": {"x": X, "y": Y}, "vise": dict(pieds)}
+    fin = {"f": 264, "fixe": {"x": X, "y": Y}, "vise": dict(pieds)}
     fin["fixe"].update(REPOS)
     fin["fixe"].update(BRAS_REPOS)
     cles.append(fin)
@@ -174,7 +187,7 @@ def main():
     anim = {
         "nom": "intro_bagarreur",
         "boucle": False,
-        "longueur": 252,
+        "longueur": 264,
         "base": "repos",
         "suivante": "idle_repos",
         # pas de retard sur les bras : les deux mains l'une sur l'autre suivent le buste,
