@@ -66,8 +66,9 @@ le bras loin), `armF_r` (rotation), `foreF` (pli du coude).
 | 0 garde | 12 | 4 | 16 | 0 / −3 | −5, −80, −20, 100 | 31, 40, 40, 95 ; −1 | 15 | 0 | 0 / 84 |
 | 5 ressort | 16 | 10 | 26 | −2 / −3 | −8, −85, −20, 102 | idem | 15 | −6 | −1 / 82,5 |
 | 8 la hanche part | −5 | 30 | 25 (épaules restées en arrière) | −1 / −2 | −2, −80, −15, 100 | 25, 40, 40, 105 ; −1 | 0 | −5 | 1 / 83 |
-| 10 coude devant | −12 | −20 | −32 | 0 / −1 | 75, −72, −50, 90 | 10, 45, 35, 125 ; −2 | −5 | 29 | 2,5 / 83 |
-| 12 contact | −15 | −35 | −50 | 0 / 0 | 107, −50, 0, 3 | −10, 50, 30, 145 ; −3 | −10 | 40 | 4 / 83 |
+| 10 coude devant | −12 | −20 | −32 | 0 / −1 | 75, −72, −50, 90 | 30, 45, 30, 125 ; −2 | −5 | 29 | 2,5 / 83 |
+| 11 extension | −13,5 | −27,5 | −41 | 0 / −0,5 | 86, −60, −45, 46 | 30, 47,5, 30, 130 ; −2,5 | −7,5 | 34,2 | 3,25 / 83 |
+| 12 contact | −15 | −35 | −50 | 0 / 0 | 107, −50, 0, 3 | 30, 50, 30, 135 ; −3 | −10 | 40 | 4 / 83 |
 | 16 dépassement | −16 | −38 | −54 | 0 / 0 | 108, −52, 0, 0 | idem | −10 | 42 | 4,5 / 83 |
 | 24 tenue | −15 | −35 | −50 | 0 / 0 | 104, −48, 0, 8 | idem | −10 | 40 | 4 / 83 |
 | 34 retour | 0 | −10 | −10 | 0 / −2 | 50, −75, −40, 95 | 20, 45, 38, 115 ; −2 | 5 | 16 | 2 / 83,5 |
@@ -78,14 +79,22 @@ tourne (16 → −5) mais les épaules restent en arrière (26 → 25) : c'est l
 partent ensuite (−32 à 10, −50 au contact). `armF_p` suit cet angle absolu (−50 au contact)
 pour que le bras tendu pointe **sur la ligne de frappe** et non à 45° de côté.
 
-Bras N : le poing N passe du sternum (garde) **au menton** pendant le coup : le coude recule
-et se plie (`armN` 31 → −10, `foreN` 95 → 145), l'omoplate N recule (−1 → −3). C'est la
+Bras N : le poing N passe du sternum (garde) **sous le menton, devant la joue (y ≈ 41 au
+lacet total 0)** pendant le coup : le coude se plie (`foreN` 95 → 135) et s'écarte (`armN_p`
+40 → 50), l'omoplate N recule (−1 → −3). `armN` reste à 30 : avec les épaules tournées à −50,
+un `armN` plus bas enverrait le coude derrière le corps et rabattrait le poing dans la poitrine. C'est la
 garde du visage pendant que l'autre bras frappe ; il revient au sternum au retour.
 
 Jambes : pieds plantés. La jambe avant (N) est ancrée par l'outil (`ancre`) : sa cheville
 garde sa place, la cuisse et le genou s'adaptent, `thighN_r` reste à −5, `thighN_p` 15. La
 jambe arrière (F) pivote : `thighF_r` 15 → −10 (le genou rentre), `thighF_p` −15 ; sa cheville
 est visée à sa place de garde (`vise legF`), le genou s'adapte (flexion entre 30 et 45).
+
+Clé 11 : ajoutée pour que le poing aille droit entre 10 et 12 ; sans elle, l'interpolation
+le fait monter en cloche juste avant l'impact.
+
+Retour (24 → 34) : le coude se replie et remonte sur le côté, le poing sort de la ligne de
+frappe (z ≈ +16 vers l'image 28). C'est voulu : le bras reprend sa place de garde.
 
 Cou : `neck` reste à 3 (la tête ne pique pas). `neck_r` compense 60 % de la rotation des
 épaules, −0,6 × (épaules absolues − 16) : le regard reste vers la cible.
@@ -117,8 +126,11 @@ Cou : `neck` reste à 3 (la tête ne pique pas). `neck_r` compense 60 % de la ro
 3. Pendant le pivot, le coude F reste à hauteur d'épaule (± 10) : il ne plonge pas.
 4. Au contact, le poing F est à hauteur du menton (entre l'épaule et le centre de la tête),
    sur la ligne de frappe (|z| < 5 au lacet total 0). Entre 10 et 12, le poing avance à
-   chaque image et ses écarts augmentent (bible A bis 4).
-5. Rien ne traverse (`--verifier`) : le bras F ne passe pas dans la tête ni dans le bras N.
+   chaque image et ses écarts augmentent (bible A bis 4) ; il reste à y 51–55 et |z| < 5
+   (pas de cloche avant l'impact).
+5. Rien ne traverse (`--verifier`) : le bras F ne passe pas dans la tête ni dans le bras N ;
+   le poing et l'avant-bras N restent hors du tronc (le vérificateur ne contrôle pas bras
+   contre tronc : à vérifier au calcul).
 6. Les chevilles ne glissent pas (pieds plantés).
 7. Stature (règle 6 du projet) : `epaule*_av` ≤ 0 tout du long. L'épaule F revient à 0 au
    contact (elle ne s'enroule pas vers l'avant) ; l'allonge du coup vient de la rotation des
