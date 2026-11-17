@@ -124,8 +124,8 @@
     "shinF": 67.3,
     "armN": 59.1,
     "foreN": 46.4,
-    "armF": -101,
-    "foreF": 276
+    "armF": -65,
+    "foreF": 225
    },
    "etire": {
     "armF": 0.95
@@ -149,8 +149,8 @@
     "shinF": 70.9,
     "armN": 62.2,
     "foreN": 34.9,
-    "armF": -109,
-    "foreF": 284
+    "armF": -63,
+    "foreF": 225
    },
    "etire": {
     "armF": 0.97
@@ -174,8 +174,8 @@
     "shinF": 66.7,
     "armN": 52.7,
     "foreN": 62.9,
-    "armF": -48,
-    "foreF": 265
+    "armF": -43,
+    "foreF": 228
    },
    "etire": {
     "armF": 1.0
