@@ -208,5 +208,6 @@ D'après `etudes/postures_trois_quarts/rapport.md` § 2.2 (V1 100 et 120, R2 145
 (F) passe en coude levé sur le côté : `armF −5`, `armF_p −80` (abduction ~80°), `armF_r −20`
 (avant-bras qui tombe vers le bas-avant), `foreF 100`. À lacet −45, le bras haut fait une barre
 vers l'arrière à hauteur d'épaule et le poing F sort de la tête. Le bras N ne change pas.
+L'épaule N (proche) est un peu baissée (`epauleN_haut −3`), à la demande de l'utilisateur.
 Le vérificateur ne relève aucune traversée sur l'idle. Le bras N raccourci (< 55 %) est voulu :
 le trois quarts se lit par un bras court et un bras à plat (rapport § 2.1).
