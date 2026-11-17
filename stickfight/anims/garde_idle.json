@@ -1,14 +1,92 @@
 {
-  "nom": "garde_idle",
-  "boucle": true,
-  "longueur": 112,
-  "base": "garde",
-  "decalage": {"chest": 3, "neck": 4, "armN": 5, "foreN": 6, "armF": 8, "foreF": 9},
-  "cles": [
-    {"f": 0},
-    {"f": 22, "plus": {"y": -2.99, "spineLow": 0.8, "chest": 1.5, "neck": -1.2, "armN": 2.5, "foreN": 3, "armF": 1.5, "foreF": 2}},
-    {"f": 56, "plus": {"neck": 0.6, "chest": -0.4}},
-    {"f": 80, "plus": {"y": -2.45, "spineLow": 0.6, "chest": 1.2, "neck": -0.8, "armN": 2, "foreN": 2, "armF": 1, "foreF": 1.5}},
-    {"f": 112}
-  ]
+ "nom": "garde_idle",
+ "boucle": true,
+ "longueur": 112,
+ "base": "garde",
+ "decalage": {
+  "chest": 3,
+  "neck": 4,
+  "armN": 5,
+  "foreN": 6,
+  "armF": 8,
+  "foreF": 9
+ },
+ "cles": [
+  {
+   "f": 0
+  },
+  {
+   "f": 22,
+   "nom": "expire, les poings se serrent",
+   "plus": {
+    "y": -1.6,
+    "x": 0.5,
+    "spineLow": 0.6,
+    "chest": 1.0,
+    "neck": -0.8,
+    "armN": 1.5,
+    "foreN": 3,
+    "armF": 1,
+    "foreF": 3,
+    "epauleN_haut": 0.5,
+    "epauleF_haut": 0.5
+   },
+   "courbe": "auto"
+  },
+  {
+   "f": 40,
+   "plus": {
+    "y": -0.5,
+    "x": 0.6,
+    "foreN": 1,
+    "foreF": 1
+   },
+   "courbe": "auto"
+  },
+  {
+   "f": 56,
+   "nom": "inspire courte",
+   "plus": {
+    "y": 0.2,
+    "x": 0,
+    "neck": 0.5,
+    "chest": -0.4,
+    "epauleN_haut": 1,
+    "epauleF_haut": 1
+   },
+   "courbe": "auto"
+  },
+  {
+   "f": 80,
+   "nom": "expire",
+   "plus": {
+    "y": -1.3,
+    "x": -0.6,
+    "spineLow": 0.5,
+    "chest": 0.9,
+    "neck": -0.6,
+    "armN": 1.2,
+    "foreN": 2.5,
+    "armF": 0.8,
+    "foreF": 2.5,
+    "epauleN_haut": 0.5,
+    "epauleF_haut": 0.5
+   },
+   "courbe": "auto"
+  },
+  {
+   "f": 96,
+   "plus": {
+    "y": -0.4,
+    "x": -0.4,
+    "foreN": 0.8,
+    "foreF": 0.8
+   },
+   "courbe": "auto"
+  },
+  {
+   "f": 112
+  }
+ ],
+ "note": "Garde fermée (analyses/gardes.md § 4) : tendu, peu de mouvement. Respiration courte, poings qui se resserrent à l'expiration, épaules hautes, très léger transfert du poids."
 }

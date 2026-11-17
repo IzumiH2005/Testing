@@ -1,14 +1,121 @@
 {
-  "nom": "garde_ouverte_idle",
-  "boucle": true,
-  "longueur": 96,
-  "base": "garde_ouverte",
-  "decalage": {"chest": 3, "neck": 4, "armN": 6, "foreN": 7, "armF": 8, "foreF": 9},
-  "cles": [
-    {"f": 0},
-    {"f": 20, "nom": "expire", "plus": {"y": -2.8, "spineLow": 0.8, "chest": 1.4, "neck": -1.2, "armN": -2.5, "foreN": 4, "armF": 1.5, "foreF": 2}},
-    {"f": 48, "nom": "inspire", "plus": {"y": 0.3, "neck": 0.6, "chest": -0.4, "armN": 1.5, "foreN": -2.5}},
-    {"f": 70, "nom": "expire", "plus": {"y": -2.2, "spineLow": 0.6, "chest": 1.1, "neck": -0.8, "armN": -1.5, "foreN": 2.5, "armF": 1, "foreF": 1.5}},
-    {"f": 96}
-  ]
+ "nom": "garde_ouverte_idle",
+ "boucle": true,
+ "longueur": 96,
+ "base": "garde_ouverte",
+ "decalage": {
+  "chest": 3,
+  "neck": 4,
+  "armN": 6,
+  "foreN": 7,
+  "armF": 8,
+  "foreF": 9
+ },
+ "cles": [
+  {
+   "f": 0
+  },
+  {
+   "f": 12,
+   "nom": "la main avant tâte la distance",
+   "plus": {
+    "y": -0.8,
+    "x": 0.3,
+    "torsion": 2,
+    "epauleN_av": 1.5,
+    "armN": 4,
+    "foreN": -9,
+    "chest": 0.4
+   },
+   "courbe": "auto"
+  },
+  {
+   "f": 20,
+   "nom": "expire, premier rebond",
+   "plus": {
+    "y": -2.8,
+    "x": 0.6,
+    "spineLow": 0.8,
+    "chest": 1.4,
+    "neck": -1.2,
+    "armN": -1.5,
+    "foreN": 3,
+    "armF": 1.5,
+    "foreF": 2,
+    "epauleN_av": 0.5
+   },
+   "courbe": "auto"
+  },
+  {
+   "f": 34,
+   "nom": "la main revient",
+   "plus": {
+    "y": -0.6,
+    "x": 0.4,
+    "armN": -1,
+    "foreN": 3,
+    "foreF": 1
+   },
+   "courbe": "auto"
+  },
+  {
+   "f": 48,
+   "nom": "inspire, épaules qui montent",
+   "plus": {
+    "y": 0.3,
+    "x": -0.2,
+    "neck": 0.6,
+    "chest": -0.4,
+    "armN": 1.5,
+    "foreN": -2.5,
+    "epauleN_haut": 1,
+    "epauleF_haut": 1
+   },
+   "courbe": "auto"
+  },
+  {
+   "f": 60,
+   "nom": "deuxième touche, plus courte",
+   "plus": {
+    "y": -0.6,
+    "x": -0.4,
+    "torsion": 1.2,
+    "epauleN_av": 1,
+    "armN": 2.5,
+    "foreN": -6,
+    "epauleN_haut": 0.5,
+    "epauleF_haut": 0.5
+   },
+   "courbe": "auto"
+  },
+  {
+   "f": 70,
+   "nom": "expire, second rebond",
+   "plus": {
+    "y": -2.2,
+    "x": -0.5,
+    "spineLow": 0.6,
+    "chest": 1.1,
+    "neck": -0.8,
+    "armN": -1.5,
+    "foreN": 2.5,
+    "armF": 1,
+    "foreF": 1.5
+   },
+   "courbe": "auto"
+  },
+  {
+   "f": 84,
+   "plus": {
+    "y": -0.4,
+    "x": -0.2,
+    "foreN": 1
+   },
+   "courbe": "auto"
+  },
+  {
+   "f": 96
+  }
+ ],
+ "note": "Garde ouverte vivante (analyses/gardes.md § 4) : deux rebonds sur les plantes par cycle, la main avant tâte la distance deux fois, les épaules suivent la respiration, le poids passe d'un pied à l'autre, la tête reste stable."
 }
