@@ -111,6 +111,8 @@ const ROT := "_r"
 ## Coude, genou : charnières. Ils ne plient que dans un plan (celui que donne
 ## la rotation du segment parent) : pas de profondeur propre.
 const CHARNIERES := ["foreN", "foreF", "shinN", "shinF"]
+## Ouverture neutre de chaque cuisse (degrés) : remplace la largeur du bassin (voir solve).
+const LARGEUR_HANCHE := 4.0
 ## Limites des canaux 3D (degrés), par « canal:os sans côté ». Profondeur du
 ## bras : vers la caméra = abduction (bras écarté du corps, jusqu'à 90°), à
 ## l'opposé = adduction (bras qui passe devant le buste, 40°). Cuisse :
@@ -242,6 +244,14 @@ static func solve(p: Dictionary) -> Dictionary:
 	for b in BONES:
 		# Charnière (coude, genou) : aucune profondeur propre.
 		var prof_os: float = 0.0 if b.id in CHARNIERES else angle(p, b.id + PROF)
+		# Largeur de hanche : les deux jambes partent d'un seul point (apparence du
+		# personnage), alors qu'un vrai bassin a deux hanches écartées. Chaque cuisse
+		# s'ouvre donc d'un angle neutre vers l'extérieur pour que les pieds tombent
+		# sous les hanches (vue de face). thigh*_p se compte à partir de là.
+		if b.id == "thighN":
+			prof_os += LARGEUR_HANCHE
+		elif b.id == "thighF":
+			prof_os -= LARGEUR_HANCHE
 		var B: Basis = basis[b.parent] * RZ.call(b.rest + b.sign * angle(p, b.id)) * RY.call(prof_os)
 		if b.id.begins_with("arm") or b.id.begins_with("thigh"):
 			B = B * RX.call(angle(p, b.id + ROT))
