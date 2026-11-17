@@ -104,20 +104,20 @@
     "x": 2.5,
     "y": 83,
     "torsionBassin": -12,
-    "torsion": -20,
+    "torsion": -12,
     "epauleF_av": 0,
     "epauleF_haut": -1,
-    "armF": 75,
-    "armF_p": -70,
+    "armF": 68,
+    "armF_p": -72,
     "armF_r": -50,
-    "foreF": 110,
+    "foreF": 120,
     "armN": 30,
     "armN_p": 45,
     "armN_r": 30,
     "foreN": 125,
     "epauleN_av": -2,
     "thighF_r": -5,
-    "neck_r": 28.8
+    "neck_r": 24.0
    },
    "vise": {
     "legF": [
@@ -134,20 +134,20 @@
     "x": 3.25,
     "y": 83,
     "torsionBassin": -13.5,
-    "torsion": -27.5,
+    "torsion": -24,
     "epauleF_av": 0,
     "epauleF_haut": -0.5,
-    "armF": 76,
-    "armF_p": -75,
-    "armF_r": -48,
-    "foreF": 84,
+    "armF": 70,
+    "armF_p": -68,
+    "armF_r": -42,
+    "foreF": 85,
     "armN": 30,
     "armN_p": 47.5,
     "armN_r": 30,
     "foreN": 130,
     "epauleN_av": -2.5,
     "thighF_r": -7.5,
-    "neck_r": 34.2
+    "neck_r": 32.1
    },
    "vise": {
     "legF": [

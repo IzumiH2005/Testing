@@ -130,7 +130,7 @@ Cou : `neck` reste à 3 (la tête ne pique pas). `neck_r` compense 60 % de la ro
 3. Pendant le pivot, le coude F reste à hauteur d'épaule (± 10) : il ne plonge pas.
 4. Au contact, le poing F est à hauteur du menton (entre l'épaule et le centre de la tête),
    sur la ligne de frappe (|z| < 5 au lacet total 0). Entre 10 et 12, le poing avance à
-   chaque image et ses écarts augmentent (bible A bis 4) ; il reste à y 51–55 et |z| < 5
+   chaque image et ses écarts augmentent (bible A bis 4) ; il reste à y 48–55 et |z| ≤ 5
    (pas de cloche avant l'impact).
 5. Rien ne traverse (`--verifier`) : le bras F ne passe pas dans la tête ni dans le bras N ;
    le poing et l'avant-bras N restent hors du tronc (le vérificateur ne contrôle pas bras
