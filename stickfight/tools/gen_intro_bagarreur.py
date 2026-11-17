@@ -43,15 +43,22 @@ SUR = {"root": -5, "spineLow": 3, "chest": 2, "neck": 4, "torsion": 0,
 BRAS_REPOS = {"armN": -10, "foreN": 10, "armF": 8, "foreF": 8,
               "armN_p": 12, "armF_p": -12, "armN_r": 0, "armF_r": 0}
 # Bras de la clé 136 (sortie de resout_mains) : sert au trajet 104 → 136.
-PRETE = {"armN": 3, "foreN": 128, "armF": 3.9, "foreF": 122, "armN_p": 57.9, "armF_p": -51.9, "armN_r": 15.5, "armF_r": -17.1}
+PRETE = {"armN": 23.8, "foreN": 131.5, "armF": 6.5, "foreF": 120.6, "armN_p": 68.9, "armF_p": -54, "armN_r": 34.8, "armF_r": -25.2}
 
 
-MAIN_N = tuple(json.loads(os.environ.get("MN", "[25, -12, -8.5]")))
-MAIN_F = tuple(json.loads(os.environ.get("MF", "[27, -15, 8.5]")))
+MAIN_N = tuple(json.loads(os.environ.get("MN", "[25, -8, -7]")))
+MAIN_F = tuple(json.loads(os.environ.get("MF", "[27, -17, 7.5]")))
 
 
 # Coudes un peu sous les mains : avant-bras presque horizontaux (l'écartement s'ouvre pour ça).
-COUDE_DY = float(os.environ.get("CD", -6))
+COUDE_DY = float(os.environ.get("CD", -3))
+
+
+# Pendant le craquage, le buste tourne de trois quarts vers la caméra (idée de
+# l'utilisateur) : les deux poings, côte à côte en profondeur, se séparent à l'écran. La
+# tête reste tournée vers l'adversaire (neck_r compense).
+TROIS_QUARTS = float(os.environ.get("T", -25))
+SENS = float(os.environ.get("SENS", 1))
 
 
 def tronc(f):
@@ -107,7 +114,8 @@ def main():
             u = ease(min(1.0, (f - DEBUT_MAINS) / (MAINS_PRETES - DEBUT_MAINS)), "acc-dec")
             b = mix(bras_debut, PRETE, u)
             t_debut = round(0.25 * (bras_debut["armN"] - bras_debut["armF"]) / 2, 2)
-            haut["torsion"] = round(t_debut * (1 - u), 2)
+            haut["torsion"] = round(t_debut * (1 - u) + TROIS_QUARTS * u, 2)
+            haut["neck_r"] = round(-TROIS_QUARTS * u, 2)
             haut["epauleN_av"] = haut["epauleF_av"] = round(-2 + u, 2)
         cle["fixe"].update(haut)
         cle["fixe"].update(b)
@@ -120,6 +128,9 @@ def main():
         h = dict(SUR)
         h.update({"epauleN_av": -1, "epauleF_av": -1})
         h.update(haut or {})
+        # buste tourné de trois quarts vers la caméra, tête qui reste sur l'adversaire
+        h["torsion"] = TROIS_QUARTS
+        h["neck_r"] = -TROIS_QUARTS
         dxm, dym = mains
         c = {"f": f, "fixe": {"x": X, "y": round(Y - 2.5 + dy_bassin, 2)}, "vise": dict(pieds)}
         c["fixe"].update(h)
@@ -127,8 +138,14 @@ def main():
         # mains placées en 3D (tools/resout_mains.sh) : même endroit que la première version
         # (devant la poitrine, loin du buste), mais l'une à côté de l'autre en profondeur, au
         # contact, au lieu de l'une dans l'autre
-        c["mains3d"] = {"N": [MAIN_N[0] + dxm, MAIN_N[1] + dym, MAIN_N[2]],
-                        "F": [MAIN_F[0] + dxm, MAIN_F[1] + dym, MAIN_F[2]],
+        # les mains tournent avec le buste (même angle que la torsion, autour de la verticale)
+        a = math.radians(SENS * TROIS_QUARTS)
+
+        def tourne(m):
+            x, z = m[0] + dxm, m[2]
+            return [round(x * math.cos(a) - z * math.sin(a), 2), m[1] + dym,
+                    round(x * math.sin(a) + z * math.cos(a), 2)]
+        c["mains3d"] = {"N": tourne(MAIN_N), "F": tourne(MAIN_F),
                         "coude_dy": COUDE_DY, "ecart": [coudes, 75]}
         if courbe:
             c["courbe"] = courbe
@@ -138,10 +155,10 @@ def main():
 
     # Stature (règle 6) : épaules droites ou en arrière, buste droit, même au craquement ;
     # l'effort se lit par les épaules qui montent puis tombent, les genoux, la tête.
-    APPUI1 = {"chest": 0, "neck": 3, "epauleN_haut": 3, "epauleF_haut": 3,
+    APPUI1 = {"chest": 0, "neck": 3, "epauleN_haut": 2, "epauleF_haut": 2,
               "epauleN_av": -3, "epauleF_av": -3}
     CRAC1 = {"chest": 2, "neck": 10, "epauleN_haut": -2, "epauleF_haut": -2}
-    APPUI2 = {"chest": -1, "neck": 2, "epauleN_haut": 5, "epauleF_haut": 5, "root": -6,
+    APPUI2 = {"chest": -1, "neck": 2, "epauleN_haut": 2, "epauleF_haut": 2, "root": -6,
               "epauleN_av": -3, "epauleF_av": -3}
     CRAC2 = {"chest": 2, "neck": 13, "epauleN_haut": -3, "epauleF_haut": -3}
     FIN = {"neck": 1}  # menton qui remonte, regard sur l'adversaire
@@ -149,13 +166,13 @@ def main():
     cles += [
         craque(136),
         craque(148, courbe="acc-dec"),
-        craque(158, haut=APPUI1, mains=(-3, 3), courbe="acc", p=3),
-        craque(162, dy_bassin=-1.5, haut=CRAC1, mains=(3, -5), coudes=45, courbe="dec"),
-        craque(168, dy_bassin=-1.2, haut=CRAC1, mains=(3, -4), coudes=44, courbe="acc-dec"),
+        craque(158, haut=APPUI1, mains=(-2, 2), courbe="acc", p=3),
+        craque(162, dy_bassin=-1.5, haut=CRAC1, mains=(3, -4), coudes=45, courbe="dec"),
+        craque(168, dy_bassin=-1.2, haut=CRAC1, mains=(3, -3), coudes=44, courbe="acc-dec"),
         craque(180, haut={"neck": 4}, courbe="acc-dec"),
-        craque(190, haut=APPUI2, mains=(-4, 5), coudes=33, courbe="acc", p=3),
-        craque(194, dy_bassin=-2.5, haut=CRAC2, mains=(4, -7), coudes=50, courbe="dec"),
-        craque(202, dy_bassin=-2.0, haut=CRAC2, mains=(4, -6), coudes=48, courbe="acc-dec"),
+        craque(190, haut=APPUI2, mains=(-2, 3), coudes=33, courbe="acc", p=3),
+        craque(195, dy_bassin=-2.5, haut=CRAC2, mains=(4, -6), coudes=50, courbe="dec"),
+        craque(202, dy_bassin=-2.0, haut=CRAC2, mains=(4, -5), coudes=48, courbe="acc-dec"),
         craque(214, haut=FIN, courbe="acc-dec"),
         craque(222, haut=FIN, courbe="acc-dec"),
     ]

@@ -103,6 +103,7 @@ proche (N) le couvre.
 | « les coudes ne sont pas assez tournés vers l'intérieur » | les avant-bras pointent vers le centre (l'un vers l'autre) autant que le rig le permet, sans ramener les mains contre la poitrine | « vers l'avant » ≤ 62° |
 | « Les coudes devraient être légèrement en arrière au lieu d'aligner au buste je pense » | essayé (coudes à −2 puis −7) : les mains se retrouvent sous le menton, illisibles de profil ; remplacé par la demande suivante | — |
 | « Finalement c'est la première version qui correspondait le plus […] utilise-la comme base » | on reprend la toute première version (mains loin devant la poitrine, coudes ouverts, poings joints) ; on n'y corrige que les traversées (mains en 3D, côte à côte en profondeur) et la stature (épaules qui avançaient au crac) | rendu comparé à la première version ; contrôles 4 et 5 |
+| « Et si cette pose […] tu la faisais en 3/4 au lieu de profil […] sa tête est bien sûr tournée vers son adversaire » | pendant le craquage, buste tourné de 25° vers la caméra, cibles des mains tournées avec lui ; tête tournée d'autant dans l'autre sens | `torsion` −25, `neck_r` +25 aux clés 136-222 ; de profil centres des mains ≥ 10 et coudes ≥ 15 l'un de l'autre |
 | « même en vue de profil on doit vraiment avoir l'impression que ses mains se touchent et qu'il craque du poing » | de profil : deux boules distinctes au contact, deux avant-bras distincts, un appui puis un à-coup lisibles | distances de profil (contrôle 4 ter) |
 
 **Limite du rig.** Les deux épaules sont au même point (pas de largeur d'épaules), le bras
@@ -113,37 +114,40 @@ même raison, de profil les deux coudes sont tous les deux près de la ligne du 
 peut pas les écarter beaucoup l'un de l'autre (une torsion du buste de ±20° a été essayée :
 elle n'aide pas, les coudes se rapprochent même).
 
-### 2.4 Géométrie retenue (première version, sans traversée)
+### 2.4 Géométrie retenue (première version, de trois quarts, sans traversée)
 
-**Les mains loin devant la poitrine.** C'est ce qui rendait la première version lisible : de
-profil, les avant-bras sortent nettement du tronc et les poings joints sont bien devant le
-sternum, à hauteur du bas de la poitrine. Centres des poings, relatifs à l'épaule (x devant,
-y haut, z profondeur, N côté caméra = z négatif) : main N (25, −12, −8,5), poing F
-(27, −15, +8,5).
+**De trois quarts pendant le craquage (idée de l'utilisateur).** De 104 à 136, pendant que
+les mains montent, le buste tourne de 25° vers la caméra (`torsion` −25) ; la tête tourne
+d'autant dans l'autre sens (`neck_r` +25) : le regard reste sur l'adversaire. C'est une
+attitude naturelle (on s'ouvre un peu pour « montrer » ses poings) et c'est ce qui rend le
+geste lisible : sans torsion, les deux mains sont l'une derrière l'autre en profondeur et ne
+font qu'une boule de profil. Avec la torsion, la ligne des mains tourne avec la poitrine ;
+de profil on voit deux boules au contact (centres à 12, la paume un peu plus haute), deux
+avant-bras distincts et deux coudes séparés (24 entre eux : coude N derrière le tronc, coude
+F devant).
 
-**Les mains se touchent, elles ne se traversent pas.** Dans la première version, les deux
-mains visaient le même point : elles étaient l'une dans l'autre. Ici elles sont côte à côte
-en profondeur, distance 17,4 (deux rayons = 17) : contact franc, sans chevauchement. La
-main N est un peu plus haute et un peu en retrait (3 plus haut, 2 en arrière) : c'est la
-paume qui couvre le dessus du poing F. De profil, les centres sont à 3,6 : une seule masse de
-poings joints au bout de deux avant-bras, comme dans la première version.
+**Les mains loin devant la poitrine**, comme dans la première version : poings devant le
+sternum, à hauteur du bas de la poitrine, nettement sous le menton. Centres relatifs à
+l'épaule dans le repère du buste (x devant, y haut, z profondeur, N côté caméra = z négatif),
+puis tournés de 25° avec lui : paume N (25, −8, −7), poing F (27, −17, +7,5).
 
-**Coudes ouverts, avant-bras presque horizontaux.** Chaque coude est cherché 6 sous sa main
-(`coude_dy` −6) : avant-bras à +11° (la main un peu plus haute que le coude, poing levé
-« je vais te casser la figure »). Les coudes s'ouvrent pour y arriver : bras à 58° (N) et
-52° (F) de la verticale en position posée, 64-68° à l'appui (les coudes montent), 45-50° au
-crac (ils tombent). Les coudes sont au niveau du tronc ou un peu devant (x 0 à +2).
+**Les mains se touchent sans se traverser.** Centres à 17,1-17,2 à toutes les clés (deux
+rayons = 17) : contact franc, la paume N couvre le dessus du poing F.
 
-**Le craquement, sans choc.** Les mains ne se quittent jamais (§ 2.1 : une force qui monte
-lentement, puis la résistance qui cède). Le craquement se lit par :
-- l'**appui** (10 images, puis 10, `acc`) : les poings remontent et reculent vers la poitrine
-  de 3-4 (on serre en tirant), les coudes montent et s'ouvrent, les épaules montent et
-  reculent (inspire) ;
-- le **crac** (4 images, `dec`) : tout cède d'un coup : les poings partent devant et en bas
-  (+6 et −8 depuis l'appui 1, +8 et −12 depuis l'appui 2), les coudes tombent, les épaules
-  tombent, les genoux cèdent, la tête hoche ;
-- le **second craquement** est plus fort (on recraque d'autres doigts) : appui plus haut,
-  chute plus longue, bassin plus bas, hochement plus marqué.
+**Avant-bras presque horizontaux.** Chaque coude est cherché 3 sous sa main (`coude_dy` −3) :
+pente +5 à +7° aux clés posées et d'appui, −3° à 0° pour le poing F au crac 2 (il tombe).
+Bras à 71° (N) et 54° (F) de la verticale posé, 75° / 58-60° à l'appui, 61-66° / 46-51° au
+crac.
+
+**Le craquement, sans choc.** Les mains ne se quittent jamais (§ 2.1). Il se lit par :
+- l'**appui** (10 images, `acc`) : les poings remontent de 2-3 et reculent de 2 (on serre en
+  tirant, sans monter au menton), les coudes montent et s'ouvrent, les épaules montent de 2
+  et reculent (inspire) ;
+- le **crac** (4 images, puis 5 pour le second, `dec`) : tout cède : poings devant et en bas
+  (+5/−6, puis +6/−9 depuis l'appui), coudes et épaules qui tombent, genoux qui cèdent,
+  hochement de tête ;
+- le **second craquement** est plus fort : chute plus longue, bassin plus bas, hochement
+  plus marqué.
 
 ## 2 bis. Stature : la ligne des épaules
 
@@ -165,13 +169,13 @@ Durées à 60 images par seconde.
 |---|---|---|---|
 | 0-40 | départ | départ de la marche détendue | le buste se redresse, les épaules reculent (en 20 images) |
 | 40-96 | marche | un cycle de marche détendue | buste droit, bras qui balancent, épaules qui tournent un peu |
-| 96-148 | dernier pas et arrêt | arrêt en un pas | à partir de 104, les mains montent ; jointes à 136, posées à 148 |
+| 96-148 | dernier pas et arrêt | arrêt en un pas | à partir de 104, les mains montent et le buste tourne de trois quarts (la tête reste sur l'adversaire) ; jointes à 136, posées à 148 |
 | 148-158 | appui 1 (10 images, `acc`) | posées | poings qui remontent vers la poitrine, coudes et épaules qui montent |
 | 158-162 | crac 1 (4 images, `dec`) | genoux qui cèdent (bassin −1,5) | à-coup : poings devant et en bas ; coudes et épaules qui tombent ; hochement |
 | 162-180 | tenue puis relâche | | retour à la position posée |
 | 180-190 | appui 2 (10 images, `acc`) | | poings plus haut, coudes plus ouverts, épaules plus hautes, bassin qui se redresse |
-| 190-194 | crac 2 | genoux qui cèdent plus (bassin −2,5) | à-coup plus fort ; hochement plus marqué ; buste toujours droit |
-| 194-222 | tenue | | il regarde l'adversaire, menton qui remonte |
+| 190-195 | crac 2 (5 images) | genoux qui cèdent plus (bassin −2,5) | à-coup plus fort ; hochement plus marqué ; buste toujours droit |
+| 195-222 | tenue | | il regarde l'adversaire, menton qui remonte |
 | 222-252 | retour au repos | | les mains se séparent et descendent, le buste reprend le repos |
 
 ## 4. Les poses clés, articulation par articulation
@@ -182,22 +186,23 @@ Repère : angles du squelette (voir `analyses/anatomie.md` § 4 bis et 6 bis).
 « plan » est l'angle de l'avant-bras vu de dessus (0 = vers le centre, 90 = devant) ; les
 canaux du rig (arm, fore, _p, _r) suivent.
 
-| Pose | N : bras / vert., coude, pente, plan | N : arm / fore / _p / _r | F : bras / vert., coude, pente, plan | F : arm / fore / _p / _r | Omoplates (haut, av) | Mains (3D) ; profil |
+| Pose | N : bras / vert., pente, plan | N : arm / fore / _p / _r | F : bras / vert., pente, plan | F : arm / fore / _p / _r | Omoplates (haut, av) | Mains 3D ; profil mains, coudes |
 |---|---|---|---|---|---|---|
-| Posée (148) | 58°, coude 18 sous l'épaule, pente +11°, plan 50° | 3 / 128 / 58 / 16 | 52°, coude 21 sous l'épaule, pente +11°, plan 54° | 4 / 122 / −52 / −17 | 0, −1 | 17,4 ; profil mains 3,6, coudes 2,9 |
-| Appui 1 (158) | 64°, coude 15 sous l'épaule, pente +11°, plan 46° | −4 / 135 / 64 / 10 | 58°, coude 18 sous l'épaule, pente +10°, plan 49° | −2 / 130 / −58 / −14 | +3, −3 | 17,3 ; profil mains 3,6, coudes 2,9 |
-| Crac 1 (162) | 47°, coude 23 sous l'épaule, pente +11°, plan 58° | 3 / 118 / 47 / 16 | 45°, coude 24 sous l'épaule, pente +7°, plan 61° | 6 / 112 / −45 / −20 | −2, −1 | 17,4 ; profil mains 3,6, coudes 1,4 |
-| Appui 2 (190) | 68°, coude 13 sous l'épaule, pente +11°, plan 43° | −6 / 138 / 68 / 7 | 62°, coude 16 sous l'épaule, pente +11°, plan 47° | −4 / 133 / −62 / −12 | +5, −3 | 17,3 ; profil mains 3,6, coudes 3,0 |
-| Crac 2 (194) | 50°, coude 22 sous l'épaule, pente +5°, plan 57° | 6 / 115 / 50 / 23 | 51°, coude 21 sous l'épaule, pente −1°, plan 57° | 11 / 108 / −50 / −31 | −3, −1 | 17,4 ; profil mains 3,6, coudes 1,9 |
+| Posée (148) | 71°, +6°, 64° | 24 / 132 / 69 / 35 | 54°, +5°, 26° | 6 / 121 / -54 / -25 | 0, −1 | 17,1-17,2 ; 12,0 ; 24,1 |
+| Appui 1 (158) | 75°, +5°, 62° | 24 / 136 / 74 / 35 | 58°, +5°, 23° | 3 / 126 / -58 / -24 | +2, −3 | 17,1-17,2 ; 12,0 ; 25,2 |
+| Crac 1 (162) | 64°, +5°, 69° | 22 / 124 / 62 / 36 | 46°, +5°, 34° | 7 / 111 / -45 / -24 | −2, −1 | 17,1-17,2 ; 12,0 ; 21,8 |
+| Appui 2 (190) | 75°, +7°, 61° | 25 / 136 / 75 / 35 | 60°, +5°, 21° | 2 / 127 / -58 / -24 | +2, −3 | 17,1-17,2 ; 12,0 ; 25,5 |
+| Crac 2 (195) | 61°, +5°, 71° | 20 / 120 / 59 / 35 | 51°, −3°, 29° | 13 / 107 / -50 / -36 | −3, −1 | 17,1-17,2 ; 12,0 ; 22,9 |
 
-Les deux coudes sont à x = 0 à +4 de l'épaule (au niveau du tronc).
+De profil, le coude N est 7 à 10 derrière l'épaule et le coude F 13 à 16 devant : la ligne
+des coudes tourne avec le buste (trois quarts).
 
 | Pose | Bassin, buste | Jambes | Tête |
 |---|---|---|---|
-| Posée | root −5, bas du dos 3, poitrine 2, torsion 0 ; bassin 2,5 plus bas que debout | pieds à plat, écartés (N à −21, F à +21 du bassin ; pied N devant, celui du dernier pas), hanches écartées ±13°, genoux légèrement fléchis par la descente du bassin, chevilles neutres | cou 4, regard sur l'adversaire |
-| Appui 1 | poitrine 0 (inspire) | idem | cou 3 |
+| Posée | root −5, bas du dos 3, poitrine 2, torsion −25 (trois quarts) ; bassin 2,5 plus bas que debout | pieds à plat, écartés (N à −21, F à +21 du bassin ; pied N devant, celui du dernier pas), hanches écartées ±13°, genoux légèrement fléchis par la descente du bassin, chevilles neutres | cou 4, `neck_r` +25 : visage vers l'adversaire |
+| Appui 1 | poitrine 0 (inspire), épaules +2 en haut, −3 en arrière | idem | cou 3 |
 | Crac 1 | poitrine 2, bassin −1,5, épaules −1 en avant (jamais devant) | genoux qui cèdent (flexion qui augmente de la descente du bassin) | cou 10 : hochement ; le regard reste sur l'adversaire (les yeux remontent) |
-| Appui 2 | root −6, poitrine −1 | idem posée | cou 2 |
+| Appui 2 | root −6, poitrine −1, épaules +2 en haut, −3 en arrière | idem posée | cou 2 |
 | Crac 2 | poitrine 2, bassin −2,5 | genoux qui cèdent plus | cou 13 |
 
 Les coudes : à l'appui ils montent (de 3 à 5) et s'ouvrent, au crac ils tombent de 8 et se
@@ -215,14 +220,13 @@ des épaules les faisait glisser l'une dans l'autre pendant 3 ou 4 images.
 
 ## 5. Ce qui se voit de profil
 
-- Les poings joints bien devant la poitrine, au bout de deux avant-bras presque horizontaux
-  qui sortent du tronc : la silhouette de quelqu'un qui serre ses poings devant lui.
-- De profil, la paume N et le poing F se recouvrent (centres à 3,6) : on voit une masse de
-  poings joints. C'est ainsi dans la première version, que l'utilisateur a préférée ; le
-  contact se lit de face et de trois quarts (deux boules côte à côte).
-- L'appui : les poings qui remontent vers la poitrine, les coudes et les épaules qui montent.
-- Le crac : un à-coup net vers l'avant et le bas, les épaules qui tombent, les genoux qui
-  cèdent, la tête qui hoche.
+- Le buste un peu ouvert vers la caméra (trois quarts), la tête de profil vers l'adversaire.
+- Deux poings joints devant la poitrine : deux boules distinctes qui se touchent (centres à
+  12 de profil), au bout de deux avant-bras presque horizontaux, coudes séparés (24) : un
+  poing serré dans l'autre main.
+- L'appui : les poings remontent un peu et reculent, coudes et épaules qui montent.
+- Le crac : un à-coup vers l'avant et le bas, épaules qui tombent, genoux qui cèdent, tête
+  qui hoche.
 - Le buste droit, épaules en arrière : la ligne du dos ne s'enroule pas.
 
 ## 6. Références
@@ -234,6 +238,10 @@ des épaules les faisait glisser l'une dans l'autre pendant 3 ou 4 images.
 - Guides pratiques (wikiHow « Crack Your Knuckles », Livestrong) : poing enveloppé par l'autre
   main et pressé, ou jointures poussées dans la paume.
 
+- Strength vs Speed, rouge 100-127 (`etudes/01_strength_vs_speed/planches/rouge_100_111_posture.png`) :
+  le « costaud » n'est jamais en profil strict ; ses deux bras se lisent parce qu'un coude part
+  derrière et l'autre devant, le buste un peu ouvert vers la caméra, la tête sur l'adversaire.
+  C'est le principe du trois quarts retenu ici.
 - Bible : § mise en scène (intro, victoire : poses tenues, lisibles), poses tenues après un
   geste sec (contraste de vitesse).
 - Inventaire § 4 : intro dans les 3 animations de mise en scène du personnage.
@@ -246,9 +254,9 @@ des épaules les faisait glisser l'une dans l'autre pendant 3 ou 4 images.
 4. Rien ne se traverse (`--verifier`, contrôle en 3D) : mains à 16,8-18 l'une de
    l'autre à toutes les images du craquage (deux rayons = 17), avant-bras qui ne se croisent
    pas.
-4 bis. Avant-bras entre −12° et +12° (pente) aux clés de contact ; bras à ≥ 50° de la
-   verticale en position posée et à l'appui, ≥ 44° au crac.
-4 ter. De profil : avant-bras qui sortent du tronc (mains à ≥ 20 devant l'épaule) ; de face et
-   de trois quarts, deux boules distinctes au contact.
+4 bis. Avant-bras entre −12° et +12° (pente) aux clés de contact ; bras F à ≥ 50° de la
+   verticale posé et à l'appui, ≥ 44° au crac ; bras N (côté caméra) plus haut, 61-75°.
+4 ter. De profil : deux boules distinctes au contact (centres ≥ 10 l'un de l'autre), coudes
+   ≥ 15 l'un de l'autre, avant-bras qui sortent du tronc ; tête tournée vers l'adversaire.
 5. Épaules jamais en avant : `epaule*_av` ≤ −1 et poitrine ≤ 2 pendant tout le craquage.
 6. Dernière image identique au repos (pas de saut vers `idle_repos`).
