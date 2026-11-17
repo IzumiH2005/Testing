@@ -6,7 +6,8 @@ extends SceneTree
 ## qui porte
 ##     "mains3d": {"N": [dx, dy, dz], "F": [dx, dy, dz],
 ##                 "coude_dy": 0, "coude_dx": -3, "ecart": [40, 60]}   (facultatifs ;
-##                  coude_dy et coude_dx acceptent aussi [N, F])
+##                  coude_dy, coude_dx et ecart acceptent aussi [N, F] ; un ecart
+##                  négatif rentre le coude devant le buste)
 ## (cible du centre du poing, relative à l'épaule, x devant, y haut, z profondeur,
 ## N côté caméra = z négatif) reçoit dans "fixe" les angles arm, fore et arm_r qui y
 ## mènent. Sans "coude_dy", l'écartement du coude est celui de la clé (armN_p / armF_p).
@@ -19,7 +20,7 @@ extends SceneTree
 ##     tools/resout_mains.sh anims/x.json
 ## Bornes : élévation −60..100, coude 40..160, rotation −80..80 (limite du rig).
 
-const LO := [-60.0, 40.0, -80.0, 0.0]
+const LO := [-60.0, 40.0, -80.0, -30.0]
 const HI := [100.0, 160.0, 80.0, 90.0]
 
 
@@ -57,7 +58,7 @@ func _resout(pose: Dictionary, side: String, tgt: Vector3, depart: Array, coude,
 	var bestv := []
 	var regle := func(c: int, val: float) -> void:
 		pose.angles[ch[c]] = val * sg_p if c == 3 else val
-	for essai in 41:
+	for essai in int(OS.get_environment("ESSAIS")) if OS.has_environment("ESSAIS") else 41:
 		if essai > 0 and best < 0.3:
 			break
 		var v := []
@@ -122,8 +123,11 @@ func _initialize() -> void:
 			coude_dx = m.get("coude_dx")
 			if coude_dx is Array:
 				coude_dx = coude_dx[0] if side == "N" else coude_dx[1]
+			var ec: Array = m.get("ecart", [0, 90])
+			if ec[0] is Array:  # [[min, max] de N, [min, max] de F]
+				ec = ec[0] if side == "N" else ec[1]
 			var r := _resout(pose, side, S + Vector3(d[0], d[1], d[2]), prec[side],
-				cd, m.get("ecart", [0, 90]))
+				cd, ec)
 			prec[side] = r[1]
 			for c in r[3]:
 				var val: float = r[1][c] * (r[4] if c == 3 else 1.0)
