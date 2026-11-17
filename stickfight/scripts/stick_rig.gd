@@ -118,7 +118,7 @@ const DEMI_HANCHES := 9.0
 const DEMI_EPAULES := 14.0
 ## Angle neutre des cuisses vers l'intérieur : debout, les pieds sont un peu plus près
 ## de l'axe que les hanches (thigh*_p se compte à partir de là).
-const LARGEUR_HANCHE := 0.0
+const LARGEUR_HANCHE := -3.0
 ## Limites des canaux 3D (degrés), par « canal:os sans côté ». Profondeur du
 ## bras : vers la caméra = abduction (bras écarté du corps, jusqu'à 90°), à
 ## l'opposé = adduction (bras qui passe devant le buste, 40°). Cuisse :
@@ -783,19 +783,13 @@ static func primitives(p: Dictionary, color := Color("#111111"), far_shade := 1.
 		var c := far if side == "F" else color
 		var ba := 30.0 if side == "F" else -30.0
 		var bl := 20.0 if side == "F" else -20.0
-		# Le membre part du tronc : bassin (centre → hanche) puis cuisse, clavicule
-		# (haut du buste → épaule) puis bras, d'un seul trait. De profil, la hanche et
-		# l'épaule sont sur le tronc (largeur en profondeur) : rien ne change ; de face,
-		# le membre reste rattaché au tronc par ce pont.
-		items.append({"z": bl + (Z["hip" + side] + Z["knee" + side]) / 2.0, "type": "path",
-			"points": [J.hip, J["hip" + side], J["knee" + side]], "width": w, "color": c, "part": "leg" + side})
+		seg.call("hip", "knee" + side, bl, c, "leg" + side)
 		var lower := ["knee" + side, "ankle" + side]
 		if s.foot > 0.0:
 			lower.append("toe" + side)
 		items.append({"z": bl + (Z["knee" + side] + Z["ankle" + side]) / 2.0, "type": "path", "points": lower.map(func(k): return J[k]),
 			"width": w, "color": c, "part": "leg" + side})
-		items.append({"z": ba + (Z["shoulder" + side] + Z["elbow" + side]) / 2.0, "type": "path",
-			"points": [J.shoulder, J["shoulder" + side], J["elbow" + side]], "width": w, "color": c, "part": "arm" + side})
+		seg.call("shoulder" + side, "elbow" + side, ba, c, "arm" + side)
 		seg.call("elbow" + side, "hand" + side, ba, c, "arm" + side)
 		if s.hand > w / 2.0:
 			items.append({"z": ba + Z["hand" + side] - 0.01, "type": "circle", "c": J["hand" + side], "r": s.hand, "color": c, "part": "hand" + side})

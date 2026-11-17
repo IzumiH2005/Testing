@@ -133,15 +133,14 @@ les jambes partent de deux points et descendent presque verticales, chaque pied 
 croise pas la ligne du milieu ; les genoux pointent vers l'avant, dans la direction du pied ; les
 bras pendent à côté du buste, pas dedans.
 
-Notre personnage dessine ses membres depuis le tronc (son apparence, de profil). Le squelette
-porte donc cette largeur **en profondeur seulement** : `DEMI_HANCHES` (9) et `DEMI_EPAULES` (14)
-dans `stick_rig.gd`, dans le repère qui ne tourne qu'avec le lacet. Le dessin relie chaque membre
-au tronc par sa vraie liaison, d'un seul trait : bassin (centre → hanche) puis cuisse, clavicule
-(haut du buste → épaule) puis bras. De profil, hanches et épaules sont sur le tronc, ces liaisons
-ont une longueur nulle : le dessin est identique au pixel près à l'ancien, même pendant une
-torsion ou couché. De face et de trois quarts, les épaules forment un T, le bassin un petit pont,
-les jambes descendent chacune sous sa hanche et les bras pendent à côté du buste, toujours
-rattachés. `thighN_p` / `thighF_p` = 0 : pied sous sa hanche. Contrôle : vue de face (`--vues`).
+Notre personnage dessine ses membres depuis un seul point du tronc (son apparence, de profil). Le
+squelette porte donc cette largeur **en profondeur seulement** : `DEMI_HANCHES` (9) et
+`DEMI_EPAULES` (14) dans `stick_rig.gd`, dans le repère qui ne tourne qu'avec le lacet. De profil
+le décalage est perpendiculaire à l'écran, donc invisible (même pendant une torsion ou couché) ;
+de face et de trois quarts, hanches et épaules s'écartent comme sur un vrai corps.
+`LARGEUR_HANCHE` (−3°) rapproche un peu les pieds de l'axe : `thighN_p` / `thighF_p` = 0 donne
+des pieds légèrement à l'intérieur des hanches (marche), +5 des pieds sous les hanches (repos).
+Contrôle : vue de face (`--vues`).
 
 Couplages à respecter :
 
