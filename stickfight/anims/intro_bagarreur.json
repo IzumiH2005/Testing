@@ -2066,14 +2066,14 @@
     "epauleF_av": -2,
     "epauleN_haut": 0,
     "epauleF_haut": 0,
-    "armN": -16.03,
-    "foreN": 11.81,
-    "armF": 14.13,
-    "foreF": 22.55,
-    "armN_p": 16.42,
-    "armF_p": -16.37,
-    "armN_r": 0.49,
-    "armF_r": -0.28
+    "armN": -16.54,
+    "foreN": 12.15,
+    "armF": 14.04,
+    "foreF": 22.65,
+    "armN_p": 16.61,
+    "armF_p": -16.38,
+    "armN_r": 0.06,
+    "armF_r": -0.14
    },
    "vise": {
     "legN": [
@@ -2100,14 +2100,14 @@
     "epauleF_av": -2,
     "epauleN_haut": 0,
     "epauleF_haut": 0,
-    "armN": -14.54,
-    "foreN": 14.71,
-    "armF": 13.85,
-    "foreF": 25.32,
-    "armN_p": 17.65,
-    "armF_p": -17.45,
-    "armN_r": 1.93,
-    "armF_r": -1.1
+    "armN": -16.56,
+    "foreN": 16.03,
+    "armF": 13.46,
+    "foreF": 25.72,
+    "armN_p": 18.4,
+    "armF_p": -17.5,
+    "armN_r": 0.24,
+    "armF_r": -0.56
    },
    "vise": {
     "legN": [
@@ -2134,14 +2134,14 @@
     "epauleF_av": -2,
     "epauleN_haut": 0,
     "epauleF_haut": 0,
-    "armN": -12.13,
-    "foreN": 19.42,
-    "armF": 13.38,
-    "foreF": 29.82,
-    "armN_p": 19.65,
-    "armF_p": -19.2,
-    "armN_r": 4.28,
-    "armF_r": -2.44
+    "armN": -16.59,
+    "foreN": 22.33,
+    "armF": 12.53,
+    "foreF": 30.72,
+    "armN_p": 21.31,
+    "armF_p": -19.31,
+    "armN_r": 0.54,
+    "armF_r": -1.24
    },
    "vise": {
     "legN": [
@@ -2168,14 +2168,14 @@
     "epauleF_av": -2,
     "epauleN_haut": 0,
     "epauleF_haut": 0,
-    "armN": -8.88,
-    "foreN": 25.75,
-    "armF": 12.76,
-    "foreF": 35.87,
-    "armN_p": 22.34,
-    "armF_p": -21.56,
-    "armN_r": 7.44,
-    "armF_r": -4.23
+    "armN": -16.64,
+    "foreN": 30.82,
+    "armF": 11.28,
+    "foreF": 37.44,
+    "armN_p": 25.23,
+    "armF_p": -21.76,
+    "armN_r": 0.94,
+    "armF_r": -2.15
    },
    "vise": {
     "legN": [
@@ -2202,14 +2202,14 @@
     "epauleF_av": -2,
     "epauleN_haut": 0,
     "epauleF_haut": 0,
-    "armN": -4.92,
-    "foreN": 33.47,
-    "armF": 12,
-    "foreF": 43.25,
-    "armN_p": 25.62,
-    "armF_p": -24.44,
-    "armN_r": 11.29,
-    "armF_r": -6.42
+    "armN": -16.7,
+    "foreN": 41.16,
+    "armF": 9.76,
+    "foreF": 45.63,
+    "armN_p": 30,
+    "armF_p": -24.73,
+    "armN_r": 1.42,
+    "armF_r": -3.27
    },
    "vise": {
     "legN": [
@@ -2236,14 +2236,14 @@
     "epauleF_av": -2,
     "epauleN_haut": 0,
     "epauleF_haut": 0,
-    "armN": -0.41,
-    "foreN": 42.28,
-    "armF": 11.13,
-    "foreF": 51.67,
-    "armN_p": 29.36,
-    "armF_p": -27.73,
-    "armN_r": 15.68,
-    "armF_r": -8.92
+    "armN": -16.77,
+    "foreN": 52.96,
+    "armF": 8.02,
+    "foreF": 54.97,
+    "armN_p": 35.45,
+    "armF_p": -28.13,
+    "armN_r": 1.98,
+    "armF_r": -4.54
    },
    "vise": {
     "legN": [
@@ -2270,14 +2270,14 @@
     "epauleF_av": -2,
     "epauleN_haut": 0,
     "epauleF_haut": 0,
-    "armN": 4.49,
-    "foreN": 51.83,
-    "armF": 10.19,
-    "foreF": 60.81,
-    "armN_p": 33.43,
-    "armF_p": -31.29,
-    "armN_r": 20.44,
-    "armF_r": -11.63
+    "armN": -16.84,
+    "foreN": 65.76,
+    "armF": 6.13,
+    "foreF": 65.11,
+    "armN_p": 41.35,
+    "armF_p": -31.82,
+    "armN_r": 2.58,
+    "armF_r": -5.92
    },
    "vise": {
     "legN": [
@@ -2304,14 +2304,14 @@
     "epauleF_av": -2,
     "epauleN_haut": 0,
     "epauleF_haut": 0,
-    "armN": 9.58,
-    "foreN": 61.77,
-    "armF": 9.21,
-    "foreF": 70.31,
-    "armN_p": 37.65,
-    "armF_p": -35,
-    "armN_r": 25.4,
-    "armF_r": -14.45
+    "armN": -16.91,
+    "foreN": 79.07,
+    "armF": 4.17,
+    "foreF": 75.66,
+    "armN_p": 47.5,
+    "armF_p": -35.65,
+    "armN_r": 3.2,
+    "armF_r": -7.35
    },
    "vise": {
     "legN": [
@@ -2338,14 +2338,14 @@
     "epauleF_av": -2,
     "epauleN_haut": 0,
     "epauleF_haut": 0,
-    "armN": 14.68,
-    "foreN": 71.7,
-    "armF": 8.24,
-    "foreF": 79.81,
-    "armN_p": 41.87,
-    "armF_p": -38.71,
-    "armN_r": 30.36,
-    "armF_r": -17.27
+    "armN": -16.99,
+    "foreN": 92.38,
+    "armF": 2.2,
+    "foreF": 86.2,
+    "armN_p": 53.65,
+    "armF_p": -39.48,
+    "armN_r": 3.82,
+    "armF_r": -8.78
    },
    "vise": {
     "legN": [
@@ -2372,14 +2372,14 @@
     "epauleF_av": -2,
     "epauleN_haut": 0,
     "epauleF_haut": 0,
-    "armN": 17.17,
-    "foreN": 76.55,
-    "armF": 7.76,
-    "foreF": 84.44,
-    "armN_p": 43.93,
-    "armF_p": -40.52,
-    "armN_r": 32.77,
-    "armF_r": -18.64
+    "armN": -17.03,
+    "foreN": 98.87,
+    "armF": 1.24,
+    "foreF": 91.34,
+    "armN_p": 56.64,
+    "armF_p": -41.35,
+    "armN_r": 4.13,
+    "armF_r": -9.48
    },
    "vise": {
     "legN": [
@@ -2406,14 +2406,14 @@
     "epauleF_av": -2,
     "epauleN_haut": 0,
     "epauleF_haut": 0,
-    "armN": 19.58,
-    "foreN": 81.26,
-    "armF": 7.3,
-    "foreF": 88.94,
-    "armN_p": 45.94,
-    "armF_p": -42.27,
-    "armN_r": 35.12,
-    "armF_r": -19.98
+    "armN": -17.06,
+    "foreN": 105.18,
+    "armF": 0.31,
+    "foreF": 96.34,
+    "armN_p": 59.55,
+    "armF_p": -43.17,
+    "armN_r": 4.42,
+    "armF_r": -10.16
    },
    "vise": {
     "legN": [
@@ -2440,14 +2440,14 @@
     "epauleF_av": -2,
     "epauleN_haut": 0,
     "epauleF_haut": 0,
-    "armN": 24.09,
-    "foreN": 90.06,
-    "armF": 6.43,
-    "foreF": 97.36,
-    "armN_p": 49.68,
-    "armF_p": -45.56,
-    "armN_r": 39.51,
-    "armF_r": -22.48
+    "armN": -17.13,
+    "foreN": 116.98,
+    "armF": -1.43,
+    "foreF": 105.68,
+    "armN_p": 65,
+    "armF_p": -46.57,
+    "armN_r": 4.98,
+    "armF_r": -11.43
    },
    "vise": {
     "legN": [
@@ -2474,14 +2474,14 @@
     "epauleF_av": -2,
     "epauleN_haut": 0,
     "epauleF_haut": 0,
-    "armN": 28.05,
-    "foreN": 97.78,
-    "armF": 5.67,
-    "foreF": 104.74,
-    "armN_p": 52.96,
-    "armF_p": -48.44,
-    "armN_r": 43.36,
-    "armF_r": -24.67
+    "armN": -17.19,
+    "foreN": 127.32,
+    "armF": -2.95,
+    "foreF": 113.87,
+    "armN_p": 69.77,
+    "armF_p": -49.54,
+    "armN_r": 5.46,
+    "armF_r": -12.55
    },
    "vise": {
     "legN": [
@@ -2508,14 +2508,14 @@
     "epauleF_av": -2,
     "epauleN_haut": 0,
     "epauleF_haut": 0,
-    "armN": 31.3,
-    "foreN": 104.12,
-    "armF": 5.05,
-    "foreF": 110.79,
-    "armN_p": 55.65,
-    "armF_p": -50.8,
-    "armN_r": 46.52,
-    "armF_r": -26.46
+    "armN": -17.24,
+    "foreN": 135.8,
+    "armF": -4.2,
+    "foreF": 120.59,
+    "armN_p": 73.69,
+    "armF_p": -51.99,
+    "armN_r": 5.86,
+    "armF_r": -13.46
    },
    "vise": {
     "legN": [
@@ -2542,14 +2542,14 @@
     "epauleF_av": -2,
     "epauleN_haut": 0,
     "epauleF_haut": 0,
-    "armN": 33.71,
-    "foreN": 108.82,
-    "armF": 4.58,
-    "foreF": 115.29,
-    "armN_p": 57.65,
-    "armF_p": -52.55,
-    "armN_r": 48.87,
-    "armF_r": -27.8
+    "armN": -17.27,
+    "foreN": 142.11,
+    "armF": -5.13,
+    "foreF": 125.59,
+    "armN_p": 76.6,
+    "armF_p": -53.8,
+    "armN_r": 6.16,
+    "armF_r": -14.14
    },
    "vise": {
     "legN": [
@@ -2576,14 +2576,14 @@
     "epauleF_av": -2,
     "epauleN_haut": 0,
     "epauleF_haut": 0,
-    "armN": 35.2,
-    "foreN": 111.72,
-    "armF": 4.3,
-    "foreF": 118.06,
-    "armN_p": 58.88,
-    "armF_p": -53.63,
-    "armN_r": 50.31,
-    "armF_r": -28.62
+    "armN": -17.29,
+    "foreN": 145.99,
+    "armF": -5.71,
+    "foreF": 128.66,
+    "armN_p": 78.39,
+    "armF_p": -54.92,
+    "armN_r": 6.34,
+    "armF_r": -14.56
    },
    "vise": {
     "legN": [
@@ -2612,14 +2612,14 @@
     "epauleF_haut": 0,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 49.7,
-    "foreN": 116.7,
-    "armN_r": 64.4,
-    "armN_p": 66,
-    "armF": 4.6,
-    "foreF": 123.2,
-    "armF_r": -23,
-    "armF_p": -55
+    "armN": -17.3,
+    "foreN": 147.3,
+    "armN_r": 6.4,
+    "armN_p": 79,
+    "armF": -5.9,
+    "foreF": 129.7,
+    "armF_r": -14.7,
+    "armF_p": -55.3
    },
    "vise": {
     "legN": [
@@ -2633,19 +2633,20 @@
    },
    "_mains3d": {
     "N": [
-     32,
-     -11,
-     -7.5
+     15.5,
+     -8,
+     -6.5
     ],
     "F": [
-     26,
+     21,
      -16,
-     7.5
+     8.5
     ],
     "coude_dy": [
      2,
      -4
     ],
+    "coude_dx": -2,
     "ecart": [
      55,
      90
@@ -2668,14 +2669,14 @@
     "epauleF_haut": 0,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 49.7,
-    "foreN": 116.7,
-    "armN_r": 64.4,
-    "armN_p": 66,
-    "armF": 4.6,
-    "foreF": 123.2,
-    "armF_r": -23,
-    "armF_p": -55
+    "armN": -17.3,
+    "foreN": 147.3,
+    "armN_r": 6.4,
+    "armN_p": 79,
+    "armF": -5.9,
+    "foreF": 129.7,
+    "armF_r": -14.7,
+    "armF_p": -55.3
    },
    "vise": {
     "legN": [
@@ -2690,19 +2691,20 @@
    "courbe": "acc-dec",
    "_mains3d": {
     "N": [
-     32,
-     -11,
-     -7.5
+     15.5,
+     -8,
+     -6.5
     ],
     "F": [
-     26,
+     21,
      -16,
-     7.5
+     8.5
     ],
     "coude_dy": [
      2,
      -4
     ],
+    "coude_dx": -2,
     "ecart": [
      55,
      90
@@ -2725,14 +2727,14 @@
     "epauleF_haut": 3,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 47.8,
-    "foreN": 116.7,
-    "armN_r": 68.2,
-    "armN_p": 66.7,
-    "armF": 0.4,
-    "foreF": 127.5,
-    "armF_r": -23.3,
-    "armF_p": -59.9
+    "armN": -39.2,
+    "foreN": 148.2,
+    "armN_r": -16,
+    "armN_p": 84.4,
+    "armF": -8.9,
+    "foreF": 132.6,
+    "armF_r": -16.7,
+    "armF_p": -60.6
    },
    "vise": {
     "legN": [
@@ -2747,19 +2749,20 @@
    "courbe": "acc",
    "_mains3d": {
     "N": [
-     31.44,
-     -12.61,
-     -7.5
+     15.97,
+     -6.17,
+     -6.5
     ],
     "F": [
-     24,
+     20,
      -15,
-     7.5
+     8.5
     ],
     "coude_dy": [
      4,
      -2
     ],
+    "coude_dx": -2,
     "ecart": [
      55,
      90
@@ -2782,13 +2785,13 @@
     "epauleF_haut": -2,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 39.6,
-    "foreN": 106.8,
-    "armN_r": 54.5,
-    "armN_p": 57.5,
-    "armF": 9.7,
-    "foreF": 119.7,
-    "armF_r": -27.1,
+    "armN": -15.8,
+    "foreN": 143.9,
+    "armN_r": 4,
+    "armN_p": 77.5,
+    "armF": -5.9,
+    "foreF": 128.9,
+    "armF_r": -14.1,
     "armF_p": -55
    },
    "vise": {
@@ -2804,19 +2807,20 @@
    "courbe": "dec",
    "_mains3d": {
     "N": [
-     35.58,
-     -15.14,
-     -7.5
+     18.28,
+     -8.03,
+     -6.5
     ],
     "F": [
-     28,
+     22,
      -17,
-     7.5
+     8.5
     ],
     "coude_dy": [
      1,
      -4
     ],
+    "coude_dx": -2,
     "ecart": [
      55,
      90
@@ -2839,13 +2843,13 @@
     "epauleF_haut": -2,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 39.6,
-    "foreN": 106.8,
-    "armN_r": 54.5,
-    "armN_p": 57.5,
-    "armF": 9.7,
-    "foreF": 119.7,
-    "armF_r": -27.1,
+    "armN": -15.8,
+    "foreN": 143.9,
+    "armN_r": 4,
+    "armN_p": 77.5,
+    "armF": -5.9,
+    "foreF": 128.9,
+    "armF_r": -14.1,
     "armF_p": -55
    },
    "vise": {
@@ -2861,19 +2865,20 @@
    "courbe": "acc-dec",
    "_mains3d": {
     "N": [
-     35.58,
-     -15.14,
-     -7.5
+     18.28,
+     -8.03,
+     -6.5
     ],
     "F": [
-     28,
+     22,
      -17,
-     7.5
+     8.5
     ],
     "coude_dy": [
      1,
      -4
     ],
+    "coude_dx": -2,
     "ecart": [
      55,
      90
@@ -2896,14 +2901,14 @@
     "epauleF_haut": 0,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 48.8,
-    "foreN": 116.7,
-    "armN_r": 63.5,
-    "armN_p": 66.1,
-    "armF": 4.6,
-    "foreF": 123.2,
-    "armF_r": -23,
-    "armF_p": -55
+    "armN": -18.9,
+    "foreN": 147.5,
+    "armN_r": 3.9,
+    "armN_p": 79.5,
+    "armF": -5.9,
+    "foreF": 129.7,
+    "armF_r": -14.7,
+    "armF_p": -55.3
    },
    "vise": {
     "legN": [
@@ -2918,19 +2923,20 @@
    "courbe": "acc-dec",
    "_mains3d": {
     "N": [
-     32,
-     -11,
-     -7.5
+     15.5,
+     -8,
+     -6.5
     ],
     "F": [
-     26,
+     21,
      -16,
-     7.5
+     8.5
     ],
     "coude_dy": [
      2,
      -4
     ],
+    "coude_dx": -2,
     "ecart": [
      55,
      90
@@ -2953,14 +2959,14 @@
     "epauleF_haut": 5,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 70.3,
-    "foreN": 128.2,
-    "armN_r": 89.4,
-    "armN_p": 75.6,
-    "armF": -2.1,
-    "foreF": 129.9,
-    "armF_r": -23.8,
-    "armF_p": -63.6
+    "armN": -34.5,
+    "foreN": 150.9,
+    "armN_r": -4.6,
+    "armN_p": 83.3,
+    "armF": -11.4,
+    "foreF": 133.1,
+    "armF_r": -16.7,
+    "armF_p": -63.1
    },
    "vise": {
     "legN": [
@@ -2975,19 +2981,20 @@
    "courbe": "acc",
    "_mains3d": {
     "N": [
-     26.93,
-     -7.25,
-     -7.5
+     13.44,
+     -7.34,
+     -6.5
     ],
     "F": [
-     23,
-     -14,
-     7.5
+     20,
+     -14.5,
+     8.5
     ],
     "coude_dy": [
-     5,
+     4,
      -1
     ],
+    "coude_dx": -2,
     "ecart": [
      55,
      90
@@ -3010,13 +3017,13 @@
     "epauleF_haut": -3,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 45,
-    "foreN": 116.2,
-    "armN_r": 57.1,
-    "armN_p": 64.3,
-    "armF": 11.6,
-    "foreF": 119,
-    "armF_r": -27.2,
+    "armN": -12,
+    "foreN": 145.4,
+    "armN_r": 14,
+    "armN_p": 73.5,
+    "armF": -5.9,
+    "foreF": 128.4,
+    "armF_r": -13.6,
     "armF_p": -55
    },
    "vise": {
@@ -3032,19 +3039,20 @@
    "courbe": "dec",
    "_mains3d": {
     "N": [
-     32.45,
-     -10.49,
-     -7.5
+     15.69,
+     -10.08,
+     -6.5
     ],
     "F": [
-     29,
-     -17.5,
-     7.5
+     22.5,
+     -17,
+     8.5
     ],
     "coude_dy": [
-     0,
+     0.5,
      -4
     ],
+    "coude_dx": -2,
     "ecart": [
      55,
      90
@@ -3067,13 +3075,13 @@
     "epauleF_haut": -3,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 45,
-    "foreN": 116.2,
-    "armN_r": 57.1,
-    "armN_p": 64.3,
-    "armF": 11.6,
-    "foreF": 119,
-    "armF_r": -27.2,
+    "armN": -12,
+    "foreN": 145.4,
+    "armN_r": 14,
+    "armN_p": 73.5,
+    "armF": -5.9,
+    "foreF": 128.4,
+    "armF_r": -13.6,
     "armF_p": -55
    },
    "vise": {
@@ -3089,19 +3097,20 @@
    "courbe": "acc-dec",
    "_mains3d": {
     "N": [
-     32.45,
-     -10.49,
-     -7.5
+     15.69,
+     -10.08,
+     -6.5
     ],
     "F": [
-     29,
-     -17.5,
-     7.5
+     22.5,
+     -17,
+     8.5
     ],
     "coude_dy": [
-     0,
+     0.5,
      -4
     ],
+    "coude_dx": -2,
     "ecart": [
      55,
      90
@@ -3124,14 +3133,14 @@
     "epauleF_haut": 0,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 49.1,
-    "foreN": 116.7,
-    "armN_r": 63.8,
-    "armN_p": 66,
-    "armF": 4.6,
-    "foreF": 123.2,
-    "armF_r": -23,
-    "armF_p": -55
+    "armN": -17.3,
+    "foreN": 147.3,
+    "armN_r": 6.4,
+    "armN_p": 79,
+    "armF": -5.9,
+    "foreF": 129.7,
+    "armF_r": -14.7,
+    "armF_p": -55.3
    },
    "vise": {
     "legN": [
@@ -3146,19 +3155,20 @@
    "courbe": "acc-dec",
    "_mains3d": {
     "N": [
-     32,
-     -11,
-     -7.5
+     15.5,
+     -8,
+     -6.5
     ],
     "F": [
-     26,
+     21,
      -16,
-     7.5
+     8.5
     ],
     "coude_dy": [
      2,
      -4
     ],
+    "coude_dx": -2,
     "ecart": [
      55,
      90
@@ -3181,14 +3191,14 @@
     "epauleF_haut": 0,
     "thighN_p": 13,
     "thighF_p": -13,
-    "armN": 49.1,
-    "foreN": 116.7,
-    "armN_r": 63.8,
-    "armN_p": 66,
-    "armF": 4.6,
-    "foreF": 123.2,
-    "armF_r": -23,
-    "armF_p": -55
+    "armN": -17.3,
+    "foreN": 147.3,
+    "armN_r": 6.4,
+    "armN_p": 79,
+    "armF": -5.9,
+    "foreF": 129.7,
+    "armF_r": -14.7,
+    "armF_p": -55.3
    },
    "vise": {
     "legN": [
@@ -3203,19 +3213,20 @@
    "courbe": "acc-dec",
    "_mains3d": {
     "N": [
-     32,
-     -11,
-     -7.5
+     15.5,
+     -8,
+     -6.5
     ],
     "F": [
-     26,
+     21,
      -16,
-     7.5
+     8.5
     ],
     "coude_dy": [
      2,
      -4
     ],
+    "coude_dx": -2,
     "ecart": [
      55,
      90

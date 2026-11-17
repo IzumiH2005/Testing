@@ -5,7 +5,8 @@ extends SceneTree
 ## bras, et deux mains qui doivent se toucher finissent l'une dans l'autre. Ici, une clé
 ## qui porte
 ##     "mains3d": {"N": [dx, dy, dz], "F": [dx, dy, dz],
-##                 "coude_dy": 0, "ecart": [40, 60]}      (ces deux-là facultatifs)
+##                 "coude_dy": 0, "coude_dx": -3, "ecart": [40, 60]}   (facultatifs ;
+##                  coude_dy et coude_dx acceptent aussi [N, F])
 ## (cible du centre du poing, relative à l'épaule, x devant, y haut, z profondeur,
 ## N côté caméra = z négatif) reçoit dans "fixe" les angles arm, fore et arm_r qui y
 ## mènent. Sans "coude_dy", l'écartement du coude est celui de la clé (armN_p / armF_p).
@@ -16,14 +17,17 @@ extends SceneTree
 ## précédente, pour ne pas changer de branche d'une clé à l'autre.
 ##
 ##     tools/resout_mains.sh anims/x.json
-## Bornes : élévation −60..100, coude 40..160, rotation −180..180.
+## Bornes : élévation −60..100, coude 40..160, rotation −80..80 (limite du rig).
 
-const LO := [-60.0, 40.0, -180.0, 0.0]
-const HI := [100.0, 160.0, 180.0, 90.0]
+const LO := [-60.0, 40.0, -80.0, 0.0]
+const HI := [100.0, 160.0, 80.0, 90.0]
 
 
 func _p3(sol: Dictionary, k: String) -> Vector3:
 	return Vector3(sol.joints[k].x, sol.joints[k].y, float(sol.prof.get(k, 0.0)))
+
+
+var coude_dx = null  # position avant-arrière du coude par rapport à l'épaule (+ = devant)
 
 
 func _err(pose: Dictionary, side: String, tgt: Vector3, coude) -> float:
@@ -32,6 +36,8 @@ func _err(pose: Dictionary, side: String, tgt: Vector3, coude) -> float:
 	var e := h.distance_to(tgt)
 	if coude != null:
 		e += absf(sol.joints["elbow" + side].y - h.y - float(coude))
+	if coude_dx != null:
+		e += absf(sol.joints["elbow" + side].x - sol.joints["shoulderN"].x - float(coude_dx))
 	return e
 
 
@@ -111,6 +117,9 @@ func _initialize() -> void:
 			var cd = m.get("coude_dy")
 			if cd is Array:
 				cd = cd[0] if side == "N" else cd[1]
+			coude_dx = m.get("coude_dx")
+			if coude_dx is Array:
+				coude_dx = coude_dx[0] if side == "N" else coude_dx[1]
 			var r := _resout(pose, side, S + Vector3(d[0], d[1], d[2]), prec[side],
 				cd, m.get("ecart", [0, 90]))
 			prec[side] = r[1]
@@ -142,8 +151,9 @@ func _initialize() -> void:
 		var abd := func(sd: String) -> float:
 			var e := _p3(sol, "elbow" + sd) - Sh
 			return rad_to_deg(atan2(Vector2(e.x, e.z).length(), -e.y))
-		print("   profil : mains %.1f, coudes %.1f, coudes y %.0f/%.0f ; bras/verticale %.0f°/%.0f°" % [
+		print("   profil : mains %.1f, coudes %.1f, coudes x %.0f/%.0f y %.0f/%.0f ; bras/verticale %.0f°/%.0f°" % [
 			pr.call("handN", "handF"), pr.call("elbowN", "elbowF"),
+			J.elbowN.x - Sh.x, J.elbowF.x - Sh.x,
 			J.elbowN.y - Sh.y, J.elbowF.y - Sh.y, abd.call("N"), abd.call("F")])
 	var f := FileAccess.open(chemin, FileAccess.WRITE)
 	f.store_string(JSON.stringify(data, " ", false) + "\n")

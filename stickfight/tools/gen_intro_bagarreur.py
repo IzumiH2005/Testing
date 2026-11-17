@@ -48,16 +48,18 @@ BRAS_REPOS = {"armN": -10, "foreN": 10, "armF": 8, "foreF": 8,
 # N côté caméra = z négatif) ; les angles sont résolus par tools/resout_mains.sh.
 # Une partie du décalage entre les mains est dans le plan de profil (x, y) pour que, vu de
 # profil, on voie la boule N posée sur le poing F et pas une seule boule.
-MAIN_F = (26, -16, 7.5)
-MAIN_N = (32, -11, -7.5)
+MAIN_F = tuple(json.loads(os.environ.get("MF", "[21, -16, 8.5]")))
+MAIN_N = tuple(json.loads(os.environ.get("MN", "[15.5, -8, -6.5]")))
 # Coudes (hauteur par rapport à la main) : N au-dessus de sa main, F en dessous, pour que
 # de profil les deux avant-bras fassent un coin au lieu d'une seule bande.
-COUDES = (2, -4)
+COUDES = tuple(json.loads(os.environ.get("CD", "[2, -4]")))
 # Écartement des coudes cherché dans cette plage.
 ECART = [55, 90]
-# Angles de cette position (sortie de resout_mains, clé 148) : sert au trajet 104 → 136.
-PRETE = {"armN": 35.7, "foreN": 112.7, "armF": 4.2, "foreF": 119,
-         "armN_p": 59.3, "armF_p": -54, "armN_r": 50.8, "armF_r": -28.9}
+# Coudes légèrement derrière la ligne du buste (demande de l'utilisateur) : x du coude par
+# rapport à l'épaule.
+COUDE_X = float(os.environ.get("CX", -2))
+# Angles de cette position (sortie de resout_mains, clé 136) : sert au trajet 104 → 136.
+PRETE = {"armN": -17.3, "foreN": 147.3, "armF": -5.9, "foreF": 129.7, "armN_p": 79, "armF_p": -55.3, "armN_r": 6.4, "armF_r": -14.7}
 
 
 def tronc(f):
@@ -139,7 +141,7 @@ def main():
         c["mains3d"] = {"N": [round(nx + dxm, 2), round(ny + dym, 2), MAIN_N[2]],
                         "F": [MAIN_F[0] + dxm, MAIN_F[1] + dym, MAIN_F[2]],
                         "coude_dy": [COUDES[0] + coudes[0], COUDES[1] + coudes[1]],
-                        "ecart": ECART}
+                        "coude_dx": COUDE_X, "ecart": ECART}
         if courbe:
             c["courbe"] = courbe
         if p:
@@ -149,7 +151,8 @@ def main():
     # Stature : la ligne des épaules reste droite ou en arrière (epaule_av ≤ 0), le buste
     # ne s'enroule pas. Le buste tourne un peu vers la caméra (côté du poing F devant) pour
     # que les coudes ouverts se voient de profil.
-    T = float(os.environ.get("T", -10))
+    T = float(os.environ.get("T", 0))
+    R1A, R1B, R2A, R2B, M1, M2 = json.loads(os.environ.get("RL", "[10, 12, -8, -10, 1, 1.5]"))
     PRET = {"torsion": T}
     APPUI1 = {"torsion": T, "chest": 0, "neck": 3, "epauleN_haut": 3, "epauleF_haut": 3,
               "epauleN_av": -3, "epauleF_av": -3}
@@ -166,15 +169,15 @@ def main():
         craque(146, haut=PRET, courbe="acc-dec"),
         # appui 1 : on serre lentement, la main N roule vers l'avant sur les phalanges, les
         # coudes montent, les épaules montent
-        craque(162, haut=APPUI1, mains=(-2, 1), roule=22, coudes=(2, 2), courbe="acc"),
+        craque(162, haut=APPUI1, mains=(-1, 1), roule=R1A, coudes=(2, 2), courbe="acc"),
         # crac 1 : la résistance cède, tout tombe d'un coup de quelques unités
-        craque(164, dy_bassin=-1.5, haut=CRAC1, mains=(2, -1), roule=26, coudes=(-1, 0), courbe="dec"),
-        craque(172, dy_bassin=-1.2, haut=CRAC1, mains=(2, -1), roule=26, coudes=(-1, 0), courbe="acc-dec"),
+        craque(164, dy_bassin=-1.5, haut=CRAC1, mains=(M1, -1), roule=R1B, coudes=(-1, 0), courbe="dec"),
+        craque(172, dy_bassin=-1.2, haut=CRAC1, mains=(M1, -1), roule=R1B, coudes=(-1, 0), courbe="acc-dec"),
         craque(184, haut=dict(PRET, neck=4), courbe="acc-dec"),
         # appui 2 : plus long et plus fort, la main N roule dans l'autre sens (autres doigts)
-        craque(204, haut=APPUI2, mains=(-3, 2), roule=-20, coudes=(3, 3), courbe="acc"),
-        craque(206, dy_bassin=-2.5, haut=CRAC2, mains=(3, -1.5), roule=-24, coudes=(-2, 0), courbe="dec"),
-        craque(214, dy_bassin=-2.0, haut=CRAC2, mains=(3, -1.5), roule=-24, coudes=(-2, 0), courbe="acc-dec"),
+        craque(204, haut=APPUI2, mains=(-1, 1.5), roule=R2A, coudes=(2, 3), courbe="acc"),
+        craque(206, dy_bassin=-2.5, haut=CRAC2, mains=(M2, -1), roule=R2B, coudes=(-1.5, 0), courbe="dec"),
+        craque(214, dy_bassin=-2.0, haut=CRAC2, mains=(M2, -1), roule=R2B, coudes=(-1.5, 0), courbe="acc-dec"),
         craque(226, haut=FIN, courbe="acc-dec"),
         craque(234, haut=FIN, courbe="acc-dec"),
     ]
