@@ -1,0 +1,472 @@
+<title>Poseur Stickfight</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+/* Atelier : la scène (planche de dessin) reste visible, les réglages défilent à côté (ou dessous sur téléphone). */
+:root {
+  --bg: #e9ecf0;
+  --panel: #f7f8fa;
+  --line: #cfd5dd;
+  --ink: #1a1d23;
+  --muted: #5d6573;
+  --accent: #2b5fd9;
+  --accent-soft: #dbe5fb;
+  --stage: #f3f4f6;
+  --grid: #e1e4e9;
+  --ground: #b9c0ca;
+  --figure: #111111;
+  --figure-far: #6b7485;
+  --joint: #2b5fd9;
+  --warn: #b4441b;
+  --f-display: "Space Grotesk", "IBM Plex Sans", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14171c; --panel: #1c2027; --line: #2e343e; --ink: #e6e8ec; --muted: #98a1af;
+    --accent: #7ea2ff; --accent-soft: #24304a; --stage: #d9dce1; --grid: #c9cdd4; --ground: #9aa2ae;
+    --figure: #111111; --figure-far: #5f6878; --joint: #2b5fd9; --warn: #f08a5d; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14171c; --panel: #1c2027; --line: #2e343e; --ink: #e6e8ec; --muted: #98a1af;
+  --accent: #7ea2ff; --accent-soft: #24304a; --stage: #d9dce1; --grid: #c9cdd4; --ground: #9aa2ae;
+  --figure: #111111; --figure-far: #5f6878; --joint: #2b5fd9; --warn: #f08a5d; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 14px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 12px;
+}
+.app { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 16px; max-width: 1280px; margin: 0 auto; height: 100%; }
+header.top { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+h1 { font-family: var(--f-display); font-size: 20px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+.sub { color: var(--muted); font-size: 13px; }
+.stagecol { display: flex; flex-direction: column; gap: 10px; min-width: 0; position: sticky; top: env(safe-area-inset-top, 0px); align-self: start; }
+.stage { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; aspect-ratio: 4 / 4.2; max-width: 100%; touch-action: none; cursor: ew-resize; }
+.stage canvas { width: 100%; height: 100%; display: block; }
+.viewtag { position: absolute; left: 10px; top: 8px; font-family: var(--f-mono); font-size: 11px; color: #3b4250; background: rgba(255,255,255,.75); padding: 2px 6px; border-radius: 4px; }
+.hint { position: absolute; right: 10px; bottom: 8px; font-size: 11px; color: #5d6573; }
+.views { display: flex; gap: 6px; flex-wrap: wrap; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--panel); }
+.seg button { border: 0; background: transparent; color: var(--ink); font: 500 13px var(--f-body); padding: 7px 12px; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.thumbs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.thumb { background: var(--stage); border: 1px solid var(--line); border-radius: 8px; padding: 0; cursor: pointer; position: relative; aspect-ratio: 1 / 1.05; overflow: hidden; }
+.thumb canvas { width: 100%; height: 100%; display: block; }
+.thumb span { position: absolute; left: 6px; top: 4px; font: 500 10px var(--f-mono); color: #3b4250; }
+.thumb[aria-pressed="true"] { outline: 2px solid var(--accent); outline-offset: -2px; }
+.camrow { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--muted); }
+.camrow input { flex: 1; min-width: 0; }
+
+.panel { min-width: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-bottom: 40px; }
+.bar { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.btn { border: 1px solid var(--line); background: var(--panel); color: var(--ink); font: 500 13px var(--f-body); padding: 7px 11px; border-radius: 7px; cursor: pointer; }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.opts { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; color: var(--muted); }
+.opts label { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
+details.grp { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+details.grp > summary { list-style: none; cursor: pointer; padding: 10px 12px; font-family: var(--f-display); font-weight: 600; font-size: 14px; display: flex; justify-content: space-between; align-items: center; }
+details.grp > summary::-webkit-details-marker { display: none; }
+details.grp > summary .n { font: 400 11px var(--f-mono); color: var(--muted); }
+details.grp > summary::after { content: "+"; font-family: var(--f-mono); color: var(--muted); margin-left: 8px; }
+details.grp[open] > summary::after { content: "−"; }
+.rows { display: flex; flex-direction: column; gap: 2px; padding: 0 12px 10px; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) 62px 22px; gap: 4px 8px; align-items: center; padding: 3px 0; }
+.row .lab { font-size: 13px; display: flex; flex-direction: column; min-width: 0; }
+.row .lab small { font: 400 10.5px var(--f-mono); color: var(--muted); }
+.row input[type=range] { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); margin: 0; height: 22px; }
+.row input[type=number] { width: 62px; font: 400 12px var(--f-mono); padding: 3px 4px; border: 1px solid var(--line); border-radius: 5px; background: var(--bg); color: var(--ink); font-variant-numeric: tabular-nums; text-align: right; }
+.row .z { border: 0; background: none; color: var(--muted); cursor: pointer; font: 14px var(--f-mono); padding: 0; }
+.row .z:hover { color: var(--accent); }
+.row.changed .lab > span { color: var(--accent); }
+.io { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; }
+.io h2 { font-family: var(--f-display); font-size: 14px; margin: 0; }
+.io p { margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.45; }
+.io textarea { width: 100%; min-height: 120px; font: 11.5px/1.4 var(--f-mono); border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); padding: 8px; resize: vertical; }
+.toast { font-size: 12px; color: var(--accent); min-height: 1em; }
+.toast.err { color: var(--warn); }
+
+@media (max-width: 760px) {
+  body { padding-block: 8px; }
+  .app { grid-template-columns: minmax(0, 1fr); height: auto; }
+  .stagecol { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-bottom: 6px; }
+  .stage { aspect-ratio: auto; height: 38vh; }
+  .thumbs { display: none; }
+  .panel { overflow: visible; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="app">
+  <header class="top">
+    <h1>Poseur Stickfight</h1>
+    <span class="sub">Le rig du bagarreur, articulation par articulation. Glisse sur la scène pour tourner la caméra.</span>
+  </header>
+
+  <section class="stagecol" aria-label="Scène">
+    <div class="stage" id="stage">
+      <canvas id="main"></canvas>
+      <span class="viewtag" id="viewtag">Profil · caméra 0°</span>
+      <span class="hint">← glisser →</span>
+    </div>
+    <div class="views">
+      <div class="seg" role="group" aria-label="Vue">
+        <button id="v-face" data-cam="90">Face</button>
+        <button id="v-tq" data-cam="45">Trois quarts</button>
+        <button id="v-prof" data-cam="0" aria-pressed="true">Profil</button>
+        <button id="v-dos" data-cam="-90">Dos</button>
+      </div>
+    </div>
+    <div class="camrow">
+      <span>Caméra</span>
+      <input type="range" id="cam" min="-180" max="180" step="1" value="0" aria-label="Angle de la caméra">
+      <span id="camv" style="font-family:var(--f-mono);width:42px;text-align:right">0°</span>
+    </div>
+    <div class="thumbs">
+      <button class="thumb" data-cam="90" aria-label="Vue de face"><canvas></canvas><span>FACE</span></button>
+      <button class="thumb" data-cam="45" aria-label="Vue de trois quarts"><canvas></canvas><span>3/4</span></button>
+      <button class="thumb" data-cam="0" aria-label="Vue de profil"><canvas></canvas><span>PROFIL</span></button>
+    </div>
+  </section>
+
+  <section class="panel" aria-label="Réglages">
+    <div class="bar">
+      <button class="btn" id="p-repos">Repos</button>
+      <button class="btn" id="p-garde">Garde</button>
+      <button class="btn" id="p-neutre">Neutre</button>
+      <button class="btn" id="p-miroir" title="Échange les côtés proche et loin">Échanger proche / loin</button>
+    </div>
+    <div class="opts">
+      <label><input type="checkbox" id="o-sol" checked> Poser au sol</label>
+      <label><input type="checkbox" id="o-loin" checked> Membres loin en gris</label>
+      <label><input type="checkbox" id="o-art"> Articulations</label>
+      <label><input type="checkbox" id="o-lim" checked> Amplitudes humaines</label>
+    </div>
+    <div id="groups"></div>
+    <div class="io">
+      <h2>Ta pose</h2>
+      <p>Copie ce texte et colle-le-moi dans la conversation : c'est le format des fichiers <code>poses/*.json</code>, je pourrai la reprendre telle quelle. Tu peux aussi coller une pose ici puis la charger.</p>
+      <textarea id="json" spellcheck="false" aria-label="Pose au format JSON"></textarea>
+      <div class="bar">
+        <button class="btn primary" id="copy">Copier la pose</button>
+        <button class="btn" id="load">Charger le texte</button>
+        <span class="toast" id="toast" role="status"></span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+// ===================== Rig (portage de scripts/stick_rig.gd) =====================
+const STYLE = { head: 46, headSink: 0.12, stroke: 15, hand: 8.5, neck: 0, spineLow: 22, chest: 24,
+  upperArm: 34, forearm: 32, thigh: 41, shin: 42, foot: 10 };
+const ROOT = { id: "root", rest: 90, sign: -1, lim: [-180, 180], label: "Bascule du bassin" };
+const BONES = [
+  { id: "spineLow", parent: "root", len: "spineLow", rest: 0, sign: -1, lim: [-25, 45], label: "Bas du dos" },
+  { id: "chest", parent: "spineLow", len: "chest", rest: 0, sign: -1, lim: [-25, 45], label: "Poitrine" },
+  { id: "neck", parent: "chest", len: "neck", rest: 0, sign: -1, lim: [-60, 50], label: "Cou / tête" },
+  { id: "armF", parent: "chest", len: "upperArm", rest: 180, sign: 1, lim: [-180, 180], label: "Épaule (loin)" },
+  { id: "foreF", parent: "armF", len: "forearm", rest: 0, sign: 1, lim: [0, 150], label: "Coude (loin)" },
+  { id: "armN", parent: "chest", len: "upperArm", rest: 180, sign: 1, lim: [-180, 180], label: "Épaule (proche)" },
+  { id: "foreN", parent: "armN", len: "forearm", rest: 0, sign: 1, lim: [0, 150], label: "Coude (proche)" },
+  { id: "thighF", parent: "root", len: "thigh", rest: 180, sign: 1, lim: [-30, 140], label: "Hanche (loin)" },
+  { id: "shinF", parent: "thighF", len: "shin", rest: 0, sign: -1, lim: [0, 150], label: "Genou (loin)" },
+  { id: "footF", parent: "shinF", len: "foot", rest: 90, sign: 1, lim: [-50, 65], label: "Cheville (loin)" },
+  { id: "thighN", parent: "root", len: "thigh", rest: 180, sign: 1, lim: [-30, 140], label: "Hanche (proche)" },
+  { id: "shinN", parent: "thighN", len: "shin", rest: 0, sign: -1, lim: [0, 150], label: "Genou (proche)" },
+  { id: "footN", parent: "shinN", len: "foot", rest: 90, sign: 1, lim: [-50, 65], label: "Cheville (proche)" },
+];
+const CHARNIERES = ["foreN", "foreF", "shinN", "shinF"];
+
+const rad = (a) => a * Math.PI / 180;
+function rot(ax, deg) { // Basis(axis, angle) de Godot : rotation directe (main droite)
+  const t = rad(deg), c = Math.cos(t), s = Math.sin(t), C = 1 - c, [x, y, z] = ax;
+  return [[c + x*x*C, x*y*C - z*s, x*z*C + y*s], [y*x*C + z*s, c + y*y*C, y*z*C - x*s], [z*x*C - y*s, z*y*C + x*s, c + z*z*C]];
+}
+const RX = (a) => rot([1, 0, 0], a), RY = (a) => rot([0, 1, 0], a), RZ = (a) => rot([0, 0, 1], a);
+function mul(A, B) { const R = [[0,0,0],[0,0,0],[0,0,0]]; for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) R[i][j] = A[i][0]*B[0][j] + A[i][1]*B[1][j] + A[i][2]*B[2][j]; return R; }
+const col = (A, j) => [A[0][j], A[1][j], A[2][j]];
+const add = (a, b) => [a[0]+b[0], a[1]+b[1], a[2]+b[2]];
+const sc = (a, k) => [a[0]*k, a[1]*k, a[2]*k];
+
+function solve(p) {
+  const A = (id) => +(p.angles[id] || 0);
+  const tip = {}, basis = {}, base3 = {};
+  basis.root = mul(mul(mul(RY(A("lacet")), RZ(ROOT.rest + ROOT.sign * A("root"))), RY(A("root_p"))), RX(-A("torsionBassin")));
+  tip.root = [0, 0, 0];
+  for (const b of BONES) {
+    const prof = CHARNIERES.includes(b.id) ? 0 : A(b.id + "_p");
+    let B = mul(mul(basis[b.parent], RZ(b.rest + b.sign * A(b.id))), RY(prof));
+    if (b.id.startsWith("arm") || b.id.startsWith("thigh")) B = mul(B, RX(A(b.id + "_r")));
+    if (b.id === "spineLow") B = mul(B, RX(-0.2 * A("torsion")));
+    if (b.id === "chest") B = mul(B, RX(-0.8 * A("torsion")));
+    if (b.id === "neck") B = mul(B, RX(-A("neck_r")));
+    basis[b.id] = B;
+    let o3 = tip[b.parent];
+    if (b.id.startsWith("arm")) {
+      const side = b.id.slice(3), Bc = basis.chest;
+      o3 = add(o3, add(sc(col(Bc, 1), -A("epaule" + side + "_av")), sc(col(Bc, 0), A("epaule" + side + "_haut"))));
+      base3[b.id] = o3;
+    }
+    tip[b.id] = add(o3, sc(col(B, 0), STYLE[b.len] * (b.len === "neck" ? 1 : 1)));
+  }
+  const r = STYLE.head / 2;
+  const head3 = add(tip.neck, sc(col(basis.neck, 0), r * (1 - STYLE.headSink)));
+  const f = (p.facing || 1) < 0 ? -1 : 1;
+  const pts3 = { hip: tip.root, waist: tip.spineLow, shoulder: tip.chest, neckTop: tip.neck, head: head3,
+    elbowN: tip.armN, handN: tip.foreN, elbowF: tip.armF, handF: tip.foreF,
+    kneeN: tip.thighN, ankleN: tip.shinN, toeN: tip.footN, kneeF: tip.thighF, ankleF: tip.shinF, toeF: tip.footF };
+  const J = {}, Z = {};
+  const W = (v) => [p.x + f * v[0], p.y + v[1]];
+  for (const k in pts3) { J[k] = W(pts3[k]); Z[k] = pts3[k][2]; }
+  for (const s of ["N", "F"]) {
+    J["shoulder" + s] = W(base3["arm" + s]); Z["shoulder" + s] = base3["arm" + s][2];
+    J["hip" + s] = J.hip; Z["hip" + s] = Z.hip;
+  }
+  return { J, Z, r };
+}
+
+function lowestY(p) {
+  const { J, r } = solve(p);
+  let lo = Infinity;
+  for (const k in J) {
+    if (k === "head") continue;
+    const rr = (k === "handN" || k === "handF") ? Math.max(STYLE.hand, STYLE.stroke / 2) : STYLE.stroke / 2;
+    lo = Math.min(lo, J[k][1] - rr);
+  }
+  return Math.min(lo, J.head[1] - r);
+}
+
+function primitives(p, cNear, cFar) {
+  const { J, Z, r } = solve(p);
+  const items = [];
+  const seg = (a, b, base, c) => items.push({ z: base + (Z[a] + Z[b]) / 2, type: "path", pts: [J[a], J[b]], c });
+  for (const s of ["F", "N"]) {
+    const c = s === "F" ? cFar : cNear, ba = s === "F" ? 30 : -30, bl = s === "F" ? 20 : -20;
+    seg("hip", "knee" + s, bl, c);
+    items.push({ z: bl + (Z["knee" + s] + Z["ankle" + s]) / 2, type: "path", pts: [J["knee" + s], J["ankle" + s], J["toe" + s]], c });
+    seg("shoulder" + s, "elbow" + s, ba, c);
+    seg("elbow" + s, "hand" + s, ba, c);
+    items.push({ z: ba + Z["hand" + s] - 0.01, type: "circle", ctr: J["hand" + s], r: STYLE.hand, c });
+  }
+  items.push({ z: (Z.hip + Z.shoulder) / 2, type: "path", pts: [J.hip, J.waist, J.shoulder], c: cNear });
+  items.push({ z: Z.head - 1, type: "circle", ctr: J.head, r, c: cNear });
+  items.forEach((it, i) => it.rang = i);
+  items.sort((a, b) => (b.z - a.z) || (a.rang - b.rang));
+  return { items, J };
+}
+
+// ===================== Poses =====================
+const POSES = {
+  repos: { nom: "repos", style: "epais", x: 0, y: 87.78, facing: 1, angles: { root: -11, spineLow: 6, chest: 9, neck: 8, armF: 8, foreF: 8, armN: -10, foreN: 10, thighF: 3.73, shinF: 0.02, footF: -14.71, thighN: -25.71, shinN: 0.02, footN: 14.73, thighN_p: 5, thighF_p: -5, thighN_r: 10, thighF_r: -10, armN_p: 12, armF_p: -12 } },
+  garde: { nom: "garde", style: "epais", x: 0, y: 72.13, facing: 1, angles: { root: 3, spineLow: 8, chest: 9, neck: 14, armF: 58, foreF: 136, armN: 70, foreN: 122, thighF: 1.83, shinF: 57.85, footF: 11.96, thighN: 58.09, shinN: 62.55, footN: 5.48, torsion: 4, torsionBassin: 22, epauleN_av: 1, epauleF_av: 1, epauleN_haut: 4, epauleF_haut: 4, armF_p: -16, armN_p: 18, thighF_p: -16, thighN_p: 16, thighF_r: -35, thighN_r: -5, armN_r: -24, armF_r: -24 } },
+  neutre: { nom: "neutre", style: "epais", x: 0, y: 90.5, facing: 1, angles: {} },
+};
+
+// Réglages affichés : [id, libellé, aide, min, max] (amplitudes de stick_rig.gd).
+const side = (S, nom) => [
+  ["arm" + S, "Épaule : lever le bras devant", "+ devant, − derrière", -180, 180],
+  ["arm" + S + "_p", "Épaule : écarter le bras", S === "N" ? "+ vers la caméra (écarté)" : "− vers l'extérieur (écarté)", -90, 90],
+  ["arm" + S + "_r", "Épaule : rotation du bras", "oriente le coude", -80, 80],
+  ["fore" + S, "Coude : plier", "0 tendu", 0, 150],
+  ["epaule" + S + "_av", "Omoplate : avancer / reculer", "bagarreur ≤ 0", -7, 7],
+  ["epaule" + S + "_haut", "Omoplate : hausser", "", -3, 7],
+];
+const leg = (S) => [
+  ["thigh" + S, "Hanche : monter le genou", "+ devant", -30, 140],
+  ["thigh" + S + "_p", "Hanche : écarter la jambe", S === "N" ? "+ vers la caméra" : "− vers l'extérieur", S === "N" ? -30 : -45, S === "N" ? 45 : 30],
+  ["thigh" + S + "_r", "Hanche : rotation de la cuisse", "oriente le genou", -45, 45],
+  ["shin" + S, "Genou : plier", "0 tendu", 0, 150],
+  ["foot" + S, "Cheville", "+ pointe relevée", -50, 65],
+  ["foot" + S + "_p", "Cheville : pied tourné", "", -25, 25],
+];
+const GROUPS = [
+  { titre: "Corps entier", open: true, rows: [
+    ["lacet", "Corps tourné vers la caméra", "tout le corps, pieds compris", -180, 180],
+    ["torsionBassin", "Torsion du bassin", "les hanches tournent", -60, 60],
+    ["torsion", "Torsion des épaules", "par rapport au bassin", -45, 45],
+    ["root", "Bascule du bassin", "+ penché en avant", -180, 180],
+    ["root_p", "Bassin : inclinaison sur le côté", "", -30, 30],
+  ]},
+  { titre: "Dos et tête", open: true, rows: [
+    ["spineLow", "Bas du dos", "+ penché en avant", -25, 45],
+    ["spineLow_p", "Bas du dos : sur le côté", "", -30, 30],
+    ["chest", "Poitrine", "+ penché en avant", -25, 45],
+    ["chest_p", "Poitrine : sur le côté", "", -30, 30],
+    ["neck", "Cou : baisser la tête", "+ menton vers le bas", -60, 50],
+    ["neck_r", "Cou : tourner la tête", "", -80, 80],
+    ["neck_p", "Cou : pencher sur le côté", "", -40, 40],
+  ]},
+  { titre: "Bras proche", sub: "côté caméra", open: true, rows: side("N") },
+  { titre: "Bras loin", sub: "derrière", open: true, rows: side("F") },
+  { titre: "Jambe proche", sub: "côté caméra", open: false, rows: leg("N") },
+  { titre: "Jambe loin", sub: "derrière", open: false, rows: leg("F") },
+];
+const ROWDEF = {}; GROUPS.forEach(g => g.rows.forEach(r => ROWDEF[r[0]] = r));
+
+// ===================== État =====================
+let pose = clone(POSES.repos);
+let cam = 0;
+const opt = { sol: true, loin: true, art: false, lim: true };
+function clone(o) { return JSON.parse(JSON.stringify(o)); }
+try { const s = localStorage.getItem("poseur.pose"); if (s) { const q = JSON.parse(s); if (q && q.angles) pose = q; } } catch (e) {}
+
+// ===================== Interface =====================
+const $ = (id) => document.getElementById(id);
+const inputs = {};
+function buildGroups() {
+  const host = $("groups");
+  for (const g of GROUPS) {
+    const d = document.createElement("details"); d.className = "grp"; d.open = g.open;
+    d.innerHTML = `<summary><span>${g.titre}${g.sub ? ` <span class="n">${g.sub}</span>` : ""}</span></summary>`;
+    const rows = document.createElement("div"); rows.className = "rows";
+    for (const [id, lab, aide, lo, hi] of g.rows) {
+      const row = document.createElement("div"); row.className = "row"; row.dataset.id = id;
+      row.innerHTML = `<label class="lab" for="r-${id}"><span>${lab}</span><small>${id}${aide ? " · " + aide : ""}</small></label>
+        <input type="number" id="n-${id}" step="0.5" aria-label="${lab} (valeur)">
+        <button class="z" title="Remettre à 0" aria-label="Remettre ${lab} à 0">↺</button>
+        <input type="range" id="r-${id}" min="${lo}" max="${hi}" step="0.5">`;
+      const r = row.querySelector("input[type=range]"), n = row.querySelector("input[type=number]");
+      r.addEventListener("input", () => set(id, +r.value));
+      n.addEventListener("change", () => set(id, +n.value));
+      row.querySelector(".z").addEventListener("click", () => set(id, 0));
+      inputs[id] = { r, n, row, lo, hi };
+      rows.appendChild(row);
+    }
+    d.appendChild(rows); host.appendChild(d);
+  }
+}
+function set(id, v) {
+  if (!isFinite(v)) return;
+  const d = inputs[id];
+  if (opt.lim && d) v = Math.max(d.lo, Math.min(d.hi, v));
+  pose.angles[id] = Math.round(v * 100) / 100;
+  sync(); draw();
+}
+function sync() {
+  for (const id in inputs) {
+    const v = +(pose.angles[id] || 0), d = inputs[id];
+    d.r.value = v; if (document.activeElement !== d.n) d.n.value = v;
+    d.row.classList.toggle("changed", v !== 0);
+  }
+  $("json").value = toJSON();
+  try { localStorage.setItem("poseur.pose", JSON.stringify(pose)); } catch (e) {}
+}
+function planted() {
+  const q = clone(pose);
+  if (opt.sol) q.y = q.y - lowestY(q);
+  return q;
+}
+function toJSON() {
+  const q = planted();
+  const angles = {};
+  for (const k of Object.keys(pose.angles)) { const v = +pose.angles[k]; if (Math.abs(v) > 1e-9) angles[k] = Math.round(v * 100) / 100; }
+  return JSON.stringify({ nom: pose.nom || "ma_pose", style: "epais", x: 0, y: Math.round(q.y * 100) / 100, facing: 1, angles }, null, 2);
+}
+
+// ===================== Dessin =====================
+function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+function render(canvas, camDeg, big) {
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  if (!w || !h) return;
+  if (canvas.width !== Math.round(w * dpr) || canvas.height !== Math.round(h * dpr)) { canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr); }
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, w, h);
+  const q = planted();
+  q.angles = Object.assign({}, q.angles, { lacet: (+q.angles.lacet || 0) + camDeg });
+  const k = Math.min(h / 250, w / 190);
+  const groundY = h - 18 * (big ? 1.4 : 1);
+  const ox = w / 2;
+  const S = (v) => [ox + v[0] * k, groundY - v[1] * k];
+  // grille : un carreau = 10 unités (≈ 10 cm)
+  ctx.strokeStyle = css("--grid"); ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let gx = 0; ox + gx * k < w; gx += 10) { for (const sx of [ox + gx * k, ox - gx * k]) { ctx.moveTo(sx, 0); ctx.lineTo(sx, groundY); } }
+  for (let gy = 0; groundY - gy * k > 0; gy += 10) { ctx.moveTo(0, groundY - gy * k); ctx.lineTo(w, groundY - gy * k); }
+  ctx.stroke();
+  ctx.fillStyle = css("--ground"); ctx.fillRect(0, groundY, w, h - groundY);
+  const near = css("--figure"), far = opt.loin ? css("--figure-far") : near;
+  const { items, J } = primitives(q, near, far);
+  ctx.lineCap = "round"; ctx.lineJoin = "round";
+  for (const it of items) {
+    ctx.strokeStyle = it.c; ctx.fillStyle = it.c;
+    if (it.type === "path") {
+      ctx.lineWidth = STYLE.stroke * k;
+      ctx.beginPath(); it.pts.forEach((v, i) => { const s = S(v); i ? ctx.lineTo(s[0], s[1]) : ctx.moveTo(s[0], s[1]); }); ctx.stroke();
+    } else {
+      const s = S(it.ctr); ctx.beginPath(); ctx.arc(s[0], s[1], it.r * k, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+  if (opt.art && big) {
+    ctx.fillStyle = css("--joint");
+    for (const key of ["shoulderN", "shoulderF", "elbowN", "elbowF", "handN", "handF", "hip", "waist", "kneeN", "kneeF", "ankleN", "ankleF"]) {
+      const s = S(J[key]); ctx.beginPath(); ctx.arc(s[0], s[1], 3.2, 0, Math.PI * 2); ctx.fill();
+    }
+  }
+}
+function camName(c) {
+  const a = ((c % 360) + 540) % 360 - 180;
+  if (a === 0) return "Profil"; if (a === 90) return "Face"; if (a === 45) return "Trois quarts"; if (a === -90) return "Dos";
+  return "Libre";
+}
+function draw() {
+  render($("main"), cam, true);
+  document.querySelectorAll(".thumb").forEach(t => { render(t.querySelector("canvas"), +t.dataset.cam, false); t.setAttribute("aria-pressed", String(+t.dataset.cam === cam)); });
+  $("viewtag").textContent = `${camName(cam)} · caméra ${cam}°`;
+  $("cam").value = cam; $("camv").textContent = cam + "°";
+  document.querySelectorAll(".seg button").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.cam === cam)));
+}
+function setCam(c) { cam = Math.round(((c + 180) % 360 + 360) % 360 - 180); draw(); }
+
+// ===================== Événements =====================
+buildGroups(); sync();
+document.querySelectorAll("[data-cam]").forEach(b => b.addEventListener("click", () => setCam(+b.dataset.cam)));
+$("cam").addEventListener("input", (e) => setCam(+e.target.value));
+let drag = null;
+$("stage").addEventListener("pointerdown", (e) => { drag = { x: e.clientX, c: cam }; $("stage").setPointerCapture(e.pointerId); });
+$("stage").addEventListener("pointermove", (e) => { if (drag) setCam(drag.c + (e.clientX - drag.x) * 0.6); });
+["pointerup", "pointercancel"].forEach(t => $("stage").addEventListener(t, () => drag = null));
+for (const k of ["repos", "garde", "neutre"]) $("p-" + k).addEventListener("click", () => { pose = clone(POSES[k]); sync(); draw(); });
+$("p-miroir").addEventListener("click", () => {
+  const a = {}, src = pose.angles;
+  for (const k in src) {
+    let o = k.replace(/(arm|fore|thigh|shin|foot|epaule)N/, "$1#").replace(/(arm|fore|thigh|shin|foot|epaule)F/, "$1N").replace("#", "F");
+    let v = src[k];
+    if (/_p$/.test(k) && /^(arm|thigh|foot)/.test(k)) v = -v; // l'écartement change de sens
+    if (/_r$/.test(k) && /^(arm|thigh)/.test(k)) v = -v;
+    a[o] = v;
+  }
+  pose.angles = a; sync(); draw();
+});
+for (const k of ["sol", "loin", "art", "lim"]) $("o-" + k).addEventListener("change", (e) => { opt[k] = e.target.checked; sync(); draw(); });
+function toast(t, err) { const el = $("toast"); el.textContent = t; el.classList.toggle("err", !!err); clearTimeout(toast.h); toast.h = setTimeout(() => el.textContent = "", 2600); }
+$("copy").addEventListener("click", () => {
+  const txt = $("json").value;
+  const fallback = () => { $("json").focus(); $("json").select(); toast("Texte sélectionné : copie-le avec ton téléphone."); };
+  try { navigator.clipboard.writeText(txt).then(() => toast("Pose copiée."), fallback); } catch (e) { fallback(); }
+});
+$("load").addEventListener("click", () => {
+  try {
+    const q = JSON.parse($("json").value);
+    if (!q || typeof q.angles !== "object") throw new Error();
+    pose = { nom: q.nom || "ma_pose", style: "epais", x: 0, y: +q.y || 87.78, facing: 1, angles: {} };
+    for (const k in q.angles) pose.angles[k] = +q.angles[k];
+    sync(); draw(); toast("Pose chargée.");
+  } catch (e) { toast("Ce texte n'est pas une pose : il faut un objet JSON avec « angles ».", true); }
+});
+window.addEventListener("resize", draw);
+if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", draw);
+draw();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+</script>

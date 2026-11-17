@@ -18,7 +18,9 @@ extends SceneTree
 ## précédente, pour ne pas changer de branche d'une clé à l'autre.
 ##
 ##     tools/resout_mains.sh anims/x.json
-## Bornes : élévation −60..100, coude 40..160, rotation −80..80 (limite du rig).
+## "elev": [min, max] remplace les bornes d'élévation (bras levé au-dessus de l'épaule).
+## Les cibles sont dans les axes du monde (le buste tourné ne les tourne pas).
+## Bornes : élévation −60..100 (sauf "elev"), coude 40..160, rotation −80..80 (limite du rig).
 
 const LO := [-60.0, 40.0, -80.0, -30.0]
 const HI := [100.0, 160.0, 80.0, 90.0]
@@ -42,11 +44,13 @@ func _err(pose: Dictionary, side: String, tgt: Vector3, coude) -> float:
 	return e
 
 
-func _resout(pose: Dictionary, side: String, tgt: Vector3, depart: Array, coude, ecart: Array) -> Array:
+func _resout(pose: Dictionary, side: String, tgt: Vector3, depart: Array, coude, ecart: Array, elev: Array) -> Array:
 	var sg_p := 1.0 if side == "N" else -1.0
 	var ch := ["arm" + side, "fore" + side, "arm" + side + "_r", "arm" + side + "_p"]
 	var lo := LO.duplicate()
 	var hi := HI.duplicate()
+	lo[0] = float(elev[0])
+	hi[0] = float(elev[1])
 	var n := 3
 	if coude != null:
 		n = 4
@@ -126,8 +130,9 @@ func _initialize() -> void:
 			var ec: Array = m.get("ecart", [0, 90])
 			if ec[0] is Array:  # [[min, max] de N, [min, max] de F]
 				ec = ec[0] if side == "N" else ec[1]
+			var el: Array = m.get("elev", [LO[0], HI[0]])
 			var r := _resout(pose, side, S + Vector3(d[0], d[1], d[2]), prec[side],
-				cd, ec)
+				cd, ec, el)
 			prec[side] = r[1]
 			for c in r[3]:
 				var val: float = r[1][c] * (r[4] if c == 3 else 1.0)
@@ -161,6 +166,8 @@ func _initialize() -> void:
 			pr.call("handN", "handF"), pr.call("elbowN", "elbowF"),
 			J.elbowN.x - Sh.x, J.elbowF.x - Sh.x,
 			J.elbowN.y - Sh.y, J.elbowF.y - Sh.y, abd.call("N"), abd.call("F")])
+		print("   monde : poing F (%.1f, %.1f), paume N (%.1f, %.1f), tête (%.1f, %.1f)" % [
+			J.handF.x, J.handF.y, J.handN.x, J.handN.y, J.head.x, J.head.y])
 	var f := FileAccess.open(chemin, FileAccess.WRITE)
 	f.store_string(JSON.stringify(data, " ", false) + "\n")
 	quit()

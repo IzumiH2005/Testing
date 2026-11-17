@@ -31,12 +31,13 @@ def ease(u, courbe):
 
 
 def mix(a, b, u):
-    return {k: round(a[k] + (b[k] - a[k]) * u, 2) for k in a}
+    return {k: round(a[k] + (b.get(k, a[k]) - a[k]) * u, 2) for k in a}
 
 
 # Repos (poses/repos.json) : haut du corps.
 REPOS = {"root": -11, "spineLow": 6, "chest": 9, "neck": 8, "torsion": 0,
-         "epauleN_av": 0, "epauleF_av": 0, "epauleN_haut": 0, "epauleF_haut": 0}
+         "epauleN_av": 0, "epauleF_av": 0, "epauleN_haut": 0, "epauleF_haut": 0,
+         "torsionBassin": 0, "neck_r": 0}
 # Buste droit, poitrine ouverte, épaules reculées, menton horizontal.
 SUR = {"root": -5, "spineLow": 3, "chest": 2, "neck": 4, "torsion": 0,
        "epauleN_av": -2, "epauleF_av": -2, "epauleN_haut": 0, "epauleF_haut": 0}
@@ -61,7 +62,10 @@ COUDE_DY = float(os.environ.get("CD", -4))
 # Pendant le craquage, le buste tourne de trois quarts vers la caméra (idée de
 # l'utilisateur) : les deux poings, côte à côte en profondeur, se séparent à l'écran. La
 # tête reste tournée vers l'adversaire (neck_r compense).
-TROIS_QUARTS = float(os.environ.get("T", -35))
+TROIS_QUARTS = float(os.environ.get("T", -45))
+# Vrai trois quarts (demande de l'utilisateur : « au point où ses deux épaules sont
+# visibles ») : le bassin tourne aussi, la poitrine fait face à la caméra à 60°.
+BASSIN = float(os.environ.get("TB", -15))
 SENS = float(os.environ.get("SENS", 1))
 
 
@@ -119,7 +123,8 @@ def main():
             b = mix(bras_debut, PRETE, u)
             t_debut = round(0.25 * (bras_debut["armN"] - bras_debut["armF"]) / 2, 2)
             haut["torsion"] = round(t_debut * (1 - u) + TROIS_QUARTS * u, 2)
-            haut["neck_r"] = round(-TROIS_QUARTS * u, 2)
+            haut["torsionBassin"] = round(BASSIN * u, 2)
+            haut["neck_r"] = round(-(TROIS_QUARTS + BASSIN) * u, 2)
             haut["epauleN_av"] = haut["epauleF_av"] = round(-2 + u, 2)
         cle["fixe"].update(haut)
         cle["fixe"].update(b)
@@ -141,11 +146,12 @@ def main():
         h.update(haut or {})
         # buste tourné de trois quarts vers la caméra, tête qui reste sur l'adversaire
         h["torsion"] = TROIS_QUARTS
-        h["neck_r"] = -TROIS_QUARTS
+        h["torsionBassin"] = BASSIN
+        h["neck_r"] = -(TROIS_QUARTS + BASSIN)
         c = {"f": f, "fixe": {"x": X, "y": round(Y - 2.5 + dy_bassin, 2)}, "vise": dict(pieds)}
         c["fixe"].update(h)
         c["fixe"].update({"thighN_p": 13, "thighF_p": -13, "armN_p": 20, "armF_p": -20})
-        a = math.radians(SENS * TROIS_QUARTS)
+        a = math.radians(SENS * (TROIS_QUARTS + BASSIN))
 
         def tourne(m):
             x, z = m[0], m[2]
@@ -157,9 +163,10 @@ def main():
         # coudes séparés de profil : N haut et devant (plus encore à l'appui), F bas
         cn = {"repos": CN_REPOS, "appui": CN_APPUI, "crac": CN_CRAC}[phase]
         c["mains3d"] = {"N": tourne(fN), "F": tourne(fF),
-                        "coude_dy": [cn, COUDE_DY], "coude_dx": [CDX_N, CDX_F],
+                        "coude_dy": [cn, COUDE_DY],
                         "ecart": [json.loads(os.environ.get("ECN", "[28, 45]")),
                                   json.loads(os.environ.get("ECF", "[20, 40]"))]}
+        c["mains3d"]["coude_dx"] = [CDX_N, CDX_F]
         if courbe:
             c["courbe"] = courbe
         if p:
