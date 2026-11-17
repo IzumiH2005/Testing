@@ -46,14 +46,14 @@ BRAS_REPOS = {"armN": -10, "foreN": 10, "armF": 8, "foreF": 8,
 # chaque main de son côté en profondeur, sans se traverser (voir l'analyse § 4).
 # Cibles du centre des poings, relatives à l'épaule (x devant, y haut, z profondeur,
 # N côté caméra = z négatif) ; les angles sont résolus par tools/resout_mains.sh.
-MAIN_F = (22, -22, 3)
-MAIN_N = (37, -19, -3)
+MAIN_F = (26, -20, 7)
+MAIN_N = (33, -14, -7)
 # Coudes ouverts sur les côtés : l'écartement est cherché dans cette plage pour que
 # les avant-bras soient horizontaux (coude à la hauteur de la main).
-ECART = [40, 75]
+ECART = [40, 90]
 # Angles de cette position (sortie de resout_mains, clé 148) : sert au trajet 104 → 136.
-PRETE = {"armN": 35.5, "foreN": 101.7, "armF": -0.4, "foreF": 123.7,
-         "armN_p": 46.7, "armF_p": -49.9, "armN_r": 52.5, "armF_r": -33.6}
+PRETE = {"armN": 35.7, "foreN": 112.7, "armF": 4.2, "foreF": 119,
+         "armN_p": 59.3, "armF_p": -54, "armN_r": 50.8, "armF_r": -28.9}
 
 
 def tronc(f):
@@ -154,12 +154,12 @@ def main():
         craque(136),
         craque(148, courbe="acc-dec"),
         # appui : les mains remontent vers soi, la paume quitte le poing (écart visible)
-        craque(158, haut=APPUI1, mains=(-3, 3), n_plus=(2, 7), coude_dy=-3, courbe="acc", p=3),
+        craque(158, haut=APPUI1, mains=(-2, 1), n_plus=(1, 5), coude_dy=-3, courbe="acc", p=3),
         # craquement : la paume revient frapper le poing et les deux poussent devant et en bas
         craque(162, dy_bassin=-1.5, haut=CRAC1, mains=(2, -3), n_plus=(-0.5, -0.5), coude_dy=3, courbe="dec"),
         craque(168, dy_bassin=-1.2, haut=CRAC1, mains=(2, -2.5), n_plus=(-0.5, -0.5), coude_dy=3, courbe="acc-dec"),
         craque(180, haut={"neck": 4}, courbe="acc-dec"),
-        craque(190, haut=APPUI2, mains=(-4, 4), n_plus=(3, 9), coude_dy=-4, courbe="acc", p=3),
+        craque(190, haut=APPUI2, mains=(-3, 2), n_plus=(1.5, 6), coude_dy=-4, courbe="acc", p=3),
         craque(194, dy_bassin=-2.5, haut=CRAC2, mains=(3, -4), n_plus=(-0.5, -0.5), coude_dy=3, courbe="dec"),
         craque(202, dy_bassin=-2.0, haut=CRAC2, mains=(3, -3.5), n_plus=(-0.5, -0.5), coude_dy=3, courbe="acc-dec"),
         craque(214, haut=FIN, courbe="acc-dec"),

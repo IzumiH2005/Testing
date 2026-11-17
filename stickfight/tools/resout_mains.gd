@@ -120,10 +120,16 @@ func _initialize() -> void:
 				printerr("clé %d : main %s à %.1f de sa cible" % [int(k.f), side, r[2]])
 		var sol := StickRig.solve(pose)
 		var J: Dictionary = sol.joints
-		print("clé %d : mains à %.1f, avant-bras %+.0f°/%+.0f°, écart %.0f/%.0f, traversées %s (marge %.1f)" % [int(k.f),
+		var aN := _p3(sol, "handN") - _p3(sol, "elbowN")
+		var aF := _p3(sol, "handF") - _p3(sol, "elbowF")
+		# pente : avant-bras par rapport au sol (+ = main plus haute que le coude) ;
+		# vers l'avant : angle de l'avant-bras avec l'axe gauche-droite, vu de dessus
+		# (0 = pointé vers l'autre main, 90 = pointé devant)
+		print("clé %d : mains à %.1f, pente %+.0f°/%+.0f°, vers l'avant %.0f°/%.0f°, écart %.0f/%.0f, traversées %s (marge %.1f)" % [int(k.f),
 			_p3(sol, "handN").distance_to(_p3(sol, "handF")),
-			rad_to_deg(atan2(J.handN.y - J.elbowN.y, absf(J.handN.x - J.elbowN.x) + 0.001)),
-			rad_to_deg(atan2(J.handF.y - J.elbowF.y, absf(J.handF.x - J.elbowF.x) + 0.001)),
+			rad_to_deg(atan2(aN.y, Vector2(aN.x, aN.z).length())),
+			rad_to_deg(atan2(aF.y, Vector2(aF.x, aF.z).length())),
+			rad_to_deg(atan2(absf(aN.x), absf(aN.z))), rad_to_deg(atan2(absf(aF.x), absf(aF.z))),
 			pose.angles.get("armN_p", 0.0), pose.angles.get("armF_p", 0.0),
 			AT._traversees(sol), AT._derniere_marge])
 	var f := FileAccess.open(chemin, FileAccess.WRITE)

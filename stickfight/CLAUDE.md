@@ -39,4 +39,15 @@
    légèrement bombée, ligne des épaules droite ou un peu en arrière (`epaule*_av` ≤ 0), jamais
    enroulée vers l'avant, même sur un effort (on lit l'effort par les épaules qui montent puis
    tombent, les coudes, la tête, pas par un dos qui s'arrondit).
-7. Ne pas changer l'apparence des personnages (style, épaisseur, couleurs) sans qu'on le demande.
+7. **Le critique juge avant et après.** Un agent critique strict
+   (`.claude/agents/critique-animation.md`, lancé comme agent général à qui on donne ce
+   fichier) regarde le travail :
+   - **avant** de poser les clés : il critique la fiche d'analyse (anatomie, axes, ce qui doit
+     se lire de profil) ;
+   - **après** chaque itération : `tools/critique.sh anims/x.json DOSSIER --de a --a b --vue
+     x,y,w,h` prépare les images (clés en trois vues, profil, zoom, vérificateur), puis on lui
+     donne le dossier, la fiche et ce qui a changé.
+   On corrige tant qu'il répond REFUSÉ. On ne montre, ne valide ni ne commite une animation
+   sans son VALIDÉ. Ne jamais discuter son verdict à sa place : si un défaut semble faux, le
+   vérifier sur l'image.
+8. Ne pas changer l'apparence des personnages (style, épaisseur, couleurs) sans qu'on le demande.
