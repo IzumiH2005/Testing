@@ -667,6 +667,13 @@ C'est le point le plus important, et le plus raté chez nous.
 - **En garde** : coude fermé à 90° ou moins. Le rapide a un poing détaché devant le visage et
   le coude arrière levé à l'horizontale. Le costaud a un poing collé sous le menton et l'autre
   bras en équerre.
+  Le coude arrière « levé à l'horizontale » est un coude levé **sur le côté** à hauteur
+  d'épaule (abduction ~85°), l'avant-bras pointé vers l'adversaire ou vers le bas-avant : de
+  profil ou de trois quarts dos, il se lit comme une barre horizontale vers l'arrière, et le
+  poing arrière sort de la tête (`etudes/postures_trois_quarts/rapport.md`).
+- **Trois quarts** : il se lit par deux bras de longueurs différentes à l'écran (un raccourci,
+  un à plat), jamais par un buste élargi. La vraie face est réservée à l'encaisse et au
+  blocage (R2 6096-6128).
 - **Armé d'un coup lourd** : le bras monte presque tendu vers l'arrière et le haut (V1 175),
   puis le coude se ferme (V1 176). Le poing finit **derrière la tête**, à une tête au-dessus
   de l'épaule. L'avant-bras est rabattu vers la tête, jamais ouvert vers le ciel.
