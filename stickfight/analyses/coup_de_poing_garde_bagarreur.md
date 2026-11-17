@@ -66,8 +66,8 @@ le bras loin), `armF_r` (rotation), `foreF` (pli du coude).
 | 0 garde | 12 | 4 | 16 | 0 / −3 | −5, −80, −20, 100 | 31, 40, 40, 95 ; −1 | 15 | 0 | 0 / 84 |
 | 5 ressort | 16 | 10 | 26 | −2 / −3 | −8, −85, −20, 102 | idem | 15 | −6 | −1 / 82,5 |
 | 8 la hanche part | −5 | 30 | 25 (épaules restées en arrière) | −1 / −2 | −2, −80, −15, 100 | 25, 40, 40, 105 ; −1 | 0 | −5,4 | 1 / 83 |
-| 10 coude devant | −12 | −20 | −32 | 0 / −1 | 75, −70, −50, 110 | 30, 45, 30, 125 ; −2 | −5 | 28,8 | 2,5 / 83 |
-| 11 extension | −13,5 | −27,5 | −41 | 0 / −0,5 | 76, −75, −48, 84 | 30, 47,5, 30, 130 ; −2,5 | −7,5 | 34,2 | 3,25 / 83 |
+| 10 coude devant | −12 | −12 | −24 | 0 / −1 | 68, −72, −50, 120 | 30, 45, 30, 125 ; −2 | −5 | 24 | 2,5 / 83 |
+| 11 extension | −13,5 | −24 | −37,5 | 0 / −0,5 | 70, −68, −42, 85 | 30, 47,5, 30, 130 ; −2,5 | −7,5 | 32,1 | 3,25 / 83 |
 | 12 contact | −15 | −35 | −50 | 0 / 0 | 107, −50, 0, 3 | 30, 50, 30, 135 ; −3 | −10 | 39,6 | 4 / 83 |
 | 16 dépassement | −16 | −38 | −54 | 0 / 0 | 108, −52, 0, 0 | idem | −10 | 42 | 4,5 / 83 |
 | 24 tenue | −15 | −35 | −50 | 0 / 0 | 104, −48, 0, 8 | idem | −10 | 39,6 | 4 / 83 |
@@ -90,10 +90,12 @@ garde sa place, la cuisse et le genou s'adaptent, `thighN_r` reste à −5, `thi
 jambe arrière (F) pivote : `thighF_r` 15 → −10 (le genou rentre), `thighF_p` −15 ; sa cheville
 est visée à sa place de garde (`vise legF`), le genou s'adapte (flexion entre 30 et 45).
 
-Clé 10 : le coude arrive devant **encore fermé** (`foreF` 110), le poing près du menton :
-le pivot porte le coude, il ne déplie pas le bras. Clé 11 : le poing est sur la droite qui va
-du poing de la clé 10 au contact (pas de cloche). Ainsi le dépliage (10 → 12) garde de la
-course et accélère jusqu'au contact : écarts du poing d'environ 12 puis 18 unités par image.
+Clés 10 et 11 (rythme) : le pivot ne va pas jusqu'au bout avant le dépliage (épaules à −24
+à l'image 10, coude encore fermé à 120) ; la fin de la rotation et le dépliage se chevauchent
+de 10 à 12 (bible A bis, chevauchement). Au lacet total 0, le poing avance de 27, 25, puis 16
+et 18 : le dépliage accélère jusqu'au contact. À −45, le dépliage est raccourci par la vue
+(il va en partie vers le fond) : à l'écran, les écarts décroissent régulièrement (28, 20, 13,
+10), sans arrêt à la charnière entre le pivot et l'extension. Le poing monte sans cloche.
 
 Retour (24 → 34) : le coude se replie et remonte sur le côté, le poing sort de la ligne de
 frappe (z ≈ +16 vers l'image 28). C'est voulu : le bras reprend sa place de garde.
