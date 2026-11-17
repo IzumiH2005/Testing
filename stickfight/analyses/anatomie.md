@@ -131,8 +131,11 @@ Canaux : `thighN`, `thighN_p`, `thighN_r`.
 même ligne : vu de face, il y a un espace entre eux (un vrai bassin a deux hanches écartées). Les
 jambes partent d'un seul point (apparence du personnage), donc cet écartement se règle dans chaque
 pose par `thighN_p` (+) / `thighF_p` (−) : 5° pieds joints (garde-à-vous), 9° debout détendu
-(repos), 13° et plus base large et ancrée, 16° gardes. Le pied qui passe en marchant ne croise pas
-la ligne du milieu. Contrôle : vue de face (`--vues`).
+(repos), 13° base large et ancrée, 16° gardes. Au-delà de 16°, seulement pour les postures qui
+l'exigent vraiment (fente latérale, réception très large, appui écarté pour encaisser). Note de
+lecture : avec un trait de 15, les deux cuisses se recouvrent tant que l'écart est faible ; de
+face, la séparation ne semble partir du pubis qu'à partir de 16° environ (à 5-9° elle semble
+partir des genoux). Le pied qui passe en marchant ne croise pas la ligne du milieu. Contrôle : vue de face (`--vues`).
 
 Couplages à respecter :
 
