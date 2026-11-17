@@ -4,7 +4,7 @@
 Jambes : départ + un cycle + arrêt en un pas de la marche détendue, recollés bout à bout.
 Haut du corps : buste droit, épaules reculées, puis craquage du poing une fois arrêté.
 
-    GODOT=… python3 tools/gen_intro_bagarreur.py   (lance tools/resout_mains.sh)
+    python3 tools/gen_intro_bagarreur.py
 """
 import json
 import subprocess
@@ -42,24 +42,16 @@ SUR = {"root": -5, "spineLow": 3, "chest": 2, "neck": 4, "torsion": 0,
        "epauleN_av": -2, "epauleF_av": -2, "epauleN_haut": 0, "epauleF_haut": 0}
 BRAS_REPOS = {"armN": -10, "foreN": 10, "armF": 8, "foreF": 8,
               "armN_p": 12, "armF_p": -12, "armN_r": 0, "armF_r": 0}
-# Mains jointes au milieu devant le sternum : le poing F un peu du côté loin, la main N
-# posée devant et au-dessus de ses phalanges, du côté caméra (voir l'analyse § 2.3).
-# Cibles du centre des poings, relatives à l'épaule (x devant, y haut, z profondeur,
-# N côté caméra = z négatif) ; les angles sont résolus par tools/resout_mains.sh.
-# Une partie du décalage entre les mains est dans le plan de profil (x, y) pour que, vu de
-# profil, on voie la boule N posée sur le poing F et pas une seule boule.
-MAIN_F = tuple(json.loads(os.environ.get("MF", "[21, -16, 8.5]")))
-MAIN_N = tuple(json.loads(os.environ.get("MN", "[15.5, -8, -6.5]")))
-# Coudes (hauteur par rapport à la main) : N au-dessus de sa main, F en dessous, pour que
-# de profil les deux avant-bras fassent un coin au lieu d'une seule bande.
-COUDES = tuple(json.loads(os.environ.get("CD", "[2, -4]")))
-# Écartement des coudes cherché dans cette plage.
-ECART = [55, 90]
-# Coudes légèrement derrière la ligne du buste (demande de l'utilisateur) : x du coude par
-# rapport à l'épaule.
-COUDE_X = float(os.environ.get("CX", -2))
-# Angles de cette position (sortie de resout_mains, clé 136) : sert au trajet 104 → 136.
-PRETE = {"armN": -17.3, "foreN": 147.3, "armF": -5.9, "foreF": 129.7, "armN_p": 79, "armF_p": -55.3, "armN_r": 6.4, "armF_r": -14.7}
+# Bras de la clé 136 (sortie de resout_mains) : sert au trajet 104 → 136.
+PRETE = {"armN": 3, "foreN": 128, "armF": 3.9, "foreF": 122, "armN_p": 57.9, "armF_p": -51.9, "armN_r": 15.5, "armF_r": -17.1}
+
+
+MAIN_N = tuple(json.loads(os.environ.get("MN", "[25, -12, -8.5]")))
+MAIN_F = tuple(json.loads(os.environ.get("MF", "[27, -15, 8.5]")))
+
+
+# Coudes un peu sous les mains : avant-bras presque horizontaux (l'écartement s'ouvre pour ça).
+COUDE_DY = float(os.environ.get("CD", -6))
 
 
 def tronc(f):
@@ -116,73 +108,59 @@ def main():
             b = mix(bras_debut, PRETE, u)
             t_debut = round(0.25 * (bras_debut["armN"] - bras_debut["armF"]) / 2, 2)
             haut["torsion"] = round(t_debut * (1 - u), 2)
+            haut["epauleN_av"] = haut["epauleF_av"] = round(-2 + u, 2)
         cle["fixe"].update(haut)
         cle["fixe"].update(b)
         if f >= MAINS_PRETES:
             break
         cles.append(cle)
 
-    # Craquage : clés à partir de 136, mains placées par mains3d (repère de l'épaule).
-    def craque(f, dy_bassin=0.0, haut=None, mains=(0, 0), roule=0.0, coudes=(0, 0),
-               courbe=None, p=None):
-        """mains : décalage des deux mains ensemble ; roule : la main N roule sur le poing F
-        (degrés, + = vers l'avant et le bas, − = vers soi et le haut), en restant au contact ;
-        coudes : ajouté à la hauteur des coudes (+ = plus haut)."""
+    # Craquage : clés à partir de 136, mains placées en 3D par mains3d (repère de l'épaule).
+    def craque(f, dy_bassin=0.0, haut=None, mains=(0, 0), coudes=35, courbe=None, p=None):
         h = dict(SUR)
+        h.update({"epauleN_av": -1, "epauleF_av": -1})
         h.update(haut or {})
         dxm, dym = mains
-        rx, ry = MAIN_N[0] - MAIN_F[0], MAIN_N[1] - MAIN_F[1]
-        a = math.radians(-roule)
-        nx = MAIN_F[0] + rx * math.cos(a) - ry * math.sin(a)
-        ny = MAIN_F[1] + rx * math.sin(a) + ry * math.cos(a)
         c = {"f": f, "fixe": {"x": X, "y": round(Y - 2.5 + dy_bassin, 2)}, "vise": dict(pieds)}
         c["fixe"].update(h)
-        c["fixe"].update({"thighN_p": 13, "thighF_p": -13})
-        c["mains3d"] = {"N": [round(nx + dxm, 2), round(ny + dym, 2), MAIN_N[2]],
+        c["fixe"].update({"thighN_p": 13, "thighF_p": -13, "armN_p": coudes, "armF_p": -coudes})
+        # mains placées en 3D (tools/resout_mains.sh) : même endroit que la première version
+        # (devant la poitrine, loin du buste), mais l'une à côté de l'autre en profondeur, au
+        # contact, au lieu de l'une dans l'autre
+        c["mains3d"] = {"N": [MAIN_N[0] + dxm, MAIN_N[1] + dym, MAIN_N[2]],
                         "F": [MAIN_F[0] + dxm, MAIN_F[1] + dym, MAIN_F[2]],
-                        "coude_dy": [COUDES[0] + coudes[0], COUDES[1] + coudes[1]],
-                        "coude_dx": COUDE_X, "ecart": ECART}
+                        "coude_dy": COUDE_DY, "ecart": [coudes, 75]}
         if courbe:
             c["courbe"] = courbe
         if p:
             c["p"] = p
         return c
 
-    # Stature : la ligne des épaules reste droite ou en arrière (epaule_av ≤ 0), le buste
-    # ne s'enroule pas. Le buste tourne un peu vers la caméra (côté du poing F devant) pour
-    # que les coudes ouverts se voient de profil.
-    T = float(os.environ.get("T", 0))
-    R1A, R1B, R2A, R2B, M1, M2 = json.loads(os.environ.get("RL", "[10, 12, -8, -10, 1, 1.5]"))
-    PRET = {"torsion": T}
-    APPUI1 = {"torsion": T, "chest": 0, "neck": 3, "epauleN_haut": 3, "epauleF_haut": 3,
+    # Stature (règle 6) : épaules droites ou en arrière, buste droit, même au craquement ;
+    # l'effort se lit par les épaules qui montent puis tombent, les genoux, la tête.
+    APPUI1 = {"chest": 0, "neck": 3, "epauleN_haut": 3, "epauleF_haut": 3,
               "epauleN_av": -3, "epauleF_av": -3}
-    CRAC1 = {"torsion": T, "chest": 2, "neck": 10, "epauleN_haut": -2, "epauleF_haut": -2,
-             "epauleN_av": -1, "epauleF_av": -1}
-    APPUI2 = {"torsion": T, "chest": -1, "neck": 2, "epauleN_haut": 5, "epauleF_haut": 5,
-              "root": -6, "epauleN_av": -3, "epauleF_av": -3}
-    CRAC2 = {"torsion": T, "chest": 2, "neck": 13, "epauleN_haut": -3, "epauleF_haut": -3,
-             "epauleN_av": -1, "epauleF_av": -1}
-    FIN = {"torsion": T, "neck": 1}  # menton qui remonte, regard sur l'adversaire
+    CRAC1 = {"chest": 2, "neck": 10, "epauleN_haut": -2, "epauleF_haut": -2}
+    APPUI2 = {"chest": -1, "neck": 2, "epauleN_haut": 5, "epauleF_haut": 5, "root": -6,
+              "epauleN_av": -3, "epauleF_av": -3}
+    CRAC2 = {"chest": 2, "neck": 13, "epauleN_haut": -3, "epauleF_haut": -3}
+    FIN = {"neck": 1}  # menton qui remonte, regard sur l'adversaire
 
     cles += [
-        craque(136, haut={"torsion": T / 2}),
-        craque(146, haut=PRET, courbe="acc-dec"),
-        # appui 1 : on serre lentement, la main N roule vers l'avant sur les phalanges, les
-        # coudes montent, les épaules montent
-        craque(162, haut=APPUI1, mains=(-1, 1), roule=R1A, coudes=(2, 2), courbe="acc"),
-        # crac 1 : la résistance cède, tout tombe d'un coup de quelques unités
-        craque(164, dy_bassin=-1.5, haut=CRAC1, mains=(M1, -1), roule=R1B, coudes=(-1, 0), courbe="dec"),
-        craque(172, dy_bassin=-1.2, haut=CRAC1, mains=(M1, -1), roule=R1B, coudes=(-1, 0), courbe="acc-dec"),
-        craque(184, haut=dict(PRET, neck=4), courbe="acc-dec"),
-        # appui 2 : plus long et plus fort, la main N roule dans l'autre sens (autres doigts)
-        craque(204, haut=APPUI2, mains=(-1, 1.5), roule=R2A, coudes=(2, 3), courbe="acc"),
-        craque(206, dy_bassin=-2.5, haut=CRAC2, mains=(M2, -1), roule=R2B, coudes=(-1.5, 0), courbe="dec"),
-        craque(214, dy_bassin=-2.0, haut=CRAC2, mains=(M2, -1), roule=R2B, coudes=(-1.5, 0), courbe="acc-dec"),
-        craque(226, haut=FIN, courbe="acc-dec"),
-        craque(234, haut=FIN, courbe="acc-dec"),
+        craque(136),
+        craque(148, courbe="acc-dec"),
+        craque(158, haut=APPUI1, mains=(-3, 3), courbe="acc", p=3),
+        craque(162, dy_bassin=-1.5, haut=CRAC1, mains=(3, -5), coudes=45, courbe="dec"),
+        craque(168, dy_bassin=-1.2, haut=CRAC1, mains=(3, -4), coudes=44, courbe="acc-dec"),
+        craque(180, haut={"neck": 4}, courbe="acc-dec"),
+        craque(190, haut=APPUI2, mains=(-4, 5), coudes=33, courbe="acc", p=3),
+        craque(194, dy_bassin=-2.5, haut=CRAC2, mains=(4, -7), coudes=50, courbe="dec"),
+        craque(202, dy_bassin=-2.0, haut=CRAC2, mains=(4, -6), coudes=48, courbe="acc-dec"),
+        craque(214, haut=FIN, courbe="acc-dec"),
+        craque(222, haut=FIN, courbe="acc-dec"),
     ]
     # Retour au repos : les mains se séparent puis descendent.
-    fin = {"f": 264, "fixe": {"x": X, "y": Y}, "vise": dict(pieds)}
+    fin = {"f": 252, "fixe": {"x": X, "y": Y}, "vise": dict(pieds)}
     fin["fixe"].update(REPOS)
     fin["fixe"].update(BRAS_REPOS)
     cles.append(fin)
@@ -190,11 +168,9 @@ def main():
     anim = {
         "nom": "intro_bagarreur",
         "boucle": False,
-        "longueur": 264,
+        "longueur": 252,
         "base": "repos",
         "suivante": "idle_repos",
-        # pas de retard sur les bras : les deux mains l'une sur l'autre suivent le buste,
-        # sinon la poussée sèche les fait glisser l'une dans l'autre
         "decalage": {"chest": 2, "neck": 4},
         "ecartement": {"jambes": 9},
         "cles": cles,
@@ -204,7 +180,6 @@ def main():
         json.dump(anim, f, indent=1, ensure_ascii=False)
         f.write("\n")
     print(out, len(cles), "clés")
-    # Mains en 3D (profondeur comprise) : remplace "mains3d" par les angles des bras.
     subprocess.run([os.path.join(ICI, "resout_mains.sh"), out], check=True)
 
 

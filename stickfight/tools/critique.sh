@@ -25,7 +25,7 @@ plage=()
 [ -n "$de" ] && plage+=(--de "$de")
 [ -n "$a" ] && plage+=(--a "$a")
 "$A" "$anim" --verifier > "$out/verifier.txt" 2>&1 || true
-"$A" "$anim" --cles --vues --scale 1 -o "$out/cles_vues.png" >/dev/null 2>&1
+"$A" "$anim" "${plage[@]}" --cles --vues --scale 1 -o "$out/cles_vues.png" >/dev/null 2>&1
 "$A" "$anim" "${plage[@]}" --pas 4 --cols 12 --scale 1 -o "$out/profil.png" >/dev/null 2>&1
 if [ -n "$de" ]; then
   "$A" "$anim" "${plage[@]}" --pas 2 --cols 12 --scale 1 -o "$out/profil_fin.png" >/dev/null 2>&1

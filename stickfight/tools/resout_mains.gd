@@ -33,7 +33,7 @@ var coude_dx = null  # position avant-arrière du coude par rapport à l'épaule
 func _err(pose: Dictionary, side: String, tgt: Vector3, coude) -> float:
 	var sol := StickRig.solve(pose)
 	var h := _p3(sol, "hand" + side)
-	var e := h.distance_to(tgt)
+	var e := 4.0 * h.distance_to(tgt)  # la main d'abord : le contact prime sur les coudes
 	if coude != null:
 		e += absf(sol.joints["elbow" + side].y - h.y - float(coude))
 	if coude_dx != null:
@@ -128,8 +128,8 @@ func _initialize() -> void:
 				k.fixe[r[0][c]] = snappedf(val, 0.1)
 			if k.has("vise"):
 				k.vise.erase("arm" + side)
-			if r[2] > 0.5:
-				printerr("clé %d : main %s à %.1f de sa cible" % [int(k.f), side, r[2]])
+			if r[2] > 2.0:
+				printerr("clé %d : main %s : écart pondéré %.1f (main ×4 + coudes)" % [int(k.f), side, r[2]])
 		var sol := StickRig.solve(pose)
 		var J: Dictionary = sol.joints
 		var aN := _p3(sol, "handN") - _p3(sol, "elbowN")
