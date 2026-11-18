@@ -31,10 +31,11 @@ extends SceneTree
 ##               membres qui se traversent (en 3D : mains, avant-bras, bras)
 ## --cles        planche des seules images clés (et du contact), pas toutes
 ## --vues        chaque image sous quatre angles, une ligne par angle : de face,
-##               de trois quarts, de profil, puis la vue du jeu (le corps tourne
-##               sur place, lacet +70°, +110°, +140°, +0° : le bagarreur est déjà
-##               tourné en garde, sa vraie face est à +70°) ; pour vérifier
-##               qu'aucun axe n'est oublié
+##               de trois quarts face, de profil, puis la vue du jeu. Vues absolues
+##               (lacet total imposé, quel que soit le lacet de la pose) : face = -90°,
+##               trois quarts face = -45°, profil = 0° (regard à droite ; 180° à
+##               gauche), dos = +90° ; la vue du jeu garde le lacet de la pose.
+##               Pour vérifier qu'aucun axe n'est oublié
 ##
 ## Une animation seule est jouée sans enchaîner sur « suivante ».
 
@@ -242,14 +243,15 @@ func _run() -> void:
 		# Une ligne par angle de vue ; sans effets (ils ont été calculés de profil).
 		var n0 := sel.size()
 		var lignes := []
-		for lac in [70.0, 110.0, 140.0, 0.0]:
+		for lac in [-90.0, -45.0, 0.0, null]:
 			for r in sel:
 				var r2: Dictionary = r.duplicate(true)
 				r2.vfx = []
 				r2.effets = []
 				r2.ecrans = []
 				for fig in r2.fighters:
-					fig.pose.angles.lacet = float(fig.pose.angles.get("lacet", 0.0)) + lac
+					if lac != null:
+						fig.pose.angles.lacet = lac
 					fig.trainees = []
 					fig.smears = []
 					fig.fantomes = []

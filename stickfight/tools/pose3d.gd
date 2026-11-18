@@ -2,17 +2,17 @@ extends SceneTree
 ## Exporte en JSON la pose 3D calculée par StickRig.solve() (points et repères des
 ## os), pour poser le mannequin 3D de référence (tools/mannequin.py).
 ##
-##   godot --headless --path . -s res://tools/pose3d.gd -- poses/x.json [--lacet 90,45,0] [-o out.json]
+##   godot --headless --path . -s res://tools/pose3d.gd -- poses/x.json [--lacet -90,-45,0] [-o out.json]
 ##     [--set armN=40,armN_p+=10]   (angles modifiés sans toucher au fichier : k=v ou k+=n)
 ##
-## Une entrée par lacet ajouté (90 = de face, 45 = trois quarts, 0 = profil),
+## Une entrée par lacet total imposé (-90 = de face, -45 = trois quarts face, 0 = profil),
 ## repère du personnage : x vers l'avant, y vers le haut, z négatif = côté caméra.
 
 func _initialize() -> void:
 	var argv := OS.get_cmdline_user_args()
 	var path := ""
 	var out := ""
-	var lacets := [90.0, 45.0, 0.0]
+	var lacets := [-90.0, -45.0, 0.0]
 	var sets := []
 	var i := 0
 	while i < argv.size():
@@ -44,7 +44,7 @@ func _initialize() -> void:
 	var vues := []
 	for lac in lacets:
 		var p: Dictionary = p0.duplicate(true)
-		p.angles.lacet = float(p.angles.get("lacet", 0.0)) + lac
+		p.angles.lacet = lac
 		var sol := StickRig.solve(p)
 		var o := Vector2(float(p.x), float(p.y))
 		var f: float = sol.facing

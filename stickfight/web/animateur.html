@@ -660,9 +660,20 @@ function drawFigure(ctx, V, v, cNear, cFar, alpha, camDeg) {
   ctx.globalAlpha = 1;
   return J;
 }
-// Caméra ajoutée au lacet du personnage (déjà tourné en garde) : 70 = face, 110 = trois quarts, 140 = profil.
-const VUES = [[0, "Vue du jeu"], [70, "Face"], [110, "Trois quarts"], [140, "Profil"], [-110, "Dos"]];
-function vueNom() { const a = ((cam % 360) + 540) % 360 - 180; const v = VUES.find(x => x[0] === a); return v ? v[1] : `Caméra ${a}°`; }
+// Vues absolues : la caméra s'ajoute au lacet de la pose, on vise un lacet total.
+// Lacet total 0 = profil (regarde à droite), -90 = face, +90 = dos, -45 = trois quarts face, +45 = trois quarts dos.
+// (Regard à gauche : profil = 180.)  null = vue du jeu (caméra 0).
+const VUES = [[null, "Vue du jeu"], [-90, "Face"], [-45, "Trois quarts face"], [0, "Profil"], [45, "Trois quarts dos"], [90, "Dos"]];
+const norm180 = (a) => Math.round(((a % 360) + 540) % 360 - 180);
+function lacetPose() { try { return valsAt(curF()).lacet || 0; } catch (e) { return 0; } }
+function camPour(cible) { return cible === null ? 0 : norm180(cible - lacetPose()); }
+let vueI = 0;   // index de la vue choisie au bouton (-1 : caméra tournée à la main)
+function vueNom() {
+  if (vueI >= 0 && cam === camPour(VUES[vueI][0])) return VUES[vueI][1];
+  if (cam === 0) return VUES[0][1];
+  const tot = norm180(cam + lacetPose()), v = VUES.find(x => x[0] !== null && x[0] === tot);
+  return v ? v[1] : `Caméra ${norm180(cam)}° (lacet ${tot}°)`;
+}
 function drawScene() {
   const cv = $("scene"), dpr = window.devicePixelRatio || 1, w = cv.clientWidth, h = cv.clientHeight;
   if (!w || !h) return;
@@ -778,12 +789,13 @@ function setCam(c, keep) {
   cam = Math.round(((c + 180) % 360 + 360) % 360 - 180); trajCache = null; drawScene();
 }
 $("vue").addEventListener("click", () => {
-  const a = ((cam % 360) + 540) % 360 - 180, i = VUES.findIndex(x => x[0] === a);
-  setCam(VUES[(i + 1) % VUES.length][0]);
+  const tot = norm180(cam + lacetPose());
+  let i = vueI >= 0 && cam === camPour(VUES[vueI][0]) ? vueI : cam === 0 ? 0 : VUES.findIndex(x => x[0] !== null && x[0] === tot);
+  vueI = (i + 1) % VUES.length; setCam(camPour(VUES[vueI][0]));
 });
 function setMode(m) {
   if (m === mode) return;
-  if (m === "prof") { camAvantProf = cam; setCam(70); } else setCam(camAvantProf);
+  if (m === "prof") { camAvantProf = cam; vueI = 3; setCam(camPour(0)); } else setCam(camAvantProf);
   mode = m;
   $("m-plan").setAttribute("aria-pressed", String(m === "plan")); $("m-prof").setAttribute("aria-pressed", String(m === "prof"));
   updHint(); drawScene();

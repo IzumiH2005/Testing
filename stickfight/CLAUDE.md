@@ -22,10 +22,11 @@
    face, puis de trois quarts, pour vérifier qu'aucun axe n'est oublié (largeur des pieds, bras
    sur le côté ou en arrière, rotation du coude, torsion), et seulement ensuite on revient de
    profil : `tools/anim.sh anims/x.json --cles --vues -o vues.png --scale 1` (une ligne par vue :
-   face, trois quarts, profil, puis la vue du jeu). Les angles s'ajoutent au lacet de la pose :
-   **face = +70°, trois quarts = +110°, profil = +140°**, vue du jeu = +0° (le bagarreur est déjà
-   tourné en garde ; ce n'est pas +90° pour la face). Pour une pose seule :
-   `tools/rendu.sh … --set lacet=<lacet de la pose + 70>`, puis +110, puis +140.
+   face, trois quarts face, profil, puis la vue du jeu). Les vues sont **absolues** (lacet total,
+   quel que soit le lacet de la pose) : **profil = 0°** (regard à droite ; 180° regard à gauche),
+   **face = −90°**, **trois quarts face = −45°**, trois quarts dos = +45°, dos = +90°. Dans
+   l'éditeur, caméra = lacet visé − lacet de la pose. Pour une pose seule :
+   `tools/rendu.sh … --set lacet=-90`, puis `lacet=-45`, puis `lacet=0`.
 3. **Construire pose par pose, comme un mannequin.** Poser la première clé, la vérifier, la
    corriger, puis seulement passer à la suivante. Vérifier en texte (`tools/anim.sh … --verifier`)
    et regarder une seule petite image par groupe de clés (`--cles --scale 1`).

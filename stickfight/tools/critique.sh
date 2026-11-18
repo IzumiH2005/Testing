@@ -2,7 +2,7 @@
 # Prépare le dossier d'images que lit le critique (voir .claude/agents/critique-animation.md).
 #   tools/critique.sh anims/x.json DOSSIER [--de a --a b] [--vue x,y,w,h]
 # Produit dans DOSSIER :
-#   cles_vues.png     chaque clé en quatre vues (face, trois quarts, profil, jeu), sans effets
+#   cles_vues.png     chaque clé en quatre vues (face -90°, trois quarts face -45°, profil 0°, jeu), sans effets
 #   profil.png        tout le passage choisi, de profil, une image sur 4
 #   profil_fin.png    le passage choisi, de profil, une image sur 2 (seulement avec --de/--a)
 #   zoom.png          le passage choisi, cadré sur --vue (si donné), échelle 3
