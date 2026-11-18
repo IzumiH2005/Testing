@@ -1,0 +1,28 @@
+{
+  "nom": "face_bras_jambes_ecartes",
+  "style": "epais",
+  "x": 0,
+  "y": 89.6,
+  "facing": 1,
+  "angles": {
+    "root": 0,
+    "spineLow": 0,
+    "chest": 0,
+    "neck": 0,
+    "armF": 0,
+    "foreF": 0,
+    "armN": 0,
+    "foreN": 0,
+    "thighF": 0,
+    "shinF": 0,
+    "footF": 0,
+    "thighN": 0,
+    "shinN": 0,
+    "footN": 0,
+    "thighN_p": 10,
+    "thighF_p": -10,
+    "armN_p": 20,
+    "armF_p": -20,
+    "lacet": 20
+  }
+}
