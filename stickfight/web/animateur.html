@@ -760,7 +760,11 @@ sceneCv.addEventListener("pointermove", (e) => {
     const chans = mode === "prof" ? H.prof : [...H.plan, ...H.prof.filter(c => !c.endsWith("_r"))];
     if (sdrag.z0 == null) sdrag.z0 = solve(poseFrom(sdrag.v0, cam)).Z[sdrag.hk];
     dls(v, chans, (w2) => { const s = solve(poseFrom(w2, cam)), p = s.J[sdrag.hk];
-      return mode === "prof" ? [p[0] - target[0], p[1] - target[1]] : [p[0] - target[0], p[1] - target[1], 1.5 * (s.Z[sdrag.hk] - sdrag.z0)]; });
+      if (mode === "prof") return [p[0] - target[0], p[1] - target[1]];
+      // Sur l'écran : la profondeur coûte cher, le bras se lève et se plie avant de passer devant le corps.
+      const r = [p[0] - target[0], p[1] - target[1], 1.5 * (s.Z[sdrag.hk] - sdrag.z0)];
+      for (const c of H.prof) if (c.endsWith("_p")) r.push(0.12 * (w2[c] - sdrag.v0[c]));
+      return r; });
     setVals(sdrag.f, pick(v, chans));
   }
   trajCache = null; refresh(true);
