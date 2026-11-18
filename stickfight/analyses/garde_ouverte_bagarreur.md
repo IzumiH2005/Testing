@@ -31,6 +31,8 @@ Demandes de l'utilisateur :
 
 ## 1. Intention
 
+> Remplacé par le § 10 (garde réaliste) pour la position des bras, des jambes et la hauteur du bassin.
+
 La garde commune est une garde de boxe d'école. Elle dit « boxeur appliqué » :
 
 - fente longue : 72 entre les chevilles de profil ;
@@ -70,6 +72,8 @@ On garde ces trois fonctions, avec moins de technique et plus d'attitude.
 
 ## 2. Anatomie
 
+> Remplacé par le § 10 (garde réaliste) pour la position des bras, des jambes et la hauteur du bassin.
+
 Flexions données dans les unités du rig : `shin*` est la flexion du genou par rapport à la
 cuisse (0 = jambe tendue), `fore*` celle du coude par rapport au bras (0 = bras tendu).
 
@@ -89,6 +93,8 @@ cuisse (0 = jambe tendue), `fore*` celle du coude par rapport au bras (0 = bras 
 | Bras arrière (droit, N) | deltoïde moyen : bras écarté de 80° sur le côté (`armN_p` 80), presque pas d'élévation devant (`armN` −5), rotation 20 ; coude fléchi de 100° | coude levé sur le côté à hauteur d'épaule, avant-bras qui tombe vers le bas-avant (§ 8) |
 
 ## 3. La pose, articulation par articulation
+
+> Les valeurs de ce paragraphe et du § 8 sont remplacées par le § 10 (garde réaliste).
 
 **Repère du rig**
 
@@ -165,6 +171,8 @@ Le `lacet` de la pose s'ajoute à celui de la vue. On juge la pose à lacet tota
     est acceptée à cet angle.
 
 ## 4. La boucle `garde_ouverte_idle_bagarreur` (96 i)
+
+> Les déplacements du bassin (`x`, `y`) des clés 38 à 74 sont remplacés par le § 10 (balancement asymétrique).
 
 A8 : une pose tenue reste vivante, sans le sautillement du boxeur. Le bagarreur se balance
 d'avant en arrière sur ses appuis plantés.
@@ -296,3 +304,147 @@ dos ».
     coup.
   - Il porte maintenant sur le bras de frappe : images 9-10 et 30-40 (fiche coup § 7.6).
   - Le poing de garde, passé côté loin, n'est plus mesuré.
+
+## 10. Révision : garde réaliste réglée sur le mannequin 3D
+
+**Ce qui n'allait pas**
+
+Posé sur le mannequin 3D (`tools/mannequin.py`, corps MakeHuman CC0 sous le stickman), la
+garde du § 8 ne tenait pas debout :
+- le coude arrière levé à l'horizontale, sur le côté, n'est pas une garde : il ouvre les
+  côtes et le menton, et aucun boxeur ni bagarreur ne le tient ;
+- le bras avant, très ouvert (`armF_p` −40, `armF_r` −40), mettait le coude dehors ;
+- jambe arrière : le genou fléchi à 33° avec un pied presque à plat donnait une cheville
+  cassée, et le talon arrière ne se lisait pas.
+
+L'utilisateur a corrigé la pose sur le mannequin, vue par vue, jusqu'à la juger
+satisfaisante, puis demandé de la reporter sur le stick et de l'animer.
+
+**La garde**
+
+Le principe est celui d'une garde de rue réelle : les coudes protègent les côtes, les poings
+protègent le visage, rien ne pend.
+- Poing arrière (N, droit, côté caméra) **au menton**, coude bas contre les côtes, sous
+  l'épaule. C'est le bras qui frappe : il part de là, chargé, sans rien à remonter.
+- Poing avant (F, gauche) **à hauteur de clavicule**, devant, coude bas et dans l'axe, bras
+  plié à 97°. C'est le bras qui mesure la distance et appelle l'adversaire (§ 4).
+- Jambe arrière presque tendue, tibia incliné vers l'avant (30°), talon levé : le poids est
+  sur l'avant-pied arrière, prêt à pousser.
+- Jambe avant plus droite qu'au § 3 (genou 22° au lieu de 36°). Le bassin remonte de 3.
+  Sinon la pointe arrière ne touche pas le sol.
+
+**Réglages**
+
+| Articulation | Axes | Avant (§ 3 et 8) | Après |
+|---|---|---|---|
+| Bassin | hauteur | y 84 | **y 87** |
+| Épaule N (arrière) | élévation, écartement, rotation | −5, 80, 20 | **31,3, 14,6, 3,7** |
+| Coude N | flexion | 100 | **127,2** |
+| Épaule F (avant) | élévation, écartement, rotation | 31,46, −40, −40 | **32, −17,5, −9,7** |
+| Coude F | flexion | 95,21 | **96,9** |
+| Hanche N | flexion, rotation | −11,1, −15 | **−26, −2** |
+| Genou N | flexion | 33,12 | **4** |
+| Cheville N | flexion | 10 | **−16** (pied raide, voir plus bas) |
+| Hanche F | flexion | 26 | **14** |
+| Genou F | flexion | 35,95 | **22** |
+| Cheville F | flexion | 5,48 | **5,5** |
+
+Inchangés : torsions (−4, −12), `lacet` +45, buste (`root` −2, `spineLow` 4, `chest` 4),
+`neck` 3, omoplates (`epauleN_haut` −3, `epauleF_av` −1), écartement des hanches (±15),
+`thighF_r` 5.
+
+**Pourquoi `footN` est négatif alors que le talon est levé**
+
+`footN` est l'angle du pied par rapport au tibia. Le tibia arrière est incliné de 30° vers
+l'avant ; avec `footN` −16 le pied plonge de 43° vers la pointe. La cheville est en flexion
+plantaire (angle tibia-pied d'environ 106°). Le talon est à 6,6 au-dessus du sol et la
+pointe au sol. Sur le mannequin, les orteils se cassent à plat au sol (articulation
+métatarso-phalangienne), comme un vrai pied en appui sur l'avant-pied.
+
+`thighN_r` passe de −15 à −2 : la rotation externe de la jambe arrière mettait le genou en
+dedans du pied sur le mannequin. Pied et genou sont maintenant dans le même axe.
+
+**Anatomie de la nouvelle garde**
+
+| Partie | Articulations et axes | Muscles qui tiennent la pose |
+|---|---|---|
+| Bras N (arrière) | épaule fléchie de 31°, ramenée en adduction (écartement 14,6), rotation 3,7 ; coude fléchi à 127 | grand pectoral et grand dorsal serrent le coude contre les côtes ; deltoïde antérieur porte le bras ; biceps et brachial tiennent le coude plié, poing au menton |
+| Bras F (avant) | épaule fléchie de 32° dans le plan devant, peu écartée (−17,5), rotation −9,7 ; coude à 97 | deltoïde antérieur et grand pectoral (faisceau claviculaire) portent le bras devant ; biceps et brachial tiennent le coude ; bras souple, prêt à appeler |
+| Jambe N (arrière) | hanche en extension (−26), rotation −2 ; genou presque tendu (4) ; cheville en flexion plantaire (~106°) | triceps sural chargé : le poids passe par l'avant-pied ; quadriceps tient le genou ; c'est elle qui pousse le corps vers l'avant au départ d'un coup |
+| Jambe F (avant) | hanche fléchie de 14, écartée (−15), rotation 5 ; genou à 22 ; pied à plat | quadriceps et fessiers portent l'essentiel du poids ; le genou souple absorbe le balancement |
+| Buste | droit, poitrine légèrement bombée (règle 6) | érecteurs du rachis ; omoplates basses (trapèze inférieur) |
+
+D'où part la force : la jambe arrière pousse sur l'avant-pied, la hanche tourne, le buste
+suit ; le poing arrière, déjà au menton et chargé contre les côtes, n'a rien à remonter.
+
+**Positions qui en résultent, sans le lacet**
+
+- Bassin (0 ; 87), épaules (2,9 ; 129,9) et (2,3 ; 134), tête (6,2 ; 152,8).
+- Bas du cercle de tête vers y 133 : le menton du stick est à la hauteur des épaules.
+- Poing N (30,4 ; 127,5) : collé sous le menton. Coude N (14 ; 100,1) : 30 sous l'épaule.
+- Poing F (43,2 ; 120,3) : devant, à hauteur de clavicule, 13 sous la tête. Coude F
+  (18,8 ; 104,8). C'est fidèle au mannequin validé : sur lui, le cercle de tête du stick
+  couvre tête et cou.
+- Genou N (−17,9 ; 50,8) : au-dessus et en avant de la cheville N. Genou F (12,9 ; 49).
+- Cheville N (−38,9 ; 14,9), pointe N (−32 ; 8,1). Cheville F (10,3 ; 8,2), pointe F (20,2 ; 8,5).
+- 49 entre les chevilles. Point le plus bas 0,62.
+- De face (lacet 90) : chevilles à 31 l'une de l'autre ; coudes à 12 (N) et 6 (F) de l'axe
+  du tronc.
+
+**Ce qui se lit dans chaque vue**
+
+- Face : avant-bras arrière vertical, avant-bras avant incliné vers l'axe, devant le haut du tronc, poings sous le menton, coudes
+  serrés. Les pieds sont écartés.
+- Trois quarts (+45) : le poing arrière collé sous le menton, côté caméra ; le bras avant
+  sort devant, plié, poing à hauteur de clavicule. Jambe avant fléchie, jambe arrière longue, talon levé.
+- Profil : le bras avant montre l'avant-bras qui monte vers la clavicule ; le bras arrière est
+  court, collé au corps. Il est voulu (voir les contrôles).
+
+**La boucle**
+
+Elle garde le § 4 : balancement avant-arrière sur appuis plantés, main avant qui appelle,
+menton qui monte. Les jambes se replient seules (`ancre`) pour garder les chevilles.
+
+Le balancement devient **asymétrique**, surtout vers l'avant. Avec une jambe arrière presque
+tendue, reculer le bassin raccourcit la distance hanche-cheville arrière et l'ancre replie le
+genou : à x −3,5 il revenait à 30°, la jambe cassée que la révision corrige. Le recul se lit
+donc par la torsion (+5, +4), les épaules qui montent et le menton, pas par le bassin.
+
+| Clé | `x` | `y` |
+|---|---|---|
+| 10 | +2,2 | −1,2 |
+| 26 | +3,5 | −0,6 |
+| 38 | +0,5 | −1 (au lieu de −2,2) |
+| 50 | −0,8 (au lieu de −3,5) | 0 (au lieu de −0,6) |
+| 62 | −0,6 (au lieu de −3) | −0,2 (au lieu de −0,8) |
+| 74 | 0 (au lieu de −0,5) | −1 (au lieu de −2,2) |
+| 86 | +1 | −0,6 |
+
+Genou arrière entre 5 et 18 sur toutes les clés. Point le plus bas entre −0,5 et 0,6.
+
+**Coup de poing**
+
+`coup_de_poing_garde_bagarreur` est écrit en valeurs absolues sur l'ancienne garde (coude
+levé, y 84). Il n'est plus raccord. Il sera repris dans sa propre fiche, avec un armé qui
+part du poing au menton.
+
+**Contrôles du § 7 remplacés**
+
+- 3. Bassin entre 85 et 89 ; épaule entre 128 et 135. Poing N ≥ 126 (sous le menton) ;
+  poing F entre 118 et 123 (clavicule).
+- 6 bis. Genou arrière ≤ 18 sur toute la boucle.
+- 8. Boucle : bassin d'au moins +3 vers l'avant et −0,5 vers l'arrière en x ; torsion
+  d'au moins ±4.
+- 5. De face : coudes entre 4 et 18 de l'axe du tronc (serrés, mais pas dedans) ; aucune
+  traversée bras-tronc au vérificateur.
+- 6. Genou arrière au-dessus et en avant de la cheville arrière ; talon arrière 4 à 9
+  au-dessus du sol, pointe au sol ; `thighN_r` entre −5 et 0.
+- 9. Alertes admises sur la boucle :
+  - « bras loin raccourci » (§ 3) ;
+  - « bras proche confondu avec le corps » et « bras proche peu visible ». Le bras arrière
+    est replié contre les côtes, poing au menton, côté caméra : il passe devant le tronc à
+    toutes les vues. C'est la garde demandée. Contrôle : le poing N reste visible en bosse
+    sous le menton à toutes les images (l'avant-bras ne peut pas se détacher d'une silhouette
+    pleine à cet angle).
+  - « epauleN_haut hors amplitude » : −3 est la valeur demandée par l'utilisateur (§ 8).
+- Les autres contrôles du § 7 restent.
