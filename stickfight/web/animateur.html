@@ -194,7 +194,7 @@ kbd { font: 500 10.5px var(--f-mono); border: 1px solid var(--line); border-bott
       <label><input type="checkbox" id="o-oignon" checked> Fantômes avant / après</label>
       <label><input type="checkbox" id="o-pieds" checked> Pieds collés au sol quand le bassin bouge</label>
       <label><input type="checkbox" id="o-trajet"> Trajet du point choisi</label>
-      <label><input type="checkbox" id="o-profondeur" checked> Couleurs de profondeur (bleu proche, orange loin, foncé = vers la caméra)</label>
+      <label><input type="checkbox" id="o-profondeur" checked> Repères de profondeur (points blancs : pointe des pieds, visage)</label>
     </div>
   </section>
 
@@ -654,14 +654,7 @@ function centerX(Q = P()) {
   for (let f = 0; f <= L; f += Math.max(1, Math.round(L / 24))) { s += chanAt(Q, Q.pistes.bassin, "x", f); n++; }
   return s / n;
 }
-// Profondeur (éditeur seulement) : bleu = côté proche (N), orange = côté loin (F), gris = tronc et tête ;
-// plus c'est foncé, plus c'est près de la caméra (z relatif au bassin, ±30 unités).
-function couleurProf(dz, cote) {
-  const t = Math.max(0, Math.min(1, 0.5 + dz / 60)), L = 18 + t * 52;
-  if (cote === "N") return `hsl(212 75% ${L}%)`;
-  if (cote === "F") return `hsl(24 85% ${L}%)`;
-  return `hsl(220 8% ${L}%)`;
-}
+// Repères de profondeur (éditeur seulement) : point blanc au bout du pied (plein = pointe vers la caméra) et sur le visage.
 function drawFigure(ctx, V, v, cNear, cFar, alpha, camDeg, haut) {
   const S = (p) => [V.ox + (p[0] - V.cx) * V.k, V.gy - p[1] * V.k];
   const pf = poseFrom(v, camDeg); if (haut) pf.haut = true;
@@ -672,21 +665,15 @@ function drawFigure(ctx, V, v, cNear, cFar, alpha, camDeg, haut) {
     ctx.strokeStyle = it.c; ctx.fillStyle = it.c;
     if (it.type === "path") {
       ctx.lineWidth = STYLE.stroke * V.k;
+      ctx.beginPath(); it.pts.forEach((p, i) => { const s = S(p); i ? ctx.lineTo(s[0], s[1]) : ctx.moveTo(s[0], s[1]); }); ctx.stroke();
       if (prof) {
-        // un dégradé par tronçon : foncé = près de la caméra, clair = loin
-        for (let i = 1; i < it.pts.length; i++) {
-          const a = S(it.pts[i - 1]), b = S(it.pts[i]), g = ctx.createLinearGradient(a[0], a[1], b[0] + 0.01, b[1]);
-          g.addColorStop(0, couleurProf(it.zs[i - 1] - it.zh, it.cote)); g.addColorStop(1, couleurProf(it.zs[i] - it.zh, it.cote));
-          ctx.strokeStyle = g; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
-        }
         if (it.pied) {   // pointe du pied marquée d'un point blanc (cercle plein si elle vient vers la caméra)
           const t = S(it.pts[2]), vers = it.zs[2] < it.zs[1];
           ctx.lineWidth = Math.max(1, V.k * 0.8); ctx.strokeStyle = "#fff"; ctx.fillStyle = "#fff";
           ctx.beginPath(); ctx.arc(t[0], t[1], STYLE.stroke * V.k * 0.28, 0, Math.PI * 2); vers ? ctx.fill() : ctx.stroke();
         }
-      } else { ctx.beginPath(); it.pts.forEach((p, i) => { const s = S(p); i ? ctx.lineTo(s[0], s[1]) : ctx.moveTo(s[0], s[1]); }); ctx.stroke(); }
+      }
     } else {
-      if (prof) ctx.fillStyle = couleurProf(it.zc - it.zh, it.cote);
       if (haut && it.tete) ctx.globalAlpha = alpha * 0.45;   // de haut, la tête ne doit pas cacher les épaules
       const s = S(it.ctr); ctx.beginPath(); ctx.arc(s[0], s[1], it.r * V.k, 0, Math.PI * 2); ctx.fill();
       ctx.globalAlpha = alpha;
