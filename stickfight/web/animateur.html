@@ -194,7 +194,7 @@ kbd { font: 500 10.5px var(--f-mono); border: 1px solid var(--line); border-bott
       <label><input type="checkbox" id="o-oignon" checked> Fantômes avant / après</label>
       <label><input type="checkbox" id="o-pieds" checked> Pieds collés au sol quand le bassin bouge</label>
       <label><input type="checkbox" id="o-trajet"> Trajet du point choisi</label>
-      <label><input type="checkbox" id="o-profondeur" checked> Repères de profondeur (points blancs : pointe des pieds, visage)</label>
+      <label><input type="checkbox" id="o-profondeur" checked> Repères de profondeur (points blancs : pointe des pieds, yeux)</label>
     </div>
   </section>
 
@@ -339,6 +339,9 @@ function solve(p) {
     kneeN: tip.thighN, ankleN: tip.shinN, toeN: tip.footN, kneeF: tip.thighF, ankleF: tip.shinF, toeF: tip.footF };
   const J = {}, Z = {};
   pts3.nez = add(head3, sc(col(basis.neck, 1), -r * 0.72));   // devant du visage (sert à l'affichage de profondeur)
+  // deux yeux de part et d'autre du nez : de face, ils restent visibles à côté de la poignée du centre de la tête
+  pts3.oeilA = add(add(head3, sc(col(basis.neck, 1), -r * 0.62)), sc(col(basis.neck, 2), r * 0.4));
+  pts3.oeilB = add(add(head3, sc(col(basis.neck, 1), -r * 0.62)), sc(col(basis.neck, 2), -r * 0.4));
   // Caméra qui monte (tilt 0 = à hauteur, 90 = juste au-dessus) : rotation autour de l'axe x ;
   // le fond de la scène monte à l'écran, ce qui est haut vient vers la caméra.
   const tl = rad(p.tilt || 0), ct = Math.cos(tl), st = Math.sin(tl);
@@ -682,7 +685,8 @@ function drawFigure(ctx, V, v, cNear, cFar, alpha, camDeg, tilt) {
       const s = S(it.ctr); ctx.beginPath(); ctx.arc(s[0], s[1], it.r * V.k, 0, Math.PI * 2); ctx.fill();
       ctx.globalAlpha = alpha;
       if (prof && it.tete && it.znez <= it.zc + it.r * 0.3) {   // visage : point blanc s'il est tourné vers la caméra (rien de dos)
-        const n = S(J.nez); ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(n[0], n[1], it.r * V.k * 0.2, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = "#fff";
+        for (const k of ["oeilA", "oeilB"]) { const n = S(J[k]); ctx.beginPath(); ctx.arc(n[0], n[1], it.r * V.k * 0.15, 0, Math.PI * 2); ctx.fill(); }
       }
     }
   }
@@ -690,7 +694,7 @@ function drawFigure(ctx, V, v, cNear, cFar, alpha, camDeg, tilt) {
   return J;
 }
 // Vues absolues : la caméra s'ajoute au lacet de la pose, on vise un lacet total.
-// Lacet total 0 = profil (regarde à droite), -90 = face, +90 = dos, -45 = trois quarts face, +45 = trois quarts dos.
+// Lacet total 0 = profil (regarde à droite), +90 = face, -90 = dos, +45 = trois quarts face, -45 = trois quarts dos.
 // (Regard à gauche : profil = 180.)  null = vue du jeu (caméra 0).
 const VUES = [[null, "Vue du jeu"], [90, "Face"], [45, "Trois quarts face"], [0, "Profil"], [-45, "Trois quarts dos"], [-90, "Dos"]];
 const norm180 = (a) => Math.round(((a % 360) + 540) % 360 - 180);
