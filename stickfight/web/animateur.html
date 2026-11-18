@@ -7,7 +7,7 @@
 :root {
   --bg: #e9ecf0; --panel: #f7f8fa; --panel2: #eef1f5; --line: #cfd5dd; --ink: #1a1d23; --muted: #5d6573;
   --accent: #2b5fd9; --accent-soft: #dbe5fb; --on-accent: #ffffff; --depth: #8a4fd0; --depth-soft: #ece2f8;
-  --stage: #f3f4f6; --grid: #e1e4e9; --ground: #b9c0ca; --figure: #111111; --figure-far: #6b7485;
+  --stage: #f3f4f6; --grid: #e1e4e9; --ground: #b9c0ca; --figure: #111111; --figure-far: #111111;
   --onion-a: #2b8fd9; --onion-b: #d9762b; --handle: #ffffff; --trail: #2b5fd9; --warn: #b4441b;
   --c-auto: #2b5fd9; --c-lin: #6b7485; --c-acc: #d9762b; --c-dec: #2f9a62; --c-accdec: #8a4fd0; --c-palier: #1a1d23;
   --f-display: "Space Grotesk", "IBM Plex Sans", system-ui, sans-serif;
@@ -18,7 +18,7 @@
   :root:not([data-theme="light"]) {
     --bg: #14171c; --panel: #1c2027; --panel2: #232831; --line: #2e343e; --ink: #e6e8ec; --muted: #98a1af;
     --accent: #7ea2ff; --accent-soft: #24304a; --on-accent: #0d1220; --depth: #b88cf0; --depth-soft: #2f2640;
-    --stage: #d9dce1; --grid: #c9cdd4; --ground: #9aa2ae; --figure: #111111; --figure-far: #5f6878;
+    --stage: #d9dce1; --grid: #c9cdd4; --ground: #9aa2ae; --figure: #111111; --figure-far: #111111;
     --onion-a: #1f78c4; --onion-b: #c4651f; --handle: #ffffff; --trail: #2b5fd9; --warn: #f08a5d;
     --c-auto: #7ea2ff; --c-lin: #98a1af; --c-acc: #f0a05d; --c-dec: #5fc48e; --c-accdec: #b88cf0; --c-palier: #e6e8ec;
     color-scheme: dark;
@@ -27,7 +27,7 @@
 :root[data-theme="dark"] {
   --bg: #14171c; --panel: #1c2027; --panel2: #232831; --line: #2e343e; --ink: #e6e8ec; --muted: #98a1af;
   --accent: #7ea2ff; --accent-soft: #24304a; --on-accent: #0d1220; --depth: #b88cf0; --depth-soft: #2f2640;
-  --stage: #d9dce1; --grid: #c9cdd4; --ground: #9aa2ae; --figure: #111111; --figure-far: #5f6878;
+  --stage: #d9dce1; --grid: #c9cdd4; --ground: #9aa2ae; --figure: #111111; --figure-far: #111111;
   --onion-a: #1f78c4; --onion-b: #c4651f; --handle: #ffffff; --trail: #2b5fd9; --warn: #f08a5d;
   --c-auto: #7ea2ff; --c-lin: #98a1af; --c-acc: #f0a05d; --c-dec: #5fc48e; --c-accdec: #b88cf0; --c-palier: #e6e8ec;
   color-scheme: dark;
@@ -81,6 +81,12 @@ select { font: 400 13.5px var(--f-body); min-height: 40px; padding: 0 8px; borde
 .pill { font: 500 11.5px var(--f-mono); color: #3b4250; background: rgba(255,255,255,.9); border: 1px solid #c3c9d2; padding: 0 9px; min-height: 36px; border-radius: 10px; display: inline-flex; align-items: center; cursor: pointer; }
 .hint { font-size: 12.5px; color: var(--muted); margin: 0; line-height: 1.4; }
 .hint.prof { color: var(--depth); }
+.profbox { border: 1px solid var(--depth-soft); background: color-mix(in srgb, var(--depth-soft) 45%, transparent); border-radius: 10px; padding: 8px 10px; display: flex; flex-direction: column; gap: 6px; }
+.pr { display: grid; grid-template-columns: 40px minmax(0, 1fr) 40px; gap: 6px; align-items: center; }
+.pr .lab { grid-column: 1 / -1; font-size: 12.5px; display: flex; justify-content: space-between; gap: 8px; }
+.pr .lab b { font: 500 12px var(--f-mono); color: var(--depth); }
+.pr input[type=range] { width: 100%; accent-color: var(--depth); margin: 0; height: 28px; }
+.pr .ends { grid-column: 1 / -1; display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: -4px; }
 .toggles { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12.5px; color: var(--muted); }
 .toggles label { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; min-height: 28px; }
 
@@ -179,12 +185,6 @@ kbd { font: 500 10.5px var(--f-mono); border: 1px solid var(--line); border-bott
   <section class="stagewrap" aria-label="Scène">
     <div class="stage" id="stage">
       <canvas id="scene" tabindex="0" aria-label="Scène : attrape un point pour bouger le corps"></canvas>
-      <div class="ov tl">
-        <div class="mode" role="group" aria-label="Ce que bouge le doigt">
-          <button class="plan" id="m-plan" aria-pressed="true">Dans le plan</button>
-          <button class="prof" id="m-prof" aria-pressed="false">Profondeur</button>
-        </div>
-      </div>
       <div class="ov tr"><button class="pill" id="vue" title="Changer de vue">Profil</button></div>
     </div>
     <p class="hint" id="hint"></p>
@@ -197,6 +197,16 @@ kbd { font: 500 10.5px var(--f-mono); border: 1px solid var(--line); border-bott
 
   <section class="outils box" aria-label="Point choisi">
     <div class="selname" id="selnom">Main proche</div>
+    <div class="profbox">
+      <div class="row">
+        <span class="muted">Glisser bouge</span>
+        <div class="mode" role="group" aria-label="Ce que bouge le doigt">
+          <button class="plan" id="m-plan" aria-pressed="true">Sur l'écran</button>
+          <button class="prof" id="m-prof" aria-pressed="false">En profondeur</button>
+        </div>
+      </div>
+      <div id="profctl"></div>
+    </div>
     <div class="row">
       <button class="btn primary" id="k-poser" title="K">◆ Clé</button>
       <button class="btn" id="k-suppr" title="Suppr">Enlever la clé</button>
@@ -424,6 +434,16 @@ for (const S of ["N", "F"]) {
 }
 const GROUP_HANDLE = { bassin: "hip", buste: "shoulder", tete: "head", epauleN: "elbowN", coudeN: "handN", epauleF: "elbowF", coudeF: "handF",
   hancheN: "kneeN", genouN: "ankleN", chevilleN: "toeN", hancheF: "kneeF", genouF: "ankleF", chevilleF: "toeF" };
+HANDLES.hip.prof = ["lacet", "torsionBassin", "root_p"];
+HANDLES.shoulder.prof = ["torsion", "chest_p", "spineLow_p"];
+const BOUTS = { lacet: ["de dos", "de face"], torsionBassin: ["hanches en arrière", "en avant"], root_p: ["penché d'un côté", "de l'autre"],
+  torsion: ["épaules en arrière", "en avant"], chest_p: ["incliné d'un côté", "de l'autre"], spineLow_p: ["d'un côté", "de l'autre"],
+  neck_p: ["tête d'un côté", "de l'autre"] };
+for (const S of ["N", "F"]) {
+  BOUTS["arm" + S + "_p"] = ["bras vers l'arrière-plan", "vers l'avant-plan"]; BOUTS["arm" + S + "_r"] = ["coude tourné dedans", "dehors"];
+  BOUTS["thigh" + S + "_p"] = ["jambe vers l'arrière-plan", "vers l'avant-plan"]; BOUTS["thigh" + S + "_r"] = ["genou tourné dedans", "dehors"];
+  BOUTS["foot" + S + "_p"] = ["pointe dedans", "dehors"];
+}
 function handleVisible(hk) {
   const H = HANDLES[hk]; if (!H.ctx) return true;
   const s = selHandle ? HANDLES[selHandle] : null; if (!s) return false;
@@ -706,7 +726,7 @@ function hitHandle(sx, sy, touch) {
   }
   return best;
 }
-function selectHandle(hk) { selHandle = hk; selGroups = [...HANDLES[hk].g]; selKeys.clear(); trajCache = null; buildChans(); refresh(); }
+function selectHandle(hk) { if (hk !== selHandle) setMode("plan"); selHandle = hk; selGroups = [...HANDLES[hk].g]; selKeys.clear(); trajCache = null; buildChans(); refresh(); }
 const sceneCv = $("scene");
 sceneCv.addEventListener("pointerdown", (e) => {
   const r = sceneCv.getBoundingClientRect(), sx = e.clientX - r.left, sy = e.clientY - r.top;
@@ -767,16 +787,47 @@ function updHint() {
   const h = $("hint");
   h.classList.toggle("prof", mode === "prof");
   h.textContent = mode === "prof"
-    ? "Profondeur : écarter, rapprocher, tourner. Vue de face pour bien voir. Le bassin fait tourner le corps."
-    : "Attrape un point et déplace-le. La profondeur ne bouge pas. Glisse ailleurs pour tourner la caméra.";
+    ? "En profondeur : glisser écarte, rapproche ou tourne le point choisi (vue de face pour bien voir). Ou utilise les réglages violets."
+    : "Attrape un point et déplace-le : il reste à sa profondeur. Pour la changer, choisis « En profondeur » ou les réglages violets. Glisse ailleurs pour tourner la caméra.";
 }
 $("m-plan").addEventListener("click", () => setMode("plan"));
 $("m-prof").addEventListener("click", () => setMode("prof"));
 
 // ===================== Réglages fins =====================
 const chInputs = {};
+function applyCh(c, g, val) {
+  if (!isFinite(val)) return;
+  stop(); beginEdit();
+  const f = curF();
+  if (g === "bassin" && opt.pieds && (c === "x" || c === "y" || c === "root")) {
+    const v = valsAt(f), pins = footPins(v); v[c] = clampCh(c, val); replant(v, pins);
+    const out = { [c]: v[c] }; for (const l of LEGCH) out[l] = v[l]; setVals(f, out);
+  } else setVals(f, { [c]: val });
+  trajCache = null; refresh(true);
+}
+function finCh() { endEdit(); thumbsDirty = true; drawPlanches(); }
+function buildProf() {
+  const host = $("profctl"); host.innerHTML = "";
+  const H = selHandle && HANDLES[selHandle]; if (!H || !H.prof) return;
+  for (const c of H.prof) {
+    const def = CH[c], g = CHG[c], b = BOUTS[c] || ["−", "+"], row = document.createElement("div"); row.className = "pr";
+    row.innerHTML = `<div class="lab"><span>${def.lab}</span><b></b></div>
+      <button class="btn sq small" aria-label="${def.lab} : moins">−</button>
+      <input type="range" min="${def.lo}" max="${def.hi}" step="0.5" aria-label="${def.lab}">
+      <button class="btn sq small" aria-label="${def.lab} : plus">+</button>
+      <div class="ends"><span>${b[0]}</span><span>${b[1]}</span></div>`;
+    const rg = row.querySelector("input"), [bm, bp] = row.querySelectorAll("button");
+    rg.addEventListener("input", () => applyCh(c, g, +rg.value));
+    rg.addEventListener("change", finCh);
+    bm.addEventListener("click", () => { applyCh(c, g, valsAt(curF())[c] - 5); finCh(); });
+    bp.addEventListener("click", () => { applyCh(c, g, valsAt(curF())[c] + 5); finCh(); });
+    chInputs["p:" + c] = { c, rg, nb: row.querySelector("b"), row, g, ro: true };
+    host.appendChild(row);
+  }
+}
 function buildChans() {
   const host = $("chans"); host.innerHTML = ""; for (const k in chInputs) delete chInputs[k];
+  buildProf();
   $("selnom").innerHTML = selHandle ? HANDLES[selHandle].nom : "Tout le corps";
   $("reginfo").textContent = selHandle ? HANDLES[selHandle].nom : "";
   const all = selGroups.flatMap(g => GBY[g].ch.filter(c => c !== "facing").map(c => ({ c, g })));
@@ -790,20 +841,10 @@ function buildChans() {
         <input type="number" step="0.5" aria-label="${def.lab} (valeur)">
         <input type="range" id="r-${c}" min="${def.lo}" max="${def.hi}" step="0.5">`;
       const rg = row.querySelector("input[type=range]"), nb = row.querySelector("input[type=number]");
-      const apply = (val) => {
-        if (!isFinite(val)) return;
-        stop(); beginEdit();
-        const f = curF();
-        if (g === "bassin" && opt.pieds && (c === "x" || c === "y" || c === "root")) {
-          const v = valsAt(f), pins = footPins(v); v[c] = clampCh(c, val); replant(v, pins);
-          const out = { [c]: v[c] }; for (const l of LEGCH) out[l] = v[l]; setVals(f, out);
-        } else setVals(f, { [c]: val });
-        trajCache = null; refresh(true);
-      };
-      rg.addEventListener("input", () => apply(+rg.value));
-      rg.addEventListener("change", () => { endEdit(); thumbsDirty = true; drawPlanches(); });
-      nb.addEventListener("change", () => { apply(+nb.value); endEdit(); thumbsDirty = true; drawPlanches(); });
-      chInputs[c] = { rg, nb, row, g };
+      rg.addEventListener("input", () => applyCh(c, g, +rg.value));
+      rg.addEventListener("change", finCh);
+      nb.addEventListener("change", () => { applyCh(c, g, +nb.value); finCh(); });
+      chInputs[c] = { c, rg, nb, row, g };
       d.appendChild(row);
     }
     host.appendChild(d);
@@ -813,9 +854,10 @@ function buildChans() {
 }
 function syncChans() {
   const f = curF(), v = valsAt(playT ?? f);
-  for (const c in chInputs) {
-    const d = chInputs[c], val = round2(v[c]);
-    d.rg.value = val; if (document.activeElement !== d.nb) d.nb.value = val;
+  for (const key in chInputs) {
+    const d = chInputs[key], val = round2(v[d.c]);
+    d.rg.value = val;
+    if (d.ro) d.nb.textContent = (Math.round(val * 10) / 10) + "°"; else if (document.activeElement !== d.nb) d.nb.value = val;
     d.row.classList.toggle("keyed", keyIdx(d.g, f) >= 0);
   }
   const keyed = selGroups.filter(g => keyIdx(g, f) >= 0);
@@ -957,7 +999,7 @@ tl.addEventListener("pointermove", (e) => {
   if (keyDrag && keyDrag.moved && keyDrag.delta) moveKeys(keyDrag.delta);
   keyDrag = null; refresh();
 }));
-function selectGroup(g) { selHandle = GROUP_HANDLE[g]; selGroups = [g]; selKeys.clear(); trajCache = null; buildChans(); refresh(); }
+function selectGroup(g) { if (GROUP_HANDLE[g] !== selHandle) setMode("plan"); selHandle = GROUP_HANDLE[g]; selGroups = [g]; selKeys.clear(); trajCache = null; buildChans(); refresh(); }
 function moveKeys(delta) {
   const L = P().longueur;
   edit(() => {
