@@ -30,9 +30,11 @@ extends SceneTree
 ##               déséquilibre, distance du poing à la tête adverse au contact,
 ##               membres qui se traversent (en 3D : mains, avant-bras, bras)
 ## --cles        planche des seules images clés (et du contact), pas toutes
-## --vues        chaque image sous trois angles, une ligne par angle : de face,
-##               de trois quarts, de profil (le corps tourne sur place, lacet
-##               +90°, +45°, +0°) ; pour vérifier qu'aucun axe n'est oublié
+## --vues        chaque image sous quatre angles, une ligne par angle : de face,
+##               de trois quarts, de profil, puis la vue du jeu (le corps tourne
+##               sur place, lacet +70°, +110°, +140°, +0° : le bagarreur est déjà
+##               tourné en garde, sa vraie face est à +70°) ; pour vérifier
+##               qu'aucun axe n'est oublié
 ##
 ## Une animation seule est jouée sans enchaîner sur « suivante ».
 
@@ -240,7 +242,7 @@ func _run() -> void:
 		# Une ligne par angle de vue ; sans effets (ils ont été calculés de profil).
 		var n0 := sel.size()
 		var lignes := []
-		for lac in [90.0, 45.0, 0.0]:
+		for lac in [70.0, 110.0, 140.0, 0.0]:
 			for r in sel:
 				var r2: Dictionary = r.duplicate(true)
 				r2.vfx = []

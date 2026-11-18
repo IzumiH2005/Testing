@@ -185,7 +185,7 @@ kbd { font: 500 10.5px var(--f-mono); border: 1px solid var(--line); border-bott
   <section class="stagewrap" aria-label="Scène">
     <div class="stage" id="stage">
       <canvas id="scene" tabindex="0" aria-label="Scène : attrape un point pour bouger le corps"></canvas>
-      <div class="ov tr"><button class="pill" id="vue" title="Changer de vue">Profil</button></div>
+      <div class="ov tr"><button class="pill" id="vue" title="Changer de vue">Vue du jeu</button></div>
     </div>
     <p class="hint" id="hint"></p>
     <div class="toggles">
@@ -660,7 +660,8 @@ function drawFigure(ctx, V, v, cNear, cFar, alpha, camDeg) {
   ctx.globalAlpha = 1;
   return J;
 }
-const VUES = [[0, "Profil (jeu)"], [45, "Trois quarts"], [90, "Face"], [-90, "Dos"]];
+// Caméra ajoutée au lacet du personnage (déjà tourné en garde) : 70 = face, 110 = trois quarts, 140 = profil.
+const VUES = [[0, "Vue du jeu"], [70, "Face"], [110, "Trois quarts"], [140, "Profil"], [-110, "Dos"]];
 function vueNom() { const a = ((cam % 360) + 540) % 360 - 180; const v = VUES.find(x => x[0] === a); return v ? v[1] : `Caméra ${a}°`; }
 function drawScene() {
   const cv = $("scene"), dpr = window.devicePixelRatio || 1, w = cv.clientWidth, h = cv.clientHeight;
@@ -782,7 +783,7 @@ $("vue").addEventListener("click", () => {
 });
 function setMode(m) {
   if (m === mode) return;
-  if (m === "prof") { camAvantProf = cam; setCam(90); } else setCam(camAvantProf);
+  if (m === "prof") { camAvantProf = cam; setCam(70); } else setCam(camAvantProf);
   mode = m;
   $("m-plan").setAttribute("aria-pressed", String(m === "plan")); $("m-prof").setAttribute("aria-pressed", String(m === "prof"));
   updHint(); drawScene();
