@@ -103,6 +103,10 @@ canvas.loupe{position:absolute;width:116px;height:116px;border-radius:50%;border
 .filters button{flex:none;min-height:38px;padding:6px 12px;border-radius:999px;font-size:14px}
 .filters button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--ink)}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.reprint-info{margin:0;font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+.reprint-info b{color:var(--ink);font-weight:600}.reprint-info code{font-family:var(--f-mono);font-size:12px}
+.reprint-info .mini{min-height:30px;padding:2px 10px;font-size:12px;border-radius:999px;margin-left:4px}
+.reprint-info .sw{display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--line);vertical-align:middle}
 .spec{font-family:var(--f-mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
 
 /* OCR */
@@ -214,13 +218,15 @@ progress{width:100%;height:8px;accent-color:var(--accent)}
         <span class="spec" id="res-spec"></span>
       </div>
       <div class="filters" id="filters" role="group" aria-label="Rendu">
-        <button data-f="magic" aria-pressed="true">Magique</button>
+        <button data-f="reprint" aria-pressed="true">Réimpression</button>
+        <button data-f="magic" aria-pressed="false">Magique</button>
         <button data-f="photo" aria-pressed="false">Couleurs fidèles</button>
         <button data-f="color" aria-pressed="false">Couleur douce</button>
         <button data-f="gray" aria-pressed="false">Niveaux de gris</button>
         <button data-f="bw" aria-pressed="false">Noir et blanc</button>
         <button data-f="none" aria-pressed="false">Sans retouche</button>
       </div>
+      <p class="reprint-info" id="reprint-info" hidden></p>
       <div class="tools-ai" id="tools-ai">
         <button id="btn-curve" aria-pressed="false"><svg class="i" viewBox="0 0 24 24"><path d="M5 5c4 2 10 2 14 0v14c-4 2-10 2-14 0z"/><path d="M9 10h6M9 14h6"/></svg>Page courbée</button>
         <button id="btn-erase"><svg class="i" viewBox="0 0 24 24"><path d="m14 5 5 5-8 8H7l-3-3z"/><path d="M11 18h9"/></svg>Gomme (doigts, taches)</button>
@@ -267,6 +273,7 @@ progress{width:100%;height:8px;accent-color:var(--accent)}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
 <script src="ai.js"></script>
+<script src="reprint.js"></script>
 <script>
 "use strict";
 /* =========================================================================
@@ -637,6 +644,7 @@ function applyFilter(warped, f) {
   const w = warped.width, h = warped.height, out = document.createElement("canvas"); out.width = w; out.height = h;
   const octx = out.getContext("2d");
   if (f === "none") { octx.drawImage(warped, 0, 0); return out; }
+  if (f === "reprint") { const m = warped._light || (warped._light = lightModel(warped)); return Reprint.run(warped, m, { paper: warped._paper }); }
   if (f === "magic" || f === "photo") { // « Magique » choisit seul : document texte -> fond blanc ; couverture/illustration -> couleurs fidèles
     const m = warped._light || (warped._light = lightModel(warped));
     if (f === "photo" || m.colorful > 0.07) { octx.putImageData(photoFilter(warped, m), 0, 0); return out; }
@@ -673,7 +681,7 @@ function rotateCanvas(c, rot) {
   rot = ((rot % 4) + 4) % 4; if (!rot) return c;
   const o = document.createElement("canvas"); o.width = rot % 2 ? c.height : c.width; o.height = rot % 2 ? c.width : c.height;
   const x = o.getContext("2d"); x.translate(o.width / 2, o.height / 2); x.rotate(rot * Math.PI / 2); x.drawImage(c, -c.width / 2, -c.height / 2);
-  return o;
+  o._info = c._info; return o;
 }
 
 /* ---------- vue Recadrage ---------- */
@@ -696,7 +704,7 @@ async function openCrop(blob) {
   await busy("Recherche des bords…", async () => {
     const photo = await fileToCanvas(blob);
     const det = await findEdges(photo);
-    S.cur = { blob, photo, quad: det.quad, found: det.found, byAI: det.byAI, filter: "magic", rot: 0 };
+    S.cur = { blob, photo, quad: det.quad, found: det.found, byAI: det.byAI, filter: "reprint", rot: 0 };
   });
   const c = S.cur.photo, pc = $("photo"); pc.width = c.width; pc.height = c.height; pc.getContext("2d").drawImage(c, 0, 0);
   setPill(S.cur.found);
@@ -751,6 +759,11 @@ async function renderResult() {
   document.querySelectorAll("#filters button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.f === cur.filter)));
   const fmt = a4Guess(cur.out.width, cur.out.height);
   const ppp = fmt === "A4" ? Math.round(Math.min(cur.out.width, cur.out.height) / (210 / 25.4)) : null;
+  const ri = $("reprint-info"), info = cur.out._info; ri.hidden = !info;
+  if (info) { const sw = c => `<i class="sw" style="background:${c}"></i>`;
+    const forced = cur.warped._paper === "white", other = forced ? `couleur détectée (${info.found.name})` : "feuille blanche";
+    ri.innerHTML = `Feuille ${sw(info.paper.hex)}<b>${info.paper.name}</b> <code>${info.paper.hex}</code> · encres ${info.inks.slice(0, 8).map(sw).join("")}`
+      + (info.found.hex !== "#FFFFFF" || forced ? ` <button class="mini" data-paper="${forced ? "auto" : "white"}">Mettre en ${other}</button>` : ""); }
   $("res-spec").textContent = `${cur.out.width} × ${cur.out.height} px` + (fmt ? ` · ${fmt}` : "") + (ppp ? ` · ≈ ${ppp} ppp` : "");
 }
 /* Bords propres : la couleur du support (table, tissu) est mesurée juste autour de la feuille ;
@@ -853,6 +866,7 @@ $("btn-erase-ok").onclick = async () => {
   exitErase(); if (r) { cur.warped = r; toast("Zone effacée · « Maintenir pour voir l'avant » montre la page sans filtre"); }
   renderResult();
 };
+$("reprint-info").addEventListener("click", e => { const b = e.target.closest("button[data-paper]"); if (!b || !S.cur) return; S.cur.warped._paper = b.dataset.paper; renderResult(); });
 $("filters").addEventListener("click", e => { const f = e.target.closest("button")?.dataset.f; if (!f || f === S.cur.filter) return; S.cur.filter = f; renderResult(); });
 $("btn-rotl").onclick = () => { S.cur.rot--; renderResult(); };
 $("btn-rotr").onclick = () => { S.cur.rot++; renderResult(); };
