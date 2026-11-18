@@ -127,12 +127,12 @@ def rand_ink_color(rng, kind="any"):
 def rand_paper(rng):
     """Couleur du papier (sRGB 0..1)."""
     r = rng.random()
-    if r < 0.42:   # blanc ou presque
+    if r < 0.6:    # blanc ou presque (le cas le plus courant)
         v = rng.uniform(0.92, 1.0)
         return np.clip(v + rng.normal(0, 0.012, 3), 0, 1).astype(np.float32)
     import colorsys
     h = rng.random()
-    if r < 0.82:   # pastel : rose clair, crème, bleu pâle...
+    if r < 0.88:   # pastel : rose clair, crème, bleu pâle...
         s, l = rng.uniform(0.15, 0.75), rng.uniform(0.8, 0.95)
     else:          # papier coloré franc ou foncé (couvertures)
         s, l = rng.uniform(0.2, 0.8), rng.uniform(0.25, 0.8)
