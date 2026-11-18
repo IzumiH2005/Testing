@@ -18,7 +18,10 @@ Une page web unique qui tourne entièrement dans le navigateur du téléphone (a
 5. **Page courbée (IA, bouton)** : UVDoc « déplie » les pages de livre ou froissées.
 6. **Gomme (IA, bouton)** : les doigts sont repérés automatiquement (couleur de peau touchant le bord),
    on peut compléter au pinceau, puis MI-GAN reconstruit le papier à la place.
-7. **Nettoyage** : fond papier estimé puis divisé (retire ombres et teinte). Rendus : Magique,
+7. **Nettoyage** : « Magique » choisit seul. Page de texte : fond papier estimé puis divisé (fond blanc).
+   Couverture ou page illustrée : l'éclairage est modélisé par une surface douce ajustée sur le seul papier,
+   puis retiré (ombres et teinte de la lampe), sans délaver les couleurs. Les bouts de table ou de tissu
+   visibles sur les bords sont repeints en papier. Rendus : Magique, Couleurs fidèles,
    Couleur douce, Niveaux de gris, Noir et blanc, Sans retouche.
 8. **Texte (OCR)** : Tesseract.js 5 (réseau LSTM, français), fichiers servis depuis `web/ocr/`.
 9. **PDF** : jsPDF, une page par scan, avec calque de texte invisible si l'OCR a été lancé (PDF cherchable).

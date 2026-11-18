@@ -215,6 +215,7 @@ progress{width:100%;height:8px;accent-color:var(--accent)}
       </div>
       <div class="filters" id="filters" role="group" aria-label="Rendu">
         <button data-f="magic" aria-pressed="true">Magique</button>
+        <button data-f="photo" aria-pressed="false">Couleurs fidèles</button>
         <button data-f="color" aria-pressed="false">Couleur douce</button>
         <button data-f="gray" aria-pressed="false">Niveaux de gris</button>
         <button data-f="bw" aria-pressed="false">Noir et blanc</button>
@@ -578,10 +579,68 @@ function sharpen(img, amount) {
   const bl = boxBlur(L, w, h, 1);
   for (let i = 0; i < w * h; i++) { const delta = (L[i] - bl[i]) * amount; for (let c = 0; c < 3; c++) d[i * 4 + c] += delta; }
 }
+/* Couvertures, photos, pages illustrées : on ne « blanchit » pas les zones colorées.
+   L'éclairage (ombre, teinte de la lampe) est modélisé par une surface douce (polynôme de degré 2)
+   ajustée sur les seuls pixels de papier, puis retiré : balance des blancs + ombres, couleurs gardées. */
+function lightModel(src) {
+  const k = Math.min(1, 220 / Math.max(src.width, src.height)), w = Math.max(8, Math.round(src.width * k)), h = Math.max(8, Math.round(src.height * k));
+  const c = newCanvas(w, h), ctx = c.getContext("2d"); ctx.drawImage(src, 0, 0, w, h);
+  const d = ctx.getImageData(0, 0, w, h).data, n = w * h, L = new Float32Array(n), C = new Float32Array(n);
+  let colorful = 0;
+  for (let i = 0; i < n; i++) { const r = d[i * 4], g = d[i * 4 + 1], b = d[i * 4 + 2]; L[i] = 0.299 * r + 0.587 * g + 0.114 * b; C[i] = Math.max(r, g, b) - Math.min(r, g, b); }
+  const sorted = Float32Array.from(L).sort(), lq = sorted[Math.floor(n * 0.55)];
+  let cand = []; for (let i = 0; i < n; i++) if (L[i] >= lq) cand.push(i);
+  const cs = cand.map(i => C[i]).sort((a, b) => a - b), cmed = cs[cs.length >> 1];
+  cand = cand.filter(i => C[i] <= cmed + 14);
+  const feat = i => { const x = (i % w) / w * 2 - 1, y = ((i / w) | 0) / h * 2 - 1; return [1, x, y, x * x, x * y, y * y]; };
+  const fitCh = (ids, o) => { const A = Array.from({ length: 6 }, () => new Array(6).fill(0)), b = new Array(6).fill(0);
+    for (const i of ids) { const f = feat(i), v = d[i * 4 + o]; for (let r = 0; r < 6; r++) { b[r] += f[r] * v; for (let s = 0; s < 6; s++) A[r][s] += f[r] * f[s]; } }
+    for (let r = 0; r < 6; r++) A[r][r] += 1e-3 * ids.length; return solve(A, b); };
+  const pred = (co, i) => { const f = feat(i); let s = 0; for (let r = 0; r < 6; r++) s += co[r] * f[r]; return s; };
+  let co = null;
+  for (let it = 0; it < 4 && cand.length > n * 0.03; it++) {
+    co = [0, 1, 2].map(o => fitCh(cand, o));
+    const res = cand.map(i => Math.abs(d[i * 4] - pred(co[0], i)) + Math.abs(d[i * 4 + 1] - pred(co[1], i)) + Math.abs(d[i * 4 + 2] - pred(co[2], i)));
+    const med = res.slice().sort((a, b) => a - b)[res.length >> 1];
+    cand = cand.filter((i, j) => res[j] <= Math.max(9, 2.5 * med));
+  }
+  const paperFrac = cand.length / n;
+  if (!co || paperFrac < 0.03) { // presque pas de papier : simple balance des blancs sur les pixels les plus clairs
+    const top = []; for (let i = 0; i < n; i++) if (L[i] >= sorted[Math.floor(n * 0.97)]) top.push(i);
+    co = [0, 1, 2].map(o => { const m = top.reduce((s, i) => s + d[i * 4 + o], 0) / Math.max(1, top.length); return [m, 0, 0, 0, 0, 0]; });
+  }
+  for (let i = 0; i < n; i++) { const r = d[i * 4] / Math.max(30, pred(co[0], i)), g = d[i * 4 + 1] / Math.max(30, pred(co[1], i)), b = d[i * 4 + 2] / Math.max(30, pred(co[2], i));
+    if ((Math.max(r, g, b) - Math.min(r, g, b)) * Math.max(r, g, b) > 0.28) colorful++; }
+  return { co, colorful: colorful / n, paperFrac };
+}
+function photoFilter(warped, model) {
+  const w = warped.width, h = warped.height, img = warped.getContext("2d").getImageData(0, 0, w, h), d = img.data, co = model.co, WHITE = 244;
+  const row = new Float32Array(18);
+  for (let y = 0; y < h; y++) { const Y = y / h * 2 - 1;
+    for (let o = 0; o < 3; o++) { const c = co[o]; row[o * 6] = c[0] + c[2] * Y + c[5] * Y * Y; row[o * 6 + 1] = c[1] + c[4] * Y; row[o * 6 + 2] = c[3]; }
+    for (let x = 0; x < w; x++) { const X = x / w * 2 - 1, i = (y * w + x) * 4;
+      for (let o = 0; o < 3; o++) { const bg = row[o * 6] + row[o * 6 + 1] * X + row[o * 6 + 2] * X * X; d[i + o] = d[i + o] / Math.max(30, bg) * WHITE; } } }
+  const black = Math.min(70, percentile(d, 0.003));
+  for (let i = 0; i < d.length; i += 4) {
+    const l = lumOf(d, i);
+    for (let c = 0; c < 3; c++) {
+      let v = d[i + c];
+      v = (v - black) / (255 - black); v = v < 0 ? 0 : v > 1 ? 1 : v;
+      v = v + (v * v * (3 - 2 * v) - v) * 0.25;                   // léger contraste en S
+      d[i + c] = v * 255;
+    }
+  }
+  sharpen(img, 0.5);
+  return img;
+}
 function applyFilter(warped, f) {
   const w = warped.width, h = warped.height, out = document.createElement("canvas"); out.width = w; out.height = h;
   const octx = out.getContext("2d");
   if (f === "none") { octx.drawImage(warped, 0, 0); return out; }
+  if (f === "magic" || f === "photo") { // « Magique » choisit seul : document texte -> fond blanc ; couverture/illustration -> couleurs fidèles
+    const m = warped._light || (warped._light = lightModel(warped));
+    if (f === "photo" || m.colorful > 0.07) { octx.putImageData(photoFilter(warped, m), 0, 0); return out; }
+  }
   const img = flatten(warped, f === "color" ? 0.8 : 1), d = img.data;
   if (f === "color") {
     const white = 247, black = Math.min(40, percentile(d, 0.005));
@@ -694,7 +753,45 @@ async function renderResult() {
   const ppp = fmt === "A4" ? Math.round(Math.min(cur.out.width, cur.out.height) / (210 / 25.4)) : null;
   $("res-spec").textContent = `${cur.out.width} × ${cur.out.height} px` + (fmt ? ` · ${fmt}` : "") + (ppp ? ` · ≈ ${ppp} ppp` : "");
 }
-function flatWarp(cur) { const q = orderQuad(cur.quad), [w, h] = outSize(q, cur.photo.width, cur.photo.height); return warp(cur.photo, q, w, h); }
+/* Bords propres : la couleur du support (table, tissu) est mesurée juste autour de la feuille ;
+   ce qui lui ressemble sur les bords de l'image redressée (coins abîmés ou arrondis, cadre un peu large) est repeint en papier. */
+function cleanBorders(warped, photo, q) {
+  const k = Math.min(1, 700 / Math.max(photo.width, photo.height)), pw = Math.round(photo.width * k), ph = Math.round(photo.height * k);
+  const pc = newCanvas(pw, ph), pctx = pc.getContext("2d"); pctx.drawImage(photo, 0, 0, pw, ph); const pd = pctx.getImageData(0, 0, pw, ph).data;
+  const cx = q.reduce((s, p) => s + p[0], 0) / 4, cy = q.reduce((s, p) => s + p[1], 0) / 4, samp = [];
+  for (let s = 0; s < 4; s++) { const a = q[s], b = q[(s + 1) % 4];
+    for (let t = 0.05; t < 0.95; t += 0.01) for (const f of [1.03, 1.06]) {
+      const x = (cx + (a[0] + (b[0] - a[0]) * t - cx) * f) * k, y = (cy + (a[1] + (b[1] - a[1]) * t - cy) * f) * k;
+      if (x < 0 || y < 0 || x >= pw || y >= ph) continue; const i = ((y | 0) * pw + (x | 0)) * 4; samp.push([pd[i], pd[i + 1], pd[i + 2]]); } }
+  if (samp.length < 40) return;
+  const mean = [0, 1, 2].map(c => samp.reduce((s, p) => s + p[c], 0) / samp.length);
+  const dist = (r, g, b) => Math.hypot(r - mean[0], g - mean[1], b - mean[2]);
+  const ds = samp.map(p => dist(...p)).sort((a, b) => a - b), tol = Math.max(30, ds[Math.floor(ds.length * 0.8)] * 1.3);
+  const w = warped.width, h = warped.height, ctx = warped.getContext("2d"), img = ctx.getImageData(0, 0, w, h), d = img.data;
+  // le support doit être nettement différent du papier, sinon on ne touche à rien
+  let pl = [0, 0, 0], pn = 0; for (let y = h * 0.3 | 0; y < h * 0.7; y += 4) for (let x = w * 0.3 | 0; x < w * 0.7; x += 4) { const i = (y * w + x) * 4; if (lumOf(d, i) > 150) { pl[0] += d[i]; pl[1] += d[i + 1]; pl[2] += d[i + 2]; pn++; } }
+  if (pn < 50 || dist(pl[0] / pn, pl[1] / pn, pl[2] / pn) < tol * 1.5) return;
+  const m = new Uint8Array(w * h), Mx = Math.round(w * 0.05), My = Math.round(h * 0.05), bg = i => dist(d[i], d[i + 1], d[i + 2]) < tol;
+  const run = (n, lim, idx) => { let miss = 0; for (let s = 0; s < lim && miss < 3; s++) { const j = idx(s); if (bg(j * 4)) { for (let u = s - miss; u <= s; u++) m[idx(u)] = 1; miss = 0; } else miss++; } };
+  for (let y = 0; y < h; y++) { run(0, Mx, s => y * w + s); run(0, Mx, s => y * w + w - 1 - s); }
+  for (let x = 0; x < w; x++) { run(0, My, s => s * w + x); run(0, My, s => (h - 1 - s) * w + x); }
+  let cnt = 0; for (let i = 0; i < w * h; i++) cnt += m[i]; if (!cnt) return;
+  const grown = morph(m, w, h, 2, true);
+  // couleur du papier voisin : moyenne des pixels sains dans une bande juste à l'intérieur
+  const B = 24, gw = Math.ceil(w / B), gh = Math.ceil(h / B), acc = new Float32Array(gw * gh * 4);
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) { const i = y * w + x; if (grown[i]) continue; const l = lumOf(d, i * 4); if (l < 120) continue;
+    const g = ((y / B) | 0) * gw + ((x / B) | 0); acc[g * 4] += d[i * 4]; acc[g * 4 + 1] += d[i * 4 + 1]; acc[g * 4 + 2] += d[i * 4 + 2]; acc[g * 4 + 3]++; }
+  for (let pass = 0; pass < 40; pass++) { let todo = 0; const nx = acc.slice();
+    for (let g = 0; g < gw * gh; g++) { if (acc[g * 4 + 3]) continue; todo++; const gx = g % gw, gy = (g / gw) | 0;
+      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { const xx = gx + dx, yy = gy + dy; if (xx < 0 || yy < 0 || xx >= gw || yy >= gh) continue; const o = (yy * gw + xx) * 4;
+        if (acc[o + 3]) for (let c = 0; c < 4; c++) nx[g * 4 + c] += acc[o + c] / acc[o + 3]; } }
+    acc.set(nx); if (!todo) break; }
+  const soft = boxBlur(Float32Array.from(grown), w, h, 2);
+  for (let i = 0; i < w * h; i++) { const a = Math.min(1, soft[i] * 1.6); if (a <= 0) continue; const x = i % w, y = (i / w) | 0, g = ((y / B) | 0) * gw + ((x / B) | 0), nn = acc[g * 4 + 3] || 1;
+    for (let c = 0; c < 3; c++) d[i * 4 + c] += (acc[g * 4 + c] / nn - d[i * 4 + c]) * a; }
+  ctx.putImageData(img, 0, 0);
+}
+function flatWarp(cur) { const q = orderQuad(cur.quad), [w, h] = outSize(q, cur.photo.width, cur.photo.height), c = warp(cur.photo, q, w, h); cleanBorders(c, cur.photo, q); return c; }
 async function toResult() {
   const cur = S.cur; cur.curve = false;
   await busy("Redressement…", async () => {
