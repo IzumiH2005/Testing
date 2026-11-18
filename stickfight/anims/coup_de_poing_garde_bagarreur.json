@@ -1,310 +1,312 @@
 {
  "nom": "coup_de_poing_garde_bagarreur",
  "boucle": false,
- "longueur": 48,
+ "longueur": 32,
  "base": "garde_ouverte_bagarreur",
  "suivante": "garde_ouverte_idle_bagarreur",
  "pieds_auto": false,
- "note": "Coup du bras arrière (coude levé) depuis la garde ouverte du bagarreur, sans pas : la hanche part, les épaules suivent et ramènent le coude devant, le coude se déplie en dernier. Analyse : analyses/coup_de_poing_garde_bagarreur.md.",
+ "note": "Direct du bras arrière (droit, côté caméra) depuis la garde réaliste du bagarreur, sans pas : la jambe arrière pousse, la hanche part, les épaules suivent, le poing part du menton en ligne droite, le coude se tend en dernier ; le poing gauche remonte à la joue. Analyse : analyses/coup_de_poing_garde_bagarreur.md.",
  "cles": [
   {
    "f": 0,
    "nom": "garde",
+   "courbe": "auto"
+  },
+  {
+   "f": 3,
+   "nom": "il se ramasse : le bassin et les épaules tournent un peu en arrière, le poing reste au menton",
    "fixe": {
-    "torsionBassin": -12,
-    "torsion": -4,
-    "epauleN_av": 0,
-    "epauleN_haut": -3,
-    "armN": -5,
-    "armN_p": 80,
-    "armN_r": 20,
-    "foreN": 100,
-    "armF": 31.46,
-    "armF_p": -40,
-    "armF_r": -40,
-    "foreF": 95.21,
-    "epauleF_av": -1,
-    "thighN_r": -15,
-    "neck_r": 0.0,
-    "x": 0,
-    "y": 84
-   },
-   "vise": {
-    "legN": [
-     -29.7,
-     13.3
-    ]
+    "torsionBassin": -15.0,
+    "torsion": -7.0,
+    "neck_r": 3.6,
+    "x": -0.5,
+    "y": 86.2,
+    "footF": 8.6,
+    "footN": -8.9,
+    "shinF": 23.1,
+    "shinN": 10,
+    "thighF": 14,
+    "thighF_p": -16,
+    "thighF_r": 6.3,
+    "thighN": -22.3,
+    "thighN_p": 16,
+    "thighN_r": -2,
+    "armF": 32,
+    "armF_p": -17.5,
+    "armF_r": -9.7,
+    "foreF": 96.9
    },
    "courbe": "acc"
   },
   {
-   "f": 5,
-   "nom": "ressort : il se ramasse, l'épaule arrière recule",
+   "f": 6,
+   "nom": "la jambe arrière pousse, le talon décolle, la hanche part en avant, les épaules restent",
    "fixe": {
-    "torsionBassin": -16,
-    "torsion": -10,
-    "epauleN_av": -2,
-    "epauleN_haut": -3,
-    "armN": -8,
-    "armN_p": 85,
-    "armN_r": 20,
-    "foreN": 102,
-    "armF": 31.46,
-    "armF_p": -40,
-    "armF_r": -40,
-    "foreF": 95.21,
-    "epauleF_av": -1,
-    "thighN_r": -15,
-    "neck_r": 6.0,
-    "x": -1,
-    "y": 82.5
-   },
-   "vise": {
-    "legN": [
-     -29.7,
-     13.3
-    ]
-   },
-   "courbe": "acc"
+    "torsionBassin": 6.0,
+    "torsion": -24.0,
+    "neck_r": 1.2,
+    "x": 3.0,
+    "y": 86.8,
+    "footF": 11.3,
+    "footN": -21.2,
+    "shinF": 24,
+    "shinN": 11,
+    "thighF": 17.2,
+    "thighF_p": -8.5,
+    "thighF_r": -14,
+    "thighN": -26.7,
+    "thighN_p": 9.2,
+    "thighN_r": 6,
+    "armF": 32,
+    "armF_p": -17.5,
+    "armF_r": -9.7,
+    "foreF": 96.9
+   }
+  },
+  {
+   "f": 7,
+   "nom": "les épaules suivent la hanche, le poing quitte le menton sur la ligne",
+   "fixe": {
+    "torsionBassin": 10.0,
+    "torsion": -10.0,
+    "neck_r": -9.6,
+    "x": 5.0,
+    "y": 87.0,
+    "footF": 13.1,
+    "footN": -28.7,
+    "shinF": 24.9,
+    "shinN": 10,
+    "thighF": 17,
+    "thighF_p": -6.8,
+    "thighF_r": -13.7,
+    "thighN": -28.2,
+    "thighN_p": 8,
+    "thighN_r": 8,
+    "armF": 32,
+    "armF_p": -17.5,
+    "armF_r": -9.7,
+    "foreF": 96.9,
+    "armN": 34.5,
+    "armN_p": 8,
+    "armN_r": -17,
+    "foreN": 122.5
+   }
   },
   {
    "f": 8,
-   "nom": "la hanche part, les épaules restent en arrière",
+   "nom": "le buste tourne, le coude reste sous le poing, le poing gauche remonte",
    "fixe": {
-    "torsionBassin": 5,
-    "torsion": -30,
-    "epauleN_av": -1,
-    "epauleN_haut": -2,
-    "armN": -2,
-    "armN_p": 80,
-    "armN_r": 15,
-    "foreN": 100,
-    "armF": 25,
-    "armF_p": -40,
-    "armF_r": -40,
-    "foreF": 105,
+    "torsionBassin": 12.0,
+    "torsion": 10.0,
+    "neck_r": -22.8,
+    "x": 5.0,
+    "y": 86.6,
+    "footF": 11.9,
+    "footN": -26.2,
+    "shinF": 31.4,
+    "shinN": 9,
+    "thighF": 20.4,
+    "thighF_p": -5.2,
+    "thighF_r": -17.3,
+    "thighN": -29.2,
+    "thighN_p": 7.2,
+    "thighN_r": 9,
+    "armF": 37.5,
+    "armF_p": -23.0,
+    "armF_r": -1.6,
+    "foreF": 113.7,
     "epauleF_av": -1,
-    "thighN_r": 0,
-    "neck_r": 5.4,
-    "x": 1,
-    "y": 83
-   },
-   "vise": {
-    "legN": [
-     -29.7,
-     13.3
-    ]
-   },
-   "courbe": "lin"
+    "armN": 43,
+    "armN_p": 23,
+    "armN_r": -25,
+    "foreN": 103.5
+   }
+  },
+  {
+   "f": 9,
+   "nom": "le poing file droit, le genou arrière finit de s'étendre",
+   "fixe": {
+    "torsionBassin": 14.0,
+    "torsion": 24.0,
+    "neck_r": -32.4,
+    "x": 5.6,
+    "y": 86.5,
+    "footF": 12.8,
+    "footN": -29.8,
+    "shinF": 32.4,
+    "shinN": 8,
+    "thighF": 20.7,
+    "thighF_p": -4.2,
+    "thighF_r": -19,
+    "thighN": -29.8,
+    "thighN_p": 6.6,
+    "thighN_r": 10,
+    "armF": 43,
+    "armF_p": -28.5,
+    "armF_r": 6.5,
+    "foreF": 130.5,
+    "epauleF_av": -2,
+    "epauleN_haut": -2,
+    "armN": 57,
+    "armN_p": 36.5,
+    "armN_r": -26,
+    "foreN": 75
+   }
   },
   {
    "f": 10,
-   "nom": "les épaules suivent, le coude vient devant",
+   "nom": "contact : bras tendu, épaule droite haute, menton derrière l'épaule, poing gauche contre le côté gauche du menton",
    "fixe": {
-    "torsionBassin": 12,
-    "torsion": 12,
-    "epauleN_av": 0,
-    "epauleN_haut": -1,
-    "armN": 68,
-    "armN_p": 72,
-    "armN_r": 50,
-    "foreN": 120,
-    "armF": 30,
-    "armF_p": -45,
-    "armF_r": -30,
-    "foreF": 125,
-    "epauleF_av": -2,
-    "thighN_r": 5,
-    "neck_r": -24.0,
-    "x": 2.5,
-    "y": 83
-   },
-   "vise": {
-    "legN": [
-     -29.7,
-     13.3
-    ]
-   },
-   "courbe": "lin"
-  },
-  {
-   "f": 11,
-   "nom": "extension : le coude se déplie, le poing va droit",
-   "fixe": {
-    "torsionBassin": 13.5,
-    "torsion": 24,
-    "epauleN_av": 0,
-    "epauleN_haut": -0.5,
-    "armN": 70,
-    "armN_p": 68,
-    "armN_r": 42,
-    "foreN": 85,
-    "armF": 30,
-    "armF_p": -47.5,
-    "armF_r": -30,
-    "foreF": 130,
-    "epauleF_av": -2.5,
-    "thighN_r": 7.5,
-    "neck_r": -32.1,
-    "x": 3.25,
-    "y": 83
-   },
-   "vise": {
-    "legN": [
-     -29.7,
-     13.3
-    ]
-   },
-   "courbe": "lin"
-  },
-  {
-   "f": 12,
-   "nom": "contact",
-   "fixe": {
-    "torsionBassin": 15,
-    "torsion": 35,
-    "epauleN_av": 0,
-    "epauleN_haut": 0,
-    "armN": 107,
-    "armN_p": 50,
-    "armN_r": 0,
-    "foreN": 3,
-    "armF": 30,
-    "armF_p": -50,
-    "armF_r": -30,
-    "foreF": 135,
-    "epauleF_av": -3,
+    "torsionBassin": 15.0,
+    "torsion": 32.0,
+    "neck_r": -37.8,
+    "x": 6.4,
+    "y": 86.5,
+    "footF": 14.2,
+    "footN": -38.4,
+    "shinF": 32.1,
+    "shinN": 7,
+    "thighF": 20.1,
+    "thighF_p": -3.6,
+    "thighF_r": -19.7,
+    "thighN": -29.8,
+    "thighN_p": 6.3,
     "thighN_r": 10,
-    "neck_r": -39.6,
-    "x": 4,
-    "y": 83
-   },
-   "vise": {
-    "legN": [
-     -29.7,
-     13.3
-    ]
+    "armF": 43,
+    "armF_p": -28.5,
+    "armF_r": 6.5,
+    "foreF": 130.5,
+    "epauleF_av": -3,
+    "epauleN_haut": -1,
+    "armN": 99,
+    "armN_p": 45.5,
+    "armN_r": -27,
+    "foreN": 13
    },
    "courbe": "dec"
   },
   {
-   "f": 16,
-   "nom": "dépassement",
+   "f": 13,
+   "nom": "le poing reste un instant au bout de la ligne",
    "fixe": {
-    "torsionBassin": 16,
-    "torsion": 38,
-    "epauleN_av": 0,
-    "epauleN_haut": 0,
-    "armN": 108,
-    "armN_p": 52,
-    "armN_r": 0,
-    "foreN": 0,
-    "armF": 30,
-    "armF_p": -50,
-    "armF_r": -30,
-    "foreF": 135,
-    "epauleF_av": -3,
+    "torsionBassin": 16.0,
+    "torsion": 35.0,
+    "neck_r": -40.2,
+    "x": 6.7,
+    "y": 86.5,
+    "footF": 14,
+    "footN": -40.8,
+    "shinF": 33,
+    "shinN": 7,
+    "thighF": 20.6,
+    "thighF_p": -3.5,
+    "thighF_r": -19.2,
+    "thighN": -29.8,
+    "thighN_p": 5.8,
     "thighN_r": 10,
-    "neck_r": -42.0,
-    "x": 4.5,
-    "y": 83
-   },
-   "vise": {
-    "legN": [
-     -29.7,
-     13.3
-    ]
-   },
-   "courbe": "acc-dec"
-  },
-  {
-   "f": 24,
-   "nom": "tenue",
-   "fixe": {
-    "torsionBassin": 15,
-    "torsion": 35,
-    "epauleN_av": 0,
-    "epauleN_haut": 0,
-    "armN": 104,
-    "armN_p": 48,
-    "armN_r": 0,
-    "foreN": 8,
-    "armF": 30,
-    "armF_p": -50,
-    "armF_r": -30,
-    "foreF": 135,
+    "armF": 43,
+    "armF_p": -28.5,
+    "armF_r": 6.5,
+    "foreF": 130.5,
     "epauleF_av": -3,
-    "thighN_r": 10,
-    "neck_r": -39.6,
-    "x": 4,
-    "y": 83
-   },
-   "vise": {
-    "legN": [
-     -29.7,
-     13.3
-    ]
-   },
-   "courbe": "acc-dec"
-  },
-  {
-   "f": 34,
-   "nom": "retour : le coude se replie et remonte sur le côté",
-   "fixe": {
-    "torsionBassin": 0,
-    "torsion": 10,
-    "epauleN_av": 0,
-    "epauleN_haut": -2,
-    "armN": 50,
-    "armN_p": 75,
-    "armN_r": 40,
-    "foreN": 95,
-    "armF": 20,
-    "armF_p": -45,
-    "armF_r": -38,
-    "foreF": 115,
-    "epauleF_av": -2,
-    "thighN_r": -5,
-    "neck_r": -15.6,
-    "x": 2,
-    "y": 83.5
-   },
-   "vise": {
-    "legN": [
-     -29.7,
-     13.3
-    ]
-   },
-   "courbe": "acc-dec"
-  },
-  {
-   "f": 48,
-   "nom": "garde",
-   "fixe": {
-    "torsionBassin": -12,
-    "torsion": -4,
-    "epauleN_av": 0,
-    "epauleN_haut": -3,
-    "armN": -5,
-    "armN_p": 80,
-    "armN_r": 20,
-    "foreN": 100,
-    "armF": 31.46,
-    "armF_p": -40,
-    "armF_r": -40,
-    "foreF": 95.21,
-    "epauleF_av": -1,
-    "thighN_r": -15,
-    "neck_r": 0.0,
-    "x": 0,
-    "y": 84
-   },
-   "vise": {
-    "legN": [
-     -29.7,
-     13.3
-    ]
+    "armN": 99,
+    "armN_p": 45.5,
+    "armN_r": -27,
+    "foreN": 13
    }
+  },
+  {
+   "f": 15,
+   "nom": "fin du maintien, le corps commence à revenir",
+   "fixe": {
+    "torsionBassin": 15.0,
+    "torsion": 33.0,
+    "neck_r": -38.4,
+    "x": 6.5,
+    "y": 86.5,
+    "footF": 13.7,
+    "footN": -39,
+    "shinF": 33,
+    "shinN": 7,
+    "thighF": 20.5,
+    "thighF_p": -3.6,
+    "thighF_r": -19.4,
+    "thighN": -29.8,
+    "thighN_p": 6.3,
+    "thighN_r": 10,
+    "armF": 43,
+    "armF_p": -28.5,
+    "armF_r": 6.5,
+    "foreF": 130.5,
+    "epauleF_av": -2,
+    "armN": 99,
+    "armN_p": 45.5,
+    "armN_r": -27,
+    "foreN": 13
+   }
+  },
+  {
+   "f": 21,
+   "nom": "le bras revient sur la même ligne, le bassin retourne, le poing gauche commence à redescendre",
+   "fixe": {
+    "torsionBassin": 6.0,
+    "torsion": 10.0,
+    "neck_r": -19.2,
+    "x": 6.0,
+    "y": 86.8,
+    "footF": 14.7,
+    "footN": -30.8,
+    "shinF": 27.1,
+    "shinN": 8,
+    "thighF": 17,
+    "thighF_p": -7,
+    "thighF_r": -13.2,
+    "thighN": -29.1,
+    "thighN_p": 10.3,
+    "thighN_r": 5,
+    "armF": 37.5,
+    "armF_p": -23.0,
+    "armF_r": -1.6,
+    "foreF": 113.7,
+    "epauleF_av": -1,
+    "armN": 43,
+    "armN_p": 23,
+    "armN_r": -25,
+    "foreN": 103.5
+   }
+  },
+  {
+   "f": 26,
+   "nom": "le poing droit arrive au menton, le poing gauche est revenu en garde",
+   "fixe": {
+    "torsionBassin": -6.0,
+    "torsion": -4.0,
+    "neck_r": -3.6,
+    "x": 1.5,
+    "y": 86.8,
+    "footF": 8,
+    "footN": -17.5,
+    "shinF": 25.7,
+    "shinN": 10,
+    "thighF": 16.7,
+    "thighF_p": -12.8,
+    "thighF_r": -0.8,
+    "thighN": -24.6,
+    "thighN_p": 13.5,
+    "thighN_r": 0,
+    "armF": 32,
+    "armF_p": -17.5,
+    "armF_r": -9.7,
+    "foreF": 96.9,
+    "armN": 34.5,
+    "armN_p": 8,
+    "armN_r": -17,
+    "foreN": 122.5
+   }
+  },
+  {
+   "f": 32,
+   "nom": "garde"
   }
  ]
 }
