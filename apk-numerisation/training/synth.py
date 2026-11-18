@@ -308,7 +308,10 @@ def gen_clean(rng, long_side=1024):
 
     if kind == "cover":
         # aplat principal (parfois avec coins arrondis comme la couverture de Baudelaire)
-        if rng.random() < 0.8:
+        bleed = rng.random() < 0.4  # fond entièrement imprimé (ex. couverture orange de « Rework ») :
+        if bleed:                   # les lettres « en réserve » gardent la couleur de la feuille
+            pg.put(np.ones((H, W), np.float32), rand_ink_color(rng, "any"), 2)
+        elif rng.random() < 0.8:
             x0, y0 = rng.uniform(-0.1, 0.4) * W, rng.uniform(0.25, 0.5) * H
             x1, y1 = rng.uniform(0.6, 1.1) * W, rng.uniform(0.7, 0.98) * H
             pg.put(pg.shape_mask(x0, y0, x1, y1), rand_ink_color(rng, "pale" if rng.random() < 0.5 else "any"), 2)
@@ -326,6 +329,8 @@ def gen_clean(rng, long_side=1024):
             size = rng.uniform(0.04, 0.13) * H
             f = rng.choice(F)
             col = rand_ink_color(rng, "any" if rng.random() < 0.6 else "black")
+            if bleed and rng.random() < 0.65:
+                col = np.ones(3, np.float32)  # pas d'encre : blanc du papier
             txt = " ".join(word(rng) for _ in range(rng.integers(1, 3)))
             x = rng.uniform(m, W * 0.5)
             w, h = pg.text(x, y, txt, size, col, f)
