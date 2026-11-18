@@ -1,0 +1,3 @@
+__pycache__/
+rip_lut.pt
+*.onnx

@@ -120,16 +120,7 @@ progress{width:100%;height:8px;accent-color:var(--accent)}
 .spin{width:22px;height:22px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--accent);animation:sp 0.8s linear infinite;flex:none}
 @keyframes sp{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion: reduce){.spin{animation-duration:3s}}
-.aitog{min-height:32px;padding:3px 10px;border-radius:999px;font-family:var(--f-mono);font-size:12px;gap:6px}
-.aitog[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
-.aitog .dot{width:8px;height:8px;border-radius:50%;background:var(--muted)}
-.aitog[aria-pressed="true"] .dot{background:var(--ok)}
-.tools-ai{display:flex;gap:8px;flex-wrap:wrap}
-.tools-ai button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
 .result{position:relative}
-.result .paint{position:absolute;touch-action:none;cursor:crosshair;box-shadow:none;background:transparent}
-.erase-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:var(--surface);border:1px solid var(--accent);border-radius:var(--r);padding:10px}
-.erase-bar p{flex:1 1 200px;font-size:13px;color:var(--muted)}
 .busy .box{flex-direction:row}
 .busy small{display:block;font-family:var(--f-mono);font-size:12px;color:var(--muted);font-weight:400}
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:30;background:var(--ink);color:var(--bg);border-radius:8px;padding:10px 14px;font-size:14px;max-width:calc(100% - 32px);box-shadow:0 4px 14px rgba(0,0,0,.25)}
@@ -139,7 +130,7 @@ progress{width:100%;height:8px;accent-color:var(--accent)}
 <div class="app">
   <header class="top">
     <div class="wrap">
-      <div class="brand"><h1>Scanner Propre</h1><span class="row" style="gap:10px"><button id="btn-ai" class="aitog" aria-pressed="true" title="Activer ou couper les modèles d'IA"><span class="dot"></span>IA</button><span class="count" id="count">0 page</span></span></div>
+      <div class="brand"><h1>Scanner Propre</h1><span class="row" style="gap:10px"><span class="count" id="count">0 page</span></span></div>
       <ol class="steps" id="steps" aria-label="Étapes">
         <li data-s="1"><span>Photo</span></li>
         <li data-s="2"><span>Cadre</span></li>
@@ -214,30 +205,15 @@ progress{width:100%;height:8px;accent-color:var(--accent)}
     <!-- RÉSULTAT -->
     <section id="v-res" class="wrap" hidden>
       <div class="row" style="justify-content:space-between">
-        <h2>Nettoyage</h2>
+        <h2>Réimpression</h2>
         <span class="spec" id="res-spec"></span>
       </div>
       <div class="filters" id="filters" role="group" aria-label="Rendu">
-        <button data-f="reprint" aria-pressed="true">Réimpression</button>
-        <button data-f="magic" aria-pressed="false">Magique</button>
-        <button data-f="photo" aria-pressed="false">Couleurs fidèles</button>
-        <button data-f="color" aria-pressed="false">Couleur douce</button>
-        <button data-f="gray" aria-pressed="false">Niveaux de gris</button>
-        <button data-f="bw" aria-pressed="false">Noir et blanc</button>
-        <button data-f="none" aria-pressed="false">Sans retouche</button>
+        <button data-f="reprint" aria-pressed="true">Réimpression (3 IA)</button>
+        <button data-f="none" aria-pressed="false">Photo d'origine</button>
       </div>
       <p class="reprint-info" id="reprint-info" hidden></p>
-      <div class="tools-ai" id="tools-ai">
-        <button id="btn-curve" aria-pressed="false"><svg class="i" viewBox="0 0 24 24"><path d="M5 5c4 2 10 2 14 0v14c-4 2-10 2-14 0z"/><path d="M9 10h6M9 14h6"/></svg>Page courbée</button>
-        <button id="btn-erase"><svg class="i" viewBox="0 0 24 24"><path d="m14 5 5 5-8 8H7l-3-3z"/><path d="M11 18h9"/></svg>Gomme (doigts, taches)</button>
-      </div>
-      <div class="erase-bar" id="erase-bar" hidden>
-        <p id="erase-msg">Coloriez ce qui doit disparaître.</p>
-        <button id="btn-erase-clear" class="ghost">Vider</button>
-        <button id="btn-erase-cancel">Annuler</button>
-        <button id="btn-erase-ok" class="primary">Effacer</button>
-      </div>
-      <div class="result" id="result"><canvas id="out"></canvas><canvas id="paint" class="paint" hidden></canvas></div>
+      <div class="result" id="result"><canvas id="out"></canvas></div>
       <div class="row">
         <button id="btn-rotl" aria-label="Pivoter à gauche"><svg class="i" viewBox="0 0 24 24"><path d="M4 4v5h5"/><path d="M5 9a8 8 0 1 1-1 6"/></svg></button>
         <button id="btn-rotr" aria-label="Pivoter à droite"><svg class="i" viewBox="0 0 24 24"><path d="M20 4v5h-5"/><path d="M19 9a8 8 0 1 0 1 6"/></svg></button>
@@ -250,6 +226,7 @@ progress{width:100%;height:8px;accent-color:var(--accent)}
   <div class="bar" id="bar-doc">
     <div class="wrap">
       <button id="btn-ocr" disabled><svg class="i" viewBox="0 0 24 24"><path d="M4 7V4h3M17 4h3v3M20 17v3h-3M7 20H4v-3"/><path d="M8 9h8M8 12h8M8 15h5"/></svg>Lire le texte</button>
+      <button id="btn-png" disabled><svg class="i" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="m4 16 5-5 4 4 3-3 4 4"/></svg>PNG</button>
       <button id="btn-pdf" class="primary" disabled><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></svg>Exporter en PDF</button>
     </div>
   </div>
@@ -294,11 +271,7 @@ const tick = () => new Promise(r => requestAnimationFrame(() => setTimeout(r, 20
 async function busy(msg, fn) { $("busy-msg").textContent = msg; $("busy-sub").textContent = ""; $("busy").hidden = false; await tick(); try { return await fn(); } finally { $("busy").hidden = true; } }
 
 /* ---------- IA (voir ai.js) ---------- */
-S.ai = (() => { try { return localStorage.getItem("scan-ai") !== "off"; } catch { return true; } })();
-S.aiFail = {};
-function setAiBtn() { $("btn-ai").setAttribute("aria-pressed", String(S.ai)); $("tools-ai").hidden = !S.ai; }
-$("btn-ai").onclick = () => { S.ai = !S.ai; try { localStorage.setItem("scan-ai", S.ai ? "on" : "off"); } catch {} setAiBtn();
-  toast(S.ai ? "IA activée : coins, orientation, courbure et gomme" : "IA coupée : méthode classique seule"); };
+S.ai = true; S.aiFail = {};
 const aiProg = (f, m) => { $("busy-sub").textContent = f < 1 ? `Téléchargement du modèle « ${m.label} » (${m.mb} Mo) · ${Math.round(f * 100)} %` : "Démarrage du modèle…"; };
 async function tryAI(name, fn) {
   if (!S.ai || S.aiFail[name]) return null;
@@ -531,151 +504,11 @@ function detectQuad(src) {
 const insetQuad = (c, f) => { const W = c.width, H = c.height; return [[W * f, H * f], [W * (1 - f), H * f], [W * (1 - f), H * (1 - f)], [W * f, H * (1 - f)]]; };
 const fullQuad = c => [[0, 0], [c.width, 0], [c.width, c.height], [0, c.height]];
 
-/* ---------- 3. nettoyage ---------- */
-/* Estime la couleur du papier sur une grille grossière (le papier = pixels les plus clairs de chaque case),
-   puis divise l'image par ce fond : ombres, reflets et teinte jaune disparaissent. */
-function paperGrid(d, w, h) {
-  const B = Math.max(8, Math.round(Math.max(w, h) / 44)), gw = Math.ceil(w / B), gh = Math.ceil(h / B);
-  const mx = new Float32Array(gw * gh);
-  for (let y = 0; y < h; y++) { const gy = (y / B) | 0; for (let x = 0; x < w; x++) { const i = (y * w + x) * 4;
-    const l = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2], g = gy * gw + ((x / B) | 0); if (l > mx[g]) mx[g] = l; } }
-  const R = new Float32Array(gw * gh), G = new Float32Array(gw * gh), Bl = new Float32Array(gw * gh), N = new Float32Array(gw * gh);
-  for (let y = 0; y < h; y++) { const gy = (y / B) | 0; for (let x = 0; x < w; x++) { const i = (y * w + x) * 4;
-    const l = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2], g = gy * gw + ((x / B) | 0);
-    if (l >= mx[g] - 28) { R[g] += d[i]; G[g] += d[i + 1]; Bl[g] += d[i + 2]; N[g]++; } } }
-  let ch = [R, G, Bl].map(a => { const o = new Float32Array(a.length); for (let g = 0; g < a.length; g++) o[g] = a[g] / Math.max(1, N[g]); return o; });
-  // une case presque entièrement noire (titre, photo) ne doit pas faire croire à un papier sombre : dilatation par luminance
-  const lum = g => 0.299 * ch[0][g] + 0.587 * ch[1][g] + 0.114 * ch[2][g];
-  for (let pass = 0; pass < 2; pass++) {
-    const nc = ch.map(a => a.slice());
-    for (let y = 0; y < gh; y++) for (let x = 0; x < gw; x++) { let bg = y * gw + x, bl = lum(bg);
-      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) { const yy = y + dy, xx = x + dx; if (yy < 0 || xx < 0 || yy >= gh || xx >= gw) continue;
-        const g = yy * gw + xx, l = lum(g); if (l > bl + 18) { bl = l; bg = g; } }
-      for (let c = 0; c < 3; c++) nc[c][y * gw + x] = ch[c][bg]; }
-    ch = nc;
-  }
-  ch = ch.map(a => boxBlur(boxBlur(a, gw, gh, 1), gw, gh, 1));
-  return { ch, gw, gh, B };
-}
-function flatten(src, strength) { // renvoie ImageData normalisée (fond ≈ 255)
-  const w = src.width, h = src.height, ctx = src.getContext("2d"), id = ctx.getImageData(0, 0, w, h), d = id.data;
-  const { ch, gw, gh, B } = paperGrid(d, w, h);
-  const o = new ImageData(w, h), od = o.data;
-  for (let y = 0; y < h; y++) {
-    let gy = (y + 0.5) / B - 0.5; if (gy < 0) gy = 0; if (gy > gh - 1) gy = gh - 1;
-    const y0 = gy | 0, y1 = Math.min(gh - 1, y0 + 1), fy = gy - y0;
-    for (let x = 0; x < w; x++) {
-      let gx = (x + 0.5) / B - 0.5; if (gx < 0) gx = 0; if (gx > gw - 1) gx = gw - 1;
-      const x0 = gx | 0, x1 = Math.min(gw - 1, x0 + 1), fx = gx - x0, i = (y * w + x) * 4;
-      for (let c = 0; c < 3; c++) { const a = ch[c];
-        const bg = (a[y0 * gw + x0] * (1 - fx) + a[y0 * gw + x1] * fx) * (1 - fy) + (a[y1 * gw + x0] * (1 - fx) + a[y1 * gw + x1] * fx) * fy;
-        const norm = d[i + c] / Math.max(24, bg) * 255;
-        od[i + c] = d[i + c] + (norm - d[i + c]) * strength; }
-      od[i + 3] = 255;
-    }
-  }
-  return o;
-}
-function lumOf(d, i) { return 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2]; }
-function percentile(d, p) { const hist = new Uint32Array(256); const n = d.length / 4;
-  for (let i = 0; i < d.length; i += 16) hist[Math.min(255, lumOf(d, i) | 0)]++;
-  let tot = 0; const tgt = (n / 4) * p; for (let v = 0; v < 256; v++) { tot += hist[v]; if (tot >= tgt) return v; } return 255; }
-function sharpen(img, amount) {
-  const w = img.width, h = img.height, d = img.data, L = new Float32Array(w * h);
-  for (let i = 0; i < w * h; i++) L[i] = lumOf(d, i * 4);
-  const bl = boxBlur(L, w, h, 1);
-  for (let i = 0; i < w * h; i++) { const delta = (L[i] - bl[i]) * amount; for (let c = 0; c < 3; c++) d[i * 4 + c] += delta; }
-}
-/* Couvertures, photos, pages illustrées : on ne « blanchit » pas les zones colorées.
-   L'éclairage (ombre, teinte de la lampe) est modélisé par une surface douce (polynôme de degré 2)
-   ajustée sur les seuls pixels de papier, puis retiré : balance des blancs + ombres, couleurs gardées. */
-function lightModel(src) {
-  const k = Math.min(1, 220 / Math.max(src.width, src.height)), w = Math.max(8, Math.round(src.width * k)), h = Math.max(8, Math.round(src.height * k));
-  const c = newCanvas(w, h), ctx = c.getContext("2d"); ctx.drawImage(src, 0, 0, w, h);
-  const d = ctx.getImageData(0, 0, w, h).data, n = w * h, L = new Float32Array(n), C = new Float32Array(n);
-  let colorful = 0;
-  for (let i = 0; i < n; i++) { const r = d[i * 4], g = d[i * 4 + 1], b = d[i * 4 + 2]; L[i] = 0.299 * r + 0.587 * g + 0.114 * b; C[i] = Math.max(r, g, b) - Math.min(r, g, b); }
-  const sorted = Float32Array.from(L).sort(), lq = sorted[Math.floor(n * 0.55)];
-  let cand = []; for (let i = 0; i < n; i++) if (L[i] >= lq) cand.push(i);
-  const cs = cand.map(i => C[i]).sort((a, b) => a - b), cmed = cs[cs.length >> 1];
-  cand = cand.filter(i => C[i] <= cmed + 14);
-  const feat = i => { const x = (i % w) / w * 2 - 1, y = ((i / w) | 0) / h * 2 - 1; return [1, x, y, x * x, x * y, y * y]; };
-  const fitCh = (ids, o) => { const A = Array.from({ length: 6 }, () => new Array(6).fill(0)), b = new Array(6).fill(0);
-    for (const i of ids) { const f = feat(i), v = d[i * 4 + o]; for (let r = 0; r < 6; r++) { b[r] += f[r] * v; for (let s = 0; s < 6; s++) A[r][s] += f[r] * f[s]; } }
-    for (let r = 0; r < 6; r++) A[r][r] += 1e-3 * ids.length; return solve(A, b); };
-  const pred = (co, i) => { const f = feat(i); let s = 0; for (let r = 0; r < 6; r++) s += co[r] * f[r]; return s; };
-  let co = null;
-  for (let it = 0; it < 4 && cand.length > n * 0.03; it++) {
-    co = [0, 1, 2].map(o => fitCh(cand, o));
-    const res = cand.map(i => Math.abs(d[i * 4] - pred(co[0], i)) + Math.abs(d[i * 4 + 1] - pred(co[1], i)) + Math.abs(d[i * 4 + 2] - pred(co[2], i)));
-    const med = res.slice().sort((a, b) => a - b)[res.length >> 1];
-    cand = cand.filter((i, j) => res[j] <= Math.max(9, 2.5 * med));
-  }
-  const paperFrac = cand.length / n;
-  if (!co || paperFrac < 0.03) { // presque pas de papier : simple balance des blancs sur les pixels les plus clairs
-    const top = []; for (let i = 0; i < n; i++) if (L[i] >= sorted[Math.floor(n * 0.97)]) top.push(i);
-    co = [0, 1, 2].map(o => { const m = top.reduce((s, i) => s + d[i * 4 + o], 0) / Math.max(1, top.length); return [m, 0, 0, 0, 0, 0]; });
-  }
-  for (let i = 0; i < n; i++) { const r = d[i * 4] / Math.max(30, pred(co[0], i)), g = d[i * 4 + 1] / Math.max(30, pred(co[1], i)), b = d[i * 4 + 2] / Math.max(30, pred(co[2], i));
-    if ((Math.max(r, g, b) - Math.min(r, g, b)) * Math.max(r, g, b) > 0.28) colorful++; }
-  return { co, colorful: colorful / n, paperFrac };
-}
-function photoFilter(warped, model) {
-  const w = warped.width, h = warped.height, img = warped.getContext("2d").getImageData(0, 0, w, h), d = img.data, co = model.co, WHITE = 244;
-  const row = new Float32Array(18);
-  for (let y = 0; y < h; y++) { const Y = y / h * 2 - 1;
-    for (let o = 0; o < 3; o++) { const c = co[o]; row[o * 6] = c[0] + c[2] * Y + c[5] * Y * Y; row[o * 6 + 1] = c[1] + c[4] * Y; row[o * 6 + 2] = c[3]; }
-    for (let x = 0; x < w; x++) { const X = x / w * 2 - 1, i = (y * w + x) * 4;
-      for (let o = 0; o < 3; o++) { const bg = row[o * 6] + row[o * 6 + 1] * X + row[o * 6 + 2] * X * X; d[i + o] = d[i + o] / Math.max(30, bg) * WHITE; } } }
-  const black = Math.min(70, percentile(d, 0.003));
-  for (let i = 0; i < d.length; i += 4) {
-    const l = lumOf(d, i);
-    for (let c = 0; c < 3; c++) {
-      let v = d[i + c];
-      v = (v - black) / (255 - black); v = v < 0 ? 0 : v > 1 ? 1 : v;
-      v = v + (v * v * (3 - 2 * v) - v) * 0.25;                   // léger contraste en S
-      d[i + c] = v * 255;
-    }
-  }
-  sharpen(img, 0.5);
-  return img;
-}
-function applyFilter(warped, f) {
-  const w = warped.width, h = warped.height, out = document.createElement("canvas"); out.width = w; out.height = h;
-  const octx = out.getContext("2d");
-  if (f === "none") { octx.drawImage(warped, 0, 0); return out; }
-  if (f === "reprint") { const m = warped._light || (warped._light = lightModel(warped)); return Reprint.run(warped, m, { paper: warped._paper }); }
-  if (f === "magic" || f === "photo") { // « Magique » choisit seul : document texte -> fond blanc ; couverture/illustration -> couleurs fidèles
-    const m = warped._light || (warped._light = lightModel(warped));
-    if (f === "photo" || m.colorful > 0.07) { octx.putImageData(photoFilter(warped, m), 0, 0); return out; }
-  }
-  const img = flatten(warped, f === "color" ? 0.8 : 1), d = img.data;
-  if (f === "color") {
-    const white = 247, black = Math.min(40, percentile(d, 0.005));
-    for (let i = 0; i < d.length; i += 4) for (let c = 0; c < 3; c++) d[i + c] = Math.max(0, Math.min(255, (d[i + c] - black) / (white - black) * 255));
-    sharpen(img, 0.35);
-  } else {
-    const white = 236, black = Math.min(95, percentile(d, 0.01));
-    for (let i = 0; i < d.length; i += 4) {
-      const l = lumOf(d, i);
-      for (let c = 0; c < 3; c++) {
-        let v = d[i + c] + (d[i + c] - l) * 0.35;                // couleurs d'encre plus franches (signatures, tampons)
-        v = (v - black) / (white - black); v = v < 0 ? 0 : v > 1 ? 1 : v;
-        d[i + c] = Math.pow(v, 1.25) * 255;                       // texte plus noir, fond blanc
-      }
-    }
-    sharpen(img, 0.6);
-    if (f === "gray" || f === "bw") {
-      for (let i = 0; i < d.length; i += 4) { const l = lumOf(d, i); d[i] = d[i + 1] = d[i + 2] = l; }
-    }
-    if (f === "bw") {
-      const L = new Float32Array(w * h); for (let i = 0; i < w * h; i++) L[i] = d[i * 4];
-      const t = otsu(L, 110, 210);
-      for (let i = 0; i < w * h; i++) { const v = Math.max(0, Math.min(255, (L[i] - (t - 14)) / 28 * 255)); d[i * 4] = d[i * 4 + 1] = d[i * 4 + 2] = v; }
-    }
-  }
-  octx.putImageData(img, 0, 0);
-  return out;
+/* ---------- 3. réimpression (voir reprint.js) ---------- */
+async function applyFilter(warped, f) {
+  if (f === "none") { const o = newCanvas(warped.width, warped.height); o.getContext("2d").drawImage(warped, 0, 0); return o; }
+  if (!AI.ready("print")) $("busy-sub").textContent = "Chargement des 3 IA (première fois seulement)…";
+  return Reprint.run(warped, { paper: warped._paper, onProg: aiProg, onStep: m => { $("busy-msg").textContent = m; } });
 }
 function rotateCanvas(c, rot) {
   rot = ((rot % 4) + 4) % 4; if (!rot) return c;
@@ -750,122 +583,26 @@ function a4Guess(w, h) {
   return best ? best[0] : null;
 }
 async function renderResult() {
-  const cur = S.cur; if (paint.on) exitErase();
-  $("btn-curve").setAttribute("aria-pressed", String(!!cur.curve));
-  await busy("Nettoyage de la page…", async () => {
-    cur.out = rotateCanvas(applyFilter(cur.warped, cur.filter), cur.rot);
-  });
+  const cur = S.cur;
+  try { await busy("Réimpression de la page…", async () => { cur.out = rotateCanvas(await applyFilter(cur.warped, cur.filter), cur.rot); }); }
+  catch (e) { console.error(e); toast("Les IA n'ont pas pu tourner ici : photo d'origine affichée", 4500); cur.filter = "none"; cur.out = rotateCanvas(await applyFilter(cur.warped, "none"), cur.rot); }
   const o = $("out"); o.width = cur.out.width; o.height = cur.out.height; o.getContext("2d").drawImage(cur.out, 0, 0);
   document.querySelectorAll("#filters button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.f === cur.filter)));
   const fmt = a4Guess(cur.out.width, cur.out.height);
   const ppp = fmt === "A4" ? Math.round(Math.min(cur.out.width, cur.out.height) / (210 / 25.4)) : null;
   const ri = $("reprint-info"), info = cur.out._info; ri.hidden = !info;
-  if (info) { const sw = c => `<i class="sw" style="background:${c}"></i>`;
+  if (info) { const sw = c => `<i class="sw" style="background:${c}"></i>`, ink = info.inkMean.map(v => Math.round(v * 100));
     const forced = cur.warped._paper === "white", other = forced ? `couleur détectée (${info.found.name})` : "feuille blanche";
-    ri.innerHTML = `Feuille ${sw(info.paper.hex)}<b>${info.paper.name}</b> <code>${info.paper.hex}</code> · encres ${info.inks.slice(0, 8).map(sw).join("")}`
+    ri.innerHTML = `Feuille ${sw(info.paper.hex)}<b>${info.paper.name}</b> <code>${info.paper.hex}</code> · encre moyenne C ${ink[0]} % M ${ink[1]} % J ${ink[2]} % N ${ink[3]} %`
       + (info.found.hex !== "#FFFFFF" || forced ? ` <button class="mini" data-paper="${forced ? "auto" : "white"}">Mettre en ${other}</button>` : ""); }
   $("res-spec").textContent = `${cur.out.width} × ${cur.out.height} px` + (fmt ? ` · ${fmt}` : "") + (ppp ? ` · ≈ ${ppp} ppp` : "");
 }
-/* Bords propres : la couleur du support (table, tissu) est mesurée juste autour de la feuille ;
-   ce qui lui ressemble sur les bords de l'image redressée (coins abîmés ou arrondis, cadre un peu large) est repeint en papier. */
-function cleanBorders(warped, photo, q) {
-  const k = Math.min(1, 700 / Math.max(photo.width, photo.height)), pw = Math.round(photo.width * k), ph = Math.round(photo.height * k);
-  const pc = newCanvas(pw, ph), pctx = pc.getContext("2d"); pctx.drawImage(photo, 0, 0, pw, ph); const pd = pctx.getImageData(0, 0, pw, ph).data;
-  const cx = q.reduce((s, p) => s + p[0], 0) / 4, cy = q.reduce((s, p) => s + p[1], 0) / 4, samp = [];
-  for (let s = 0; s < 4; s++) { const a = q[s], b = q[(s + 1) % 4];
-    for (let t = 0.05; t < 0.95; t += 0.01) for (const f of [1.03, 1.06]) {
-      const x = (cx + (a[0] + (b[0] - a[0]) * t - cx) * f) * k, y = (cy + (a[1] + (b[1] - a[1]) * t - cy) * f) * k;
-      if (x < 0 || y < 0 || x >= pw || y >= ph) continue; const i = ((y | 0) * pw + (x | 0)) * 4; samp.push([pd[i], pd[i + 1], pd[i + 2]]); } }
-  if (samp.length < 40) return;
-  const mean = [0, 1, 2].map(c => samp.reduce((s, p) => s + p[c], 0) / samp.length);
-  const dist = (r, g, b) => Math.hypot(r - mean[0], g - mean[1], b - mean[2]);
-  const ds = samp.map(p => dist(...p)).sort((a, b) => a - b), tol = Math.max(30, ds[Math.floor(ds.length * 0.8)] * 1.3);
-  const w = warped.width, h = warped.height, ctx = warped.getContext("2d"), img = ctx.getImageData(0, 0, w, h), d = img.data;
-  // le support doit être nettement différent du papier, sinon on ne touche à rien
-  let pl = [0, 0, 0], pn = 0; for (let y = h * 0.3 | 0; y < h * 0.7; y += 4) for (let x = w * 0.3 | 0; x < w * 0.7; x += 4) { const i = (y * w + x) * 4; if (lumOf(d, i) > 150) { pl[0] += d[i]; pl[1] += d[i + 1]; pl[2] += d[i + 2]; pn++; } }
-  if (pn < 50 || dist(pl[0] / pn, pl[1] / pn, pl[2] / pn) < tol * 1.5) return;
-  const m = new Uint8Array(w * h), Mx = Math.round(w * 0.05), My = Math.round(h * 0.05), bg = i => dist(d[i], d[i + 1], d[i + 2]) < tol;
-  const run = (n, lim, idx) => { let miss = 0; for (let s = 0; s < lim && miss < 3; s++) { const j = idx(s); if (bg(j * 4)) { for (let u = s - miss; u <= s; u++) m[idx(u)] = 1; miss = 0; } else miss++; } };
-  for (let y = 0; y < h; y++) { run(0, Mx, s => y * w + s); run(0, Mx, s => y * w + w - 1 - s); }
-  for (let x = 0; x < w; x++) { run(0, My, s => s * w + x); run(0, My, s => (h - 1 - s) * w + x); }
-  let cnt = 0; for (let i = 0; i < w * h; i++) cnt += m[i]; if (!cnt) return;
-  const grown = morph(m, w, h, 2, true);
-  // couleur du papier voisin : moyenne des pixels sains dans une bande juste à l'intérieur
-  const B = 24, gw = Math.ceil(w / B), gh = Math.ceil(h / B), acc = new Float32Array(gw * gh * 4);
-  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) { const i = y * w + x; if (grown[i]) continue; const l = lumOf(d, i * 4); if (l < 120) continue;
-    const g = ((y / B) | 0) * gw + ((x / B) | 0); acc[g * 4] += d[i * 4]; acc[g * 4 + 1] += d[i * 4 + 1]; acc[g * 4 + 2] += d[i * 4 + 2]; acc[g * 4 + 3]++; }
-  for (let pass = 0; pass < 40; pass++) { let todo = 0; const nx = acc.slice();
-    for (let g = 0; g < gw * gh; g++) { if (acc[g * 4 + 3]) continue; todo++; const gx = g % gw, gy = (g / gw) | 0;
-      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { const xx = gx + dx, yy = gy + dy; if (xx < 0 || yy < 0 || xx >= gw || yy >= gh) continue; const o = (yy * gw + xx) * 4;
-        if (acc[o + 3]) for (let c = 0; c < 4; c++) nx[g * 4 + c] += acc[o + c] / acc[o + 3]; } }
-    acc.set(nx); if (!todo) break; }
-  const soft = boxBlur(Float32Array.from(grown), w, h, 2);
-  for (let i = 0; i < w * h; i++) { const a = Math.min(1, soft[i] * 1.6); if (a <= 0) continue; const x = i % w, y = (i / w) | 0, g = ((y / B) | 0) * gw + ((x / B) | 0), nn = acc[g * 4 + 3] || 1;
-    for (let c = 0; c < 3; c++) d[i * 4 + c] += (acc[g * 4 + c] / nn - d[i * 4 + c]) * a; }
-  ctx.putImageData(img, 0, 0);
-}
-function flatWarp(cur) { const q = orderQuad(cur.quad), [w, h] = outSize(q, cur.photo.width, cur.photo.height), c = warp(cur.photo, q, w, h); cleanBorders(c, cur.photo, q); return c; }
+function flatWarp(cur) { const q = orderQuad(cur.quad), [w, h] = outSize(q, cur.photo.width, cur.photo.height), c = warp(cur.photo, q, w, h); return c; }
 async function toResult() {
-  const cur = S.cur; cur.curve = false;
-  await busy("Redressement…", async () => {
-    cur.warped = flatWarp(cur);
-    if (cur.autoRot === undefined) { // l'IA regarde si la page est à l'envers ou couchée
-      const o = await tryAI("orient", () => AI.orientation(cur.warped, aiProg));
-      cur.autoRot = 0; if (o && o.turns && o.conf > 0.7) { cur.rot = -o.turns; cur.autoRot = o.turns; }
-    }
-  });
-  if (cur.autoRot) toast("Page remise à l'endroit par l'IA");
+  const cur = S.cur;
+  await busy("Redressement…", async () => { cur.warped = flatWarp(cur); });
   show("res"); await renderResult();
 }
-/* Page courbée : l'IA UVDoc calcule où chaque point de la feuille devrait être, puis la déplie */
-async function dewarpCur(cur) {
-  const P = cur.photo, q = orderQuad(cur.quad), xs = q.map(p => p[0]), ys = q.map(p => p[1]);
-  const m = 0.05 * Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...ys) - Math.min(...ys));
-  const x0 = Math.max(0, Math.min(...xs) - m), y0 = Math.max(0, Math.min(...ys) - m), x1 = Math.min(P.width, Math.max(...xs) + m), y1 = Math.min(P.height, Math.max(...ys) + m);
-  const crop = newCanvas(Math.round(x1 - x0), Math.round(y1 - y0)); crop.getContext("2d").drawImage(P, x0, y0, x1 - x0, y1 - y0, 0, 0, crop.width, crop.height);
-  const flat = await AI.dewarp(crop, aiProg), [w, h] = outSize(q, P.width, P.height);
-  const out = newCanvas(w, h), g = out.getContext("2d"); g.imageSmoothingQuality = "high"; g.drawImage(flat, 0, 0, w, h); return out;
-}
-$("btn-curve").onclick = async () => {
-  const cur = S.cur;
-  if (cur.curve) { await busy("Redressement…", async () => { cur.warped = flatWarp(cur); }); cur.curve = false; }
-  else { const r = await busy("Remise à plat de la page (IA)…", () => tryAI("dewarp", () => dewarpCur(cur)));
-    if (!r) return; cur.warped = r; cur.curve = true; toast("Page dépliée par l'IA · touchez encore pour annuler"); }
-  renderResult();
-};
-/* Gomme : on colorie (ou l'appli repère le doigt), puis l'IA MI-GAN reconstruit le fond */
-const paint = { on: false, last: null };
-function placePaint() { const o = $("out"), pc = $("paint");
-  Object.assign(pc.style, { left: o.offsetLeft + "px", top: o.offsetTop + "px", width: o.offsetWidth + "px", height: o.offsetHeight + "px" }); }
-function exitErase() { paint.on = false; $("paint").hidden = true; $("erase-bar").hidden = true; $("tools-ai").hidden = !S.ai; $("filters").hidden = false; }
-$("btn-erase").onclick = async () => {
-  const cur = S.cur, base = rotateCanvas(cur.warped, cur.rot), o = $("out"), pc = $("paint");
-  o.width = base.width; o.height = base.height; o.getContext("2d").drawImage(base, 0, 0);
-  pc.width = base.width; pc.height = base.height; const g = pc.getContext("2d"); g.clearRect(0, 0, pc.width, pc.height);
-  const sk = AI.skinMask(base);
-  if (sk) { const im = g.createImageData(pc.width, pc.height); for (let i = 0; i < sk.length; i++) if (sk[i]) { im.data[i * 4] = 255; im.data[i * 4 + 1] = 40; im.data[i * 4 + 2] = 60; im.data[i * 4 + 3] = 140; } g.putImageData(im, 0, 0); }
-  $("erase-msg").textContent = sk ? "Doigt repéré (en rouge). Corrigez au besoin, puis « Effacer »." : "Coloriez au doigt ce qui doit disparaître : doigt, tache, agrafe…";
-  paint.on = true; pc.hidden = false; $("erase-bar").hidden = false; $("tools-ai").hidden = true; $("filters").hidden = true; await tick(); placePaint();
-};
-(function paintDrag() { const pc = $("paint"); let down = false;
-  const pt = e => { const r = pc.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * pc.width, (e.clientY - r.top) / r.height * pc.height]; };
-  const stroke = p => { const g = pc.getContext("2d"), a = paint.last || p; g.strokeStyle = "rgba(255,40,60,0.55)"; g.lineCap = g.lineJoin = "round";
-    g.lineWidth = Math.max(pc.width, pc.height) * 0.035;     g.beginPath(); g.moveTo(a[0], a[1]); g.lineTo(p[0] + 0.01, p[1]); g.stroke(); paint.last = p; };
-  pc.addEventListener("pointerdown", e => { if (!paint.on) return; down = true; paint.last = null; pc.setPointerCapture(e.pointerId); e.preventDefault(); stroke(pt(e)); });
-  pc.addEventListener("pointermove", e => { if (down) stroke(pt(e)); });
-  const up = () => { down = false; paint.last = null; }; pc.addEventListener("pointerup", up); pc.addEventListener("pointercancel", up);
-  window.addEventListener("resize", () => { if (paint.on) placePaint(); });
-})();
-$("btn-erase-clear").onclick = () => { const pc = $("paint"); pc.getContext("2d").clearRect(0, 0, pc.width, pc.height); };
-$("btn-erase-cancel").onclick = () => { exitErase(); renderResult(); };
-$("btn-erase-ok").onclick = async () => {
-  const cur = S.cur, mc = rotateCanvas($("paint"), -cur.rot), d = mc.getContext("2d").getImageData(0, 0, mc.width, mc.height).data;
-  const mask = new Uint8Array(mc.width * mc.height); let any = 0; for (let i = 0; i < mask.length; i++) if (d[i * 4 + 3] > 10) { mask[i] = 1; any++; }
-  if (!any) { toast("Coloriez d'abord la zone à effacer"); return; }
-  const r = await busy("Effacement par l'IA…", () => tryAI("erase", () => AI.erase(cur.warped, mask, aiProg)));
-  exitErase(); if (r) { cur.warped = r; toast("Zone effacée · « Maintenir pour voir l'avant » montre la page sans filtre"); }
-  renderResult();
-};
 $("reprint-info").addEventListener("click", e => { const b = e.target.closest("button[data-paper]"); if (!b || !S.cur) return; S.cur.warped._paper = b.dataset.paper; renderResult(); });
 $("filters").addEventListener("click", e => { const f = e.target.closest("button")?.dataset.f; if (!f || f === S.cur.filter) return; S.cur.filter = f; renderResult(); });
 $("btn-rotl").onclick = () => { S.cur.rot--; renderResult(); };
@@ -877,12 +614,13 @@ $("btn-rotr").onclick = () => { S.cur.rot++; renderResult(); };
 })();
 
 /* ---------- document ---------- */
-const toBlob = (c, q = 0.9) => new Promise(r => c.toBlob(r, "image/jpeg", q));
+const toBlob = (c, q = 0.95) => new Promise(r => c.toBlob(r, "image/jpeg", q));
+const toPNG = c => new Promise(r => c.toBlob(r, "image/png"));
 async function keepPage() {
   const cur = S.cur;
-  const jpg = await toBlob(cur.out);
-  const page = { blob: cur.blob, quad: cur.quad.map(p => p.slice()), warped: cur.warped, filter: cur.filter, rot: cur.rot, curve: cur.curve, autoRot: cur.autoRot, byAI: cur.byAI,
-                 jpg, url: URL.createObjectURL(jpg), w: cur.out.width, h: cur.out.height, ocr: null };
+  const jpg = await toBlob(cur.out), png = await toPNG(cur.out);
+  const page = { blob: cur.blob, quad: cur.quad.map(p => p.slice()), warped: cur.warped, filter: cur.filter, rot: cur.rot, byAI: cur.byAI,
+                 jpg, png, url: URL.createObjectURL(jpg), w: cur.out.width, h: cur.out.height, ocr: null };
   if (S.editIdx >= 0) { URL.revokeObjectURL(S.pages[S.editIdx].url); S.pages[S.editIdx] = page; } else S.pages.push(page);
   S.editIdx = -1; S.cur = null;
   renderDoc(); show("doc");
@@ -897,7 +635,7 @@ function renderDoc() {
   const n = S.pages.length;
   $("count").textContent = n + (n > 1 ? " pages" : " page");
   $("empty").hidden = n > 0; $("doc").hidden = n === 0; $("pipeline").hidden = n > 0;
-  $("btn-pdf").disabled = $("btn-ocr").disabled = n === 0;
+  $("btn-pdf").disabled = $("btn-png").disabled = $("btn-ocr").disabled = n === 0;
   $("lbl-cam").lastChild.textContent = n ? "page suivante" : "ouvre l'appareil photo";
   $("doc-spec").textContent = n ? `${n} × page · ${(S.pages.reduce((s, p) => s + p.jpg.size, 0) / 1048576).toFixed(1)} Mo` : "";
   const box = $("pages"); box.innerHTML = "";
@@ -921,7 +659,7 @@ async function editPage(i) {
   const p = S.pages[i]; S.editIdx = i;
   await busy("Ouverture…", async () => {
     const photo = await fileToCanvas(p.blob);
-    S.cur = { blob: p.blob, photo, quad: p.quad.map(q => q.slice()), found: true, byAI: p.byAI, warped: p.warped, filter: p.filter, rot: p.rot, curve: p.curve, autoRot: p.autoRot };
+    S.cur = { blob: p.blob, photo, quad: p.quad.map(q => q.slice()), found: true, byAI: p.byAI, warped: p.warped, filter: p.filter, rot: p.rot };
   });
   show("res"); await renderResult();
 }
@@ -936,7 +674,7 @@ $("btn-auto").onclick = async () => { await busy("Recherche des bords…", async
 $("btn-full").onclick = () => { S.cur.quad = fullQuad(S.cur.photo); drawCrop(); };
 $("btn-crop-ok").onclick = toResult;
 $("btn-crop-cancel").onclick = () => { S.cur = null; S.editIdx = -1; queue = []; show("doc"); };
-$("btn-res-back").onclick = async () => { if (paint.on) exitErase();
+$("btn-res-back").onclick = async () => {
   const c = S.cur.photo, pc = $("photo"); pc.width = c.width; pc.height = c.height; pc.getContext("2d").drawImage(c, 0, 0);
   setPill(S.cur.found); show("crop"); await tick(); drawCrop(); };
 $("btn-res-ok").onclick = async () => { await keepPage(); if (queue.length) nextInQueue(); };
@@ -1030,6 +768,10 @@ $("btn-pdf").onclick = () => busy("Création du PDF…", async () => {
   if (!searchable) toast("Astuce : lancez « Lire le texte » avant l'export pour un PDF cherchable", 4000);
 });
 
+$("btn-png").onclick = async () => { // image sans perte, une par page
+  for (let i = 0; i < S.pages.length; i++) await saveFile(`scan_${stamp()}${S.pages.length > 1 ? "_p" + (i + 1) : ""}.png`, S.pages[i].png);
+};
+
 /* ---------- 4. OCR ---------- */
 function abs(p) { return new URL(p, location.href).href; }
 async function getWorker(onProg) {
@@ -1072,5 +814,5 @@ $("btn-copy").onclick = () => { const t = $("ocr-text").value; if (!t) return;
   navigator.clipboard.writeText(t).then(() => toast("Texte copié"), () => { $("ocr-text").select(); toast("Sélectionné : utilisez Copier du téléphone"); }); };
 $("btn-txt").onclick = () => { const t = $("ocr-text").value; if (t) saveFile(`texte_${stamp()}.txt`, t); };
 
-setAiBtn(); show("doc"); renderDoc();
+show("doc"); renderDoc();
 </script>
