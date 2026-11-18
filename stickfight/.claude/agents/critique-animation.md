@@ -93,8 +93,11 @@ tronc à une autre profondeur.
 8. **Mouvement dans le temps** (bandes une image sur 2 ou 4) : saccades, saut de pose,
    glissement des pieds, sens du mouvement incohérent, temps mort, geste sec qui ne se lit pas
    (pas de contraste de vitesse), fin qui ne raccorde pas à l'animation suivante.
-9. **Les trois vues concordent.** Une pose correcte de face mais absurde de trois quarts est
-   fausse.
+9. **Les vues concordent, à tous les angles.** Une pose correcte de face mais absurde de trois
+   quarts est fausse. Si on te donne un balayage de caméra (`--angles`, pas de 15°, dans les
+   deux sens et vers le dos), regarde chaque angle intermédiaire : un avant-bras dont on ne
+   comprend pas la pliure, un bras qui devient un moignon, une main qui passe dans la tête à un
+   seul de ces angles suffit à refuser. Si on ne te le donne pas, demande-le.
 10. **Vérificateur** (`verifier.txt`) : chaque alerte est soit justifiée par la fiche (dis
     laquelle), soit un défaut.
 
