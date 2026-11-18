@@ -17,6 +17,7 @@ extends SceneTree
 ## --strobe f    toutes les images superposées (de bleu clair à rouge clair,
 ##               la dernière en noir) avec la trajectoire des articulations
 ##               suivies : un point par image, pour voir les arcs et l'espacement
+## --camera w   (avec --images / --gif) la vue, de largeur w, suit le bassin
 ## --suivre a,b  articulations suivies (handN, handF, head, ankleN, hip...)
 ## --images dir  une PNG par image (frame_0000.png...)
 ## --boucles n  une boucle est jouée n fois (1 par défaut)
@@ -56,7 +57,7 @@ func _abs(path: String) -> String:
 func _parse(argv: PackedStringArray) -> Dictionary:
 	var a := {"file": "", "out": "", "strobe": "", "images": "", "de": -1, "a": -1, "pas": 1, "cols": 6,
 		"suivre": [], "vue": [], "scale": 2.0, "debug": false, "print": false, "boucles": 1,
-		"verifier": false, "cles": false, "vues": false}
+		"verifier": false, "cles": false, "vues": false, "camera": 0.0}
 	var i := 0
 	while i < argv.size():
 		var k := argv[i]
@@ -73,6 +74,9 @@ func _parse(argv: PackedStringArray) -> Dictionary:
 			"--scale":
 				i += 1
 				a.scale = float(argv[i])
+			"--camera":
+				i += 1
+				a.camera = float(argv[i])
 			"--suivre":
 				i += 1
 				a.suivre = Array(argv[i].split(","))
@@ -202,7 +206,7 @@ func _report(r: Dictionary) -> String:
 	for fig in r.fighters:
 		var J: Dictionary = StickRig.solve(fig.pose).joints
 		var pts := []
-		for k in ["hip", "shoulder", "head", "handN", "handF", "elbowN", "ankleN", "ankleF"]:
+		for k in ["hip", "shoulder", "head", "handN", "handF", "elbowN", "ankleN", "ankleF", "elbowF", "kneeN", "kneeF", "toeN", "toeF", "waist"]:
 			pts.append("%s(%.1f,%.1f)" % [k, J[k].x, J[k].y])
 		var v := StickRig.violations(fig.pose)
 		var vs := ""
@@ -345,7 +349,12 @@ func _run() -> void:
 		pl.grid = false
 		vp.add_child(pl)
 		var n := 0
+		var cam := -INF
 		for r in recs.slice(de, fin + 1):
+			if a.camera > 0.0:     # --camera w : la vue (largeur w) suit le bassin, lissée
+				var hx: float = StickRig.solve(r.fighters[0].pose).joints.hip.x
+				cam = hx if cam == -INF else lerpf(cam, hx, 0.12)
+				pl.view = Rect2(cam - a.camera * 0.45, view.position.y, a.camera, view.size.y)
 			_set_record(pl, r, a.debug)
 			pl.caption = ""
 			var img: Image = await _grab(vp)
