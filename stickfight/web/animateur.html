@@ -192,6 +192,7 @@ kbd { font: 500 10.5px var(--f-mono); border: 1px solid var(--line); border-bott
       <label><input type="checkbox" id="o-oignon" checked> Fantômes avant / après</label>
       <label><input type="checkbox" id="o-pieds" checked> Pieds collés au sol quand le bassin bouge</label>
       <label><input type="checkbox" id="o-trajet"> Trajet du point choisi</label>
+      <label><input type="checkbox" id="o-profondeur" checked> Couleurs de profondeur (bleu proche, orange loin, foncé = vers la caméra)</label>
     </div>
   </section>
 
@@ -335,6 +336,7 @@ function solve(p) {
     kneeN: tip.thighN, ankleN: tip.shinN, toeN: tip.footN, kneeF: tip.thighF, ankleF: tip.shinF, toeF: tip.footF };
   const J = {}, Z = {};
   const W = (v) => [p.x + f * v[0], p.y + v[1]];
+  pts3.nez = add(head3, sc(col(basis.neck, 1), -r * 0.72));   // devant du visage (sert à l'affichage de profondeur)
   for (const k in pts3) { J[k] = W(pts3[k]); Z[k] = pts3[k][2]; }
   for (const s of ["N", "F"]) {
     J["shoulder" + s] = W(base3["arm" + s]); Z["shoulder" + s] = base3["arm" + s][2];
@@ -346,17 +348,19 @@ function solve(p) {
 function primitives(p, cNear, cFar) {
   const { J, Z, r } = solve(p);
   const items = [];
-  const seg = (a, b, base, c) => items.push({ z: base + (Z[a] + Z[b]) / 2, type: "path", pts: [J[a], J[b]], c });
+  const seg = (a, b, base, c, cote) => items.push({ z: base + (Z[a] + Z[b]) / 2, type: "path", pts: [J[a], J[b]], zs: [Z[a], Z[b]], c, cote });
   for (const s of ["F", "N"]) {
     const c = s === "F" ? cFar : cNear, ba = s === "F" ? 30 : -30, bl = s === "F" ? 20 : -20;
-    seg("hip", "knee" + s, bl, c);
-    items.push({ z: bl + (Z["knee" + s] + Z["ankle" + s]) / 2, type: "path", pts: [J["knee" + s], J["ankle" + s], J["toe" + s]], c });
-    seg("shoulder" + s, "elbow" + s, ba, c);
-    seg("elbow" + s, "hand" + s, ba, c);
-    items.push({ z: ba + Z["hand" + s] - 0.01, type: "circle", ctr: J["hand" + s], r: STYLE.hand, c });
+    seg("hip" + s, "knee" + s, bl, c, s);
+    items.push({ z: bl + (Z["knee" + s] + Z["ankle" + s]) / 2, type: "path", pts: [J["knee" + s], J["ankle" + s], J["toe" + s]],
+      zs: [Z["knee" + s], Z["ankle" + s], Z["toe" + s]], c, cote: s, pied: true });
+    seg("shoulder" + s, "elbow" + s, ba, c, s);
+    seg("elbow" + s, "hand" + s, ba, c, s);
+    items.push({ z: ba + Z["hand" + s] - 0.01, type: "circle", ctr: J["hand" + s], r: STYLE.hand, zc: Z["hand" + s], zh: Z.hip, c, cote: s });
   }
-  items.push({ z: (Z.hip + Z.shoulder) / 2, type: "path", pts: [J.hip, J.waist, J.shoulder], c: cNear });
-  items.push({ z: Z.head - 1, type: "circle", ctr: J.head, r, c: cNear });
+  items.push({ z: (Z.hip + Z.shoulder) / 2, type: "path", pts: [J.hip, J.waist, J.shoulder], zs: [Z.hip, Z.waist, Z.shoulder], c: cNear });
+  items.push({ z: Z.head - 1, type: "circle", ctr: J.head, r, zc: Z.head, znez: Z.nez, c: cNear, tete: true });
+  for (const it of items) it.zh = Z.hip;
   items.forEach((it, i) => it.rang = i);
   items.sort((a, b) => (b.z - a.z) || (a.rang - b.rang));
   return { items, J };
@@ -560,7 +564,7 @@ const $ = (id) => document.getElementById(id);
 let frame = 0, playT = null, playAll = false, cam = 0, camAvantProf = 0, mode = "plan";
 let selHandle = "handN", selGroups = ["epauleN", "coudeN"];
 let selKeys = new Set();
-const opt = { oignon: true, pieds: true, trajet: false, detail: false };
+const opt = { oignon: true, pieds: true, trajet: false, detail: false, profondeur: true };
 const undoStack = [], redoStack = [];
 let editSnap = null;
 function beginEdit() { if (!editSnap) editSnap = JSON.stringify(film); }
@@ -646,16 +650,43 @@ function centerX(Q = P()) {
   for (let f = 0; f <= L; f += Math.max(1, Math.round(L / 24))) { s += chanAt(Q, Q.pistes.bassin, "x", f); n++; }
   return s / n;
 }
+// Profondeur (éditeur seulement) : bleu = côté proche (N), orange = côté loin (F), gris = tronc et tête ;
+// plus c'est foncé, plus c'est près de la caméra (z relatif au bassin, ±30 unités).
+function couleurProf(dz, cote) {
+  const t = Math.max(0, Math.min(1, 0.5 + dz / 60)), L = 18 + t * 52;
+  if (cote === "N") return `hsl(212 75% ${L}%)`;
+  if (cote === "F") return `hsl(24 85% ${L}%)`;
+  return `hsl(220 8% ${L}%)`;
+}
 function drawFigure(ctx, V, v, cNear, cFar, alpha, camDeg) {
   const S = (p) => [V.ox + (p[0] - V.cx) * V.k, V.gy - p[1] * V.k];
   const { items, J } = primitives(poseFrom(v, camDeg), cNear, cFar);
   ctx.globalAlpha = alpha; ctx.lineCap = "round"; ctx.lineJoin = "round";
+  const prof = opt.profondeur && alpha === 1;
   for (const it of items) {
     ctx.strokeStyle = it.c; ctx.fillStyle = it.c;
     if (it.type === "path") {
       ctx.lineWidth = STYLE.stroke * V.k;
-      ctx.beginPath(); it.pts.forEach((p, i) => { const s = S(p); i ? ctx.lineTo(s[0], s[1]) : ctx.moveTo(s[0], s[1]); }); ctx.stroke();
-    } else { const s = S(it.ctr); ctx.beginPath(); ctx.arc(s[0], s[1], it.r * V.k, 0, Math.PI * 2); ctx.fill(); }
+      if (prof) {
+        // un dégradé par tronçon : foncé = près de la caméra, clair = loin
+        for (let i = 1; i < it.pts.length; i++) {
+          const a = S(it.pts[i - 1]), b = S(it.pts[i]), g = ctx.createLinearGradient(a[0], a[1], b[0] + 0.01, b[1]);
+          g.addColorStop(0, couleurProf(it.zs[i - 1] - it.zh, it.cote)); g.addColorStop(1, couleurProf(it.zs[i] - it.zh, it.cote));
+          ctx.strokeStyle = g; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
+        }
+        if (it.pied) {   // pointe du pied marquée d'un point blanc (cercle plein si elle vient vers la caméra)
+          const t = S(it.pts[2]), vers = it.zs[2] < it.zs[1];
+          ctx.lineWidth = Math.max(1, V.k * 0.8); ctx.strokeStyle = "#fff"; ctx.fillStyle = "#fff";
+          ctx.beginPath(); ctx.arc(t[0], t[1], STYLE.stroke * V.k * 0.28, 0, Math.PI * 2); vers ? ctx.fill() : ctx.stroke();
+        }
+      } else { ctx.beginPath(); it.pts.forEach((p, i) => { const s = S(p); i ? ctx.lineTo(s[0], s[1]) : ctx.moveTo(s[0], s[1]); }); ctx.stroke(); }
+    } else {
+      if (prof) ctx.fillStyle = couleurProf(it.zc - it.zh, it.cote);
+      const s = S(it.ctr); ctx.beginPath(); ctx.arc(s[0], s[1], it.r * V.k, 0, Math.PI * 2); ctx.fill();
+      if (prof && it.tete && it.znez <= it.zc + it.r * 0.3) {   // visage : point blanc s'il est tourné vers la caméra (rien de dos)
+        const n = S(J.nez); ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(n[0], n[1], it.r * V.k * 0.2, 0, Math.PI * 2); ctx.fill();
+      }
+    }
   }
   ctx.globalAlpha = 1;
   return J;
@@ -1291,7 +1322,7 @@ document.addEventListener("keydown", (e) => {
   else if (e.key === "p" || e.key === "P") setMode(mode === "plan" ? "prof" : "plan");
   else if (e.key === "Delete" || e.key === "Backspace") { e.preventDefault(); delSel(); }
 });
-for (const k of ["oignon", "pieds", "trajet", "detail"]) $("o-" + k).addEventListener("change", (e) => { opt[k] = e.target.checked; trajCache = null; refresh(); });
+for (const k of ["oignon", "pieds", "trajet", "detail", "profondeur"]) $("o-" + k).addEventListener("change", (e) => { opt[k] = e.target.checked; trajCache = null; refresh(); });
 
 // ===================== Démarrage =====================
 $("legend").innerHTML = Object.entries(COURBE_COL).map(([n, v]) => `<span><i style="background:var(${v})"></i>${COURBE_NOM[n]}</span>`).join("")
