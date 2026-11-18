@@ -53,15 +53,12 @@
    légèrement bombée, ligne des épaules droite ou un peu en arrière (`epaule*_av` ≤ 0), jamais
    enroulée vers l'avant, même sur un effort (on lit l'effort par les épaules qui montent puis
    tombent, les coudes, la tête, pas par un dos qui s'arrondit).
-7. **Le critique juge avant et après.** Un agent critique strict
-   (`.claude/agents/critique-animation.md`, lancé comme agent général à qui on donne ce
-   fichier) regarde le travail :
-   - **avant** de poser les clés : il critique la fiche d'analyse (anatomie, axes, ce qui doit
-     se lire de profil) ;
-   - **après** chaque itération : `tools/critique.sh anims/x.json DOSSIER --de a --a b --vue
-     x,y,w,h` prépare les images (clés en trois vues, profil, zoom, vérificateur), puis on lui
-     donne le dossier, la fiche et ce qui a changé.
-   On corrige tant qu'il répond REFUSÉ. On ne montre, ne valide ni ne commite une animation
-   sans son VALIDÉ. Ne jamais discuter son verdict à sa place : si un défaut semble faux, le
-   vérifier sur l'image.
+7. **C'est l'utilisateur qui juge.** Après chaque itération, préparer les images avec
+   `tools/critique.sh anims/x.json DOSSIER --de a --a b --vue x,y,w,h` (clés en trois vues,
+   profil, zoom, vérificateur) et les **montrer directement à l'utilisateur**, avec les
+   contrôles chiffrés et ce qui a changé. C'est lui qui dit si c'est acceptable ; on ne commite
+   une animation qu'avec son accord. L'agent critique (`.claude/agents/critique-animation.md`)
+   valide la **fiche d'analyse** (étape 1) avant qu'on pose les clés ; il ne juge plus le
+   résultat en images (sauf si l'utilisateur le demande), pour éviter des boucles d'itérations
+   sans fin sur des défauts que l'utilisateur juge acceptables.
 8. Ne pas changer l'apparence des personnages (style, épaisseur, couleurs) sans qu'on le demande.
