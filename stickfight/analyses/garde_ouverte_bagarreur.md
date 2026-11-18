@@ -448,3 +448,50 @@ part du poing au menton.
     pleine à cet angle).
   - « epauleN_haut hors amplitude » : −3 est la valeur demandée par l'utilisateur (§ 8).
 - Les autres contrôles du § 7 restent.
+
+## 11. Révision : la garde lisible au tour de caméra (pas de 2°)
+
+**Ce qui n'allait pas.** La garde du § 10 était juste de profil, mais le tour de caméra
+(`--tour 2`, vues absolues) montrait deux défauts :
+- de face (90°), les deux poings se cachaient sous la tête, près de l'axe : on ne lisait
+  plus la garde ;
+- à la vue du jeu (45°), tout le bras arrière se fondait dans le tronc : un seul bras visible.
+
+**Méthode.** Les poings sont placés en 3D avec `mains3d` (cibles relatives à l'épaule, pose à
+lacet 0, x devant, y haut, z profondeur, N côté caméra = z négatif), puis on regarde face,
+trois quarts, profil et le tour complet dans les deux sens.
+
+| Essai | Poing N | Poing F | Résultat |
+|---|---|---|---|
+| e1 | (19, −12, −15) | (37, −10, 11) | de face lisible ; à 45° le poing N tombe sur l'axe (x + z ≈ 4) : bras arrière invisible |
+| e2 | (28, −12, −7) | (37, −10, 11) | à 45° le poing N sort ; de profil il est caché derrière l'avant-bras F |
+| e3 | (26, −14, −7) | (38, −5, 11) | même défaut de profil : le poing N est sur la ligne de l'avant-bras F |
+| **e4** | **(23, −4, −8)** | **(38, −10, 11)** | retenu |
+
+**Pourquoi e4.** C'est la garde de boxe classique : le poing arrière **monte au menton** (y −4
+sous l'épaule, juste sous la tête) et le poing avant reste **devant, à hauteur de clavicule**.
+Comme le poing arrière est plus haut que la ligne de l'avant-bras avant, il ne se cache plus
+derrière lui de profil. À 45°, sa projection (x + z ≈ 15) le sort de l'axe du tronc, et
+son coude, écarté de 40° côté caméra, fait une bosse au bord du torse.
+
+**Angles retenus** (coudes : `coude_dy` −20/−15, `coude_dx` 2/12, écart 12 à 40°) :
+`armN` 28,7, `foreN` 136,2, `armN_r` 19,4, `armN_p` 40 ; `armF` 18,1, `foreF` 100,
+`armF_r` 15,3, `armF_p` −28,9. Le reste de la pose (jambes, bassin, buste, épaules) ne
+change pas.
+
+**Ce qu'on lit à chaque vue**
+- **Face (90°)** : les deux poings de part et d'autre du menton ; le coude arrière s'ouvre
+  côté caméra et le coude avant reste près des côtes.
+- **Trois quarts (45°, jeu)** : le poing arrière fait une bosse au menton, le coude arrière
+  une bosse au bord du torse, et le bras avant est plié vers l'adversaire. On voit deux bras.
+- **Profil (0°)** : deux poings étagés. Le poing arrière est au menton, le poing avant est
+  plus bas et plus loin devant.
+- **Tour de 2° en 2°, dans les deux sens**, sur les 9 clés de la boucle : « lisible à tous
+  les angles ». Aucun moignon et aucune main sur la tête.
+
+**Contrôles**
+- Vérificateur : aucune traversée (marge 7,5 à la résolution).
+- Les alertes admises sont celles du § 10.
+- Poing N à environ 126 (sous le menton) ; poing F à environ 120.
+- La boucle d'attente garde ses offsets (`plus`). L'« appel » du bras avant (images 10 et 26)
+  reste lisible.
