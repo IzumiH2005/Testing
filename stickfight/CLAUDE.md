@@ -27,14 +27,16 @@
    **face = +90°**, **trois quarts face = +45°**, trois quarts dos = −45°, dos = −90° (lacet positif = le corps se tourne vers la caméra). Dans
    l'éditeur, caméra = lacet visé − lacet de la pose. Pour une pose seule :
    `tools/rendu.sh … --set lacet=90`, puis `lacet=45`, puis `lacet=0`.
-   **Balayage de caméra, dans les deux sens.** Une vue fixe cache des axes : de face on voit
+   **Tour de caméra, dans les deux sens.** Une vue fixe cache des axes : de face on voit
    la profondeur sans voir comment l'avant-bras est plié ni sa rotation. Une fois la pose
-   posée, décaler la caméra par petits pas (15°) de la vue de départ vers la gauche **et** vers
-   la droite, jusqu'au profil et au-delà vers le dos, et vérifier qu'à chaque angle la pose
-   reste lisible et logique (aucun bras qui se réduit à un moignon, aucune main qui traverse
-   la tête) : `tools/anim.sh anims/x.json --cles --angles 90,75,60,45,30,15,0 -o g.png
-   --scale 1` puis `--angles 90,105,120,135,150,165,180`, et les angles de dos (-15 … -165).
-   Dans l'éditeur : glisser la scène de quelques degrés dans un sens, puis dans l'autre.
+   posée, faire tourner la caméra **par pas de 2°** depuis la vue de départ jusqu'au tour
+   complet, de la gauche vers la droite **puis** de la droite vers la gauche, et vérifier qu'à
+   chaque angle la pose reste lisible et logique (on comprend la pliure de chaque membre,
+   aucune main qui traverse la tête) : `tools/anim.sh anims/x.json --cles --tour 2 -o t.png
+   --scale 0.5` (deux planches par clé, `t_<image>_plus.png` et `t_<image>_moins.png`, plus un
+   relevé en texte des angles où un segment se voit en moignon ou une main passe sur la tête ;
+   ces angles-là se regardent de près). Dans l'éditeur : glisser la scène de 2° en 2° dans un
+   sens, puis dans l'autre.
 3. **Construire pose par pose, comme un mannequin.** Poser la première clé, la vérifier, la
    corriger, puis seulement passer à la suivante. Vérifier en texte (`tools/anim.sh … --verifier`)
    et regarder une seule petite image par groupe de clés (`--cles --scale 1`).

@@ -38,6 +38,14 @@ extends SceneTree
 ##               Pour vérifier qu'aucun axe n'est oublié
 ## --angles a,b,…  comme --vues, avec ses propres angles (lacets absolus), une ligne par
 ##               angle : balayage progressif de la caméra, ex. 90,75,60,45,30,15,0
+## --tour p      (avec -o f.png) tour complet de la caméra autour de chaque image
+##               sélectionnée, par pas de p degrés (2 conseillé), dans les deux sens :
+##               f_<image>_plus.png (lacet croissant, de la vue de départ jusqu'à
+##               un tour entier) et f_<image>_moins.png (lacet décroissant). Chaque
+##               case porte son lacet absolu. Contrôle en texte, angle par angle :
+##               segments vus en moignon (longueur à l'écran < 30 % de la longueur
+##               réelle) et main posée sur le disque de la tête à l'écran
+##               (devant / derrière)
 ##
 ## Une animation seule est jouée sans enchaîner sur « suivante ».
 
@@ -62,7 +70,7 @@ func _abs(path: String) -> String:
 func _parse(argv: PackedStringArray) -> Dictionary:
 	var a := {"file": "", "out": "", "strobe": "", "images": "", "de": -1, "a": -1, "pas": 1, "cols": 6,
 		"suivre": [], "vue": [], "scale": 2.0, "debug": false, "print": false, "boucles": 1,
-		"verifier": false, "cles": false, "vues": false, "camera": 0.0, "angles": []}
+		"verifier": false, "cles": false, "vues": false, "camera": 0.0, "angles": [], "tour": 0.0}
 	var i := 0
 	while i < argv.size():
 		var k := argv[i]
@@ -82,6 +90,9 @@ func _parse(argv: PackedStringArray) -> Dictionary:
 			"--camera":
 				i += 1
 				a.camera = float(argv[i])
+			"--tour":
+				i += 1
+				a.tour = float(argv[i])
 			"--angles":
 				i += 1
 				a.vues = true
@@ -177,6 +188,8 @@ func _default_view(recs: Array) -> Rect2:
 
 func _caption(r: Dictionary) -> String:
 	var parts := ["%d" % r.g]
+	if r.has("tour_lac"):
+		return "%d°" % roundi(r.tour_lac)
 	for fig in r.fighters:
 		parts.append("%s %s" % [fig.anim, str(snappedf(fig.t, 0.01))])
 	if r.hitstop > 0:
@@ -274,28 +287,11 @@ func _run() -> void:
 	var view: Rect2 = Rect2(a.vue[0], a.vue[1], a.vue[2], a.vue[3]) if a.vue.size() == 4 else _default_view(recs.slice(de, fin + 1))
 	var scale: float = a.scale
 
-	if a.out != "":
-		var cols: int = mini(a.cols, sel.size())
-		var rows := int(ceil(float(sel.size()) / cols))
-		var cell := Vector2i(roundi(view.size.x * scale), roundi(view.size.y * scale))
-		var vp := SubViewport.new()
-		vp.disable_3d = true
-		vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS
-		vp.size = Vector2i(cell.x * cols + (cols - 1) * 2, cell.y * rows + (rows - 1) * 2)
-		root.add_child(vp)
-		var bg := ColorRect.new()
-		bg.color = Color("#5c5c5c")
-		bg.size = Vector2(vp.size)
-		vp.add_child(bg)
-		for i in sel.size():
-			var pl := _make_planche(view, scale, a.debug)
-			pl.position = Vector2((i % cols) * (cell.x + 2), (i / cols) * (cell.y + 2))
-			_set_record(pl, sel[i], a.debug)
-			vp.add_child(pl)
-		var img: Image = await _grab(vp)
-		img.save_png(_abs(a.out))
+	if a.out != "" and a.tour > 0.0:
+		await _tour(sel, a, view, scale)
+	elif a.out != "":
+		await _planche_png(sel, a.cols, view, scale, a.debug, a.out)
 		print("Planche : " + a.out)
-		vp.queue_free()
 
 	if a.strobe != "":
 		var vp := SubViewport.new()
@@ -376,6 +372,115 @@ func _run() -> void:
 
 ## Image clé : un combattant est sur une clé de son animation (première image
 ## où il l'atteint) ou sur son événement contact.
+func _planche_png(sel: Array, ncols: int, view: Rect2, scale: float, debug: bool, out: String) -> void:
+	var cols: int = mini(ncols, sel.size())
+	var rows := int(ceil(float(sel.size()) / cols))
+	var cell := Vector2i(roundi(view.size.x * scale), roundi(view.size.y * scale))
+	var vp := SubViewport.new()
+	vp.disable_3d = true
+	vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	vp.size = Vector2i(cell.x * cols + (cols - 1) * 2, cell.y * rows + (rows - 1) * 2)
+	root.add_child(vp)
+	var bg := ColorRect.new()
+	bg.color = Color("#5c5c5c")
+	bg.size = Vector2(vp.size)
+	vp.add_child(bg)
+	for i in sel.size():
+		var pl := _make_planche(view, scale, debug)
+		pl.position = Vector2((i % cols) * (cell.x + 2), (i / cols) * (cell.y + 2))
+		_set_record(pl, sel[i], debug)
+		vp.add_child(pl)
+	var img: Image = await _grab(vp)
+	img.save_png(_abs(out))
+	vp.queue_free()
+
+
+static func _lac_norm(l: float) -> float:
+	return fposmod(l + 180.0, 360.0) - 180.0
+
+
+## Tour complet de la caméra, dans les deux sens, autour de chaque image de sel.
+func _tour(sel: Array, a: Dictionary, view: Rect2, scale: float) -> void:
+	var base: String = a.out.trim_suffix(".png")
+	var n := int(round(360.0 / a.tour))
+	for r in sel:
+		var lac0: float = float(r.fighters[0].pose.angles.get("lacet", 0.0))
+		var alertes := {}  # message -> [lacets]
+		for sens in [1, -1]:
+			var cases := []
+			for k in n + 1:
+				var lac: float = _lac_norm(lac0 + sens * k * a.tour)
+				var r2: Dictionary = r.duplicate(true)
+				r2.vfx = []
+				r2.effets = []
+				r2.ecrans = []
+				r2.tour_lac = lac
+				for fig in r2.fighters:
+					fig.pose.angles.lacet = lac
+					fig.trainees = []
+					fig.smears = []
+					fig.fantomes = []
+					fig.flou = []
+				cases.append(r2)
+				if sens == 1:
+					for fig in r2.fighters:
+						for m in _lisibilite(StickRig.solve(fig.pose)):
+							if not alertes.has(m):
+								alertes[m] = []
+							alertes[m].append(roundi(lac))
+			var out := "%s_%03d_%s.png" % [base, r.g, "plus" if sens == 1 else "moins"]
+			await _planche_png(cases, a.cols if a.cols != 6 else 15, view, scale, false, out)
+			print("Tour : " + out)
+		var L := ["Image %d (lacet de départ %d°) : %s" % [r.g, roundi(lac0), "lisible à tous les angles" if alertes.is_empty() else ""]]
+		for m in alertes:
+			L.append("  ⚠ %s : lacet %s" % [m, _plages_angles(alertes[m], roundi(a.tour))])
+		print("\n".join(L))
+
+
+## Ce qui se lit mal sous l'angle de la pose résolue : segments vus presque en bout
+## (moignon) et main posée sur le disque de la tête à l'écran.
+static func _lisibilite(sol: Dictionary) -> Array:
+	var out := []
+	var segs := [["bras N", "shoulderN", "elbowN"], ["avant-bras N", "elbowN", "handN"],
+		["bras F", "shoulderF", "elbowF"], ["avant-bras F", "elbowF", "handF"],
+		["cuisse N", "hipN", "kneeN"], ["jambe N", "kneeN", "ankleN"],
+		["cuisse F", "hipF", "kneeF"], ["jambe F", "kneeF", "ankleF"]]
+	for s in segs:
+		if not (sol.joints.has(s[1]) and sol.joints.has(s[2])):
+			continue
+		var l3 := _p3(sol, s[1]).distance_to(_p3(sol, s[2]))
+		var l2: float = sol.joints[s[1]].distance_to(sol.joints[s[2]])
+		if l3 > 1.0 and l2 / l3 < 0.3:
+			out.append("%s en moignon" % s[0])
+	for c in ["N", "F"]:
+		var h: Vector2 = sol.joints["hand" + c]
+		if h.distance_to(sol.joints.head) < sol.head_r:
+			var devant: bool = float(sol.prof.get("hand" + c, 0.0)) < float(sol.prof.get("head", 0.0))
+			out.append("main %s sur la tête (%s)" % [c, "devant" if devant else "derrière"])
+	return out
+
+
+## [0, 2, 4, 10] (pas 2) → "0…4 10"
+func _plages_angles(ls: Array, pas: int) -> String:
+	ls.sort()
+	var out := []
+	var a: int = ls[0]
+	var b: int = ls[0]
+	for k in range(1, ls.size()):
+		if ls[k] - b <= pas:
+			b = ls[k]
+		else:
+			out.append(str(a) if a == b else "%d…%d" % [a, b])
+			a = ls[k]
+			b = ls[k]
+	out.append(str(a) if a == b else "%d…%d" % [a, b])
+	# Le tour boucle : une plage qui finit à 180° continue celle qui commence à -180°.
+	if out.size() > 1 and ls[0] - pas <= -180 and b + pas >= 180:
+		var fin: String = out.pop_back()
+		out[0] = fin.split("…")[0] + "…" + out[0].split("…")[-1]
+	return " ".join(out) + "°"
+
+
 func _est_cle(recs: Array, g: int) -> bool:
 	for i in recs[g].fighters.size():
 		var fig: Dictionary = recs[g].fighters[i]

@@ -94,10 +94,12 @@ tronc à une autre profondeur.
    glissement des pieds, sens du mouvement incohérent, temps mort, geste sec qui ne se lit pas
    (pas de contraste de vitesse), fin qui ne raccorde pas à l'animation suivante.
 9. **Les vues concordent, à tous les angles.** Une pose correcte de face mais absurde de trois
-   quarts est fausse. Si on te donne un balayage de caméra (`--angles`, pas de 15°, dans les
-   deux sens et vers le dos), regarde chaque angle intermédiaire : un avant-bras dont on ne
+   quarts est fausse. Si on te donne un tour de caméra (`--tour 2` : tour complet par pas de 2°,
+   dans les deux sens, planches `_plus` et `_moins` et relevé en texte), regarde chaque angle
+   intermédiaire, et de près ceux que le relevé signale : un avant-bras dont on ne
    comprend pas la pliure, un bras qui devient un moignon, une main qui passe dans la tête à un
-   seul de ces angles suffit à refuser. Si on ne te le donne pas, demande-le.
+   seul de ces angles suffit à refuser (un membre vu en bout sur quelques degrés est normal si
+   les angles voisins montrent clairement sa direction). Si on ne te le donne pas, demande-le.
 10. **Vérificateur** (`verifier.txt`) : chaque alerte est soit justifiée par la fiche (dis
     laquelle), soit un défaut.
 
