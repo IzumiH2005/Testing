@@ -81,7 +81,11 @@ def poser(V, F, rig, W, vue, echelle):
                 R[f"hand_{cote_m}"] = R[bn]
         # Pied : cheville -> orteils, le plan du tibia garde la rotation.
         fn = f"foot_{cote_m}"
+        # Le pied du stickman posé à plat a ses orteils à hauteur de cheville ; celui du
+        # mannequin descend de ~17° vers la plante. On prend donc la direction à plat
+        # (projetée à l'horizontale) comme repos, sinon chaque pied pique de 17° de trop.
         d0 = queue[f"ball_{cote_m}"] - tete[fn]
+        d0[1] = 0.0
         d = P["toe" + cote_s] - P["ankle" + cote_s]
         R[fn] = _pied(R[f"calf_{cote_m}"], d0, d)
     # Os non pilotés : rotation du parent.
