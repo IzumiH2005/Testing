@@ -1,0 +1,1127 @@
+<title>Animateur Stickfight</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+/* Établi d'animation : scène + inspecteur en haut, feuille d'exposition (une ligne par articulation) en bas. */
+:root {
+  --bg: #e9ecf0; --panel: #f7f8fa; --panel2: #eef1f5; --line: #cfd5dd; --ink: #1a1d23; --muted: #5d6573;
+  --accent: #2b5fd9; --accent-soft: #dbe5fb; --on-accent: #ffffff;
+  --stage: #f3f4f6; --grid: #e1e4e9; --ground: #b9c0ca; --figure: #111111; --figure-far: #6b7485;
+  --onion-a: #2b8fd9; --onion-b: #d9762b; --handle: #ffffff; --trail: #2b5fd9; --warn: #b4441b;
+  --c-auto: #2b5fd9; --c-lin: #6b7485; --c-acc: #d9762b; --c-dec: #2f9a62; --c-accdec: #8a4fd0; --c-palier: #1a1d23;
+  --f-display: "Space Grotesk", "IBM Plex Sans", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14171c; --panel: #1c2027; --panel2: #232831; --line: #2e343e; --ink: #e6e8ec; --muted: #98a1af;
+    --accent: #7ea2ff; --accent-soft: #24304a; --on-accent: #0d1220;
+    --stage: #d9dce1; --grid: #c9cdd4; --ground: #9aa2ae; --figure: #111111; --figure-far: #5f6878;
+    --onion-a: #1f78c4; --onion-b: #c4651f; --handle: #ffffff; --trail: #2b5fd9; --warn: #f08a5d;
+    --c-auto: #7ea2ff; --c-lin: #98a1af; --c-acc: #f0a05d; --c-dec: #5fc48e; --c-accdec: #b88cf0; --c-palier: #e6e8ec;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14171c; --panel: #1c2027; --panel2: #232831; --line: #2e343e; --ink: #e6e8ec; --muted: #98a1af;
+  --accent: #7ea2ff; --accent-soft: #24304a; --on-accent: #0d1220;
+  --stage: #d9dce1; --grid: #c9cdd4; --ground: #9aa2ae; --figure: #111111; --figure-far: #5f6878;
+  --onion-a: #1f78c4; --onion-b: #c4651f; --handle: #ffffff; --trail: #2b5fd9; --warn: #f08a5d;
+  --c-auto: #7ea2ff; --c-lin: #98a1af; --c-acc: #f0a05d; --c-dec: #5fc48e; --c-accdec: #b88cf0; --c-palier: #e6e8ec;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 14px; margin: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 10px 40px;
+}
+.app { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+header.top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+h1 { font-family: var(--f-display); font-size: 20px; font-weight: 600; margin: 0 6px 0 0; letter-spacing: -0.01em; }
+.field { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; color: var(--muted); }
+.field input[type=text], .field input[type=number], .field select {
+  font: 400 13px var(--f-mono); padding: 5px 7px; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--panel); color: var(--ink); min-width: 0;
+}
+.field input[type=number] { width: 64px; font-variant-numeric: tabular-nums; }
+.btn { border: 1px solid var(--line); background: var(--panel); color: var(--ink); font: 500 13px var(--f-body); padding: 6px 10px; border-radius: 7px; cursor: pointer; white-space: nowrap; }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.btn:disabled { opacity: .45; cursor: default; border-color: var(--line); }
+.btn.icon { font-family: var(--f-mono); min-width: 34px; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible, canvas:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.spacer { flex: 1; }
+
+.work { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr); gap: 12px; }
+.stagecol { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.stage { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; height: min(62vh, 560px); min-height: 300px; touch-action: none; }
+.stage canvas { width: 100%; height: 100%; display: block; cursor: grab; }
+.stage canvas.on-handle { cursor: move; }
+.tag { position: absolute; left: 10px; top: 8px; font: 500 11px var(--f-mono); color: #3b4250; background: rgba(255,255,255,.8); padding: 2px 6px; border-radius: 4px; pointer-events: none; }
+.tag.r { left: auto; right: 10px; }
+.hint { position: absolute; left: 10px; bottom: 8px; font-size: 11.5px; color: #4a5260; background: rgba(255,255,255,.7); padding: 2px 6px; border-radius: 4px; pointer-events: none; max-width: calc(100% - 20px); }
+.row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--panel); }
+.seg button { border: 0; background: transparent; color: var(--ink); font: 500 12.5px var(--f-body); padding: 6px 10px; cursor: pointer; }
+.seg button + button { border-left: 1px solid var(--line); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+.opts { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12.5px; color: var(--muted); }
+.opts label { display: inline-flex; gap: 5px; align-items: center; cursor: pointer; }
+
+.panel { min-width: 0; display: flex; flex-direction: column; gap: 10px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.card h2 { font-family: var(--f-display); font-size: 15px; font-weight: 600; margin: 0; }
+.card p { margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.45; }
+.keystate { font: 400 12px var(--f-mono); color: var(--muted); }
+.keystate b { color: var(--accent); font-weight: 500; }
+.chgrp { display: flex; flex-direction: column; gap: 2px; }
+.chgrp h3 { margin: 6px 0 0; font: 600 12px var(--f-display); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.ch { display: grid; grid-template-columns: minmax(0, 1fr) 64px; gap: 2px 8px; align-items: center; padding: 2px 0; }
+.ch .lab { font-size: 12.5px; min-width: 0; }
+.ch .lab small { display: block; font: 400 10.5px var(--f-mono); color: var(--muted); }
+.ch input[type=range] { grid-column: 1 / -1; width: 100%; accent-color: var(--accent); margin: 0; height: 20px; }
+.ch input[type=number] { width: 64px; font: 400 12px var(--f-mono); padding: 3px 4px; border: 1px solid var(--line); border-radius: 5px; background: var(--bg); color: var(--ink); font-variant-numeric: tabular-nums; text-align: right; }
+.ch.keyed .lab > span::before { content: "◆ "; color: var(--accent); }
+
+.transport { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
+.fnum { font: 500 13px var(--f-mono); font-variant-numeric: tabular-nums; }
+.sheet { display: flex; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.labels { flex: 0 0 auto; width: 128px; border-right: 1px solid var(--line); background: var(--panel2); }
+.labels .hd { height: 24px; border-bottom: 1px solid var(--line); font: 500 10.5px var(--f-mono); color: var(--muted); display: flex; align-items: center; padding: 0 8px; }
+.labels button { display: flex; align-items: center; width: 100%; height: 24px; border: 0; border-bottom: 1px solid var(--line); background: transparent; color: var(--ink); font: 500 12px var(--f-body); padding: 0 8px; cursor: pointer; text-align: left; }
+.labels button.sum { font-weight: 600; }
+.labels button[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); }
+.tlwrap { flex: 1; min-width: 0; overflow-x: auto; }
+.tlwrap canvas { display: block; touch-action: none; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font: 400 11px var(--f-mono); color: var(--muted); }
+.legend i { display: inline-block; width: 9px; height: 9px; transform: rotate(45deg); margin-right: 5px; vertical-align: 0; }
+.keys { font: 400 11.5px var(--f-mono); color: var(--muted); line-height: 1.6; }
+.keys kbd { font: 500 10.5px var(--f-mono); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; background: var(--panel2); color: var(--ink); }
+
+details.io { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+details.io > summary { list-style: none; cursor: pointer; padding: 10px 12px; font: 600 14px var(--f-display); }
+details.io > summary::-webkit-details-marker { display: none; }
+.iobody { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 12px; padding: 0 12px 12px; }
+.iobody .card { background: var(--panel2); }
+textarea { width: 100%; min-height: 110px; font: 11.5px/1.4 var(--f-mono); border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); padding: 8px; resize: vertical; }
+.saved { display: flex; flex-direction: column; gap: 4px; max-height: 180px; overflow-y: auto; }
+.saved button { text-align: left; }
+.toast { font-size: 12px; color: var(--accent); min-height: 1em; }
+.toast.err { color: var(--warn); }
+
+@media (max-width: 860px) {
+  .work { grid-template-columns: minmax(0, 1fr); }
+  .stage { height: 46vh; min-height: 260px; }
+  .labels { width: 96px; }
+  .labels button { font-size: 11px; padding: 0 6px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="app">
+  <header class="top">
+    <h1>Animateur Stickfight</h1>
+    <label class="field">Nom <input type="text" id="nom" size="22" spellcheck="false"></label>
+    <label class="field">Longueur <input type="number" id="longueur" min="1" max="600" step="1"></label>
+    <label class="field"><input type="checkbox" id="boucle"> Boucle</label>
+    <span class="spacer"></span>
+    <label class="field">Ouvrir <select id="ouvrir" aria-label="Ouvrir une animation du jeu"></select></label>
+    <button class="btn" id="nouveau" title="Nouvelle animation depuis une pose">Nouvelle</button>
+    <button class="btn icon" id="undo" title="Annuler (Ctrl+Z)" aria-label="Annuler">↶</button>
+    <button class="btn icon" id="redo" title="Rétablir (Ctrl+Y)" aria-label="Rétablir">↷</button>
+  </header>
+
+  <div class="work">
+    <section class="stagecol" aria-label="Scène">
+      <div class="stage" id="stage">
+        <canvas id="scene" tabindex="0" aria-label="Scène : attrape une articulation pour la déplacer"></canvas>
+        <span class="tag" id="viewtag">Profil</span>
+        <span class="tag r" id="frametag">image 0</span>
+        <span class="hint" id="hint">Attrape un point bleu (main, coude, tête, bassin, genou, cheville, pointe) et déplace-le. Ailleurs : glisse pour tourner la caméra.</span>
+      </div>
+      <div class="row">
+        <div class="seg" role="group" aria-label="Vue">
+          <button data-cam="90">Face</button>
+          <button data-cam="45">Trois quarts</button>
+          <button data-cam="0" aria-pressed="true">Profil (jeu)</button>
+          <button data-cam="-90">Dos</button>
+        </div>
+      </div>
+      <div class="opts">
+        <label><input type="checkbox" id="o-oignon" checked> Pelure d'oignon</label>
+        <label><input type="checkbox" id="o-trajet" checked> Trajectoire du point choisi</label>
+        <label><input type="checkbox" id="o-pieds" checked> Pieds plantés quand le bassin bouge</label>
+        <label><input type="checkbox" id="o-loin" checked> Membres loin en gris</label>
+        <label><input type="checkbox" id="o-lim" checked> Amplitudes humaines</label>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Articulation choisie">
+      <div class="card">
+        <h2 id="selnom">Main proche</h2>
+        <div class="keystate" id="keystate"></div>
+        <div class="row">
+          <button class="btn primary" id="k-poser" title="K">Poser une clé ici</button>
+          <button class="btn" id="k-suppr" title="Suppr">Supprimer la clé</button>
+        </div>
+        <label class="field">Courbe vers la clé suivante
+          <select id="courbe">
+            <option value="auto">auto (souple)</option>
+            <option value="lin">lin (constante)</option>
+            <option value="acc">acc (part lentement)</option>
+            <option value="dec">dec (arrive lentement)</option>
+            <option value="acc-dec">acc-dec (lent, vif, lent)</option>
+            <option value="palier">palier (tient puis saute)</option>
+          </select>
+        </label>
+        <div id="chans"></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="transport" aria-label="Lecture">
+    <button class="btn icon" id="t-debut" title="Début (Origine)" aria-label="Début">⏮</button>
+    <button class="btn icon" id="t-cprev" title="Clé précédente (Maj+←)" aria-label="Clé précédente">◆←</button>
+    <button class="btn icon" id="t-prev" title="Image précédente (←)" aria-label="Image précédente">‹</button>
+    <button class="btn primary icon" id="t-play" title="Lecture (Espace)" aria-label="Lecture">▶</button>
+    <button class="btn icon" id="t-next" title="Image suivante (→)" aria-label="Image suivante">›</button>
+    <button class="btn icon" id="t-cnext" title="Clé suivante (Maj+→)" aria-label="Clé suivante">→◆</button>
+    <span class="fnum" id="fnum">0 / 48</span>
+    <label class="field">Vitesse <select id="vitesse"><option value="0.25">×¼</option><option value="0.5">×½</option><option value="1" selected>×1 (60 i/s)</option></select></label>
+    <label class="field"><input type="checkbox" id="t-boucle" checked> Relire en boucle</label>
+    <span class="spacer"></span>
+    <button class="btn" id="k-copier" title="Ctrl+C">Copier</button>
+    <button class="btn" id="k-coller" title="Ctrl+V">Coller ici</button>
+    <button class="btn" id="k-tout" title="Pose une clé sur toutes les articulations à cette image">Clé partout</button>
+  </div>
+
+  <div class="sheet" aria-label="Clés par articulation">
+    <div class="labels" id="labels"><div class="hd">articulation</div></div>
+    <div class="tlwrap" id="tlwrap"><canvas id="tl" tabindex="0" aria-label="Feuille des clés"></canvas></div>
+  </div>
+  <div class="legend" id="legend"></div>
+  <div class="keys">
+    Feuille : clic = aller à l'image · clic sur ◆ = choisir (Maj pour en ajouter) · glisser un ◆ = le déplacer dans le temps · double-clic = poser une clé.
+    Clavier : <kbd>Espace</kbd> lecture · <kbd>←</kbd><kbd>→</kbd> image · <kbd>Maj</kbd>+<kbd>←</kbd><kbd>→</kbd> clé · <kbd>K</kbd> clé · <kbd>Suppr</kbd> supprimer · <kbd>Ctrl</kbd>+<kbd>C</kbd>/<kbd>V</kbd> copier/coller · <kbd>Ctrl</kbd>+<kbd>Z</kbd>/<kbd>Y</kbd> annuler/rétablir.
+  </div>
+
+  <details class="io" id="io" open>
+    <summary>Envoyer, exporter, importer</summary>
+    <div class="iobody">
+      <div class="card" id="cloud">
+        <h2>Envoyer à Claude</h2>
+        <p id="cloudtxt">Enregistre l'animation ici : je la lis directement de mon côté, sans copier-coller.</p>
+        <div class="row">
+          <button class="btn primary" id="envoyer" disabled>Envoyer « <span id="envnom">…</span> »</button>
+          <span class="toast" id="cloudtoast" role="status"></span>
+        </div>
+        <div class="saved" id="saved"></div>
+      </div>
+      <div class="card">
+        <h2>Animation pour le jeu</h2>
+        <p>Format <code>anims/*.json</code>. Le jeu partage les temps de clé entre toutes les articulations : chaque image où une articulation a une clé devient une clé du corps entier, avec la pose exacte de l'éditeur.</p>
+        <label class="field">Pose de base <input type="text" id="basenom" size="24" spellcheck="false"></label>
+        <textarea id="jeu" spellcheck="false" readonly aria-label="Animation au format du jeu"></textarea>
+        <div class="row"><button class="btn" id="copier-jeu">Copier l'animation</button><span class="toast" id="toast" role="status"></span></div>
+      </div>
+      <div class="card">
+        <h2>Projet de l'éditeur</h2>
+        <p>Les pistes telles quelles (clés par articulation). Colle un projet ou une pose (<code>poses/*.json</code>, posée à l'image courante) puis charge-le.</p>
+        <textarea id="projet" spellcheck="false" aria-label="Projet au format JSON"></textarea>
+        <div class="row"><button class="btn" id="copier-projet">Copier le projet</button><button class="btn" id="charger">Charger le texte</button></div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<script id="donnees" type="application/json">
+/*DONNEES*/{"poses":{},"anims":{}}/*FIN*/
+</script>
+<script>
+"use strict";
+// ===================== Rig (portage de scripts/stick_rig.gd, identique à web/poseur.html) =====================
+const STYLE = { head: 46, headSink: 0.12, stroke: 15, hand: 8.5, neck: 0, spineLow: 22, chest: 24,
+  upperArm: 34, forearm: 32, thigh: 41, shin: 42, foot: 10 };
+const ROOT = { rest: 90, sign: -1 };
+const BONES = [
+  { id: "spineLow", parent: "root", len: "spineLow", rest: 0, sign: -1 },
+  { id: "chest", parent: "spineLow", len: "chest", rest: 0, sign: -1 },
+  { id: "neck", parent: "chest", len: "neck", rest: 0, sign: -1 },
+  { id: "armF", parent: "chest", len: "upperArm", rest: 180, sign: 1 },
+  { id: "foreF", parent: "armF", len: "forearm", rest: 0, sign: 1 },
+  { id: "armN", parent: "chest", len: "upperArm", rest: 180, sign: 1 },
+  { id: "foreN", parent: "armN", len: "forearm", rest: 0, sign: 1 },
+  { id: "thighF", parent: "root", len: "thigh", rest: 180, sign: 1 },
+  { id: "shinF", parent: "thighF", len: "shin", rest: 0, sign: -1 },
+  { id: "footF", parent: "shinF", len: "foot", rest: 90, sign: 1 },
+  { id: "thighN", parent: "root", len: "thigh", rest: 180, sign: 1 },
+  { id: "shinN", parent: "thighN", len: "shin", rest: 0, sign: -1 },
+  { id: "footN", parent: "shinN", len: "foot", rest: 90, sign: 1 },
+];
+const CHARNIERES = ["foreN", "foreF", "shinN", "shinF"];
+const rad = (a) => a * Math.PI / 180;
+function rot(ax, deg) {
+  const t = rad(deg), c = Math.cos(t), s = Math.sin(t), C = 1 - c, [x, y, z] = ax;
+  return [[c + x*x*C, x*y*C - z*s, x*z*C + y*s], [y*x*C + z*s, c + y*y*C, y*z*C - x*s], [z*x*C - y*s, z*y*C + x*s, c + z*z*C]];
+}
+const RX = (a) => rot([1, 0, 0], a), RY = (a) => rot([0, 1, 0], a), RZ = (a) => rot([0, 0, 1], a);
+function mul(A, B) { const R = [[0,0,0],[0,0,0],[0,0,0]]; for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) R[i][j] = A[i][0]*B[0][j] + A[i][1]*B[1][j] + A[i][2]*B[2][j]; return R; }
+const col = (A, j) => [A[0][j], A[1][j], A[2][j]];
+const add = (a, b) => [a[0]+b[0], a[1]+b[1], a[2]+b[2]];
+const sc = (a, k) => [a[0]*k, a[1]*k, a[2]*k];
+
+function solve(p) {
+  const A = (id) => +(p.angles[id] || 0);
+  const tip = {}, basis = {}, base3 = {};
+  basis.root = mul(mul(mul(RY(A("lacet")), RZ(ROOT.rest + ROOT.sign * A("root"))), RY(A("root_p"))), RX(-A("torsionBassin")));
+  tip.root = [0, 0, 0];
+  for (const b of BONES) {
+    const prof = CHARNIERES.includes(b.id) ? 0 : A(b.id + "_p");
+    let B = mul(mul(basis[b.parent], RZ(b.rest + b.sign * A(b.id))), RY(prof));
+    if (b.id.startsWith("arm") || b.id.startsWith("thigh")) B = mul(B, RX(A(b.id + "_r")));
+    if (b.id === "spineLow") B = mul(B, RX(-0.2 * A("torsion")));
+    if (b.id === "chest") B = mul(B, RX(-0.8 * A("torsion")));
+    if (b.id === "neck") B = mul(B, RX(-A("neck_r")));
+    basis[b.id] = B;
+    let o3 = tip[b.parent];
+    if (b.id.startsWith("arm")) {
+      const side = b.id.slice(3), Bc = basis.chest;
+      o3 = add(o3, add(sc(col(Bc, 1), -A("epaule" + side + "_av")), sc(col(Bc, 0), A("epaule" + side + "_haut"))));
+      base3[b.id] = o3;
+    }
+    tip[b.id] = add(o3, sc(col(B, 0), STYLE[b.len]));
+  }
+  const r = STYLE.head / 2;
+  const head3 = add(tip.neck, sc(col(basis.neck, 0), r * (1 - STYLE.headSink)));
+  const f = (p.facing || 1) < 0 ? -1 : 1;
+  const pts3 = { hip: tip.root, waist: tip.spineLow, shoulder: tip.chest, neckTop: tip.neck, head: head3,
+    elbowN: tip.armN, handN: tip.foreN, elbowF: tip.armF, handF: tip.foreF,
+    kneeN: tip.thighN, ankleN: tip.shinN, toeN: tip.footN, kneeF: tip.thighF, ankleF: tip.shinF, toeF: tip.footF };
+  const J = {}, Z = {};
+  const W = (v) => [p.x + f * v[0], p.y + v[1]];
+  for (const k in pts3) { J[k] = W(pts3[k]); Z[k] = pts3[k][2]; }
+  for (const s of ["N", "F"]) {
+    J["shoulder" + s] = W(base3["arm" + s]); Z["shoulder" + s] = base3["arm" + s][2];
+    J["hip" + s] = J.hip; Z["hip" + s] = Z.hip;
+  }
+  return { J, Z, r };
+}
+
+function primitives(p, cNear, cFar) {
+  const { J, Z, r } = solve(p);
+  const items = [];
+  const seg = (a, b, base, c) => items.push({ z: base + (Z[a] + Z[b]) / 2, type: "path", pts: [J[a], J[b]], c });
+  for (const s of ["F", "N"]) {
+    const c = s === "F" ? cFar : cNear, ba = s === "F" ? 30 : -30, bl = s === "F" ? 20 : -20;
+    seg("hip", "knee" + s, bl, c);
+    items.push({ z: bl + (Z["knee" + s] + Z["ankle" + s]) / 2, type: "path", pts: [J["knee" + s], J["ankle" + s], J["toe" + s]], c });
+    seg("shoulder" + s, "elbow" + s, ba, c);
+    seg("elbow" + s, "hand" + s, ba, c);
+    items.push({ z: ba + Z["hand" + s] - 0.01, type: "circle", ctr: J["hand" + s], r: STYLE.hand, c });
+  }
+  items.push({ z: (Z.hip + Z.shoulder) / 2, type: "path", pts: [J.hip, J.waist, J.shoulder], c: cNear });
+  items.push({ z: Z.head - 1, type: "circle", ctr: J.head, r, c: cNear });
+  items.forEach((it, i) => it.rang = i);
+  items.sort((a, b) => (b.z - a.z) || (a.rang - b.rang));
+  return { items, J };
+}
+
+// ===================== Canaux et articulations =====================
+// [id, libellé, aide, min, max]
+const CH = {};
+function defCh(id, lab, aide, lo, hi) { CH[id] = { id, lab, aide, lo, hi }; }
+defCh("x", "Position avant / arrière", "unités, 1 carreau = 10", -400, 400);
+defCh("y", "Hauteur du bassin", "unités au-dessus du sol", -20, 170);
+defCh("root", "Bascule du bassin", "+ penché en avant", -180, 180);
+defCh("root_p", "Bassin : inclinaison sur le côté", "", -30, 30);
+defCh("torsionBassin", "Torsion du bassin", "les hanches tournent", -60, 60);
+defCh("lacet", "Corps tourné vers la caméra", "tout le corps", -360, 450);
+defCh("spineLow", "Bas du dos", "+ penché en avant", -25, 45);
+defCh("spineLow_p", "Bas du dos : sur le côté", "", -30, 30);
+defCh("chest", "Poitrine", "+ penché en avant", -25, 45);
+defCh("chest_p", "Poitrine : sur le côté", "", -30, 30);
+defCh("torsion", "Torsion des épaules", "par rapport au bassin", -45, 45);
+defCh("neck", "Cou : baisser la tête", "+ menton vers le bas", -60, 50);
+defCh("neck_p", "Cou : pencher sur le côté", "", -40, 40);
+defCh("neck_r", "Cou : tourner la tête", "", -80, 80);
+for (const S of ["N", "F"]) {
+  defCh("arm" + S, "Épaule : lever le bras devant", "+ devant, − derrière", -180, 180);
+  defCh("arm" + S + "_p", "Épaule : écarter le bras", S === "N" ? "+ vers la caméra" : "− vers l'extérieur", -90, 90);
+  defCh("arm" + S + "_r", "Épaule : rotation du bras", "oriente le coude", -80, 80);
+  defCh("epaule" + S + "_av", "Omoplate : avancer / reculer", "bagarreur ≤ 0", -7, 7);
+  defCh("epaule" + S + "_haut", "Omoplate : hausser", "", -3, 7);
+  defCh("fore" + S, "Coude : plier", "0 tendu", 0, 150);
+  defCh("thigh" + S, "Hanche : monter le genou", "+ devant", -30, 140);
+  defCh("thigh" + S + "_p", "Hanche : écarter la jambe", S === "N" ? "+ vers la caméra" : "− vers l'extérieur", S === "N" ? -30 : -45, S === "N" ? 45 : 30);
+  defCh("thigh" + S + "_r", "Hanche : rotation de la cuisse", "oriente le genou", -45, 45);
+  defCh("shin" + S, "Genou : plier", "0 tendu", 0, 150);
+  defCh("foot" + S, "Cheville", "+ pointe relevée", -50, 65);
+  defCh("foot" + S + "_p", "Cheville : pied tourné", "", -25, 25);
+}
+const GRP = [
+  { id: "bassin", nom: "Bassin", ch: ["x", "y", "root", "root_p", "torsionBassin", "lacet", "facing"] },
+  { id: "buste", nom: "Buste", ch: ["spineLow", "spineLow_p", "chest", "chest_p", "torsion"] },
+  { id: "tete", nom: "Tête", ch: ["neck", "neck_p", "neck_r"] },
+  { id: "epauleN", nom: "Épaule proche", ch: ["armN", "armN_p", "armN_r", "epauleN_av", "epauleN_haut"] },
+  { id: "coudeN", nom: "Coude proche", ch: ["foreN"] },
+  { id: "epauleF", nom: "Épaule loin", ch: ["armF", "armF_p", "armF_r", "epauleF_av", "epauleF_haut"] },
+  { id: "coudeF", nom: "Coude loin", ch: ["foreF"] },
+  { id: "hancheN", nom: "Hanche proche", ch: ["thighN", "thighN_p", "thighN_r"] },
+  { id: "genouN", nom: "Genou proche", ch: ["shinN"] },
+  { id: "chevilleN", nom: "Cheville proche", ch: ["footN", "footN_p"] },
+  { id: "hancheF", nom: "Hanche loin", ch: ["thighF", "thighF_p", "thighF_r"] },
+  { id: "genouF", nom: "Genou loin", ch: ["shinF"] },
+  { id: "chevilleF", nom: "Cheville loin", ch: ["footF", "footF_p"] },
+];
+const GBY = {}; GRP.forEach(g => GBY[g.id] = g);
+const CHG = {}; GRP.forEach(g => g.ch.forEach(c => CHG[c] = g.id));
+const ALLCH = GRP.flatMap(g => g.ch);
+
+// Poignées sur la scène : point attrapé, articulations clées, canaux que le glisser ajuste.
+const HANDLES = {
+  head: { nom: "Tête", g: ["tete"], ch: ["neck", "neck_p"] },
+  shoulder: { nom: "Haut du buste", g: ["buste"], ch: ["spineLow", "chest", "spineLow_p", "chest_p"] },
+  hip: { nom: "Bassin", g: ["bassin"], move: true },
+};
+for (const S of ["N", "F"]) {
+  const c = S === "N" ? "proche" : "loin";
+  HANDLES["elbow" + S] = { nom: "Coude " + c, g: ["epaule" + S], ch: ["arm" + S, "arm" + S + "_p"] };
+  HANDLES["hand" + S] = { nom: "Main " + c, g: ["epaule" + S, "coude" + S], ch: ["arm" + S, "arm" + S + "_p", "fore" + S] };
+  HANDLES["knee" + S] = { nom: "Genou " + c, g: ["hanche" + S], ch: ["thigh" + S, "thigh" + S + "_p"] };
+  HANDLES["ankle" + S] = { nom: "Cheville " + c, g: ["hanche" + S, "genou" + S], ch: ["thigh" + S, "thigh" + S + "_p", "shin" + S] };
+  HANDLES["toe" + S] = { nom: "Pointe du pied " + c, g: ["cheville" + S], ch: ["foot" + S, "foot" + S + "_p"] };
+}
+// pour sélectionner une ligne de la feuille : quel point montrer
+const GROUP_HANDLE = { bassin: "hip", buste: "shoulder", tete: "head", epauleN: "elbowN", coudeN: "handN", epauleF: "elbowF", coudeF: "handF",
+  hancheN: "kneeN", genouN: "ankleN", chevilleN: "toeN", hancheF: "kneeF", genouF: "ankleF", chevilleF: "toeF" };
+
+// ===================== Données embarquées =====================
+const DATA = (() => {
+  const t = document.getElementById("donnees").textContent;
+  const a = t.indexOf("/*DONNEES*/"), b = t.indexOf("/*FIN*/");
+  try { return JSON.parse(t.slice(a + 11, b)); } catch (e) { return { poses: {}, anims: {} }; }
+})();
+const FALLBACK_BASE = { x: 0, y: 87, facing: 1, angles: { root: -2, spineLow: 4, chest: 4, neck: 3, armN: 31.3, foreN: 127.2, armF: 32, foreF: 96.9,
+  thighN: -26, shinN: 4, footN: -16, thighF: 14, shinF: 22, footF: 5.5, torsion: -4, torsionBassin: -12, lacet: 45, epauleF_av: -1, epauleF_haut: 1,
+  epauleN_haut: -3, armN_p: 14.6, armF_p: -17.5, thighN_p: 15, thighF_p: -15, armN_r: 3.7, armF_r: -9.7, thighN_r: -2, thighF_r: 5 } };
+
+// ===================== Projet =====================
+// proj.pistes[g] = [{ f, v: {canal: valeur}, c: courbe, p, pl }]
+function clone(o) { return JSON.parse(JSON.stringify(o)); }
+function baseVals(b) {
+  const v = { x: +b.x || 0, y: +b.y || 0, facing: (+b.facing || 1) < 0 ? -1 : 1 };
+  for (const c of ALLCH) if (!(c in v)) v[c] = +(b.angles && b.angles[c]) || 0;
+  return v;
+}
+function newProject(baseNom) {
+  const b = DATA.poses[baseNom] || FALLBACK_BASE;
+  const base = baseVals(b);
+  const pistes = {};
+  for (const g of GRP) pistes[g.id] = [{ f: 0, v: pick(base, g.ch), c: "auto", p: 2, pl: false }];
+  return { nom: "mon_animation", longueur: 48, boucle: false, baseNom: baseNom || "garde_ouverte_bagarreur", base, pistes };
+}
+function pick(o, keys) { const r = {}; for (const k of keys) r[k] = o[k]; return r; }
+function fromGame(nom) {
+  const a = DATA.anims[nom];
+  const k0 = a.k[0];
+  const val = (k) => { const v = { x: k.x, y: k.y, facing: k.fa || 1 }; for (const c of ALLCH) if (!(c in v)) v[c] = +(k.a[c] || 0); return v; };
+  const base = val(k0);
+  const pistes = {};
+  for (const g of GRP) pistes[g.id] = a.k.map(k => ({ f: k.f, v: pick(val(k), g.ch), c: k.c || "auto", p: k.p || 2, pl: !!k.pl }));
+  return { nom, longueur: a.L, boucle: !!a.b, baseNom: "garde_ouverte_bagarreur", base, pistes };
+}
+
+let proj = null;
+try { const s = localStorage.getItem("animateur.projet"); if (s) { const q = JSON.parse(s); if (q && q.pistes) proj = q; } } catch (e) {}
+if (!proj) proj = DATA.anims.gauche_droite_crochet_bagarreur ? fromGame("gauche_droite_crochet_bagarreur") : newProject("garde_ouverte_bagarreur");
+for (const g of GRP) if (!proj.pistes[g.id]) proj.pistes[g.id] = [];
+
+// ===================== Interpolation (portage de StickAnim._channel) =====================
+function ease(c, u, pw) {
+  switch (c) {
+    case "lin": return u;
+    case "acc": return Math.pow(u, pw);
+    case "dec": return 1 - Math.pow(1 - u, pw);
+    case "acc-dec": return u < 0.5 ? 0.5 * Math.pow(2 * u, pw) : 1 - 0.5 * Math.pow(2 * (1 - u), pw);
+    case "palier": return 0;
+  }
+  return u;
+}
+function chanAt(keys, c, t) {
+  const n = keys.length, L = proj.longueur, loop = proj.boucle && L > 0;
+  const base = proj.base[c] ?? 0;
+  if (!n) return base;
+  const kv = (k) => (k.v[c] ?? base);
+  if (n === 1) return kv(keys[0]);
+  const K = (i) => keys[((i % n) + n) % n];
+  const T = (i) => K(i).f + L * Math.floor(i / n);
+  if (loop) t = ((t % L) + L) % L;
+  let i = 0;
+  while (i < n - 1 && keys[i + 1].f <= t) i++;
+  const has = i < n - 1 || loop;
+  const k0 = keys[i];
+  if (!has || c === "facing") return kv(k0);
+  const t0 = k0.f, t1 = T(i + 1);
+  const u = Math.max(0, Math.min(1, (t - t0) / Math.max(t1 - t0, 1e-6)));
+  const v0 = kv(k0), v1 = kv(K(i + 1));
+  const courbe = k0.c || "auto";
+  if (courbe !== "auto") return v0 + (v1 - v0) * ease(courbe, u, k0.p || 2);
+  const tan = (j) => {
+    if (!loop && (j <= 0 || j >= n - 1)) return 0;
+    if (K(j).pl) return 0;
+    const ta = T(j - 1), tb = T(j), tc = T(j + 1);
+    const va = kv(K(j - 1)), vb = kv(K(j)), vc = kv(K(j + 1));
+    const s0 = (vb - va) / Math.max(tb - ta, 1e-6), s1 = (vc - vb) / Math.max(tc - tb, 1e-6);
+    if (s0 * s1 <= 0) return 0;
+    const m = (s0 * (tc - tb) + s1 * (tb - ta)) / (tc - ta);
+    const lim = 3 * Math.min(Math.abs(s0), Math.abs(s1));
+    return Math.max(-lim, Math.min(lim, m));
+  };
+  const dt = t1 - t0, m0 = tan(i) * dt, m1 = tan(i + 1) * dt, u2 = u * u, u3 = u2 * u;
+  return (2*u3 - 3*u2 + 1) * v0 + (u3 - 2*u2 + u) * m0 + (-2*u3 + 3*u2) * v1 + (u3 - u2) * m1;
+}
+function valsAt(t) {
+  const v = {};
+  for (const g of GRP) { const keys = proj.pistes[g.id]; for (const c of g.ch) v[c] = chanAt(keys, c, t); }
+  return v;
+}
+function poseFrom(v, camDeg) {
+  const angles = {};
+  for (const c of ALLCH) if (c !== "x" && c !== "y" && c !== "facing") angles[c] = v[c];
+  if (camDeg) angles.lacet = (angles.lacet || 0) + camDeg;
+  return { x: v.x, y: v.y, facing: v.facing, angles };
+}
+
+// ===================== État de l'interface =====================
+const $ = (id) => document.getElementById(id);
+let frame = 0, playT = null, cam = 0;
+let selHandle = "handN", selGroups = ["epauleN", "coudeN"];
+let selKeys = new Set();       // "groupe@image"
+const opt = { oignon: true, trajet: true, pieds: true, loin: true, lim: true };
+const undoStack = [], redoStack = [];
+let editSnap = null;
+function beginEdit() { if (!editSnap) editSnap = JSON.stringify(proj); }
+function endEdit() {
+  if (!editSnap) return;
+  if (editSnap !== JSON.stringify(proj)) { undoStack.push(editSnap); if (undoStack.length > 200) undoStack.shift(); redoStack.length = 0; }
+  editSnap = null; changed();
+}
+function edit(fn) { beginEdit(); fn(); endEdit(); }
+function undo() { if (!undoStack.length) return; redoStack.push(JSON.stringify(proj)); proj = JSON.parse(undoStack.pop()); changed(); }
+function redo() { if (!redoStack.length) return; undoStack.push(JSON.stringify(proj)); proj = JSON.parse(redoStack.pop()); changed(); }
+
+// ===================== Clés =====================
+const curF = () => Math.round(frame);
+function keyIdx(g, f) { return proj.pistes[g].findIndex(k => k.f === f); }
+function sortKeys(g) { proj.pistes[g].sort((a, b) => a.f - b.f); }
+function ensureKey(g, f) {
+  let i = keyIdx(g, f);
+  if (i >= 0) return proj.pistes[g][i];
+  const v = {}; for (const c of GBY[g].ch) v[c] = round2(chanAt(proj.pistes[g], c, f));
+  // la nouvelle clé prend la courbe de la clé qui commence le segment
+  const prev = [...proj.pistes[g]].reverse().find(k => k.f < f);
+  const k = { f, v, c: prev ? prev.c : "auto", p: prev ? prev.p : 2, pl: false };
+  proj.pistes[g].push(k); sortKeys(g);
+  return k;
+}
+const round2 = (v) => Math.round(v * 100) / 100;
+function clampCh(c, v) { const d = CH[c]; if (opt.lim && d) v = Math.max(d.lo, Math.min(d.hi, v)); return v; }
+function setVals(f, vals) {
+  for (const c in vals) { const k = ensureKey(CHG[c], f); k.v[c] = round2(clampCh(c, vals[c])); }
+}
+function deleteKeys(list) {
+  for (const s of list) {
+    const [g, fs] = s.split("@"); const i = keyIdx(g, +fs);
+    if (i >= 0) proj.pistes[g].splice(i, 1);
+  }
+}
+
+// ===================== Résolution des glissers (moindres carrés amortis) =====================
+function linsolve(M, b) {
+  const n = b.length, A = M.map((r, i) => [...r, b[i]]);
+  for (let i = 0; i < n; i++) {
+    let p = i; for (let r = i + 1; r < n; r++) if (Math.abs(A[r][i]) > Math.abs(A[p][i])) p = r;
+    [A[i], A[p]] = [A[p], A[i]];
+    const d = A[i][i] || 1e-9;
+    for (let r = 0; r < n; r++) if (r !== i) { const k = A[r][i] / d; for (let c = i; c <= n; c++) A[r][c] -= k * A[i][c]; }
+  }
+  return A.map((r, i) => r[n] / (r[i] || 1e-9));
+}
+// v : valeurs complètes (modifiées sur place pour les canaux chans) ; resid(v) -> tableau d'écarts
+function dls(v, chans, resid, iters = 12, lam = 1.2) {
+  for (let it = 0; it < iters; it++) {
+    const r0 = resid(v);
+    if (Math.hypot(...r0) < 0.02) break;
+    const m = r0.length, n = chans.length, Jm = [];
+    for (let i = 0; i < m; i++) Jm.push(new Array(n).fill(0));
+    for (let j = 0; j < n; j++) {
+      const c = chans[j], old = v[c], h = 0.05;
+      v[c] = old + h; const r1 = resid(v); v[c] = old;
+      for (let i = 0; i < m; i++) Jm[i][j] = (r1[i] - r0[i]) / h;
+    }
+    const JJ = [];
+    for (let a = 0; a < m; a++) { JJ.push([]); for (let b = 0; b < m; b++) { let s = 0; for (let j = 0; j < n; j++) s += Jm[a][j] * Jm[b][j]; JJ[a].push(s + (a === b ? lam * lam : 0)); } }
+    const y = linsolve(JJ, r0.map(x => -x));
+    let big = 0;
+    const d = chans.map((c, j) => { let s = 0; for (let i = 0; i < m; i++) s += Jm[i][j] * y[i]; big = Math.max(big, Math.abs(s)); return s; });
+    const sc = big > 15 ? 15 / big : 1;   // pas plus de 15° par itération
+    chans.forEach((c, j) => { v[c] = clampCh(c, v[c] + d[j] * sc); });
+  }
+  return v;
+}
+const P3 = (v, pt) => { const s = solve(poseFrom(v, 0)); return [s.J[pt][0], s.J[pt][1], s.Z[pt]]; };
+function footPins(v) { const o = {}; for (const S of ["N", "F"]) o[S] = { a: P3(v, "ankle" + S), t: P3(v, "toe" + S) }; return o; }
+function replant(v, pins) {
+  for (const S of ["N", "F"]) {
+    const chans = ["thigh" + S, "thigh" + S + "_p", "shin" + S, "foot" + S];
+    dls(v, chans, (w) => {
+      const a = P3(w, "ankle" + S), t = P3(w, "toe" + S), pa = pins[S].a, pt = pins[S].t;
+      return [a[0]-pa[0], a[1]-pa[1], a[2]-pa[2], 0.6*(t[0]-pt[0]), 0.6*(t[1]-pt[1]), 0.6*(t[2]-pt[2])];
+    }, 16, 0.6);
+  }
+}
+const LEGCH = ["thighN", "thighN_p", "shinN", "footN", "thighF", "thighF_p", "shinF", "footF"];
+
+// ===================== Dessin de la scène =====================
+function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+let view = { k: 1, ox: 0, gy: 0, cx: 0 };
+let trajCache = null;
+function centerX() {
+  const L = Math.max(1, proj.longueur); let s = 0, n = 0;
+  for (let f = 0; f <= L; f += Math.max(1, Math.round(L / 24))) { s += chanAt(proj.pistes.bassin, "x", f); n++; }
+  return s / n;
+}
+function drawFigure(ctx, v, cNear, cFar, alpha) {
+  const S = (p) => [view.ox + (p[0] - view.cx) * view.k, view.gy - p[1] * view.k];
+  const { items, J } = primitives(poseFrom(v, cam), cNear, cFar);
+  ctx.globalAlpha = alpha; ctx.lineCap = "round"; ctx.lineJoin = "round";
+  for (const it of items) {
+    ctx.strokeStyle = it.c; ctx.fillStyle = it.c;
+    if (it.type === "path") {
+      ctx.lineWidth = STYLE.stroke * view.k;
+      ctx.beginPath(); it.pts.forEach((p, i) => { const s = S(p); i ? ctx.lineTo(s[0], s[1]) : ctx.moveTo(s[0], s[1]); }); ctx.stroke();
+    } else { const s = S(it.ctr); ctx.beginPath(); ctx.arc(s[0], s[1], it.r * view.k, 0, Math.PI * 2); ctx.fill(); }
+  }
+  ctx.globalAlpha = 1;
+  return J;
+}
+let lastJ = null, dragTarget = null;
+function drawScene() {
+  const cv = $("scene"), dpr = window.devicePixelRatio || 1, w = cv.clientWidth, h = cv.clientHeight;
+  if (!w || !h) return;
+  if (cv.width !== Math.round(w * dpr) || cv.height !== Math.round(h * dpr)) { cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); }
+  const ctx = cv.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+  const k = Math.min(h / 235, w / 200);
+  view = { k, ox: w / 2, gy: h - 22, cx: view.cxFixed ?? 0, cxFixed: view.cxFixed };
+  const S = (p) => [view.ox + (p[0] - view.cx) * k, view.gy - p[1] * k];
+  ctx.strokeStyle = css("--grid"); ctx.lineWidth = 1; ctx.beginPath();
+  const x0 = view.ox - view.cx * k;
+  for (let gx = -1000; gx <= 1000; gx += 10) { const sx = x0 + gx * k; if (sx < 0 || sx > w) continue; ctx.moveTo(sx, 0); ctx.lineTo(sx, view.gy); }
+  for (let gy = 0; view.gy - gy * k > 0; gy += 10) { ctx.moveTo(0, view.gy - gy * k); ctx.lineTo(w, view.gy - gy * k); }
+  ctx.stroke();
+  ctx.fillStyle = css("--ground"); ctx.fillRect(0, view.gy, w, h - view.gy);
+  const t = playT ?? frame;
+  if (opt.oignon && playT == null) {
+    const L = proj.longueur;
+    for (const [df, c] of [[-4, "--onion-a"], [4, "--onion-b"]]) {
+      let f2 = curF() + df;
+      if (proj.boucle) f2 = ((f2 % L) + L) % L; else if (f2 < 0 || f2 > L) continue;
+      drawFigure(ctx, valsAt(f2), css(c), css(c), 0.22);
+    }
+  }
+  const near = css("--figure"), far = opt.loin ? css("--figure-far") : near;
+  const J = drawFigure(ctx, valsAt(t), near, far, 1);
+  lastJ = J;
+  // trajectoire du point choisi, une marque par image (l'écart = la vitesse)
+  if (opt.trajet && selHandle) {
+    if (!trajCache || trajCache.cam !== cam || trajCache.h !== selHandle) {
+      const pts = [], L = proj.longueur;
+      for (let f = 0; f <= L; f++) pts.push(solve(poseFrom(valsAt(f), cam)).J[selHandle]);
+      trajCache = { cam, h: selHandle, pts };
+    }
+    const pts = trajCache.pts, keyed = new Set();
+    for (const g of HANDLES[selHandle].g) proj.pistes[g].forEach(kk => keyed.add(kk.f));
+    ctx.strokeStyle = css("--trail"); ctx.globalAlpha = 0.55; ctx.lineWidth = 1.5; ctx.beginPath();
+    pts.forEach((p, i) => { const s = S(p); i ? ctx.lineTo(s[0], s[1]) : ctx.moveTo(s[0], s[1]); }); ctx.stroke();
+    ctx.globalAlpha = 1; ctx.fillStyle = css("--trail");
+    pts.forEach((p, i) => { const s = S(p); ctx.beginPath(); ctx.arc(s[0], s[1], keyed.has(i) ? 3.4 : 1.6, 0, Math.PI * 2); ctx.fill(); });
+  }
+  // poignées
+  if (playT == null) {
+    for (const hk in HANDLES) {
+      const s = S(J[hk]), on = hk === selHandle;
+      ctx.beginPath(); ctx.arc(s[0], s[1], on ? 7.5 : 5.5, 0, Math.PI * 2);
+      ctx.fillStyle = on ? css("--trail") : css("--handle"); ctx.fill();
+      ctx.lineWidth = 2; ctx.strokeStyle = css("--trail"); ctx.stroke();
+    }
+    if (dragTarget) {
+      const s = S(dragTarget); ctx.strokeStyle = css("--warn"); ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(s[0] - 6, s[1]); ctx.lineTo(s[0] + 6, s[1]); ctx.moveTo(s[0], s[1] - 6); ctx.lineTo(s[0], s[1] + 6); ctx.stroke();
+    }
+  }
+  const a = ((cam % 360) + 540) % 360 - 180;
+  $("viewtag").textContent = ({ 0: "Profil (vue du jeu)", 90: "Face", 45: "Trois quarts", "-90": "Dos" })[a] || `Caméra ${a}°`;
+  $("frametag").textContent = "image " + (playT == null ? curF() : Math.floor(t));
+}
+const toWorld = (sx, sy) => [(sx - view.ox) / view.k + view.cx, (view.gy - sy) / view.k];
+
+// ===================== Glisser sur la scène =====================
+let sdrag = null;
+function hitHandle(sx, sy, touch) {
+  if (!lastJ) return null;
+  let best = null, bd = touch ? 24 : 14;
+  for (const hk in HANDLES) {
+    const p = lastJ[hk], s = [view.ox + (p[0] - view.cx) * view.k, view.gy - p[1] * view.k];
+    const d = Math.hypot(s[0] - sx, s[1] - sy);
+    if (d < bd) { bd = d; best = hk; }
+  }
+  return best;
+}
+function selectHandle(hk) {
+  selHandle = hk; selGroups = [...HANDLES[hk].g]; trajCache = null;
+  buildChans(); refresh();
+}
+const sceneCv = $("scene");
+sceneCv.addEventListener("pointerdown", (e) => {
+  const r = sceneCv.getBoundingClientRect(), sx = e.clientX - r.left, sy = e.clientY - r.top;
+  stop();
+  const hk = hitHandle(sx, sy, e.pointerType !== "mouse");
+  sceneCv.setPointerCapture(e.pointerId);
+  if (hk) {
+    if (hk !== selHandle) selectHandle(hk);
+    const f = curF(), v = valsAt(f), p = solve(poseFrom(v, cam)).J[hk], w = toWorld(sx, sy);
+    sdrag = { hk, f, off: [p[0] - w[0], p[1] - w[1]], v0: v, w0: w, pins: footPins(v) };
+    beginEdit();
+  } else sdrag = { cam: true, x: e.clientX, c: cam };
+});
+sceneCv.addEventListener("pointermove", (e) => {
+  const r = sceneCv.getBoundingClientRect(), sx = e.clientX - r.left, sy = e.clientY - r.top;
+  if (!sdrag) { sceneCv.classList.toggle("on-handle", !!hitHandle(sx, sy, false)); return; }
+  if (sdrag.cam) { setCam(sdrag.c + (e.clientX - sdrag.x) * 0.6); return; }
+  const H = HANDLES[sdrag.hk], w = toWorld(sx, sy), target = [w[0] + sdrag.off[0], w[1] + sdrag.off[1]];
+  const v = valsAt(sdrag.f);
+  if (H.move) {
+    const fs = v.facing < 0 ? -1 : 1;
+    v.x = sdrag.v0.x + (w[0] - sdrag.w0[0]); v.y = sdrag.v0.y + (w[1] - sdrag.w0[1]);
+    void fs;
+    const out = { x: v.x, y: v.y };
+    if (opt.pieds) { replant(v, sdrag.pins); for (const c of LEGCH) out[c] = v[c]; }
+    setVals(sdrag.f, out);
+  } else {
+    dragTarget = target;
+    dls(v, H.ch, (w2) => { const p = solve(poseFrom(w2, cam)).J[sdrag.hk]; return [p[0] - target[0], p[1] - target[1]]; });
+    setVals(sdrag.f, pick(v, H.ch));
+  }
+  trajCache = null; refresh(true);
+});
+["pointerup", "pointercancel"].forEach(t => sceneCv.addEventListener(t, () => { if (sdrag && !sdrag.cam) endEdit(); sdrag = null; dragTarget = null; drawScene(); }));
+function setCam(c) { cam = Math.round(((c + 180) % 360 + 360) % 360 - 180); trajCache = null; document.querySelectorAll("[data-cam]").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.cam === cam))); drawScene(); }
+document.querySelectorAll("[data-cam]").forEach(b => b.addEventListener("click", () => setCam(+b.dataset.cam)));
+
+// ===================== Inspecteur =====================
+const chInputs = {};
+function buildChans() {
+  const host = $("chans"); host.innerHTML = ""; for (const k in chInputs) delete chInputs[k];
+  $("selnom").textContent = selHandle ? HANDLES[selHandle].nom : GBY[selGroups[0]].nom;
+  for (const g of selGroups) {
+    const box = document.createElement("div"); box.className = "chgrp";
+    box.innerHTML = `<h3>${GBY[g].nom}</h3>`;
+    for (const c of GBY[g].ch) {
+      if (c === "facing") continue;
+      const d = CH[c], row = document.createElement("div"); row.className = "ch";
+      row.innerHTML = `<label class="lab" for="r-${c}"><span>${d.lab}</span><small>${c}${d.aide ? " · " + d.aide : ""}</small></label>
+        <input type="number" id="n-${c}" step="0.5" aria-label="${d.lab} (valeur)">
+        <input type="range" id="r-${c}" min="${d.lo}" max="${d.hi}" step="0.5">`;
+      const rg = row.querySelector("input[type=range]"), nb = row.querySelector("input[type=number]");
+      const apply = (val) => {
+        if (!isFinite(val)) return;
+        stop(); beginEdit();
+        const f = curF();
+        if (g === "bassin" && opt.pieds) {
+          const v = valsAt(f), pins = footPins(v); v[c] = clampCh(c, val); replant(v, pins);
+          const out = { [c]: v[c] }; for (const l of LEGCH) out[l] = v[l]; setVals(f, out);
+        } else setVals(f, { [c]: val });
+        trajCache = null; refresh(true);
+      };
+      rg.addEventListener("input", () => apply(+rg.value));
+      rg.addEventListener("change", endEdit);
+      nb.addEventListener("change", () => { apply(+nb.value); endEdit(); });
+      chInputs[c] = { rg, nb, row, g };
+      box.appendChild(row);
+    }
+    host.appendChild(box);
+  }
+}
+function syncChans() {
+  const f = curF(), v = valsAt(playT ?? f);
+  for (const c in chInputs) {
+    const d = chInputs[c], val = round2(v[c]);
+    d.rg.value = val; if (document.activeElement !== d.nb) d.nb.value = val;
+    d.row.classList.toggle("keyed", keyIdx(d.g, f) >= 0);
+  }
+  const keyed = selGroups.filter(g => keyIdx(g, f) >= 0);
+  $("keystate").innerHTML = keyed.length
+    ? `<b>◆ clé à l'image ${f}</b> (${keyed.map(g => GBY[g].nom).join(", ")})`
+    : `image ${f} : pas de clé, valeur interpolée. Bouger l'articulation pose une clé.`;
+  const k = keyed.length ? proj.pistes[keyed[0]][keyIdx(keyed[0], f)] : null;
+  $("courbe").disabled = !k && !selKeys.size;
+  const sk = [...selKeys].map(s => { const [g, fs] = s.split("@"); return proj.pistes[g]?.[keyIdx(g, +fs)]; }).filter(Boolean);
+  $("courbe").value = (sk[0] || k || { c: "auto" }).c || "auto";
+  $("k-suppr").disabled = !keyed.length && !selKeys.size;
+}
+$("k-poser").addEventListener("click", () => poseKey(selGroups));
+$("k-tout").addEventListener("click", () => poseKey(GRP.map(g => g.id)));
+function poseKey(groups) { edit(() => { for (const g of groups) ensureKey(g, curF()); }); }
+$("k-suppr").addEventListener("click", delSel);
+function delSel() {
+  const list = selKeys.size ? [...selKeys] : selGroups.filter(g => keyIdx(g, curF()) >= 0).map(g => g + "@" + curF());
+  if (!list.length) return;
+  edit(() => deleteKeys(list)); selKeys.clear(); refresh();
+}
+$("courbe").addEventListener("change", (e) => {
+  const c = e.target.value;
+  const list = selKeys.size ? [...selKeys] : selGroups.map(g => g + "@" + curF());
+  edit(() => { for (const s of list) { const [g, fs] = s.split("@"); const i = keyIdx(g, +fs); if (i >= 0) proj.pistes[g][i].c = c; } });
+});
+
+// ===================== Feuille des clés =====================
+const ROWH = 24, RULER = 24, PAD = 12;
+const ROWS = [{ id: "_tout", nom: "Toutes" }, ...GRP];
+const COURBE_COL = { auto: "--c-auto", lin: "--c-lin", acc: "--c-acc", dec: "--c-dec", "acc-dec": "--c-accdec", palier: "--c-palier" };
+let ppf = 14;
+function buildLabels() {
+  const host = $("labels");
+  for (const r of ROWS) {
+    const b = document.createElement("button"); b.textContent = r.nom; b.dataset.g = r.id;
+    if (r.id === "_tout") b.className = "sum";
+    b.addEventListener("click", () => selectRow(r.id));
+    host.appendChild(b);
+  }
+  $("legend").innerHTML = Object.entries(COURBE_COL).map(([n, v]) => `<span><i style="background:var(${v})"></i>${n}</span>`).join("");
+}
+function selectRow(g) {
+  if (g === "_tout") { selHandle = null; selGroups = GRP.map(x => x.id); }
+  else { selHandle = GROUP_HANDLE[g]; selGroups = [g]; }
+  trajCache = null; buildChans(); refresh();
+}
+function unionFrames() { const s = new Set(); for (const g of GRP) proj.pistes[g.id].forEach(k => s.add(k.f)); return [...s].sort((a, b) => a - b); }
+function drawSheet() {
+  const wrap = $("tlwrap"), cv = $("tl"), dpr = window.devicePixelRatio || 1, L = proj.longueur;
+  ppf = Math.max(12, (wrap.clientWidth - 2 * PAD) / Math.max(1, L));
+  const w = Math.max(wrap.clientWidth, Math.ceil(L * ppf + 2 * PAD)), h = RULER + ROWS.length * ROWH;
+  cv.style.width = w + "px"; cv.style.height = h + "px";
+  if (cv.width !== Math.round(w * dpr) || cv.height !== Math.round(h * dpr)) { cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); }
+  const ctx = cv.getContext("2d"); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.fillStyle = css("--panel"); ctx.fillRect(0, 0, w, h);
+  const X = (f) => PAD + f * ppf;
+  ROWS.forEach((r, i) => {
+    const y = RULER + i * ROWH;
+    if (r.id !== "_tout" && selGroups.includes(r.id) || (r.id === "_tout" && selGroups.length === GRP.length)) { ctx.fillStyle = css("--accent-soft"); ctx.fillRect(0, y, w, ROWH); }
+    ctx.fillStyle = css("--line"); ctx.fillRect(0, y + ROWH - 1, w, 1);
+  });
+  // repères d'images
+  ctx.font = "10.5px " + css("--f-mono"); ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  const step = ppf >= 24 ? 1 : ppf >= 14 ? 2 : 5;
+  for (let f = 0; f <= L; f++) {
+    const x = X(f);
+    ctx.fillStyle = css("--line");
+    ctx.fillRect(Math.round(x), RULER, 1, h - RULER);
+    if (f % step === 0 || f === L) { ctx.fillStyle = css("--muted"); ctx.fillText(String(f), x, RULER / 2); }
+  }
+  ctx.fillStyle = css("--line"); ctx.fillRect(0, RULER - 1, w, 1);
+  const diamond = (x, y, s, fill, sel) => {
+    ctx.beginPath(); ctx.moveTo(x, y - s); ctx.lineTo(x + s, y); ctx.lineTo(x, y + s); ctx.lineTo(x - s, y); ctx.closePath();
+    ctx.fillStyle = fill; ctx.fill();
+    ctx.lineWidth = sel ? 2.5 : 1; ctx.strokeStyle = sel ? css("--ink") : css("--panel"); ctx.stroke();
+  };
+  const dx = keyDrag && keyDrag.moved ? keyDrag.delta : 0;
+  ROWS.forEach((r, i) => {
+    const yc = RULER + i * ROWH + ROWH / 2;
+    if (r.id === "_tout") {
+      for (const f of unionFrames()) {
+        const all = GRP.every(g => selKeys.has(g.id + "@" + f));
+        diamond(X(f + (all ? dx : 0)), yc, 6, css("--muted"), all);
+      }
+      return;
+    }
+    const keys = proj.pistes[r.id];
+    keys.forEach((k, j) => {
+      const nx = keys[j + 1];
+      if (nx) { ctx.fillStyle = css(COURBE_COL[k.c || "auto"]); ctx.globalAlpha = 0.45; ctx.fillRect(X(k.f), yc - 1.5, X(nx.f) - X(k.f), 3); ctx.globalAlpha = 1; }
+    });
+    for (const k of keys) {
+      const sel = selKeys.has(r.id + "@" + k.f);
+      diamond(X(k.f + (sel ? dx : 0)), yc, 6, css(COURBE_COL[k.c || "auto"]), sel);
+    }
+  });
+  // tête de lecture
+  const t = playT ?? frame, px = X(t);
+  ctx.fillStyle = css("--warn"); ctx.fillRect(Math.round(px) - 1, 0, 2, h);
+  ctx.beginPath(); ctx.moveTo(px - 6, 0); ctx.lineTo(px + 6, 0); ctx.lineTo(px, 8); ctx.closePath(); ctx.fill();
+  document.querySelectorAll("#labels button").forEach(b => {
+    const g = b.dataset.g;
+    b.setAttribute("aria-pressed", String(g === "_tout" ? selGroups.length === GRP.length : selGroups.length < GRP.length && selGroups.includes(g)));
+  });
+}
+let keyDrag = null;
+const tl = $("tl");
+function tlHit(e) {
+  const r = tl.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
+  const f = Math.max(0, Math.min(proj.longueur, Math.round((x - PAD) / ppf)));
+  const row = y < RULER ? -1 : Math.floor((y - RULER) / ROWH);
+  return { f, row, x };
+}
+function keysAtRow(row, f) {
+  if (row === 0) return GRP.filter(g => keyIdx(g.id, f) >= 0).map(g => g.id + "@" + f);
+  const g = ROWS[row]; return g && keyIdx(g.id, f) >= 0 ? [g.id + "@" + f] : [];
+}
+tl.addEventListener("pointerdown", (e) => {
+  stop(); const { f, row } = tlHit(e); tl.setPointerCapture(e.pointerId);
+  if (row < 0 || row >= ROWS.length) { keyDrag = { scrub: true }; setFrame(f); return; }
+  const hits = keysAtRow(row, f);
+  if (row > 0 && !(selGroups.length === 1 && selGroups[0] === ROWS[row].id)) selectRow(ROWS[row].id);
+  if (hits.length) {
+    if (e.shiftKey) hits.forEach(s => selKeys.has(s) && hits.length === 1 ? selKeys.delete(s) : selKeys.add(s));
+    else if (!hits.every(s => selKeys.has(s))) { selKeys = new Set(hits); }
+    keyDrag = { f0: f, delta: 0, moved: false };
+  } else { if (!e.shiftKey) selKeys.clear(); keyDrag = { scrub: true }; }
+  setFrame(f);
+});
+tl.addEventListener("pointermove", (e) => {
+  if (!keyDrag) return;
+  const { f } = tlHit(e);
+  if (keyDrag.scrub) { setFrame(f); return; }
+  keyDrag.delta = f - keyDrag.f0; if (keyDrag.delta) keyDrag.moved = true;
+  setFrame(f);
+});
+["pointerup", "pointercancel"].forEach(t => tl.addEventListener(t, () => {
+  if (keyDrag && keyDrag.moved && keyDrag.delta) moveKeys(keyDrag.delta);
+  keyDrag = null; refresh();
+}));
+tl.addEventListener("dblclick", (e) => {
+  const { f, row } = tlHit(e); if (row < 0) return;
+  setFrame(f); poseKey(row === 0 ? GRP.map(g => g.id) : [ROWS[row].id]);
+});
+function moveKeys(delta) {
+  const L = proj.longueur;
+  edit(() => {
+    const moving = [...selKeys].map(s => { const [g, fs] = s.split("@"); const i = keyIdx(g, +fs); return i >= 0 ? { g, k: proj.pistes[g][i] } : null; }).filter(Boolean);
+    const ns = new Set();
+    for (const m of moving) m.nf = Math.max(0, Math.min(L, m.k.f + delta));
+    for (const m of moving) { // une clé non choisie à l'arrivée est remplacée
+      proj.pistes[m.g] = proj.pistes[m.g].filter(k => moving.some(o => o.k === k) || k.f !== m.nf);
+    }
+    for (const m of moving) { m.k.f = m.nf; ns.add(m.g + "@" + m.nf); }
+    for (const g of GRP) { // deux clés choisies au même endroit : on garde la dernière
+      const seen = new Map(); proj.pistes[g.id].forEach(k => seen.set(k.f, k)); proj.pistes[g.id] = [...seen.values()]; sortKeys(g.id);
+    }
+    selKeys = ns;
+  });
+}
+
+// ===================== Copier / coller =====================
+let clip = null;
+function copy() {
+  const f = curF();
+  if (selKeys.size) {
+    const list = [...selKeys].map(s => { const [g, fs] = s.split("@"); const i = keyIdx(g, +fs); return i >= 0 ? { g, k: clone(proj.pistes[g][i]) } : null; }).filter(Boolean);
+    const f0 = Math.min(...list.map(x => x.k.f));
+    clip = list.map(x => ({ g: x.g, df: x.k.f - f0, k: x.k }));
+  } else {
+    const v = valsAt(f);
+    clip = selGroups.map(g => ({ g, df: 0, k: { f, v: pick(v, GBY[g].ch), c: "auto", p: 2, pl: false } }));
+  }
+  toast(`${clip.length} clé${clip.length > 1 ? "s" : ""} copiée${clip.length > 1 ? "s" : ""}.`);
+}
+function paste() {
+  if (!clip) return;
+  const f = curF();
+  edit(() => {
+    selKeys.clear();
+    for (const c of clip) {
+      const nf = Math.min(proj.longueur, f + c.df), k = clone(c.k); k.f = nf;
+      proj.pistes[c.g] = proj.pistes[c.g].filter(x => x.f !== nf); proj.pistes[c.g].push(k); sortKeys(c.g);
+      selKeys.add(c.g + "@" + nf);
+    }
+  });
+}
+$("k-copier").addEventListener("click", copy);
+$("k-coller").addEventListener("click", paste);
+
+// ===================== Lecture =====================
+let raf = null, lastTs = 0;
+function play() {
+  if (playT != null) return stop();
+  playT = frame >= proj.longueur ? 0 : frame; lastTs = 0;
+  $("t-play").textContent = "❚❚"; $("t-play").setAttribute("aria-label", "Pause");
+  const tick = (ts) => {
+    if (playT == null) return;
+    if (lastTs) playT += (ts - lastTs) / 1000 * 60 * +$("vitesse").value;
+    lastTs = ts;
+    if (playT > proj.longueur) {
+      if ($("t-boucle").checked) playT = proj.boucle ? playT % proj.longueur : 0; else { frame = proj.longueur; return stop(); }
+    }
+    drawScene(); drawSheet(); syncChans(); $("fnum").textContent = `${Math.floor(playT)} / ${proj.longueur}`;
+    raf = requestAnimationFrame(tick);
+  };
+  raf = requestAnimationFrame(tick);
+}
+function stop() {
+  if (playT == null) return;
+  frame = Math.min(proj.longueur, Math.round(playT)); playT = null; cancelAnimationFrame(raf);
+  $("t-play").textContent = "▶"; $("t-play").setAttribute("aria-label", "Lecture"); refresh();
+}
+function setFrame(f) { frame = Math.max(0, Math.min(proj.longueur, Math.round(f))); refresh(); }
+function jumpKey(dir) {
+  const fr = (selGroups.length === GRP.length ? unionFrames() : [...new Set(selGroups.flatMap(g => proj.pistes[g].map(k => k.f)))].sort((a, b) => a - b));
+  const f = curF(), t = dir > 0 ? fr.find(x => x > f) : [...fr].reverse().find(x => x < f);
+  if (t != null) setFrame(t);
+}
+$("t-play").addEventListener("click", play);
+$("t-debut").addEventListener("click", () => { stop(); setFrame(0); });
+$("t-prev").addEventListener("click", () => { stop(); setFrame(curF() - 1); });
+$("t-next").addEventListener("click", () => { stop(); setFrame(curF() + 1); });
+$("t-cprev").addEventListener("click", () => { stop(); jumpKey(-1); });
+$("t-cnext").addEventListener("click", () => { stop(); jumpKey(1); });
+
+// ===================== Export / import =====================
+function gameJSON() {
+  const frames = unionFrames();
+  const cles = frames.map(f => {
+    const v = valsAt(f), fixe = {};
+    for (const c of ALLCH) if (c !== "facing") fixe[c] = round2(v[c]);
+    const here = GRP.map(g => proj.pistes[g.id][keyIdx(g.id, f)]).filter(Boolean);
+    const cs = [...new Set(here.map(k => k.c || "auto"))];
+    const k = { f, nom: "f" + f, fixe };
+    if (v.facing < 0) k.facing = -1;
+    if (cs.length === 1 && cs[0] !== "auto") k.courbe = cs[0];
+    if (here.length && here.every(x => x.pl)) k.plate = true;
+    return k;
+  });
+  return JSON.stringify({ nom: proj.nom, boucle: !!proj.boucle, longueur: proj.longueur, base: proj.baseNom || "garde_ouverte_bagarreur",
+    pieds_auto: false, note: "Fait dans web/animateur.html.", cles }, null, 1);
+}
+function slug(s) { return String(s || "sans_nom").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9_-]+/g, "_").slice(0, 60) || "sans_nom"; }
+function toast(t, err, id = "toast") { const el = $(id); el.textContent = t; el.classList.toggle("err", !!err); clearTimeout(el._h); el._h = setTimeout(() => el.textContent = "", 3000); }
+function copyText(id, msg) {
+  const ta = $(id), txt = ta.value;
+  const fb = () => { ta.focus(); ta.select(); toast("Texte sélectionné : copie-le à la main."); };
+  try { navigator.clipboard.writeText(txt).then(() => toast(msg), fb); } catch (e) { fb(); }
+}
+$("copier-jeu").addEventListener("click", () => copyText("jeu", "Animation copiée."));
+$("copier-projet").addEventListener("click", () => copyText("projet", "Projet copié."));
+$("charger").addEventListener("click", () => {
+  try {
+    const q = JSON.parse($("projet").value);
+    if (q && q.pistes) {
+      edit(() => { proj = q; for (const g of GRP) if (!proj.pistes[g.id]) proj.pistes[g.id] = []; });
+      frame = 0; selKeys.clear(); toast("Projet chargé.");
+    } else if (q && q.angles) {
+      const v = baseVals(q);
+      edit(() => { const f = curF(); for (const g of GRP) { proj.pistes[g.id] = proj.pistes[g.id].filter(k => k.f !== f); proj.pistes[g.id].push({ f, v: pick(v, g.ch), c: "auto", p: 2, pl: false }); sortKeys(g.id); } });
+      toast(`Pose posée à l'image ${curF()}.`);
+    } else throw new Error();
+    loadedProject();
+  } catch (e) { toast("Ce texte n'est ni un projet (« pistes ») ni une pose (« angles »).", true); }
+});
+function fillOpen() {
+  const sel = $("ouvrir");
+  sel.innerHTML = `<option value="">animation du jeu…</option>` + Object.keys(DATA.anims).sort().map(n => `<option value="${n}">${n}</option>`).join("");
+}
+$("ouvrir").addEventListener("change", (e) => {
+  const n = e.target.value; if (!n) return;
+  edit(() => { proj = fromGame(n); }); frame = 0; selKeys.clear(); e.target.value = ""; loadedProject();
+});
+$("nouveau").addEventListener("click", () => {
+  edit(() => { proj = newProject("garde_ouverte_bagarreur"); }); frame = 0; selKeys.clear(); loadedProject();
+});
+$("nom").addEventListener("change", (e) => edit(() => { proj.nom = slug(e.target.value); }));
+$("basenom").addEventListener("change", (e) => edit(() => { proj.baseNom = e.target.value.trim(); }));
+$("longueur").addEventListener("change", (e) => { const L = Math.max(1, Math.min(600, Math.round(+e.target.value || 1))); edit(() => { proj.longueur = L; }); setFrame(frame); });
+$("boucle").addEventListener("change", (e) => edit(() => { proj.boucle = e.target.checked; }));
+$("undo").addEventListener("click", undo); $("redo").addEventListener("click", redo);
+
+// ===================== Envoi à Claude (base partagée de la page) =====================
+let db = null;
+(async () => {
+  try { db = window.claude && window.claude.use ? await window.claude.use("db") : null; } catch (e) { db = null; }
+  if (!db) { $("cloudtxt").textContent = "L'envoi direct n'est pas disponible ici : copie l'animation pour le jeu ci-contre et colle-la-moi."; return; }
+  $("envoyer").disabled = false;
+  db.collection("projets").onSnapshot((snap) => {
+    const host = $("saved"); host.innerHTML = "";
+    const docs = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.maj || 0) - (a.maj || 0));
+    if (!docs.length) { host.innerHTML = `<p>Rien d'envoyé pour l'instant. Ce que tu envoies, et ce que je dépose ici, s'affichera dans cette liste.</p>`; return; }
+    for (const d of docs) {
+      const b = document.createElement("button"); b.className = "btn";
+      const when = d.maj ? new Date(d.maj).toLocaleString("fr-FR", { dateStyle: "short", timeStyle: "short" }) : "";
+      b.textContent = `Ouvrir « ${d.nom || d.id} »${d.auteur === "claude" ? " (de Claude)" : ""} · ${when}`;
+      b.addEventListener("click", () => {
+        try { const q = JSON.parse(d.projet); edit(() => { proj = q; for (const g of GRP) if (!proj.pistes[g.id]) proj.pistes[g.id] = []; }); frame = 0; selKeys.clear(); loadedProject(); toast("Ouvert.", false, "cloudtoast"); }
+        catch (e) { toast("Ce projet est illisible.", true, "cloudtoast"); }
+      });
+      host.appendChild(b);
+    }
+  }, () => { $("saved").innerHTML = `<p>La liste n'a pas pu être lue.</p>`; });
+})();
+$("envoyer").addEventListener("click", async () => {
+  if (!db) return;
+  const id = slug(proj.nom);
+  $("envoyer").disabled = true;
+  try {
+    await db.collection("projets").doc(id).set({ nom: proj.nom, maj: Date.now(), auteur: "utilisateur", projet: JSON.stringify(proj), jeu: gameJSON() });
+    toast(`Envoyé : « ${proj.nom} ». Dis-moi de le regarder.`, false, "cloudtoast");
+  } catch (e) { toast("L'envoi a échoué : " + (e && e.message ? e.message : "erreur inconnue") + ". Copie l'animation à la place.", true, "cloudtoast"); }
+  $("envoyer").disabled = false;
+});
+
+// ===================== Rafraîchissement =====================
+let saveTimer = null;
+function changed() { trajCache = null; refresh(); }
+function refresh(light) {
+  drawScene(); drawSheet(); syncChans();
+  $("fnum").textContent = `${curF()} / ${proj.longueur}`;
+  $("undo").disabled = !undoStack.length; $("redo").disabled = !redoStack.length;
+  if (document.activeElement !== $("nom")) $("nom").value = proj.nom;
+  $("longueur").value = proj.longueur; $("boucle").checked = !!proj.boucle;
+  if (document.activeElement !== $("basenom")) $("basenom").value = proj.baseNom || "";
+  $("envnom").textContent = proj.nom;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => {
+    $("jeu").value = gameJSON();
+    if (document.activeElement !== $("projet")) $("projet").value = JSON.stringify(proj);
+    try { localStorage.setItem("animateur.projet", JSON.stringify(proj)); } catch (e) {}
+  }, light ? 400 : 60);
+}
+function loadedProject() { view.cxFixed = centerX(); trajCache = null; buildChans(); refresh(); }
+
+// ===================== Clavier =====================
+document.addEventListener("keydown", (e) => {
+  const tag = (e.target.tagName || "").toLowerCase();
+  if (tag === "input" && e.target.type !== "range" && e.target.type !== "checkbox" || tag === "textarea" || tag === "select") return;
+  const mod = e.ctrlKey || e.metaKey;
+  if (mod && e.key.toLowerCase() === "z") { e.preventDefault(); e.shiftKey ? redo() : undo(); return; }
+  if (mod && e.key.toLowerCase() === "y") { e.preventDefault(); redo(); return; }
+  if (mod && e.key.toLowerCase() === "c") { e.preventDefault(); copy(); return; }
+  if (mod && e.key.toLowerCase() === "v") { e.preventDefault(); paste(); return; }
+  if (tag === "input" && e.target.type === "range" && (e.key.startsWith("Arrow"))) return;
+  if (e.key === " ") { e.preventDefault(); play(); }
+  else if (e.key === "ArrowLeft") { e.preventDefault(); stop(); e.shiftKey ? jumpKey(-1) : setFrame(curF() - 1); }
+  else if (e.key === "ArrowRight") { e.preventDefault(); stop(); e.shiftKey ? jumpKey(1) : setFrame(curF() + 1); }
+  else if (e.key === "Home") { stop(); setFrame(0); }
+  else if (e.key === "End") { stop(); setFrame(proj.longueur); }
+  else if (e.key === "k" || e.key === "K") poseKey(selGroups);
+  else if (e.key === "Delete" || e.key === "Backspace") { e.preventDefault(); delSel(); }
+});
+for (const k of ["oignon", "trajet", "pieds", "loin", "lim"]) $("o-" + k).addEventListener("change", (e) => { opt[k] = e.target.checked; trajCache = null; drawScene(); });
+
+// ===================== Démarrage =====================
+buildLabels(); fillOpen(); loadedProject();
+window.addEventListener("resize", () => refresh());
+if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => refresh());
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => refresh());
+</script>
