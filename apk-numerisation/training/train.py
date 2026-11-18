@@ -30,6 +30,7 @@ ap.add_argument("--bs", type=int, default=8)
 ap.add_argument("--crop", type=int, default=192)
 ap.add_argument("--lr", type=float, default=2e-3)
 ap.add_argument("--resume", action="store_true")
+ap.add_argument("--pretrained", default=None, help="poids ImageNet de MobileNetV3 (IA 1)")
 args = ap.parse_args()
 torch.set_num_threads(4)
 os.makedirs(args.out, exist_ok=True)
@@ -48,12 +49,20 @@ def read_lab(p):
     return lab % 4, lab // 4
 
 
+def lin(x):
+    return torch.where(x <= 0.04045, x / 12.92, ((x + 0.055) / 1.055) ** 2.4)
+
+
+def srgb(x):
+    return torch.where(x <= 0.0031308, 12.92 * x, 1.055 * x.clamp(min=1e-8) ** (1 / 2.4) - 0.055)
+
+
 def to_t(a):
     return torch.from_numpy(np.ascontiguousarray(a)).permute(2, 0, 1).float()
 
 
-def run(model, loader_fn, loss_fn, minutes, name, val_fn=None):
-    opt = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=1e-4)
+def run(model, loader_fn, loss_fn, minutes, name, val_fn=None, groups=None):
+    opt = torch.optim.AdamW(groups or model.parameters(), lr=args.lr, weight_decay=1e-4)
     ck = os.path.join(args.out, name + ".pt")
     if args.resume and os.path.exists(ck):
         model.load_state_dict(torch.load(ck))
@@ -67,7 +76,7 @@ def run(model, loader_fn, loss_fn, minutes, name, val_fn=None):
                 break
             lr = args.lr * (0.03 + 0.97 * 0.5 * (1 + math.cos(math.pi * el / budget)))
             for g in opt.param_groups:
-                g["lr"] = lr
+                g["lr"] = lr * g.get("k", 1)
             loss = loss_fn(model, batch)
             opt.zero_grad()
             loss.backward()
@@ -112,6 +121,17 @@ if args.stage == "paper":
                 x, e = x.flip(3), e.flip(3)
             if torch.rand(1) < 0.5:
                 x, e = x.flip(2), e.flip(2)
+            # autre éclairage (couleur de lampe, exposition) : la photo change, pas la couleur du papier
+            n = len(b)
+            t = (torch.rand(n) * 2 - 1) * torch.where(torch.rand(n) < 0.35, 1.6, 1.0)
+            g = torch.stack([1 + 0.35 * t, torch.ones(n), 1 - 0.45 * t], 1).clamp(min=0.12)
+            g[:, 1] *= 1 + 0.06 * torch.randn(n)
+            g = g / g.amax(1, keepdim=True) * torch.empty(n, 1).uniform_(0.45, 1.25)
+            keep = torch.rand(n) < 0.3
+            g[keep] = 1
+            g = g[:, :, None, None]
+            x = srgb((lin(x) * g).clamp(0, 1))
+            e = srgb((lin(e) * g).clamp(0, 1))
             yield x, e, Pt[b]
 
     def loss_fn(m, b):
@@ -125,7 +145,11 @@ if args.stage == "paper":
         print("contrôle : erreur couleur papier moyenne %.1f / 255 (max %.1f), carte papier %.1f / 255"
               % (err.mean(), err.max(), (ee - Ev).abs().mean() * 255), flush=True)
 
-    run(PaperNet(), loader, loss_fn, args.minutes, "paper", val_fn)
+    net = PaperNet(args.pretrained)
+    base = list(net.f.parameters())
+    ids = {id(p) for p in base}
+    groups = [{"params": base, "k": 0.2}, {"params": [p for p in net.parameters() if id(p) not in ids], "k": 1.0}]
+    run(net, loader, loss_fn, args.minutes, "paper", val_fn, groups)
 
 elif args.stage == "cache1":
     m = PaperNet()

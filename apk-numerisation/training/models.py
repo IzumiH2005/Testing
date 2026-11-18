@@ -34,30 +34,91 @@ def normalize(photo, paperE):
     return enc(n)
 
 
-class PaperNet(nn.Module):
+# ---- MobileNetV3-Large (Howard et al. 2019), même structure que torchvision (licence BSD-3)
+#      pour pouvoir charger ses poids pré-entraînés sur ImageNet sans dépendre de torchvision.
+def _div8(v):
+    n = max(8, int(v + 4) // 8 * 8)
+    return n + 8 if n < 0.9 * v else n
+
+
+def _cna(i, o, k=1, s=1, g=1, act=nn.Hardswish):
+    L = [nn.Conv2d(i, o, k, s, (k - 1) // 2, groups=g, bias=False), nn.BatchNorm2d(o, eps=0.001, momentum=0.01)]
+    if act:
+        L.append(act(inplace=True))
+    return nn.Sequential(*L)
+
+
+class _SE(nn.Module):
+    def __init__(self, c, q):
+        super().__init__()
+        self.fc1, self.fc2 = nn.Conv2d(c, q, 1), nn.Conv2d(q, c, 1)
+
+    def forward(self, x):
+        return x * F.hardsigmoid(self.fc2(F.relu(self.fc1(x.mean((2, 3), keepdim=True)))))
+
+
+class _IR(nn.Module):
+    def __init__(self, i, k, e, o, se, act, s):
+        super().__init__()
+        L = [] if e == i else [_cna(i, e, act=act)]
+        L.append(_cna(e, e, k, s, e, act))
+        if se:
+            L.append(_SE(e, _div8(e // 4)))
+        L.append(_cna(e, o, act=None))
+        self.block, self.res = nn.Sequential(*L), s == 1 and i == o
+
+    def forward(self, x):
+        y = self.block(x)
+        return x + y if self.res else y
+
+
+_MBV3 = [(16, 3, 16, 16, 0, "RE", 1), (16, 3, 64, 24, 0, "RE", 2), (24, 3, 72, 24, 0, "RE", 1),
+         (24, 5, 72, 40, 1, "RE", 2), (40, 5, 120, 40, 1, "RE", 1), (40, 5, 120, 40, 1, "RE", 1),
+         (40, 3, 240, 80, 0, "HS", 2), (80, 3, 200, 80, 0, "HS", 1), (80, 3, 184, 80, 0, "HS", 1),
+         (80, 3, 184, 80, 0, "HS", 1), (80, 3, 480, 112, 1, "HS", 1), (112, 3, 672, 112, 1, "HS", 1),
+         (112, 5, 672, 160, 1, "HS", 2), (160, 5, 960, 160, 1, "HS", 1), (160, 5, 960, 160, 1, "HS", 1)]
+
+
+class MobileNetV3(nn.Module):
     def __init__(self):
         super().__init__()
-        self.e1 = cbr(3, 16, 2)                                  # 128
-        self.e2 = nn.Sequential(cbr(16, 32, 2), cbr(32, 32))     # 64
-        self.e3 = nn.Sequential(cbr(32, 64, 2), cbr(64, 64))     # 32
-        self.e4 = nn.Sequential(cbr(64, 96, 2), cbr(96, 96))     # 16
-        self.e5 = nn.Sequential(cbr(96, 128, 2), cbr(128, 128))  # 8
-        self.head = nn.Sequential(nn.Linear(256, 96), nn.ReLU(inplace=True), nn.Linear(96, 3))
-        self.d4 = cbr(128 + 96, 64)
-        self.d3 = cbr(64 + 64, 48)
-        self.d2 = nn.Sequential(cbr(48 + 32, 32), nn.Conv2d(32, 3, 3, 1, 1))
+        L = [_cna(3, 16, 3, 2)]
+        L += [_IR(i, k, e, o, se, nn.ReLU if a == "RE" else nn.Hardswish, s) for i, k, e, o, se, a, s in _MBV3]
+        L.append(_cna(160, 960))
+        self.features = nn.Sequential(*L)
+
+
+class PaperNet(nn.Module):
+    """IA 1. Base : MobileNetV3-Large pré-entraîné sur ImageNet (il sait déjà distinguer
+    couleurs, matières et éclairages), spécialisé ici pour retrouver la couleur du papier."""
+
+    def __init__(self, pretrained=None):
+        super().__init__()
+        bb = MobileNetV3()
+        if pretrained:
+            sd = {k: v for k, v in torch.load(pretrained).items() if k.startswith("features.")}
+            bb.load_state_dict(sd)
+        self.f = bb.features
+        self.register_buffer("mean", torch.tensor([0.485, 0.456, 0.406]).view(1, 3, 1, 1))
+        self.register_buffer("std", torch.tensor([0.229, 0.224, 0.225]).view(1, 3, 1, 1))
+        self.head = nn.Sequential(nn.Linear(1920, 192), nn.ReLU(inplace=True), nn.Linear(192, 3))
+        self.r = _cna(960, 96, act=nn.ReLU)
+        self.d4 = cbr(96 + 112, 64)
+        self.d3 = cbr(64 + 40, 48)
+        self.d2 = nn.Sequential(cbr(48 + 24, 32), nn.Conv2d(32, 3, 3, 1, 1))
 
     def forward(self, x):  # x [B,3,256,256] sRGB 0..1
-        e2 = self.e2(self.e1(x))
-        e3 = self.e3(e2)
-        e4 = self.e4(e3)
-        e5 = self.e5(e4)
-        g = torch.cat([e5.mean((2, 3)), e5.amax((2, 3))], 1)
+        h, keep = (x - self.mean) / self.std, {}
+        for i, m in enumerate(self.f):
+            h = m(h)
+            if i in (3, 6, 12):
+                keep[i] = h                                    # 64, 32, 16 px
+        g = torch.cat([h.mean((2, 3)), h.amax((2, 3))], 1)     # 8 px, 960 canaux
         paper = torch.sigmoid(self.head(g))
         up = lambda t: F.interpolate(t, scale_factor=2.0, mode="bilinear", align_corners=False)
-        d = self.d4(torch.cat([up(e5), e4], 1))
-        d = self.d3(torch.cat([up(d), e3], 1))
-        E = torch.sigmoid(self.d2(torch.cat([up(d), e2], 1)))  # [B,3,64,64]
+        d = self.d4(torch.cat([up(self.r(h)), keep[12]], 1))
+        d = self.d3(torch.cat([up(d), keep[6]], 1))
+        E = torch.sigmoid(self.d2(torch.cat([up(d), keep[3]], 1)))  # [B,3,64,64]
         return paper, E
 
 
