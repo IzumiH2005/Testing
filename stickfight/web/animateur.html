@@ -309,7 +309,7 @@ const col = (A, j) => [A[0][j], A[1][j], A[2][j]];
 const add = (a, b) => [a[0]+b[0], a[1]+b[1], a[2]+b[2]];
 const sc = (a, k) => [a[0]*k, a[1]*k, a[2]*k];
 
-const HAUT_Y = 95;   // vue de haut : hauteur à l'écran où l'on place le bassin
+const HAUT_Y = 95;   // vue de haut : hauteur à l'écran où l'on place le bassin (on y glisse peu à peu en montant)
 function solve(p) {
   const A = (id) => +(p.angles[id] || 0);
   const tip = {}, basis = {}, base3 = {};
@@ -339,8 +339,12 @@ function solve(p) {
     kneeN: tip.thighN, ankleN: tip.shinN, toeN: tip.footN, kneeF: tip.thighF, ankleF: tip.shinF, toeF: tip.footF };
   const J = {}, Z = {};
   pts3.nez = add(head3, sc(col(basis.neck, 1), -r * 0.72));   // devant du visage (sert à l'affichage de profondeur)
-  if (p.haut) for (const k in pts3) { const v = pts3[k]; pts3[k] = [v[0], v[2], -v[1]]; }   // vue de haut : la profondeur monte à l'écran, la hauteur devient la profondeur
-  const W = (v) => [p.x + f * v[0], (p.haut ? HAUT_Y : p.y) + v[1]];
+  // Caméra qui monte (tilt 0 = à hauteur, 90 = juste au-dessus) : rotation autour de l'axe x ;
+  // le fond de la scène monte à l'écran, ce qui est haut vient vers la caméra.
+  const tl = rad(p.tilt || 0), ct = Math.cos(tl), st = Math.sin(tl);
+  if (p.tilt) for (const k in pts3) { const v = pts3[k]; pts3[k] = [v[0], v[1] * ct + v[2] * st, v[2] * ct - v[1] * st]; }
+  const y0 = p.tilt ? p.y * ct + HAUT_Y * st : p.y;
+  const W = (v) => [p.x + f * v[0], y0 + v[1]];
   for (const k in pts3) { J[k] = W(pts3[k]); Z[k] = pts3[k][2]; }
   for (const s of ["N", "F"]) {
     J["shoulder" + s] = W(base3["arm" + s]); Z["shoulder" + s] = base3["arm" + s][2];
@@ -556,11 +560,11 @@ function valsAt(t, Q = P()) {
   for (const g of GRP) { const keys = Q.pistes[g.id]; for (const c of g.ch) v[c] = chanAt(Q, keys, c, t); }
   return v;
 }
-function poseFrom(v, camDeg) {
+function poseFrom(v, camDeg, tilt) {
   const angles = {};
   for (const c of ALLCH) if (c !== "x" && c !== "y" && c !== "facing") angles[c] = v[c];
   if (camDeg) angles.lacet = (angles.lacet || 0) + camDeg;
-  return { x: v.x, y: v.y, facing: v.facing, angles };
+  return { x: v.x, y: v.y, facing: v.facing, angles, tilt: tilt || 0 };
 }
 
 // ===================== État =====================
@@ -655,9 +659,9 @@ function centerX(Q = P()) {
   return s / n;
 }
 // Repères de profondeur (éditeur seulement) : point blanc au bout du pied (plein = pointe vers la caméra) et sur le visage.
-function drawFigure(ctx, V, v, cNear, cFar, alpha, camDeg, haut) {
+function drawFigure(ctx, V, v, cNear, cFar, alpha, camDeg, tilt) {
   const S = (p) => [V.ox + (p[0] - V.cx) * V.k, V.gy - p[1] * V.k];
-  const pf = poseFrom(v, camDeg); if (haut) pf.haut = true;
+  const pf = poseFrom(v, camDeg, tilt), haut = (tilt || 0) > 45;
   const { items, J } = primitives(pf, cNear, cFar);
   ctx.globalAlpha = alpha; ctx.lineCap = "round"; ctx.lineJoin = "round";
   const prof = opt.profondeur && alpha === 1;
@@ -692,9 +696,10 @@ const VUES = [[null, "Vue du jeu"], [-90, "Face"], [-45, "Trois quarts face"], [
 const norm180 = (a) => Math.round(((a % 360) + 540) % 360 - 180);
 function lacetPose() { try { return valsAt(curF()).lacet || 0; } catch (e) { return 0; } }
 function camPour(cible) { return cible === null ? 0 : norm180(cible - lacetPose()); }
-let vueHaut = false;   // caméra au-dessus du personnage (regarder seulement, les points ne se déplacent pas)
+let camTilt = 0;   // hauteur de la caméra : 0 = à hauteur du personnage, 90 = vue de haut (glisser vers le bas pour monter)
 let vueI = 0;   // index de la vue choisie au bouton (-1 : caméra tournée à la main)
-function vueNom() {
+function vueNom() { const n = vueNomPlat(); return camTilt > 0 ? `${n} · vue d'en haut ${Math.round(camTilt)}°` : n; }
+function vueNomPlat() {
   if (vueI >= 0 && cam === camPour(VUES[vueI][0])) return VUES[vueI][1];
   if (cam === 0) return VUES[0][1];
   const tot = norm180(cam + lacetPose()), v = VUES.find(x => x[0] !== null && x[0] === tot);
@@ -714,34 +719,34 @@ function drawScene() {
   for (let gx = -1000; gx <= 1000; gx += 10) { const sx = x0 + gx * k; if (sx < 0 || sx > w) continue; ctx.moveTo(sx, 0); ctx.lineTo(sx, view.gy); }
   for (let gy = 0; view.gy - gy * k > 0; gy += 10) { ctx.moveTo(0, view.gy - gy * k); ctx.lineTo(w, view.gy - gy * k); }
   ctx.stroke();
-  if (vueHaut) {   // vue de haut : pas de sol, on indique où est la caméra du jeu
+  if (camTilt > 60) {   // vue de haut : pas de sol, on indique où est la caméra du jeu
     ctx.fillStyle = css("--ground"); ctx.font = "12px system-ui, sans-serif"; ctx.textAlign = "center";
     ctx.fillText("▼ côté caméra (devant l'écran du jeu) ▼", w / 2, h - 8);
     ctx.fillText("▲ fond de la scène ▲", w / 2, 16); ctx.textAlign = "start";
-  } else { ctx.fillStyle = css("--ground"); ctx.fillRect(0, view.gy, w, h - view.gy); }
+  } else if (camTilt < 1) { ctx.fillStyle = css("--ground"); ctx.fillRect(0, view.gy, w, h - view.gy); }
   const t = playT ?? frame, Q = P();
   if (opt.oignon && playT == null) {
     const L = Q.longueur;
     for (const [df, c] of [[-3, "--onion-a"], [3, "--onion-b"]]) {
       let f2 = curF() + df;
       if (Q.boucle) f2 = ((f2 % L) + L) % L; else if (f2 < 0 || f2 > L) continue;
-      drawFigure(ctx, view, valsAt(f2), css(c), css(c), 0.2, cam, vueHaut);
+      drawFigure(ctx, view, valsAt(f2), css(c), css(c), 0.2, cam, camTilt);
     }
   }
-  const J = drawFigure(ctx, view, valsAt(t), css("--figure"), css("--figure-far"), 1, cam, vueHaut);
+  const J = drawFigure(ctx, view, valsAt(t), css("--figure"), css("--figure-far"), 1, cam, camTilt);
   lastJ = J;
-  if (opt.trajet && selHandle && playT == null && !vueHaut) {
-    if (!trajCache || trajCache.cam !== cam || trajCache.h !== selHandle) {
+  if (opt.trajet && selHandle && playT == null) {
+    if (!trajCache || trajCache.cam !== cam || trajCache.t !== camTilt || trajCache.h !== selHandle) {
       const pts = [];
-      for (let f = 0; f <= Q.longueur; f++) pts.push(solve(poseFrom(valsAt(f), cam)).J[selHandle]);
-      trajCache = { cam, h: selHandle, pts };
+      for (let f = 0; f <= Q.longueur; f++) pts.push(solve(poseFrom(valsAt(f), cam, camTilt)).J[selHandle]);
+      trajCache = { cam, t: camTilt, h: selHandle, pts };
     }
     ctx.strokeStyle = css("--trail"); ctx.globalAlpha = 0.5; ctx.lineWidth = 1.5; ctx.beginPath();
     trajCache.pts.forEach((p, i) => { const s = S(p); i ? ctx.lineTo(s[0], s[1]) : ctx.moveTo(s[0], s[1]); }); ctx.stroke();
     ctx.globalAlpha = 1; ctx.fillStyle = css("--trail");
     trajCache.pts.forEach((p) => { const s = S(p); ctx.beginPath(); ctx.arc(s[0], s[1], 1.6, 0, Math.PI * 2); ctx.fill(); });
   }
-  if (playT == null && !vueHaut) {
+  if (playT == null) {
     const col = mode === "prof" ? css("--depth") : "#2b5fd9";
     for (const hk in HANDLES) {
       if (!handleVisible(hk)) continue;
@@ -752,7 +757,8 @@ function drawScene() {
     }
   }
   $("vue").textContent = vueNom();
-  $("haut").setAttribute("aria-pressed", String(vueHaut));
+  $("haut").setAttribute("aria-pressed", String(camTilt > 0));
+  $("haut").textContent = camTilt > 0 ? `Hauteur ${Math.round(camTilt)}°` : "Vue de haut";
 }
 const toWorld = (sx, sy) => [(sx - view.ox) / view.k + view.cx, (view.gy - sy) / view.k];
 
@@ -774,26 +780,30 @@ const sceneCv = $("scene");
 sceneCv.addEventListener("pointerdown", (e) => {
   const r = sceneCv.getBoundingClientRect(), sx = e.clientX - r.left, sy = e.clientY - r.top;
   stop();
-  const hk = vueHaut ? null : hitHandle(sx, sy, e.pointerType !== "mouse");
+  const hk = hitHandle(sx, sy, e.pointerType !== "mouse");
   sceneCv.setPointerCapture(e.pointerId);
   if (hk) {
     if (hk !== selHandle) selectHandle(hk);
-    const f = curF(), v = valsAt(f), p = solve(poseFrom(v, cam)).J[hk], w = toWorld(sx, sy);
+    const f = curF(), v = valsAt(f), p = solve(poseFrom(v, cam, camTilt)).J[hk], w = toWorld(sx, sy);
     sdrag = { hk, f, off: [p[0] - w[0], p[1] - w[1]], v0: v, w0: w, sx0: sx, pins: footPins(v) };
     beginEdit();
-  } else sdrag = { cam: true, x: e.clientX, c: cam, moved: false };
+  } else sdrag = { cam: true, x: e.clientX, y: e.clientY, c: cam, t: camTilt, moved: false };
 });
 sceneCv.addEventListener("pointermove", (e) => {
   if (!sdrag) return;
   const r = sceneCv.getBoundingClientRect(), sx = e.clientX - r.left, sy = e.clientY - r.top;
-  if (sdrag.cam) { if (Math.abs(e.clientX - sdrag.x) > 4) sdrag.moved = true; if (sdrag.moved) setCam(sdrag.c + (e.clientX - sdrag.x) * 0.6, true); return; }
+  if (sdrag.cam) {   // gauche / droite : tourner autour ; bas / haut : monter / descendre la caméra
+    if (Math.hypot(e.clientX - sdrag.x, e.clientY - sdrag.y) > 4) sdrag.moved = true;
+    if (sdrag.moved) { camTilt = Math.max(0, Math.min(90, sdrag.t + (e.clientY - sdrag.y) * 0.5)); if (camTilt < 2) camTilt = 0; setCam(sdrag.c + (e.clientX - sdrag.x) * 0.6, true); updHint(); }
+    return;
+  }
   const H = HANDLES[sdrag.hk], w = toWorld(sx, sy), target = [w[0] + sdrag.off[0], w[1] + sdrag.off[1]];
   const v = valsAt(sdrag.f);
   if (H.move) {
     if (mode === "prof") {   // en profondeur, le bassin fait tourner le corps
       setVals(sdrag.f, { lacet: sdrag.v0.lacet + (sx - sdrag.sx0) * 0.5 });
     } else {
-      v.x = sdrag.v0.x + (w[0] - sdrag.w0[0]); v.y = sdrag.v0.y + (w[1] - sdrag.w0[1]);
+      v.x = sdrag.v0.x + (w[0] - sdrag.w0[0]); if (!camTilt) v.y = sdrag.v0.y + (w[1] - sdrag.w0[1]);   // caméra montée : le bassin ne glisse que sur x
       const out = { x: v.x, y: v.y };
       if (opt.pieds) { replant(v, sdrag.pins); for (const c of LEGCH) out[c] = v[c]; }
       setVals(sdrag.f, out);
@@ -801,8 +811,8 @@ sceneCv.addEventListener("pointermove", (e) => {
   } else {
     // Dans le plan : le point garde sa profondeur (il glisse sur l'écran, jamais vers toi ou loin de toi).
     const chans = mode === "prof" ? H.prof : [...H.plan, ...H.prof.filter(c => !c.endsWith("_r"))];
-    if (sdrag.z0 == null) sdrag.z0 = solve(poseFrom(sdrag.v0, cam)).Z[sdrag.hk];
-    dls(v, chans, (w2) => { const s = solve(poseFrom(w2, cam)), p = s.J[sdrag.hk];
+    if (sdrag.z0 == null) sdrag.z0 = solve(poseFrom(sdrag.v0, cam, camTilt)).Z[sdrag.hk];
+    dls(v, chans, (w2) => { const s = solve(poseFrom(w2, cam, camTilt)), p = s.J[sdrag.hk];
       if (mode === "prof") return [p[0] - target[0], p[1] - target[1]];
       // Sur l'écran : la profondeur coûte cher, le bras se lève et se plie avant de passer devant le corps.
       const r = [p[0] - target[0], p[1] - target[1], 1.5 * (s.Z[sdrag.hk] - sdrag.z0)];
@@ -819,7 +829,7 @@ sceneCv.addEventListener("pointermove", (e) => {
 function setCam(c, keep) {
   cam = Math.round(((c + 180) % 360 + 360) % 360 - 180); trajCache = null; drawScene();
 }
-$("haut").addEventListener("click", () => { vueHaut = !vueHaut; trajCache = null; updHint(); drawScene(); });
+$("haut").addEventListener("click", () => { camTilt = camTilt > 0 ? 0 : 90; trajCache = null; updHint(); drawScene(); });
 $("vue").addEventListener("click", () => {
   const tot = norm180(cam + lacetPose());
   let i = vueI >= 0 && cam === camPour(VUES[vueI][0]) ? vueI : cam === 0 ? 0 : VUES.findIndex(x => x[0] !== null && x[0] === tot);
@@ -835,7 +845,7 @@ function setMode(m) {
 function updHint() {
   const h = $("hint");
   h.classList.toggle("prof", mode === "prof");
-  h.textContent = vueHaut ? "Vue de haut : on regarde seulement (les points ne se déplacent pas). Glisse pour tourner la caméra ; le bas de l'image est le côté de la caméra du jeu."
+  h.textContent = camTilt > 0 ? `Caméra montée de ${Math.round(camTilt)}° : glisse vers le bas pour monter encore, vers le haut pour redescendre, de côté pour tourner. Le bassin ne bouge qu'en avant / arrière.`
     : mode === "prof"
     ? "En profondeur : glisser écarte, rapproche ou tourne le point choisi (vue de face pour bien voir). Ou utilise les réglages violets."
     : "Attrape un point et déplace-le : il reste à sa profondeur. Pour la changer, choisis « En profondeur » ou les réglages violets. Glisse ailleurs pour tourner la caméra.";
