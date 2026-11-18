@@ -21,6 +21,7 @@ DATA = os.path.join(ICI, "..", "mannequin")
 # vers le repère du stickman (x devant, y en haut, z négatif = côté caméra = côté N).
 # Le côté N (proche) est porté par les os « _r », le côté F par les « _l ».
 M2W = np.array([[0, -1, 0], [0, 0, 1], [1, 0, 0]], float)
+SOL = -84.0  # hauteur du sol dans le repère du stickman
 
 
 def charger_mannequin():
@@ -63,6 +64,7 @@ def poser(V, F, rig, W, vue, echelle):
     # Membres : direction des segments + plan de flexion.
     membres = [("upperarm", "lowerarm", "shoulder", "elbow", "hand", "arm"),
                ("thigh", "calf", "hip", "knee", "ankle", "thigh")]
+    sol_stick = min(P[k][1] for k in ("ankleN", "ankleF", "toeN", "toeF"))
     for cote_m, cote_s in (("r", "N"), ("l", "F")):
         for haut, bas, a, b, c, os_s in membres:
             hn, bn = f"{haut}_{cote_m}", f"{bas}_{cote_m}"
@@ -88,6 +90,17 @@ def poser(V, F, rig, W, vue, echelle):
         d0[1] = 0.0
         d = P["toe" + cote_s] - P["ankle" + cote_s]
         R[fn] = _pied(R[f"calf_{cote_m}"], d0, d)
+        # Orteils : quand le pied est en appui (orteil du stickman au sol) et le talon
+        # levé, ils se plient à la base (articulation métatarso-phalangienne) pour rester
+        # à plat au lieu de piquer dans le sol. En l'air, ils restent dans l'axe du pied.
+        bn = f"ball_{cote_m}"
+        t = R[fn] @ (queue[bn] - tete[bn])
+        if P["toe" + cote_s][1] < sol_stick + 4 and t[1] < 0:
+            th = np.array([t[0], 0.0, t[2]])
+            ax = unit(np.cross(t, th))
+            ang = min(np.arccos(np.clip(np.dot(unit(t), unit(th)), -1, 1)), np.radians(60))
+            from scipy.spatial.transform import Rotation as _Ro
+            R[bn] = _Ro.from_rotvec(ax * ang).as_matrix() @ R[fn]
     # Os non pilotés : rotation du parent.
     def rot(b):
         while b not in R:
@@ -194,12 +207,18 @@ def main():
     axs = np.atleast_1d(axs)
     for ax, vue in zip(axs, vues):
         Vp, pos = poser(V, F, rig, W, vue, echelle)
+        if os.environ.get("MANNEQUIN_PIEDS"):
+            for cote_m, cote_s in (("r", "N"), ("l", "F")):
+                idx = [i for b in (f"foot_{cote_m}", f"ball_{cote_m}") for i, x in W[b] if x > 0.5]
+                q = Vp[idx]
+                print(f"pied {cote_s} lacet {vue['lacet']:.0f}: point le plus bas {q[:, 1].min() - SOL:+.1f}"
+                      f" (talon/arrière {q[q[:, 0].argmin(), 1] - SOL:+.1f})")
         dessiner(ax, Vp, F, vue, pos, stick=not a.sans_stick)
         ax.set_aspect("equal")
         x0, x1, y0, y1 = [float(c) for c in a.cadre.split(",")] if a.cadre else (-75, 75, -95, 100)
         ax.set_xlim(x0, x1)
         ax.set_ylim(y0, y1)
-        ax.axhline(-84, color="#999", lw=1)
+        ax.axhline(SOL, color="#999", lw=1)
         ax.set_title(f"{data['pose']}\n{noms.get(float(vue['lacet']), vue['lacet'])}", fontsize=9)
         ax.axis("off")
     fig.text(0.5, 0.02, "rouge : côté proche (N)   bleu : côté loin (F)   membres du stickman recalés sur les épaules et hanches du mannequin", ha="center", fontsize=8, color="#555")
