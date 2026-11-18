@@ -24,9 +24,9 @@
    profil : `tools/anim.sh anims/x.json --cles --vues -o vues.png --scale 1` (une ligne par vue :
    face, trois quarts face, profil, puis la vue du jeu). Les vues sont **absolues** (lacet total,
    quel que soit le lacet de la pose) : **profil = 0°** (regard à droite ; 180° regard à gauche),
-   **face = −90°**, **trois quarts face = −45°**, trois quarts dos = +45°, dos = +90°. Dans
+   **face = +90°**, **trois quarts face = +45°**, trois quarts dos = −45°, dos = −90° (lacet positif = le corps se tourne vers la caméra). Dans
    l'éditeur, caméra = lacet visé − lacet de la pose. Pour une pose seule :
-   `tools/rendu.sh … --set lacet=-90`, puis `lacet=-45`, puis `lacet=0`.
+   `tools/rendu.sh … --set lacet=90`, puis `lacet=45`, puis `lacet=0`.
 3. **Construire pose par pose, comme un mannequin.** Poser la première clé, la vérifier, la
    corriger, puis seulement passer à la suivante. Vérifier en texte (`tools/anim.sh … --verifier`)
    et regarder une seule petite image par groupe de clés (`--cles --scale 1`).

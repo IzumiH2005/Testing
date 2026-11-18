@@ -692,7 +692,7 @@ function drawFigure(ctx, V, v, cNear, cFar, alpha, camDeg, tilt) {
 // Vues absolues : la caméra s'ajoute au lacet de la pose, on vise un lacet total.
 // Lacet total 0 = profil (regarde à droite), -90 = face, +90 = dos, -45 = trois quarts face, +45 = trois quarts dos.
 // (Regard à gauche : profil = 180.)  null = vue du jeu (caméra 0).
-const VUES = [[null, "Vue du jeu"], [-90, "Face"], [-45, "Trois quarts face"], [0, "Profil"], [45, "Trois quarts dos"], [90, "Dos"]];
+const VUES = [[null, "Vue du jeu"], [90, "Face"], [45, "Trois quarts face"], [0, "Profil"], [-45, "Trois quarts dos"], [-90, "Dos"]];
 const norm180 = (a) => Math.round(((a % 360) + 540) % 360 - 180);
 function lacetPose() { try { return valsAt(curF()).lacet || 0; } catch (e) { return 0; } }
 function camPour(cible) { return cible === null ? 0 : norm180(cible - lacetPose()); }

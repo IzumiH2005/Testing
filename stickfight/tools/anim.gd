@@ -32,10 +32,12 @@ extends SceneTree
 ## --cles        planche des seules images clés (et du contact), pas toutes
 ## --vues        chaque image sous quatre angles, une ligne par angle : de face,
 ##               de trois quarts face, de profil, puis la vue du jeu. Vues absolues
-##               (lacet total imposé, quel que soit le lacet de la pose) : face = -90°,
-##               trois quarts face = -45°, profil = 0° (regard à droite ; 180° à
-##               gauche), dos = +90° ; la vue du jeu garde le lacet de la pose.
+##               (lacet total imposé, quel que soit le lacet de la pose) : face = +90°,
+##               trois quarts face = +45°, profil = 0° (regard à droite ; 180° à
+##               gauche), dos = -90° ; la vue du jeu garde le lacet de la pose.
 ##               Pour vérifier qu'aucun axe n'est oublié
+## --angles a,b,…  comme --vues, avec ses propres angles (lacets absolus), une ligne par
+##               angle : balayage progressif de la caméra, ex. 90,75,60,45,30,15,0
 ##
 ## Une animation seule est jouée sans enchaîner sur « suivante ».
 
@@ -60,7 +62,7 @@ func _abs(path: String) -> String:
 func _parse(argv: PackedStringArray) -> Dictionary:
 	var a := {"file": "", "out": "", "strobe": "", "images": "", "de": -1, "a": -1, "pas": 1, "cols": 6,
 		"suivre": [], "vue": [], "scale": 2.0, "debug": false, "print": false, "boucles": 1,
-		"verifier": false, "cles": false, "vues": false, "camera": 0.0}
+		"verifier": false, "cles": false, "vues": false, "camera": 0.0, "angles": []}
 	var i := 0
 	while i < argv.size():
 		var k := argv[i]
@@ -80,6 +82,10 @@ func _parse(argv: PackedStringArray) -> Dictionary:
 			"--camera":
 				i += 1
 				a.camera = float(argv[i])
+			"--angles":
+				i += 1
+				a.vues = true
+				a.angles = Array(argv[i].split(",")).map(func(s): return float(s))
 			"--suivre":
 				i += 1
 				a.suivre = Array(argv[i].split(","))
@@ -243,7 +249,7 @@ func _run() -> void:
 		# Une ligne par angle de vue ; sans effets (ils ont été calculés de profil).
 		var n0 := sel.size()
 		var lignes := []
-		for lac in [-90.0, -45.0, 0.0, null]:
+		for lac in (a.angles if not a.angles.is_empty() else [90.0, 45.0, 0.0, null]):
 			for r in sel:
 				var r2: Dictionary = r.duplicate(true)
 				r2.vfx = []

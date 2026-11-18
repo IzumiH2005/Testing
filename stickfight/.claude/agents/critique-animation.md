@@ -18,7 +18,7 @@ Réponds en français.
 ## Ce qu'on te donne
 
 - le nom de l'animation et le dossier d'images préparé par `tools/critique.sh` :
-  `cles_vues.png` (chaque clé : ligne 1 face, ligne 2 trois quarts face, ligne 3 profil, ligne 4 vue du jeu ; lacets totaux absolus : face = −90°, trois quarts face = −45°, profil = 0°), numéro de
+  `cles_vues.png` (chaque clé : ligne 1 face, ligne 2 trois quarts face, ligne 3 profil, ligne 4 vue du jeu ; lacets totaux absolus : face = +90°, trois quarts face = +45°, profil = 0°), numéro de
   l'image sous chaque vignette), `profil.png` (une image sur 4), `profil_fin.png` (une sur 2
   sur le passage important), `zoom.png` (cadrage serré), `verifier.txt` ;
 - la fiche `analyses/<nom>.md` (intention, anatomie, poses clés, contrôles chiffrés) ;
