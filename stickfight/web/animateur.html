@@ -72,7 +72,8 @@ select { font: 400 13.5px var(--f-body); min-height: 40px; padding: 0 8px; borde
 .stage { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; height: min(56vh, 560px); min-height: 280px; touch-action: none; }
 .stage canvas { width: 100%; height: 100%; display: block; }
 .ov { position: absolute; display: flex; gap: 6px; align-items: center; }
-.ov.tl { left: 8px; top: 8px; } .ov.tr { right: 8px; top: 8px; } .ov.bl { left: 8px; bottom: 8px; right: 8px; }
+.ov.tl { left: 8px; top: 8px; } .ov.tr { right: 8px; top: 8px; display: flex; gap: 6px; }
+.pill[aria-pressed="true"] { background: #2b5fd9; color: #fff; border-color: #2b5fd9; } .ov.bl { left: 8px; bottom: 8px; right: 8px; }
 .mode { display: inline-flex; border-radius: 10px; overflow: hidden; border: 1px solid #c3c9d2; background: rgba(255,255,255,.92); }
 .mode button { border: 0; background: transparent; color: #1a1d23; font: 600 12.5px var(--f-body); padding: 0 11px; min-height: 36px; cursor: pointer; }
 .mode button + button { border-left: 1px solid #c3c9d2; }
@@ -185,7 +186,8 @@ kbd { font: 500 10.5px var(--f-mono); border: 1px solid var(--line); border-bott
   <section class="stagewrap" aria-label="Scène">
     <div class="stage" id="stage">
       <canvas id="scene" tabindex="0" aria-label="Scène : attrape un point pour bouger le corps"></canvas>
-      <div class="ov tr"><button class="pill" id="vue" title="Changer de vue">Vue du jeu</button></div>
+      <div class="ov tr"><button class="pill" id="vue" title="Changer de vue">Vue du jeu</button>
+        <button class="pill" id="haut" aria-pressed="false" title="Regarder le personnage d'au-dessus (glisser pour tourner)">Vue de haut</button></div>
     </div>
     <p class="hint" id="hint"></p>
     <div class="toggles">
@@ -307,6 +309,7 @@ const col = (A, j) => [A[0][j], A[1][j], A[2][j]];
 const add = (a, b) => [a[0]+b[0], a[1]+b[1], a[2]+b[2]];
 const sc = (a, k) => [a[0]*k, a[1]*k, a[2]*k];
 
+const HAUT_Y = 95;   // vue de haut : hauteur à l'écran où l'on place le bassin
 function solve(p) {
   const A = (id) => +(p.angles[id] || 0);
   const tip = {}, basis = {}, base3 = {};
@@ -335,8 +338,9 @@ function solve(p) {
     elbowN: tip.armN, handN: tip.foreN, elbowF: tip.armF, handF: tip.foreF,
     kneeN: tip.thighN, ankleN: tip.shinN, toeN: tip.footN, kneeF: tip.thighF, ankleF: tip.shinF, toeF: tip.footF };
   const J = {}, Z = {};
-  const W = (v) => [p.x + f * v[0], p.y + v[1]];
   pts3.nez = add(head3, sc(col(basis.neck, 1), -r * 0.72));   // devant du visage (sert à l'affichage de profondeur)
+  if (p.haut) for (const k in pts3) { const v = pts3[k]; pts3[k] = [v[0], v[2], -v[1]]; }   // vue de haut : la profondeur monte à l'écran, la hauteur devient la profondeur
+  const W = (v) => [p.x + f * v[0], (p.haut ? HAUT_Y : p.y) + v[1]];
   for (const k in pts3) { J[k] = W(pts3[k]); Z[k] = pts3[k][2]; }
   for (const s of ["N", "F"]) {
     J["shoulder" + s] = W(base3["arm" + s]); Z["shoulder" + s] = base3["arm" + s][2];
@@ -658,9 +662,10 @@ function couleurProf(dz, cote) {
   if (cote === "F") return `hsl(24 85% ${L}%)`;
   return `hsl(220 8% ${L}%)`;
 }
-function drawFigure(ctx, V, v, cNear, cFar, alpha, camDeg) {
+function drawFigure(ctx, V, v, cNear, cFar, alpha, camDeg, haut) {
   const S = (p) => [V.ox + (p[0] - V.cx) * V.k, V.gy - p[1] * V.k];
-  const { items, J } = primitives(poseFrom(v, camDeg), cNear, cFar);
+  const pf = poseFrom(v, camDeg); if (haut) pf.haut = true;
+  const { items, J } = primitives(pf, cNear, cFar);
   ctx.globalAlpha = alpha; ctx.lineCap = "round"; ctx.lineJoin = "round";
   const prof = opt.profondeur && alpha === 1;
   for (const it of items) {
@@ -682,7 +687,9 @@ function drawFigure(ctx, V, v, cNear, cFar, alpha, camDeg) {
       } else { ctx.beginPath(); it.pts.forEach((p, i) => { const s = S(p); i ? ctx.lineTo(s[0], s[1]) : ctx.moveTo(s[0], s[1]); }); ctx.stroke(); }
     } else {
       if (prof) ctx.fillStyle = couleurProf(it.zc - it.zh, it.cote);
+      if (haut && it.tete) ctx.globalAlpha = alpha * 0.45;   // de haut, la tête ne doit pas cacher les épaules
       const s = S(it.ctr); ctx.beginPath(); ctx.arc(s[0], s[1], it.r * V.k, 0, Math.PI * 2); ctx.fill();
+      ctx.globalAlpha = alpha;
       if (prof && it.tete && it.znez <= it.zc + it.r * 0.3) {   // visage : point blanc s'il est tourné vers la caméra (rien de dos)
         const n = S(J.nez); ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(n[0], n[1], it.r * V.k * 0.2, 0, Math.PI * 2); ctx.fill();
       }
@@ -698,6 +705,7 @@ const VUES = [[null, "Vue du jeu"], [-90, "Face"], [-45, "Trois quarts face"], [
 const norm180 = (a) => Math.round(((a % 360) + 540) % 360 - 180);
 function lacetPose() { try { return valsAt(curF()).lacet || 0; } catch (e) { return 0; } }
 function camPour(cible) { return cible === null ? 0 : norm180(cible - lacetPose()); }
+let vueHaut = false;   // caméra au-dessus du personnage (regarder seulement, les points ne se déplacent pas)
 let vueI = 0;   // index de la vue choisie au bouton (-1 : caméra tournée à la main)
 function vueNom() {
   if (vueI >= 0 && cam === camPour(VUES[vueI][0])) return VUES[vueI][1];
@@ -719,19 +727,23 @@ function drawScene() {
   for (let gx = -1000; gx <= 1000; gx += 10) { const sx = x0 + gx * k; if (sx < 0 || sx > w) continue; ctx.moveTo(sx, 0); ctx.lineTo(sx, view.gy); }
   for (let gy = 0; view.gy - gy * k > 0; gy += 10) { ctx.moveTo(0, view.gy - gy * k); ctx.lineTo(w, view.gy - gy * k); }
   ctx.stroke();
-  ctx.fillStyle = css("--ground"); ctx.fillRect(0, view.gy, w, h - view.gy);
+  if (vueHaut) {   // vue de haut : pas de sol, on indique où est la caméra du jeu
+    ctx.fillStyle = css("--ground"); ctx.font = "12px system-ui, sans-serif"; ctx.textAlign = "center";
+    ctx.fillText("▼ côté caméra (devant l'écran du jeu) ▼", w / 2, h - 8);
+    ctx.fillText("▲ fond de la scène ▲", w / 2, 16); ctx.textAlign = "start";
+  } else { ctx.fillStyle = css("--ground"); ctx.fillRect(0, view.gy, w, h - view.gy); }
   const t = playT ?? frame, Q = P();
   if (opt.oignon && playT == null) {
     const L = Q.longueur;
     for (const [df, c] of [[-3, "--onion-a"], [3, "--onion-b"]]) {
       let f2 = curF() + df;
       if (Q.boucle) f2 = ((f2 % L) + L) % L; else if (f2 < 0 || f2 > L) continue;
-      drawFigure(ctx, view, valsAt(f2), css(c), css(c), 0.2, cam);
+      drawFigure(ctx, view, valsAt(f2), css(c), css(c), 0.2, cam, vueHaut);
     }
   }
-  const J = drawFigure(ctx, view, valsAt(t), css("--figure"), css("--figure-far"), 1, cam);
+  const J = drawFigure(ctx, view, valsAt(t), css("--figure"), css("--figure-far"), 1, cam, vueHaut);
   lastJ = J;
-  if (opt.trajet && selHandle && playT == null) {
+  if (opt.trajet && selHandle && playT == null && !vueHaut) {
     if (!trajCache || trajCache.cam !== cam || trajCache.h !== selHandle) {
       const pts = [];
       for (let f = 0; f <= Q.longueur; f++) pts.push(solve(poseFrom(valsAt(f), cam)).J[selHandle]);
@@ -742,7 +754,7 @@ function drawScene() {
     ctx.globalAlpha = 1; ctx.fillStyle = css("--trail");
     trajCache.pts.forEach((p) => { const s = S(p); ctx.beginPath(); ctx.arc(s[0], s[1], 1.6, 0, Math.PI * 2); ctx.fill(); });
   }
-  if (playT == null) {
+  if (playT == null && !vueHaut) {
     const col = mode === "prof" ? css("--depth") : "#2b5fd9";
     for (const hk in HANDLES) {
       if (!handleVisible(hk)) continue;
@@ -753,6 +765,7 @@ function drawScene() {
     }
   }
   $("vue").textContent = vueNom();
+  $("haut").setAttribute("aria-pressed", String(vueHaut));
 }
 const toWorld = (sx, sy) => [(sx - view.ox) / view.k + view.cx, (view.gy - sy) / view.k];
 
@@ -774,7 +787,7 @@ const sceneCv = $("scene");
 sceneCv.addEventListener("pointerdown", (e) => {
   const r = sceneCv.getBoundingClientRect(), sx = e.clientX - r.left, sy = e.clientY - r.top;
   stop();
-  const hk = hitHandle(sx, sy, e.pointerType !== "mouse");
+  const hk = vueHaut ? null : hitHandle(sx, sy, e.pointerType !== "mouse");
   sceneCv.setPointerCapture(e.pointerId);
   if (hk) {
     if (hk !== selHandle) selectHandle(hk);
@@ -819,6 +832,7 @@ sceneCv.addEventListener("pointermove", (e) => {
 function setCam(c, keep) {
   cam = Math.round(((c + 180) % 360 + 360) % 360 - 180); trajCache = null; drawScene();
 }
+$("haut").addEventListener("click", () => { vueHaut = !vueHaut; trajCache = null; updHint(); drawScene(); });
 $("vue").addEventListener("click", () => {
   const tot = norm180(cam + lacetPose());
   let i = vueI >= 0 && cam === camPour(VUES[vueI][0]) ? vueI : cam === 0 ? 0 : VUES.findIndex(x => x[0] !== null && x[0] === tot);
@@ -834,7 +848,8 @@ function setMode(m) {
 function updHint() {
   const h = $("hint");
   h.classList.toggle("prof", mode === "prof");
-  h.textContent = mode === "prof"
+  h.textContent = vueHaut ? "Vue de haut : on regarde seulement (les points ne se déplacent pas). Glisse pour tourner la caméra ; le bas de l'image est le côté de la caméra du jeu."
+    : mode === "prof"
     ? "En profondeur : glisser écarte, rapproche ou tourne le point choisi (vue de face pour bien voir). Ou utilise les réglages violets."
     : "Attrape un point et déplace-le : il reste à sa profondeur. Pour la changer, choisis « En profondeur » ou les réglages violets. Glisse ailleurs pour tourner la caméra.";
 }
