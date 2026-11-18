@@ -505,6 +505,7 @@ scripts/demo.gd           scène de démo
 tools/rendu.gd, rendu.sh  rendu PNG d'une pose
 tools/mannequin.sh        mannequin 3D réaliste (MakeHuman, CC0) posé comme le stickman, 3 vues
                           (pose3d.gd exporte la pose 3D, mannequin.py pose et rend ; Python : numpy, scipy, matplotlib)
+                          --set k=v,k+=n essaie des angles sans toucher à la pose ; --set lacet=0 donne les vraies vues
 mannequin/                maillage, os et poids du mannequin (CC0, voir mannequin/LICENCE.md)
 tools/anim.gd, anim.sh    planche, stroboscopie, GIF, vidéo d'une animation
 tools/gen_demi_tour.gd    génère anims/demi_tour.json (rotation 3D projetée)
