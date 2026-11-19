@@ -9,7 +9,7 @@ import numpy as np
 import torch
 
 from common import color_name_fr, measure_bg
-from finish import reprint_clean
+from finish import enhance_photo, page_mode, reprint_clean
 from models import PaperNet, SelectNet, sel_probs
 
 md, src, dst = sys.argv[1:4]
@@ -37,6 +37,15 @@ with torch.no_grad():
 bg, gain, how = measure_bg(x5, sel)
 if os.environ.get("PAPER"):
     bg, how = np.array([float(v) for v in os.environ["PAPER"].split(",")], np.float32) / 255, "imposé"
+mode, paper = page_mode(sel)
+if os.environ.get("MODE"):
+    mode = os.environ["MODE"]
+print(f"mode {mode} · papier {paper:.0%} de la page", flush=True)
+if mode == "photo":
+    out = enhance_photo(ph, out_long)
+    cv2.imwrite(dst, (out[..., ::-1] * 255 + 0.5).clip(0, 255).astype(np.uint8))
+    print("taille", out.shape[1], "x", out.shape[0], "· %.1f s" % (time.time() - t0))
+    sys.exit(0)
 out, pal, bg, flat = reprint_clean(ph, sel, bg, gain, out_long, return_debug=True)
 if os.environ.get("FLAT"):
     cv2.imwrite(os.environ["FLAT"], (flat[..., ::-1] * 255 + 0.5).clip(0, 255).astype(np.uint8))

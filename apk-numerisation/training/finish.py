@@ -837,6 +837,54 @@ def conserve_ink(tb, pa, pb, lin_s, pal_lin, K, lo=0.42, hi=float(os.environ.get
     return out
 
 
+PHOTO_MAX_PAPER = 0.3
+
+
+def page_mode(sel):
+    """Choix automatique du traitement, d'après l'IA 2 (tri) :
+    - 'reprint' : une feuille (papier + encres) -> réimpression nette en aplats ;
+    - 'photo'   : une page presque entièrement imprimée (couverture, affiche, photo) : pas de papier
+                  à reconstruire, des dégradés et des reflets partout -> on garde l'image redressée
+                  et on l'améliore seulement (couleurs, contraste, bruit, netteté).
+    -> (mode, part de papier)"""
+    paper = float((sel[..., 0] > 0.6).mean())
+    return ('photo' if paper < PHOTO_MAX_PAPER else 'reprint'), paper
+
+
+def enhance_photo(ph, out_long=2400):
+    """Mode photo : image redressée améliorée, sans réimpression.
+    1. balance des blancs : le blanc le plus clair et peu coloré de la page (lettres blanches, bande
+       blanche) sert de référence -> la teinte de la lampe ou du jour est retirée ;
+    2. niveaux : noirs un peu plus profonds, blanc de référence remis à 96 % ;
+    3. bruit du capteur retiré en gardant les bords, puis netteté douce."""
+    ph = ph.astype(np.float32)
+    p = ph.reshape(-1, 3)
+    L = p.mean(1)
+    sat = (p.max(1) - p.min(1)) / np.maximum(p.max(1), 1e-3)
+    w = (L > np.quantile(L, 0.97)) & (sat < 0.3)
+    gain = np.ones(3, np.float32)
+    if w.sum() > 0.002 * len(p):
+        ref = np.median(p[w], 0)
+        gain = np.clip(0.96 / np.maximum(ref, 1e-3), 0.75, 1.5).astype(np.float32)
+        print('  balance des blancs sur', (ref * 255).round().astype(int), flush=True)
+    out = np.clip(ph * gain, 0, 1)
+    lo = np.quantile(out.reshape(-1, 3), 0.003, axis=0)
+    lo = np.minimum(lo, 0.12)
+    out = np.clip((out - lo) / np.maximum(1 - lo, 1e-3), 0, 1)
+    H, W = out.shape[:2]
+    k = out_long / max(H, W)
+    if k < 1:
+        out = cv2.resize(out, (round(W * k), round(H * k)), interpolation=cv2.INTER_AREA)
+    u8 = (out * 255 + 0.5).astype(np.uint8)
+    u8 = cv2.fastNlMeansDenoisingColored(u8, None, 4, 4, 7, 21)
+    out = u8.astype(np.float32) / 255
+    if k > 1:
+        out = cv2.resize(out, (round(W * k), round(H * k)), interpolation=cv2.INTER_CUBIC)
+    blur = cv2.GaussianBlur(out, (0, 0), max(1.0, 0.0006 * out_long))
+    out = np.clip(out + 0.6 * (out - blur), 0, 1)
+    return out.astype(np.float32)
+
+
 def reprint_clean(ph, sel, bg, gain, out_long=2400, tau=9.0, return_debug=False):
     """ph : photo redressée (H,W,3) sRGB 0..1 ; sel : probas IA 2 (h,w,5) ; bg : couleur du fond (avec gain).
     -> page réimprimée (out_long px sur le grand côté), palette sRGB."""
