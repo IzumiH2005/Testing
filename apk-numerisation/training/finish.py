@@ -1269,7 +1269,7 @@ def reprint_clean(ph, sel, bg, gain, out_long=2400, tau=9.0, return_debug=False)
         m = up > best
         best[m] = up[m]
         lbl[m] = k
-    del best, best_t
+    del best, best_t, up, up_t
     # partie mince d'une forme (trait, empattement, petit blanc entre deux lettres) : ce qu'une ouverture
     # de rayon ~1,2 px photo efface. Là, on garde le lissage léger, ailleurs le fort.
     rho = max(1, round(1.2 * sc * 2))
@@ -1304,7 +1304,7 @@ def reprint_clean(ph, sel, bg, gain, out_long=2400, tau=9.0, return_debug=False)
         lut = np.zeros(idx.max() + 1, np.uint8)
         lut[idx[ys, xs]] = lbl[ys, xs]
         lbl = np.where(unk > 0, lut[idx], lbl).astype(np.uint8)
-        del idx
+        del idx, ys, xs, lut, unk
     if os.environ.get('DBG'):
         np.save(os.environ['DBG']+'/lbl0.npy', lbl)
     if _on('merge_kin'): merge_kin(lbl, pal, max(Hh, Wh))
@@ -1496,11 +1496,13 @@ def reprint_clean(ph, sel, bg, gain, out_long=2400, tau=9.0, return_debug=False)
         keep_ink = np.nonzero(share > 0.1)[0]
         lab1 = cv2.GaussianBlur(lab, (0, 0), 1)
         resid = np.sqrt(((lab1[..., None, :] - pal[keep_ink][None, None]) ** 2).sum(-1).min(-1))
+        del lab1
         w = np.clip((resid - 4) / 6, 0, 1)
         w = cv2.GaussianBlur(ill, (0, 0), sg / 2) * cv2.GaussianBlur(w, (0, 0), 1)
         img_m = cv2.resize(w, (Wh, Hh))[..., None]
         flat_up = cv2.resize(flat_d, (Wh, Hh), interpolation=cv2.INTER_CUBIC)
         out = out * (1 - img_m) + flat_up * img_m
+        del img_m, flat_up
     # 6. reliure : une colonne régulière de marques semblables, sur toute la hauteur d'un bord
     #    (anneaux de spirale, trous de perforation), n'est pas du contenu. Une ligne de texte près
     #    du bord est trop courte ou trop irrégulière pour passer ces tests ; un cadre est trop long.
