@@ -99,7 +99,10 @@ def find_palette(lab, cand, bg_lab, max_k=16, merge=11.0):
         groups = []  # (centre, effectif)
         for i in order:
             c, n = cen[i], cnt[i]
-            if n < max(25, 0.0015 * len(pts)):
+            # une encre franchement colorée (orange d'un drapeau, logo) peut être rare sur la page :
+            # on la garde quand même, un tel point de couleur n'est pas du bruit de fond
+            vivid = np.hypot(c[1], c[2]) > 35
+            if n < (max(25, 0.0003 * len(pts)) if vivid else max(25, 0.0015 * len(pts))):
                 continue
             for g in groups:
                 if np.linalg.norm(g[0] - c) < merge:
@@ -1188,7 +1191,11 @@ def reprint_clean(ph, sel, bg, gain, out_long=2400, tau=9.0, return_debug=False)
     for i in range(1, n):
         x, y, w, h, a = st[i]
         if a < 0.002 * H * W:
-            continue
+            # petite illustration très colorée (drapeau, logo) : gardée si elle est loin du bord
+            m = cc == i
+            vivid = np.median(np.hypot(lab[..., 1][m], lab[..., 2][m])) > 45
+            if not (vivid and a > 0.0003 * H * W and x > mg and y > mg and x + w < W - mg and y + h < H - mg):
+                continue
         m = (cc == i).astype(np.uint8)
         edge = x <= mg or y <= mg or x + w >= W - mg or y + h >= H - mg
         if edge and a < 0.08 * H * W:
@@ -1331,6 +1338,166 @@ def reprint_clean(ph, sel, bg, gain, out_long=2400, tau=9.0, return_debug=False)
         img_m = cv2.resize(w, (Wh, Hh))[..., None]
         flat_up = cv2.resize(flat_d, (Wh, Hh), interpolation=cv2.INTER_CUBIC)
         out = out * (1 - img_m) + flat_up * img_m
+    # 6. reliure : une colonne régulière de marques semblables, sur toute la hauteur d'un bord
+    #    (anneaux de spirale, trous de perforation), n'est pas du contenu. Une ligne de texte près
+    #    du bord est trop courte ou trop irrégulière pour passer ces tests ; un cadre est trop long.
+    #    On compte aussi les marques déjà retirées par les règles d'avant, sinon la colonne a des trous.
+    content = (dom_v != 0).astype(np.uint8)
+    nb, cb, sb, cnb = cv2.connectedComponentsWithStats(content, connectivity=8)
+    for side in ('l', 'r', 't', 'b'):
+        if side in 'lr':
+            pos = cnb[:, 0] / W; along = cnb[:, 1]; ln = sb[:, 3]; wd = sb[:, 2]; S, T = H, W
+        else:
+            pos = cnb[:, 1] / H; along = cnb[:, 0]; ln = sb[:, 2]; wd = sb[:, 3]; S, T = W, H
+        inn = (pos < 0.06) if side in 'lt' else (pos > 0.94)
+        cand = inn & (ln < 0.05 * S) & (wd < 0.06 * T) & (sb[:, 4] > 0.00002 * H * W)
+        cand[0] = False
+        idx = np.nonzero(cand)[0]
+        if len(idx) < 6:
+            continue
+        idx = idx[np.argsort(along[idx])]
+        a_ = along[idx]; L = max(1.0, float(np.median(ln[idx])))
+        sp = np.diff(a_); ms = max(1.0, float(np.median(sp)))
+        k = np.round(sp / ms)
+        reg = np.mean((k >= 1) & (np.abs(sp - k * ms) < 0.3 * ms))  # espacement régulier
+        ext = (a_[-1] - a_[0]) / S                                  # couvre presque tout le bord
+        sim = np.median(np.abs(ln[idx] - L)) / L                    # marques de même taille
+        if not (reg >= 0.7 and ext > 0.7 and sim < 0.25):
+            continue
+        m = np.isin(cb, idx).astype(np.uint8)
+        m = cv2.dilate(m, np.ones((3, 3), np.uint8))
+        mu = cv2.resize(cv2.GaussianBlur(m.astype(np.float32), (0, 0), 1), (Wh, Hh))[..., None]
+        out = out * (1 - mu) + pal_rgb[0] * mu
+        gone |= m
+        print(f'  reliure ({side}) : {len(idx)} marques retirées', flush=True)
+    # 7. aplats en dégradé (bandeau bleu qui pâlit) : la palette d'encres unies les découpe en taches.
+    #    On les repère sur la photo débarrassée du texte (filtre médian) : une zone lisse, distincte du
+    #    papier, grande. Un dégradé qui pâlit jusqu'au blanc se voit en morceaux : les morceaux qui se
+    #    chevauchent forment un seul bandeau (enveloppe convexe). Dedans : le dégradé lissé de la photo,
+    #    puis le texte réimprimé par-dessus avec sa propre encre (couverture mesurée sur la photo).
+    kmed = int(0.012 * L0) | 1
+    medf = cv2.medianBlur((np.clip(flat_d, 0, 1) * 255 + 0.5).astype(np.uint8), kmed).astype(np.float32) / 255
+    labm = srgb_to_lab(medf)
+    dpap = np.linalg.norm(labm - bg_lab, axis=-1)
+    gm = np.linalg.norm(cv2.morphologyEx(labm, cv2.MORPH_GRADIENT, np.ones((5, 5), np.uint8)), axis=-1)
+    pm = cv2.morphologyEx((dpap > 5).astype(np.uint8), cv2.MORPH_OPEN, np.ones((kmed, kmed), np.uint8))
+    pm[(gone > 0) | (ill > 0)] = 0
+    npn, cpn, spn, _ = cv2.connectedComponentsWithStats(pm)
+    big = [i for i in range(1, npn) if spn[i, 4] > 0.006 * H * W]
+    grp = {i: i for i in big}
+    def root(i):
+        while grp[i] != i: i = grp[i]
+        return i
+    for a_ in big:
+        for b_ in big:
+            if a_ < b_:
+                xa, ya, wa, ha = spn[a_, :4]; xb, yb, wb, hb = spn[b_, :4]
+                ox = min(xa + wa, xb + wb) - max(xa, xb); oy = min(ya + ha, yb + hb) - max(ya, yb)
+                # deux morceaux d'un même bandeau : même bande horizontale (ou verticale), et qui se touchent
+                if (oy > 0.5 * min(ha, hb) and ox > -0.02 * W) or (ox > 0.5 * min(wa, wb) and oy > -0.02 * H):
+                    grp[root(b_)] = root(a_)
+    panels = np.zeros((H, W), np.uint8)
+    for r_ in {root(i) for i in big}:
+        ids = [i for i in big if root(i) == r_]
+        mg_ = np.isin(cpn, ids).astype(np.uint8)
+        pts = cv2.findNonZero(mg_)
+        hull = np.zeros((H, W), np.uint8); cv2.fillConvexPoly(hull, cv2.convexHull(pts), 1)
+        x, y, w, h = cv2.boundingRect(pts)
+        if hull.sum() < 0.012 * H * W or x <= tb_ or y <= tb_ or x + w >= W - tb_ or y + h >= H - tb_:
+            continue
+        inner_ = cv2.erode(hull, np.ones((kmed, kmed), np.uint8)) > 0
+        if not inner_.any() or np.median(gm[inner_]) > 5 or mg_.sum() < 0.3 * hull.sum():
+            continue   # trop texturé : une photo, pas un dégradé
+        # un vrai dégradé : aucune encre unie ne le couvre seule (sinon la palette le rend déjà bien :
+        # lettres claires sur fond de couleur, sceau doré, aplat uni), et sa forme est un rectangle
+        cnt1 = np.bincount(dom_v[mg_ > 0].ravel())
+        if cnt1.max() > 0.7 * cnt1.sum() or hull.sum() < 0.85 * w * h or (ill[y:y + h, x:x + w] > 0).mean() > 0.05:
+            continue
+        # le liseré du bandeau déborde parfois du dégradé détecté (côté pâle) : les traits fins juste
+        # autour, entièrement dans cette marge, en font partie -> le bandeau s'étend jusqu'à eux
+        rb = max(3, round(0.03 * L0))
+        zone = cv2.dilate(hull, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * rb + 1,) * 2))
+        y0, y1, x0, x1 = max(0, y - rb), min(H, y + h + rb), max(0, x - rb), min(W, x + w + rb)
+        cnt_ = (((dom_v != 0) & (gone == 0) & (ill == 0))[y0:y1, x0:x1]).astype(np.uint8)
+        nf, cf, sf, _ = cv2.connectedComponentsWithStats(cnt_, connectivity=8)
+        ins = np.bincount(cf[zone[y0:y1, x0:x1] > 0], minlength=nf) == sf[:, 4]
+        out_ = np.bincount(cf[hull[y0:y1, x0:x1] == 0], minlength=nf) > 0.5 * sf[:, 4]
+        thin = np.minimum(sf[:, 2], sf[:, 3]) <= max(3, 0.006 * L0)
+        fr = ins & out_ & thin
+        fr[0] = False
+        if fr.any():
+            fy, fx = np.nonzero(fr[cf])
+            pts = np.concatenate([pts.reshape(-1, 2), np.stack([fx + x0, fy + y0], 1)]).astype(np.int32)
+        # un bandeau est un rectangle (coins arrondis) : son côté pâle se fond dans le papier sur la
+        # photo, on le complète d'après les bords qu'on voit
+        x, y, w, h = cv2.boundingRect(pts)
+        rr = max(2, min(round(0.015 * L0), w // 4, h // 4))
+        hull = np.zeros((H, W), np.uint8)
+        cv2.rectangle(hull, (x + rr, y), (x + w - 1 - rr, y + h - 1), 1, -1)
+        cv2.rectangle(hull, (x, y + rr), (x + w - 1, y + h - 1 - rr), 1, -1)
+        for cx_, cy_ in ((x + rr, y + rr), (x + w - 1 - rr, y + rr), (x + rr, y + h - 1 - rr), (x + w - 1 - rr, y + h - 1 - rr)):
+            cv2.circle(hull, (cx_, cy_), rr, 1, -1)
+        panels |= cv2.dilate(hull, np.ones((kmed // 2 | 1, kmed // 2 | 1), np.uint8))   # inclut le liseré du bandeau
+    if panels.any():
+        pmask = panels > 0
+        Lf = lab[..., 0]
+        # texte = nettement plus sombre (ou plus clair) que le dégradé local
+        dark = (np.abs(labm[..., 0] - Lf) > 12) & pmask
+        # le dégradé : surface lisse (polynôme de degré 2) ajustée sur le fond du bandeau, sans le texte
+        field = medf.copy()
+        keep = pmask & ~cv2.dilate(dark.astype(np.uint8), np.ones((9, 9), np.uint8)).astype(bool)
+        npz, cpz = cv2.connectedComponents(panels)
+        for j in range(1, npz):
+            mj = cpz == j
+            yy, xx = np.nonzero(mj & keep)
+            if len(xx) < 100:
+                continue
+            sel = np.linspace(0, len(xx) - 1, min(len(xx), 20000)).astype(int)
+            xs, ys = xx[sel] / W, yy[sel] / H
+            A = np.stack([np.ones_like(xs), xs, ys, xs * xs, xs * ys, ys * ys], 1)
+            coef, *_ = np.linalg.lstsq(A, medf[yy[sel], xx[sel]], rcond=None)
+            Y, X = np.nonzero(mj)
+            xs, ys = X / W, Y / H
+            smp = medf[yy[sel], xx[sel]]
+            field[Y, X] = np.clip(np.stack([np.ones_like(xs), xs, ys, xs * xs, xs * ys, ys * ys], 1) @ coef,
+                                  np.percentile(smp, 2, 0), np.percentile(smp, 98, 0))   # pas d'extrapolation folle
+        field = np.clip(field, 0, 1)
+        fL = srgb_to_lab(np.clip(field, 0, 1))[..., 0]
+        # le texte, mesuré contre le dégradé lisse : l'intérieur des grosses lettres compte aussi
+        dark = ((fL - Lf) > 12) & pmask
+        # le liseré du bandeau (sur son pourtour) appartient au fond, pas au texte
+        rim = pmask & ~(cv2.erode(panels, np.ones((kmed, kmed), np.uint8)) > 0)
+        nd, cd_, sd_, _ = cv2.connectedComponentsWithStats(dark.astype(np.uint8))
+        rim_n = np.bincount(cd_[rim], minlength=nd)
+        dark &= ~np.isin(cd_, np.nonzero(rim_n > 0.3 * sd_[:, 4])[0][1:] if nd > 1 else [])
+        # le texte d'un bandeau est imprimé avec l'encre la plus sombre de la page
+        darkest = int(np.argmin(pal[:, 0]))
+        cov = np.zeros((H, W), np.float32)
+        inkc = np.zeros((H, W, 3), np.float32)
+        nt, ct, stt, _ = cv2.connectedComponentsWithStats(cv2.dilate(dark.astype(np.uint8), np.ones((3, 3), np.uint8)))
+        for j in range(1, nt):
+            x, y, w, h = stt[j, :4]
+            sl = (slice(y, y + h), slice(x, x + w)); mj = ct[sl] == j
+            k = darkest
+            fm = float(np.median(fL[sl][mj]))
+            c = np.clip((fL[sl] - Lf[sl]) / max(1.0, fm - pal[k, 0]), 0, 1)
+            cov[sl][mj] = c[mj]; inkc[sl][mj] = pal_rgb[k]
+        up = lambda a: cv2.resize(a, (Wh, Hh), interpolation=cv2.INTER_CUBIC)
+        cu = np.clip((up(cov) - 0.5) * 2.2 + 0.5, 0, 1)[..., None]     # bords nets mais lisses
+        ink_up = cv2.resize(inkc, (Wh, Hh), interpolation=cv2.INTER_NEAREST)
+        pan = up(field) * (1 - cu) + ink_up * cu
+        pu = cv2.resize(cv2.GaussianBlur(panels.astype(np.float32), (0, 0), 1), (Wh, Hh))[..., None]
+        out = out * (1 - pu) + pan * pu
+        print(f'  dégradés : {cv2.connectedComponents(panels)[0] - 1} zone(s)', flush=True)
+    # 8. halos : un objet retiré laisse parfois un contour pâle (anticrénelage). Un pixel pâle qui n'est
+    #    près d'aucun contenu gardé redevient papier.
+    kept = ((dom_v != 0) & (gone == 0)).astype(np.uint8)
+    kept |= panels
+    near = cv2.resize(cv2.dilate(kept, np.ones((5, 5), np.uint8)), (Wh, Hh), interpolation=cv2.INTER_NEAREST) > 0
+    pale = np.abs(out.astype(np.float32) - pal_rgb[0]).max(-1) < 0.25
+    halo = (~near & pale).astype(np.float32)
+    halo = cv2.GaussianBlur(halo, (0, 0), 1)[..., None]
+    out = out * (1 - halo) + pal_rgb[0] * halo
     out = cv2.resize(out.astype(np.float32), (Wh // 2, Hh // 2), interpolation=cv2.INTER_AREA)
     if return_debug:
         return out, pal_rgb, bg, flat_d

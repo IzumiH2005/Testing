@@ -54,9 +54,16 @@ const AI = (() => {
 
   /* ---------- aides image ---------- */
   function canvasOf(w, h) { const c = document.createElement("canvas"); c.width = w; c.height = h; return c; }
+  // réduction par moitiés successives (≈ moyenne de zone) : une réduction directe ×6-10 crénelle l'image et aveugle les IA
   function pixels(src, w, h, sx = 0, sy = 0, sw = src.width, sh = src.height) {
+    let cur = src, cx = sx, cy = sy, cw = sw, ch = sh;
+    while (cw > 2 * w || ch > 2 * h) {
+      const nw = Math.max(w, Math.round(cw / 2)), nh = Math.max(h, Math.round(ch / 2)), c = canvasOf(nw, nh), x = c.getContext("2d");
+      x.imageSmoothingQuality = "high"; x.drawImage(cur, cx, cy, cw, ch, 0, 0, nw, nh);
+      cur = c; cx = 0; cy = 0; cw = nw; ch = nh;
+    }
     const c = canvasOf(w, h), x = c.getContext("2d", { willReadFrequently: true });
-    x.imageSmoothingQuality = "high"; x.drawImage(src, sx, sy, sw, sh, 0, 0, w, h);
+    x.imageSmoothingQuality = "high"; x.drawImage(cur, cx, cy, cw, ch, 0, 0, w, h);
     return x.getImageData(0, 0, w, h).data;
   }
   function toCHW(d, n, mean, std, scale = 1 / 255) {
@@ -66,24 +73,25 @@ const AI = (() => {
   }
 
   /* ---------- 1. coins de la feuille ---------- */
-  async function corners(src, onProg) {
+  // box = [sx, sy, sw, sh] : ne regarder qu'une partie de la photo (2e passe, plus précise)
+  async function corners(src, onProg, box) {
     const s = await session("corners", onProg), o = window.ort, N = 256, M = 128;
-    const x = toCHW(pixels(src, N, N), N * N);
+    const [bx, by, bw, bh] = box || [0, 0, src.width, src.height];
+    const x = toCHW(pixels(src, N, N, bx, by, bw, bh), N * N);
     const out = await s.run({ [s.inputNames[0]]: new o.Tensor("float32", x, [1, 3, N, N]) });
-    const hm = out[s.outputNames[0]].data, quad = []; let score = 1;
+    const hm = out[s.outputNames[0]].data, pts = [], scores = [];
     for (let ch = 0; ch < 4; ch++) {
       const off = ch * M * M; let bi = 0, bv = -1;
       for (let i = 0; i < M * M; i++) if (hm[off + i] > bv) { bv = hm[off + i]; bi = i; }
-      score = Math.min(score, bv);
-      if (bv < 0.3) return { quad: null, score };
-      // tache autour du maximum (> 0.3) → barycentre pondéré, plus précis qu'un seul pixel
-      const seen = new Uint8Array(M * M), st = [bi]; seen[bi] = 1; let sw = 0, sx = 0, sy = 0;
+      // tache autour du maximum (≥ moitié du pic) → barycentre pondéré, plus précis qu'un seul pixel
+      const lim = bv / 2, seen = new Uint8Array(M * M), st = [bi]; seen[bi] = 1; let sw = 0, sx = 0, sy = 0;
       while (st.length) { const i = st.pop(), v = hm[off + i], px = i % M, py = (i / M) | 0; sw += v; sx += v * px; sy += v * py;
         for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) { const nx = px + dx, ny = py + dy; if (nx < 0 || ny < 0 || nx >= M || ny >= M) continue;
-          const j = ny * M + nx; if (!seen[j] && hm[off + j] >= 0.3) { seen[j] = 1; st.push(j); } } }
-      quad.push([(sx / sw + 0.5) / M * src.width, (sy / sw + 0.5) / M * src.height]);
+          const j = ny * M + nx; if (!seen[j] && hm[off + j] >= lim) { seen[j] = 1; st.push(j); } } }
+      pts.push([bx + (sx / sw + 0.5) / M * bw, by + (sy / sw + 0.5) / M * bh]); scores.push(bv);
     }
-    return { quad, score }; // ordre : haut-gauche, haut-droite, bas-droite, bas-gauche
+    // ordre : haut-gauche, haut-droite, bas-droite, bas-gauche ; quad = null si un coin n'est pas sûr
+    return { pts, scores, quad: scores.every(v => v >= 0.3) ? pts : null, score: Math.min(...scores) };
   }
 
   return { MODELS, session, ready, corners, loadRuntime };

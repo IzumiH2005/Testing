@@ -196,9 +196,19 @@ def measure_bg(photo, sel):
         src = "blanc de référence"
     else:
         bsat = (bg.max() - bg.min()) / max(bg.max(), 1e-3)
+        r, g_, b = bg
+        # teinte « lumière » : bleutée (ombre, jour, reflet d'un tissu bleu) ou légèrement chaude (lampe).
+        # Une lumière déplace la couleur le long de l'axe bleu ↔ jaune (r et b de part et d'autre, g au milieu) ;
+        # un papier vraiment coloré (rose, vert, jaune vif) sort de cet axe ou est trop saturé.
+        on_axis = min(r, b) - 0.04 <= g_ <= max(r, b) + 0.04
+        cool = b > r and bsat < 0.45
+        warm = r > b and bsat < 0.15
         if bsat < 0.12 and bg.mean() > 0.5:  # fond clair presque neutre : c'est le papier lui-même
             gain = np.full(3, 0.95 / max(bg.max(), 1e-3))
             src = "fond clair pris comme papier"
+        elif on_axis and (cool or warm) and bg.max() > 0.35:  # papier blanc sous une lumière colorée
+            gain = np.clip(0.95 / np.maximum(bg, 1e-3), 0.7, 3.0)
+            src = "papier blanc sous lumière colorée (teinte retirée)"
         else:
             gain = np.ones(3)
             src = "mesure directe (pas de blanc sur la page)"

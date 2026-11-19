@@ -280,10 +280,62 @@ async function tryAI(name, fn) {
   catch (e) { console.error(e); S.aiFail[name] = true; toast(`IA « ${AI.MODELS[name].label} » indisponible ici : méthode classique utilisée`, 4000); return null; }
 }
 async function findEdges(photo) { // IA d'abord, méthode classique en secours
-  const r = await tryAI("corners", () => AI.corners(photo, aiProg));
-  if (r && r.quad && angleOk(r.quad) && polyArea(r.quad) > photo.width * photo.height * 0.04)
-    return { quad: r.quad.map(p => [Math.max(0, Math.min(photo.width, p[0])), Math.max(0, Math.min(photo.height, p[1]))]), found: true, byAI: true };
+  const W = photo.width, H = photo.height, cl = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  const fin = q => ({ quad: q.map(p => [cl(p[0], 0, W), cl(p[1], 0, H)]), found: true, byAI: true });
+  const okQ = q => q && angleOk(q) && polyArea(q) > W * H * 0.04;
+  const r1 = await tryAI("corners", () => AI.corners(photo, aiProg));
+  if (r1) {
+    const pts = r1.pts.map(p => p.slice()), sc = r1.scores.slice(), good = () => sc.map(v => v >= 0.25);
+    if (good().filter(Boolean).length >= 3) {
+      // 2e passe sur la seule zone de la feuille : coins plus nets (un coin caché par une spirale, un doigt… reste faible)
+      const q0 = parallelCorner(pts, good()), m = 0.06 * Math.max(W, H);
+      const x0 = cl(Math.min(...q0.map(p => p[0])) - m, 0, W), x1 = cl(Math.max(...q0.map(p => p[0])) + m, 0, W);
+      const y0 = cl(Math.min(...q0.map(p => p[1])) - m, 0, H), y1 = cl(Math.max(...q0.map(p => p[1])) + m, 0, H);
+      const r2 = x1 - x0 > 32 && y1 - y0 > 32 ? await tryAI("corners", () => AI.corners(photo, null, [x0, y0, x1 - x0, y1 - y0])) : null;
+      if (r2) for (let i = 0; i < 4; i++) if (r2.scores[i] >= 0.3 && r2.scores[i] >= sc[i]) { pts[i] = r2.pts[i]; sc[i] = r2.scores[i]; }
+      const g = good(), n = g.filter(Boolean).length;
+      // une feuille est un rectangle : le coin manquant est au croisement des deux bords qui y mènent
+      const q = n === 4 ? pts : n === 3 ? edgeCorner(photo, pts, g) : null;
+      if (okQ(q)) return fin(q);
+    }
+  }
   const d = detectQuad(photo); return { quad: d.quad, found: d.found, byAI: false };
+}
+/* coin manquant k estimé par parallélogramme (les 3 autres sont sûrs) */
+function parallelCorner(pts, good) {
+  const k = good.indexOf(false); if (k < 0) return pts;
+  const a = pts[(k + 1) % 4], b = pts[(k + 3) % 4], o = pts[(k + 2) % 4], q = pts.map(p => p.slice());
+  q[k] = [a[0] + b[0] - o[0], a[1] + b[1] - o[1]]; return q;
+}
+/* coin manquant = intersection des deux bords de la feuille partant des coins voisins.
+   Chaque bord : la droite (±12° autour de l'estimation) qui suit le contour le plus net et le plus continu. */
+function edgeCorner(photo, pts, good) {
+  const k = good.indexOf(false), P = parallelCorner(pts, good)[k];
+  const s = Math.min(1, 1000 / Math.max(photo.width, photo.height)), w = Math.round(photo.width * s), h = Math.round(photo.height * s);
+  const c = newCanvas(w, h), x = c.getContext("2d", { willReadFrequently: true }); x.drawImage(photo, 0, 0, w, h);
+  const d = x.getImageData(0, 0, w, h).data, gr = new Float32Array(w * h);
+  for (let i = 0; i < w * h; i++) gr[i] = 0.299 * d[4 * i] + 0.587 * d[4 * i + 1] + 0.114 * d[4 * i + 2];
+  const g = boxBlur(gr, w, h, 1);
+  const line = C => {
+    const cx = C[0] * s, cy = C[1] * s, dx0 = P[0] * s - cx, dy0 = P[1] * s - cy, L = Math.hypot(dx0, dy0), a0 = Math.atan2(dy0, dx0);
+    let best = -1, ba = a0;
+    for (let da = -12; da <= 12; da += 0.25) {
+      const a = a0 + da * Math.PI / 180, ux = Math.cos(a), uy = Math.sin(a), v = [];
+      for (let i = 0; i < 160; i++) { const t = (0.1 + 0.7 * i / 159) * L, px = Math.round(cx + t * ux), py = Math.round(cy + t * uy);
+        if (px < 1 || py < 1 || px >= w - 1 || py >= h - 1) continue; const j = py * w + px;
+        v.push(Math.abs((g[j + 1] - g[j - 1]) * -uy + (g[j + w] - g[j - w]) * ux)); }
+      if (v.length < 96) continue; v.sort((p, q) => p - q); const med = v[v.length >> 1]; // médiane : un bord continu, pas quelques taches
+      if (med > best) { best = med; ba = a; }
+    }
+    return [Math.cos(ba), Math.sin(ba)];
+  };
+  const A = pts[(k + 1) % 4], B = pts[(k + 3) % 4], u = line(A), v = line(B), det = u[0] * -v[1] + v[0] * u[1];
+  const q = pts.map(p => p.slice());
+  if (Math.abs(det) < 1e-6) { q[k] = P; return q; }
+  const t = ((B[0] - A[0]) * -v[1] + v[0] * (B[1] - A[1])) / det; // A + t·u = B + r·v
+  q[k] = [A[0] + t * u[0], A[1] + t * u[1]];
+  if (Math.hypot(q[k][0] - P[0], q[k][1] - P[1]) > 0.25 * Math.hypot(A[0] - B[0], A[1] - B[1])) q[k] = P; // croisement aberrant
+  return q;
 }
 function newCanvas(w, h) { const c = document.createElement("canvas"); c.width = w; c.height = h; return c; }
 
