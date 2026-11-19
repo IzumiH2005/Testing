@@ -103,6 +103,12 @@ const Reprint = (() => {
     const sel = r2.sel.data;
     onStep && onStep("Pipette : couleur du fond…");
     const bgm = measureBg(ph2, sel, w2 * h2);
+    // choix automatique : feuille (papier + encres) ou page entièrement imprimée (couverture, affiche)
+    const page = Photo.pageMode(sel, w2 * h2);
+    return { paper: bgm.paper, gain: bgm.gain, src: bgm.src, sel, w2, h2, E64, page };
+  }
+  async function printer(src, a, onProg, onStep) {
+    const o = await AI.loadRuntime(), { E64, sel, w2, h2 } = a;
     // IA 3 : imprimante (jusqu'à 1280 px, par tuiles qui se chevauchent)
     onStep && onStep("IA 3 : calcul des encres blanc, C, M, J, N…");
     const k3 = Math.min(1, 1280 / Math.max(src.width, src.height)), W = Math.round(src.width * k3), H = Math.round(src.height * k3);
@@ -125,7 +131,7 @@ const Reprint = (() => {
     // règle : l'imprimante n'encre jamais le fond (il est donné par la pipette)
     const HW = H * W;
     for (let i = 0; i < HW; i++) { const k = 1 - S[i]; for (let ch = 0; ch < 5; ch++) cov[ch * HW + i] *= k; }
-    return { paper: bgm.paper, gain: bgm.gain, src: bgm.src, cov, W, H };
+    a.cov = cov; a.W = W; a.H = H;
   }
 
   /* ---------- impression : fond (+ blanc couvrant) × filtres des encres ---------- */
@@ -145,16 +151,27 @@ const Reprint = (() => {
     return c;
   }
 
-  /* Point d'entrée : page redressée -> page réimprimée (même taille) + infos papier/encres */
+  /* Point d'entrée : page redressée -> page réimprimée + infos.
+     opts.layout : "photo" (fond photo + éléments nets réimprimés), "reprint" (feuille entière), sinon choix auto. */
   async function run(warped, opts = {}) {
     const a = warped._reprint || (warped._reprint = await analyse(warped, opts.onProg, opts.onStep));
+    const auto = a.page.mode, layout = opts.layout === "photo" || opts.layout === "reprint" ? opts.layout : auto;
+    const pageInfo = { auto, layout, paperFrac: a.page.paper };
+    if (layout === "photo") {
+      opts.onStep && opts.onStep("Couverture : photo améliorée, texte et aplats réimprimés…"); await tick();
+      const out = warped._photoOut || (warped._photoOut = Photo.reprintOver(warped, a.sel, a.w2, a.h2));
+      out._info = { ...pageInfo, ...out._photoInfo }; return out;
+    }
+    if (!a.cov) await printer(warped, a, opts.onProg, opts.onStep);
     const found = a.paper.map(v => Math.round(v * 255)), fInfo = { rgb: found, hex: hex(found), name: nameFr(found), src: a.src };
     const white = opts.paper === "white", manual = Array.isArray(opts.paper);
-    const usedRGB = white ? [255, 255, 255] : manual ? opts.paper : found;
+    // papier presque blanc (blanc cassé, grisé, crème léger) -> blanc de photocopie pur
+    const snap = !white && !manual && Photo.nearWhite(found);
+    const usedRGB = white || snap ? [255, 255, 255] : manual ? opts.paper : found;
     const out = print(a, warped.width, warped.height, usedRGB);
     const n = a.W * a.H, mean = [0, 1, 2, 3, 4].map(k => { let s = 0; for (let i = 0; i < n; i++) s += a.cov[k * n + i]; return s / n; });
-    out._info = { found: fInfo, inkMean: mean, mode: white ? "white" : manual ? "manual" : "auto",
-                  paper: white ? { rgb: usedRGB, hex: "#FFFFFF", name: "blanc" } : manual ? { rgb: usedRGB, hex: hex(usedRGB), name: nameFr(usedRGB) } : fInfo };
+    out._info = { ...pageInfo, found: fInfo, inkMean: mean, snap, mode: white ? "white" : manual ? "manual" : "auto",
+                  paper: white || snap ? { rgb: usedRGB, hex: "#FFFFFF", name: "blanc" } : manual ? { rgb: usedRGB, hex: hex(usedRGB), name: nameFr(usedRGB) } : fInfo };
     return out;
   }
   /* pipette manuelle : couleur touchée sur la photo (médiane 9 × 9), corrigée par la même balance des blancs */

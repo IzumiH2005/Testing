@@ -904,7 +904,7 @@ def reprint_over_photo(ph, sel, out_long=2400):
     G = np.hypot(*np.gradient(cv2.GaussianBlur(D, (0, 0), 1)))
     n, cc, st, _ = cv2.connectedComponentsWithStats((D > 22).astype(np.uint8), connectivity=8)
     k3, k5, k15 = np.ones((3, 3), np.uint8), np.ones((5, 5), np.uint8), np.ones((15, 15), np.uint8)
-    elems, doubt, geo = [], [], {}
+    cands = []
     for i in range(1, n):
         x, y, w, h, a = st[i]
         if a < 1e-5 * H * W or max(w, h) > 0.12 * L0:
@@ -926,22 +926,36 @@ def reprint_over_photo(ph, sel, out_long=2400):
         if not (sharp >= 0.12 or (solid > 0.85 and sharp >= 0.06 and thin > 0.01 * L0)):
             continue             # bord progressif : reflet ou dessin flou, on garde la photo
         core = m & (D[sl] > np.quantile(d, 0.6))
-        e = [i, sl, np.median(I[sl][core], 0), a]
-        # fond agité autour (reflet, texture, pli) : mis de côté, sauf s'il fait partie d'une ligne de texte
-        (doubt if noise > 9 else elems).append(e)
-        geo[i] = (x + w / 2, y + h / 2, h)
-    # cohérence : une lettre au milieu d'une ligne réimprimée est réimprimée aussi (même encre, même taille)
-    for e in doubt:
-        cx, cy, h = geo[e[0]]
-        le = srgb_to_lab(e[2][None, None].astype(np.float32))[0, 0]
-        near = 0
-        for f in elems:
-            fx, fy, fh = geo[f[0]]
-            if 0.75 < fh / h < 1.33 and abs(fy - cy) < 0.5 * h and abs(fx - cx) < 2.5 * h and \
-               np.linalg.norm(srgb_to_lab(f[2][None, None].astype(np.float32))[0, 0] - le) < 15:
-                near += 1
-        if near >= 2:
-            elems.append(e)
+        ink0 = np.median(I[sl][core], 0)
+        cands.append(dict(i=i, sl=sl, ink0=ink0, a=a, lab=srgb_to_lab(ink0[None, None].astype(np.float32))[0, 0],
+                          cx=x + w / 2, cy=y + h / 2, h=h, noise=noise, sharp=sharp, solid=solid))
+    # lignes : éléments voisins de même taille et même encre (une ligne de texte, une rangée de carrés)
+    par = list(range(len(cands)))
+    def find(u):
+        while par[u] != u:
+            par[u] = par[par[u]]; u = par[u]
+        return u
+    for u, e in enumerate(cands):
+        for v in range(u + 1, len(cands)):
+            f = cands[v]
+            if 0.75 < f['h'] / e['h'] < 1.33 and abs(f['cy'] - e['cy']) < 0.5 * e['h'] and abs(f['cx'] - e['cx']) < 2.5 * e['h'] \
+               and np.linalg.norm(f['lab'] - e['lab']) < 25:
+                par[find(u)] = find(v)
+    lines = {}
+    for u, e in enumerate(cands):
+        lines.setdefault(find(u), []).append(e)
+    # décision par ligne entière (plus sûre qu'une lettre seule) : une ligne nette sur fond calme est
+    # réimprimée en entier ; une ligne sous un reflet (fond agité, bords mous) reste en photo.
+    # Élément isolé : réimprimé seulement si le fond autour est calme et le bord franc (ou forme pleine :
+    # carré, puce) ; un débris de reflet isolé a un bord mou et reste en photo.
+    elems = []
+    for ln in lines.values():
+        if len(ln) >= 3:
+            if np.median([e['noise'] for e in ln]) <= 9 and np.median([e['sharp'] for e in ln]) >= 0.17:
+                elems += ln
+        else:
+            elems += [e for e in ln if e['noise'] <= 9 and (e['sharp'] >= 0.17 or e['solid'] > 0.85)]
+    elems = [[e['i'], e['sl'], e['ink0'], e['a']] for e in elems]
     # palette commune : des encres proches (même blanc, même jaune) deviennent une seule couleur
     elems.sort(key=lambda e: -e[3])
     pal = []

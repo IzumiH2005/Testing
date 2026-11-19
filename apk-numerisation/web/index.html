@@ -250,6 +250,7 @@ progress{width:100%;height:8px;accent-color:var(--accent)}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
 <script src="ai.js"></script>
+<script src="photo.js"></script>
 <script src="reprint.js"></script>
 <script>
 "use strict";
@@ -560,7 +561,7 @@ const fullQuad = c => [[0, 0], [c.width, 0], [c.width, c.height], [0, c.height]]
 async function applyFilter(warped, f) {
   if (f === "none") { const o = newCanvas(warped.width, warped.height); o.getContext("2d").drawImage(warped, 0, 0); return o; }
   if (!AI.ready("print")) $("busy-sub").textContent = "Chargement des 3 IA (première fois seulement)…";
-  return Reprint.run(warped, { paper: warped._paper, onProg: aiProg, onStep: m => { $("busy-msg").textContent = m; } });
+  return Reprint.run(warped, { paper: warped._paper, layout: warped._layout, onProg: aiProg, onStep: m => { $("busy-msg").textContent = m; } });
 }
 function rotateCanvas(c, rot) {
   rot = ((rot % 4) + 4) % 4; if (!rot) return c;
@@ -643,13 +644,20 @@ async function renderResult() {
   const fmt = a4Guess(cur.out.width, cur.out.height);
   const ppp = fmt === "A4" ? Math.round(Math.min(cur.out.width, cur.out.height) / (210 / 25.4)) : null;
   const ri = $("reprint-info"), info = cur.out._info; ri.hidden = !info;
-  if (info) { const sw = c => `<i class="sw" style="background:${c}"></i>`, ink = info.inkMean.map(v => Math.round(v * 100));
-    const how = info.mode === "manual" ? "choisi à la pipette" : info.mode === "white" ? "feuille blanche" : `pipette auto · ${info.found.src}`;
-    const btn = (p, t) => `<button class="mini" data-paper="${p}">${t}</button>`;
-    ri.innerHTML = `Fond ${sw(info.paper.hex)}<b>${info.paper.name}</b> <code>${info.paper.hex}</code> <span>(${how})</span> · encre moyenne C ${ink[0]} % M ${ink[1]} % J ${ink[2]} % N ${ink[3]} % · blanc ${ink[4]} %`
-      + btn("pick", "Pipette : toucher le fond")
-      + (info.mode !== "auto" ? btn("auto", `Couleur détectée (${info.found.name})`) : "")
-      + (info.mode !== "white" ? btn("white", "Feuille blanche") : ""); }
+  if (info) { const sw = c => `<i class="sw" style="background:${c}"></i>`, pct = v => Math.round(v * 100);
+    const btn = (p, t) => `<button class="mini" data-paper="${p}">${t}</button>`, lay = (p, t) => `<button class="mini" data-layout="${p}">${t}</button>`;
+    const why = info.layout === info.auto ? `choix auto : papier visible sur ${pct(info.paperFrac)} % de la page` : "choisi à la main";
+    if (info.layout === "photo") {
+      ri.innerHTML = `<b>Couverture</b> <span>(${why})</span> · fond photo amélioré · ${info.elements} éléments nets réimprimés en `
+        + info.inks.map(c => sw(Reprint.hex(c))).join("")
+        + lay("reprint", "Réimprimer toute la page");
+    } else { const ink = info.inkMean.map(pct);
+      const how = info.mode === "manual" ? "choisi à la pipette" : info.mode === "white" ? "feuille blanche" : info.snap ? `presque blanc (${info.found.name}) donc blanc pur` : `pipette auto · ${info.found.src}`;
+      ri.innerHTML = `<b>Feuille réimprimée</b> <span>(${why})</span> · Fond ${sw(info.paper.hex)}<b>${info.paper.name}</b> <code>${info.paper.hex}</code> <span>(${how})</span> · encre moyenne C ${ink[0]} % M ${ink[1]} % J ${ink[2]} % N ${ink[3]} % · blanc ${ink[4]} %`
+        + btn("pick", "Pipette : toucher le fond")
+        + (info.mode !== "auto" ? btn("auto", `Couleur détectée (${info.found.name})`) : "")
+        + (info.mode !== "white" ? btn("white", "Feuille blanche") : "")
+        + lay("photo", "Garder le fond photo"); } }
   $("res-spec").textContent = `${cur.out.width} × ${cur.out.height} px` + (fmt ? ` · ${fmt}` : "") + (ppp ? ` · ≈ ${ppp} ppp` : "");
 }
 function flatWarp(cur) { const q = orderQuad(cur.quad), [w, h] = outSize(q, cur.photo.width, cur.photo.height), c = warp(cur.photo, q, w, h); return c; }
@@ -658,7 +666,9 @@ async function toResult() {
   await busy("Redressement…", async () => { cur.warped = flatWarp(cur); });
   show("res"); await renderResult();
 }
-$("reprint-info").addEventListener("click", e => { const b = e.target.closest("button[data-paper]"); if (!b || !S.cur) return;
+$("reprint-info").addEventListener("click", e => { if (!S.cur) return;
+  const l = e.target.closest("button[data-layout]"); if (l) { S.cur.warped._layout = l.dataset.layout; return renderResult(); }
+  const b = e.target.closest("button[data-paper]"); if (!b) return;
   if (b.dataset.paper === "pick") return startPick();
   S.cur.warped._paper = b.dataset.paper; renderResult(); });
 /* pipette manuelle : on montre la photo, la personne touche le fond, on réimprime avec cette couleur */
