@@ -37,7 +37,7 @@ with torch.no_grad():
 bg, gain, how = measure_bg(x5, sel)
 if os.environ.get("PAPER"):
     bg, how = np.array([float(v) for v in os.environ["PAPER"].split(",")], np.float32) / 255, "imposé"
-mode, paper = page_mode(sel)
+mode, paper = page_mode(sel, bg)
 if os.environ.get("MODE"):
     mode = os.environ["MODE"]
 print(f"mode {mode} · papier {paper:.0%} de la page", flush=True)

@@ -838,16 +838,22 @@ def conserve_ink(tb, pa, pb, lin_s, pal_lin, K, lo=0.42, hi=float(os.environ.get
 
 
 PHOTO_MAX_PAPER = 0.3
+PAPER_MAX_CHROMA, PAPER_MIN_L = 40.0, 55.0  # au-delà : fond imprimé (rouge, noir...), pas du papier
 
 
-def page_mode(sel):
+def page_mode(sel, bg=None):
     """Choix automatique du traitement, d'après l'IA 2 (tri) :
     - 'reprint' : une feuille (papier + encres) -> réimpression nette en aplats ;
     - 'photo'   : une page presque entièrement imprimée (couverture, affiche, photo) : pas de papier
                   à reconstruire, des dégradés et des reflets partout -> on garde l'image redressée
                   et on l'améliore seulement (couleurs, contraste, bruit, netteté).
+    Un « papier » trop saturé ou trop sombre (bg, RGB 0-1) est un fond imprimé d'aplat -> 'photo'.
     -> (mode, part de papier)"""
     paper = float((sel[..., 0] > 0.6).mean())
+    if bg is not None:
+        L, a, b = srgb_to_lab(np.asarray(bg, np.float32).reshape(1, 1, 3))[0, 0]
+        if np.hypot(a, b) > PAPER_MAX_CHROMA or L < PAPER_MIN_L:
+            return 'photo', paper
     return ('photo' if paper < PHOTO_MAX_PAPER else 'reprint'), paper
 
 

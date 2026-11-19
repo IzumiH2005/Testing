@@ -646,7 +646,7 @@ async function renderResult() {
   const ri = $("reprint-info"), info = cur.out._info; ri.hidden = !info;
   if (info) { const sw = c => `<i class="sw" style="background:${c}"></i>`, pct = v => Math.round(v * 100);
     const btn = (p, t) => `<button class="mini" data-paper="${p}">${t}</button>`, lay = (p, t) => `<button class="mini" data-layout="${p}">${t}</button>`;
-    const why = info.layout === info.auto ? `choix auto : papier visible sur ${pct(info.paperFrac)} % de la page` : "choisi à la main";
+    const why = info.layout !== info.auto ? "choisi à la main" : info.why === "fond" ? "choix auto : fond imprimé en couleur, pas de papier" : `choix auto : papier visible sur ${pct(info.paperFrac)} % de la page`;
     if (info.layout === "photo") {
       ri.innerHTML = `<b>Couverture</b> <span>(${why})</span> · fond photo amélioré · ${info.elements} éléments nets réimprimés en `
         + info.inks.map(c => sw(Reprint.hex(c))).join("")

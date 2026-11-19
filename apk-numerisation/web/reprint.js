@@ -104,7 +104,7 @@ const Reprint = (() => {
     onStep && onStep("Pipette : couleur du fond…");
     const bgm = measureBg(ph2, sel, w2 * h2);
     // choix automatique : feuille (papier + encres) ou page entièrement imprimée (couverture, affiche)
-    const page = Photo.pageMode(sel, w2 * h2);
+    const page = Photo.pageMode(sel, w2 * h2, bgm.paper);
     return { paper: bgm.paper, gain: bgm.gain, src: bgm.src, sel, w2, h2, E64, page };
   }
   async function printer(src, a, onProg, onStep) {
@@ -156,7 +156,7 @@ const Reprint = (() => {
   async function run(warped, opts = {}) {
     const a = warped._reprint || (warped._reprint = await analyse(warped, opts.onProg, opts.onStep));
     const auto = a.page.mode, layout = opts.layout === "photo" || opts.layout === "reprint" ? opts.layout : auto;
-    const pageInfo = { auto, layout, paperFrac: a.page.paper };
+    const pageInfo = { auto, layout, paperFrac: a.page.paper, why: a.page.why };
     if (layout === "photo") {
       opts.onStep && opts.onStep("Couverture : photo améliorée, texte et aplats réimprimés…"); await tick();
       const out = warped._photoOut || (warped._photoOut = Photo.reprintOver(warped, a.sel, a.w2, a.h2));

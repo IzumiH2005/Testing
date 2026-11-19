@@ -159,9 +159,15 @@ const Photo = (() => {
   const DENOISE = { passes: 1, r: 2, ss: 1.5, sr: 0.03 };
 
   /* ---------- choix du mode d'après l'IA 2 ---------- */
-  function pageMode(sel, n) { // sel [5,n] : part des points « papier » sûrs
+  // sel [5,n] : part des points « papier » sûrs ; bg (RGB 0-1) : couleur mesurée du « papier ».
+  // Un papier trop saturé ou trop sombre est en fait un fond imprimé (couverture rouge, noire…).
+  const PAPER_MAX_CHROMA = 40, PAPER_MIN_L = 55;
+  function pageMode(sel, n, bg) {
     let c = 0; for (let i = 0; i < n; i++) if (sel[i] > 0.6) c++;
-    const paper = c / n; return { mode: paper < PHOTO_MAX_PAPER ? "photo" : "reprint", paper };
+    const paper = c / n;
+    if (bg) { const [L, a, b] = lab1(bg);
+      if (Math.hypot(a, b) > PAPER_MAX_CHROMA || L < PAPER_MIN_L) return { mode: "photo", paper, why: "fond" }; }
+    return { mode: paper < PHOTO_MAX_PAPER ? "photo" : "reprint", paper, why: "papier" };
   }
 
   /* ---------- 1. photo améliorée ---------- */
