@@ -15,7 +15,7 @@ import cv2
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
-from common import lin2srgb, render_np, rip, srgb2lin
+from common import lin2srgb, print_np, render_np, rip, srgb2lin
 
 # ---------------------------------------------------------------- ressources
 _FONTS = None
@@ -145,11 +145,18 @@ class Page:
         self.rng, self.H, self.W = rng, H, W
         self.t = np.ones((H, W, 3), np.float32)       # transmission voulue (avant le RIP)
         self.cls = np.zeros((H, W), np.uint8)          # 0 papier 1 texte/trait 2 aplat 3 image
+        self.w = np.zeros((H, W), np.float32)          # encre blanche couvrante
+        self.bleed = False                             # fond coloré sur toute la page
 
-    def put(self, alpha, col, cls):
+    def put(self, alpha, col, cls, white=None):
         a = alpha[..., None]
         if np.ndim(col) == 1:
-            col = np.asarray(col, np.float32)[None, None]
+            col = np.asarray(col, np.float32)
+            if white is None:  # du blanc sur un fond coloré : il faut l'encre blanche
+                white = self.bleed and bool(np.all(col >= 0.999))
+            col = col[None, None]
+        if white:
+            self.w = self.w * (1 - alpha) + alpha
         self.t = self.t * (1 - a) + col * a
         self.cls[alpha > 0.5] = cls
 
@@ -296,6 +303,8 @@ class Page:
 
 
 def gen_clean(rng, long_side=1024):
+    """-> cov (H,W,5) = C, M, J, N, blanc ; classes ; fond (transmission lin. ou None)."""
+    bg = None
     ar = rng.choice([1.414, 1.414, 1.294, 1.5, 1.33, 1.6, 1.0, 1.2])
     H, W = long_side, int(long_side / ar)
     if rng.random() < 0.12:
@@ -308,9 +317,10 @@ def gen_clean(rng, long_side=1024):
 
     if kind == "cover":
         # aplat principal (parfois avec coins arrondis comme la couverture de Baudelaire)
-        bleed = rng.random() < 0.4  # fond entièrement imprimé (ex. couverture orange de « Rework ») :
-        if bleed:                   # les lettres « en réserve » gardent la couleur de la feuille
-            pg.put(np.ones((H, W), np.float32), rand_ink_color(rng, "any"), 2)
+        bleed = rng.random() < 0.5  # fond entièrement coloré (ex. couverture orange de « Rework ») :
+        if bleed:                   # ce fond devient la « couleur du papier », le blanc est une encre
+            pg.bleed = True
+            bg = rand_ink_color(rng, "any")
         elif rng.random() < 0.8:
             x0, y0 = rng.uniform(-0.1, 0.4) * W, rng.uniform(0.25, 0.5) * H
             x1, y1 = rng.uniform(0.6, 1.1) * W, rng.uniform(0.7, 0.98) * H
@@ -323,14 +333,14 @@ def gen_clean(rng, long_side=1024):
             full[oy:oy + ih, ox:ox + iw] = a
             col = np.ones((H, W, 3), np.float32)
             col[oy:oy + ih, ox:ox + iw] = img
-            pg.put(full, col, 3)
+            pg.put(full, col, 3, white=bleed and rng.random() < 0.6)
         y = m
         for _ in range(rng.integers(1, 4)):  # titres
             size = rng.uniform(0.04, 0.13) * H
             f = rng.choice(F)
             col = rand_ink_color(rng, "any" if rng.random() < 0.6 else "black")
             if bleed and rng.random() < 0.65:
-                col = np.ones(3, np.float32)  # pas d'encre : blanc du papier
+                col = np.ones(3, np.float32)  # lettres blanches (encre blanche)
             txt = " ".join(word(rng) for _ in range(rng.integers(1, 3)))
             x = rng.uniform(m, W * 0.5)
             w, h = pg.text(x, y, txt, size, col, f)
@@ -409,8 +419,8 @@ def gen_clean(rng, long_side=1024):
                         yy += body * 2.4
                     yy = pg.paragraph(x, yy, colw, body, tcol, int(rng.integers(2, 10)), bfont,
                                       align=rng.choice(["left", "left", "center", "right"])) + body
-    cov = rip(pg.t)
-    return cov, pg.cls
+    cov = np.concatenate([rip(pg.t), pg.w[..., None]], -1)
+    return cov, pg.cls, bg
 
 
 # ---------------------------------------------------------------- photo de téléphone
@@ -430,7 +440,7 @@ def jpeg(img8, q):
 def degrade(rng, cov, cls, paper_srgb):
     H, W = cls.shape
     p_lin = srgb2lin(paper_srgb)
-    R = p_lin[None, None] * render_np(cov)                 # réflectance de la page propre
+    R = print_np(p_lin[None, None], cov)                   # réflectance de la page propre
     defect = np.zeros((H, W), np.float32)
     yy, xx = np.mgrid[0:H, 0:W].astype(np.float32)
 
@@ -563,7 +573,10 @@ def degrade(rng, cov, cls, paper_srgb):
 def make_sample(seed, long_side=1024):
     rng = np.random.default_rng(seed)
     paper = rand_paper(rng)
-    cov, cls = gen_clean(rng, long_side)
+    cov, cls, bg = gen_clean(rng, long_side)
+    if bg is not None:  # couleur du fond = aplat imprimé sur une feuille blanche
+        white = np.clip(rng.uniform(0.92, 1.0) + rng.normal(0, 0.012, 3), 0, 1).astype(np.float32)
+        paper = lin2srgb(srgb2lin(white) * bg)
     jbytes, E, defect = degrade(rng, cov, cls, paper)
     return dict(photo_jpg=jbytes, cov=(cov * 255 + 0.5).astype(np.uint8), cls=cls, defect=defect,
                 E=E, paper=paper)
@@ -572,6 +585,7 @@ def make_sample(seed, long_side=1024):
 def save_sample(d, path):
     os.makedirs(path, exist_ok=True)
     open(os.path.join(path, "photo.jpg"), "wb").write(d["photo_jpg"])
-    cv2.imwrite(os.path.join(path, "cov.png"), d["cov"])  # 4 canaux C,M,J,N (stockés tels quels)
+    cv2.imwrite(os.path.join(path, "cov.png"), d["cov"][..., :4])  # 4 canaux C,M,J,N (stockés tels quels)
+    cv2.imwrite(os.path.join(path, "w.png"), d["cov"][..., 4])     # encre blanche
     cv2.imwrite(os.path.join(path, "lab.png"), (d["cls"] + 4 * d["defect"]).astype(np.uint8))
     np.savez(os.path.join(path, "meta.npz"), E=d["E"], paper=d["paper"])

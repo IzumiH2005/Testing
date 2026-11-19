@@ -7,13 +7,15 @@
    IA 1 « œil du papier » : vraie couleur de la feuille (code + nom) et aspect du papier nu sur la photo.
    IA 2 « trieur »        : pour chaque point : papier, texte/trait, aplat, image, ou défaut (tache, pli, doigt…).
    IA 3 « imprimante »    : quantité d'encre Cyan, Magenta, Jaune, Noir à déposer en chaque point.
-   Impression : couleur du papier × filtres des 4 encres (synthèse soustractive, comme une vraie imprimante).
+   Impression : couleur du fond (IA 1), recouverte d'encre blanche là où il faut (IA 3),
+   puis filtres des 4 encres C, M, J, N (synthèse soustractive, comme une vraie imprimante).
    ========================================================================= */
 const Reprint = (() => {
   const lin = v => v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
   const enc = v => v <= 0.0031308 ? 12.92 * v : 1.055 * Math.pow(v, 1 / 2.4) - 0.055;
   const INKS = [[0, 174, 239], [236, 0, 140], [255, 242, 0], [16, 16, 16]]; // C, M, J, N à 100 %
   const INK_A = INKS.map(c => c.map(v => 1 - lin(v / 255)));               // part de lumière absorbée
+  const WHITE = [0.97, 0.97, 0.96].map(lin);                                  // 5e encre : blanc couvrant
   const ENC = new Uint8ClampedArray(4097); for (let i = 0; i <= 4096; i++) ENC[i] = Math.round(enc(i / 4096) * 255);
   const hex = c => "#" + c.map(v => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, "0")).join("").toUpperCase();
 
@@ -61,7 +63,7 @@ const Reprint = (() => {
   async function analyse(src, onProg, onStep) {
     const o = await AI.loadRuntime();
     // IA 1 : œil du papier (photo entière en 256 × 256)
-    onStep && onStep("IA 1 : couleur du papier…");
+    onStep && onStep("IA 1 : couleur du fond…");
     const s1 = await AI.session("paper", onProg);
     const r1 = await s1.run({ photo: new o.Tensor("float32", chw(src, 256, 256), [1, 3, 256, 256]) });
     const paper = Array.from(r1.paper.data), E64 = r1.E.data;
@@ -73,10 +75,10 @@ const Reprint = (() => {
                               E: new o.Tensor("float32", resize(E64, 3, 64, 64, h2, w2), [1, 3, h2, w2]) });
     const sel = r2.sel.data;
     // IA 3 : imprimante (jusqu'à 1280 px, par tuiles qui se chevauchent)
-    onStep && onStep("IA 3 : calcul des encres C, M, J, N…");
+    onStep && onStep("IA 3 : calcul des encres blanc, C, M, J, N…");
     const k3 = Math.min(1, 1280 / Math.max(src.width, src.height)), W = Math.round(src.width * k3), H = Math.round(src.height * k3);
     const ph = chw(src, W, H), E = resize(E64, 3, 64, 64, H, W), S = resize(sel, 5, h2, w2, H, W);
-    const s3 = await AI.session("print", onProg), cov = new Float32Array(4 * H * W);
+    const s3 = await AI.session("print", onProg), cov = new Float32Array(5 * H * W);
     const T = 512, M = 32, starts = n => { if (n <= T) return [0]; const a = []; for (let p = 0; ; p += T - 2 * M) { if (p + T >= n) { a.push(n - T); break; } a.push(p); } return a; };
     const ys = starts(H), xs = starts(W), th = Math.min(T, H), tw = Math.min(T, W);
     let done = 0;
@@ -87,22 +89,22 @@ const Reprint = (() => {
       const c = r3.cov.data;
       // on garde le centre de chaque tuile (les bords d'une tuile voient moins de contexte)
       const ya = y0 === 0 ? 0 : M, yb = y0 + th >= H ? th : th - M, xa = x0 === 0 ? 0 : M, xb = x0 + tw >= W ? tw : tw - M;
-      for (let ch = 0; ch < 4; ch++) for (let y = ya; y < yb; y++)
+      for (let ch = 0; ch < 5; ch++) for (let y = ya; y < yb; y++)
         cov.set(c.subarray(ch * th * tw + y * tw + xa, ch * th * tw + y * tw + xb), ch * H * W + (y0 + y) * W + x0 + xa);
-      done++; onStep && onStep(`IA 3 : calcul des encres C, M, J, N… ${Math.round(100 * done / (ys.length * xs.length))} %`); await tick();
+      done++; onStep && onStep(`IA 3 : calcul des encres blanc, C, M, J, N… ${Math.round(100 * done / (ys.length * xs.length))} %`); await tick();
     }
     return { paper, cov, W, H };
   }
 
-  /* ---------- impression : papier × filtres des encres ---------- */
+  /* ---------- impression : fond (+ blanc couvrant) × filtres des encres ---------- */
   function print(a, outW, outH, paperRGB) {
-    const cov = (outW === a.W && outH === a.H) ? a.cov : resize(a.cov, 4, a.H, a.W, outH, outW), n = outW * outH;
+    const cov = (outW === a.W && outH === a.H) ? a.cov : resize(a.cov, 5, a.H, a.W, outH, outW), n = outW * outH;
     const P = paperRGB.map(v => lin(v / 255)), A = INK_A;
     const c = canvasOf(outW, outH), x = c.getContext("2d"), img = x.createImageData(outW, outH), d = img.data;
     for (let i = 0; i < n; i++) {
-      const c0 = cov[i], c1 = cov[n + i], c2 = cov[2 * n + i], c3 = cov[3 * n + i];
+      const c0 = cov[i], c1 = cov[n + i], c2 = cov[2 * n + i], c3 = cov[3 * n + i], w = cov[4 * n + i];
       for (let ch = 0; ch < 3; ch++) {
-        const t = P[ch] * (1 - c0 * A[0][ch]) * (1 - c1 * A[1][ch]) * (1 - c2 * A[2][ch]) * (1 - c3 * A[3][ch]);
+        const t = (P[ch] * (1 - w) + WHITE[ch] * w) * (1 - c0 * A[0][ch]) * (1 - c1 * A[1][ch]) * (1 - c2 * A[2][ch]) * (1 - c3 * A[3][ch]);
         d[i * 4 + ch] = ENC[Math.max(0, Math.min(4096, Math.round(t * 4096)))];
       }
       d[i * 4 + 3] = 255;
@@ -117,7 +119,7 @@ const Reprint = (() => {
     const found = a.paper.map(v => Math.round(v * 255)), fInfo = { rgb: found, hex: hex(found), name: nameFr(found) };
     const white = opts.paper === "white", usedRGB = white ? [255, 255, 255] : found;
     const out = print(a, warped.width, warped.height, usedRGB);
-    const n = a.W * a.H, mean = [0, 1, 2, 3].map(k => { let s = 0; for (let i = 0; i < n; i++) s += a.cov[k * n + i]; return s / n; });
+    const n = a.W * a.H, mean = [0, 1, 2, 3, 4].map(k => { let s = 0; for (let i = 0; i < n; i++) s += a.cov[k * n + i]; return s / n; });
     out._info = { found: fInfo, paper: white ? { rgb: usedRGB, hex: "#FFFFFF", name: "blanc" } : fInfo, inkMean: mean };
     return out;
   }

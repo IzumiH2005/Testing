@@ -45,6 +45,11 @@ def t_lin2srgb(x):
 
 INK_T = srgb2lin(INKS_SRGB)  # (4,3) transmission linéaire de chaque encre à 100 %
 
+# 5e encre : le blanc couvrant (opaque), posé AVANT les 4 autres, comme sur les imprimantes à encre
+# blanche. Il sert à imprimer du blanc sur un fond coloré (ex. lettres blanches de « Rework »).
+WHITE_SRGB = np.array([0.97, 0.97, 0.96], np.float32)
+WHITE_LIN = srgb2lin(WHITE_SRGB)
+
 
 def render_np(cov):
     """cov (...,4) couverture 0..1 -> transmission linéaire (...,3)."""
@@ -62,6 +67,25 @@ def render_t(cov):
         f = 1.0 - cov[:, i:i + 1] * (1.0 - T[i].view(1, 3, 1, 1))
         out = f if out is None else out * f
     return out
+
+
+def print_np(paper_lin, cov):
+    """Page imprimée (lumière linéaire) : fond = papier, recouvert de blanc là où cov[...,4] > 0,
+    puis filtres des 4 encres. cov (...,4) ou (...,5)."""
+    base = np.asarray(paper_lin, np.float32)
+    if cov.shape[-1] > 4:
+        w = cov[..., 4:5]
+        base = base * (1 - w) + WHITE_LIN * w
+    return base * render_np(cov[..., :4])
+
+
+def print_t(paper_lin, cov):
+    """Même chose en torch : paper_lin [B,3] ou [3], cov [B,4|5,H,W]."""
+    p = torch.as_tensor(paper_lin, dtype=cov.dtype, device=cov.device).reshape(-1, 3, 1, 1)
+    if cov.shape[1] > 4:
+        w = cov[:, 4:5]
+        p = p * (1 - w) + torch.as_tensor(WHITE_LIN, dtype=cov.dtype, device=cov.device).view(1, 3, 1, 1) * w
+    return p * render_t(cov[:, :4])
 
 
 # --- « RIP » : conversion couleur -> quantités d'encre (table 3D précalculée) ---

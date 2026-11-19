@@ -7,8 +7,9 @@ IA 2 « trieur » (SelectNet)         : pour chaque point (page réduite à 512 
     du texte/trait, un aplat de couleur ou une image, et si c'est un défaut à ne pas réimprimer
     (tache, pli, usure, doigt, bout de table, reflet).
 IA 3 « imprimante » (PrintNet)      : pour chaque point en pleine résolution, donne la quantité
-    d'encre Cyan, Magenta, Jaune et Noir à déposer (0 à 100 %).
-La page finale est ensuite « imprimée » : couleur du papier x filtres des 4 encres.
+    d'encre Blanche (couvrante), Cyan, Magenta, Jaune et Noir à déposer (0 à 100 %).
+La page finale est ensuite « imprimée » : couleur du fond, recouverte de blanc là où il faut,
+puis filtres des 4 encres.
 """
 import torch
 import torch.nn as nn
@@ -159,10 +160,10 @@ def sel_probs(logits):
 
 
 class PrintNet(nn.Module):
-    """Sortie : couverture C, M, J, N (0..1) en chaque point."""
+    """Sortie : couverture C, M, J, N et blanc couvrant (0..1) en chaque point."""
     def __init__(self):
         super().__init__()
-        self.net = UNet(11, 4, [16, 32, 48, 64])
+        self.net = UNet(11, 5, [16, 32, 48, 64])
 
     def forward(self, photo, paperE, sel):  # sel = probabilités de l'IA 2 agrandies à la même taille
         return torch.sigmoid(self.net(torch.cat([photo, normalize(photo, paperE), sel], 1)))

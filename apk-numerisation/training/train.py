@@ -18,7 +18,7 @@ import torch
 import torch.nn.functional as F
 from torch.utils.data import DataLoader, Dataset
 
-from common import render_t, t_lin2srgb
+from common import print_t, t_lin2srgb, t_srgb2lin
 from models import PaperNet, PrintNet, SelectNet, sel_probs
 
 ap = argparse.ArgumentParser()
@@ -246,6 +246,10 @@ elif args.stage == "print":
             ph = read_photo(p)
             H, W = ph.shape[:2]
             cov = cv2.imread(os.path.join(p, "cov.png"), cv2.IMREAD_UNCHANGED).astype(np.float32) / 255
+            wp = os.path.join(p, "w.png")
+            w = cv2.imread(wp, cv2.IMREAD_UNCHANGED).astype(np.float32) / 255 if os.path.exists(wp) else np.zeros((H, W), np.float32)
+            cov = np.dstack([cov, w])  # C, M, J, N, blanc
+            paper = torch.from_numpy(np.load(os.path.join(p, "meta.npz"))["paper"]).float()
             cls, _ = read_lab(p)
             E = cv2.resize(np.load(os.path.join(p, "Ep.npy")), (W, H), interpolation=cv2.INTER_LINEAR)
             sel = cv2.resize(np.load(os.path.join(p, "sel.npy")).astype(np.float32) / 255, (W, H), interpolation=cv2.INTER_LINEAR)
@@ -266,30 +270,30 @@ elif args.stage == "print":
                         break
                 sl = (slice(y0, y0 + c), slice(x0, x0 + c))
                 out.append((to_t(ph[sl]), to_t(E[sl]), to_t(sel[sl]), to_t(cov[sl]),
-                            torch.from_numpy(cls[sl].astype(np.int64))))
+                            torch.from_numpy(cls[sl].astype(np.int64)), paper))
             return [torch.stack(z) for z in zip(*out)]
 
     dl = DataLoader(DS(train), batch_size=max(1, args.bs // 4), shuffle=True, num_workers=3, drop_last=True,
                     persistent_workers=True, collate_fn=lambda b: [torch.cat(z) for z in zip(*b)])
 
-    def printed(cov):
-        return t_lin2srgb(render_t(cov))
+    def printed(cov, paper):  # page imprimée sur un papier de la couleur trouvée par l'IA 1
+        return t_lin2srgb(print_t(t_srgb2lin(paper), cov))
 
     def loss_fn(m, b):
-        x, E, sel, cov, cls = b
+        x, E, sel, cov, cls, paper = b
         pc = m(x, E, sel)
         w = 1 + (cls == 1).float()[:, None] * 2  # le texte compte plus
         l_cov = ((pc - cov).abs() * w).mean()
-        l_rgb = ((printed(pc) - printed(cov)).abs() * w).mean()
+        l_rgb = ((printed(pc, paper) - printed(cov, paper)).abs() * w).mean()
         return l_cov + 2 * l_rgb
 
     def val_fn(m):
         errs = []
         ds = DS(val[:20], k=2)
         for i in range(len(ds)):
-            x, E, sel, cov, cls = ds[i]
+            x, E, sel, cov, cls, paper = ds[i]
             pc = m(x, E, sel)
-            errs.append(((printed(pc) - printed(cov)).abs().mean() * 255).item())
+            errs.append(((printed(pc, paper) - printed(cov, paper)).abs().mean() * 255).item())
         print("contrôle : écart moyen page réimprimée / page d'origine %.1f / 255" % np.mean(errs), flush=True)
 
     run(PrintNet(), lambda: dl, loss_fn, args.minutes, "print", val_fn)

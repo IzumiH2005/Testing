@@ -3,7 +3,7 @@
    Module IA — réseaux de neurones exécutés dans le navigateur
    (onnxruntime-web, WebAssembly). Rien n'est envoyé sur Internet.
      corners : DocAligner (heatmap, LCNet)  → les 4 coins de la feuille (repérage)
-     paper   : IA 1 « œil du papier »        → vraie couleur de la feuille   ┐ entraînées pour ce projet
+     paper   : IA 1 « œil du papier »        → couleur du fond de la page   ┐ entraînées pour ce projet
      select  : IA 2 « trieur »               → texte / aplat / image / défaut ├ (voir ../training/)
      print   : IA 3 « imprimante »           → encres C, M, J, N             ┘
    Les modèles ne sont téléchargés qu'au premier usage, puis gardés en mémoire.
@@ -12,7 +12,7 @@ const AI = (() => {
   const url = p => new URL("ai/" + p, location.href).href;
   const MODELS = {
     corners: { parts: ["docaligner.onnx.wasm"], mb: 4.8, label: "repérage des coins" },
-    paper:   { parts: ["ia1_papier.onnx.wasm"], mb: 0, label: "IA 1 · couleur du papier" },
+    paper:   { parts: ["ia1_papier.onnx.wasm"], mb: 0, label: "IA 1 · couleur du fond" },
     select:  { parts: ["ia2_trieur.onnx.wasm"], mb: 0, label: "IA 2 · tri" },
     print:   { parts: ["ia3_imprimante.onnx.wasm"], mb: 0, label: "IA 3 · imprimante" }
   };

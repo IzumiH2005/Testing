@@ -593,7 +593,7 @@ async function renderResult() {
   const ri = $("reprint-info"), info = cur.out._info; ri.hidden = !info;
   if (info) { const sw = c => `<i class="sw" style="background:${c}"></i>`, ink = info.inkMean.map(v => Math.round(v * 100));
     const forced = cur.warped._paper === "white", other = forced ? `couleur détectée (${info.found.name})` : "feuille blanche";
-    ri.innerHTML = `Feuille ${sw(info.paper.hex)}<b>${info.paper.name}</b> <code>${info.paper.hex}</code> · encre moyenne C ${ink[0]} % M ${ink[1]} % J ${ink[2]} % N ${ink[3]} %`
+    ri.innerHTML = `Fond ${sw(info.paper.hex)}<b>${info.paper.name}</b> <code>${info.paper.hex}</code> · encre moyenne C ${ink[0]} % M ${ink[1]} % J ${ink[2]} % N ${ink[3]} % · blanc ${ink[4]} %`
       + (info.found.hex !== "#FFFFFF" || forced ? ` <button class="mini" data-paper="${forced ? "auto" : "white"}">Mettre en ${other}</button>` : ""); }
   $("res-spec").textContent = `${cur.out.width} × ${cur.out.height} px` + (fmt ? ` · ${fmt}` : "") + (ppp ? ` · ≈ ${ppp} ppp` : "");
 }
