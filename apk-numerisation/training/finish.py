@@ -730,6 +730,58 @@ def edge_debris(lbl):
         lb[mm > 0] = fill
 
 
+def _spur_ids(diff, op, r, depth=1.3, area=2.5, ccs=None, thick=2.0):
+    """Morceaux de diff (= forme moins son ouverture op) qui sont des dents du contour : collés à la
+    forme ouverte, peu profonds, petits, et posés sur une forme épaisse (demi-épaisseur >= thick·r ;
+    dans un petit texte, un « picot » de cette taille est un vrai détail de lettre, et un petit blanc
+    est l'espace entre deux lettres). Renvoie un booléen par composante (0 = fond, faux)."""
+    n, cc, st = ccs if ccs is not None else cv2.connectedComponentsWithStats(diff, connectivity=8)[:3]
+    dist = cv2.distanceTransform(1 - op, cv2.DIST_L2, 3)
+    inner = cv2.dilate(cv2.distanceTransform(op, cv2.DIST_L2, 3),
+                       cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (4 * r + 1, 4 * r + 1)))
+    dmax = np.zeros(n, np.float32)
+    dmin = np.full(n, 1e9, np.float32)
+    tk = np.zeros(n, np.float32)
+    ys, xs = np.nonzero(diff)
+    ids = cc[ys, xs]
+    np.maximum.at(dmax, ids, dist[ys, xs])
+    np.minimum.at(dmin, ids, dist[ys, xs])
+    np.maximum.at(tk, ids, inner[ys, xs])
+    cand = (st[:, 4] <= area * r * r) & (dmax <= depth * r) & (dmin <= 1.5) & (tk >= thick * r)
+    cand[0] = False
+    return cand
+
+
+def smooth_spurs(lbl, r, depth=1.3, area=2.5):
+    """Picots et encoches sur les contours : la photo (bruit JPEG, grain du papier) laisse des pointes
+    d'encre d'un ou deux pixels collées aux lettres, et des petites morsures dans leurs bords. Une vraie
+    impression a des contours nets et réguliers. Pour chaque encre (fond compris, ce qui traite les
+    encoches) : ce qu'une ouverture de rayon r enlève et qui reste collé à la forme, peu profond
+    (< depth·r) et petit (< area·r²), est rendu à l'encre qui l'entoure. Un petit morceau détaché
+    (point du i, contre-forme d'un e) n'est pas collé à la forme ouverte : il est gardé."""
+    Hh, Wh = lbl.shape
+    kd = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * r + 1, 2 * r + 1))
+    k3 = np.ones((3, 3), np.uint8)
+    snap = lbl.copy()
+    for k in np.unique(snap):
+        mk = (snap == k).astype(np.uint8)
+        op = cv2.morphologyEx(mk, cv2.MORPH_OPEN, kd)
+        diff = (mk > op).astype(np.uint8)
+        if not diff.any():
+            continue
+        n, cc, st, _ = cv2.connectedComponentsWithStats(diff, connectivity=8)
+        cand = _spur_ids(diff, op, r, depth, area, (n, cc, st))
+        for i in np.nonzero(cand)[0]:
+            x0, y0, w, h = st[i, :4]
+            X0, Y0, X1, Y1 = max(x0 - 2, 0), max(y0 - 2, 0), min(x0 + w + 2, Wh), min(y0 + h + 2, Hh)
+            m = (cc[Y0:Y1, X0:X1] == i).astype(np.uint8)
+            sb = snap[Y0:Y1, X0:X1]
+            ring = (cv2.dilate(m, k3) > 0) & (sb != k)
+            if not ring.any():
+                continue
+            lbl[Y0:Y1, X0:X1][m > 0] = np.bincount(sb[ring]).argmax()
+
+
 COV = os.environ.get('COV', 'clip')
 _on = lambda n: n not in os.environ.get('SKIP', '').split(',')
 
@@ -1059,7 +1111,15 @@ def reprint_clean(ph, sel, bg, gain, out_long=2400, tau=9.0, return_debug=False)
     thin = np.zeros((Hh, Wh), bool)
     for k in np.unique(lbl_t):
         mk = (lbl_t == k).astype(np.uint8)
-        thin |= (mk > cv2.morphologyEx(mk, cv2.MORPH_OPEN, kd))
+        op = cv2.morphologyEx(mk, cv2.MORPH_OPEN, kd)
+        diff = (mk > op).astype(np.uint8)
+        if not diff.any():
+            continue
+        # seuls les vrais traits fins comptent : les petites dents du contour (que l'ouverture enlève
+        # aussi) doivent recevoir le lissage fort, sinon le bord des lettres reste en escalier
+        bad = _spur_ids(diff, op, rho)
+        n, cc = cv2.connectedComponents(diff, connectivity=8)
+        thin |= (cc > 0) & ~bad[cc]
     thin = cv2.dilate(thin.astype(np.uint8), np.ones((3, 3), np.uint8)).astype(bool)
     if os.environ.get('DBG'):
         np.save(os.environ['DBG']+'/lblt.npy', lbl_t); np.save(os.environ['DBG']+'/thin.npy', thin)
@@ -1095,12 +1155,14 @@ def reprint_clean(ph, sel, bg, gain, out_long=2400, tau=9.0, return_debug=False)
     if _on('light_rims'): light_rims(lbl, pal, lab)
     if _on('edge_debris'): edge_debris(lbl)
     if _on('lone_marks'): lone_marks(lbl, pal)
+    if _on('smooth_spurs'): smooth_spurs(lbl, rho)
     if os.environ.get('DBG'):
         np.save(os.environ['DBG']+'/lbl2.npy', lbl)
     tick('nettoyage')
     pal_rgb = lab_to_srgb(pal).astype(np.float32)
     pal_rgb[0] = bg
     out = pal_rgb[lbl]
+    dom_v = cv2.resize(lbl, (W, H), interpolation=cv2.INTER_NEAREST)   # encres vraiment imprimées
     del lbl
     # 5. illustrations et objets hors page. On compare la photo à sa version « encres unies » : à
     #    l'intérieur d'une lettre ou d'un aplat l'écart est nul (une seule encre l'explique), dans une
@@ -1140,6 +1202,48 @@ def reprint_clean(ph, sel, bg, gain, out_long=2400, tau=9.0, return_debug=False)
             gone |= m
             continue
         ill = np.maximum(ill, cv2.dilate(m, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * mg + 1,) * 2)))
+    # objet étranger qui entre par le bord (doigt, pouce, coin de table, bout d'une autre feuille) en
+    # aplat uni : l'IA ne le voit pas comme une illustration car il a une seule couleur. Il se trahit
+    # par sa couleur : une encre qu'on ne trouve presque QUE dans des formes collées au bord. Une vraie
+    # encre de la page (texte, cadre, bandeau) apparaît aussi à l'intérieur. Un bandeau imprimé à fond
+    # perdu longe tout un côté : il est gardé.
+    L0 = max(H, W)
+    tb_ = max(2, round(0.004 * L0))
+    text_ink = np.zeros(K, bool)
+    text_ink[1:] = np.abs(pal[1:, 0] - pal[0, 0]) > 35   # encres bien contrastées (texte, traits)
+    for k in range(1, K):
+        mk = ((dom_f == k) & (gone == 0)).astype(np.uint8)
+        tot = int(mk.sum())
+        if tot < 0.0005 * H * W:
+            continue
+        nk, ck, sk, _ = cv2.connectedComponentsWithStats(mk, connectivity=8)
+        x, y, w, h, a = sk[:, 0], sk[:, 1], sk[:, 2], sk[:, 3], sk[:, 4]
+        tl, tt, tr, tbm = x <= tb_, y <= tb_, x + w >= W - tb_, y + h >= H - tb_
+        touch = tl | tt | tr | tbm
+        touch[0] = False
+        if not touch.any() or a[touch].sum() < 0.8 * tot:
+            continue
+        # longueur de bord occupée : un doigt ou un coin n'en couvre qu'une partie
+        span = np.maximum(np.where(tl | tr, h / H, 0), np.where(tt | tbm, w / W, 0))
+        sel_ = touch & (a >= 0.0005 * H * W) & (span < 0.75)
+        if not sel_.any():
+            continue
+        m0 = sel_[ck].astype(bool)
+        # petite marge seulement (le liseré de l'objet) ; les lettres qui le touchent restent
+        md = cv2.dilate(m0.astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * tb_ + 1,) * 2)) > 0
+        m = m0 | (md & ~text_ink[dom_f])
+        # liseré de l'objet classé dans une encre foncée : petits morceaux presque entiers dans la marge
+        md2 = cv2.dilate(m0.astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (4 * tb_ + 1,) * 2)) > 0
+        nr, cr = cv2.connectedComponents(((dom_f != 0) & ~m).astype(np.uint8), connectivity=8)
+        inside = np.bincount(cr[md2], minlength=nr) >= 0.9 * np.bincount(cr.ravel(), minlength=nr)
+        inside[0] = False
+        m = (m | inside[cr]).astype(np.uint8)
+        ring = cv2.dilate(m, np.ones((2 * mg + 1, 2 * mg + 1), np.uint8)) > m
+        fill = np.bincount(dom_f[ring & (dom_f != k)], minlength=K).argmax()
+        mu = cv2.resize(cv2.GaussianBlur(m.astype(np.float32), (0, 0), 1.5), (Wh, Hh))[..., None]
+        out = out * (1 - mu) + pal_rgb[fill] * mu
+        gone |= m
+        ill[m > 0] = 0
     # bandes collées au bord de la photo (table, ombre, tranche du papier) : un élément qui touche le
     # bord et ne s'en éloigne pas de plus de 4 % est hors de la page -> recouvert par l'encre voisine.
     # Les objets déjà recouverts ci-dessus (doigt) n'en font plus partie : le reste de la table sous le
@@ -1162,6 +1266,48 @@ def reprint_clean(ph, sel, bg, gain, out_long=2400, tau=9.0, return_debug=False)
         fill = np.bincount(dom_f[ring], minlength=K).argmax()
         mu = cv2.resize(cv2.GaussianBlur(strip.astype(np.float32), (0, 0), 1), (Wh, Hh))[..., None]
         out = out * (1 - mu) + pal_rgb[fill] * mu
+        gone |= strip
+    # éclats perdus d'un aplat : une encre peu contrastée (aplat, pas du texte) dont la masse est un grand
+    # bloc, mais qui laisse aussi de petits morceaux isolés loin de tout autre contenu (bord déchiré,
+    # pli, reflet) -> ce ne sont pas des éléments imprimés, on les recouvre par le fond voisin.
+    content = ((dom_v != 0) & (gone == 0)).astype(np.uint8)
+    far = max(4, round(0.03 * L0))
+    # zones « image » de l'IA 2 qui ne touchent pas le bord (une zone collée au bord = hors page, coin déchiré)
+    n4, cc4, st4, _ = cv2.connectedComponentsWithStats((p_img > 0.5).astype(np.uint8), connectivity=8)
+    x4, y4, w4, h4 = st4[:, 0], st4[:, 1], st4[:, 2], st4[:, 3]
+    keep4 = (x4 > tb_) & (y4 > tb_) & (x4 + w4 < W - tb_) & (y4 + h4 < H - tb_)
+    keep4[0] = False
+    pic = keep4[cc4]
+    faint = np.zeros(K, bool)
+    faint[1:] = np.linalg.norm(pal[1:] - pal[0], axis=1) < 15
+    for k in range(1, K):
+        if text_ink[k]:
+            continue
+        mk = ((dom_v == k) & (gone == 0)).astype(np.uint8)
+        nk, ck, sk, _ = cv2.connectedComponentsWithStats(mk, connectivity=8)
+        if nk < 3:
+            continue
+        a = sk[:, 4].copy(); a[0] = 0
+        if a.max() < 0.5 * a.sum():
+            continue
+        small = (a > 0) & (a < 0.02 * a.max()) & (a < 0.001 * H * W)
+        # voisins valables : contenu bien visible (pas les autres éclats de cette encre, ni les encres
+        # presque de la couleur du fond, qui ne sont que des plis ou des ombres)
+        host = (content & ~small[ck] & ~faint[dom_v]) | (ill > 0) | pic   # photos : contenu aussi
+        for i in np.nonzero(small)[0]:
+            x, y, w, h = sk[i, :4]
+            x0, y0, x1, y1 = max(0, x - far), max(0, y - far), min(W, x + w + far), min(H, y + h + far)
+            me = (ck[y0:y1, x0:x1] == i).astype(np.uint8)
+            near = cv2.dilate(me, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * far + 1,) * 2))
+            if (host[y0:y1, x0:x1] & near).any():
+                continue
+            m = np.zeros((H, W), np.uint8)
+            m[y0:y1, x0:x1] = cv2.dilate(me, np.ones((3, 3), np.uint8))
+            mu = cv2.resize(cv2.GaussianBlur(m.astype(np.float32), (0, 0), 1), (Wh, Hh))[..., None]
+            out = out * (1 - mu) + pal_rgb[0] * mu
+            gone |= m
+            content[m > 0] = 0
+            host[m > 0] = 0
     if ill.any():
         # une illustration repérée par l'écart s'étend à toute la zone « image » de l'IA 2 qui la contient
         # (la rose, dont les tons sont proches d'une encre, suit la main et les feuilles)
