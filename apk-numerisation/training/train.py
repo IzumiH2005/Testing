@@ -298,7 +298,9 @@ elif args.stage == "print":
         w = 1 + (cls == 1).float()[:, None] * 2  # le texte compte plus
         l_cov = ((pc - cov).abs() * w).mean()
         l_rgb = ((printed(pc, paper) - printed(cov, paper)).abs() * w).mean()
-        return l_cov + 2 * l_rgb
+        # encre blanche : rare et invisible sur fond pâle, donc notée à part et fortement
+        l_w = ((pc[:, 4] - cov[:, 4]).abs() * (1 + 20 * cov[:, 4])).mean()
+        return l_cov + 2 * l_rgb + 3 * l_w
 
     def val_fn(m):
         errs = []
@@ -308,5 +310,12 @@ elif args.stage == "print":
             pc = m(x, E, sel)
             errs.append(((printed(pc, paper) - printed(cov, paper)).abs().mean() * 255).item())
         print("contrôle : écart moyen page réimprimée / page d'origine %.1f / 255" % np.mean(errs), flush=True)
+        wv, wp = [], []
+        for i in range(len(ds)):
+            x, E, sel, cov, cls, paper = ds[i]
+            m_ = cov[:, 4] > 0.5
+            if m_.any():
+                wv.append(((m(x, E, sel)[:, 4] > 0.5) & m_).sum().item() / m_.sum().item())
+        print("contrôle : encre blanche retrouvée %.2f" % (np.mean(wv) if wv else -1), flush=True)
 
     run(PrintNet(), lambda: dl, loss_fn, args.minutes, "print", val_fn)

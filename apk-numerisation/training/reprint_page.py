@@ -1,3 +1,4 @@
+import os
 """Réimprime une page déjà redressée avec les 3 IA (version Python de référence).
    python reprint_page.py MODELS_DIR page.png sortie.png"""
 import sys
@@ -30,6 +31,7 @@ T = lambda a: torch.from_numpy(np.ascontiguousarray(a)).permute(2, 0, 1)[None].f
 with torch.no_grad():
     paper, E = load(PaperNet, "paper")(T(cv2.resize(ph, (256, 256), interpolation=cv2.INTER_AREA)))
     paper = paper[0].numpy()
+    if os.environ.get("PAPER"): paper = np.array([float(v) for v in os.environ["PAPER"].split(",")], np.float32) / 255
     E = E[0].permute(1, 2, 0).numpy()
     rgb = (paper * 255).round().astype(int)
     print("fond", rgb, "#%02x%02x%02x" % tuple(rgb), color_name_fr(rgb))
