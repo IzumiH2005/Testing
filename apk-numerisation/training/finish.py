@@ -16,6 +16,7 @@ couleur mesurée sur la photo (après correction de l'éclairage).
   5. illustrations (photos, dessins nuancés) : gardées telles quelles, juste éclairage corrigé.
 """
 import os
+import sys
 
 import cv2
 import numpy as np
@@ -151,12 +152,19 @@ def drop_mixtures(pal, lab, cand):
     return pal[keep], np.array(mid)
 
 
-def clean_islands(lbl, K, long_side):
+def clean_islands(lbl, K, long_side, pal=None, keep_de=30.0):
     dust = (0.0012 * long_side) ** 2      # plus petit qu'un point de ponctuation
     blob = (0.004 * long_side) ** 2       # taille max d'un défaut de remplissage dans une forme
     hole = (0.0009 * long_side) ** 2      # trou de fond dans une forme : seulement minuscule (on garde les « o »)
     H, W = lbl.shape
     ker = np.ones((3, 3), np.uint8)
+
+    def small_box(j, x, y, w, h, a):
+        # l'encre qui entoure n'est qu'une auréole autour de la marque (tache sur le papier), pas un
+        # vrai cartouche : la marque n'est pas un contenu
+        r = 4 * max(w, h)
+        return (lbl[max(0, y - r):y + h + r, max(0, x - r):x + w + r] == j).sum() < 6 * a
+
     for k in range(K):
         n, cc, st, _ = cv2.connectedComponentsWithStats((lbl == k).astype(np.uint8), connectivity=8)
         lim = hole if k == 0 else blob
@@ -174,7 +182,10 @@ def clean_islands(lbl, K, long_side):
             frac = nb[j] / max(1, nb.sum())
             if j == 0 and a < dust:            # poussière sur le fond
                 lbl[y0:y1, x0:x1][m] = 0
-            elif j != 0 and frac > 0.8:        # enfermé dans une forme d'une seule encre
+            elif j != 0 and frac > 0.8 and (pal is None or a < dust or np.linalg.norm(pal[k] - pal[j]) < keep_de
+                                             or small_box(j, x, y, w, h, a)):
+                # enfermé dans une forme d'une seule encre, de couleur voisine : défaut de remplissage.
+                # Une marque bien contrastée (accent, point, lettre dans un cartouche) est gardée.
                 lbl[y0:y1, x0:x1][m] = j
 
 
@@ -235,19 +246,158 @@ def merge_kin(lbl, pal, long_side, max_de=30.0):
             ring = cv2.dilate(m.astype(np.uint8), ker).astype(bool) & ~m
             nb = np.bincount(lbl[y0:y1, x0:x1][ring], minlength=K).astype(float)
             nb[k] = 0
-            ink = nb[1:].sum()
-            if ink == 0:
+            # seules les encres proches comptent (un morceau de lettre noire posé dans un encadré
+            # turquoise touche surtout le turquoise, mais c'est au noir qu'il appartient)
+            kin = np.array([0.0] + [nb[j] if np.linalg.norm(pal[k] - pal[j]) <= max_de else 0.0
+                                    for j in range(1, K)])
+            if kin.sum() == 0:
                 continue
-            j = int(np.argmax(nb[1:])) + 1
+            j = int(np.argmax(kin))
             # on ne va que vers l'encre la plus présente de la page : jamais un bout de noir vers le bleu
-            if nb[j] / ink < 0.8 or nb[j] / nb.sum() < 0.08 or j not in areas or tot[j] < tot[k]:
-                continue
-            if np.linalg.norm(pal[k] - pal[j]) > max_de:
+            if kin[j] / kin.sum() < 0.8 or nb[j] / nb.sum() < 0.08 or j not in areas or tot[j] < tot[k]:
                 continue
             ccj, stj = areas[j][1], areas[j][2]
             touch = np.unique(ccj[y0:y1, x0:x1][ring])
             touch = touch[touch > 0]
             if a < 0.5 * stj[touch, cv2.CC_STAT_AREA].sum():
+                lbl[y0:y1, x0:x1][m] = j
+
+
+def unify_clusters(lbl, pal, long_side, size=0.02, pad=0.015, max_de=36.0):
+    """Une petite forme isolée (lettre, accent, point) posée sur un fond uni est imprimée d'une seule
+    encre. Le flou et la compression JPEG colorent ses bords et ses parties fines (bleu clair au bord
+    d'une lettre bleu nuit sur un cartouche turquoise, brun sombre dans le noir) : ces pixels prennent
+    l'encre de la forme, choisie par la majorité des alentours (le mot, la ligne). Une encre n'est
+    absorbée que si elle est proche de celle de la forme, ou située entre elle et le fond (liseré)."""
+    K = len(pal)
+    H, W = lbl.shape
+    pd = round(pad * long_side)
+    lim = (size * long_side) ** 2
+    tot = np.bincount(lbl.ravel(), minlength=K)
+    de = lambda a, b: float(np.linalg.norm(pal[a] - pal[b]))
+
+    def seg(q, j, s):
+        a, b, p = pal[j], pal[s], pal[q]
+        v = b - a
+        t = np.clip(np.dot(p - a, v) / max(np.dot(v, v), 1e-6), 0, 1)
+        return float(np.linalg.norm(a + t * v - p))
+
+    for s in [0] + [q for q in range(1, K) if tot[q] > 0.002 * H * W]:
+        M = ((lbl != s) & (lbl != 0)) if s else (lbl != 0)
+        n, cc, st, _ = cv2.connectedComponentsWithStats(M.astype(np.uint8), connectivity=8)
+        for i in range(1, n):
+            x, y, w, h, a = st[i]
+            if a >= lim or a < 4:
+                continue
+            x0, y0, x1, y1 = max(0, x - 1), max(0, y - 1), min(W, x + w + 1), min(H, y + h + 1)
+            m = cc[y0:y1, x0:x1] == i
+            sub = lbl[y0:y1, x0:x1]
+            c = np.bincount(sub[m], minlength=K)
+            if (c > 0).sum() < 2:
+                continue
+            ring = cv2.dilate(m.astype(np.uint8), np.ones((3, 3), np.uint8)).astype(bool) & ~m
+            if (sub[ring] == s).mean() < 0.6:
+                continue
+            X0, Y0, X1, Y1 = max(0, x - pd), max(0, y - pd), min(W, x + w + pd), min(H, y + h + pd)
+            nb = np.bincount(lbl[Y0:Y1, X0:X1].ravel(), minlength=K)
+            # l'encre de la forme : la plus répandue alentour parmi celles qui contrastent vraiment avec
+            # le fond (une encre pâle de liseré ne peut pas être l'encre d'un accent)
+            pres = [q for q in range(1, K) if c[q] > 0]
+            dmax = max(de(q, s) for q in pres)
+            j = max((q for q in pres if de(q, s) >= 0.6 * dmax), key=lambda q: nb[q])
+            dj = de(j, s)
+            # creux d'une lettre (intérieur d'un o) : pas un liseré, il garde sa couleur claire
+            jm = (m & (sub == j)).astype(np.uint8)
+            ff = np.pad(1 - jm, 1, constant_values=1)
+            cv2.floodFill(ff, None, (0, 0), 2)
+            hole = ff[1:-1, 1:-1] == 1
+            fr = np.zeros_like(m)
+            cov = 0.0
+            for q in range(1, K):
+                if q == j or c[q] == 0:
+                    continue
+                if de(q, j) <= max_de:
+                    # une encre pâle très majoritaire n'est pas le bord d'une forme : quelques pixels
+                    # plus foncés ne la recolorent pas (pli du dos, ombre d'un coin abîmé)
+                    if de(q, s) < 0.6 * dmax and c[q] > 2 * c[j]:
+                        continue
+                    sub[m & (sub == q)] = j
+                elif de(q, s) < dj and seg(q, j, s) < 0.5 * dj:
+                    f = m & (sub == q) & ~hole
+                    v = pal[s] - pal[j]
+                    t = float(np.clip(np.dot(pal[q] - pal[j], v) / max(np.dot(v, v), 1e-6), 0, 1))
+                    cov += f.sum() * (1 - t)
+                    fr |= f
+            core = (m & (sub == j)).astype(np.uint8)
+            if fr.any() and cv2.connectedComponents(cv2.dilate(core, np.ones((3, 3), np.uint8)))[0] > 2:
+                # cœur en plusieurs morceaux reliés par l'encre claire : trait fin (lettre d'un sceau),
+                # la partie claire fait partie du trait, la retirer le couperait
+                fr[:] = False
+            if fr.sum() > 3 * core.sum():
+                # surtout du « liseré » autour d'un petit cœur : une tache floue (salissure), pas une
+                # lettre ; on la laisse aux règles des formes molles
+                fr[:] = False
+            if fr.any():
+                # liseré : on garde autant de pixels d'encre que sa couverture réelle (lumière conservée),
+                # en partant des plus proches du cœur de la forme ; le reste rejoint le fond
+                core = m & (sub == j)
+                if core.any():
+                    d = cv2.distanceTransform((~core).astype(np.uint8), cv2.DIST_L2, 3)
+                else:
+                    d = -cv2.distanceTransform(np.pad(m, 1).astype(np.uint8), cv2.DIST_L2, 3)[1:-1, 1:-1]
+                ys, xs = np.nonzero(fr)
+                o = np.argsort(d[ys, xs], kind='stable')
+                nk = int(round(cov))
+                sub[ys[o[:nk]], xs[o[:nk]]] = j
+                sub[ys[o[nk:]], xs[o[nk:]]] = s
+
+
+def unify_kin(lbl, pal, long_side, max_de=36.0, pad=0.015, padx=0.04, size=0.02, dom=2.5):
+    """Un mot est imprimé d'une seule encre : une lettre (ou un morceau) d'une encre proche (brun très
+    sombre au milieu d'un texte bleu nuit) entourée, à l'échelle d'une ligne, de beaucoup plus de
+    l'autre encre, prend cette encre. Les encres franchement différentes ne sont jamais mêlées."""
+    K = len(pal)
+    H, W = lbl.shape
+    pd = round(pad * long_side)
+    px = round(padx * long_side)   # une ligne de texte s'étend en largeur
+    lim = (size * long_side) ** 2
+    # seules les petites formes (lettres) votent : un grand dessin voisin ne colore pas le texte
+    small = np.zeros(lbl.shape, bool)
+    for q in range(1, K):
+        n, cc, st, _ = cv2.connectedComponentsWithStats((lbl == q).astype(np.uint8), connectivity=8)
+        ok = np.r_[False, st[1:, cv2.CC_STAT_AREA] < lim]
+        small |= ok[cc]
+    for k in range(1, K):
+        kin = [j for j in range(1, K) if j != k and np.linalg.norm(pal[k] - pal[j]) <= max_de]
+        if not kin:
+            continue
+        n, cc, st, _ = cv2.connectedComponentsWithStats((lbl == k).astype(np.uint8), connectivity=8)
+        for i in range(1, n):
+            x, y, w, h, a = st[i]
+            if a >= lim:
+                continue
+            x0, y0, x1, y1 = max(0, x - px), max(0, y - pd), min(W, x + w + px), min(H, y + h + pd)
+            nb = np.bincount(lbl[y0:y1, x0:x1][small[y0:y1, x0:x1]], minlength=K)
+            m = cc[y0:y1, x0:x1] == i
+            ring = cv2.dilate(m.astype(np.uint8), np.ones((3, 3), np.uint8)).astype(bool) & ~m
+            rc = np.bincount(lbl[y0:y1, x0:x1][ring], minlength=K)
+            # seulement une encre que le morceau touche, et qui n'est pas ce qui l'entoure (sinon le
+            # morceau disparaîtrait dans le fond coloré : accent, point d'un i)
+            cand = [q for q in kin if rc[q] < 0.6 * rc.sum()]
+            if not cand:
+                continue
+            j = max(cand, key=lambda q: nb[q])
+            if nb[j] < dom * nb[k]:
+                continue
+            # jamais vers une encre qui se confond davantage avec ce qui entoure le morceau (le point
+            # d'un i ne doit pas pâlir jusqu'à disparaître)
+            sr = int(np.argmax(rc))
+            if np.linalg.norm(pal[j] - pal[sr]) < 0.75 * np.linalg.norm(pal[k] - pal[sr]):
+                continue
+            # le morceau borde une forme d'une encre encore plus proche de la sienne (ombre rouge sombre
+            # d'un dessin rouge) : il appartient à cette forme, pas au texte
+            dj = np.linalg.norm(pal[k] - pal[j])
+            if not any(q > 0 and q != k and q != j and rc[q] > 0 and np.linalg.norm(pal[k] - pal[q]) < dj for q in range(K)):
                 lbl[y0:y1, x0:x1][m] = j
 
 
@@ -299,6 +449,337 @@ def drop_fringes(lbl, K, rho):
         lut = np.zeros(idx.max() + 1, np.uint8)
         lut[idx[ys, xs]] = lbl[ys, xs]
         lbl[bad] = lut[idx[bad]]
+
+
+def drop_mix_blobs(lbl, pal, long_side, max_side=0.004):
+    """Tache de mélange : au creux d'une lettre (coin intérieur d'un E), le flou mélange l'encre et le
+    fond ; si la page a une encre de cette couleur intermédiaire (rouge sombre entre le rouge du fond et
+    le noir), une petite tache de cette encre apparaît dans la lettre. Une petite forme dont l'encre est
+    un mélange du fond et d'une encre voisine, et qui touche les deux, est rendue à ses voisines."""
+    K = len(pal)
+    H, W = lbl.shape
+    lin = lab_to_srgb(pal)
+    lin = np.where(lin <= 0.04045, lin / 12.92, ((np.clip(lin, 0, 1) + 0.055) / 1.055) ** 2.4) * 100
+    lim = (max_side * long_side) ** 2
+    ker = np.ones((3, 3), np.uint8)
+    bad = np.zeros((H, W), bool)
+    for k in range(1, K):
+        mixes = []
+        for j in range(1, K):
+            if j == k:
+                continue
+            v = lin[j] - lin[0]
+            vv = max(float(v @ v), 1e-6)
+            d = lin[k] - lin[0]
+            t = float(d @ v) / vv
+            perp = float(np.linalg.norm(d - t * v))
+            if 0.15 < t < 0.85 and perp < 0.25 * np.sqrt(vv):
+                mixes.append(j)
+        if not mixes:
+            continue
+        n, cc, st, _ = cv2.connectedComponentsWithStats((lbl == k).astype(np.uint8), connectivity=8)
+        for i in np.where(st[:, cv2.CC_STAT_AREA] < lim)[0]:
+            if i == 0:
+                continue
+            x, y, w, h, a = st[i]
+            x0, y0, x1, y1 = max(0, x - 2), max(0, y - 2), min(W, x + w + 2), min(H, y + h + 2)
+            m = cc[y0:y1, x0:x1] == i
+            ring = cv2.dilate(m.astype(np.uint8), ker).astype(bool) & ~m
+            nb = np.bincount(lbl[y0:y1, x0:x1][ring], minlength=K).astype(float)
+            tot = max(nb.sum(), 1)
+            if nb[0] / tot < 0.1:
+                continue
+            if max(nb[j] for j in mixes) / tot >= 0.2 and (nb[0] + sum(nb[j] for j in mixes)) / tot > 0.9:
+                bad[y0:y1, x0:x1] |= m
+    if bad.any():
+        src = (~bad).astype(np.uint8)
+        _, idx = cv2.distanceTransformWithLabels(src, cv2.DIST_L2, 5, labelType=cv2.DIST_LABEL_PIXEL)
+        ys, xs = np.nonzero(src)
+        lut = np.zeros(idx.max() + 1, np.uint8)
+        lut[idx[ys, xs]] = lbl[ys, xs]
+        lbl[bad] = lut[idx[bad]]
+
+
+def recolor_thin(lbl, pal, lab, min_proj=3.0):
+    """Un trait fin coloré (filet doré, signature au stylo bleu) sort souvent gris foncé sur la photo :
+    l'appareil lisse la couleur plus que la luminosité (et accentue les bords). Le trait est alors pris
+    pour du noir. Indice qui reste : sa teinte penche, même un peu, vers celle de l'encre colorée qu'il
+    touche, alors qu'un mélange noir + fond n'a que la teinte (faible) du fond.
+    Morceau d'encre neutre qui touche une encre colorée et penche nettement vers elle -> cette encre."""
+    Hh, Wh = lbl.shape
+    H, W = lab.shape[:2]
+    ch = np.hypot(pal[:, 1], pal[:, 2])
+    bg_ab, Lb = pal[0, 1:], pal[0, 0]
+    col = [j for j in range(1, len(pal)) if ch[j] > 12]
+    if not col:
+        return
+    for _ in range(3):   # un morceau recoloré peut en rapprocher un autre (trait coupé en plusieurs bouts)
+        if not _recolor_pass(lbl, pal, lab, col, min_proj, H, W, Hh, Wh, Lb, bg_ab, ch):
+            break
+
+
+def _recolor_pass(lbl, pal, lab, col, min_proj, H, W, Hh, Wh, Lb, bg_ab, ch):
+    changed = False
+    # proche de l'encre colorée (même dessin : lettres d'un sceau autour de son anneau, devise sous un
+    # emblème, bout effilé d'un filet) ; le texte courant, lui, ne penche vers aucune encre colorée
+    R = 0.03 * max(Hh, Wh)
+    dil = {j: cv2.distanceTransform((lbl != j).astype(np.uint8), cv2.DIST_L2, 3) <= R for j in col}
+    # dans le cadre d'un petit dessin coloré (fils d'une balance, détails d'un emblème) : boîte d'un
+    # morceau de cette encre, agrandie de 1 % ; les grands cadres (bordure de page) ne comptent pas
+    box = {}
+    mg = round(0.01 * max(Hh, Wh))
+    for j in col:
+        nj, _, sj, _ = cv2.connectedComponentsWithStats((lbl == j).astype(np.uint8), connectivity=8)
+        b = np.zeros((Hh, Wh), bool)
+        for x, y, w, h, a in sj[1:]:
+            if a >= 0.0003 * Hh * Wh and w * h <= 0.03 * Hh * Wh:
+                b[max(y - mg, 0):y + h + mg, max(x - mg, 0):x + w + mg] = True
+        box[j] = b
+    for k in range(1, len(pal)):
+        if ch[k] > 8 or pal[k, 0] > Lb - 20:
+            continue
+        mk = lbl == k
+        n, cc, st, _ = cv2.connectedComponentsWithStats(mk.astype(np.uint8), connectivity=8)
+        ys, xs = np.nonzero(mk)
+        c = cc[ys, xs]
+        px = lab[np.minimum(ys * H // Hh, H - 1), np.minimum(xs * W // Wh, W - 1)]
+        t = np.clip((Lb - px[:, 0]) / (Lb - pal[k, 0]), 0, 1)[:, None]
+        ex = px[:, 1:] - (bg_ab * (1 - t) + pal[k, 1:] * t)   # teinte en trop par rapport au mélange
+        cnt = np.maximum(np.bincount(c, minlength=n), 1)
+        ea = np.bincount(c, ex[:, 0], minlength=n) / cnt
+        eb = np.bincount(c, ex[:, 1], minlength=n) / cnt
+        small = st[:, cv2.CC_STAT_AREA] < 0.002 * Hh * Wh
+        # entouré de fond (pas un texte posé sur un aplat coloré)
+        ccd = cv2.dilate(cc.astype(np.float32), np.ones((3, 3), np.uint8)).astype(np.int32)
+        ring = (ccd > 0) & ~mk
+        rc = ccd[ring]
+        bgf = np.bincount(rc, lbl[ring] == 0, minlength=n) / np.maximum(np.bincount(rc, minlength=n), 1)
+        # point le plus foncé de la photo sous le morceau (5e centile, par morceau)
+        o = np.lexsort((px[:, 0], c))
+        first = np.searchsorted(c[o], np.arange(n))
+        dark = px[o, 0][np.minimum(first + (0.05 * (cnt - 1)).astype(int), len(o) - 1)] if len(o) else np.zeros(n)
+        best = np.zeros(n, np.int32)
+        bestp = np.full(n, min_proj)
+        for j in col:
+            u = pal[j, 1:] - bg_ab
+            u = u / max(np.linalg.norm(u), 1e-3)
+            proj = ea * u[0] + eb * u[1]
+            adj = np.bincount(c, dil[j][ys, xs], minlength=n) > 0
+            # encre peu colorée (bleu nuit) : une petite pente de teinte ne prouve rien, on exige plus
+            ok = adj & small & (proj > bestp) & (proj > 80.0 / ch[j])
+            # 2e indice, pour un trait si fin que sa teinte s'est perdue : il est dans le cadre d'un petit
+            # dessin de cette encre, entouré de fond, et la photo n'y est jamais plus foncée que cette
+            # encre ne peut l'être (un vrai trait noir, même fin, descend plus bas)
+            inb = np.bincount(c, box[j][ys, xs], minlength=n) >= 0.9 * cnt
+            ok2 = small & inb & (bgf > 0.6) & (dark > pal[j, 0] - 8) & (proj > 0.5) & (best == 0)
+            best[ok] = j
+            bestp[ok] = proj[ok]
+            best[ok2] = j
+        best[0] = 0
+        if best.any():
+            nl = best[c]
+            sel = nl > 0
+            lbl[ys[sel], xs[sel]] = nl[sel]
+            changed = True
+    return changed
+
+
+def faint_marks(lbl, pal, lab, max_ratio=0.3, max_dp=20.0):
+    """Trace pâle imprimée en encre foncée : pli du papier, rayure, poussière claire. Une encre foncée
+    vient d'un endroit foncé de la photo ; si la photo, sous ce petit morceau, reste presque de la
+    couleur du fond (écart < 30 % de celui de l'encre, et < 20 en clarté), ce n'est pas de l'encre.
+    Le texte fin, même flou sur la photo, garde plus de 40 % de son contraste. Le morceau prend
+    l'encre qui l'entoure."""
+    Hh, Wh = lbl.shape
+    L = max(Hh, Wh)
+    Lu = cv2.resize(np.ascontiguousarray(lab[..., 0]), (Wh, Hh), interpolation=cv2.INTER_LINEAR)
+    bgL = pal[0, 0]
+    for j in range(1, len(pal)):
+        dI = bgL - pal[j, 0]
+        if dI < 15:
+            continue
+        n, cc, st, _ = cv2.connectedComponentsWithStats((lbl == j).astype(np.uint8), connectivity=8)
+        for i in range(1, n):
+            x, y, w, h, a = st[i]
+            if a > (0.015 * L) ** 2:
+                continue
+            m = cc[y:y + h, x:x + w] == i
+            dP = bgL - np.percentile(Lu[y:y + h, x:x + w][m], 3)
+            if dP > max_dp or dP > max_ratio * dI:
+                continue
+            p = 3
+            X0, Y0, X1, Y1 = max(x - p, 0), max(y - p, 0), min(x + w + p, Wh), min(y + h + p, Hh)
+            mm = (cc[Y0:Y1, X0:X1] == i).astype(np.uint8)
+            lb = lbl[Y0:Y1, X0:X1]
+            ring = (cv2.dilate(mm, np.ones((5, 5), np.uint8)) > mm) & (lb != j)
+            lb[mm > 0] = np.bincount(lb[ring], minlength=1).argmax() if ring.any() else 0
+
+
+def lone_marks(lbl, pal, r=0.012, speck=6e-6, faint=60e-6, de_faint=35.0):
+    """Marque seule sur le fond, sans autre encre à moins de 1,2 % de la page :
+      - minuscule (moins de 6e-6 de la page, plus petit qu'un chiffre) : poussière, tache ;
+      - petit point rond et plein (moins de 1,8e-5, isolé, loin de tout mot) : tache d'encre ou de
+        saleté ; un point imprimé (point final, point du i) est toujours collé à un mot ;
+      - petite (moins de 6e-5) et faite presque uniquement d'encres proches du fond : pli, rayure,
+        reflet. Un vrai signe isolé (numéro de page, puce) est net et tranche sur le fond.
+    Elle devient du fond."""
+    Hh, Wh = lbl.shape
+    L = max(Hh, Wh)
+    ink = lbl != 0
+    # deux encres à moins de r l'une de l'autre se touchent une fois grossies de r/2
+    near = cv2.distanceTransform((~ink).astype(np.uint8), cv2.DIST_L2, 3) <= r * L / 2
+    n, cc = cv2.connectedComponents(near.astype(np.uint8), connectivity=8)
+    ys, xs = np.nonzero(ink)
+    c = cc[ys, xs]
+    de = np.linalg.norm(pal - pal[0], axis=1)
+    area = np.bincount(c, minlength=n)
+    strong = np.bincount(c, de[lbl[ys, xs]] > de_faint, minlength=n)
+    x0 = np.full(n, 1 << 30); x1 = np.zeros(n, np.int64); y0 = np.full(n, 1 << 30); y1 = np.zeros(n, np.int64)
+    np.minimum.at(x0, c, xs); np.maximum.at(x1, c, xs); np.minimum.at(y0, c, ys); np.maximum.at(y1, c, ys)
+    bw, bh = np.maximum(x1 - x0 + 1, 1), np.maximum(y1 - y0 + 1, 1)
+    dot = (area < 3 * speck * L * L) & (np.maximum(bw, bh) <= 2.5 * np.minimum(bw, bh)) & (area >= 0.5 * bw * bh)
+    kill = (area < speck * L * L) | dot | ((area < faint * L * L) & (strong < 0.1 * area))
+    kill[0] = False
+    if os.environ.get('DBG'):
+        for i in np.nonzero(kill)[0]:
+            yy, xx = ys[c == i], xs[c == i]
+            print("  marque seule x=%.3f y=%.3f aire=%.1fe-6 forte=%.2f" % (xx.mean() / Wh, yy.mean() / Hh,
+                  area[i] / L ** 2 * 1e6, strong[i] / area[i]), file=sys.stderr)
+    lbl[ys[kill[c]], xs[kill[c]]] = 0
+
+
+def light_rims(lbl, pal, lab, max_thick=0.0007, max_ratio=0.75, min_bg=0.8):
+    """Liseré clair : l'accentuation du téléphone dessine un fin trait plus clair que le papier le long
+    des lettres foncées, et un pli de la couverture fait un reflet clair. Sur la photo ce trait est à
+    peine plus clair que le papier, alors qu'une encre claire l'est franchement. Un morceau d'encre plus
+    claire que le fond, très mince (au plus 0,07 % du grand côté d'épaisseur), entouré de fond et dont
+    la photo n'atteint pas les trois quarts de l'éclat de cette encre, redevient du fond."""
+    Hh, Wh = lbl.shape
+    L = max(Hh, Wh)
+    Lu = None
+    bgL = pal[0, 0]
+    for j in range(1, len(pal)):
+        dI = pal[j, 0] - bgL
+        if dI < 8:
+            continue
+        mj = (lbl == j).astype(np.uint8)
+        n, cc, st, _ = cv2.connectedComponentsWithStats(mj, connectivity=8)
+        if n < 2:
+            continue
+        if Lu is None:
+            Lu = cv2.resize(np.ascontiguousarray(lab[..., 0]), (Wh, Hh), interpolation=cv2.INTER_LINEAR)
+        dt = cv2.distanceTransform(mj, cv2.DIST_L2, 3)
+        for i in range(1, n):
+            x, y, w, h, a = st[i]
+            p = 3
+            X0, Y0, X1, Y1 = max(x - p, 0), max(y - p, 0), min(x + w + p, Wh), min(y + h + p, Hh)
+            mm = (cc[Y0:Y1, X0:X1] == i).astype(np.uint8)
+            if dt[Y0:Y1, X0:X1][mm > 0].max() > max_thick * L:
+                continue
+            if np.percentile(Lu[Y0:Y1, X0:X1][mm > 0], 97) - bgL > max_ratio * dI:
+                continue
+            lb = lbl[Y0:Y1, X0:X1]
+            ring = (cv2.dilate(mm, np.ones((5, 5), np.uint8)) > mm)
+            if (lb[ring] == 0).mean() < min_bg:
+                continue
+            lb[mm > 0] = 0
+
+
+def edge_debris(lbl):
+    """Débris au bord de la photo (coin abîmé, tranche, poussière de la table) : la page imprimée n'a
+    rien collé à son bord. Deux cas, sur les étiquettes haute définition :
+      - morceau qui touche le bord sans s'en éloigner de plus de 6 % ni être grand ;
+      - petit morceau à moins de 2 % du bord, seul (aucune autre encre à moins de 3 %) : un vrai signe
+        dans la marge (point, numéro) a toujours des voisins.
+    Il prend l'encre qui l'entoure (le fond, en général)."""
+    Hh, Wh = lbl.shape
+    L = max(Hh, Wh)
+    ink = (lbl != 0).astype(np.uint8)
+    n, cc, st, _ = cv2.connectedComponentsWithStats(ink, connectivity=8)
+    x, y, w, h, a = st[:, 0], st[:, 1], st[:, 2], st[:, 3], st[:, 4]
+    bmin = np.minimum(np.minimum(x, y), np.minimum(Wh - x - w, Hh - y - h))
+    touch = (bmin <= 0.004 * L) & (a <= 0.003 * L * L)
+    near = (bmin <= 0.02 * L) & (a <= (0.012 * L) ** 2)
+    cand = touch | near
+    cand[0] = False
+    if not cand.any():
+        return
+    other = ink.copy()
+    other[cand[cc]] = 0
+    dist = cv2.distanceTransform(1 - other, cv2.DIST_L2, 3)
+    for i in np.nonzero(cand)[0]:
+        x0, y0, x1, y1 = x[i], y[i], x[i] + w[i], y[i] + h[i]
+        m = cc[y0:y1, x0:x1] == i
+        yy, xx = np.nonzero(m)
+        yy, xx = yy + y0, xx + x0
+        dmax = np.minimum(np.minimum(xx, Wh - 1 - xx), np.minimum(yy, Hh - 1 - yy)).max()
+        if touch[i] and dmax <= 0.06 * L:
+            pass
+        elif near[i] and dmax <= 0.02 * L and dist[yy, xx].min() > 0.03 * L:
+            pass
+        else:
+            continue
+        p = 4
+        X0, Y0, X1, Y1 = max(x0 - p, 0), max(y0 - p, 0), min(x1 + p, Wh), min(y1 + p, Hh)
+        mm = (cc[Y0:Y1, X0:X1] == i).astype(np.uint8)
+        ring = (cv2.dilate(mm, np.ones((5, 5), np.uint8)) > mm) & (cc[Y0:Y1, X0:X1] != i)
+        lb = lbl[Y0:Y1, X0:X1]
+        fill = np.bincount(lb[ring], minlength=1).argmax() if ring.any() else 0
+        if fill != 0 and (lb[ring] == 0).mean() > 0.3:
+            fill = 0
+        lb[mm > 0] = fill
+
+
+COV = os.environ.get('COV', 'clip')
+_on = lambda n: n not in os.environ.get('SKIP', '').split(',')
+
+
+def conserve_ink(tb, pa, pb, lin_s, pal_lin, K, lo=0.42, hi=float(os.environ.get('COVHI', 0.56))):
+    """Épaisseur juste : le flou de l'objectif déplace la lumière mais n'en crée ni n'en détruit. Dans un
+    petit carré, la quantité d'encre vue par la photo (somme des parts d'encre, en lumière linéaire) est
+    donc égale à la surface vraiment imprimée. On place le seuil de chaque carré pour que la surface
+    réimprimée soit cette quantité : ni lettres grasses (texte flou), ni lettres maigres.
+    Seulement pour les bords encre/fond ; le seuil reste entre lo et hi (les traits fins gardent la règle
+    des sommets)."""
+    if COV == 'off':
+        return tb
+    H, W = tb.shape
+    s = max(12, round(0.02 * max(H, W)))
+    gy, gx = (H + s - 1) // s, (W + s - 1) // s
+    out = tb.copy()
+    for k in range(1, K):
+        P = (pa == 0) & (pb == k)
+        if P.sum() < 50:
+            continue
+        v = pal_lin[k] - pal_lin[0]
+        t = ((lin_s - pal_lin[0]) @ v) / max(float(v @ v), 1e-6)
+        t = np.clip(t, -0.3 if COV == 'raw' else 0.0, 1.0)
+        th = np.full((gy, gx), 0.5, np.float32)
+        wt = np.zeros((gy, gx), np.float32)
+        for i in range(gy):
+            for j in range(gx):
+                sl = (slice(i * s, (i + 1) * s), slice(j * s, (j + 1) * s))
+                p = P[sl]
+                if p.sum() < 8:
+                    continue
+                vals = tb[sl][p]
+                n_now = int((vals >= 0.5).sum())
+                if n_now < 6:
+                    continue
+                target = int(round(float(t[sl][p].sum())))
+                vs = np.sort(vals)[::-1]
+                target = min(max(target, 1), len(vs))
+                th[i, j] = np.clip(vs[target - 1], lo, hi)
+                wt[i, j] = n_now
+        if not wt.any():
+            continue
+        # seuil lissé d'un carré à l'autre (pondéré par la quantité d'encre)
+        num = cv2.GaussianBlur(th * wt, (3, 3), 0.8)
+        den = cv2.GaussianBlur(wt, (3, 3), 0.8)
+        thm = np.where(den > 1e-3, num / np.maximum(den, 1e-3), 0.5).astype(np.float32)
+        thm = cv2.resize(thm, (W, H), interpolation=cv2.INTER_LINEAR)
+        out[P] = tb[P] - thm[P] + 0.5
+    return out
 
 
 def reprint_clean(ph, sel, bg, gain, out_long=2400, tau=9.0, return_debug=False):
@@ -552,7 +1033,9 @@ def reprint_clean(ph, sel, bg, gain, out_long=2400, tau=9.0, return_debug=False)
     ridge = ((rc[2][:, cv2.CC_STAT_AREA] >= 4) & (n_ink >= 3))[rc[1]] & ridge
     if os.environ.get('DBG'):
         np.save(os.environ['DBG']+'/tb.npy', tb); np.save(os.environ['DBG']+'/ridge.npy', ridge); np.save(os.environ['DBG']+'/pab.npy', np.stack([pa,pb]))
-    tb = np.where(ridge, 0.62, tb)
+    tb = conserve_ink(tb, pa, pb, lin_s, pal_lin, K)
+    tb = np.where(ridge, np.maximum(tb, 0.62), tb)
+    dom_f =np.where(tb >= 0.5, pb, pa).astype(np.uint8)   # encre choisie, à la résolution de la photo
     soft = np.clip((tb - 0.5) / 0.5 + 0.5, 0, 1)   # rampe douce autour de 1/2 -> contours lisses
     for k in range(K):
         pk = np.where(pb == k, soft, 0) + np.where(pa == k, 1 - soft, 0)
@@ -598,33 +1081,110 @@ def reprint_clean(ph, sel, bg, gain, out_long=2400, tau=9.0, return_debug=False)
         del idx
     if os.environ.get('DBG'):
         np.save(os.environ['DBG']+'/lbl0.npy', lbl)
-    merge_kin(lbl, pal, max(Hh, Wh))
-    drop_fringes(lbl, K, rho)
-    clean_islands(lbl, K, max(Hh, Wh))
+    if _on('merge_kin'): merge_kin(lbl, pal, max(Hh, Wh))
+    if _on('unify_clusters'): unify_clusters(lbl, pal, max(Hh, Wh))
+    if _on('unify_kin'): unify_kin(lbl, pal, max(Hh, Wh))
+    if _on('drop_fringes'): drop_fringes(lbl, K, rho)
+    if _on('drop_mix_blobs'): drop_mix_blobs(lbl, pal, max(Hh, Wh))
+    if _on('clean_islands'): clean_islands(lbl, K, max(Hh, Wh), pal)
     if os.environ.get('DBG'):
         np.save(os.environ['DBG']+'/lbl1.npy', lbl)
-    drop_soft_shapes(lbl, pal, cv2.resize(G, (Wh, Hh), interpolation=cv2.INTER_LINEAR), 2 * sc)
+    if _on('drop_soft_shapes'): drop_soft_shapes(lbl, pal, cv2.resize(G, (Wh, Hh), interpolation=cv2.INTER_LINEAR), 2 * sc)
+    if _on('recolor_thin'): recolor_thin(lbl, pal, lab)
+    if _on('faint_marks'): faint_marks(lbl, pal, lab)
+    if _on('light_rims'): light_rims(lbl, pal, lab)
+    if _on('edge_debris'): edge_debris(lbl)
+    if _on('lone_marks'): lone_marks(lbl, pal)
+    if os.environ.get('DBG'):
+        np.save(os.environ['DBG']+'/lbl2.npy', lbl)
     tick('nettoyage')
     pal_rgb = lab_to_srgb(pal).astype(np.float32)
     pal_rgb[0] = bg
     out = pal_rgb[lbl]
     del lbl
-    # 5. illustrations : seulement là où les encres unies n'expliquent pas la photo (dégradés, photos),
-    #    sur une zone assez grande ; la photo corrigée y est recollée avec un bord doux
-    lab_b = cv2.GaussianBlur(lab, (0, 0), 1.5)
-    resid = np.sqrt(((lab_b[..., None, :] - pal[None, None]) ** 2).sum(-1).min(-1))
-    ill = (resid > 12).astype(np.uint8)
-    kk = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * r + 1, 2 * r + 1))
-    ill = cv2.morphologyEx(ill, cv2.MORPH_OPEN, kk)            # les bords de lettres (minces) partent
-    ill = cv2.morphologyEx(ill, cv2.MORPH_CLOSE, kk)
-    n, cc, st, _ = cv2.connectedComponentsWithStats(ill)
-    big = np.zeros(n, bool)
-    big[1:] = st[1:, cv2.CC_STAT_AREA] > 0.004 * H * W
-    ill = big[cc] & (p_img > 0.3)
+    # 5. illustrations et objets hors page. On compare la photo à sa version « encres unies » : à
+    #    l'intérieur d'une lettre ou d'un aplat l'écart est nul (une seule encre l'explique), dans une
+    #    photo ou un dessin en dégradé il reste grand partout. Les bords entre encres sont ignorés (un bord
+    #    mal placé d'un pixel n'est pas une illustration).
+    labr = pal[dom_f]
+    E = np.linalg.norm(cv2.GaussianBlur(labr, (0, 0), 2) - cv2.GaussianBlur(lab, (0, 0), 2), axis=-1)
+    bd = np.zeros((H, W), np.uint8)
+    bd[:, 1:] |= dom_f[:, 1:] != dom_f[:, :-1]
+    bd[1:, :] |= dom_f[1:, :] != dom_f[:-1, :]
+    inner = (cv2.dilate(bd, np.ones((5, 5), np.uint8)) == 0).astype(np.float32)
+    sg = max(H, W) / 150
+    dens = cv2.GaussianBlur(((E > 14) * inner).astype(np.float32), (0, 0), sg) / \
+        np.maximum(cv2.GaussianBlur(inner, (0, 0), sg), 0.05)
+    n, cc, st, _ = cv2.connectedComponentsWithStats((dens > 0.3).astype(np.uint8))
+    mg = max(3, round(0.012 * max(H, W)))
+    flat_up = None
+    if os.environ.get('DBG'):
+        np.save(os.environ['DBG']+'/dom.npy', dom_f); np.save(os.environ['DBG']+'/lab.npy', lab)
+        np.save(os.environ['DBG']+'/dens.npy', dens)
+    ill = np.zeros((H, W), np.float32)
+    gone = np.zeros((H, W), np.uint8)
+    for i in range(1, n):
+        x, y, w, h, a = st[i]
+        if a < 0.002 * H * W:
+            continue
+        m = (cc == i).astype(np.uint8)
+        edge = x <= mg or y <= mg or x + w >= W - mg or y + h >= H - mg
+        if edge and a < 0.08 * H * W:
+            # objet qui entre par le bord de la photo (doigt, table, coin abîmé) : hors de la page.
+            # On le recouvre de l'encre qui l'entoure (le fond, en général).
+            m = cv2.dilate(m, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * mg + 1, 2 * mg + 1)))
+            ring = cv2.dilate(m, np.ones((2 * mg + 1, 2 * mg + 1), np.uint8)) > m
+            fill = np.bincount(dom_f[ring], minlength=K).argmax()
+            mu = cv2.resize(cv2.GaussianBlur(m.astype(np.float32), (0, 0), 1.5), (Wh, Hh))[..., None]
+            out = out * (1 - mu) + pal_rgb[fill] * mu
+            gone |= m
+            continue
+        ill = np.maximum(ill, cv2.dilate(m, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * mg + 1,) * 2)))
+    # bandes collées au bord de la photo (table, ombre, tranche du papier) : un élément qui touche le
+    # bord et ne s'en éloigne pas de plus de 4 % est hors de la page -> recouvert par l'encre voisine.
+    # Les objets déjà recouverts ci-dessus (doigt) n'en font plus partie : le reste de la table sous le
+    # doigt redevient une simple bande.
+    band = max(4, round(0.04 * max(H, W)))
+    n2, cc2 = cv2.connectedComponents(((dom_f != 0) & (gone == 0)).astype(np.uint8), connectivity=8)
+    yy, xx = np.nonzero(cc2)
+    c2 = cc2[yy, xx]
+    db = np.minimum(np.minimum(xx, W - 1 - xx), np.minimum(yy, H - 1 - yy))   # distance au bord
+    dmin = np.full(n2, 1 << 30)
+    dmax = np.zeros(n2, np.int64)
+    np.minimum.at(dmin, c2, db)
+    np.maximum.at(dmax, c2, db)
+    out_pg = (dmin <= max(2, round(0.004 * max(H, W)))) & (dmax <= band)
+    out_pg[0] = False
+    strip = out_pg[cc2].astype(np.uint8)
+    if strip.any():
+        strip = cv2.dilate(strip, np.ones((5, 5), np.uint8))
+        ring = cv2.dilate(strip, np.ones((9, 9), np.uint8)) > strip
+        fill = np.bincount(dom_f[ring], minlength=K).argmax()
+        mu = cv2.resize(cv2.GaussianBlur(strip.astype(np.float32), (0, 0), 1), (Wh, Hh))[..., None]
+        out = out * (1 - mu) + pal_rgb[fill] * mu
     if ill.any():
-        img_m = cv2.resize(cv2.GaussianBlur(ill.astype(np.float32), (0, 0), 2), (Wh, Hh))
+        # une illustration repérée par l'écart s'étend à toute la zone « image » de l'IA 2 qui la contient
+        # (la rose, dont les tons sont proches d'une encre, suit la main et les feuilles)
+        n3, cc3 = cv2.connectedComponents((p_img > 0.5).astype(np.uint8))
+        hit = np.bincount(cc3[ill > 0], minlength=n3)
+        tot3 = np.bincount(cc3.ravel(), minlength=n3)
+        grow = (hit > 0.05 * (ill > 0).sum()) | (hit > 0.2 * tot3)
+        grow[0] = False
+        ill = np.maximum(ill, grow[cc3].astype(np.float32))
+        # dans l'illustration, la photo corrigée est recollée ; les points qui ont déjà la couleur d'une
+        # encre qui entoure l'illustration (l'aplat rose autour de la fleur, le fond) gardent l'encre unie,
+        # avec un passage progressif (écart < 4 : encre, > 10 : photo)
+        im8 = (ill > 0).astype(np.uint8)
+        ring = cv2.dilate(im8, np.ones((2 * mg + 1, 2 * mg + 1), np.uint8)) > im8
+        share = np.bincount(dom_f[ring], minlength=K) / max(ring.sum(), 1)
+        keep_ink = np.nonzero(share > 0.1)[0]
+        lab1 = cv2.GaussianBlur(lab, (0, 0), 1)
+        resid = np.sqrt(((lab1[..., None, :] - pal[keep_ink][None, None]) ** 2).sum(-1).min(-1))
+        w = np.clip((resid - 4) / 6, 0, 1)
+        w = cv2.GaussianBlur(ill, (0, 0), sg / 2) * cv2.GaussianBlur(w, (0, 0), 1)
+        img_m = cv2.resize(w, (Wh, Hh))[..., None]
         flat_up = cv2.resize(flat_d, (Wh, Hh), interpolation=cv2.INTER_CUBIC)
-        out = out * (1 - img_m[..., None]) + flat_up * img_m[..., None]
+        out = out * (1 - img_m) + flat_up * img_m
     out = cv2.resize(out.astype(np.float32), (Wh // 2, Hh // 2), interpolation=cv2.INTER_AREA)
     if return_debug:
         return out, pal_rgb, bg, flat_d
