@@ -57,6 +57,13 @@ def srgb(x):
     return torch.where(x <= 0.0031308, 12.92 * x, 1.055 * x.clamp(min=1e-8) ** (1 / 2.4) - 0.055)
 
 
+def rsz(a, size, interpolation):
+    if a.ndim == 3 and a.shape[2] > 4:
+        return np.dstack([rsz(a[..., i:i + 4], size, interpolation) for i in range(0, a.shape[2], 4)])
+    r = cv2.resize(a, size, interpolation=interpolation)
+    return r[..., None] if a.ndim == 3 and r.ndim == 2 else r
+
+
 def to_t(a):
     return torch.from_numpy(np.ascontiguousarray(a)).permute(2, 0, 1).float()
 
@@ -205,12 +212,14 @@ elif args.stage in ("select", "cache2"):
 
         dl = DataLoader(DS(train), batch_size=args.bs, shuffle=True, num_workers=3, drop_last=True,
                         persistent_workers=True)
-        cw = torch.tensor([1.0, 2.0, 1.0, 1.0])
+        cw = torch.tensor([1.0, 2.0, 2.0, 1.0])
+        pw = torch.tensor(5.0)  # les défauts sont rares : on les compte plus
 
         def loss_fn(m, b):
             x, E, cls, dfc = b
             o = m(x, E)
-            return F.cross_entropy(o[:, :4], cls, weight=cw) + F.binary_cross_entropy_with_logits(o[:, 4], (dfc > 0.3).float())
+            return F.cross_entropy(o[:, :4], cls, weight=cw) + \
+                F.binary_cross_entropy_with_logits(o[:, 4], (dfc > 0.3).float(), pos_weight=pw)
 
         def val_fn(m):
             conf = np.zeros((4, 4))
@@ -230,7 +239,11 @@ elif args.stage in ("select", "cache2"):
             print("contrôle : bonne classe papier %.2f texte %.2f aplat %.2f image %.2f ; défauts rappel %.2f précision %.2f"
                   % (*acc, tp / max(1, tp + fn), tp / max(1, tp + fp)), flush=True)
 
-        run(SelectNet(), lambda: dl, loss_fn, args.minutes, "select", val_fn)
+        net = SelectNet(args.pretrained)
+        base = list(net.f.parameters())
+        ids = {id(p) for p in base}
+        groups = [{"params": base, "k": 0.3}, {"params": [p for p in net.parameters() if id(p) not in ids], "k": 1.0}]
+        run(net, lambda: dl, loss_fn, args.minutes, "select", val_fn, groups)
 
 # ------------------------------------------------------------------ IA 3
 elif args.stage == "print":
@@ -252,12 +265,12 @@ elif args.stage == "print":
             paper = torch.from_numpy(np.load(os.path.join(p, "meta.npz"))["paper"]).float()
             cls, _ = read_lab(p)
             E = cv2.resize(np.load(os.path.join(p, "Ep.npy")), (W, H), interpolation=cv2.INTER_LINEAR)
-            sel = cv2.resize(np.load(os.path.join(p, "sel.npy")).astype(np.float32) / 255, (W, H), interpolation=cv2.INTER_LINEAR)
+            sel = rsz(np.load(os.path.join(p, "sel.npy")).astype(np.float32) / 255, (W, H), cv2.INTER_LINEAR)
             s = np.random.uniform(0.75, 1.4)
             if abs(s - 1) > 0.05:  # varie la taille des caractères
                 sz = (round(W * s), round(H * s))
                 it = cv2.INTER_AREA if s < 1 else cv2.INTER_LINEAR
-                ph, cov, E, sel = [cv2.resize(a, sz, interpolation=it) for a in (ph, cov, E, sel)]
+                ph, cov, E, sel = [rsz(a, sz, it) for a in (ph, cov, E, sel)]
                 cls = cv2.resize(cls, sz, interpolation=cv2.INTER_NEAREST)
             H, W = ph.shape[:2]
             c = args.crop

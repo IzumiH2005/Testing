@@ -3,7 +3,7 @@
 IA 1 « œil du papier » (PaperNet)  : regarde la photo entière (256x256) et donne
     - la vraie couleur du papier (sans l'éclairage, les taches, la saleté),
     - l'aspect qu'aurait le papier nu sur la photo (carte 64x64 : lumière, ombres, teinte de lampe).
-IA 2 « trieur » (SelectNet)         : pour chaque point (page réduite à 512 px), dit si c'est du papier,
+IA 2 « trieur » (SelectNet, base MobileNetV3) : pour chaque point (page réduite à 512 px), dit si c'est du papier,
     du texte/trait, un aplat de couleur ou une image, et si c'est un défaut à ne pas réimprimer
     (tache, pli, usure, doigt, bout de table, reflet).
 IA 3 « imprimante » (PrintNet)      : pour chaque point en pleine résolution, donne la quantité
@@ -146,13 +146,37 @@ class UNet(nn.Module):
 
 
 class SelectNet(nn.Module):
-    """Sortie : 4 logits (papier, texte, aplat, image) + 1 logit défaut."""
-    def __init__(self):
+    """IA 2. Base : le début de MobileNetV3-Large pré-entraîné sur ImageNet (il sait déjà reconnaître
+    bords, textures, lettres, photos), plus un décodeur qui remonte à la pleine résolution.
+    Sortie : 4 logits (papier, texte, aplat, image) + 1 logit défaut."""
+    def __init__(self, pretrained=None):
         super().__init__()
-        self.net = UNet(6, 5, [24, 40, 64, 96, 128])
+        bb = MobileNetV3()
+        if pretrained:
+            sd = {k: v for k, v in torch.load(pretrained).items() if k.startswith("features.")}
+            bb.load_state_dict(sd)
+        self.f = bb.features[:13]                          # jusqu'à 1/16, 112 canaux
+        self.register_buffer("mean", torch.tensor([0.485, 0.456, 0.406]).view(1, 3, 1, 1))
+        self.register_buffer("std", torch.tensor([0.229, 0.224, 0.225]).view(1, 3, 1, 1))
+        self.u8 = cbr(112 + 40, 64)
+        self.u4 = cbr(64 + 24, 48)
+        self.u2 = cbr(48 + 16, 32)
+        self.full = nn.Sequential(cbr(6, 16), cbr(16, 16))  # détails fins en pleine résolution
+        self.u1 = nn.Sequential(cbr(32 + 16, 32), nn.Conv2d(32, 5, 1))
 
     def forward(self, photo, paperE):  # tous deux [B,3,H,W] sRGB
-        return self.net(torch.cat([photo, normalize(photo, paperE)], 1))
+        n = normalize(photo, paperE)
+        h, keep = (n - self.mean) / self.std, {}
+        for i, m in enumerate(self.f):
+            h = m(h)
+            if i in (0, 3, 6):
+                keep[i] = h                                 # 1/2, 1/4, 1/8
+        up = lambda t, r: F.interpolate(t, size=r.shape[-2:], mode="bilinear", align_corners=False)
+        d = self.u8(torch.cat([up(h, keep[6]), keep[6]], 1))
+        d = self.u4(torch.cat([up(d, keep[3]), keep[3]], 1))
+        d = self.u2(torch.cat([up(d, keep[0]), keep[0]], 1))
+        fl = self.full(torch.cat([photo, n], 1))
+        return self.u1(torch.cat([up(d, fl), fl], 1))
 
 
 def sel_probs(logits):
