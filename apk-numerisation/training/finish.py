@@ -885,6 +885,101 @@ def enhance_photo(ph, out_long=2400):
     return out.astype(np.float32)
 
 
+def reprint_over_photo(ph, sel, out_long=2400):
+    """Réimpression partielle (pages entièrement imprimées : couvertures, affiches).
+    Le fond reste la photo améliorée (dégradés, bandes, motifs) ; seuls les éléments nets
+    (texte, carrés, logos) sont réimprimés par-dessus en couleur unie, à bord franc.
+    En cas de doute (reflet, rayure, bord flou), l'élément n'est pas touché : la photo reste."""
+    I = enhance_photo(ph, out_long)
+    H, W = I.shape[:2]; L0 = max(H, W)
+    lab = srgb_to_lab(I)
+    # fond local : médiane large calculée en petit (les éléments fins disparaissent, les dégradés restent)
+    s = 600 / L0
+    Is = cv2.resize(I, (round(W * s), round(H * s)), interpolation=cv2.INTER_AREA)
+    k = int(0.035 * 600) | 1
+    Bs = np.dstack([cv2.medianBlur((Is[..., c] * 255).astype(np.uint8), k) for c in range(3)]).astype(np.float32) / 255
+    B = cv2.resize(cv2.GaussianBlur(Bs, (0, 0), 2), (W, H), interpolation=cv2.INTER_CUBIC)
+    D = np.linalg.norm(lab - srgb_to_lab(B), axis=-1)
+    S = cv2.resize(sel, (W, H), interpolation=cv2.INTER_LINEAR)
+    G = np.hypot(*np.gradient(cv2.GaussianBlur(D, (0, 0), 1)))
+    n, cc, st, _ = cv2.connectedComponentsWithStats((D > 22).astype(np.uint8), connectivity=8)
+    k3, k5, k15 = np.ones((3, 3), np.uint8), np.ones((5, 5), np.uint8), np.ones((15, 15), np.uint8)
+    elems, doubt, geo = [], [], {}
+    for i in range(1, n):
+        x, y, w, h, a = st[i]
+        if a < 1e-5 * H * W or max(w, h) > 0.12 * L0:
+            continue
+        sl = (slice(max(0, y - 9), y + h + 9), slice(max(0, x - 9), x + w + 9))
+        m = cc[sl] == i; u = m.astype(np.uint8); d = D[sl][m]
+        q90 = max(np.quantile(d, 0.9), 1e-3)
+        rim = (cv2.dilate(u, k3) > 0) & ~(cv2.erode(u, k3) > 0)
+        sharp = np.median(G[sl][rim]) / q90
+        ring = (cv2.dilate(u, k15) > 0) & ~(cv2.dilate(u, k5) > 0) & (cc[sl] == 0)
+        noise = np.median(D[sl][ring]) if ring.any() else 0
+        p = S[sl][m].mean(0)
+        solid = a / (w * h)
+        thin, long_ = min(w, h), max(w, h)
+        if p[4] > 0.15:          # l'IA 2 y voit un défaut (rayure, tache, bord)
+            continue
+        if thin < 0.005 * L0 and long_ > 2.5 * thin:   # trait très fin isolé : rayure probable
+            continue
+        if not (sharp >= 0.12 or (solid > 0.85 and sharp >= 0.06 and thin > 0.01 * L0)):
+            continue             # bord progressif : reflet ou dessin flou, on garde la photo
+        core = m & (D[sl] > np.quantile(d, 0.6))
+        e = [i, sl, np.median(I[sl][core], 0), a]
+        # fond agité autour (reflet, texture, pli) : mis de côté, sauf s'il fait partie d'une ligne de texte
+        (doubt if noise > 9 else elems).append(e)
+        geo[i] = (x + w / 2, y + h / 2, h)
+    # cohérence : une lettre au milieu d'une ligne réimprimée est réimprimée aussi (même encre, même taille)
+    for e in doubt:
+        cx, cy, h = geo[e[0]]
+        le = srgb_to_lab(e[2][None, None].astype(np.float32))[0, 0]
+        near = 0
+        for f in elems:
+            fx, fy, fh = geo[f[0]]
+            if 0.75 < fh / h < 1.33 and abs(fy - cy) < 0.5 * h and abs(fx - cx) < 2.5 * h and \
+               np.linalg.norm(srgb_to_lab(f[2][None, None].astype(np.float32))[0, 0] - le) < 15:
+                near += 1
+        if near >= 2:
+            elems.append(e)
+    # palette commune : des encres proches (même blanc, même jaune) deviennent une seule couleur
+    elems.sort(key=lambda e: -e[3])
+    pal = []
+    for e in elems:
+        le = srgb_to_lab(e[2][None, None].astype(np.float32))[0, 0]
+        for c in pal:
+            if np.linalg.norm(le - c[0]) < 20:
+                e.append(c); c[1] += e[3]; break
+        else:
+            c = [le, e[3]]; pal.append(c); e.append(c)
+    inks = []
+    for c in pal:
+        L_, a_, b_ = c[0]
+        if L_ > 75 and np.hypot(a_, b_) < 18:     # encre presque blanche -> blanc pur
+            c[0] = np.array([100, 0, 0], np.float32)
+        inks.append(np.clip(lab_to_srgb(c[0].astype(np.float32))[0], 0, 1))
+    pal_id = {id(c): j for j, c in enumerate(pal)}
+    alpha = np.zeros((H, W), np.float32); inkimg = np.zeros((H, W, 3), np.float32)
+    for i, sl, ink0, a, c in elems:
+        ink = inks[pal_id[id(c)]]
+        m = cc[sl] == i
+        Bl = B[sl]; v = ink0 - Bl
+        t = ((I[sl] - Bl) * v).sum(-1) / np.maximum((v * v).sum(-1), 1e-4)
+        reg = cv2.dilate(m.astype(np.uint8), k5) > 0
+        t = np.where(reg, np.clip(t, 0, 1), 0)
+        upd = t > alpha[sl]
+        alpha[sl][upd] = t[upd]
+        inkimg[sl][upd] = np.broadcast_to(ink, inkimg[sl].shape)[upd]
+    print('  réimpression partielle :', len(elems), 'éléments,', len(pal), 'encres',
+          [(c * 255).round().astype(int).tolist() for c in inks], flush=True)
+    a = cv2.GaussianBlur(alpha, (0, 0), 0.8)
+    a = np.clip((a - 0.3) / 0.4, 0, 1); a = (a * a * (3 - 2 * a))[..., None]
+    zone = cv2.GaussianBlur((cv2.dilate((alpha > 0.05).astype(np.uint8), np.ones((7, 7), np.uint8)) > 0)
+                            .astype(np.float32), (0, 0), 2)[..., None]
+    out = (I * (1 - zone) + B * zone) * (1 - a) + inkimg * a
+    return np.clip(out, 0, 1).astype(np.float32)
+
+
 def reprint_clean(ph, sel, bg, gain, out_long=2400, tau=9.0, return_debug=False):
     """ph : photo redressée (H,W,3) sRGB 0..1 ; sel : probas IA 2 (h,w,5) ; bg : couleur du fond (avec gain).
     -> page réimprimée (out_long px sur le grand côté), palette sRGB."""

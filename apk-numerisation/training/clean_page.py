@@ -9,7 +9,7 @@ import numpy as np
 import torch
 
 from common import color_name_fr, measure_bg
-from finish import enhance_photo, page_mode, reprint_clean
+from finish import page_mode, reprint_clean, reprint_over_photo
 from models import PaperNet, SelectNet, sel_probs
 
 md, src, dst = sys.argv[1:4]
@@ -42,7 +42,7 @@ if os.environ.get("MODE"):
     mode = os.environ["MODE"]
 print(f"mode {mode} · papier {paper:.0%} de la page", flush=True)
 if mode == "photo":
-    out = enhance_photo(ph, out_long)
+    out = reprint_over_photo(ph, sel, out_long)  # fond = photo améliorée, éléments nets réimprimés
     cv2.imwrite(dst, (out[..., ::-1] * 255 + 0.5).clip(0, 255).astype(np.uint8))
     print("taille", out.shape[1], "x", out.shape[0], "· %.1f s" % (time.time() - t0))
     sys.exit(0)
