@@ -1489,15 +1489,55 @@ def reprint_clean(ph, sel, bg, gain, out_long=2400, tau=9.0, return_debug=False)
         pu = cv2.resize(cv2.GaussianBlur(panels.astype(np.float32), (0, 0), 1), (Wh, Hh))[..., None]
         out = out * (1 - pu) + pan * pu
         print(f'  dégradés : {cv2.connectedComponents(panels)[0] - 1} zone(s)', flush=True)
-    # 8. halos : un objet retiré laisse parfois un contour pâle (anticrénelage). Un pixel pâle qui n'est
-    #    près d'aucun contenu gardé redevient papier.
+    # 8. contrôle avant impression : chaque morceau de contenu est vérifié, puis SEUL ce qui est
+    #    validé est imprimé ; tout le reste de la page redevient papier.
+    #    Près du bord de la feuille, deux choses ne sont pas du contenu :
+    #    - un trait fin, clair, parallèle au bord (ombre de la tranche, pli de la couverture) ;
+    #      un vrai cadre est foncé, il passe ;
+    #    - une tache claire et clairsemée collée au bord (coin abîmé, déchirure).
+    keep_ = ((dom_v != 0) & (gone == 0)).astype(np.uint8)
+    nk, ck, sk, _ = cv2.connectedComponentsWithStats(keep_, connectivity=8)
+    thin_px = max(3, 0.006 * L0)
+    rej = np.zeros(nk, bool)
+    for i in range(1, nk):
+        x, y, w, h, a = sk[i]
+        bd = min(x, y, W - x - w, H - y - h) / min(H, W)
+        if bd > 0.09:
+            continue
+        sl = (slice(y, y + h), slice(x, x + w))
+        inkL = float(np.median(pal[dom_v[sl][ck[sl] == i], 0]))
+        if inkL < 60:
+            continue                     # encre foncée : texte, cadre, logo -> gardé
+        near_lr = min(x, W - x - w) / min(H, W) <= 0.09
+        near_tb = min(y, H - y - h) / min(H, W) <= 0.09
+        parallel = (near_lr and w <= thin_px and h > 3 * w) or (near_tb and h <= thin_px and w > 3 * h)
+        sparse = bd < 0.02 and a < 0.2 * w * h and max(w, h) > 0.02 * L0
+        if parallel or sparse:
+            rej[i] = True
+    if rej.any():
+        m = rej[ck].astype(np.uint8)
+        gone |= m
+        print(f'  contrôle : {int(rej.sum())} morceau(x) hors contenu près du bord', flush=True)
+    # le contenu validé : encres gardées, illustrations, bandeaux en dégradé
     kept = ((dom_v != 0) & (gone == 0)).astype(np.uint8)
     kept |= panels
+    kept |= ((ill > 0) & (gone == 0)).astype(np.uint8)
     near = cv2.resize(cv2.dilate(kept, np.ones((5, 5), np.uint8)), (Wh, Hh), interpolation=cv2.INTER_NEAREST) > 0
-    pale = np.abs(out.astype(np.float32) - pal_rgb[0]).max(-1) < 0.25
-    halo = (~near & pale).astype(np.float32)
-    halo = cv2.GaussianBlur(halo, (0, 0), 1)[..., None]
-    out = out * (1 - halo) + pal_rgb[0] * halo
+    off = cv2.GaussianBlur((~near).astype(np.float32), (0, 0), 1)[..., None]
+    out = out * (1 - off) + pal_rgb[0] * off
+    if os.environ.get('DBG'):
+        np.save(os.environ['DBG'] + '/final_dom.npy', dom_v); np.save(os.environ['DBG'] + '/final_gone.npy', gone)
+        np.save(os.environ['DBG'] + '/final_ill.npy', ill); np.save(os.environ['DBG'] + '/final_pal.npy', pal)
+    # 9. papier presque blanc (blanc cassé, grisé ou crème léger) -> blanc de photocopie pur.
+    #    Toute la page est recalée d'un même facteur : le papier devient blanc exact, les encres et
+    #    les illustrations gardent leurs écarts. Un vrai papier de couleur (beige, rouge…) est gardé.
+    pL, pa_, pb_ = srgb_to_lab(pal_rgb[0][None, None].astype(np.float32))[0, 0]
+    if pL > 80 and np.hypot(pa_, pb_) < 8:
+        wgain = 1.0 / np.maximum(pal_rgb[0], 1e-3)
+        out = np.clip(out * wgain, 0, 1)
+        pal_rgb = np.clip(pal_rgb * wgain, 0, 1)
+        bg = np.ones(3, np.float32)
+        print('  papier blanc : fond mis en blanc pur', flush=True)
     out = cv2.resize(out.astype(np.float32), (Wh // 2, Hh // 2), interpolation=cv2.INTER_AREA)
     if return_debug:
         return out, pal_rgb, bg, flat_d
