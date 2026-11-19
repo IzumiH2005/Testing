@@ -168,3 +168,38 @@ def color_name_fr(rgb255):
     if l < 0.3:
         return base + " foncé"
     return base
+
+
+def measure_bg(photo, sel):
+    """Pipette : couleur du fond mesurée sur la photo, sans IA.
+    photo (H,W,3) sRGB 0..1, sel (H,W,5) = probabilités de l'IA 2 (papier, texte, aplat, image, défaut).
+    1. médiane de la photo sur les zones « papier » (pas un seul point : on évite ombres et taches) ;
+    2. balance des blancs : si la page contient du blanc (lettres, logos), il sert de référence
+       pour retirer la teinte et l'assombrissement dus à l'éclairage.
+    -> (fond sRGB 0..1, gain par canal, source)"""
+    p = photo.reshape(-1, 3).astype(np.float32)
+    s = sel.reshape(-1, sel.shape[-1])
+    ok = s[:, 4] < 0.3
+    m = ok & (s[:, 0] > 0.6)
+    if m.sum() < 0.01 * len(p):
+        m = ok & (s[:, 0] > 0.4)
+    if m.sum() < 0.01 * len(p):
+        m = ok
+    bg = np.median(p[m], 0)
+    L = p.mean(1)
+    mx, mn = p.max(1), p.min(1)
+    sat = (mx - mn) / np.maximum(mx, 1e-3)
+    w = ok & (s[:, 0] < 0.4) & (L > max(0.45, bg.mean() + 0.08)) & (sat < 0.18)
+    if w.sum() >= max(50, 0.002 * len(p)):
+        ref = np.median(p[w], 0)
+        gain = np.clip(0.96 / np.maximum(ref, 1e-3), 0.7, 3.0)
+        src = "blanc de référence"
+    else:
+        bsat = (bg.max() - bg.min()) / max(bg.max(), 1e-3)
+        if bsat < 0.12 and bg.mean() > 0.5:  # fond clair presque neutre : c'est le papier lui-même
+            gain = np.full(3, 0.95 / max(bg.max(), 1e-3))
+            src = "fond clair pris comme papier"
+        else:
+            gain = np.ones(3)
+            src = "mesure directe (pas de blanc sur la page)"
+    return np.clip(bg * gain, 0, 1).astype(np.float32), gain.astype(np.float32), src

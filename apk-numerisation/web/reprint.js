@@ -59,21 +59,50 @@ const Reprint = (() => {
   }
   const tick = () => new Promise(r => setTimeout(r, 0));
 
+  /* ---------- pipette : couleur du fond mesurée sur la photo (même règle que training/common.py measure_bg) ---------- */
+  function median3(px, idx) { // médiane par canal via histogramme 256 cases
+    const out = [0, 0, 0];
+    for (let ch = 0; ch < 3; ch++) {
+      const h = new Uint32Array(256); for (const i of idx) h[Math.min(255, Math.round(px[ch][i] * 255))]++;
+      let c = 0; const half = idx.length / 2; for (let v = 0; v < 256; v++) { c += h[v]; if (c >= half) { out[ch] = v / 255; break; } }
+    }
+    return out;
+  }
+  function measureBg(ph, sel, n) { // ph [3,n] sRGB 0..1, sel [5,n] probabilités de l'IA 2
+    const px = [ph.subarray(0, n), ph.subarray(n, 2 * n), ph.subarray(2 * n, 3 * n)], pick = f => { const a = []; for (let i = 0; i < n; i++) if (f(i)) a.push(i); return a; };
+    const ok = i => sel[4 * n + i] < 0.3;
+    let m = pick(i => ok(i) && sel[i] > 0.6);
+    if (m.length < 0.01 * n) m = pick(i => ok(i) && sel[i] > 0.4);
+    if (m.length < 0.01 * n) m = pick(ok);
+    if (!m.length) m = pick(() => true);
+    const bg = median3(px, m), bgL = (bg[0] + bg[1] + bg[2]) / 3;
+    const w = pick(i => { const r = px[0][i], g = px[1][i], b = px[2][i], mx = Math.max(r, g, b), mn = Math.min(r, g, b);
+      return ok(i) && sel[i] < 0.4 && (r + g + b) / 3 > Math.max(0.45, bgL + 0.08) && (mx - mn) / Math.max(mx, 1e-3) < 0.18; });
+    let gain, src;
+    if (w.length >= Math.max(50, 0.002 * n)) { const ref = median3(px, w); gain = ref.map(v => Math.min(3, Math.max(0.7, 0.96 / Math.max(v, 1e-3)))); src = "blanc de référence"; }
+    else { const mx = Math.max(...bg), bs = (mx - Math.min(...bg)) / Math.max(mx, 1e-3);
+      if (bs < 0.12 && bgL > 0.5) { gain = [1, 1, 1].map(() => 0.95 / Math.max(mx, 1e-3)); src = "fond clair pris comme papier"; }
+      else { gain = [1, 1, 1]; src = "mesure directe, pas de blanc sur la page"; } }
+    return { paper: bg.map((v, k) => Math.min(1, v * gain[k])), gain, src };
+  }
+
   /* ---------- les 3 IA ---------- */
   async function analyse(src, onProg, onStep) {
     const o = await AI.loadRuntime();
-    // IA 1 : œil du papier (photo entière en 256 × 256)
-    onStep && onStep("IA 1 : couleur du fond…");
+    // IA 1 : éclairage de la page (photo entière en 256 × 256) ; la couleur du fond vient de la pipette
+    onStep && onStep("IA 1 : éclairage de la page…");
     const s1 = await AI.session("paper", onProg);
     const r1 = await s1.run({ photo: new o.Tensor("float32", chw(src, 256, 256), [1, 3, 256, 256]) });
-    const paper = Array.from(r1.paper.data), E64 = r1.E.data;
+    const E64 = r1.E.data;
     // IA 2 : trieur (512 px de grand côté)
     onStep && onStep("IA 2 : tri du texte, des images et des défauts…");
     const k2 = 512 / Math.max(src.width, src.height), w2 = Math.round(src.width * k2), h2 = Math.round(src.height * k2);
-    const s2 = await AI.session("select", onProg);
-    const r2 = await s2.run({ photo: new o.Tensor("float32", chw(src, w2, h2), [1, 3, h2, w2]),
+    const s2 = await AI.session("select", onProg), ph2 = chw(src, w2, h2);
+    const r2 = await s2.run({ photo: new o.Tensor("float32", ph2, [1, 3, h2, w2]),
                               E: new o.Tensor("float32", resize(E64, 3, 64, 64, h2, w2), [1, 3, h2, w2]) });
     const sel = r2.sel.data;
+    onStep && onStep("Pipette : couleur du fond…");
+    const bgm = measureBg(ph2, sel, w2 * h2);
     // IA 3 : imprimante (jusqu'à 1280 px, par tuiles qui se chevauchent)
     onStep && onStep("IA 3 : calcul des encres blanc, C, M, J, N…");
     const k3 = Math.min(1, 1280 / Math.max(src.width, src.height)), W = Math.round(src.width * k3), H = Math.round(src.height * k3);
@@ -93,7 +122,10 @@ const Reprint = (() => {
         cov.set(c.subarray(ch * th * tw + y * tw + xa, ch * th * tw + y * tw + xb), ch * H * W + (y0 + y) * W + x0 + xa);
       done++; onStep && onStep(`IA 3 : calcul des encres blanc, C, M, J, N… ${Math.round(100 * done / (ys.length * xs.length))} %`); await tick();
     }
-    return { paper, cov, W, H };
+    // règle : l'imprimante n'encre jamais le fond (il est donné par la pipette)
+    const HW = H * W;
+    for (let i = 0; i < HW; i++) { const k = 1 - S[i]; for (let ch = 0; ch < 5; ch++) cov[ch * HW + i] *= k; }
+    return { paper: bgm.paper, gain: bgm.gain, src: bgm.src, cov, W, H };
   }
 
   /* ---------- impression : fond (+ blanc couvrant) × filtres des encres ---------- */
@@ -116,12 +148,21 @@ const Reprint = (() => {
   /* Point d'entrée : page redressée -> page réimprimée (même taille) + infos papier/encres */
   async function run(warped, opts = {}) {
     const a = warped._reprint || (warped._reprint = await analyse(warped, opts.onProg, opts.onStep));
-    const found = a.paper.map(v => Math.round(v * 255)), fInfo = { rgb: found, hex: hex(found), name: nameFr(found) };
-    const white = opts.paper === "white", usedRGB = white ? [255, 255, 255] : found;
+    const found = a.paper.map(v => Math.round(v * 255)), fInfo = { rgb: found, hex: hex(found), name: nameFr(found), src: a.src };
+    const white = opts.paper === "white", manual = Array.isArray(opts.paper);
+    const usedRGB = white ? [255, 255, 255] : manual ? opts.paper : found;
     const out = print(a, warped.width, warped.height, usedRGB);
     const n = a.W * a.H, mean = [0, 1, 2, 3, 4].map(k => { let s = 0; for (let i = 0; i < n; i++) s += a.cov[k * n + i]; return s / n; });
-    out._info = { found: fInfo, paper: white ? { rgb: usedRGB, hex: "#FFFFFF", name: "blanc" } : fInfo, inkMean: mean };
+    out._info = { found: fInfo, inkMean: mean, mode: white ? "white" : manual ? "manual" : "auto",
+                  paper: white ? { rgb: usedRGB, hex: "#FFFFFF", name: "blanc" } : manual ? { rgb: usedRGB, hex: hex(usedRGB), name: nameFr(usedRGB) } : fInfo };
     return out;
   }
-  return { run, nameFr, hex };
+  /* pipette manuelle : couleur touchée sur la photo (médiane 9 × 9), corrigée par la même balance des blancs */
+  function pick(canvas, x, y, gain = [1, 1, 1]) {
+    const r = 4, x0 = Math.max(0, Math.round(x) - r), y0 = Math.max(0, Math.round(y) - r);
+    const d = canvas.getContext("2d").getImageData(x0, y0, Math.min(2 * r + 1, canvas.width - x0), Math.min(2 * r + 1, canvas.height - y0)).data;
+    return [0, 1, 2].map(ch => { const v = []; for (let i = ch; i < d.length; i += 4) v.push(d[i]); v.sort((a, b) => a - b);
+      return Math.min(255, Math.round(v[v.length >> 1] * gain[ch])); });
+  }
+  return { run, pick, nameFr, hex };
 })();

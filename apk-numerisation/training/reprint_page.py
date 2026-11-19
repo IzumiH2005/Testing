@@ -8,7 +8,7 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-from common import color_name_fr, print_t, srgb2lin, t_lin2srgb
+from common import color_name_fr, measure_bg, print_t, srgb2lin, t_lin2srgb
 from models import PaperNet, PrintNet, SelectNet, sel_probs
 
 md, src, dst = sys.argv[1:4]
@@ -31,14 +31,17 @@ T = lambda a: torch.from_numpy(np.ascontiguousarray(a)).permute(2, 0, 1)[None].f
 with torch.no_grad():
     paper, E = load(PaperNet, "paper")(T(cv2.resize(ph, (256, 256), interpolation=cv2.INTER_AREA)))
     paper = paper[0].numpy()
-    if os.environ.get("PAPER"): paper = np.array([float(v) for v in os.environ["PAPER"].split(",")], np.float32) / 255
     E = E[0].permute(1, 2, 0).numpy()
-    rgb = (paper * 255).round().astype(int)
-    print("fond", rgb, "#%02x%02x%02x" % tuple(rgb), color_name_fr(rgb))
     k = 512 / max(H, W)
     x5 = cv2.resize(ph, (round(W * k), round(H * k)), interpolation=cv2.INTER_AREA)
     E5 = cv2.resize(E, x5.shape[1::-1], interpolation=cv2.INTER_LINEAR)
     sel = sel_probs(load(SelectNet, "select")(T(x5), T(E5)))[0].permute(1, 2, 0).numpy()
+    # couleur du fond : pipette sur les zones « papier » + balance des blancs (l'IA 1 ne sert plus qu'à l'éclairage)
+    paper, gain, src = measure_bg(x5, sel)
+    if os.environ.get("PAPER"):
+        paper, src = np.array([float(v) for v in os.environ["PAPER"].split(",")], np.float32) / 255, "imposé"
+    rgb = (paper * 255).round().astype(int)
+    print("fond", rgb, "#%02x%02x%02x" % tuple(rgb), color_name_fr(rgb), "·", src)
     if len(sys.argv) > 5:
         vis = (np.stack([sel[..., 1], sel[..., 2], sel[..., 3]], -1) * 255).astype(np.uint8)
         vis[sel[..., 4] > 0.5] = [255, 0, 255]
@@ -46,6 +49,7 @@ with torch.no_grad():
     Ef = cv2.resize(E, (W, H), interpolation=cv2.INTER_LINEAR)
     self = cv2.resize(sel, (W, H), interpolation=cv2.INTER_LINEAR)
     cov = load(PrintNet, "print")(T(ph), T(Ef), T(self))
+    cov = cov * (1 - T(self)[:, 0:1])  # règle : jamais d'encre sur le fond, il est déjà donné par la pipette
     out = t_lin2srgb(print_t(srgb2lin(paper), cov))[0].permute(1, 2, 0).numpy()
 cv2.imwrite(dst, (out[..., ::-1] * 255 + 0.5).astype(np.uint8))
 print("encre moyenne C M J N blanc :", cov[0].mean((1, 2)).numpy().round(3))

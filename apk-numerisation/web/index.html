@@ -592,9 +592,12 @@ async function renderResult() {
   const ppp = fmt === "A4" ? Math.round(Math.min(cur.out.width, cur.out.height) / (210 / 25.4)) : null;
   const ri = $("reprint-info"), info = cur.out._info; ri.hidden = !info;
   if (info) { const sw = c => `<i class="sw" style="background:${c}"></i>`, ink = info.inkMean.map(v => Math.round(v * 100));
-    const forced = cur.warped._paper === "white", other = forced ? `couleur détectée (${info.found.name})` : "feuille blanche";
-    ri.innerHTML = `Fond ${sw(info.paper.hex)}<b>${info.paper.name}</b> <code>${info.paper.hex}</code> · encre moyenne C ${ink[0]} % M ${ink[1]} % J ${ink[2]} % N ${ink[3]} % · blanc ${ink[4]} %`
-      + (info.found.hex !== "#FFFFFF" || forced ? ` <button class="mini" data-paper="${forced ? "auto" : "white"}">Mettre en ${other}</button>` : ""); }
+    const how = info.mode === "manual" ? "choisi à la pipette" : info.mode === "white" ? "feuille blanche" : `pipette auto · ${info.found.src}`;
+    const btn = (p, t) => `<button class="mini" data-paper="${p}">${t}</button>`;
+    ri.innerHTML = `Fond ${sw(info.paper.hex)}<b>${info.paper.name}</b> <code>${info.paper.hex}</code> <span>(${how})</span> · encre moyenne C ${ink[0]} % M ${ink[1]} % J ${ink[2]} % N ${ink[3]} % · blanc ${ink[4]} %`
+      + btn("pick", "Pipette : toucher le fond")
+      + (info.mode !== "auto" ? btn("auto", `Couleur détectée (${info.found.name})`) : "")
+      + (info.mode !== "white" ? btn("white", "Feuille blanche") : ""); }
   $("res-spec").textContent = `${cur.out.width} × ${cur.out.height} px` + (fmt ? ` · ${fmt}` : "") + (ppp ? ` · ≈ ${ppp} ppp` : "");
 }
 function flatWarp(cur) { const q = orderQuad(cur.quad), [w, h] = outSize(q, cur.photo.width, cur.photo.height), c = warp(cur.photo, q, w, h); return c; }
@@ -603,7 +606,21 @@ async function toResult() {
   await busy("Redressement…", async () => { cur.warped = flatWarp(cur); });
   show("res"); await renderResult();
 }
-$("reprint-info").addEventListener("click", e => { const b = e.target.closest("button[data-paper]"); if (!b || !S.cur) return; S.cur.warped._paper = b.dataset.paper; renderResult(); });
+$("reprint-info").addEventListener("click", e => { const b = e.target.closest("button[data-paper]"); if (!b || !S.cur) return;
+  if (b.dataset.paper === "pick") return startPick();
+  S.cur.warped._paper = b.dataset.paper; renderResult(); });
+/* pipette manuelle : on montre la photo, la personne touche le fond, on réimprime avec cette couleur */
+let picking = false;
+function startPick() {
+  const cur = S.cur, o = $("out"), c = rotateCanvas(cur.warped, cur.rot);
+  o.width = c.width; o.height = c.height; o.getContext("2d").drawImage(c, 0, 0);
+  picking = true; o.style.cursor = "crosshair"; toast("Touche une zone du fond de la page", 3000);
+}
+$("out").addEventListener("click", e => { if (!picking || !S.cur) return;
+  const o = $("out"), r = o.getBoundingClientRect(); picking = false; o.style.cursor = "";
+  const gain = S.cur.warped._reprint?.gain || [1, 1, 1];
+  S.cur.warped._paper = Reprint.pick(o, (e.clientX - r.left) * o.width / r.width, (e.clientY - r.top) * o.height / r.height, gain);
+  renderResult(); });
 $("filters").addEventListener("click", e => { const f = e.target.closest("button")?.dataset.f; if (!f || f === S.cur.filter) return; S.cur.filter = f; renderResult(); });
 $("btn-rotl").onclick = () => { S.cur.rot--; renderResult(); };
 $("btn-rotr").onclick = () => { S.cur.rot++; renderResult(); };
