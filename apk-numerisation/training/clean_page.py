@@ -37,10 +37,12 @@ with torch.no_grad():
 bg, gain, how = measure_bg(x5, sel)
 if os.environ.get("PAPER"):
     bg, how = np.array([float(v) for v in os.environ["PAPER"].split(",")], np.float32) / 255, "imposé"
-mode, paper = page_mode(sel, bg)
-if os.environ.get("MODE"):
-    mode = os.environ["MODE"]
-print(f"mode {mode} · papier {paper:.0%} de la page", flush=True)
+# Par défaut : réimpression totale (feuille vierge + contenu réimprimé), toujours.
+# La réimpression partielle (fond photo gardé) ne sert que si on la demande : MODE=photo.
+mode = os.environ.get("MODE", "reprint")
+if mode == "auto":
+    mode, paper = page_mode(sel, bg)
+    print(f"choix auto : {mode} · papier {paper:.0%} de la page", flush=True)
 if mode == "photo":
     out = reprint_over_photo(ph, sel, out_long)  # fond = photo améliorée, éléments nets réimprimés
     cv2.imwrite(dst, (out[..., ::-1] * 255 + 0.5).clip(0, 255).astype(np.uint8))
