@@ -111,6 +111,15 @@ def rand_ink_color(rng, kind="any"):
         cov = np.array([0, 0, 0, rng.uniform(0.85, 1.0)])
         if rng.random() < 0.3:
             cov[:3] = rng.uniform(0, 0.5, 3)
+    elif kind == "strong":  # fond vif ou foncé (rouge, orange, bleu nuit, vert…)
+        cov = np.zeros(4)
+        idx = rng.choice(3, size=rng.integers(1, 3), replace=False)
+        cov[idx] = rng.uniform(0.6, 1.0, len(idx))
+        if rng.random() < 0.4:
+            cov[rng.integers(0, 3)] += rng.uniform(0, 0.4)
+        if rng.random() < 0.3:
+            cov[3] = rng.uniform(0.1, 0.6)
+        cov = np.clip(cov, 0, 1)
     elif kind == "pale":
         cov = rng.uniform(0, 0.35, 4) * (rng.random(4) < 0.6)
         cov[3] *= 0.3
@@ -310,17 +319,17 @@ def gen_clean(rng, long_side=1024):
     if rng.random() < 0.12:
         H, W = W, H
     pg = Page(rng, H, W)
-    kind = rng.choice(["text", "cover", "cover", "mixed", "form"], p=[0.25, 0.2, 0.15, 0.25, 0.15])
+    kind = rng.choice(["text", "cover", "cover", "mixed", "form"], p=[0.2, 0.25, 0.2, 0.2, 0.15])
     m = int(min(H, W) * rng.uniform(0.04, 0.1))
     F = fonts()
     serif = [f for f in F if "Serif" in f or "Caladea" in f or "Charter" in f] or F
 
     if kind == "cover":
         # aplat principal (parfois avec coins arrondis comme la couverture de Baudelaire)
-        bleed = rng.random() < 0.5  # fond entièrement coloré (ex. couverture orange de « Rework ») :
+        bleed = rng.random() < 0.6  # fond entièrement coloré (ex. couverture orange de « Rework ») :
         if bleed:                   # ce fond devient la « couleur du papier », le blanc est une encre
             pg.bleed = True
-            bg = rand_ink_color(rng, "any")
+            bg = rand_ink_color(rng, "strong" if rng.random() < 0.75 else "any")
         elif rng.random() < 0.8:
             x0, y0 = rng.uniform(-0.1, 0.4) * W, rng.uniform(0.25, 0.5) * H
             x1, y1 = rng.uniform(0.6, 1.1) * W, rng.uniform(0.7, 0.98) * H
@@ -333,7 +342,7 @@ def gen_clean(rng, long_side=1024):
             full[oy:oy + ih, ox:ox + iw] = a
             col = np.ones((H, W, 3), np.float32)
             col[oy:oy + ih, ox:ox + iw] = img
-            pg.put(full, col, 3, white=bleed and rng.random() < 0.6)
+            pg.put(full, col, 3, white=False)  # le blanc couvrant est réservé aux lettres et logos blancs
         y = m
         for _ in range(rng.integers(1, 4)):  # titres
             size = rng.uniform(0.04, 0.13) * H
