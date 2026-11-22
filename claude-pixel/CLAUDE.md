@@ -13,7 +13,7 @@ projet reste dans `claude-pixel/`.
    images (écran, loupe, dessin) et le résumé avant de continuer. La souris refuse le trait
    suivant tant que ce n'est pas fait. Il ne faut pas enchaîner des `regarde` à vide pour
    contourner cette règle.
-3. **Suivre la méthode.** Relire les 85 règles impératives et la partie 0 (dessiner avant de
+3. **Suivre la méthode.** Relire les 87 règles impératives et la partie 0 (dessiner avant de
    pixelliser) avant chaque dessin. Remplir la fiche d'intention honnêtement, avec le niveau
    visé : une œuvre pro précise et ce qu'on en prend. Ne cocher une case que si c'est vrai
    sur le dessin, et jamais seulement pour ouvrir une porte.
@@ -28,6 +28,9 @@ projet reste dans `claude-pixel/`.
    polish, chacun sur un nouveau calque, celui du dessous baissé à 20-40 %. Redessiner plutôt
    que gommer, retourner la toile souvent. À l'étape « Validation du dessin », s'arrêter et
    montrer le dessin à l'humain avant toute couleur.
+   Le critère de cette validation : le trait seul doit ressembler à un sketch fini de pro
+   (0-AC) : l'idée se lit en silhouette noire, trois poids de trait appliqués partout,
+   recouvrements nets, lignes de forme. Un design d'objet se dessine à 64 px de haut au moins.
 5. **Dessiner, pas seulement pixelliser.** Construire chaque volume entier dans un calque de
    construction (ellipses comprises). Poser la lumière dans l'onglet Lumière avant la
    première ombre, regarder le guide de volume, poser d'abord deux familles (vue Notan),

@@ -155,7 +155,7 @@ const E = (id, titre, ref, faire, o = {}) => Object.assign({ id, titre, ref, fai
 const C = (cle, txt) => ({ cle, txt });
 const ETAPE_FICHE = (ref) => E('fiche', 'Fiche d\'intention et règles', ref, [
   'Remplis la fiche : chaque champ est une décision prise avant le premier pixel.',
-  'Lis les 85 règles impératives (onglet Aide) et coche « lues ».',
+  'Lis les 87 règles impératives (onglet Aide) et coche « lues ».',
   'Règle la toile à la taille finale : on ne dessine jamais en grand pour réduire (A4b).',
   'Choisis ou construis la palette : une rampe par matière (A6-A).',
   'Nomme 2 ou 3 idées fortes, pas plus : ce qu\'on doit reconnaître de loin (A10-F, règle 44).'
@@ -544,6 +544,10 @@ const ETAPES_V22 = Object.assign({}, ETAPES_V21);
     'Arrête-toi et montre le dessin à l\'humain. Sous 22/30, reviens au rough ou à l\'esquisse, pas au trait.'
   ], { pasEncore: 'Aucune couleur tant que le dessin n\'est pas validé.', portes: ['critiqueDessin', 'L', 'jaggies'],
     coches: [C('planche', 'Trait regardé à ×1, ×2, retourné et en silhouette'), C('reference', 'Écart avec l\'œuvre visée écrit au carnet'), C('montre', 'Dessin montré à l\'humain avant la couleur')] });
+  // v23 (0-AC) : le trait seul doit passer pour un sketch fini de pro
+  validation.faire = validation.faire.concat(['Sketch fini (0-AC) : l\'idée se lit en silhouette noire ; trois poids de trait partout ; recouvrements nets ; lignes de forme qui disent le volume. Montré tel quel, il doit passer pour une planche de concept art.']);
+  validation.portes = validation.portes.concat(['taille64']);
+  validation.coches = [C('silhouetteIdee', 'L\'idée se lit en silhouette noire, sans trait intérieur'), C('poids', 'Trois poids de trait (fort, moyen, fin) appliqués partout'), C('recouvrements', 'Chaque recouvrement est net, lignes de forme présentes')].concat(validation.coches);
   const L = [];
   for (const e of V) {
     if (e.id === 'construction') { L.push(rough, construction, esquisse); continue; }
@@ -602,7 +606,7 @@ function porte(id, at, cache) {
   }
   switch (id) {
     case 'fiche': { const r = ficheIncomplete(doc); return r ? 'Fiche incomplète : ' + r.join(', ') : null; }
-    case 'regles': return m.reglesLues ? null : 'Lis les 85 règles impératives et coche « lues ».';
+    case 'regles': return m.reglesLues ? null : 'Lis les 87 règles impératives et coche « lues ».';
     case 'nonVide': return AP.mesures(doc, f).opaques ? null : 'L\'image exportée est vide.';
     case 'construction': return aDesPixels(doc, c => c.type === 'construction') ? null : 'Dessine la construction dans au moins un calque de type « construction ».';
     case 'silhouette1': { const n = AP.mesures(doc, f).couleurs; return n <= 2 ? null : 'La silhouette se fait en une couleur sombre (2 au plus) : ' + n + ' couleurs.'; }
@@ -649,6 +653,10 @@ function porte(id, at, cache) {
       const L = calquesConstr(doc); if (L.length < 2) return null;
       const dessous = L.slice(0, -1);
       return dessous.some(c => c.visible && c.opacite > 45) ? 'Baisse l\'opacité des passes précédentes (20 à 40 %) ou masque-les : « ' + dessous.filter(c => c.visible && c.opacite > 45).map(c => c.nom).join(' », « ') + ' ».' : null;
+    }
+    case 'taille64': {
+      if (Math.max(doc.w, doc.h) >= 64 || m.justifs.taille64) return null;
+      return 'Le dessin fait ' + doc.w + '×' + doc.h + ' : un design d\'objet se juge à 64 px de haut au moins (0-AC-C). Agrandis la toile et redessine, ou justifie.';
     }
     case 'critiqueDessin': {
       // la dernière critique qui porte une note sur 30 (une critique sans note, comme un écart écrit, ne compte pas)
@@ -700,7 +708,7 @@ const NOMS_PORTES = {
   carnetVision: 'Carnet : vision écrite et corrigée', carnetEssais: 'Carnet : essais et choix',
   carnetEssais21: 'Carnet : 6 silhouettes notées et un choix', carnetPieces: 'Carnet : 9 variantes de pièces',
   calquesConstr2: '2 calques d\'esquisse', calquesConstr3: '3 calques d\'esquisse', calquesConstr4: '4 calques d\'esquisse',
-  dessousBaisse: 'Passes précédentes baissées', critiqueDessin: 'Dessin noté 22/30 au moins',
+  dessousBaisse: 'Passes précédentes baissées', critiqueDessin: 'Dessin noté 22/30 au moins', taille64: 'Dessin à 64 px de haut au moins',
   lumierePosee: 'Lumière posée', volume: 'Le volume suit la lumière', lumiere: 'Ombrage du bon côté',
   L: 'Aucun « L »', jaggies: 'Pas de jaggies', orphelins: 'Pas d\'orphelin', bandes: 'Pas de banding', coussin: 'Pas d\'ombrage coussin',
   bruit: 'Pas de bruit', trame: 'Pas de trame décorative', superpixels: 'Pas de super pixels', budget: 'Budget de couleurs (A3)',
@@ -721,7 +729,7 @@ function verifieEtape(at) {
   return { ok: !manque.length, manque };
 }
 
-/* ---------- Les 85 règles, lues dans le texte de la méthode ---------- */
+/* ---------- Les 87 règles, lues dans le texte de la méthode ---------- */
 function extraitRegles(texte) {
   const lignes = texte.split('\n'), out = [];
   let i = lignes.findIndex(l => /^# Règles impératives/.test(l)), groupe = '';

@@ -1,4 +1,4 @@
-# Méthode de pixel art — objets, personnages, créatures et décors (v22)
+# Méthode de pixel art — objets, personnages, créatures et décors (v23)
 
 On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin classique
 (construction par volumes, ligne d'action, anatomie) et les règles du pixel art
@@ -24,8 +24,8 @@ propres.
 
 | Partie | Sections |
 |---|---|
-| Règles impératives | 85 ordres courts, tirés des tests, des livres et des maîtres |
-| **0. Dessiner avant de pixelliser** | 0-A diagnostic de la potion 64 · 0-B voir et construire · 0-C lumière et forme (zones) · 0-D design des valeurs · 0-E design des formes · 0-F perspective · 0-G couleur · 0-H bords · 0-I matières · 0-J méthode du pro · **0-K les neuf planches analysées** · 0-L recettes (potion en verre, sphère, fruit, pain, flamme, ruines, gemme) · 0-M plan d'entraînement · **0-N vision et conception (carnet, essais)** · **0-O astuces de pro** · **0-P inventer (SCAMPER, tableau morphologique)** · 0-Q geste · 0-R harmonies de couleur · 0-S métal et textures · **0-T perspective avancée et raccourcis** · **0-U anatomie animale** · **0-V mains, expressions, jeu d'acteur** · **0-W éclairages complexes** · **0-X effets naturels** · **0-Y stylisation** · **0-Z raconter en une image** · **0-AA dessiner une forme belle (design d'objet, grille de critique)** · **0-AB le sketching d'un illustrateur (rough, construction, esquisse, trait, polish, validation)** |
+| Règles impératives | 87 ordres courts, tirés des tests, des livres et des maîtres |
+| **0. Dessiner avant de pixelliser** | 0-A diagnostic de la potion 64 · 0-B voir et construire · 0-C lumière et forme (zones) · 0-D design des valeurs · 0-E design des formes · 0-F perspective · 0-G couleur · 0-H bords · 0-I matières · 0-J méthode du pro · **0-K les neuf planches analysées** · 0-L recettes (potion en verre, sphère, fruit, pain, flamme, ruines, gemme) · 0-M plan d'entraînement · **0-N vision et conception (carnet, essais)** · **0-O astuces de pro** · **0-P inventer (SCAMPER, tableau morphologique)** · 0-Q geste · 0-R harmonies de couleur · 0-S métal et textures · **0-T perspective avancée et raccourcis** · **0-U anatomie animale** · **0-V mains, expressions, jeu d'acteur** · **0-W éclairages complexes** · **0-X effets naturels** · **0-Y stylisation** · **0-Z raconter en une image** · **0-AA dessiner une forme belle (design d'objet, grille de critique)** · **0-AB le sketching d'un illustrateur (rough, construction, esquisse, trait, polish, validation)** · **0-AC le sketch fini de pro (silhouette, trois poids de trait, recouvrements, lignes de forme)** |
 | **A. Règles communes** | A1 travail · A2 lisibilité · A3 table par taille · A4 règles du dessin · A4b simplifier · A5 pipeline pixel (silhouette → contour → palette → lumière → matières → détails → nettoyage → contrôle) · A6 finition pro · **A7 tramage** · **A8 lignes et formes** · **A9 perspectives de jeu** · **A10 leçons des maîtres** · **A11 geste du pro (outils, souris)** |
 | **B. Objets** | B0 intention · B0b projection · B1 cadre · B2 volumes · B3 forme iconique · B4 matière · B4b déclinaison par taille · B5 contrôle · **B6 recettes pas à pas (pierre, rocher, cristal, slime, livre)** |
 | **C. Personnages** | C0 intention · C1 proportions · C2 pose · C3 volumes · C4 tête et visage · C5 vêtements (design) · C6 cheveux · C7 astuces de figure · C8 contrôle · C9 anatomie · C10 tailles (8 à 128 px) · C11 portrait anime · C12 visage Loomis + anime · C13 chibi pas à pas · C14 corps nu puis vêtements en calque · C15 créatures · C16 créatures complexes · C17 vêtements (plis, matières) |
@@ -83,6 +83,7 @@ propres.
 | Récit, point d'intérêt, lignes directrices | **0-Z** · F5 · 0-O |
 | Design d'une forme belle, proportions, jonctions, bouchon | **0-AA** · 0-E · 0-N |
 | Sketching : rough, esquisse, trait, polish, calques, retourner la toile | **0-AB** · A11 |
+| Sketch fini, poids du trait, lignes de forme, taille du dessin | **0-AC** · 0-H · A6-C |
 | Grandes formes, langage des formes, point d'intérêt, contraste | **0-O** · 0-E · A2 |
 
 **Sources (étiquettes) :** [Z] *Apprendre à tout dessiner avec Zephy* · [M] livre de dessin
@@ -102,7 +103,8 @@ de valeurs, [D7] Sinix, design des formes, [D8] droites et courbes, [D9] couleur
 bords, [D11]-[D15] vision, vignettes, conception et astuces de pro, [D16]-[D20]
 créativité, geste, couleur, métal et textures, [D21]-[D28] perspective, anatomie animale,
 mains, expressions, éclairages, effets, style, récit, [D29]-[D30] appeal et verre d'art ;
-[T17] séance `fiole-unique`, [D31]-[D32] sketching d'illustrateur ; liens en fin de document). Toutes les règles sont reformulées.
+[T17] séance `fiole-unique`, [D31]-[D32] sketching d'illustrateur, [D33]-[D34] line art
+fini, [T18] séance `fiole-bourgeon` ; liens en fin de document). Toutes les règles sont reformulées.
 
 ---
 
@@ -327,6 +329,12 @@ Chaque règle est un ordre. Le détail et le « pourquoi » sont dans la section
     comptent et on ne décalque pas en aveugle (0-AB-B).
 85. **Le dessin se juge à la fin du sketching, avant la couleur** : 22/30 au moins à la grille,
     et on s'arrête pour le montrer ; sinon on revient au rough ou à l'esquisse (0-AB-C).
+
+**Sketch fini (0-AC)**
+86. **Le trait seul doit ressembler à un sketch fini de pro** : l'idée se lit en silhouette
+    noire, trois poids de trait appliqués partout, recouvrements nets, lignes de forme (0-AC).
+87. **Dessiner un design d'objet à 64 px de haut au moins** ; une icône plus petite se
+    redessine ensuite à sa taille depuis le sketch validé, jamais par réduction (0-AC-C).
 
 ---
 
@@ -1192,6 +1200,59 @@ ne la sauvera pas (0-AA).
 - **Retournée**, l'image tient-elle encore ?
 - La note de la grille est-elle d'au moins **22/30** ? Sinon, on revient au rough ou à
   l'esquisse, pas au trait.
+
+## 0-AC. Le sketch fini de pro : ce que le trait seul doit déjà montrer [D33][D34][T18]
+
+**Le critère de validation :** sans couleur ni lumière, le trait seul doit ressembler à un
+**sketch fini de professionnel**. Si on le montre tel quel, on doit croire à une planche de
+concept art ou de design d'objet, pas à un brouillon.
+
+### A. Contre-exemple : la fiole-bourgeon (séance `fiole-bourgeon`, 23/30) [T18]
+- **L'idée ne se lit pas en silhouette** : en noir, c'est une carafe ronde sur un pied ; le
+  calice n'est qu'un trait clair posé sur le verre.
+- **Les sépales sont un motif imprimé**, pas une pièce de métal qui enlace la panse.
+- **Le haut est maigre** : col long et fin, petit bouton, on lit une bougie sur une boule.
+- **Tout est symétrique et figé.**
+- **Le pied est deux barres empilées.**
+- **33×48 est trop petit** pour qu'un trait ait trois poids, des lignes de forme et des
+  recouvrements.
+
+### B. Les huit critères du sketch fini
+1. **L'idée se lit en silhouette noire.** Ce qui fait l'objet (le calice, les pétales, la
+   vrille) change le contour : pointes, creux, vides, recouvrements. Un détail intérieur ne
+   porte jamais l'idée seul.
+2. **Trois poids de trait, appliqués partout** :
+   - **fort** (2 px, ou 1 px du ton le plus sombre) : la silhouette, les contacts (là où une
+     pièce touche une autre ou le sol), le côté ombre ;
+   - **moyen** (1 px sombre) : les arêtes visibles à l'intérieur de la silhouette ;
+   - **fin** (1 px d'un ton plus clair, ou interrompu) : les détails, les lignes de forme, les
+     nervures.
+   Un poids appliqué par endroits seulement donne un dessin déséquilibré.
+3. **Des recouvrements nets** : la pièce de devant coupe le contour de celle de derrière ; au
+   croisement, le trait de devant est continu et un peu plus fort (0-B-6, 0-T).
+4. **Des lignes de forme** : quelques traits fins qui courent **sur** la surface (nervure d'un
+   sépale, couture d'un pétale, bague, contour croisé) disent le volume sans ombre.
+5. **Une hiérarchie des détails** : les détails se groupent au point d'intérêt (bouchon, col)
+   et à une seconde zone ; la grande panse reste calme (0-O).
+6. **Des formes secondaires et tertiaires dessinées** : grand, moyen, petit (0-AA-B), avec des
+   vides intéressants entre les pièces.
+7. **Du mouvement** : une ligne de flux et une asymétrie voulue (une feuille d'un seul côté,
+   une pointe qui penche), sauf si l'objet doit être solennel.
+8. **Des traits décidés et propres** : courbes régulières, jonctions fermées, aucun trait
+   parasite, aucun pixel qui hésite.
+
+### C. La taille du dessin
+Un sketch fini a besoin de place pour ses trois poids de trait, ses lignes de forme et ses
+recouvrements. Pour juger un design d'objet, dessiner à **64 px de haut au moins** (96 pour un
+objet riche). Une icône plus petite se redessine ensuite **à sa taille**, à partir du sketch
+validé, comme une déclinaison (B4b) : on ne réduit jamais une image.
+
+### D. Contrôle à la validation (étape « Validation du dessin »)
+- Silhouette noire : l'idée se lit-elle sans aucun trait intérieur ?
+- Les trois poids sont-ils là, partout, et cohérents ?
+- Chaque recouvrement est-il net ?
+- Les lignes de forme disent-elles le volume ?
+- Montré tel quel, passerait-il pour une planche de concept art ?
 
 ---
 
@@ -4065,6 +4126,8 @@ Cours et livres légitimes, cités pour leurs idées ; tout est reformulé.
 | [D30] | [Musée Lalique](https://www.musee-lalique.com/en/?p=1957) · [Lalique, flacons de parfum (Rau Antiques)](https://rauantiques.com/blogs/canvases-carats-and-curiosities/master-of-glass-lalique-perfume-bottles) · [René Lalique, structure et nature](https://runningxlate.substack.com/p/rene-lalique) | la structure tirée de la nature, flacons comme objets d'art (0-AA-C) |
 | [D31] | [City Lit, du post-it à l'impression](https://www.citylit.ac.uk/blog/illustration-from-post-it-to-print) · [CUNY, déroulé d'une illustration](https://openlab.citytech.cuny.edu/woolley-comd2313sp2018/files/2018/02/Illustration-Workflow-Handout.pdf) · [Cursa, de l'esquisse au trait (tablette)](https://cursa.app/en/page/digital-drawing-on-a-tablet-sketch-to-line-workflow-that-stays-clear-and-flexible) | vignettes, rough, esquisse affinée, trait, validation (0-AB-A) |
 | [D32] | [Clip Studio, un trait vivant](https://www.clipstudio.net/how-to-draw/archives/155333) · [Clip Studio, le trait pour débutants](https://tips.clip-studio.com/en-us/articles/8771) · [Creative Bloq, 20 conseils d'esquisse](https://www.creativebloq.com/illustration/sketching-tips-beginners-81516497/2) · [Pixel Grimoire #7](https://medium.com/pixel-grimoire/how-to-start-making-pixel-art-7-e504bfa4ddf2) | redessiner, baisser l'opacité, retourner la toile, poids du trait, peu de traits en petit (0-AB-B) |
+| [D33] | [Clip Studio, améliorer son line art](https://www.clipstudio.net/how-to-draw/archives/163108) · [Cursa, poids, effilés et angles](https://cursa.app/en/page/digital-drawing-on-a-tablet-clean-line-art-techniques-line-weight-tapers-and-corners) · [Proko, Jeff Watts et la qualité du trait](https://www.proko.com/lesson/jeff-watts-on-line-quality) | système de poids, traits décidés, recouvrements, nettoyage (0-AC-B) |
+| [D34] | [Core77, poids du trait en design produit](https://core77.com/posts/99154/Sketching-Tutorial-How-To-Use-Line-Weight-In-Your-Sketches-2-Rules-n-2-Techniques) · [The Design Sketchbook, poids du trait](https://www.thedesignsketchbook.com/?p=37086) · [Lospec, contours en pixel art](https://lospec.com/articles/pixel-art-outlines) | trois poids (fin, moyen, fort), traits intérieurs d'un ton plus clair (0-AC-B) |
 | [D10] | [Les bords en peinture](https://drawpaintacademy.com/edges/) · [Muddy Colors, bords](https://www.muddycolors.com/?p=8983) | bords durs, doux, perdus (0-H) |
 
 Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixeljoint.com/forum/forum_posts.asp?TID=20953)
@@ -4218,6 +4281,13 @@ Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixel
 ---
 
 # Historique des versions
+
+- **v23 :** **0-AC le sketch fini de pro** : le trait seul doit passer pour une planche de
+  concept art ; contre-exemple de la fiole-bourgeon [T18] ; huit critères (idée en silhouette,
+  trois poids de trait, recouvrements nets, lignes de forme, hiérarchie des détails, formes
+  secondaires, mouvement, traits décidés) ; dessiner un design à 64 px de haut au moins ;
+  règles 86 et 87 ; sources [D33] et [D34]. Dans Claude Pixel : étape « Validation du dessin »
+  avec les cases du sketch fini, alerte quand un objet v23 est dessiné sous 64 px.
 
 - **v22 :** **0-AB le sketching d'un illustrateur** : vignettes, design des pièces, rough,
   construction, esquisse nettoyée, trait final, polish du trait, validation du dessin ; un

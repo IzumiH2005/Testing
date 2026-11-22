@@ -410,11 +410,11 @@ function rendMethode(c) {
     }
     if (st.index === 0 || e.portes.includes('fiche')) rendFiche(c);
     if (e.portes.includes('regles')) {
-      c.appendChild(titre('Les 85 règles', m.reglesLues ? h('span.aide-txt', { style: { color: 'var(--ok)' } }, 'lues ✓') : null));
+      c.appendChild(titre('Les 87 règles', m.reglesLues ? h('span.aide-txt', { style: { color: 'var(--ok)' } }, 'lues ✓') : null));
       c.appendChild(h('p.aide-txt', 'Elles s\'appliquent à chaque dessin. Lis-les toutes avant de confirmer.'));
       c.appendChild(h('div.ligne',
         btn(reglesOuvertes ? 'Replier les règles' : 'Lire les règles', { cible: 'regles-ouvre', click: () => { reglesOuvertes = !reglesOuvertes; rendu(true); } }),
-        btn(m.reglesLues ? 'Règles lues ✓' : 'J\'ai lu les 85 règles', { cls: m.reglesLues ? '.fantome' : '.prim', cible: 'regles-lues', inactif: m.reglesLues || !reglesOuvertes,
+        btn(m.reglesLues ? 'Règles lues ✓' : 'J\'ai lu les 87 règles', { cls: m.reglesLues ? '.fantome' : '.prim', cible: 'regles-lues', inactif: m.reglesLues || !reglesOuvertes,
           title: reglesOuvertes ? '' : 'Ouvre d\'abord les règles', click: () => act('regles.lues') })));
       if (reglesOuvertes) c.appendChild(listeRegles());
     }

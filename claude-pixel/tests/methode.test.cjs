@@ -7,10 +7,10 @@ const { AP, trait, RACINE } = require('./aide.cjs');
 
 const FICHE = { quoi: 'potion', usage: 'inventaire', couleurs: '8', projection: 'de face', lumiere: 'haut gauche', matiere: 'verre', accent: 'rouge' };
 
-test('les 85 règles impératives sont extraites du document', () => {
+test('les 87 règles impératives sont extraites du document', () => {
   const R = AP.extraitRegles(fs.readFileSync(path.join(RACINE, 'METHODE_PIXEL_ART.md'), 'utf8'));
-  assert.equal(R.length, 85);
-  assert.deepEqual(R.map(r => r.n), Array.from({ length: 85 }, (_, i) => i + 1));
+  assert.equal(R.length, 87);
+  assert.deepEqual(R.map(r => r.n), Array.from({ length: 87 }, (_, i) => i + 1));
   assert.ok(R.every(r => r.texte && r.groupe));
 });
 
@@ -121,6 +121,8 @@ test('v22 : le sketching d\'illustrateur, calque par calque, puis la validation 
   assert.match(porte('validation').find(p => p.id === 'critiqueDessin').manque, /19\/30/);
   at.act('carnet.ajoute', { rubrique: 'critique', texte: 'Dessin repris : 23/30' });
   assert.equal(porte('validation').find(p => p.id === 'critiqueDessin').manque, null);
+  // 0-AC-C : un design d'objet se juge à 64 px de haut au moins
+  assert.match(porte('validation').find(p => p.id === 'taille64').manque, /64 px/);
   // un écart écrit après la note, sans note, ne la masque pas
   at.act('carnet.ajoute', { rubrique: 'critique', texte: 'Écart avec la référence : le calice reste plat.' });
   assert.equal(porte('validation').find(p => p.id === 'critiqueDessin').manque, null);

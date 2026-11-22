@@ -54,7 +54,7 @@ claude-pixel/
 ├── README.md               ce fichier
 ├── SPEC.md                 la spécification validée
 ├── CLAUDE.md               règles de travail de Claude dans l'atelier
-├── METHODE_PIXEL_ART.md    la méthode (v22), embarquée dans l'app (onglet Aide, règles, portes)
+├── METHODE_PIXEL_ART.md    la méthode (v23), embarquée dans l'app (onglet Aide, règles, portes)
 ├── app/
 │   ├── src/                modules JS, style.css, template.html
 │   ├── build.mjs           assemble tout en un seul fichier
