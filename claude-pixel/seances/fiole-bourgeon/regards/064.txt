@@ -1,0 +1,11 @@
+regard 064
+case 19,21 · couleur #2a1a2e99 (exportée : transparent) · écran 523,360
+outil crayon · taille 2 · c1 #2a1a2eff · c2 #00000000
+calque 2/2 · image 1/1 · dessin 33×48 « Fiole bourgeon » (objet)
+étape 3 · Essais : silhouettes, critique, choix (0-AA-D · 0-AA-E · 0-N)
+porte : Carnet : 6 ligne(s) « Essai » de plus (6 silhouettes au moins), 6 « Critique » notée(s) de plus, un « Choix retenu », au moins 3 idées barrées au total. | Case non cochée : « Au moins 6 silhouettes dans 3 familles différentes » | Case non cochée : « La silhouette choisie ne se confond pas avec une potion générique » | Case non cochée : « La silhouette choisie se lit à ×1 et en miroir »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 6 idée(s), 2 barrée(s) · dernière : [variante] Tableau : panse bourgeon, tulipe ou ogive ; col court à bague ; bouchon bouton, goutte ou 
+messages : aucun
+images : seances/fiole-bourgeon/regards/064-{ecran,loupe,dessin}.png

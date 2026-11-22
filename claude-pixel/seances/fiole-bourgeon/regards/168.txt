@@ -1,0 +1,11 @@
+regard 168
+case 18,44 · couleur #2a1a2eb3 (exportée : transparent) · écran 515,544
+outil ellipse · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 5/5 · image 1/1 · dessin 33×48 « Fiole bourgeon » (objet)
+étape 6 · Construction sur le rough (0-B · 0-F · B2)
+porte : Case non cochée : « Chaque volume est dessiné entier, partie cachée comprise » | Case non cochée : « Les ellipses s'ouvrent à mesure qu'elles s'éloignent du niveau de l'œil » | Case non cochée : « Proportions comparées à la référence ou au guide grand/moyen/petit »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 21 idée(s), 13 barrée(s) · dernière : [piece] Collerette 3 (réécrite) : gardée en réserve si le col paraît nu.
+messages : aucun
+images : seances/fiole-bourgeon/regards/168-{ecran,loupe,dessin}.png

@@ -1,0 +1,11 @@
+regard 190
+case 15,43 · couleur #2a1a2ee1 (exportée : transparent) · écran 491,536
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 6/6 · image 1/1 · dessin 33×48 « Fiole bourgeon » (objet)
+étape 7 · Esquisse nettoyée (0-AB-A · 0-AB-B)
+porte : Baisse l'opacité des passes précédentes (20 à 40 %) ou masque-les : « volumes ». | Case non cochée : « Toile retournée : aucune pente ni proportion fausse » | Case non cochée : « Seuls les traits qui comptent sont gardés »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 21 idée(s), 13 barrée(s) · dernière : [piece] Collerette 3 (réécrite) : gardée en réserve si le col paraît nu.
+messages : aucun
+images : seances/fiole-bourgeon/regards/190-{ecran,loupe,dessin}.png

@@ -1,0 +1,11 @@
+regard 016
+case 16,4 · couleur #2a1a2eff (exportée : #2a1a2eff) · écran 499,224
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 1/1 · image 1/1 · dessin 33×48 « Fiole bourgeon » (objet)
+étape 3 · Essais : silhouettes, critique, choix (0-AA-D · 0-AA-E · 0-N)
+porte : Dessine la construction dans au moins un calque de type « construction ». | Carnet : 6 ligne(s) « Essai » de plus (6 silhouettes au moins), 6 « Critique » notée(s) de plus, un « Choix retenu », au moins 3 idées barrées au total. | Case non cochée : « Au moins 6 silhouettes dans 3 familles différentes » | Case non cochée : « La silhouette choisie ne se confond pas avec une potion générique » | Case non cochée : « La silhouette choisie se lit à ×1 et en miroir »
+défauts : Pixels doublés en « L » [erreur] 6 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 6 idée(s), 2 barrée(s) · dernière : [variante] Tableau : panse bourgeon, tulipe ou ogive ; col court à bague ; bouchon bouton, goutte ou 
+messages : aucun
+images : seances/fiole-bourgeon/regards/016-{ecran,loupe,dessin}.png

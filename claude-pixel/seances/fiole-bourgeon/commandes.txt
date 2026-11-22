@@ -1,0 +1,1072 @@
+19:50:28.431  # séance fiole-bourgeon · claude · 1280×800
+19:50:28.664  clic =nouveau-type-objet
+19:50:29.115  clic =nouveau-w
+19:50:29.518  touche ctrl+a
+19:50:29.595  tape "33"
+19:50:29.638  clic =nouveau-h
+19:50:30.112  touche ctrl+a
+19:50:30.188  tape "48"
+19:50:30.224  clic =nouveau-nom
+19:50:30.595  touche ctrl+a
+19:50:30.678  tape "Fiole bourgeon"
+19:50:30.944  clic =modale-oui
+19:50:31.357  attends 400
+19:50:31.759  defile =fiche-quoi
+19:50:32.107  clic =fiche-quoi
+19:50:32.272  tape "Fiole en bourgeon de verre, tenue par un calice de métal, bouchon en bouton de cristal"
+19:50:33.834  defile =fiche-usage
+19:50:33.842  clic =fiche-usage
+19:50:34.166  tape "Objet rare d'inventaire : une potion de floraison (icône 33×48)"
+19:50:35.271  defile =fiche-couleurs
+19:50:35.304  clic =fiche-couleurs
+19:50:35.633  touche ctrl+a
+19:50:35.707  tape "16"
+19:50:35.743  defile =fiche-projection
+19:50:35.746  choisis =fiche-projection "de face"
+19:50:36.338  defile =fiche-lumiere
+19:50:36.459  choisis =fiche-lumiere "haut gauche"
+19:50:37.137  defile =fiche-matiere
+19:50:37.142  clic =fiche-matiere
+19:50:37.481  tape "Verre soufflé, métal ciselé (calice), cristal (bouchon)"
+19:50:38.501  defile =fiche-accent
+19:50:38.506  clic =fiche-accent
+19:50:38.850  tape "La lumière dorée du liquide, seule couleur saturée"
+19:50:39.711  defile =fiche-vise
+19:50:39.736  clic =fiche-vise
+19:50:40.066  tape "Flacons de René Lalique : la structure entière tirée d'une plante. Planche potion étape 9 pour le verre. On juge la forme en noir avant toute couleur."
+19:50:42.739  defile =regles-ouvre
+19:50:43.105  clic =regles-ouvre
+19:50:43.292  regarde
+19:50:57.463  clic =regles-lues
+19:50:57.869  defile =etape-valide
+19:50:59.582  clic =etape-valide
+19:50:59.880  attends 300
+19:51:00.182  defile =carnet-rub-vision
+19:51:00.627  clic =carnet-rub-vision
+19:51:00.818  defile =carnet-texte
+19:51:00.821  clic =carnet-texte
+19:51:01.231  tape "Une fiole en forme de larme, simple et élégante."
+19:51:02.052  defile =carnet-ajoute
+19:51:02.057  clic =carnet-ajoute
+19:51:02.399  defile =carnet-raison-0
+19:51:02.407  clic =carnet-raison-0
+19:51:02.813  tape "Déjà tentée à la séance précédente : une larme seule reste un ballon de chimie, rien ne la rend précieuse."
+19:51:04.603  defile =carnet-barre-0
+19:51:04.608  clic =carnet-barre-0
+19:51:04.980  defile =carnet-rub-vision
+19:51:04.984  clic =carnet-rub-vision
+19:51:05.385  defile =carnet-texte
+19:51:05.740  clic =carnet-texte
+19:51:05.906  tape "Un bourgeon de verre tenu par un calice de métal, comme une fleur sur le point de s'ouvrir : la potion est le cœur de la fleur."
+19:51:08.039  defile =carnet-ajoute
+19:51:08.043  clic =carnet-ajoute
+19:51:08.399  defile =carnet-rub-formes
+19:51:08.405  clic =carnet-rub-formes
+19:51:08.758  defile =carnet-texte
+19:51:08.761  clic =carnet-texte
+19:51:09.162  tape "Ogive (un rond qui finit en pointe) pour la panse, petite ogive pour le bouchon, ogives allongées pour les sépales : une seule forme, répétée à trois échelles."
+19:51:11.891  defile =carnet-ajoute
+19:51:11.898  clic =carnet-ajoute
+19:51:12.250  defile =carnet-rub-structure
+19:51:12.257  clic =carnet-rub-structure
+19:51:12.635  defile =carnet-texte
+19:51:12.923  clic =carnet-texte
+19:51:13.082  tape "Trois sépales de métal tiennent la panse par le bas et se prolongent en une tige courte, puis un pied en disque. Col court avec une bague, comme le nœud d'une tige."
+19:51:15.832  defile =carnet-ajoute
+19:51:15.836  clic =carnet-ajoute
+19:51:16.181  defile =carnet-rub-unique
+19:51:16.187  clic =carnet-rub-unique
+19:51:16.572  defile =carnet-texte
+19:51:16.578  clic =carnet-texte
+19:51:16.980  tape "La fiole est une fleur fermée : le bouchon est un bouton de cristal. Le liquide, une sève dorée qui s'éclaire vers le haut, porte la lumière."
+19:51:19.351  defile =carnet-ajoute
+19:51:19.376  clic =carnet-ajoute
+19:51:19.713  defile =carnet-rub-logique
+19:51:19.716  clic =carnet-rub-logique
+19:51:20.045  defile =carnet-texte
+19:51:20.405  clic =carnet-texte
+19:51:20.563  tape "Le calice protège le verre et sert de pied ; la bague arrête le bouchon ; la pointe de l'ogive devient naturellement le col."
+19:51:22.691  defile =carnet-ajoute
+19:51:22.698  clic =carnet-ajoute
+19:51:23.059  defile =carnet-rub-variante
+19:51:23.067  clic =carnet-rub-variante
+19:51:23.370  defile =carnet-texte
+19:51:23.376  clic =carnet-texte
+19:51:23.748  tape "SCAMPER, Renverser : le bourgeon tête en bas, suspendu par sa tige."
+19:51:24.923  defile =carnet-ajoute
+19:51:24.929  clic =carnet-ajoute
+19:51:25.285  defile =carnet-raison-7
+19:51:25.288    ✗ Aucun élément « carnet-raison-7 ».
+19:51:33.942  defile =carnet-raison-6
+19:51:33.948  clic =carnet-raison-6
+19:51:34.362  tape "Ne tient pas posé dans une case d'inventaire, et on lit une goutte, plus une fleur."
+19:51:35.812  defile =carnet-barre-6
+19:51:35.815  clic =carnet-barre-6
+19:51:36.182  defile =carnet-rub-variante
+19:51:36.184  clic =carnet-rub-variante
+19:51:36.600  defile =carnet-texte
+19:51:36.605  clic =carnet-texte
+19:51:36.967  tape "Tableau : panse bourgeon, tulipe ou ogive ; col court à bague ; bouchon bouton, goutte ou facetté ; base calice, disque ou racines."
+19:51:39.197  defile =carnet-ajoute
+19:51:39.570  clic =carnet-ajoute
+19:51:39.738  regarde
+19:51:40.120  defile =etape-valide
+19:51:40.132  clic =etape-valide
+19:51:40.549  regarde
+19:52:04.336  clic =outil-ellipse
+19:52:04.879  trace 4,1 6,4
+19:52:05.400  regarde
+19:52:05.696  clic =outil-rect
+19:52:06.145  trace 4,5 6,6
+19:52:06.627  regarde
+19:52:07.011  trace 3,7 7,7
+19:52:07.378  regarde
+19:52:07.693  clic =outil-ellipse
+19:52:08.141  trace 1,8 9,19
+19:52:08.994  regarde
+19:52:09.303  clic =outil-crayon
+19:52:09.760  trace 3,10 4,8
+19:52:10.248  regarde
+19:52:10.543  trace 7,10 6,8
+19:52:10.845  regarde
+19:52:11.103  trace 0,13 1,16
+19:52:11.495  regarde
+19:52:11.744  trace 10,13 9,16
+19:52:12.143  regarde
+19:52:12.472  clic =outil-rect
+19:52:12.910  trace 4,20 6,21
+19:52:13.397  regarde
+19:52:13.652  trace 2,22 8,23
+19:52:14.131  regarde
+19:52:14.375  clic =outil-ellipse
+19:52:14.827  trace 12,8 20,20
+19:52:15.762  regarde
+19:52:16.050  clic =outil-crayon
+19:52:16.528  trace 13,8 13,6
+19:52:17.026  regarde
+19:52:17.323  trace 16,7 16,4
+19:52:17.665  regarde
+19:52:17.972  trace 19,8 19,6
+19:52:18.297  regarde
+19:52:18.571  trace 16,21 16,22
+19:52:18.925  regarde
+19:52:19.224  trace 17,22 19,21
+19:52:19.475  regarde
+19:52:19.777  clic =outil-rect
+19:52:20.242  trace 13,23 19,23
+19:52:20.859  regarde
+19:52:21.125  clic =outil-ellipse
+19:52:21.592  trace 26,1 28,3
+19:52:22.109  regarde
+19:52:22.406  clic =outil-rect
+19:52:22.893  trace 26,4 28,5
+19:52:23.391  regarde
+19:52:23.732  clic =outil-ellipse
+19:52:24.214  trace 23,6 31,16
+19:52:25.062  regarde
+19:52:25.331  clic =outil-crayon
+19:52:25.820  trace 25,7 26,5
+19:52:26.341  regarde
+19:52:26.611  trace 29,7 28,5
+19:52:26.911  regarde
+19:52:27.233  trace 27,17 27,21
+19:52:27.695  regarde
+19:52:28.001  clic =outil-rect
+19:52:28.493  trace 24,22 30,23
+19:52:29.163  regarde
+19:52:41.731  touche ctrl+z
+19:52:41.811  touche ctrl+z
+19:52:41.885  touche ctrl+z
+19:52:41.960  touche ctrl+z
+19:52:42.034  touche ctrl+z
+19:52:42.108  touche ctrl+z
+19:52:42.183  touche ctrl+z
+19:52:42.258  touche ctrl+z
+19:52:42.333  touche ctrl+z
+19:52:42.415  touche ctrl+z
+19:52:42.490  touche ctrl+z
+19:52:42.569  touche ctrl+z
+19:52:42.645  touche ctrl+z
+19:52:42.719  touche ctrl+z
+19:52:42.794  touche ctrl+z
+19:52:42.869  touche ctrl+z
+19:52:42.945  touche ctrl+z
+19:52:43.026  touche ctrl+z
+19:52:43.107  touche ctrl+z
+19:52:43.187  touche ctrl+z
+19:52:43.271  touche ctrl+z
+19:52:43.381  regarde
+19:52:50.710  touche ctrl+z
+19:52:50.790  clic =onglet-calques
+19:52:51.269  attends 400
+19:52:51.670  clic =calque-ajoute-construction
+19:52:52.047  attends 300
+19:52:52.351  regarde
+19:53:04.276  clic =outil-ellipse
+19:53:04.841  trace 1,31 9,42
+19:53:05.712  regarde
+19:53:06.002  trace 0,27 4,31
+19:53:06.483  regarde
+19:53:06.752  clic =outil-rect
+19:53:07.207  trace 7,27 8,30
+19:53:07.725  regarde
+19:53:07.995  clic =outil-ellipse
+19:53:08.441  trace 6,25 9,26
+19:53:08.959  regarde
+19:53:09.232  clic =outil-rect
+19:53:09.673  trace 2,43 8,44
+19:53:10.342  regarde
+19:53:10.610  clic =outil-ellipse
+19:53:11.074  trace 14,25 18,28
+19:53:11.640  regarde
+19:53:11.919  clic =outil-rect
+19:53:12.389  trace 16,29 16,31
+19:53:12.888  regarde
+19:53:13.188  clic =outil-ellipse
+19:53:13.657  trace 12,33 20,45
+19:53:14.588  regarde
+19:53:14.856  clic =outil-crayon
+19:53:15.357  trace 14,34 16,32
+19:53:15.889  regarde
+19:53:16.152  trace 18,34 16,32
+19:53:16.444  regarde
+19:53:16.710  clic =outil-ellipse
+19:53:17.176  trace 23,31 29,43
+19:53:18.145  regarde
+19:53:18.421  trace 28,36 32,43
+19:53:18.989  regarde
+19:53:19.226  clic =outil-crayon
+19:53:19.724  trace 25,32 26,29
+19:53:20.279  regarde
+19:53:20.534  trace 27,32 26,29
+19:53:20.872  regarde
+19:53:21.103  trace 30,37 30,34
+19:53:21.488  regarde
+19:53:21.749  clic =outil-rect
+19:53:22.243  trace 24,44 31,45
+19:53:22.995  regarde
+19:53:40.172  touche ctrl+z
+19:53:40.253  touche ctrl+z
+19:53:40.330  touche ctrl+z
+19:53:40.404  touche ctrl+z
+19:53:40.480  touche ctrl+z
+19:53:40.555  touche ctrl+z
+19:53:40.634  touche ctrl+z
+19:53:40.720  touche ctrl+z
+19:53:40.799  touche ctrl+z
+19:53:40.875  touche ctrl+z
+19:53:40.954  touche ctrl+z
+19:53:41.030  touche ctrl+z
+19:53:41.103  touche ctrl+z
+19:53:41.184  touche ctrl+z
+19:53:41.259  touche ctrl+z
+19:53:41.338  touche ctrl+z
+19:53:41.414  regarde
+19:53:41.793  clic =calque-nom
+19:53:42.258  touche ctrl+a
+19:53:42.336  tape "vignettes"
+19:53:42.481  touche tab
+19:53:42.555  clic =outil-ellipse
+19:53:43.089  clic =opt-rempli
+19:53:43.507  clic =outil-crayon
+19:53:43.858  clic =opt-taille
+19:53:44.239  touche ctrl+a
+19:53:44.317  tape "2"
+19:53:44.335  touche entree
+19:53:44.408  regarde
+19:53:53.445  clic =calque-nom
+19:53:53.955  touche ctrl+a
+19:53:54.031  tape "trait"
+19:53:54.117  touche tab
+19:53:54.189  attends 200
+19:53:54.390  clic =calque-ajoute-construction
+19:53:54.772  attends 300
+19:53:55.073  clic =calque-nom
+19:53:55.489  touche ctrl+a
+19:53:55.565  tape "vignettes"
+19:53:55.710  touche tab
+19:53:55.786  attends 200
+19:53:55.988  clic =outil-ellipse
+19:53:56.521  regarde
+19:54:02.930  clic =outil-ellipse
+19:54:03.091  trace 4,1 6,4
+19:54:03.624  regarde
+19:54:03.982  clic =outil-rect
+19:54:04.421  trace 4,5 6,6
+19:54:04.905  regarde
+19:54:05.199  trace 3,7 7,7
+19:54:05.570  regarde
+19:54:05.875  clic =outil-ellipse
+19:54:06.338  trace 1,8 9,19
+19:54:07.188  regarde
+19:54:07.425  clic =outil-crayon
+19:54:07.893  trace 3,10 4,8
+19:54:08.375  regarde
+19:54:08.631  trace 7,10 6,8
+19:54:08.921  regarde
+19:54:09.204  trace 0,13 1,16
+19:54:09.591  regarde
+19:54:09.845  trace 10,13 9,16
+19:54:10.237  regarde
+19:54:10.550  clic =outil-rect
+19:54:11.009  trace 4,20 6,21
+19:54:11.526  regarde
+19:54:11.804  trace 2,22 8,23
+19:54:12.286  regarde
+19:54:12.529  clic =outil-ellipse
+19:54:12.974  trace 12,8 20,20
+19:54:13.941  regarde
+19:54:14.211  clic =outil-crayon
+19:54:14.688  trace 13,8 13,6
+19:54:15.204  regarde
+19:54:15.474  trace 16,7 16,4
+19:54:15.806  regarde
+19:54:16.118  trace 19,8 19,6
+19:54:16.437  regarde
+19:54:16.715  trace 16,21 16,22
+19:54:17.073  regarde
+19:54:17.345  trace 17,22 19,21
+19:54:17.587  regarde
+19:54:17.908  clic =outil-rect
+19:54:18.370  trace 13,23 19,23
+19:54:18.988  regarde
+19:54:19.231  clic =outil-ellipse
+19:54:19.688  trace 26,1 28,3
+19:54:20.207  regarde
+19:54:20.484  clic =outil-rect
+19:54:20.978  trace 26,4 28,5
+19:54:21.472  regarde
+19:54:21.740  clic =outil-ellipse
+19:54:22.223  trace 23,6 31,16
+19:54:23.071  regarde
+19:54:23.348  clic =outil-crayon
+19:54:23.822  trace 25,7 26,5
+19:54:24.359  regarde
+19:54:24.666  trace 29,7 28,5
+19:54:24.954  regarde
+19:54:25.215  trace 27,17 27,21
+19:54:25.657  regarde
+19:54:25.958  clic =outil-rect
+19:54:26.456  trace 24,22 30,23
+19:54:27.155  regarde
+19:54:27.402  clic =outil-ellipse
+19:54:27.888  trace 1,31 9,42
+19:54:28.740  regarde
+19:54:28.977  trace 0,27 4,31
+19:54:29.459  regarde
+19:54:29.738  clic =outil-rect
+19:54:30.188  trace 7,27 8,30
+19:54:30.726  regarde
+19:54:31.048  clic =outil-ellipse
+19:54:31.507  trace 6,25 9,26
+19:54:32.020  regarde
+19:54:32.300  clic =outil-rect
+19:54:32.755  trace 2,43 8,44
+19:54:33.407  regarde
+19:54:33.651  clic =outil-ellipse
+19:54:34.126  trace 14,25 18,28
+19:54:34.721  regarde
+19:54:34.991  clic =outil-rect
+19:54:35.460  trace 16,29 16,31
+19:54:35.968  regarde
+19:54:36.230  clic =outil-ellipse
+19:54:36.691  trace 12,33 20,45
+19:54:37.644  regarde
+19:54:37.923  clic =outil-crayon
+19:54:38.419  trace 14,34 16,32
+19:54:38.953  regarde
+19:54:39.250  trace 18,34 16,32
+19:54:39.571  regarde
+19:54:39.835  clic =outil-ellipse
+19:54:40.308  trace 23,31 29,43
+19:54:41.364  regarde
+19:54:41.630  trace 28,36 32,43
+19:54:42.211  regarde
+19:54:42.503  clic =outil-crayon
+19:54:43.005  trace 25,32 26,29
+19:54:43.571  regarde
+19:54:43.911  trace 27,32 26,29
+19:54:44.246  regarde
+19:54:44.523  trace 30,37 30,34
+19:54:44.928  regarde
+19:54:45.211  clic =outil-rect
+19:54:45.687  trace 24,44 31,45
+19:54:46.438  regarde
+19:55:12.467  clic =onglet-methode
+19:55:12.982  attends 300
+19:55:13.287  defile =carnet-rub-essai
+19:55:13.683  clic =carnet-rub-essai
+19:55:13.867  defile =carnet-texte
+19:55:13.873  clic =carnet-texte
+19:55:14.238  tape "A, famille fleur : bourgeon en ogive, bouton en bouchon, bague, calice à deux sépales, tige et pied."
+19:55:16.210  defile =carnet-ajoute
+19:55:16.220  clic =carnet-ajoute
+19:55:16.608  defile =carnet-rub-critique
+19:55:16.621  clic =carnet-rub-critique
+19:55:16.850  defile =carnet-texte
+19:55:16.856  clic =carnet-texte
+19:55:17.229  tape "A : lisibilité 3, originalité 4, appeal 3, cohérence 4, rythme 3, crédibilité 4 = 21/30. Les pointes des sépales sortent comme des bras : on croit voir un petit personnage."
+19:55:20.231  defile =carnet-ajoute
+19:55:20.629  clic =carnet-ajoute
+19:55:20.793  defile =carnet-rub-essai
+19:55:20.798  clic =carnet-rub-essai
+19:55:21.181  defile =carnet-texte
+19:55:21.192  clic =carnet-texte
+19:55:21.558  tape "B, famille fleur : tulipe fermée, trois pétales pointus en haut, tige et feuille."
+19:55:23.006  defile =carnet-ajoute
+19:55:23.010  clic =carnet-ajoute
+19:55:23.374  defile =carnet-rub-critique
+19:55:23.378  clic =carnet-rub-critique
+19:55:23.649  defile =carnet-texte
+19:55:23.654  clic =carnet-texte
+19:55:24.021  tape "B : 2, 4, 2, 3, 3, 3 = 17/30. Les trois pétales font des doigts ; pas de bouchon lisible."
+19:55:25.605  defile =carnet-ajoute
+19:55:25.977  clic =carnet-ajoute
+19:55:26.144  defile =carnet-rub-essai
+19:55:26.149  clic =carnet-rub-essai
+19:55:26.543  defile =carnet-texte
+19:55:26.550  clic =carnet-texte
+19:55:26.919  tape "C, famille goutte : ogive haute, petit bouchon rond, tige longue et fine, pied plat."
+19:55:28.412  defile =carnet-ajoute
+19:55:28.423  clic =carnet-ajoute
+19:55:28.771  defile =carnet-rub-critique
+19:55:28.779  clic =carnet-rub-critique
+19:55:29.060  defile =carnet-texte
+19:55:29.063  clic =carnet-texte
+19:55:29.421  tape "C : 4, 2, 3, 4, 4, 4 = 21/30. Élégante et lisible, mais proche d'un verre à pied ou d'un parfum classique."
+19:55:31.303  defile =carnet-ajoute
+19:55:31.326  clic =carnet-ajoute
+19:55:31.689  defile =carnet-rub-essai
+19:55:31.693  clic =carnet-rub-essai
+19:55:32.063  defile =carnet-texte
+19:55:32.414  clic =carnet-texte
+19:55:32.585  tape "D, famille coquille : nautile, une grosse spirale, col de côté."
+19:55:33.666  defile =carnet-ajoute
+19:55:33.676  clic =carnet-ajoute
+19:55:34.018  defile =carnet-rub-critique
+19:55:34.023  clic =carnet-rub-critique
+19:55:34.296  defile =carnet-texte
+19:55:34.299  clic =carnet-texte
+19:55:34.672  tape "D : 2, 4, 2, 2, 2, 3 = 15/30. À cette taille, la spirale devient une tache."
+19:55:35.968  defile =carnet-ajoute
+19:55:35.972  clic =carnet-ajoute
+19:55:36.327  defile =carnet-rub-essai
+19:55:36.333  clic =carnet-rub-essai
+19:55:36.744  defile =carnet-texte
+19:55:36.749  clic =carnet-texte
+19:55:37.117  tape "E, famille goutte : goutte suspendue à un anneau."
+19:55:37.953  defile =carnet-ajoute
+19:55:38.328  clic =carnet-ajoute
+19:55:38.495  defile =carnet-rub-critique
+19:55:38.498  clic =carnet-rub-critique
+19:55:38.774  defile =carnet-texte
+19:55:38.778  clic =carnet-texte
+19:55:39.136  tape "E : 4, 3, 3, 3, 3, 2 = 18/30. On lit un pendentif ; ne tient pas debout dans une case."
+19:55:40.704  defile =carnet-ajoute
+19:55:40.707  clic =carnet-ajoute
+19:55:41.052  defile =carnet-rub-essai
+19:55:41.055  clic =carnet-rub-essai
+19:55:41.433  defile =carnet-texte
+19:55:41.440  clic =carnet-texte
+19:55:41.819  tape "F, famille bourgeon : deux bourgeons jumeaux sur un pied commun."
+19:55:42.924  defile =carnet-ajoute
+19:55:42.927  clic =carnet-ajoute
+19:55:43.269  defile =carnet-rub-critique
+19:55:43.273  clic =carnet-rub-critique
+19:55:43.543  defile =carnet-texte
+19:55:43.915  clic =carnet-texte
+19:55:44.085  tape "F : 2, 3, 2, 3, 2, 3 = 15/30. Masse grumeleuse, aucune forme ne domine."
+19:55:45.375  defile =carnet-ajoute
+19:55:45.389  clic =carnet-ajoute
+19:55:45.744  defile =carnet-raison-10
+19:55:46.260  clic =carnet-raison-10
+19:55:46.453  tape "Sous 20/30 : les pétales font des doigts."
+19:55:47.209  defile =carnet-barre-10
+19:55:47.216  clic =carnet-barre-10
+19:55:47.571  defile =carnet-raison-14
+19:55:47.912  clic =carnet-raison-14
+19:55:48.154  tape "Sous 20/30 : illisible en petit."
+19:55:48.747  defile =carnet-barre-14
+19:55:48.753  clic =carnet-barre-14
+19:55:49.119  defile =carnet-raison-18
+19:55:49.446  clic =carnet-raison-18
+19:55:49.718  tape "Sous 20/30 : aucune forme dominante."
+19:55:50.339  defile =carnet-barre-18
+19:55:50.343  clic =carnet-barre-18
+19:55:50.704  defile =carnet-rub-choix
+19:55:50.947  clic =carnet-rub-choix
+19:55:51.160  defile =carnet-texte
+19:55:51.164  clic =carnet-texte
+19:55:51.519  tape "A poussée avec les proportions de C : panse en ogive plus haute que large ; sépales collés à la panse, pointes qui remontent le long du verre au lieu de sortir comme des bras ; tige courte, pied en disque. Test générique : la ronde, la conique et la carrée n'ont pas de calice, on ne confond pas."
+19:55:56.607  defile =carnet-ajoute
+19:55:56.613  clic =carnet-ajoute
+19:55:56.971  regarde
+19:56:04.649  defile =coche-essais.familles
+19:56:04.976  clic =coche-essais.familles
+19:56:05.285  defile =coche-essais.generique
+19:56:05.291  clic =coche-essais.generique
+19:56:05.689  defile =coche-essais.lisible
+19:56:05.695  clic =coche-essais.lisible
+19:56:05.983  defile =etape-valide
+19:56:05.987  clic =etape-valide
+19:56:06.300  regarde
+19:56:49.951  cibles calque-opacite
+19:56:55.198  clic =onglet-calques
+19:56:55.670  attends 300
+19:56:56.046  cibles calque-opacite
+19:57:01.171  clic @1021 658
+19:57:01.652  attends 200
+19:57:01.853  regarde
+19:57:14.453  clic =calque-oeil-1
+19:57:14.919  clic =calque-ajoute-construction
+19:57:15.284  attends 300
+19:57:15.588  clic =calque-nom
+19:57:16.016  touche ctrl+a
+19:57:16.095  tape "pieces"
+19:57:16.236  touche tab
+19:57:16.310  attends 200
+19:57:16.511  clic =outil-ellipse
+19:57:17.048  clic =opt-rempli
+19:57:17.467  clic =outil-crayon
+19:57:17.814  clic =opt-taille
+19:57:18.198  touche ctrl+a
+19:57:18.276  tape "1"
+19:57:18.295  touche entree
+19:57:18.374  clic =outil-crayon
+19:57:18.768  trace 5,0 6,1 7,3 8,5 8,7 7,9 6,10 4,10 3,9 2,7 2,5 3,3 4,1 5,0
+19:57:20.240  regarde
+19:57:20.537  trace 5,2 6,5 5,8
+19:57:21.006  regarde
+19:57:21.267  trace 16,0 17,2 18,5 18,8 17,10 15,10 14,8 14,5 15,2 16,0
+19:57:22.514  regarde
+19:57:22.808  trace 14,11 18,11
+19:57:23.231  regarde
+19:57:23.544  trace 27,0 30,3 30,8 27,10 24,8 24,3 27,0
+19:57:24.764  regarde
+19:57:25.011  trace 27,1 27,9
+19:57:25.498  regarde
+19:57:25.782  trace 25,4 27,6 29,4
+19:57:26.171  regarde
+19:57:26.474  trace 3,13 3,19
+19:57:27.031  regarde
+19:57:27.348  trace 7,13 7,19
+19:57:27.831  regarde
+19:57:28.136  trace 2,15 8,15
+19:57:28.608  regarde
+19:57:28.894  trace 2,16 8,16
+19:57:29.361  regarde
+19:57:29.654  trace 3,19 0,22
+19:57:30.061  regarde
+19:57:30.330  trace 7,19 10,22
+19:57:30.730  regarde
+19:57:31.036  trace 13,13 19,13
+19:57:31.532  regarde
+19:57:31.804  trace 14,14 14,16 13,17 13,18 14,19 13,20 11,21 10,22
+19:57:32.431  regarde
+19:57:32.712  trace 18,14 18,16 19,17 19,18 18,19 19,20 21,21 22,22
+19:57:33.484  regarde
+19:57:33.772  trace 25,13 25,18
+19:57:34.236  regarde
+19:57:34.530  trace 29,13 29,18
+19:57:34.970  regarde
+19:57:35.270  trace 23,17 24,19 25,19
+19:57:35.647  regarde
+19:57:35.971  trace 31,17 30,19 29,19
+19:57:36.329  regarde
+19:57:36.619  trace 24,20 22,22
+19:57:36.946  regarde
+19:57:37.216  trace 30,20 32,22
+19:57:37.583  regarde
+19:57:37.872  clic =outil-ellipse
+19:57:38.349  trace 0,26 10,39
+19:57:39.268  regarde
+19:57:39.549  trace 11,26 21,39
+19:57:40.404  regarde
+19:57:40.690  trace 22,26 32,39
+19:57:41.545  regarde
+19:57:41.811  clic =outil-crayon
+19:57:42.319  trace 3,39 3,36 4,34 5,32 6,34 7,36 7,39
+19:57:43.472  regarde
+19:57:43.750  trace 2,40 1,38 0,35 0,32
+19:57:44.364  regarde
+19:57:44.652  trace 8,40 9,38 10,35 10,32
+19:57:45.299  regarde
+19:57:45.568  trace 4,41 4,43
+19:57:45.945  regarde
+19:57:46.243  trace 6,41 6,43
+19:57:46.571  regarde
+19:57:46.886  trace 1,44 9,44
+19:57:47.412  regarde
+19:57:47.686  trace 0,45 10,45
+19:57:48.331  regarde
+19:57:48.617  trace 15,40 15,43
+19:57:48.979  regarde
+19:57:49.350  trace 17,40 17,43
+19:57:49.682  regarde
+19:57:49.959  trace 11,44 21,44
+19:57:50.580  regarde
+19:57:50.880  trace 12,46 20,46
+19:57:51.462  regarde
+19:57:51.712  trace 11,45 11,45
+19:57:51.963  regarde
+19:57:52.234  trace 21,45 21,45
+19:57:52.493  regarde
+19:57:52.793  trace 27,40 24,42 22,45
+19:57:53.367  regarde
+19:57:53.638  trace 27,40 30,42 32,45
+19:57:54.165  regarde
+19:57:54.441  trace 27,40 27,46
+19:57:54.930  regarde
+19:57:55.207  trace 22,45 32,45
+19:57:55.778  regarde
+19:58:23.264  clic =onglet-methode
+19:58:23.772  attends 300
+19:58:24.073  defile =carnet-rub-piece
+19:58:24.076  clic =carnet-rub-piece
+19:58:24.459  defile =carnet-texte
+19:58:24.477  clic =carnet-texte
+19:58:24.817  tape "Bouchon 1, bouton : ogive à pointe, une couture de pétales. Répète la panse en petit : le motif à la 2e échelle."
+19:58:26.943  defile =carnet-ajoute
+19:58:26.948  clic =carnet-ajoute
+19:58:27.295  defile =carnet-rub-piece
+19:58:27.298  clic =carnet-rub-piece
+19:58:27.588  defile =carnet-texte
+19:58:27.592  clic =carnet-texte
+19:58:27.930  tape "Bouchon 2, goutte haute sur une bague : élégante mais neutre, n'évoque pas la fleur."
+19:58:29.386  defile =carnet-ajoute
+19:58:29.391  clic =carnet-ajoute
+19:58:29.746  defile =carnet-rub-piece
+19:58:29.750  clic =carnet-rub-piece
+19:58:30.037  defile =carnet-texte
+19:58:30.048  clic =carnet-texte
+19:58:30.380  tape "Bouchon 3, cristal facetté : brillant, mais anguleux dans un langage rond."
+19:58:31.671  defile =carnet-ajoute
+19:58:31.677  clic =carnet-ajoute
+19:58:32.030  defile =carnet-rub-piece
+19:58:32.035  clic =carnet-rub-piece
+19:58:32.307  defile =carnet-texte
+19:58:32.315  clic =carnet-texte
+19:58:32.646  tape "Jonction 1, bague double et épaule droite : raide, le col semble vissé sur un cône."
+19:58:34.069  defile =carnet-ajoute
+19:58:34.436  clic =carnet-ajoute
+19:58:34.600  defile =carnet-rub-piece
+19:58:34.604  clic =carnet-rub-piece
+19:58:34.871  defile =carnet-texte
+19:58:34.874  clic =carnet-texte
+19:58:35.216  tape "Jonction 2, lèvre, nœud de tige et épaule en courbe : comme le nœud d'une tige, la panse naît du col."
+19:58:36.970  defile =carnet-ajoute
+19:58:36.974  clic =carnet-ajoute
+19:58:37.312  defile =carnet-rub-piece
+19:58:37.320  clic =carnet-rub-piece
+19:58:37.635  defile =carnet-texte
+19:58:37.640  clic =carnet-texte
+19:58:37.964  tape "Jonction 3, collerette de feuilles : reprend le calice, mais charge le haut et double le détail."
+19:58:39.585  defile =carnet-ajoute
+19:58:39.590  clic =carnet-ajoute
+19:58:39.943  defile =carnet-rub-piece
+19:58:39.946  clic =carnet-rub-piece
+19:58:40.239  defile =carnet-texte
+19:58:40.620  clic =carnet-texte
+19:58:40.776  tape "Pied 1, calice à trois sépales collés, tige courte, disque : porte toute l'idée de fleur ; sépales en ogive = 3e échelle du motif."
+19:58:43.037  defile =carnet-ajoute
+19:58:43.044  clic =carnet-ajoute
+19:58:43.396  defile =carnet-rub-piece
+19:58:43.400  clic =carnet-rub-piece
+19:58:43.692  defile =carnet-texte
+19:58:43.701  clic =carnet-texte
+19:58:44.055  tape "Pied 2, disque sur tige : générique, n'importe quel verre à pied."
+19:58:45.302  defile =carnet-ajoute
+19:58:45.309  clic =carnet-ajoute
+19:58:45.663  defile =carnet-rub-piece
+19:58:45.667  clic =carnet-rub-piece
+19:58:45.953  defile =carnet-texte
+19:58:45.964  clic =carnet-texte
+19:58:46.311  tape "Pied 3, trois feuilles posées au sol : se lit mal, on croit voir des pattes."
+19:58:47.673  defile =carnet-ajoute
+19:58:48.055  clic =carnet-ajoute
+19:58:48.228  defile =carnet-raison-25
+19:58:48.639  clic =carnet-raison-25
+19:58:48.798  tape "Trop neutre, ne porte pas le motif."
+19:58:49.419  defile =carnet-barre-25
+19:58:49.428  clic =carnet-barre-25
+19:58:49.794  defile =carnet-raison-26
+19:58:49.803  clic =carnet-raison-26
+19:58:50.183  tape "Anguleux : casse le langage rond de la fiole."
+19:58:51.023  defile =carnet-barre-26
+19:58:51.027  clic =carnet-barre-26
+19:58:51.399  defile =carnet-raison-27
+19:58:51.404  clic =carnet-raison-27
+19:58:51.801  tape "Raide : un cône et un tube vissés."
+19:58:52.413  defile =carnet-barre-27
+19:58:52.416  clic =carnet-barre-27
+19:58:52.787  defile =carnet-raison-31
+19:58:52.791    ✗ Aucun élément « carnet-raison-31 ».
+19:59:12.037  defile =carnet-raison-22
+19:59:12.434  clic =carnet-raison-22
+19:59:12.613  tape "Trop neutre, ne porte pas le motif."
+19:59:13.239  defile =carnet-barre-22
+19:59:13.247  clic =carnet-barre-22
+19:59:13.614  defile =carnet-raison-23
+19:59:13.635  clic =carnet-raison-23
+19:59:14.028  tape "Anguleux : casse le langage rond de la fiole."
+19:59:14.983  defile =carnet-barre-23
+19:59:14.990  clic =carnet-barre-23
+19:59:15.381  defile =carnet-raison-24
+19:59:15.387  clic =carnet-raison-24
+19:59:15.783  tape "Raide : un cône et un tube vissés."
+19:59:16.389  defile =carnet-barre-24
+19:59:16.392  clic =carnet-barre-24
+19:59:16.756  defile =carnet-raison-28
+19:59:17.155  clic =carnet-raison-28
+19:59:17.527  tape "Générique : aucun lien avec la fleur."
+19:59:18.211  defile =carnet-barre-28
+19:59:18.216  clic =carnet-barre-28
+19:59:18.579  defile =carnet-raison-29
+19:59:18.595  clic =carnet-raison-29
+19:59:18.977  tape "Illisible : des pattes plutôt que des feuilles."
+19:59:19.812  defile =carnet-barre-29
+19:59:19.817  clic =carnet-barre-29
+19:59:20.178  defile =carnet-rub-piece
+19:59:20.580  clic =carnet-rub-piece
+19:59:20.754  defile =carnet-texte
+19:59:20.761  clic =carnet-texte
+19:59:21.093  tape "Correction : la jonction 2, la collerette 3 et le pied 1 ont été barrés par une erreur de numérotation, avec des raisons qui ne sont pas les leurs. Je les réécris ci-dessous."
+19:59:24.143  defile =carnet-ajoute
+19:59:24.148  clic =carnet-ajoute
+19:59:24.495  defile =carnet-rub-piece
+19:59:24.499  clic =carnet-rub-piece
+19:59:24.829  defile =carnet-texte
+19:59:24.834  clic =carnet-texte
+19:59:25.158  tape "Jonction 2 (réécrite) : lèvre, nœud de tige et épaule en courbe. Choisie."
+19:59:26.439  defile =carnet-ajoute
+19:59:26.442  clic =carnet-ajoute
+19:59:26.798  defile =carnet-rub-piece
+19:59:26.804  clic =carnet-rub-piece
+19:59:27.099  defile =carnet-texte
+19:59:27.489  clic =carnet-texte
+19:59:27.643  tape "Pied 1 (réécrit) : calice à trois sépales collés, tige courte, disque. Choisi."
+19:59:29.002  defile =carnet-ajoute
+19:59:29.016  clic =carnet-ajoute
+19:59:29.373  defile =carnet-rub-piece
+19:59:29.400  clic =carnet-rub-piece
+19:59:29.687  defile =carnet-texte
+19:59:29.689  clic =carnet-texte
+19:59:30.049  tape "Collerette 3 (réécrite) : gardée en réserve si le col paraît nu."
+19:59:31.196  defile =carnet-ajoute
+19:59:31.205  clic =carnet-ajoute
+19:59:31.545  regarde
+19:59:41.869  defile =coche-pieces.motif
+19:59:42.234  clic =coche-pieces.motif
+19:59:42.391  defile =coche-pieces.proportions
+19:59:42.398  clic =coche-pieces.proportions
+19:59:42.679  defile =coche-pieces.jonctions
+19:59:42.682  clic =coche-pieces.jonctions
+19:59:42.974  defile =coche-pieces.bouchon
+19:59:42.980  clic =coche-pieces.bouchon
+19:59:43.303  defile =etape-valide
+19:59:43.327  clic =etape-valide
+19:59:43.808  regarde
+19:59:59.459  clic =onglet-calques
+19:59:59.929  attends 300
+20:00:00.230  clic @1021 713
+20:00:00.710  attends 200
+20:00:00.911  clic =calque-ajoute-construction
+20:00:01.357  attends 300
+20:00:01.672  clic =calque-nom
+20:00:02.091  touche ctrl+a
+20:00:02.169  tape "rough"
+20:00:02.289  touche tab
+20:00:02.367  attends 200
+20:00:02.580  clic =outil-crayon
+20:00:03.111  trace 16,1 17,10 16,20 15,32 16,46
+20:00:05.196  regarde
+20:00:05.501  clic =outil-ellipse
+20:00:05.960  trace 6,18 26,41
+20:00:07.279  regarde
+20:00:07.581  clic =outil-crayon
+20:00:08.076  trace 9,24 12,20 14,17
+20:00:08.775  regarde
+20:00:09.067  trace 23,24 20,20 18,17
+20:00:09.667  regarde
+20:00:09.963  trace 14,17 14,11
+20:00:10.442  regarde
+20:00:10.709  trace 18,17 18,11
+20:00:11.196  regarde
+20:00:11.500  trace 13,11 19,11
+20:00:11.962  regarde
+20:00:12.288  clic =outil-ellipse
+20:00:12.778  trace 13,1 19,10
+20:00:13.710  regarde
+20:00:13.972  clic =outil-crayon
+20:00:14.453  trace 16,44 14,40 15,35 16,32 17,35 18,40 16,44
+20:00:16.072  regarde
+20:00:16.329  trace 14,44 10,40 8,35 8,31
+20:00:17.073  regarde
+20:00:17.350  trace 18,44 22,40 24,35 24,31
+20:00:18.257  regarde
+20:00:18.531  trace 16,44 16,45
+20:00:18.879  regarde
+20:00:19.212  clic =outil-ellipse
+20:00:19.674  trace 10,44 22,47
+20:00:20.623  regarde
+20:00:31.122  clic =calque-oeil-2
+20:00:31.596  regarde
+20:00:50.505  clic =outil-ellipse
+20:00:51.023  trace 5,20 27,42
+20:00:52.195  regarde
+20:00:52.543  clic =outil-crayon
+20:00:53.073  trace 7,27 9,23 12,19 14,16
+20:00:54.023  regarde
+20:00:54.328  trace 25,27 23,23 20,19 18,16
+20:00:55.175  regarde
+20:00:55.446  trace 14,16 14,12
+20:00:55.804  regarde
+20:00:56.109  trace 18,16 18,12
+20:00:56.525  regarde
+20:00:56.834  trace 13,14 19,14
+20:00:57.327  regarde
+20:00:57.628  clic =outil-ellipse
+20:00:58.095  trace 13,3 19,11
+20:00:58.899  regarde
+20:00:59.193  clic =outil-crayon
+20:00:59.657  trace 16,1 16,3
+20:01:00.188  regarde
+20:01:00.503  trace 14,44 10,41 7,36 7,30
+20:01:01.577  regarde
+20:01:01.809  trace 18,44 22,41 25,36 25,30
+20:01:02.778  regarde
+20:01:03.047  trace 16,45 13,41 14,36 16,32 18,36 19,41 16,45
+20:01:04.546  regarde
+20:01:19.801  clic =onglet-methode
+20:01:20.331  attends 300
+20:01:20.637  defile =coche-rough.flux
+20:01:21.974  clic =coche-rough.flux
+20:01:22.137  defile =coche-rough.masses
+20:01:22.140  clic =coche-rough.masses
+20:01:22.423  defile =etape-valide
+20:01:22.433  clic =etape-valide
+20:01:22.737  attends 300
+20:01:23.045  clic =onglet-calques
+20:01:23.493  attends 300
+20:01:23.796  clic @1021 768
+20:01:24.289  attends 200
+20:01:24.491  clic =calque-ajoute-construction
+20:01:24.922  attends 300
+20:01:25.226  clic =calque-nom
+20:01:25.642  touche ctrl+a
+20:01:25.718  tape "volumes"
+20:01:25.859  touche tab
+20:01:25.934  attends 200
+20:01:26.136  clic =outil-crayon
+20:01:26.674  trace 16,0 16,47
+20:01:28.693  regarde
+20:01:28.987  clic =outil-ellipse
+20:01:29.457  trace 5,20 27,42
+20:01:30.699  regarde
+20:01:30.982  trace 6,30 26,35
+20:01:32.226  regarde
+20:01:32.487  trace 13,11 19,13
+20:01:33.086  regarde
+20:01:33.374  trace 13,15 19,17
+20:01:33.874  regarde
+20:01:34.136  trace 13,2 19,11
+20:01:34.921  regarde
+20:01:35.192  trace 10,44 22,47
+20:01:36.161  regarde
+20:01:36.454  trace 14,42 18,44
+20:01:36.906  regarde
+20:01:37.160  clic =outil-crayon
+20:01:37.646  trace 7,27 9,23 12,19 14,16
+20:01:38.575  regarde
+20:01:38.857  trace 25,27 23,23 20,19 18,16
+20:01:39.702  regarde
+20:01:56.528  touche ctrl+z
+20:01:56.608  touche ctrl+z
+20:01:56.687  touche ctrl+z
+20:01:56.763  touche ctrl+z
+20:01:56.839  touche ctrl+z
+20:01:56.919  touche ctrl+z
+20:01:57.011  touche ctrl+z
+20:01:57.087  touche ctrl+z
+20:01:57.167  touche ctrl+z
+20:01:57.244  touche ctrl+z
+20:01:57.318  regarde
+20:01:57.667  clic =outil-crayon
+20:01:58.144  trace 16,0 16,47
+20:02:00.318  regarde
+20:02:00.585  clic =outil-ellipse
+20:02:01.071  trace 5,20 27,42
+20:02:02.210  regarde
+20:02:02.496  trace 6,30 26,36
+20:02:03.776  regarde
+20:02:04.042  trace 13,11 19,12
+20:02:04.671  regarde
+20:02:05.003  trace 13,16 19,17
+20:02:05.530  regarde
+20:02:05.806  trace 13,2 19,11
+20:02:06.595  regarde
+20:02:06.858  trace 10,43 22,47
+20:02:07.803  regarde
+20:02:08.122  clic =outil-crayon
+20:02:08.620  trace 7,27 9,23 12,19 14,16
+20:02:09.609  regarde
+20:02:09.884  trace 25,27 23,23 20,19 18,16
+20:02:10.719  regarde
+20:03:02.730  clic =onglet-methode
+20:03:03.259  attends 300
+20:03:03.567  defile =coche-construction.entier
+20:03:03.574  clic =coche-construction.entier
+20:03:04.068  defile =coche-construction.ellipses
+20:03:04.074  clic =coche-construction.ellipses
+20:03:04.389  defile =coche-construction.proportions
+20:03:04.395  clic =coche-construction.proportions
+20:03:04.701  defile =etape-valide
+20:03:05.077  clic =etape-valide
+20:03:05.238  attends 300
+20:03:05.539  clic =onglet-calques
+20:03:05.978  attends 300
+20:03:06.281  clic @1021 658
+20:03:06.767  attends 200
+20:03:06.968  clic =calque-ajoute-construction
+20:03:07.353  attends 300
+20:03:07.656  clic =calque-nom
+20:03:08.068  touche ctrl+a
+20:03:08.143  tape "esquisse"
+20:03:08.304  touche tab
+20:03:08.390  attends 200
+20:03:08.600  clic =outil-crayon
+20:03:09.154  clic =opt-symX
+20:03:09.701  clic =outil-crayon
+20:03:10.197  trace 16,1 15,2 14,3 14,4 13,5 13,8 14,9 15,10
+20:03:11.016  regarde
+20:03:11.305  trace 13,11 16,11
+20:03:11.650  regarde
+20:03:11.918  trace 14,12 14,13
+20:03:12.149  regarde
+20:03:12.487  trace 13,14 16,14
+20:03:12.799  regarde
+20:03:13.108  trace 14,15 14,17
+20:03:13.407  regarde
+20:03:13.736  trace 13,18 13,19 12,20 11,21 10,22 9,23 8,24 7,25 7,26 6,27 6,29 5,30 5,34 6,35 6,36 7,37 8,38 9,39 10,40 11,40 12,41 16,41
+20:03:15.172  regarde
+20:03:15.429  trace 16,30 15,31 15,32 14,33 14,35 13,36 13,38 14,39 14,40 15,41
+20:03:16.200  regarde
+20:03:16.451  trace 14,42 12,42 10,41 8,40 7,39 6,38 5,37 4,36 4,32 5,31 5,29
+20:03:17.351  regarde
+20:03:17.595  trace 5,29 6,31 6,34 7,36 8,37 10,38 12,39
+20:03:18.219  regarde
+20:03:18.481  trace 15,42 15,43
+20:03:18.754  regarde
+20:03:19.027  clic =outil-ellipse
+20:03:19.499  trace 10,43 22,47
+20:03:20.448  regarde
+20:03:29.511  clic =calque-oeil-3
+20:03:29.993  clic =calque-oeil-4
+20:03:30.301  regarde
+20:03:42.240  va 9 36
+20:03:42.582  regarde
+20:04:06.472  clic =outil-gomme
+20:04:06.937  trace 5,32 5,34
+20:04:07.433  regarde
+20:04:07.768  trace 9,39 10,40 11,40 12,41 13,41
+20:04:08.182  regarde
+20:04:27.020  clic =onglet-lumiere
+20:04:27.569  attends 300
+20:04:27.871  clic =retourne
+20:04:28.352  attends 300
+20:04:28.654  regarde
+20:04:36.049  clic =retourne
+20:04:36.330  clic =onglet-methode
+20:04:36.815  attends 300
+20:04:37.116  defile =coche-esquisse.retourne
+20:04:37.509  clic =coche-esquisse.retourne
+20:04:37.682  defile =coche-esquisse.choisis
+20:04:37.686  clic =coche-esquisse.choisis
+20:04:37.990  defile =etape-valide
+20:04:37.996  clic =etape-valide
+20:04:38.324  regarde
+20:04:46.842  clic =onglet-calques
+20:04:47.306  attends 300
+20:04:47.696  cibles calque-opacite
+20:04:47.794  cibles calque-choisit
+20:04:53.016  defile =calque-opacite
+20:04:53.490  cibles calque-opacite
+20:05:01.265  clic @1019 619
+20:05:01.666  attends 200
+20:05:01.867  clic =calque-choisit-0
+20:05:02.315  attends 200
+20:05:02.525  clic =outil-crayon
+20:05:03.213  trace 16,1 15,2 14,3 14,4 13,5 13,8 14,9 15,10
+20:05:04.052  regarde
+20:05:04.349  trace 13,11 16,11
+20:05:04.666  regarde
+20:05:04.961  trace 14,12 14,13
+20:05:05.197  regarde
+20:05:05.518  trace 13,14 16,14
+20:05:05.815  regarde
+20:05:06.159  trace 14,15 14,17
+20:05:06.468  regarde
+20:05:06.764  trace 13,18 13,19 12,20 11,21 10,22 9,23 8,24 7,25 7,26 6,27 6,29 5,30 5,31
+20:05:07.498  regarde
+20:05:07.781  trace 5,31 4,32 4,36 5,37 6,38 7,39 8,40 10,41 12,42 14,42
+20:05:08.585  regarde
+20:05:08.848  trace 6,31 6,34 7,36 8,37 10,38 12,39
+20:05:09.595  regarde
+20:05:09.899  trace 16,30 15,31 15,32 14,33 14,35 13,36 13,38 14,39 14,40 15,41
+20:05:10.728  regarde
+20:05:11.013  trace 15,42 15,43
+20:05:11.217  regarde
+20:05:11.516  clic =outil-ellipse
+20:05:11.981  trace 10,43 22,47
+20:05:12.933  regarde
+20:05:31.628  va 14 12
+20:05:31.912  regarde
+20:05:32.347  va 14 15
+20:05:32.454  regarde
+20:05:32.827  va 12 41
+20:05:33.079  regarde
+20:05:33.449  va 16 43
+20:05:33.578  regarde
+20:05:33.930  va 5 31
+20:05:34.197  regarde
+20:05:42.013  clic =outil-gomme
+20:05:42.489  clic 6,31
+20:05:42.979  regarde
+20:05:57.517  clic =couleur-c1
+20:05:58.003  defile =hex
+20:05:58.008  clic =hex
+20:05:58.542  touche ctrl+a
+20:05:58.621  tape "#5a4a70"
+20:05:58.750  touche entree
+20:05:58.826  clic =selecteur-c1
+20:05:59.252  clic =outil-crayon
+20:05:59.877  trace 6,32 6,34 7,36 8,37 10,38 12,39
+20:06:00.708  regarde
+20:06:01.005  trace 16,30 15,31 15,32 14,33 14,35 13,36 13,38 14,39 14,40 15,41
+20:06:01.809  regarde
+20:06:08.112  va 6 28
+20:06:08.344  regarde
+20:06:08.736  va 11 21
+20:06:08.915  regarde
+20:06:09.313  va 14 4
+20:06:09.527  regarde
+20:06:09.859  va 12 45
+20:06:10.160  regarde
+20:06:10.544  va 14 16
+20:06:10.813  regarde
+20:06:20.549  clic =couleur-c1
+20:06:21.054  defile =hex
+20:06:21.061  clic =hex
+20:06:21.602  touche ctrl+a
+20:06:21.678  tape "#2a1a2e"
+20:06:21.806  touche entree
+20:06:21.882  clic =selecteur-c1
+20:06:22.285  clic =outil-crayon
+20:06:22.922  clic 5,32
+20:06:23.395  regarde
+20:06:23.741  clic =outil-gomme
+20:06:24.216  clic 4,32
+20:06:24.695  regarde
+20:06:30.513  clic =onglet-controle
+20:06:31.052  attends 400
+20:06:31.454  regarde

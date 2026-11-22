@@ -1,0 +1,11 @@
+regard 200
+case 14,13 · couleur #2a1a2eff (exportée : #2a1a2eff) · écran 483,296
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 1/6 · image 1/1 · dessin 33×48 « Fiole bourgeon » (objet)
+étape 8 · Trait final (0-AB-A · A5-6 · 0-E)
+porte : Case non cochée : « Vue miroir regardée : aucune pente fausse » | Case non cochée : « Courbes tendues, aucune bosse molle »
+défauts : Bruit [attention] 5 px (dont 14,9 18,9 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 21 idée(s), 13 barrée(s) · dernière : [piece] Collerette 3 (réécrite) : gardée en réserve si le col paraît nu.
+messages : aucun
+images : seances/fiole-bourgeon/regards/200-{ecran,loupe,dessin}.png
