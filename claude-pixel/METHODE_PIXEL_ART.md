@@ -1,4 +1,4 @@
-# Méthode de pixel art — objets, personnages, créatures et décors (v19)
+# Méthode de pixel art — objets, personnages, créatures et décors (v20)
 
 On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin classique
 (construction par volumes, ligne d'action, anatomie) et les règles du pixel art
@@ -24,8 +24,8 @@ propres.
 
 | Partie | Sections |
 |---|---|
-| Règles impératives | 70 ordres courts, tirés des tests, des livres et des maîtres |
-| **0. Dessiner avant de pixelliser** | 0-A diagnostic de la potion 64 · 0-B voir et construire · 0-C lumière et forme (zones) · 0-D design des valeurs · 0-E design des formes · 0-F perspective · 0-G couleur · 0-H bords · 0-I matières · 0-J méthode du pro · **0-K les neuf planches analysées** · 0-L recettes (potion en verre, sphère, fruit, pain, flamme, ruines, gemme) · 0-M plan d'entraînement · **0-N vision et conception (carnet, essais)** · **0-O astuces de pro** · **0-P inventer (SCAMPER, tableau morphologique)** · 0-Q geste · 0-R harmonies de couleur · 0-S métal et textures |
+| Règles impératives | 78 ordres courts, tirés des tests, des livres et des maîtres |
+| **0. Dessiner avant de pixelliser** | 0-A diagnostic de la potion 64 · 0-B voir et construire · 0-C lumière et forme (zones) · 0-D design des valeurs · 0-E design des formes · 0-F perspective · 0-G couleur · 0-H bords · 0-I matières · 0-J méthode du pro · **0-K les neuf planches analysées** · 0-L recettes (potion en verre, sphère, fruit, pain, flamme, ruines, gemme) · 0-M plan d'entraînement · **0-N vision et conception (carnet, essais)** · **0-O astuces de pro** · **0-P inventer (SCAMPER, tableau morphologique)** · 0-Q geste · 0-R harmonies de couleur · 0-S métal et textures · **0-T perspective avancée et raccourcis** · **0-U anatomie animale** · **0-V mains, expressions, jeu d'acteur** · **0-W éclairages complexes** · **0-X effets naturels** · **0-Y stylisation** · **0-Z raconter en une image** |
 | **A. Règles communes** | A1 travail · A2 lisibilité · A3 table par taille · A4 règles du dessin · A4b simplifier · A5 pipeline pixel (silhouette → contour → palette → lumière → matières → détails → nettoyage → contrôle) · A6 finition pro · **A7 tramage** · **A8 lignes et formes** · **A9 perspectives de jeu** · **A10 leçons des maîtres** · **A11 geste du pro (outils, souris)** |
 | **B. Objets** | B0 intention · B0b projection · B1 cadre · B2 volumes · B3 forme iconique · B4 matière · B4b déclinaison par taille · B5 contrôle · **B6 recettes pas à pas (pierre, rocher, cristal, slime, livre)** |
 | **C. Personnages** | C0 intention · C1 proportions · C2 pose · C3 volumes · C4 tête et visage · C5 vêtements (design) · C6 cheveux · C7 astuces de figure · C8 contrôle · C9 anatomie · C10 tailles (8 à 128 px) · C11 portrait anime · C12 visage Loomis + anime · C13 chibi pas à pas · C14 corps nu puis vêtements en calque · C15 créatures · C16 créatures complexes · C17 vêtements (plis, matières) |
@@ -73,6 +73,14 @@ propres.
 | Geste, ligne d'action, courbes C et S | **0-Q** · C2 |
 | Harmonies de couleur, accent | **0-R** · F4 · A6-A |
 | Métal, bois, tissu, fourrure, feuillage | **0-S** · 0-I · C17 |
+| Perspective à 1, 2, 3 points, raccourcis | **0-T** · 0-F · A9 |
+| Quadrupèdes, oiseaux, insectes, pattes | **0-U** · C15 · C16 |
+| Mains | **0-V-A** · C10-I |
+| Expressions, jeu d'acteur | **0-V-B/C** · C10-E · C2 |
+| Plusieurs lumières, nuit, lumière colorée | **0-W** · 0-C |
+| Fumée, eau, explosion, étincelles | **0-X** · E7 · B6-D |
+| Style d'un jeu, stylisation | **0-Y** · A10 |
+| Récit, point d'intérêt, lignes directrices | **0-Z** · F5 · 0-O |
 | Grandes formes, langage des formes, point d'intérêt, contraste | **0-O** · 0-E · A2 |
 
 **Sources (étiquettes) :** [Z] *Apprendre à tout dessiner avec Zephy* · [M] livre de dessin
@@ -90,7 +98,8 @@ fournies en v17 (potion, cristal, poire, sphère, livre, pain, portail, pierre, 
 [D3] Proko, lumière et ombre, [D4] James Gurney, blog, [D5] Marco Bucci, [D6] Proko, groupes
 de valeurs, [D7] Sinix, design des formes, [D8] droites et courbes, [D9] couleur, [D10]
 bords, [D11]-[D15] vision, vignettes, conception et astuces de pro, [D16]-[D20]
-créativité, geste, couleur, métal et textures ; liens en fin de document). Toutes les règles sont reformulées.
+créativité, geste, couleur, métal et textures, [D21]-[D28] perspective, anatomie animale,
+mains, expressions, éclairages, effets, style, récit ; liens en fin de document). Toutes les règles sont reformulées.
 
 ---
 
@@ -277,6 +286,25 @@ Chaque règle est un ordre. Le détail et le « pourquoi » sont dans la section
     seulement au point d'intérêt (0-R).
 70. **Une texture = quelques amas répétés, distribués irrégulièrement, dans le demi-ton** ;
     rien en pleine lumière ni dans l'ombre profonde (0-S).
+
+**Perspective, anatomie, jeu, lumière, effets, style, récit (0-T à 0-Z)**
+71. **Le recouvrement d'abord** : ce qui est devant cache ce qui est derrière ; dans un
+    sprite, c'est l'indice de profondeur qui reste lisible. Pas de raccourci extrême sous
+    32 px (0-T).
+72. **Le pied fait l'animal** : plantigrade, digitigrade ou onguligrade ; le « genou à
+    l'envers » est une cheville ; les pattes d'un insecte partent du thorax (0-U).
+73. **L'aile est un bras, la main une moufle** : masses et groupes d'abord (plumes,
+    doigts), détails au bord seulement à la fin (0-U, 0-V).
+74. **Une émotion = sourcils, yeux, bouche, et tout le corps** ; une pose est un verbe ;
+    on exagère pour une lecture immédiate (0-V).
+75. **Plusieurs lumières : une principale, une de remplissage, des accents**, de
+    températures opposées ; jamais deux de même force (0-W).
+76. **Un effet en pixel art = paliers et amas, jamais de flou ni de semi-transparence** ;
+    il reste plus simple que le sujet et ne cache pas le point d'intérêt (0-X).
+77. **Un seul style par jeu, fixé dans une fiche de style** (contour, angles, ombrage,
+    densité, palette, proportions) ; styliser, c'est simplifier et exagérer exprès (0-Y).
+78. **Une image raconte une chose** : un point d'intérêt, l'instant clé, quelques indices ;
+    le décor et l'usure racontent sans texte (0-Z).
 
 ---
 
@@ -803,6 +831,212 @@ avant la vision.
   la masse d'abord, les feuilles ensuite.
 - **La texture vit dans le demi-ton** : elle disparaît dans la pleine lumière et dans
   l'ombre profonde (A4, 0-D).
+
+## 0-T. Perspective avancée et raccourcis [D1][D21]
+
+### A. Trois indices de profondeur, à ne pas confondre
+- **Diminution** : ce qui est loin est plus petit. Deux sujets censés avoir la même taille :
+  le plus petit paraît plus loin.
+- **Convergence** : les droites parallèles qui s'éloignent se rejoignent en un point de
+  fuite.
+- **Raccourci** : une forme **tournée vers l'œil** se tasse dans sa longueur. Le raccourci
+  dépend de l'**orientation** de la forme ; la diminution, de sa **distance**.
+- **Recouvrement** : le plus sûr des indices. Ce qui est devant cache ce qui est derrière
+  (0-B-6). Dans un sprite, c'est souvent le seul qui reste lisible.
+
+### B. Un, deux, trois points de fuite
+- **Un point** : on voit une face de face, les fuyantes vont vers un seul point (couloir,
+  route, objet vu de face). La plupart des icônes « de face » en sont une version
+  aplatie.
+- **Deux points** : on voit un coin de la boîte ; deux familles de fuyantes vont vers deux
+  points sur la ligne d'horizon, les verticales restent verticales. C'est la vue des
+  objets posés et des bâtiments en 3/4.
+- **Trois points** : les verticales convergent aussi (vue très en plongée ou en
+  contre-plongée) : effet de hauteur, de vertige, de puissance.
+- **Pour un jeu**, on choisit une projection fixe (A9, règle 33) : de face, 3/4 de dessus ou
+  isométrique 2:1. Les règles de perspective servent alors à **placer les ellipses, les
+  pentes et les recouvrements**, pas à dessiner des fuyantes exactes.
+
+### C. Raccourcis : la boîte qui vient vers nous
+- **Une boîte dont les deux bouts ont presque la même taille** est peu raccourcie ; si le
+  bout proche est **beaucoup plus grand**, le raccourci est fort.
+- **Un membre en raccourci** (bras tendu vers le spectateur) : dessiner une suite de
+  cylindres qui **se recouvrent**, le plus proche devant et plus gros ; la main paraît
+  grande, l'avant-bras court. Les ellipses des coupes deviennent presque des cercles.
+- **En pixels** : le raccourci se lit surtout par le recouvrement et par un contour plus
+  épais ou plus sombre sur la pièce proche. Éviter les raccourcis extrêmes sous 32 px :
+  ils deviennent illisibles ; préférer une pose de profil ou de 3/4 qui dit la même chose.
+
+## 0-U. Anatomie animale et créatures [D13][D22]
+
+### A. Les trois façons de marcher (le pied fait l'animal)
+| Type | Exemples | Ce qui touche le sol | Ce qu'on voit |
+|---|---|---|---|
+| **Plantigrade** | humain, ours, raton | toute la plante du pied | talon au sol, pied long et plat |
+| **Digitigrade** | chien, chat, loup, la plupart des oiseaux | les doigts | **le talon est haut** : le « genou à l'envers » est en fait la **cheville** |
+| **Onguligrade** | cheval, cerf, vache | le bout du doigt (sabot) | jambe très longue et fine, la cheville encore plus haut |
+
+- Le **vrai genou** d'un chien ou d'un cheval est **haut, près du ventre**, caché dans le
+  corps. Dessiner un genou « humain » à mi-jambe fait faux tout de suite.
+- **Pattes avant** : le coude est près du torse et plie **vers l'arrière** ; le poignet est le
+  « genou » visible à l'avant.
+- Ne pas plaquer le pied humain sur un animal : un ours qui marche sur la pointe des pieds
+  paraît faux.
+
+### B. Le quadrupède en volumes
+- Trois masses : **cage thoracique** (grosse, en œuf), **bassin** (plus petit), **tête** ; le
+  cou et la colonne les relient en une courbe (ligne d'action, 0-Q).
+- Les pattes s'accrochent **sous** les masses (épaule sous la cage, hanche sous le bassin),
+  pas sur les côtés comme des pieds de table.
+- L'omoplate glisse sur la cage : quand une patte avant avance, l'épaule monte.
+- Le poids se lit dans les appuis : la tête et la cage sont lourdes, deux pattes au sol au
+  moins sous le centre de gravité.
+
+### C. Oiseaux
+- **L'aile est un bras** : épaule, coude, poignet, main. Les plumes s'organisent en
+  **groupes** : **primaires** sur la main (longues, au bout), **secondaires** sur
+  l'avant-bras, **tertiaires** près du corps, et les **couvertures** en rangées courtes qui
+  recouvrent la base des plumes de vol.
+- **Aile pliée** : les secondaires recouvrent les primaires ; l'aile forme une goutte posée
+  contre le flanc.
+- **Dessiner des masses, pas des plumes** : la silhouette de l'aile d'abord, les groupes
+  ensuite, quelques plumes seulement au bord, comme détail final.
+- Les pattes d'oiseau sont digitigrades : la « jambe » visible est le pied.
+
+### D. Insectes et petites bêtes
+- **Trois parties** : tête, **thorax**, abdomen. **Les six pattes et les ailes partent du
+  thorax**, jamais de l'abdomen. Un thorax trop petit donne des pattes « collées ».
+- Pattes **en segments coudés**, pas en bâtons. Abdomen = souvent la plus grosse masse,
+  segmentée ou rayée.
+- Construire sur un **axe** : trois ovales, puis les pattes en paires symétriques.
+- Arachnides : deux parties et **huit** pattes ; ne pas les confondre.
+
+### E. Inventer une créature crédible (rappel 0-N)
+Un squelette tiré d'animaux réels, un type de pied cohérent avec son sol, une façon de
+manger visible (bec, crocs, trompe), des marqueurs d'identité (C15). Combiner des
+**principes** d'animaux différents, pas coller des morceaux.
+
+## 0-V. Mains, expressions, jeu d'acteur [D23][D24]
+
+### A. La main
+- **La paume est une boîte** (un peu plus large en haut), **les doigts une moufle** avant
+  d'être des doigts : on dessine d'abord la masse de la moufle, puis on la découpe en
+  quatre.
+- **Les jointures** forment des arcs, pas une ligne droite ; le majeur est le plus long.
+- **Le pouce** part du bas de la paume : une sphère (sa base charnue) + un cylindre.
+- **Bouts des doigts arrondis**, jamais en pointe.
+- **Grouper les doigts** : une main vivante garde ses doigts en groupes ; on n'en sépare un
+  que pour un geste (montrer, tenir).
+- **Dessiner les vides** entre les doigts : ils donnent la forme des doigts.
+- **En pixels** : sous 32 px, une main = une moufle de 2-3 px avec un pouce d'1 px (C10-I) ;
+  le geste se lit par la silhouette de la moufle, pas par les doigts.
+
+### B. Le visage qui joue
+- **Trois zones suffisent** : sourcils, yeux, bouche. Les **sourcils** portent le plus
+  d'émotion pour le moins de pixels.
+- **Combiner** : sourcils bas et rentrés + bouche en arc vers le bas = colère ; intérieur des
+  sourcils relevé + coins de bouche baissés = tristesse ; sourcils hauts + bouche ouverte =
+  surprise ; yeux plissés + coins relevés = joie.
+- **Asymétrie** : un vrai visage est rarement symétrique ; un sourcil plus haut que l'autre
+  rend l'expression vivante.
+- **La tête penche avec l'émotion** (baissée : tristesse, honte ; relevée : fierté, défi).
+- **Lecture immédiate** : un joueur regarde un sprite une fraction de seconde. On exagère.
+- Recettes au pixel : C10-E.
+
+### C. Le corps qui joue
+- **L'émotion vient de tout le corps** : posture, expression, accessoires, décor, couleur.
+- **Pose = verbe** : choisir ce que fait le personnage (« guette », « hésite », « fonce »),
+  pas « se tient debout ». La ligne d'action (0-Q) traduit ce verbe.
+- **Silhouette lisible** : bras détachés du corps quand le geste compte (C2).
+- **Accessoires qui racontent** : un outil dit un métier, une cicatrice une histoire (0-Y).
+
+## 0-W. Éclairages complexes [D25][B5]
+
+- **Une hiérarchie de lumières** : une lumière **principale** (la plus forte), une lumière
+  de **remplissage** (faible, adoucit l'ombre), des **accents** (contre-jour, reflets). Jamais
+  deux lumières de même force : elles se disputent et aplatissent la forme.
+- **Opposer les températures** : principale chaude, contre-jour ou ambiance froide (ou
+  l'inverse). C'est ce qui sépare les sources à l'œil.
+- **Contre-jour (rim light)** : un liseré sur le bord opposé à la principale ; il **détache**
+  le sujet du fond (B6, 0-C).
+- **Valeurs d'abord** : poser l'éclairage en gris (notan) avant les couleurs, même avec
+  plusieurs sources.
+- **Lumière colorée** : un objet éclairé par une lumière colorée prend sa teinte dans la
+  famille lumière ; son ombre tire vers la **complémentaire** ou vers l'ambiante.
+- **Nuit** : ce qui émet de la lumière devient le point d'intérêt (lampe, fenêtre, feu) ;
+  l'ambiance est sombre, froide et désaturée ; les lumières pratiques (lanterne,
+  réverbère) donnent des contre-jours forts.
+- **Sources proches** (bougie, torche) : la lumière tombe vite avec la distance ; forte
+  différence entre la face proche et l'arrière ; halo autour de la source (B6-D).
+- **Brume, fumée** : les lumières s'étalent en halo, les bords s'adoucissent, les couleurs
+  pâlissent avec la distance (F3-A).
+- **Dans l'app** : l'onglet Lumière règle la **principale** ; les lumières secondaires se
+  raisonnent à la main et se notent au carnet.
+
+## 0-X. Effets naturels : fumée, eau, feu, explosion, étincelles [D26][P3]
+
+Les guides de particules travaillent souvent avec du flou et de la transparence. **En pixel
+art, on traduit** : pas de pixels semi-transparents (règle 46) ; la transparence devient des
+**paliers de valeur** et des amas, et le flou une **trame** ou une marche de ton.
+
+- **Fumée, poussière, nuages** : des **boules** groupées, les plus denses au centre, plus
+  petites et plus claires (ou plus sombres) vers l'extérieur ; tailles **variées** (grand,
+  moyen, petit) ; éclairées comme un seul volume (0-C : dessus clair, dessous sombre). En
+  animation, les boules grossissent, pâlissent et se séparent.
+- **Eau qui coule, éclaboussure** : une forme principale (jet, langue) + des gouttes
+  détachées de tailles différentes ; reflets nets et clairs sur le dessus ; la même forme
+  qu'une fumée recolorée en bleu peut servir d'écume.
+- **Surface d'eau** : quelques lignes claires horizontales, brisées, plus serrées au loin ;
+  reflets étirés à la verticale sous les objets.
+- **Feu** : planche flamme (0-K, 0-L-E) : geste en S, cœur clair à la base, pas d'ombre
+  propre.
+- **Explosion** : un **flash** clair qui grandit très vite et ne dure pas (sinon il devient
+  une lampe), puis des cercles plus sombres vers l'extérieur ; ensuite fumée grise et
+  noire qui rétrécit, se disloque et retombe ; **débris** et poussière la rendent
+  crédible.
+- **Étincelles, électricité** : une ligne principale, une seconde plus fine qui la croise,
+  des branches au hasard ; un halo de 1-2 tons autour (B6-D).
+- **Lisibilité** : un effet doit rester plus simple que le sujet qu'il accompagne, et ne
+  jamais cacher le point d'intérêt.
+
+## 0-Y. Stylisation et cohérence d'un style [D27]
+
+- **Styliser = simplifier et exagérer exprès**, en gardant le sujet reconnaissable. On
+  choisit ce qu'on garde (les traits d'identité, A10-F) et ce qu'on supprime.
+- **Une base réaliste, une exagération contrôlée** : on part de la vraie structure (0-B,
+  0-U), puis on pousse la forme ou la couleur dans une direction choisie (plus rond, plus
+  anguleux, plus haut, plus saturé).
+- **Styliser n'est pas moins de travail** : chaque simplification est une décision. Une
+  stylisation mal faite paraît bon marché.
+- **Un seul style pour tout le jeu** : fixer tôt une **fiche de style** et s'y tenir :
+  - contour (noir, coloré, cassé, absent ; 1 ou 2 px) ;
+  - angles (arrondis ou vifs) ;
+  - ombrage (cel en 2-3 tons, ou modelé doux) ;
+  - densité de détail par taille (A3) ;
+  - palette et nombre de couleurs ; lumière (direction unique, règle 23) ;
+  - proportions (nombre de têtes, C1).
+- **Ne jamais mélanger des styles au hasard** dans une même scène : un objet en modelé doux
+  à côté de personnages en cel saute aux yeux.
+- **Dans l'app** : noter la fiche de style au carnet (rubrique *Ce que je vois* ou
+  *Formes de base*) et la recopier d'un dessin à l'autre.
+
+## 0-Z. Raconter en une image [D28]
+
+- **Un seul point d'intérêt**, autour duquel tout s'organise (0-O). Trop de symboles
+  qui se disputent noient le sens.
+- **Guider l'œil** : le plus fort contraste, la lumière, les lignes directrices (route,
+  bord, regard, alignement d'objets), les diagonales et les triangles pour le dynamisme.
+- **Placement** : sur un tiers plutôt qu'au centre pour une scène (F5) ; au centre pour une
+  icône.
+- **Un point secondaire peut appuyer le récit**, sans jamais dominer le premier.
+- **Le moment clé** : choisir l'instant le plus parlant (juste avant l'action, ou son
+  sommet) et laisser des indices de ce qui s'est passé avant.
+- **Le décor raconte** : usure, objets abandonnés, traces, architecture disent l'histoire et
+  l'époque sans texte. Même un objet seul raconte : une fiole fêlée et réparée, un livre
+  aux coins usés (B6-F).
+- **Laisser deviner** : quelques indices bien choisis valent mieux qu'une explication ; le
+  spectateur complète.
+- **Dans l'app** : la rubrique *Ce qui la rend unique* du carnet porte souvent ce récit.
 
 ---
 
@@ -3664,6 +3898,14 @@ Cours et livres légitimes, cités pour leurs idées ; tout est reformulé.
 | [D18] | [Palettes limitées (Clip Studio)](https://www.clipstudio.net/how-to-draw/archives/168546) · [palettes de couleurs (UNH)](https://it502.cs.unh.edu/tutorials/spring25/jlb1207/color_palettes.html) | dominante, soutien, accent ; analogues et complémentaires (0-R) |
 | [D19] | [Creative Bloq, peindre le métal](https://creativebloq.com/3d/paint-different-metal-surfaces-10121080) · [KeyShot, métal brossé](https://www.keyshot.com/blog/how-to-render-brushed-metals-in-keyshot/) · [Muddy Colors, reflets](https://www.muddycolors.com/?p=46120) | chrome, brossé, usé (0-S-A) |
 | [D20] | [Slynyrd, texture](https://www.slynyrd.com/blog/2018/2/15/pixelblog-2-texture) · [Slynyrd, arbres vus de dessus](https://slynyrd.com/blog/2023/5/22/pixelblog-44-top-down-trees) · [OpenGameArt, textures et tramage](https://opengameart.org/content/chapter-7-textures-and-dithering) · [Kenney, améliorer un dessin 2D](https://kenney.nl/learn/improving-2d-vector-art) | amas répétés, bois, fourrure suggérée, feuillage (0-S-B) |
+| [D21] | [Proko, l'illusion de profondeur](https://www.proko.com/lesson/the-illusion-of-depth-perspective-details-and-overlapping-forms/) · [Proko, 5 astuces pour le volume](https://proko.com/course-lesson/5-tricks-to-make-your-drawings-look-3d) · [Drawabox, boîtes et raccourcis](https://drawabox.com/lesson/1/10) · [le raccourci (Art in Context)](https://artincontext.org/foreshortening/) | diminution, convergence, raccourci, recouvrement ; 1, 2, 3 points (0-T) |
+| [D22] | [Line of Action, pattes d'animaux](https://www.line-of-action.com/fr/article/animal-leg-anatomy-cheat-sheet) · [« genoux à l'envers »](https://line-of-action.com/digitrade-animals-dont-have-backward-knees) · [Clip Studio, ailes](https://tips.clip-studio.com/en-us/articles/7950) · [Chris Wilson, ailes d'oiseau](https://chriswilsonstudio.com/how-to-draw-bird-wings/) · [UNL, morphologie des insectes](https://entomology.unl.edu/basic-insect-morphology/) · Ellenberger, Baum et Dittrich, *An Atlas of Animal Anatomy for Artists* | plantigrade, digitigrade, onguligrade ; ailes ; insectes (0-U) |
+| [D23] | [Proko, structures simples de la main](https://www.proko.com/course-lesson/simple-structures-of-the-hands) · [David Rickert, grouper les doigts](https://davidrickert.substack.com/p/drawing-hands-3-finger-bundling) | paume en boîte, moufle, pouce, doigts groupés (0-V-A) |
+| [D24] | [Clip Studio, visages expressifs](https://www.clipstudio.net/how-to-draw/archives/157239) · [Skillshare, expressions](https://www.skillshare.com/en/blog/how-to-draw-facial-expressions-a-guide/) · [Creative Bloq, un personnage tourmenté](https://www.creativebloq.com/advice/4-top-tips-for-drawing-an-anguished-character) | sourcils, yeux, bouche ; asymétrie ; tout le corps joue (0-V-B/C) |
+| [D25] | [Proko, types de sources](https://proko.com/course-lesson/types-of-light-sources/notes) · [Muddy Colors, deux températures](https://www.muddycolors.com/?p=43890) · [Clip Studio, guide de l'éclairage](https://tips.clip-studio.com/en-us/articles/8810) · [Creative Bloq, lumière principale, remplissage, contre-jour](https://www.creativebloq.com/3d/how-to-use-key-fill-and-rim-lighting-in-3d-art) | hiérarchie des lumières, contre-jour, nuit (0-W) |
+| [D26] | [Kenney, sprites de particules](https://www.kenney.nl/learn/drawing-particle-effect-sprites) · [Game Developer, explosions en 2D](https://www.gamedeveloper.com/art/2d-game-art-for-programmers-back-with-a-bang-) | fumée en boules, flash bref, débris, étincelles (0-X) |
+| [D27] | [80.lv, la stylisation](https://80.lv/articles/stylization-in-video-games-a-deep-dive-analysis/) · [Unity, trouver le style d'un jeu](https://unity.com/blog/game-art-styles-guide) · [RocketBrush, réalisme et stylisation](https://rocketbrush.com/blog/realism-vs-stylization-art-in-games) | simplifier et exagérer exprès, fiche de style (0-Y) |
+| [D28] | [Creative Bloq, raconter une histoire en une image](https://creativebloq.com/how-to/tell-a-story-in-an-image) · [Creative Bloq, récit par le décor](https://creativebloq.com/how-to/10-key-techniques-for-creating-environment-art-that-drives-visual-storytelling) · [Clip Studio, récit visuel](https://clipstudio.net/how-to-draw/archives/158243) | point d'intérêt, moment clé, indices (0-Z) |
 | [D10] | [Les bords en peinture](https://drawpaintacademy.com/edges/) · [Muddy Colors, bords](https://www.muddycolors.com/?p=8983) | bords durs, doux, perdus (0-H) |
 
 Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixeljoint.com/forum/forum_posts.asp?TID=20953)
@@ -3817,6 +4059,15 @@ Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixel
 ---
 
 # Historique des versions
+
+- **v20 :** les manques comblés. **0-T** perspective avancée et raccourcis (diminution,
+  convergence, raccourci, recouvrement ; 1, 2, 3 points ; membres en raccourci) ; **0-U**
+  anatomie animale (plantigrade, digitigrade, onguligrade ; quadrupède en volumes ; ailes
+  et groupes de plumes ; insectes) ; **0-V** mains, expressions, jeu d'acteur ; **0-W**
+  éclairages complexes (hiérarchie, températures, contre-jour, nuit, lumière colorée,
+  sources proches, brume) ; **0-X** effets naturels traduits en pixels (fumée, eau,
+  explosion, étincelles) ; **0-Y** stylisation et fiche de style ; **0-Z** raconter en une
+  image ; sources [D21] à [D28] ; règles impératives 71 à 78.
 
 - **v19 :** **0-P inventer** (SCAMPER, tableau morphologique, mélange de références,
   contraintes) ; **0-Q geste** (C, S, droite, ligne d'action, rythme, en pixels) ; **0-R
