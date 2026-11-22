@@ -1,0 +1,11 @@
+regard 001
+case 78,26 (hors du dessin) · couleur (hors toile) · écran 991,400
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 1/1 · image 1/1 · dessin 33×48 « Fiole bourgeon » (objet)
+étape 1 · Fiche d'intention et règles (B0 · B0b · A3 · 0-J)
+porte : Lis les 85 règles impératives et coche « lues ».
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : vide
+messages : aucun
+images : seances/fiole-bourgeon-reprise/regards/001-{ecran,loupe,dessin}.png
