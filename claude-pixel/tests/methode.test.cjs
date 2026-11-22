@@ -121,4 +121,7 @@ test('v22 : le sketching d\'illustrateur, calque par calque, puis la validation 
   assert.match(porte('validation').find(p => p.id === 'critiqueDessin').manque, /19\/30/);
   at.act('carnet.ajoute', { rubrique: 'critique', texte: 'Dessin repris : 23/30' });
   assert.equal(porte('validation').find(p => p.id === 'critiqueDessin').manque, null);
+  // un écart écrit après la note, sans note, ne la masque pas
+  at.act('carnet.ajoute', { rubrique: 'critique', texte: 'Écart avec la référence : le calice reste plat.' });
+  assert.equal(porte('validation').find(p => p.id === 'critiqueDessin').manque, null);
 });

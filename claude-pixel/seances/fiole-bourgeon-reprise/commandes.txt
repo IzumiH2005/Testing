@@ -1061,3 +1061,123 @@
 23:11:10.197  clic =onglet-controle
 23:11:10.711  attends 400
 23:11:11.112  regarde
+23:11:52.408  clic =onglet-methode
+23:11:52.820  attends 300
+23:11:53.120  defile =coche-forme.miroir
+23:11:53.124  clic =coche-forme.miroir
+23:11:53.579  defile =coche-forme.tendu
+23:11:53.584  clic =coche-forme.tendu
+23:11:53.881  defile =etape-valide
+23:11:53.894  clic =etape-valide
+23:11:54.217  va 16 14
+23:11:54.536  regarde
+23:12:07.919  va 16 43
+23:12:08.170  regarde
+23:12:22.638  clic =couleur-c1
+23:12:23.109  defile =hex
+23:12:23.112  clic =hex
+23:12:23.638  touche ctrl+a
+23:12:23.718  tape "#5a4a70"
+23:12:23.838  touche entree
+23:12:23.913  clic =selecteur-c1
+23:12:24.319  clic =outil-crayon
+23:12:24.856  trace 13,43 16,43
+23:12:25.416  regarde
+23:12:25.722  trace 15,11 16,11
+23:12:26.135  regarde
+23:12:26.473  trace 15,14 16,14
+23:12:26.717  regarde
+23:12:26.998  clic =opt-symX
+23:12:27.422  trace 17,4 17,6 16,7 16,8
+23:12:27.933  regarde
+23:12:36.404  clic =opt-symX
+23:12:36.834  clic 14,11
+23:12:37.262  regarde
+23:12:51.372  clic =outil-gomme
+23:12:51.838  clic 13,11
+23:12:52.302  regarde
+23:12:52.629  clic =couleur-c1
+23:12:53.188  defile =hex
+23:12:53.197  clic =hex
+23:12:53.739  touche ctrl+a
+23:12:53.815  tape "#2a1a2e"
+23:12:53.940  touche entree
+23:12:54.014  clic =selecteur-c1
+23:12:54.447  clic =outil-crayon
+23:12:54.985  clic 14,11
+23:12:55.450  regarde
+23:13:09.907  clic =onglet-methode
+23:13:10.408  attends 300
+23:13:10.711  defile =coche-polish.poids
+23:13:10.715  clic =coche-polish.poids
+23:13:11.152  defile =coche-polish.jonctions
+23:13:11.154  clic =coche-polish.jonctions
+23:13:11.438  defile =etape-valide
+23:13:11.440  clic =etape-valide
+23:13:11.805  attends 300
+23:13:12.109  clic =onglet-controle
+23:13:12.568  attends 400
+23:13:12.978  regarde
+23:13:19.889  clic =onglet-lumiere
+23:13:20.291  attends 300
+23:13:20.599  clic =retourne
+23:13:21.069  attends 300
+23:13:21.370  regarde
+23:13:21.631  clic =retourne
+23:13:33.779  clic =onglet-methode
+23:13:34.275  attends 300
+23:13:34.581  defile =carnet-rub-critique
+23:13:36.108  clic =carnet-rub-critique
+23:13:36.527  defile =carnet-texte
+23:13:36.531  clic =carnet-texte
+23:13:36.899  tape "Dessin final au trait : lisibilité 4, originalité 4, appeal 4, cohérence 4, rythme 3, crédibilité 4 = 23/30. Forts : l'épaule en S donne une vraie forme de bourgeon, l'ogive revient à trois échelles (panse, bouton, sépales), contour fort et traits intérieurs clairs. Faibles : le sépale avant se lit comme une flamme, le bas (calice, tige, pied) est tassé, la bague du col reste un peu raide."
+23:13:43.566  defile =carnet-ajoute
+23:13:51.490    ✗ « carnet-ajoute » reste hors de vue après 80 crans.
+23:13:56.705  cibles carnet-
+23:13:56.814  cibles etape-valide
+23:14:02.663  regarde
+23:14:11.593  clic =carnet-ajoute
+23:14:12.034  attends 300
+23:14:12.334  clic =carnet-rub-critique
+23:14:12.341    ✗ « carnet-rub-critique » est hors de l'écran (1006,841) : fais défiler son panneau avec la molette, puis recommence.
+23:14:17.327  defile =carnet-rub-critique
+23:14:17.725  clic =carnet-rub-critique
+23:14:18.140  defile =carnet-texte
+23:14:18.154  clic =carnet-texte
+23:14:18.557  tape "Écart avec l'œuvre visée (flacons de Lalique) : l'idée de plante porte bien toute la structure (bourgeon, calice, tige), mais Lalique sculpte en relief ; ici le calice n'est qu'un trait plat. Le relief des pétales et des sépales viendra de la lumière, s'il est bien posé."
+23:14:23.107  clic =carnet-ajoute
+23:14:23.452  attends 300
+23:14:23.754  regarde
+23:14:24.002  defile =coche-validation.planche
+23:14:25.533  clic =coche-validation.planche
+23:14:25.831  defile =coche-validation.reference
+23:14:25.834  clic =coche-validation.reference
+23:14:26.136  clic =menu-fichier
+23:14:26.633  clic =fichier-enregistrer
+23:14:26.942  # fichier enregistré : fichiers/fiole-bourgeon.claude-pixel.json
+23:14:27.024  attends 800
+23:14:27.826  regarde
+23:14:35.382  defile =carnet-rub-critique
+23:14:37.078  clic =carnet-rub-critique
+23:14:37.499  defile =carnet-texte
+23:14:37.510  clic =carnet-texte
+23:14:37.879  tape "Note du dessin final au trait : 23/30 (détail deux lignes plus haut)."
+23:14:39.078  defile =carnet-ajoute
+23:14:47.002    ✗ « carnet-ajoute » reste hors de vue après 80 crans.
+23:14:51.453  cibles carnet-ajoute
+23:14:51.531  clic =carnet-ajoute
+23:14:51.965  attends 300
+23:14:52.269  clic =menu-fichier
+23:14:52.783  clic =fichier-enregistrer
+23:14:53.083  # fichier enregistré : fichiers/fiole-bourgeon.claude-pixel.json
+23:14:53.171  attends 800
+23:14:53.974  regarde
+23:15:04.301  clic =menu-fichier
+23:15:04.696  clic =fichier-exporter
+23:15:05.097  attends 500
+23:15:05.599  clic =export-png1
+23:15:05.964  # fichier enregistré : fichiers/fiole-bourgeon.png
+23:15:06.047  attends 800
+23:15:06.849  touche echap
+23:15:06.987  fin
+23:15:08.139  # fin

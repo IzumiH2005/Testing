@@ -1,0 +1,11 @@
+regard 238
+case 11,-1 (hors du dessin) · couleur (hors toile) · écran 461,183
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 1/6 · image 1/1 · dessin 33×48 « Fiole bourgeon » (objet)
+étape 10 · Validation du dessin (avant la couleur) (0-AB-C · 0-AA-E)
+porte : Écris au carnet la note du dessin (rubrique « Critique », sous la forme « 23/30 »). | Case non cochée : « Dessin montré à l'humain avant la couleur »
+défauts : Bruit [attention] 32 px (dont 15,2 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 23 idée(s), 13 barrée(s) · dernière : [critique] Écart avec l'œuvre visée (flacons de Lalique) : l'idée de plante porte bien toute la struc
+messages : aucun
+images : seances/fiole-bourgeon-reprise/regards/238-{ecran,loupe,dessin}.png

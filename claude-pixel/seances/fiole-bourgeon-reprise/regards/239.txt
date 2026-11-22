@@ -1,0 +1,11 @@
+regard 239
+case 11,-1 (hors du dessin) · couleur (hors toile) · écran 461,183
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 1/6 · image 1/1 · dessin 33×48 « Fiole bourgeon » (objet)
+étape 10 · Validation du dessin (avant la couleur) (0-AB-C · 0-AA-E)
+porte : Case non cochée : « Dessin montré à l'humain avant la couleur »
+défauts : Bruit [attention] 32 px (dont 15,2 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 24 idée(s), 13 barrée(s) · dernière : [critique] Note du dessin final au trait : 23/30 (détail deux lignes plus haut).
+messages : aucun
+images : seances/fiole-bourgeon-reprise/regards/239-{ecran,loupe,dessin}.png

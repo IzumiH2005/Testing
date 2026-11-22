@@ -651,8 +651,10 @@ function porte(id, at, cache) {
       return dessous.some(c => c.visible && c.opacite > 45) ? 'Baisse l\'opacité des passes précédentes (20 à 40 %) ou masque-les : « ' + dessous.filter(c => c.visible && c.opacite > 45).map(c => c.nom).join(' », « ') + ' ».' : null;
     }
     case 'critiqueDessin': {
-      const c = (m.carnet || []).filter(e => e.rubrique === 'critique' && !e.barre), der = c[c.length - 1];
-      const note = der && /(\d+(?:[.,]\d+)?)\s*\/\s*30/.exec(der.texte);
+      // la dernière critique qui porte une note sur 30 (une critique sans note, comme un écart écrit, ne compte pas)
+      const re = /(\d+(?:[.,]\d+)?)\s*\/\s*30/;
+      const c = (m.carnet || []).filter(e => e.rubrique === 'critique' && !e.barre && re.test(e.texte)), der = c[c.length - 1];
+      const note = der && re.exec(der.texte);
       if (!note) return 'Écris au carnet la note du dessin (rubrique « Critique », sous la forme « 23/30 »).';
       const v = parseFloat(note[1].replace(',', '.'));
       return v >= 22 ? null : 'Le dessin est noté ' + v + '/30 : il faut 22 au moins. Reviens au rough ou à l\'esquisse.';
