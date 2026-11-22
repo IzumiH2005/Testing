@@ -1,4 +1,4 @@
-# Méthode de pixel art — objets, personnages, créatures et décors (v21)
+# Méthode de pixel art — objets, personnages, créatures et décors (v22)
 
 On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin classique
 (construction par volumes, ligne d'action, anatomie) et les règles du pixel art
@@ -24,8 +24,8 @@ propres.
 
 | Partie | Sections |
 |---|---|
-| Règles impératives | 82 ordres courts, tirés des tests, des livres et des maîtres |
-| **0. Dessiner avant de pixelliser** | 0-A diagnostic de la potion 64 · 0-B voir et construire · 0-C lumière et forme (zones) · 0-D design des valeurs · 0-E design des formes · 0-F perspective · 0-G couleur · 0-H bords · 0-I matières · 0-J méthode du pro · **0-K les neuf planches analysées** · 0-L recettes (potion en verre, sphère, fruit, pain, flamme, ruines, gemme) · 0-M plan d'entraînement · **0-N vision et conception (carnet, essais)** · **0-O astuces de pro** · **0-P inventer (SCAMPER, tableau morphologique)** · 0-Q geste · 0-R harmonies de couleur · 0-S métal et textures · **0-T perspective avancée et raccourcis** · **0-U anatomie animale** · **0-V mains, expressions, jeu d'acteur** · **0-W éclairages complexes** · **0-X effets naturels** · **0-Y stylisation** · **0-Z raconter en une image** · **0-AA dessiner une forme belle (design d'objet, grille de critique)** |
+| Règles impératives | 85 ordres courts, tirés des tests, des livres et des maîtres |
+| **0. Dessiner avant de pixelliser** | 0-A diagnostic de la potion 64 · 0-B voir et construire · 0-C lumière et forme (zones) · 0-D design des valeurs · 0-E design des formes · 0-F perspective · 0-G couleur · 0-H bords · 0-I matières · 0-J méthode du pro · **0-K les neuf planches analysées** · 0-L recettes (potion en verre, sphère, fruit, pain, flamme, ruines, gemme) · 0-M plan d'entraînement · **0-N vision et conception (carnet, essais)** · **0-O astuces de pro** · **0-P inventer (SCAMPER, tableau morphologique)** · 0-Q geste · 0-R harmonies de couleur · 0-S métal et textures · **0-T perspective avancée et raccourcis** · **0-U anatomie animale** · **0-V mains, expressions, jeu d'acteur** · **0-W éclairages complexes** · **0-X effets naturels** · **0-Y stylisation** · **0-Z raconter en une image** · **0-AA dessiner une forme belle (design d'objet, grille de critique)** · **0-AB le sketching d'un illustrateur (rough, construction, esquisse, trait, polish, validation)** |
 | **A. Règles communes** | A1 travail · A2 lisibilité · A3 table par taille · A4 règles du dessin · A4b simplifier · A5 pipeline pixel (silhouette → contour → palette → lumière → matières → détails → nettoyage → contrôle) · A6 finition pro · **A7 tramage** · **A8 lignes et formes** · **A9 perspectives de jeu** · **A10 leçons des maîtres** · **A11 geste du pro (outils, souris)** |
 | **B. Objets** | B0 intention · B0b projection · B1 cadre · B2 volumes · B3 forme iconique · B4 matière · B4b déclinaison par taille · B5 contrôle · **B6 recettes pas à pas (pierre, rocher, cristal, slime, livre)** |
 | **C. Personnages** | C0 intention · C1 proportions · C2 pose · C3 volumes · C4 tête et visage · C5 vêtements (design) · C6 cheveux · C7 astuces de figure · C8 contrôle · C9 anatomie · C10 tailles (8 à 128 px) · C11 portrait anime · C12 visage Loomis + anime · C13 chibi pas à pas · C14 corps nu puis vêtements en calque · C15 créatures · C16 créatures complexes · C17 vêtements (plis, matières) |
@@ -82,6 +82,7 @@ propres.
 | Style d'un jeu, stylisation | **0-Y** · A10 |
 | Récit, point d'intérêt, lignes directrices | **0-Z** · F5 · 0-O |
 | Design d'une forme belle, proportions, jonctions, bouchon | **0-AA** · 0-E · 0-N |
+| Sketching : rough, esquisse, trait, polish, calques, retourner la toile | **0-AB** · A11 |
 | Grandes formes, langage des formes, point d'intérêt, contraste | **0-O** · 0-E · A2 |
 
 **Sources (étiquettes) :** [Z] *Apprendre à tout dessiner avec Zephy* · [M] livre de dessin
@@ -101,7 +102,7 @@ de valeurs, [D7] Sinix, design des formes, [D8] droites et courbes, [D9] couleur
 bords, [D11]-[D15] vision, vignettes, conception et astuces de pro, [D16]-[D20]
 créativité, geste, couleur, métal et textures, [D21]-[D28] perspective, anatomie animale,
 mains, expressions, éclairages, effets, style, récit, [D29]-[D30] appeal et verre d'art ;
-[T17] séance `fiole-unique` ; liens en fin de document). Toutes les règles sont reformulées.
+[T17] séance `fiole-unique`, [D31]-[D32] sketching d'illustrateur ; liens en fin de document). Toutes les règles sont reformulées.
 
 ---
 
@@ -317,6 +318,15 @@ Chaque règle est un ordre. Le détail et le « pourquoi » sont dans la section
     c'est aux jonctions que la forme devient belle (0-AA-B).
 82. **Au moins 6 silhouettes dans 3 familles, notées avec la grille**, puis 3 variantes de
     chaque pièce (bouchon, jonction, pied) ; rien sous 20/30 ne passe (0-AA-D, 0-AA-E).
+
+**Sketching (0-AB)**
+83. **Sketcher calque par calque** : rough (geste, masses), construction, esquisse nettoyée,
+    trait final, polish ; chaque passe sur un nouveau calque, celui du dessous baissé à 20-40 %
+    (0-AB-A).
+84. **Redessiner plutôt que gommer, retourner la toile souvent** ; on choisit les traits qui
+    comptent et on ne décalque pas en aveugle (0-AB-B).
+85. **Le dessin se juge à la fin du sketching, avant la couleur** : 22/30 au moins à la grille,
+    et on s'arrête pour le montrer ; sinon on revient au rough ou à l'esquisse (0-AB-C).
 
 ---
 
@@ -1133,6 +1143,55 @@ Rendu correct, design raté. Ce qui n'allait pas :
 
 Une silhouette sous **20/30** ne passe pas à la suite. On écrit la note et la raison au carnet
 (rubrique *Critique*).
+
+## 0-AB. Le sketching d'un illustrateur, calque par calque [D31][D32][D1]
+
+Un illustrateur ne pose pas son trait final d'un coup. Il passe par des esquisses de plus en
+plus précises, chacune sur un **nouveau calque** au-dessus de la précédente, dont il **baisse
+l'opacité** comme un papier calque. Le dessin se juge **à la fin du sketching**, quand le trait
+est propre et poli, **avant** la couleur : si la forme n'est pas belle à ce moment-là, la suite
+ne la sauvera pas (0-AA).
+
+### A. Les étapes (dans Claude Pixel, chacune est une étape de la méthode)
+| # | Étape | Calque | Ce qu'on fait | Ce qu'on ne fait pas |
+|---|---|---|---|---|
+| 1 | **Vignettes** | construction « vignettes » | beaucoup de silhouettes rapides, notées (0-AA-D) | aucun détail |
+| 2 | **Design des pièces** | construction « pièces » | variantes du bouchon, des jonctions, du pied | aucun trait propre |
+| 3 | **Rough** | construction « rough » (rouge) | à la taille finale : le geste (ligne de flux en S ou en C), les grandes masses, en traits longs et libres ; plusieurs passages superposés sont permis | pas de trait propre, pas de petit détail |
+| 4 | **Construction** | construction « volumes » (bleu), rough à 30-40 % | axe, primitives entières dessinées à travers, ellipses, proportions mesurées | pas de détail |
+| 5 | **Esquisse nettoyée** | construction « esquisse » (vert), dessous à 20-30 % | on **choisit** les traits qui comptent et on les **redessine** d'un geste sûr ; on corrige les proportions ; on intègre les pièces choisies ; on retourne la toile | pas de couleur ; on ne décalque pas en aveugle |
+| 6 | **Trait final** | normal | le trait pixel-perfect qui suit l'esquisse nettoyée ; l'esquisse est un guide, pas un calque à copier : on la redessine en comprenant la structure | pas de couleur |
+| 7 | **Polish du trait** | normal | courbes régulières (A5-6, A8), jonctions nettes, poids du trait (contour extérieur plus fort, traits intérieurs plus légers ou cassés), petits détails de forme (lèvre, bague, facettes) | pas de couleur |
+| 8 | **Validation du dessin** | — | planche du trait : ×1, ×2, retourné, silhouette ; grille 0-AA-E sur 30 (22 au moins) ; comparaison avec l'œuvre visée ; **on s'arrête pour montrer le dessin à l'humain** | rien d'autre tant que le dessin n'est pas validé |
+
+### B. Les gestes du sketching
+- **Du grand au petit** : la masse entière d'abord, puis les pièces, puis les détails. On ne
+  finit jamais une zone avant d'avoir posé tout l'objet.
+- **Traits longs et décidés** dans le rough : un trait d'épaule à hanche (ou de bouchon à pied)
+  plutôt que dix petits ; le geste se prépare avant (*ghosting*, A11-A).
+- **Redessiner plutôt que gommer** : un trait faux se refait au-dessus, sur un nouveau calque
+  si besoin. Les pros repassent leurs traits plusieurs fois avant qu'ils soient beaux.
+- **Baisser l'opacité du calque du dessous** (20 à 40 %) avant chaque nouvelle passe : on voit
+  le guide sans le confondre avec le trait en cours.
+- **Une couleur par calque d'esquisse** (rouge, bleu, vert) : on sait toujours quelle passe on
+  regarde.
+- **Retourner la toile souvent** (bouton « Retourner » de l'onglet Lumière, section Sur la
+  toile) : une erreur de pente ou de proportion saute aux yeux quand l'image est retournée.
+- **Ne pas décalquer en aveugle** : redessiner à partir de l'esquisse oblige à comprendre la
+  structure. Le dessin final peut s'écarter beaucoup du premier rough : c'est normal.
+- **Choisir les traits qui comptent** : à petite taille, chaque trait coûte des pixels. Ce qui
+  peut se dire par une valeur (une face, un pli) n'a pas besoin de trait (B6-C).
+- **Poids du trait** : contour extérieur plus fort, détails intérieurs plus fins ou plus clairs.
+  En pixels : contour plein et sombre, traits intérieurs d'un ton plus clair ou interrompus
+  (0-H).
+
+### C. Ce qui se juge à la validation
+- La **silhouette** est-elle belle en noir et unique (0-AA-B) ?
+- Les **proportions** sont-elles franches, les **jonctions** dessinées, le **motif** répété ?
+- Le **trait** est-il régulier (aucun L, aucun jaggy), avec le bon poids ?
+- **Retournée**, l'image tient-elle encore ?
+- La note de la grille est-elle d'au moins **22/30** ? Sinon, on revient au rough ou à
+  l'esquisse, pas au trait.
 
 ---
 
@@ -4004,6 +4063,8 @@ Cours et livres légitimes, cités pour leurs idées ; tout est reformulé.
 | [D28] | [Creative Bloq, raconter une histoire en une image](https://creativebloq.com/how-to/tell-a-story-in-an-image) · [Creative Bloq, récit par le décor](https://creativebloq.com/how-to/10-key-techniques-for-creating-environment-art-that-drives-visual-storytelling) · [Clip Studio, récit visuel](https://clipstudio.net/how-to-draw/archives/158243) | point d'intérêt, moment clé, indices (0-Z) |
 | [D29] | [Le principe d'appeal (UIC)](https://www.evl.uic.edu/ralph/508S99/appeal.html) · [Animation Mentor, l'appeal](https://www.animationmentor.com/?p=4746) · Thomas et Johnston, *The Illusion of Life* | charme, simplicité, clarté ; ordre et intérêt (0-AA-B) |
 | [D30] | [Musée Lalique](https://www.musee-lalique.com/en/?p=1957) · [Lalique, flacons de parfum (Rau Antiques)](https://rauantiques.com/blogs/canvases-carats-and-curiosities/master-of-glass-lalique-perfume-bottles) · [René Lalique, structure et nature](https://runningxlate.substack.com/p/rene-lalique) | la structure tirée de la nature, flacons comme objets d'art (0-AA-C) |
+| [D31] | [City Lit, du post-it à l'impression](https://www.citylit.ac.uk/blog/illustration-from-post-it-to-print) · [CUNY, déroulé d'une illustration](https://openlab.citytech.cuny.edu/woolley-comd2313sp2018/files/2018/02/Illustration-Workflow-Handout.pdf) · [Cursa, de l'esquisse au trait (tablette)](https://cursa.app/en/page/digital-drawing-on-a-tablet-sketch-to-line-workflow-that-stays-clear-and-flexible) | vignettes, rough, esquisse affinée, trait, validation (0-AB-A) |
+| [D32] | [Clip Studio, un trait vivant](https://www.clipstudio.net/how-to-draw/archives/155333) · [Clip Studio, le trait pour débutants](https://tips.clip-studio.com/en-us/articles/8771) · [Creative Bloq, 20 conseils d'esquisse](https://www.creativebloq.com/illustration/sketching-tips-beginners-81516497/2) · [Pixel Grimoire #7](https://medium.com/pixel-grimoire/how-to-start-making-pixel-art-7-e504bfa4ddf2) | redessiner, baisser l'opacité, retourner la toile, poids du trait, peu de traits en petit (0-AB-B) |
 | [D10] | [Les bords en peinture](https://drawpaintacademy.com/edges/) · [Muddy Colors, bords](https://www.muddycolors.com/?p=8983) | bords durs, doux, perdus (0-H) |
 
 Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixeljoint.com/forum/forum_posts.asp?TID=20953)
@@ -4157,6 +4218,13 @@ Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixel
 ---
 
 # Historique des versions
+
+- **v22 :** **0-AB le sketching d'un illustrateur** : vignettes, design des pièces, rough,
+  construction, esquisse nettoyée, trait final, polish du trait, validation du dessin ; un
+  calque par passe, celui du dessous baissé à 20-40 % ; redessiner plutôt que gommer ;
+  retourner la toile ; poids du trait ; le dessin se juge à la fin du sketching, avant la
+  couleur ; règles 83 à 85 ; sources [D31] et [D32]. Dans Claude Pixel : étapes v22 (rough,
+  esquisse nettoyée, polish du trait, validation du dessin), bouton « Retourner la toile ».
 
 - **v21 :** **0-AA dessiner une forme belle** : contre-exemple de la fiole de la séance
   `fiole-unique` [T17], douze principes (langage dominant, motif à trois échelles, proportions

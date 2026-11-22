@@ -7,10 +7,10 @@ const { AP, trait, RACINE } = require('./aide.cjs');
 
 const FICHE = { quoi: 'potion', usage: 'inventaire', couleurs: '8', projection: 'de face', lumiere: 'haut gauche', matiere: 'verre', accent: 'rouge' };
 
-test('les 82 règles impératives sont extraites du document', () => {
+test('les 85 règles impératives sont extraites du document', () => {
   const R = AP.extraitRegles(fs.readFileSync(path.join(RACINE, 'METHODE_PIXEL_ART.md'), 'utf8'));
-  assert.equal(R.length, 82);
-  assert.deepEqual(R.map(r => r.n), Array.from({ length: 82 }, (_, i) => i + 1));
+  assert.equal(R.length, 85);
+  assert.deepEqual(R.map(r => r.n), Array.from({ length: 85 }, (_, i) => i + 1));
   assert.ok(R.every(r => r.texte && r.groupe));
 });
 
@@ -61,7 +61,7 @@ test('fiche + règles lues ouvrent l\'étape 2, qui exige ses cases cochées', (
 
 test('un document v17 garde ses 15 étapes ; un nouveau document a l\'étape « pièces »', () => {
   const d = AP.nouveauDoc({ w: 16, h: 16, type: 'objet' });
-  assert.equal(d.meta.methode, 21);
+  assert.equal(d.meta.methode, 22);
   assert.ok(AP.etapesDe(d).some(e => e.id === 'pieces'));
   d.meta.methode = 17;
   assert.equal(AP.nbEtapes(d), 15);
@@ -97,4 +97,28 @@ test('un document d\'avant la v17 garde ses étapes', () => {
   const d = AP.nouveauDoc({ w: 16, h: 16, type: 'objet' }); delete d.meta.methode;
   assert.equal(AP.nbEtapes(d), AP.ETAPES_V16.objet.length);
   assert.equal(AP.etapesDe(d)[1].id, 'forme');
+});
+
+test('v22 : le sketching d\'illustrateur, calque par calque, puis la validation du dessin', () => {
+  const at = new AP.Atelier({ doc: AP.nouveauDoc({ w: 16, h: 16, type: 'objet' }) }), d = at.doc;
+  const ids = AP.etapesDe(d).map(e => e.id);
+  for (const [a, b] of [['pieces', 'rough'], ['rough', 'construction'], ['construction', 'esquisse'], ['esquisse', 'forme'], ['forme', 'polish'], ['polish', 'validation'], ['validation', 'aplats']])
+    assert.equal(ids.indexOf(b), ids.indexOf(a) + 1, a + ' puis ' + b);
+  const porte = id => { d.meta.etape = ids.indexOf(id); return AP.etatEtape(at).portes; };
+  // un calque de construction par passe
+  const passe = (nom, x) => { at.act('calque.ajoute', { type: 'construction', nom }); at.act('outil', { nom: 'crayon' }); trait(at, [[x, 2], [x, 6]]); };
+  passe('vignettes', 1);
+  assert.match(porte('rough').find(p => p.id === 'calquesConstr2').manque, /il y en a 1/);
+  passe('rough', 3);
+  assert.equal(porte('rough').find(p => p.id === 'calquesConstr2').manque, null);
+  passe('volumes', 5);
+  assert.match(porte('construction').find(p => p.id === 'dessousBaisse').manque, /Baisse/);
+  for (const c of d.calques.filter(c => c.type === 'construction').slice(0, -1)) c.opacite = 30;
+  assert.equal(porte('construction').find(p => p.id === 'dessousBaisse').manque, null);
+  // la validation demande une note de 22/30 au moins
+  assert.match(porte('validation').find(p => p.id === 'critiqueDessin').manque, /note du dessin/);
+  at.act('carnet.ajoute', { rubrique: 'critique', texte: 'Dessin : 19/30, col trop long' });
+  assert.match(porte('validation').find(p => p.id === 'critiqueDessin').manque, /19\/30/);
+  at.act('carnet.ajoute', { rubrique: 'critique', texte: 'Dessin repris : 23/30' });
+  assert.equal(porte('validation').find(p => p.id === 'critiqueDessin').manque, null);
 });

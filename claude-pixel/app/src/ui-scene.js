@@ -7,7 +7,7 @@ const { $, h } = U;
 const ZOOMS = [1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 64];
 const TEINTE_CONSTR = '#3b82f6';
 
-const vue = U.vue = { zoom: 8, ox: 0, oy: 0, survol: null, pelure: false, vue3x3: true, grille: true, cacheConstr: false, mode: 'couleur', guide: false };
+const vue = U.vue = { zoom: 8, ox: 0, oy: 0, survol: null, pelure: false, vue3x3: true, grille: true, cacheConstr: false, mode: 'couleur', guide: false, miroir: false };
 U.marques = null; // { pixels:[[x,y]], niveau }
 
 let cv, ctx, scene, buf, bctx, dpr = 1, demande = false;
@@ -74,14 +74,17 @@ function dessineSoleil(d, X, Y, W, H) {
 }
 
 /* ---------- Coordonnées ---------- */
+/* Toile retournée (0-AB-B) : la toile est retournée à l'écran par CSS ; les coordonnées suivent. */
 function ecranVersCellule(cx, cy) {
-  const r = cv.getBoundingClientRect();
-  return { x: (cx - r.left - vue.ox) / vue.zoom, y: (cy - r.top - vue.oy) / vue.zoom };
+  const r = cv.getBoundingClientRect(), lx = vue.miroir ? r.right - cx : cx - r.left;
+  return { x: (lx - vue.ox) / vue.zoom, y: (cy - r.top - vue.oy) / vue.zoom };
 }
 function celluleVersEcran(x, y) {
-  const r = cv.getBoundingClientRect();
-  return { x: r.left + vue.ox + (x + 0.5) * vue.zoom, y: r.top + vue.oy + (y + 0.5) * vue.zoom };
+  const r = cv.getBoundingClientRect(), lx = vue.ox + (x + 0.5) * vue.zoom;
+  return { x: vue.miroir ? r.right - lx : r.left + lx, y: r.top + vue.oy + (y + 0.5) * vue.zoom };
 }
+function retourne(v) { vue.miroir = v === undefined ? !vue.miroir : !!v; if (cv) cv.style.transform = vue.miroir ? 'scaleX(-1)' : ''; redessine(); }
+U.retourne = retourne;
 U.ecranVersCellule = ecranVersCellule; U.celluleVersEcran = celluleVersEcran;
 
 /* ---------- Zoom ---------- */

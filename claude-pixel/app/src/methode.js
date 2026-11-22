@@ -155,7 +155,7 @@ const E = (id, titre, ref, faire, o = {}) => Object.assign({ id, titre, ref, fai
 const C = (cle, txt) => ({ cle, txt });
 const ETAPE_FICHE = (ref) => E('fiche', 'Fiche d\'intention et règles', ref, [
   'Remplis la fiche : chaque champ est une décision prise avant le premier pixel.',
-  'Lis les 82 règles impératives (onglet Aide) et coche « lues ».',
+  'Lis les 85 règles impératives (onglet Aide) et coche « lues ».',
   'Règle la toile à la taille finale : on ne dessine jamais en grand pour réduire (A4b).',
   'Choisis ou construis la palette : une rampe par matière (A6-A).',
   'Nomme 2 ou 3 idées fortes, pas plus : ce qu\'on doit reconnaître de loin (A10-F, règle 44).'
@@ -499,11 +499,69 @@ for (const t of Object.keys(ETAPES_V21)) {
     ETAPES_V21[t] = L;
   }
 }
-const ETAPES = ETAPES_V21;
+/* ---------- Méthode v22 : le sketching d'un illustrateur (0-AB) ----------
+ * Rough, construction, esquisse nettoyée, trait, polish, puis validation du dessin
+ * avant toute couleur. */
+const ETAPES_V22 = Object.assign({}, ETAPES_V21);
+{
+  const V = ETAPES_V21.objet, par = id => V.find(e => e.id === id);
+  const rough = E('rough', 'Rough : le geste et les grandes masses', '0-AB-A · 0-Q', [
+    'Nouveau calque de construction « rough », teinte rouge. À la taille finale.',
+    'D\'abord la ligne de flux (S ou C) du bouchon au pied, puis les grandes masses en traits longs et libres.',
+    'Plusieurs passages superposés sont permis : on cherche, on ne nettoie pas.',
+    'Intègre la silhouette et les pièces choisies aux étapes précédentes.'
+  ], { pasEncore: 'Pas de trait propre, pas de petit détail.', portes: ['calquesConstr2'], outils: ['crayon', 'ligne', 'ellipse'],
+    coches: [C('flux', 'Une ligne de flux traverse l\'objet'), C('masses', 'Les grandes masses sont posées, rien de fini')] });
+  const construction = Object.assign({}, par('construction'), {
+    titre: 'Construction sur le rough',
+    faire: ['Baisse l\'opacité du rough à 30-40 %, puis nouveau calque de construction « volumes », teinte bleue.'].concat(par('construction').faire),
+    portes: ['calquesConstr3', 'dessousBaisse']
+  });
+  const esquisse = E('esquisse', 'Esquisse nettoyée', '0-AB-A · 0-AB-B', [
+    'Baisse les calques du dessous à 20-30 %. Nouveau calque de construction « esquisse », teinte verte.',
+    'Choisis les traits qui comptent et redessine-les d\'un geste sûr : redessiner plutôt que gommer.',
+    'Corrige les proportions, intègre le bouchon, les jonctions et le pied choisis.',
+    'Retourne la toile (onglet Lumière, Sur la toile) : ce qui penche ou boite se corrige ici, pas au trait.'
+  ], { pasEncore: 'Pas de couleur, pas de trait pixel-perfect.', portes: ['calquesConstr4', 'dessousBaisse'],
+    coches: [C('retourne', 'Toile retournée : aucune pente ni proportion fausse'), C('choisis', 'Seuls les traits qui comptent sont gardés')] });
+  const trait = Object.assign({}, par('forme'), {
+    titre: 'Trait final', ref: '0-AB-A · A5-6 · 0-E',
+    faire: ['Sur un calque normal, redessine l\'esquisse nettoyée en trait pixel-perfect : c\'est un guide, pas un calque à copier.',
+      'Courbes tendues (marches qui s\'allongent ou raccourcissent régulièrement), droites aux marches égales.',
+      'Largeur impaire si l\'objet est symétrique.']
+  });
+  const polish = E('polish', 'Polish du trait', '0-AB-A · A5-6 · A8 · 0-H', [
+    'Régularise chaque courbe (aucun L, aucun jaggy), nettoie chaque jonction.',
+    'Poids du trait : contour extérieur plein et sombre ; traits intérieurs d\'un ton plus clair ou interrompus.',
+    'Ajoute les petits détails de forme : lèvre, bague, facettes du bouchon. Rien d\'autre.',
+    'Retourne la toile et regarde à ×1 après chaque passe.'
+  ], { pasEncore: 'Pas de couleur.', portes: ['nonVide', 'L', 'jaggies', 'orphelins'],
+    coches: [C('poids', 'Contour plus fort que les traits intérieurs'), C('jonctions', 'Chaque jonction est nette et dessinée')] });
+  const validation = E('validation', 'Validation du dessin (avant la couleur)', '0-AB-C · 0-AA-E', [
+    'Planche du trait : ×1, ×2, retourné, silhouette (onglet Contrôle).',
+    'Note la forme avec la grille 0-AA-E et écris-la au carnet (rubrique « Critique », « xx/30 ») : 22 au moins.',
+    'Compare avec l\'œuvre visée et écris l\'écart.',
+    'Arrête-toi et montre le dessin à l\'humain. Sous 22/30, reviens au rough ou à l\'esquisse, pas au trait.'
+  ], { pasEncore: 'Aucune couleur tant que le dessin n\'est pas validé.', portes: ['critiqueDessin', 'L', 'jaggies'],
+    coches: [C('planche', 'Trait regardé à ×1, ×2, retourné et en silhouette'), C('reference', 'Écart avec l\'œuvre visée écrit au carnet'), C('montre', 'Dessin montré à l\'humain avant la couleur')] });
+  const L = [];
+  for (const e of V) {
+    if (e.id === 'construction') { L.push(rough, construction, esquisse); continue; }
+    if (e.id === 'forme') { L.push(trait); continue; }
+    if (e.id === 'deformer') { L.push(polish, validation); continue; }
+    L.push(e);
+  }
+  ETAPES_V22.objet = L;
+}
+const ETAPES = ETAPES_V22;
 const etapesDe = doc => {
   const v = (doc.meta && doc.meta.methode) || 0;
-  return (v >= 21 ? ETAPES_V21 : v >= 17 ? ETAPES_V17 : ETAPES_V16)[typeDe(doc)];
+  return (v >= 22 ? ETAPES_V22 : v >= 21 ? ETAPES_V21 : v >= 17 ? ETAPES_V17 : ETAPES_V16)[typeDe(doc)];
 };
+/* Calques de construction qui contiennent des pixels, dans l'ordre de la pile. */
+function calquesConstr(doc) {
+  return doc.calques.filter(c => c.type === 'construction' && (doc.cels[c.id] || []).some(id => id && doc.celData[id].some(v => v >>> 24)));
+}
 
 const TYPES = {
   objet: { nom: 'Objet', ref: 'Partie B' },
@@ -544,7 +602,7 @@ function porte(id, at, cache) {
   }
   switch (id) {
     case 'fiche': { const r = ficheIncomplete(doc); return r ? 'Fiche incomplète : ' + r.join(', ') : null; }
-    case 'regles': return m.reglesLues ? null : 'Lis les 82 règles impératives et coche « lues ».';
+    case 'regles': return m.reglesLues ? null : 'Lis les 85 règles impératives et coche « lues ».';
     case 'nonVide': return AP.mesures(doc, f).opaques ? null : 'L\'image exportée est vide.';
     case 'construction': return aDesPixels(doc, c => c.type === 'construction') ? null : 'Dessine la construction dans au moins un calque de type « construction ».';
     case 'silhouette1': { const n = AP.mesures(doc, f).couleurs; return n <= 2 ? null : 'La silhouette se fait en une couleur sombre (2 au plus) : ' + n + ' couleurs.'; }
@@ -582,6 +640,22 @@ function porte(id, at, cache) {
       if (!c.some(e => e.rubrique === 'choix' && !e.barre)) manque.push('un « Choix retenu »');
       if (c.filter(e => e.barre).length < 3) manque.push('au moins 3 idées barrées au total');
       return manque.length ? 'Carnet : ' + manque.join(', ') + '.' : null;
+    }
+    case 'calquesConstr2': case 'calquesConstr3': case 'calquesConstr4': {
+      const n = +id.slice(-1), k = calquesConstr(doc).length;
+      return k >= n ? null : 'Il faut ' + n + ' calques de construction dessinés (un par passe : vignettes, rough, volumes, esquisse) ; il y en a ' + k + '.';
+    }
+    case 'dessousBaisse': {
+      const L = calquesConstr(doc); if (L.length < 2) return null;
+      const dessous = L.slice(0, -1);
+      return dessous.some(c => c.visible && c.opacite > 45) ? 'Baisse l\'opacité des passes précédentes (20 à 40 %) ou masque-les : « ' + dessous.filter(c => c.visible && c.opacite > 45).map(c => c.nom).join(' », « ') + ' ».' : null;
+    }
+    case 'critiqueDessin': {
+      const c = (m.carnet || []).filter(e => e.rubrique === 'critique' && !e.barre), der = c[c.length - 1];
+      const note = der && /(\d+(?:[.,]\d+)?)\s*\/\s*30/.exec(der.texte);
+      if (!note) return 'Écris au carnet la note du dessin (rubrique « Critique », sous la forme « 23/30 »).';
+      const v = parseFloat(note[1].replace(',', '.'));
+      return v >= 22 ? null : 'Le dessin est noté ' + v + '/30 : il faut 22 au moins. Reviens au rough ou à l\'esquisse.';
     }
     case 'carnetPieces': {
       const c = m.carnet || [], n = c.filter(e => e.rubrique === 'piece').length;
@@ -623,6 +697,8 @@ const NOMS_PORTES = {
   planche: 'Planche remplie', defauts: 'Aucun défaut restant',
   carnetVision: 'Carnet : vision écrite et corrigée', carnetEssais: 'Carnet : essais et choix',
   carnetEssais21: 'Carnet : 6 silhouettes notées et un choix', carnetPieces: 'Carnet : 9 variantes de pièces',
+  calquesConstr2: '2 calques d\'esquisse', calquesConstr3: '3 calques d\'esquisse', calquesConstr4: '4 calques d\'esquisse',
+  dessousBaisse: 'Passes précédentes baissées', critiqueDessin: 'Dessin noté 22/30 au moins',
   lumierePosee: 'Lumière posée', volume: 'Le volume suit la lumière', lumiere: 'Ombrage du bon côté',
   L: 'Aucun « L »', jaggies: 'Pas de jaggies', orphelins: 'Pas d\'orphelin', bandes: 'Pas de banding', coussin: 'Pas d\'ombrage coussin',
   bruit: 'Pas de bruit', trame: 'Pas de trame décorative', superpixels: 'Pas de super pixels', budget: 'Budget de couleurs (A3)',
@@ -643,7 +719,7 @@ function verifieEtape(at) {
   return { ok: !manque.length, manque };
 }
 
-/* ---------- Les 82 règles, lues dans le texte de la méthode ---------- */
+/* ---------- Les 85 règles, lues dans le texte de la méthode ---------- */
 function extraitRegles(texte) {
   const lignes = texte.split('\n'), out = [];
   let i = lignes.findIndex(l => /^# Règles impératives/.test(l)), groupe = '';
@@ -660,7 +736,7 @@ function extraitRegles(texte) {
 }
 
 Object.assign(AP, {
-  RUBRIQUES, FICHES, QUESTIONS, QUESTIONS_TYPE, TESTS_PRO, TABLE_A3, ETAPES, ETAPES_V16, ETAPES_V17, ETAPES_V21, etapesDe, TYPES, NOMS_PORTES,
+  RUBRIQUES, FICHES, QUESTIONS, QUESTIONS_TYPE, TESTS_PRO, TABLE_A3, ETAPES, ETAPES_V16, ETAPES_V17, ETAPES_V21, ETAPES_V22, etapesDe, TYPES, NOMS_PORTES,
   colonneA3, ficheIncomplete, nbEtapes, etapeCourante, etatEtape, verifieEtape, extraitRegles, typeDe
 });
 if (typeof module !== 'undefined') module.exports = AP;
