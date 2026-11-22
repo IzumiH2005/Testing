@@ -1,0 +1,11 @@
+regard 167
+case 13,15 · couleur #7fa3c0ff · écran 474,335
+outil remplace · taille 1 · c1 #7fa3c0ff · c2 #00000000
+calque 1/3 · image 1/1 · dessin 32×40 « Fiole a la graine d'aube » (objet)
+étape 10 · Matière : ce que la surface fait de la lumière (0-I · A5-8b · B6)
+porte : Case non cochée : « La matière se reconnaît sans couleur (gris) »
+défauts : Pixels doublés en « L » [erreur] 4 px ; Tramage en damier [conseil] 18 px (dont 11,17 12,17 11,18 12,18 10,18 10,19 11,19 9,19 près du curseur)
+volume : lumière haut gauche (az 135°, él 20°, gonfle) · accord 0.33 · familles 0.08 · inversions 8 % · étendue 0.60
+carnet : 8 idée(s), 5 barrée(s) · dernière : [choix] Vignette C. À pousser : la panse plus ronde que la pointe (grand, moyen, petit : panse, co
+messages : aucun
+images : seances/fiole-unique/regards/167-{ecran,loupe,dessin}.png

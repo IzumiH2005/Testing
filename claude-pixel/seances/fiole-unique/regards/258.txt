@@ -1,0 +1,11 @@
+regard 258
+case 1,-15 (hors du dessin) · couleur (hors toile) · écran 354,30
+outil crayon · taille 1 · c1 #312c78ff · c2 #00000000
+calque 1/3 · image 1/1 · dessin 32×40 « Fiole a la graine d'aube » (objet)
+méthode terminée · dernière étape : 15 · Contrôle final : la planche (A5-11 · B5 · B6-G · 0-J)
+porte : prête
+défauts : Pixels doublés en « L » [erreur] 3 px ; Tramage en damier [conseil] 18 px
+volume : lumière haut gauche (az 135°, él 20°, gonfle) · accord 0.30 · familles 0.10 · inversions 12 % · étendue 0.67
+carnet : 8 idée(s), 5 barrée(s) · dernière : [choix] Vignette C. À pousser : la panse plus ronde que la pointe (grand, moyen, petit : panse, co
+messages : aucun
+images : seances/fiole-unique/regards/258-{ecran,loupe,dessin}.png

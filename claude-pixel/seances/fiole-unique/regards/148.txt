@@ -1,0 +1,11 @@
+regard 148
+case 14,27 · couleur #8a7fe0ff · écran 484,455
+outil crayon · taille 1 · c1 #8a7fe0ff · c2 #00000000
+calque 1/3 · image 1/1 · dessin 32×40 « Fiole a la graine d'aube » (objet)
+étape 9 · Modelé : demi-ton, ombre propre, rebond, ombre portée (0-C · A5-8 · A6-E)
+porte : Case non cochée : « Rebond plus sombre que la lumière, ombre propre visible » | Case non cochée : « Ombre portée ou contact posé (ou raison écrite de s'en passer) »
+défauts : Tramage en damier [conseil] 8 px
+volume : lumière haut gauche (az 135°, él 20°, gonfle) · accord 0.31 · familles 0.09 · inversions 8 % · étendue 0.59
+carnet : 8 idée(s), 5 barrée(s) · dernière : [choix] Vignette C. À pousser : la panse plus ronde que la pointe (grand, moyen, petit : panse, co
+messages : aucun
+images : seances/fiole-unique/regards/148-{ecran,loupe,dessin}.png

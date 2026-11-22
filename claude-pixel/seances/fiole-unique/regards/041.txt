@@ -1,0 +1,11 @@
+regard 041
+case 24,34 · couleur transparent · écran 584,525
+outil ellipse · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 1/3 · image 1/1 · dessin 32×40 « Fiole a la graine d'aube » (objet)
+étape 5 · Trait de la forme (B6-A · A5-6 · 0-E)
+porte : Case non cochée : « Vue miroir regardée : aucune pente fausse » | Case non cochée : « Courbes tendues, aucune bosse molle »
+défauts : Bruit [attention] 8 px (dont 22,31 21,32 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 8 idée(s), 5 barrée(s) · dernière : [choix] Vignette C. À pousser : la panse plus ronde que la pointe (grand, moyen, petit : panse, co
+messages : aucun
+images : seances/fiole-unique/regards/041-{ecran,loupe,dessin}.png

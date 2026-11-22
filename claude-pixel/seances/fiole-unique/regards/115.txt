@@ -1,0 +1,11 @@
+regard 115
+case 19,24 · couleur #3f9a9aff · écran 534,425
+outil crayon · taille 1 · c1 #3f9a9aff · c2 #00000000
+calque 1/3 · image 1/1 · dessin 32×40 « Fiole a la graine d'aube » (objet)
+étape 9 · Modelé : demi-ton, ombre propre, rebond, ombre portée (0-C · A5-8 · A6-E)
+porte : L'ombrage ne suit pas la lumière (0-C · règle 50) : 20 px. Corrige, ou justifie-le. | Case non cochée : « Rebond plus sombre que la lumière, ombre propre visible » | Case non cochée : « Ombre portée ou contact posé (ou raison écrite de s'en passer) »
+défauts : Pixels doublés en « L » [erreur] 7 px (dont 20,20 23,23 près du curseur) ; L'ombrage ne suit pas la lumière [attention] 20 px (dont 21,27 22,27 20,28 21,28 22,28 près du curseur)
+volume : lumière haut gauche (az 135°, él 20°, gonfle) · accord 0.28 · familles 0.07 · inversions 6 % · étendue 0.55
+carnet : 8 idée(s), 5 barrée(s) · dernière : [choix] Vignette C. À pousser : la panse plus ronde que la pointe (grand, moyen, petit : panse, co
+messages : aucun
+images : seances/fiole-unique/regards/115-{ecran,loupe,dessin}.png

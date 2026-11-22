@@ -1,0 +1,11 @@
+regard 056
+case -31,59 (hors du dessin) · couleur (hors toile) · écran 38,775
+outil ellipse · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 1/3 · image 1/1 · dessin 32×40 « Fiole a la graine d'aube » (objet)
+étape 6 · Déformer et séparer (B6-A · B6-B)
+porte : Case non cochée : « Une forme dominante, une moyenne, une petite »
+défauts : Bruit [attention] 20 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 8 idée(s), 5 barrée(s) · dernière : [choix] Vignette C. À pousser : la panse plus ronde que la pointe (grand, moyen, petit : panse, co
+messages : aucun
+images : seances/fiole-unique/regards/056-{ecran,loupe,dessin}.png

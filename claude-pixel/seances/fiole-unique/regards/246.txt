@@ -1,0 +1,11 @@
+regard 246
+case 65,47 (hors du dessin) · couleur (hors toile) · écran 995,654
+outil crayon · taille 1 · c1 #2f7f8fff · c2 #00000000
+calque 1/3 · image 1/1 · dessin 32×40 « Fiole a la graine d'aube » (objet)
+étape 14 · Détails et nettoyage (B6-A · A6-H · A5-10)
+porte : Case non cochée : « Fissures avec lèvre claire » | Case non cochée : « Chaque étape se lit à ×1 » | Case non cochée : « AA seulement sur les marches de 2 px ou plus, à l'intérieur ; chaque pixel d'AA passe le test de l'enlèvement (règle 46) »
+défauts : L'ombrage ne suit pas la lumière [attention] 19 px ; Tramage en damier [conseil] 18 px
+volume : lumière haut gauche (az 135°, él 20°, gonfle) · accord 0.25 · familles 0.08 · inversions 23 % · étendue 0.67
+carnet : 8 idée(s), 5 barrée(s) · dernière : [choix] Vignette C. À pousser : la panse plus ronde que la pointe (grand, moyen, petit : panse, co
+messages : aucun
+images : seances/fiole-unique/regards/246-{ecran,loupe,dessin}.png

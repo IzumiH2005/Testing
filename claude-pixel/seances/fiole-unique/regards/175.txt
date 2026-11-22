@@ -1,0 +1,11 @@
+regard 175
+case 15,23 · couleur #2c4255ff · écran 494,415
+outil remplace · taille 1 · c1 #2f7f8fff · c2 #00000000
+calque 1/3 · image 1/1 · dessin 32×40 « Fiole a la graine d'aube » (objet)
+étape 11 · Éclats et contour coloré (B6-A · A6-C)
+porte : Case non cochée : « Contour coloré (selout) posé maintenant, pas avant » | Case non cochée : « Les éclats suivent la courbure de la surface »
+défauts : L'ombrage ne suit pas la lumière [attention] 26 px (dont 11,20 12,20 13,20 14,20 15,20 16,20 11,23 12,23 13,23 14,23 15,23 16,23 près du curseur) ; Tramage en damier [conseil] 22 px (dont 11,19 près du curseur)
+volume : lumière haut gauche (az 135°, él 20°, gonfle) · accord 0.25 · familles 0.07 · inversions 30 % · étendue 0.67
+carnet : 8 idée(s), 5 barrée(s) · dernière : [choix] Vignette C. À pousser : la panse plus ronde que la pointe (grand, moyen, petit : panse, co
+messages : aucun
+images : seances/fiole-unique/regards/175-{ecran,loupe,dessin}.png

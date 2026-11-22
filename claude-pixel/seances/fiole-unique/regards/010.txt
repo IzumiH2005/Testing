@@ -1,0 +1,11 @@
+regard 010
+case 20,13 · couleur transparent · écran 544,315
+outil ellipse · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 2/2 · image 1/1 · dessin 32×40 « Fiole a la graine d'aube » (objet)
+étape 3 · Essais : vignettes, effacer, recommencer (0-N · 0-B)
+porte : Carnet : 3 ligne(s) « Essai » de plus, un « Choix retenu ». | Case non cochée : « Au moins 3 silhouettes vraiment différentes essayées » | Case non cochée : « La vignette choisie se lit à ×1 et en miroir »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 6 idée(s), 3 barrée(s) · dernière : [variante] Tableau morphologique : panse en goutte, col tordu, bouchon cristal taillé, décor = un cer
+messages : aucun
+images : seances/fiole-unique/regards/010-{ecran,loupe,dessin}.png

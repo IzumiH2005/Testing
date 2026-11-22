@@ -1,0 +1,11 @@
+regard 040
+case 65,37 (hors du dessin) · couleur (hors toile) · écran 995,551
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 3/3 · image 1/1 · dessin 32×40 « Fiole a la graine d'aube » (objet)
+étape 5 · Trait de la forme (B6-A · A5-6 · 0-E)
+porte : L'image exportée est vide. | Case non cochée : « Vue miroir regardée : aucune pente fausse » | Case non cochée : « Courbes tendues, aucune bosse molle »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 8 idée(s), 5 barrée(s) · dernière : [choix] Vignette C. À pousser : la panse plus ronde que la pointe (grand, moyen, petit : panse, co
+messages : aucun
+images : seances/fiole-unique/regards/040-{ecran,loupe,dessin}.png

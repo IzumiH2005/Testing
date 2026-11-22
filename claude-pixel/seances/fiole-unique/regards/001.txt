@@ -1,0 +1,11 @@
+regard 001
+case 71,42 (hors du dessin) · couleur (hors toile) · écran 1052,604
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 1/1 · image 1/1 · dessin 32×40 « Fiole a la graine d'aube » (objet)
+étape 1 · Fiche d'intention et règles (B0 · B0b · A3 · 0-J)
+porte : Fiche incomplète : Ce que c'est, À quoi il sert dans le jeu, Nombre de couleurs prévu, Projection, Lumière, Matière principale, Couleur d'accent | Lis les 78 règles impératives et coche « lues ».
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : vide
+messages : aucun
+images : seances/fiole-unique/regards/001-{ecran,loupe,dessin}.png

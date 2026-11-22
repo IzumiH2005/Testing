@@ -75,6 +75,7 @@ L'app n'a aucune dépendance. Seule la souris a besoin de Playwright.
 |---|---|---|
 | `seances/potion/` | Potion de soin, objet 16×16, 8 couleurs | 11 étapes validées par les portes, aucun défaut détecté, environ 280 commandes, vidéo de 3 min 56 |
 | `seances/potion-64/` | Potion de vie, objet 64×64, 16 couleurs | 11 étapes validées par les portes, environ 620 commandes, 86 regards, vidéo de 20 min (67 Mo). Un défaut reste signalé : 16 coins en L, de faux positifs justifiés dans la planche (le détecteur ne regarde pas l'épaisseur du trait) |
+| `seances/fiole-unique/` | Fiole à la graine d'aube, objet 32×40, 19 couleurs, méthode v20 | 15 étapes validées par les portes : vision écrite et corrigée au carnet (11 idées, 5 barrées), 3 vignettes, construction à travers, lumière rasante, verre transparent, graine lumineuse en seconde lumière, contre-jour. Environ 1 040 commandes, 257 regards, vidéo de 32 min (59 Mo, réencodée en VP9). Limites écrites dans la planche : accord de volume à 0,30, 3 « L » dans un amas d'ombre, fond sombre raté, bouchon trop petit |
 
 ## Publication
 

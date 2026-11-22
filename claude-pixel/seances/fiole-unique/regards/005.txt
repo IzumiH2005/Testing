@@ -1,0 +1,11 @@
+regard 005
+case 66,22 (hors du dessin) · couleur (hors toile) · écran 1004,400
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 1/1 · image 1/1 · dessin 32×40 « Fiole a la graine d'aube » (objet)
+étape 2 · Vision : écrire ce que je vois (0-N)
+porte : prête
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 6 idée(s), 3 barrée(s) · dernière : [variante] Tableau morphologique : panse en goutte, col tordu, bouchon cristal taillé, décor = un cer
+messages : aucun
+images : seances/fiole-unique/regards/005-{ecran,loupe,dessin}.png

@@ -1,0 +1,11 @@
+regard 060
+case 23,30 · couleur #2a1a2eff · écran 574,485
+outil ellipse · taille 1 · c1 #5b4fb0ff · c2 #00000000
+calque 1/3 · image 1/1 · dessin 32×40 « Fiole a la graine d'aube » (objet)
+étape 7 · Couleur locale à plat (B6-A · A5-7 · 0-G)
+porte : Pixels doublés en « L » (A5-6 · règle 21) : 4 px. Corrige, ou justifie-le. | Case non cochée : « Les matières se séparent en gris »
+défauts : Pixels doublés en « L » [erreur] 4 px (dont 21,30 21,31 près du curseur) ; L'ombrage ne suit pas la lumière [attention] 0 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord -0.21 · familles — · inversions — · étendue 0.28
+carnet : 8 idée(s), 5 barrée(s) · dernière : [choix] Vignette C. À pousser : la panse plus ronde que la pointe (grand, moyen, petit : panse, co
+messages : aucun
+images : seances/fiole-unique/regards/060-{ecran,loupe,dessin}.png

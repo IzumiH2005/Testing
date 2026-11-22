@@ -1,0 +1,11 @@
+regard 004
+case 87,3 (hors du dessin) · couleur (hors toile) · écran 1211,210
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 1/1 · image 1/1 · dessin 32×40 « Fiole a la graine d'aube » (objet)
+étape 2 · Vision : écrire ce que je vois (0-N)
+porte : Carnet : écris au moins une idée pour « Structure / physionomie », « Ce qui la rend unique », « Pourquoi c'est crédible ».
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 2 idée(s), 2 barrée(s) · dernière : [structure] La pointe de la goutte en bas, comme une larme qui tombe. (barrée : Elle ne tiendrait pas debout, et le liquide n'aurait pas de )
+messages : aucun
+images : seances/fiole-unique/regards/004-{ecran,loupe,dessin}.png

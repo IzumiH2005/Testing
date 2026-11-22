@@ -1,0 +1,11 @@
+regard 099
+case 23,24 · couleur #2f7f8fff · écran 574,425
+outil crayon · taille 1 · c1 #2f7f8fff · c2 #00000000
+calque 1/3 · image 1/1 · dessin 32×40 « Fiole a la graine d'aube » (objet)
+étape 8 · Placer la lumière, deux familles (0-C · 0-D)
+porte : Volume (0-C) : accord clarté/volume 0.20 < 0,50, lumière et ombre trop proches (0.02 < 0,08), 49 % de la lumière plus sombre que l'ombre. Affiche le guide (onglet Lumière), corrige, ou justifie. | L'ombrage ne suit pas la lumière (0-C · règle 50) : 36 px. Corrige, ou justifie-le. | Case non cochée : « Vue Notan : deux masses claires, frontière qui suit la forme » | Case non cochée : « L'ombre est du côté opposé à la source, partout »
+défauts : Pixels doublés en « L » [erreur] 7 px (dont 20,20 23,23 près du curseur) ; L'ombrage ne suit pas la lumière [attention] 36 px (dont 19,20 20,21 20,22 19,23 près du curseur) ; Tramage en damier [conseil] 8 px (dont 19,22 20,22 19,23 20,23 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) · accord 0.20 · familles 0.02 · inversions 49 % · étendue 0.40
+carnet : 8 idée(s), 5 barrée(s) · dernière : [choix] Vignette C. À pousser : la panse plus ronde que la pointe (grand, moyen, petit : panse, co
+messages : aucun
+images : seances/fiole-unique/regards/099-{ecran,loupe,dessin}.png

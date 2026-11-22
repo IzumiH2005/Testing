@@ -1,0 +1,11 @@
+regard 244
+case 22,26 · couleur #2f7f8fff · écran 564,445
+outil crayon · taille 1 · c1 #2f7f8fff · c2 #00000000
+calque 1/3 · image 1/1 · dessin 32×40 « Fiole a la graine d'aube » (objet)
+étape 12 · Contre-jour (B6-A · B6-G)
+porte : Case non cochée : « Le contre-jour a une autre teinte que la lumière principale »
+défauts : L'ombrage ne suit pas la lumière [attention] 19 px (dont 18,30 19,30 20,30 près du curseur) ; Tramage en damier [conseil] 18 px
+volume : lumière haut gauche (az 135°, él 20°, gonfle) · accord 0.25 · familles 0.08 · inversions 23 % · étendue 0.67
+carnet : 8 idée(s), 5 barrée(s) · dernière : [choix] Vignette C. À pousser : la panse plus ronde que la pointe (grand, moyen, petit : panse, co
+messages : aucun
+images : seances/fiole-unique/regards/244-{ecran,loupe,dessin}.png
