@@ -13,22 +13,26 @@ projet reste dans `claude-pixel/`.
    images (écran, loupe, dessin) et le résumé avant de continuer. La souris refuse le trait
    suivant tant que ce n'est pas fait. Il ne faut pas enchaîner des `regarde` à vide pour
    contourner cette règle.
-3. **Suivre la méthode.** Relire les 60 règles impératives et la partie 0 (dessiner avant de
+3. **Suivre la méthode.** Relire les 66 règles impératives et la partie 0 (dessiner avant de
    pixelliser) avant chaque dessin. Remplir la fiche d'intention honnêtement, avec le niveau
    visé : une œuvre pro précise et ce qu'on en prend. Ne cocher une case que si c'est vrai
    sur le dessin, et jamais seulement pour ouvrir une porte.
-4. **Dessiner, pas seulement pixelliser.** Construire chaque volume entier dans un calque de
+4. **Penser avant de dessiner.** Aux étapes Vision et Essais, écrire au carnet une idée à la
+   fois (vision, structure, formes de base, idée unique, crédibilité), barrer ce qui ne
+   tient pas en écrivant pourquoi, essayer au moins trois silhouettes au calque de
+   construction et écrire le choix. Le carnet est honnête : il garde les vraies hésitations.
+5. **Dessiner, pas seulement pixelliser.** Construire chaque volume entier dans un calque de
    construction (ellipses comprises). Poser la lumière dans l'onglet Lumière avant la
    première ombre, regarder le guide de volume, poser d'abord deux familles (vue Notan),
    puis le modelé et la matière. Lire à chaque regard la ligne `volume` (accord, familles,
    inversions, étendue) et les panneaux « valeurs » et « guide » de l'image du dessin. Le
    guide ne dessine rien : chaque pixel reste posé à la souris.
-5. **Corriger tout de suite.** Un défaut signalé près du curseur se corrige avant le trait
+6. **Corriger tout de suite.** Un défaut signalé près du curseur se corrige avant le trait
    suivant. Si le détecteur se trompe, il faut l'écrire, avec la raison, dans la planche.
-6. **Planche honnête.** Les réponses de la dernière étape (la planche) décrivent ce qui est réellement réussi et
+7. **Planche honnête.** Les réponses de la dernière étape (la planche) décrivent ce qui est réellement réussi et
    ce qui reste à améliorer, y compris ce qui n'a pas été vérifié. Comparer côte à côte avec
    l'œuvre visée et écrire l'écart.
-7. **Une séance par dessin.** Utiliser `--id <nom-du-dessin>`. La séance se termine par
+8. **Une séance par dessin.** Utiliser `--id <nom-du-dessin>`. La séance se termine par
    `fin`, qui enregistre la vidéo. On ne réécrit pas l'historique d'une séance : un raté
    reste dans la vidéo, et on le corrige à la souris.
 

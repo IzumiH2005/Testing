@@ -155,7 +155,7 @@ const E = (id, titre, ref, faire, o = {}) => Object.assign({ id, titre, ref, fai
 const C = (cle, txt) => ({ cle, txt });
 const ETAPE_FICHE = (ref) => E('fiche', 'Fiche d\'intention et règles', ref, [
   'Remplis la fiche : chaque champ est une décision prise avant le premier pixel.',
-  'Lis les 60 règles impératives (onglet Aide) et coche « lues ».',
+  'Lis les 66 règles impératives (onglet Aide) et coche « lues ».',
   'Règle la toile à la taille finale : on ne dessine jamais en grand pour réduire (A4b).',
   'Choisis ou construis la palette : une rampe par matière (A6-A).',
   'Nomme 2 ou 3 idées fortes, pas plus : ce qu\'on doit reconnaître de loin (A10-F, règle 44).'
@@ -513,7 +513,7 @@ function porte(id, at, cache) {
   }
   switch (id) {
     case 'fiche': { const r = ficheIncomplete(doc); return r ? 'Fiche incomplète : ' + r.join(', ') : null; }
-    case 'regles': return m.reglesLues ? null : 'Lis les 60 règles impératives et coche « lues ».';
+    case 'regles': return m.reglesLues ? null : 'Lis les 66 règles impératives et coche « lues ».';
     case 'nonVide': return AP.mesures(doc, f).opaques ? null : 'L\'image exportée est vide.';
     case 'construction': return aDesPixels(doc, c => c.type === 'construction') ? null : 'Dessine la construction dans au moins un calque de type « construction ».';
     case 'silhouette1': { const n = AP.mesures(doc, f).couleurs; return n <= 2 ? null : 'La silhouette se fait en une couleur sombre (2 au plus) : ' + n + ' couleurs.'; }
@@ -599,7 +599,7 @@ function verifieEtape(at) {
   return { ok: !manque.length, manque };
 }
 
-/* ---------- Les 60 règles, lues dans le texte de la méthode ---------- */
+/* ---------- Les 66 règles, lues dans le texte de la méthode ---------- */
 function extraitRegles(texte) {
   const lignes = texte.split('\n'), out = [];
   let i = lignes.findIndex(l => /^# Règles impératives/.test(l)), groupe = '';

@@ -1,4 +1,4 @@
-# Méthode de pixel art — objets, personnages, créatures et décors (v17)
+# Méthode de pixel art — objets, personnages, créatures et décors (v18)
 
 On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin classique
 (construction par volumes, ligne d'action, anatomie) et les règles du pixel art
@@ -24,8 +24,8 @@ propres.
 
 | Partie | Sections |
 |---|---|
-| Règles impératives | 60 ordres courts, tirés des tests, des livres et des maîtres |
-| **0. Dessiner avant de pixelliser** | 0-A diagnostic de la potion 64 · 0-B voir et construire · 0-C lumière et forme (zones) · 0-D design des valeurs · 0-E design des formes · 0-F perspective · 0-G couleur · 0-H bords · 0-I matières · 0-J méthode du pro · **0-K les neuf planches analysées** · 0-L recettes (potion en verre, sphère, fruit, pain, flamme, ruines) · 0-M plan d'entraînement |
+| Règles impératives | 66 ordres courts, tirés des tests, des livres et des maîtres |
+| **0. Dessiner avant de pixelliser** | 0-A diagnostic de la potion 64 · 0-B voir et construire · 0-C lumière et forme (zones) · 0-D design des valeurs · 0-E design des formes · 0-F perspective · 0-G couleur · 0-H bords · 0-I matières · 0-J méthode du pro · **0-K les neuf planches analysées** · 0-L recettes (potion en verre, sphère, fruit, pain, flamme, ruines, gemme) · 0-M plan d'entraînement · **0-N vision et conception (carnet, essais)** · **0-O astuces de pro** |
 | **A. Règles communes** | A1 travail · A2 lisibilité · A3 table par taille · A4 règles du dessin · A4b simplifier · A5 pipeline pixel (silhouette → contour → palette → lumière → matières → détails → nettoyage → contrôle) · A6 finition pro · **A7 tramage** · **A8 lignes et formes** · **A9 perspectives de jeu** · **A10 leçons des maîtres** · **A11 geste du pro (outils, souris)** |
 | **B. Objets** | B0 intention · B0b projection · B1 cadre · B2 volumes · B3 forme iconique · B4 matière · B4b déclinaison par taille · B5 contrôle · **B6 recettes pas à pas (pierre, rocher, cristal, slime, livre)** |
 | **C. Personnages** | C0 intention · C1 proportions · C2 pose · C3 volumes · C4 tête et visage · C5 vêtements (design) · C6 cheveux · C7 astuces de figure · C8 contrôle · C9 anatomie · C10 tailles (8 à 128 px) · C11 portrait anime · C12 visage Loomis + anime · C13 chibi pas à pas · C14 corps nu puis vêtements en calque · C15 créatures · C16 créatures complexes · C17 vêtements (plis, matières) |
@@ -69,6 +69,8 @@ propres.
 | Tests en cours de dessin (miroir, gris, yeux plissés) | A6-J · **A11-C** |
 | Valeur d'abord, ombrer en gris | **0-D** · A6-A · **A10-F** |
 | Apprendre le dessin, exercices | **0-M** · G |
+| Vision, carnet, vignettes, créer une forme unique | **0-N** · 0-O |
+| Grandes formes, langage des formes, point d'intérêt, contraste | **0-O** · 0-E · A2 |
 
 **Sources (étiquettes) :** [Z] *Apprendre à tout dessiner avec Zephy* · [M] livre de dessin
 manga · [I] planches d'anatomie fournies · [C] planches sur les cheveux fournies · [P]
@@ -81,10 +83,11 @@ propres tests (partie D) · [B] livres de pixel art et de peinture ([B1] *Pixel 
 document) · [P2] planches de tutoriels pas à pas
 fournies (pierre, cristal, slime, livre, rochers ; B6) · [P3] neuf planches de tutoriels
 fournies en v17 (potion, cristal, poire, sphère, livre, pain, portail, pierre, flamme ;
-0-K) · [D] fondamentaux du dessin et de la peinture ([D1] Drawabox, [D2] Scott Robertson,
+0-K) · [P4] planches fournies en v18 (slime, gemmes ; 0-K, 0-L-G) · [D] fondamentaux du dessin et de la peinture ([D1] Drawabox, [D2] Scott Robertson,
 [D3] Proko, lumière et ombre, [D4] James Gurney, blog, [D5] Marco Bucci, [D6] Proko, groupes
 de valeurs, [D7] Sinix, design des formes, [D8] droites et courbes, [D9] couleur, [D10]
-bords ; liens en fin de document). Toutes les règles sont reformulées.
+bords, [D11]-[D15] vision, vignettes, conception et astuces de pro ; liens en fin de
+document). Toutes les règles sont reformulées.
 
 ---
 
@@ -249,6 +252,20 @@ Chaque règle est un ordre. Le détail et le « pourquoi » sont dans la section
     à la planche, compare côte à côte et écris l'écart (0-J).
 60. **Le guide de volume aide, il ne dessine pas** : tu poses chaque pixel ; si tu t'écartes
     du guide (forme complexe, matière), écris pourquoi (0-C, règle 2).
+
+**Vision et conception (0-N, 0-O)**
+61. **Écris ta vision avant le premier trait**, une idée à la fois, dans le carnet : ce que
+    tu vois, la structure, les formes de base, l'idée unique, ce qui la rend crédible (0-N).
+62. **N'efface jamais une idée : barre-la et écris pourquoi.** Le carnet garde le chemin
+    qui mène à la bonne forme (0-N-A).
+63. **Essaie au moins trois silhouettes vraiment différentes**, petites, au calque de
+    construction, avant de choisir ; écris le choix et ce qu'il reste à pousser (0-N-C).
+64. **Pars de formes géométriques simples, puis transforme-les** : étirer, tordre, couper,
+    combiner. La base géométrique est un repère, pas le résultat (0-N-B).
+65. **Une forme inventée reste logique** : la forme suit la fonction, une créature tient
+    sur un squelette plausible (0-N-B).
+66. **Grandes formes calmes, détails groupés, un seul point d'intérêt** : la plus forte
+    valeur, le bord le plus dur et la couleur la plus saturée s'y retrouvent (0-O).
 
 ---
 
@@ -443,11 +460,12 @@ Règles qui en découlent :
 6. **Finition des planches** : halo, étincelles en croix, ombre portée, contour d'accent :
    seulement quand le volume est juste.
 
-## 0-K. Les neuf planches de tutoriels analysées [P3]
+## 0-K. Les planches de tutoriels analysées [P3][P4]
 
 Fournies par l'utilisateur : potion (anonyme), cristal, sphère, livre, pierre et flamme
 (style Rappenem), poire, pain (signé EMIL), portail en ruines (signé ELE). Les règles sont
-reformulées ; les planches ne sont pas copiées dans le projet.
+reformulées ; les planches ne sont pas copiées dans le projet. En v18 s'ajoutent deux
+planches [P4] : slime (style Rappenem, 6 étapes) et gemmes (signée sadface_rl, 12 étapes).
 
 **Ce qu'elles font toutes :**
 1. **Chaque étape se lit seule à ×1**, et une seule idée change d'une étape à la suivante.
@@ -476,6 +494,8 @@ reformulées ; les planches ne sont pas copiées dans le projet.
 | **Pain** (4) | Tache → formes (dessus clair, flanc sombre, entailles) → ombrage riche et chaud → polissage : liseré de lumière blanc-crème sur le haut, éclats, **ombre portée douce**. Aucun contour : les formes se séparent par la valeur. |
 | **Portail** (9) | Boîtes isométriques **dessinées à travers** → pièces (marches, piliers, socle) → masses colorées avec construction visible → construction effacée → pierres et fissures → lianes et mousse qui **cassent** les boîtes → variations de lumière → portail émissif qui éclaire l'intérieur de l'arche. |
 | **Pierre** (9) | Cube → arêtes cassées → ombrage → trait intérieur effacé → fissures → trous → lumières et contour coloré → couleur → finition (B6-C). |
+| **Slime** (6) [P4] | Trait et couleur de base, yeux en simples arcs → ombrage de base en deux valeurs, lumière posée en haut à droite (point et cône) → ombres et lumières secondaires en **bandes courbes** qui suivent le dôme → contour coloré (bleu sombre) et éclats blancs **en forme d'arc** sur le haut → contre-jour cyan en bas à l'opposé (point et cône dessinés aussi) et variation violette → ombre portée bleutée et nettoyage (B6-E). |
+| **Gemme** (12) [P4] | Forme de base : un octogone allongé à **double bord** (le sertissage) → aplat → **dégradé en bandes diagonales**, dans la direction de la lumière → bandes lissées, régulières → bande la plus claire près du coin éclairé → **petite trame** seulement entre deux bandes → ombre sur le bord intérieur opposé → fondre → trame légère → lumière subtile (rebond sur le bord bas) → quelques éclats blancs **parallèles aux bandes** → une étincelle en croix sur un coin. Marche avec ou sans bordure et à plusieurs tailles : à petite taille, on garde l'idée (la diagonale claire) et on supprime la trame. |
 | **Flamme** (9) | Une goutte qui ondule (geste en S) → langues de tailles différentes → trois couches de lueur **vers l'intérieur** (le cœur, en bas, est le plus clair) → teinte plus sombre aux pointes → variation (rose et cyan près du cœur) → braises → nettoyage. Émissif : pas d'ombre propre, pas de contour. |
 
 ## 0-L. Recettes en pixels
@@ -528,6 +548,15 @@ et plus rouges → 1 ou 2 notes de teinte inattendue (rose, cyan) près du cœur
 détachées qui suivent le flux. Halo : 1-2 tons à peine plus clairs que le fond autour
 (B6-D). Aucune ombre propre.
 
+### G. Gemme polie (icône, 16 à 48 px) [P4]
+Octogone allongé, contour + sertissage d'1 px plus clair → aplat moyen → 3 à 5 bandes
+**diagonales** parallèles, de la plus claire (coin éclairé) à la plus sombre (coin opposé),
+de largeurs **inégales** (grand, moyen, petit) → trame 50 % d'1 px seulement à la frontière
+de deux bandes, à partir de 32 px (A7) → bord intérieur opposé à la lumière d'un ton plus
+sombre → rebond d'1 px sur le bord bas → 2 ou 3 éclats blancs alignés sur les bandes →
+une étincelle en croix détachée sur le coin éclairé. Déclinaison à 8-12 px : 2 bandes, un
+éclat, pas de trame (B4b).
+
 ### F. Architecture en ruines (décor isométrique) [P3]
 Boîtes en 2:1 dessinées à travers → pièces (socle, marches, piliers, linteau) → masses
 colorées, une valeur par face (dessus clair, face éclairée moyenne, face d'ombre sombre) →
@@ -549,6 +578,115 @@ projets (partie G), dans cet ordre, une séance par exercice (`--id etude-…`, 
    refaire de mémoire, noter l'écart. Les copies restent privées et créditées.
 6. **Construction** : 10 objets du quotidien en primitives dessinées à travers, au calque de
    construction seulement.
+
+## 0-N. Vision et conception : penser le dessin avant de le dessiner [D11][D12][D13][D14]
+
+Un pro ne pose pas le premier trait au hasard. Il **sait ce qu'il veut**, puis il
+**l'éprouve** : il écrit, dessine petit, rate, barre, recommence. Dans Claude Pixel, ce
+travail a deux étapes juste après la fiche : **Vision** et **Essais**, avec un **carnet de
+conception** dans l'onglet Méthode.
+
+### A. Le carnet : écrire, barrer, recommencer
+- **Une idée par ligne**, rangée dans une rubrique : *Ce que je vois*, *Structure /
+  physionomie*, *Formes de base*, *Ce qui la rend unique*, *Pourquoi c'est crédible*,
+  *Essai*, *Choix retenu*.
+- **On n'efface jamais.** Une idée qui ne tient pas se **barre**, avec sa raison (« trop
+  proche d'une potion banale », « illisible à ×1 », « le bouchon ne tiendrait pas »). Le
+  carnet garde la trace du chemin : c'est ce chemin qui mène à une forme juste.
+- **Pas tout d'un coup.** On écrit une idée, on la questionne (« pourquoi cette forme ? qu'est-ce
+  qu'elle raconte ? »), on la précise ou on la barre, puis on passe à la suivante.
+
+### B. Les cinq questions de la vision
+1. **Ce que je vois** : l'impression d'ensemble en une phrase. Ce qu'on doit sentir en une
+   seconde (« une fiole fragile et précieuse, presque vivante »).
+2. **Structure / physionomie** :
+   - **Objet** : de quoi il est fait, comment les pièces tiennent, comment on le tient, comment
+     il s'ouvre, se remplit, se pose. **La forme suit la fonction** : un objet inventé reste
+     crédible s'il pourrait servir (une fiole a un goulot pour verser, un fond pour tenir
+     debout, un bouchon qui ferme).
+   - **Créature** : un squelette tiré d'animaux réels (Terryl Whitlatch combine des
+     squelettes existants pour qu'un animal inventé reste plausible), comment elle se tient,
+     se déplace, mange, se défend, où elle vit.
+   - **Personnage** : proportions, appuis, ce que le corps dit de sa vie (âge, métier, force).
+3. **Formes de base** : les primitives de départ (sphère, cylindre, cône, boîte, tore) et
+   **comment on va les déformer**. Une base géométrique simple peut devenir une forme
+   remarquable : on étire, on tord, on coupe, on fait se rencontrer deux formes, on varie
+   les tailles (grand, moyen, petit).
+4. **Ce qui la rend unique** : **une** idée forte (une silhouette inattendue, une matière,
+   un détail de récit), pas cinq. Les autres choix restent sobres pour la servir.
+5. **Pourquoi c'est crédible** : poids, équilibre, usage, logique interne. Une forme
+   originale sans logique fait « décor de carton ».
+
+### C. Les essais : vignettes, effacer, recommencer [D11][D12]
+- **Petit et vite** : au calque de construction, des silhouettes de 8 à 16 px de haut. Plus
+  un essai est petit, plus on accepte de le jeter.
+- **Au moins trois silhouettes vraiment différentes** ; pousser chaque essai (largeur,
+  hauteur, rythme, asymétrie, vides) et **ne pas en faire deux de suite trop proches**.
+  Les derniers essais sont souvent les meilleurs : quand on croit avoir fini, en faire un
+  de plus.
+- **Silhouette d'abord**, sans couleur : si elle ne se lit pas en noir, aucun détail ne la
+  sauvera. Exagérer ce qui définit l'objet pour qu'il se lise de loin.
+- **Retourner (miroir) et regarder à ×1** chaque vignette.
+- **Choisir, puis varier** : retenir une vignette, écrire pourquoi, et noter ce qu'il faut
+  encore pousser. S'écarter de la vignette en cours de route est permis : on l'écrit au
+  carnet.
+- **Perfectionner jusqu'au détail** : même un pixel d'un col ou d'une ombre se rejoue s'il
+  ne sert pas la forme. Annuler et refaire un trait n'est pas un échec, c'est le métier.
+
+### D. Exemple : une fiole à la forme unique (carnet type)
+1. *Ce que je vois* : ~~une potion ronde classique avec un bouchon~~ — barrée : « c'est
+   l'icône que tout le monde fait, rien ne la distingue ».
+2. *Ce que je vois* : une fiole fragile, comme une goutte suspendue qui va tomber.
+3. *Formes de base* : une goutte = sphère + cône ; le col = un cylindre fin.
+4. *Structure* : ~~la pointe de la goutte en bas~~ — barrée : « elle ne tiendrait pas
+   debout ». La pointe passe en haut et devient le col ; le fond reste rond et lesté.
+5. *Ce qui la rend unique* : le col se tord d'un quart de tour, comme du verre soufflé
+   encore chaud.
+6. *Pourquoi c'est crédible* : le verre soufflé se tord vraiment ; la torsion reste au col,
+   la panse garde son volume pour le liquide.
+7. *Essai* 1 : col droit, lisible mais banal. *Essai* 2 : col très tordu, illisible à ×1.
+   *Essai* 3 : torsion légère, une seule courbe en S : lisible et différent.
+8. *Choix retenu* : essai 3. À pousser : la goutte un peu plus étroite en haut que la panse
+   (grand, moyen, petit : panse, col, bouchon).
+
+## 0-O. Astuces de pro : dessiner mieux, créer plus beau [D5][D10][D11][D12][D13][D14][D15]
+
+**Les grandes formes d'abord.** On bloque d'abord la plus grande forme, puis on découpe vers
+les plus petites. Les grandes formes restent simples et peu contrastées. Elles servent de
+repos et font ressortir les petits détails. Une image où tout est détaillé paraît plate.
+
+**L'économie de moyens.** Le moins d'information possible pour le plus d'effet : chaque
+pixel doit servir la forme, la lumière ou l'idée. Ce n'est pas plus facile qu'un rendu
+détaillé, c'est plus juste.
+
+**Le langage des formes.** Le rond est doux et amical, le triangle dynamique et dangereux,
+le carré stable et solide. Une forme **dominante** fixe la lecture, une **secondaire** y
+ajoute de la nuance. Les designs mémorables mêlent souvent deux formes en tension (une
+panse ronde avec un col anguleux).
+
+**Contraste et variété.**
+- Varier : grand/petit, droit/courbe, simple/détaillé, dur/doux, saturé/neutre.
+- Répéter avec variation : un motif repris mais jamais identique crée un rythme. Une
+  rupture de rythme attire l'œil : on la place au point d'intérêt.
+- Laisser des zones de repos (lumière calme, aplat) autour des zones riches.
+- Grouper les détails par 2-3 (A5-9), jamais en semis régulier.
+
+**Le point d'intérêt.** Un seul : le plus fort contraste de valeur, le bord le plus dur, la
+couleur la plus saturée et le détail le plus fin s'y retrouvent. Le reste de l'image le
+sert.
+
+**Pousser l'idée.** Exagérer ce qui définit le sujet (une fiole plus fine et plus haute, une
+créature plus massive). Une forme timide se lit mal à petite taille.
+
+**Regarder autrement, souvent.** Retourner l'image (miroir), la regarder en gris, plisser
+les yeux, dézoomer à ×1, faire une pause. On voit alors ce que l'habitude cache (A11-C).
+
+**Apprendre des maîtres.** Copier (en privé, crédité) les œuvres qu'on admire et noter
+**pourquoi** elles marchent (G2). Garder une bibliothèque de références classées par
+problème (verre, métal, feuillage, plis).
+
+**Accepter le raté.** Les pros annulent, effacent et refont beaucoup. Un dessin juste vient
+d'une suite de corrections, pas d'un premier jet parfait.
 
 ---
 
@@ -3224,7 +3362,8 @@ on cite l'artiste d'origine si on les montre.
 
 # Résumé
 
-**Tout dessin (partie 0) :** niveau visé (œuvre pro) → construction à travers (primitives
+**Tout dessin (partie 0) :** vision écrite et corrigée au carnet → au moins trois
+vignettes, choix écrit → niveau visé (œuvre pro) → construction à travers (primitives
 entières, ellipses) → trait → aplats de couleur locale → lumière posée, deux familles
 (Notan) → modelé (demi-ton, ombre propre, rebond, occlusion, ombre portée) → matière →
 éclats et contour coloré → contre-jour → variation de couleur → détails → planche avec
@@ -3399,6 +3538,11 @@ Cours et livres légitimes, cités pour leurs idées ; tout est reformulé.
 | [D7] | [Principes de design (grand-moyen-petit, d'après Sinix)](https://mayabeginner.readthedocs.io/en/latest/Design/L3_DesignPrinicplesPrimer.html) | hiérarchie des formes (0-E) |
 | [D8] | [Droites et courbes](https://animatedspirit.com/straights-curves) | tension du contour (0-E) |
 | [D9] | James Gurney, *Color and Light* (= [B5]) | couleur locale, lumière, ambiante ; saturation au demi-ton (0-G) |
+| [D11] | [Proko, vignettes pour le concept art](https://www.proko.com/lesson/how-to-thumbnail-for-concept-art) · [explorer des variantes](https://www.proko.com/lesson/exploring-alternate-concept-designs) · [Concept Art Empire, vignettes (Feng Zhu, Design Cinema 75)](https://conceptartempire.com/intro-to-thumbnail-sketching/) | silhouettes rapides, pousser chaque essai, choisir puis varier (0-N-C) |
+| [D12] | [Ctrl+Paint, les vignettes](https://www.ctrlpaint.com/blog/thumbnails-the-most-crucial-stage-of-your-painting) · [itération](https://www.ctrlpaint.com/videos/thumbnail-iteration) | petit et vite, jeter sans regret (0-N-C) |
+| [D13] | [Creative Bloq, créatures crédibles](https://www.creativebloq.com/art/digital-art/pro-artists-reveal-how-they-design-imaginary-creatures-that-feel-believable) · [Terryl Whitlatch (ArtStation)](https://magazine.artstation.com/2016/09/profile-creature-design-legend-terryl-whitlatch/) · Terryl Whitlatch, *Science of Creature Design* et *Principles of Creature Design* | squelettes d'animaux réels, récit de la créature (0-N-B) |
+| [D14] | [Creative Bloq, conseils de concept design](https://creativebloq.com/how-to/concept-design-tips-for-artists/2) · [The Rookies, design d'objets](https://blog.therookies.co/2019/08/11/prop-design-tips-for-newbie/) | la forme suit la fonction, lisibilité d'un objet (0-N-B) |
+| [D15] | [Les grandes formes](https://drawpaintacademy.com/big-simple-shapes-and-colors/) · [langage des formes (21-draw)](https://www.21-draw.com/pl/why-is-shape-language-so-important/) · [rythme et répétition (The Noun Project)](https://blog.thenounproject.com/?p=7993) | grandes formes, économie, langage des formes, rythme (0-O) |
 | [D10] | [Les bords en peinture](https://drawpaintacademy.com/edges/) · [Muddy Colors, bords](https://www.muddycolors.com/?p=8983) | bords durs, doux, perdus (0-H) |
 
 Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixeljoint.com/forum/forum_posts.asp?TID=20953)
@@ -3552,6 +3696,16 @@ Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixel
 ---
 
 # Historique des versions
+
+- **v18 :** **0-N vision et conception** : carnet (une idée par ligne, rien ne s'efface,
+  on barre avec la raison), cinq questions (vision, structure ou physionomie, formes de
+  base, idée unique, crédibilité), essais en vignettes (au moins trois silhouettes, choix
+  écrit), exemple d'une fiole à forme unique ; **0-O astuces de pro** (grandes formes,
+  économie, langage des formes, contraste et rythme, point d'intérêt, pousser l'idée,
+  regarder autrement, accepter le raté) ; planches slime et gemmes [P4] (0-K) et recette de
+  la gemme (0-L-G) ; sources [D11] à [D15] ; règles impératives 61 à 66. Dans Claude
+  Pixel : étapes **Vision** et **Essais** avant la construction, carnet de conception dans
+  l'onglet Méthode, portes du carnet.
 
 - **v17 :** **partie 0, dessiner avant de pixelliser**. Diagnostic de la potion 64×64 face
   à une planche pro (0-A) ; construction et dessin à travers (0-B) ; zones de la lumière :
