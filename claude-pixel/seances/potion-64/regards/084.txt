@@ -1,0 +1,9 @@
+regard 084
+case 14,48 · couleur #b8243fff · écran 394,479
+outil crayon · taille 1 · c1 #b8243fff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 10 · Détails et nettoyage (B6-A · A6-H · A5-10)
+porte : Pixels doublés en « L » (A5-6 · règle 21) : 16 px. Corrige, ou justifie-le. | Case non cochée : « Fissures avec lèvre claire » | Case non cochée : « Chaque étape se lit à ×1 » | Case non cochée : « AA seulement sur les marches de 2 px ou plus, à l'intérieur ; chaque pixel d'AA passe le test de l'enlèvement (règle 46) »
+défauts : Pixels doublés en « L » [erreur] 16 px
+messages : aucun
+images : seances/potion-64/regards/084-{ecran,loupe,dessin}.png

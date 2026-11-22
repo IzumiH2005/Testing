@@ -1,0 +1,9 @@
+regard 002
+case 114,72 (hors du dessin) · couleur (hors toile) · écran 991,620
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 1/1 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 1 · Fiche d'intention et règles (B0 · B0b · A3)
+porte : Lis les 48 règles impératives et coche « lues ».
+défauts : aucun
+messages : aucun
+images : seances/potion-64/regards/002-{ecran,loupe,dessin}.png

@@ -1,0 +1,9 @@
+regard 078
+case 45,45 · couleur #b8243fff · écran 580,461
+outil crayon · taille 1 · c1 #7a1748ff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 8 · Contre-jour (B6-A · B6-G)
+porte : Case non cochée : « Le contre-jour a une autre teinte que la lumière principale »
+défauts : Pixels doublés en « L » [erreur] 16 px (dont 45,48 46,48 près du curseur)
+messages : aucun
+images : seances/potion-64/regards/078-{ecran,loupe,dessin}.png

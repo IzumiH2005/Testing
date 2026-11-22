@@ -1,0 +1,9 @@
+regard 040
+case 114,47 (hors du dessin) · couleur (hors toile) · écran 995,474
+outil seau · taille 1 · c1 #e8483aff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 5 · Ombrage de base (B6-A · A5-8)
+porte : Case non cochée : « Terminateur net, un côté d'ombre franc » | Case non cochée : « Ombre lue en gris : la forme tient sans couleur (règle 43) »
+défauts : aucun
+messages : aucun
+images : seances/potion-64/regards/040-{ecran,loupe,dessin}.png

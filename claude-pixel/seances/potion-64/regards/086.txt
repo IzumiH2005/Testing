@@ -1,0 +1,9 @@
+regard 086
+case 25,-1 (hors du dessin) · couleur (hors toile) · écran 461,183
+outil crayon · taille 1 · c1 #b8243fff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+méthode terminée · dernière étape : 11 · Contrôle final : la planche (A5-11 · B5 · B6-G)
+porte : prête
+défauts : Pixels doublés en « L » [erreur] 16 px
+messages : aucun
+images : seances/potion-64/regards/086-{ecran,loupe,dessin}.png

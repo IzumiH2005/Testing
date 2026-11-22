@@ -387,7 +387,7 @@ function maj(quoi) {
   rafOutils = requestAnimationFrame(() => {
     rafOutils = 0;
     majRail(); majBarre();
-    if (besoinOptions && !document.querySelector('#options :focus')) { majOptions(); besoinOptions = false; }
+    if (besoinOptions && !document.querySelector('#options .champ:focus')) { majOptions(); besoinOptions = false; }
   });
 }
 function initOutils() {

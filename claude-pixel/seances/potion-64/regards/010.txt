@@ -1,0 +1,9 @@
+regard 010
+case 146,-18 (hors du dessin) · couleur (hors toile) · écran 1184,85
+outil crayon · taille 1 · c1 #f2b84bff · c2 #00000000
+calque 2/2 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 2 · Forme de base (B6-A · B6-B)
+porte : Case non cochée : « La primitive se lit à ×1 » | Case non cochée : « Repère de lumière posé » | Case non cochée : « Vue miroir regardée : aucune pente fausse »
+défauts : aucun
+messages : aucun
+images : seances/potion-64/regards/010-{ecran,loupe,dessin}.png

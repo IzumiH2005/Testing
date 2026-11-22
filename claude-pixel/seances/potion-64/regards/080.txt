@@ -1,0 +1,9 @@
+regard 080
+case 149,14 (hors du dessin) · couleur (hors toile) · écran 1201,273
+outil crayon · taille 1 · c1 #5fe0d0ff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 9 · Variation de couleur (B6-A · A5-8c)
+porte : Case non cochée : « Ombres plus froides, valeurs inchangées en gris »
+défauts : Pixels doublés en « L » [erreur] 16 px
+messages : aucun
+images : seances/potion-64/regards/080-{ecran,loupe,dessin}.png

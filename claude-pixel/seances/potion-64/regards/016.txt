@@ -1,0 +1,9 @@
+regard 016
+case 37,20 · couleur transparent · écran 532,311
+outil gomme · taille 1 · c1 #2a2238ff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 3 · Déformer et séparer (B6-A · B6-B)
+porte : Case non cochée : « Une forme dominante, une moyenne, une petite »
+défauts : aucun
+messages : aucun
+images : seances/potion-64/regards/016-{ecran,loupe,dessin}.png

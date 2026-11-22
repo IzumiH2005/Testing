@@ -1,0 +1,9 @@
+regard 013
+case 39,15 · couleur #2a2238ff · écran 544,281
+outil crayon · taille 1 · c1 #2a2238ff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 3 · Déformer et séparer (B6-A · B6-B)
+porte : Case non cochée : « Une forme dominante, une moyenne, une petite »
+défauts : aucun
+messages : aucun
+images : seances/potion-64/regards/013-{ecran,loupe,dessin}.png

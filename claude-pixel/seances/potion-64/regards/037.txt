@@ -1,0 +1,9 @@
+regard 037
+case 31,33 · couleur #ff8a3dff · écran 496,389
+outil seau · taille 1 · c1 #ff8a3dff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 4 · Nettoyer le trait et poser les aplats (B6-A · A5-7)
+porte : Case non cochée : « Les matières se séparent en gris »
+défauts : aucun
+messages : aucun
+images : seances/potion-64/regards/037-{ecran,loupe,dessin}.png

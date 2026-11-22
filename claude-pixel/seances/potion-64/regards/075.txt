@@ -1,0 +1,9 @@
+regard 075
+case 20,32 · couleur #ff8a3dff · écran 430,383
+outil crayon · taille 1 · c1 #ffd36bff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 7 · Éclats et contour coloré (B6-A · A6-C)
+porte : Case non cochée : « Contour coloré (selout) posé maintenant, pas avant »
+défauts : Pixels doublés en « L » [erreur] 16 px
+messages : aucun
+images : seances/potion-64/regards/075-{ecran,loupe,dessin}.png

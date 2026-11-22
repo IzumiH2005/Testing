@@ -1,0 +1,626 @@
+16:46:05.156  # séance potion-64 · claude · 1280×800
+16:46:07.742  clic =nouveau-type-objet
+16:46:08.200  clic =nouveau-taille-64
+16:46:08.640  clic =nouveau-nom
+16:46:09.084  touche ctrl+a
+16:46:09.162  tape "Potion de vie"
+16:46:09.407  clic =modale-oui
+16:46:09.816  attends 500
+16:46:10.324  clic =onglet-methode
+16:46:10.803  cibles fiche
+16:46:16.738  defile =fiche-quoi
+16:46:16.743  clic =fiche-quoi
+16:46:17.242  tape "grande potion de vie : flacon rond, liquide cramoisi lumineux, bouchon de liège ficelé"
+16:46:18.855  defile =fiche-usage
+16:46:18.960  clic =fiche-usage
+16:46:19.402  tape "icône d'objet grand format (64×64) pour l'inventaire et l'écran de butin"
+16:46:20.727  defile =fiche-couleurs
+16:46:20.736  clic =fiche-couleurs
+16:46:21.063  touche ctrl+a
+16:46:21.141  tape "19"
+16:46:21.176  defile =fiche-projection
+16:46:21.182  choisis =fiche-projection "de face"
+16:46:21.789  defile =fiche-lumiere
+16:46:21.794  choisis =fiche-lumiere "haut gauche"
+16:46:22.384  defile =fiche-matiere
+16:46:22.494  clic =fiche-matiere
+16:46:22.922  tape "verre épais, liquide, liège et ficelle"
+16:46:23.655  defile =fiche-accent
+16:46:23.659  clic =fiche-accent
+16:46:23.999  tape "liquide cramoisi qui rougeoie vers l'orange"
+16:46:24.779  defile =porte-fiche
+16:46:24.785  regarde
+16:46:29.160  touche tab
+16:46:29.236  clic =regles-ouvre
+16:46:29.632  attends 400
+16:46:30.035  regarde
+16:46:43.363  clic =regles-lues
+16:46:43.747  defile =etape-valide
+16:46:44.900  clic =etape-valide
+16:46:45.276  attends 300
+16:46:45.584  etat porte
+16:46:49.305  clic =onglet-couleurs
+16:46:49.760  clic =hex
+16:46:50.354  touche ctrl+a
+16:46:50.454  tape "#2a2238"
+16:46:50.575  touche entree
+16:46:50.655  clic =selecteur-c1
+16:46:51.049  clic =outil-ellipse
+16:46:51.582  clic =opt-symX
+16:46:52.047  clic =opt-axeX2
+16:46:52.445  touche ctrl+a
+16:46:52.524  tape "31.5"
+16:46:52.599  touche entree
+16:46:52.684  va 12,22
+16:46:52.984  appuie
+16:46:52.993  va 50,60
+16:46:53.326  relache
+16:46:53.333  va 31,22
+16:46:53.618  regarde
+16:47:09.974  clic =outil-crayon
+16:47:10.452  trace 26,12 26,22
+16:47:11.233  regarde
+16:47:17.243  clic =outil-rect
+16:47:17.705  va 24,8
+16:47:18.028  appuie
+16:47:18.049  va 38,11
+16:47:18.230  relache
+16:47:18.233  regarde
+16:47:21.683  clic =outil-crayon
+16:47:22.161  trace 27,7 27,2 28,1 31,1
+16:47:22.977  regarde
+16:47:26.800  clic =outil-gomme
+16:47:27.277  trace 27,22 31,22
+16:47:27.862  va 31,20
+16:47:27.944  regarde
+16:47:35.104  clic =opt-symX
+16:47:35.544  clic =onglet-calques
+16:47:36.096  clic =calque-ajoute-construction
+16:47:36.493  attends 200
+16:47:36.698  clic =onglet-couleurs
+16:47:37.086  clic =hex
+16:47:37.565  touche ctrl+a
+16:47:37.643  tape "#f2b84b"
+16:47:37.765  touche entree
+16:47:37.840  clic =selecteur-c1
+16:47:38.229  clic =outil-crayon
+16:47:38.761  trace 1,1 6,6
+16:47:39.331  regarde
+16:47:43.657  trace 6,3 6,6 3,6
+16:47:44.182  regarde
+16:47:44.635  clic =onglet-controle
+16:47:45.185  defile =vue-miroir
+16:47:45.189  regarde
+16:47:52.857  clic =onglet-calques
+16:47:53.268  clic =calque-choisit-0
+16:47:53.652  clic =onglet-methode
+16:47:54.039  defile =coche-forme.primitive
+16:47:54.551  clic =coche-forme.primitive
+16:47:54.712  defile =coche-forme.reperelum
+16:47:54.716  clic =coche-forme.reperelum
+16:47:54.998  defile =coche-forme.miroir
+16:47:55.008  clic =coche-forme.miroir
+16:47:55.311  defile =etape-valide
+16:47:55.314  clic =etape-valide
+16:47:55.633  attends 300
+16:47:55.933  etat porte
+16:47:57.758  etat porte
+16:47:59.813  etat porte
+16:48:18.412  clic =onglet-couleurs
+16:48:18.869  clic =hex
+16:48:19.349  touche ctrl+a
+16:48:19.425  tape "#2a2238"
+16:48:19.555  touche entree
+16:48:19.637  clic =selecteur-c1
+16:48:20.045  clic =outil-rect
+16:48:20.662  va 25,14
+16:48:21.011  appuie
+16:48:21.018  va 37,17
+16:48:21.193  relache
+16:48:21.195  regarde
+16:49:17.046  clic =outil-crayon
+16:49:17.550  trace 38,15 39,15 39,16 38,16
+16:49:18.140  regarde
+16:49:22.463  clic 39,15
+16:49:22.692  regarde
+16:49:25.573  trace 39,17 40,18 40,19 41,20 41,21
+16:49:25.928  regarde
+16:49:28.170  trace 38,17 38,18 37,19 37,20
+16:49:28.593  regarde
+16:49:35.111  clic =outil-gomme
+16:49:35.583  trace 37,19 37,20
+16:49:36.023  regarde
+16:49:38.236  clic =outil-crayon
+16:49:38.715  clic 38,19
+16:49:39.197  regarde
+16:49:42.580  clic =outil-ellipse
+16:49:43.048  va 14,31
+16:49:43.357  appuie
+16:49:43.371  va 48,35
+16:49:43.624  relache
+16:49:43.627  regarde
+16:49:53.211  touche ctrl+z
+16:49:53.292  regarde
+16:49:59.282  clic =onglet-methode
+16:49:59.802  defile =coche-deformer.masses
+16:49:59.808  clic =coche-deformer.masses
+16:50:00.249  defile =etape-valide
+16:50:00.252  clic =etape-valide
+16:50:00.592  regarde
+16:50:17.961  clic =onglet-couleurs
+16:50:18.410  clic =hex
+16:50:18.871  touche ctrl+a
+16:50:18.949  tape "#9c6236"
+16:50:19.111  touche entree
+16:50:19.185  clic =selecteur-c1
+16:50:19.591  clic =outil-seau
+16:50:20.162  clic 31,4
+16:50:20.655  regarde
+16:50:24.531  clic =hex
+16:50:25.038  touche ctrl+a
+16:50:25.120  tape "#6b3c26"
+16:50:25.275  touche entree
+16:50:25.354  clic =selecteur-c1
+16:50:25.766  clic 31,12
+16:50:26.257  regarde
+16:50:28.572  clic =hex
+16:50:29.076  touche ctrl+a
+16:50:29.153  tape "#6a87a8"
+16:50:29.295  touche entree
+16:50:29.370  clic =selecteur-c1
+16:50:29.772  clic 31,9
+16:50:30.261  regarde
+16:50:32.504  clic =hex
+16:50:33.003  touche ctrl+a
+16:50:33.081  tape "#a8865a"
+16:50:33.227  touche entree
+16:50:33.300  clic =selecteur-c1
+16:50:33.712  clic 31,15
+16:50:34.187  regarde
+16:50:38.170  clic =outil-crayon
+16:50:38.697  trace 26,15 26,16
+16:50:39.157  regarde
+16:50:41.447  trace 36,15 36,16
+16:50:41.793  regarde
+16:50:44.567  clic =onglet-couleurs
+16:50:45.049  clic =hex
+16:50:45.534  touche ctrl+a
+16:50:45.611  tape "#3a4868"
+16:50:45.747  touche entree
+16:50:45.820  clic =selecteur-c1
+16:50:46.235  clic =outil-seau
+16:50:46.759  clic 31,45
+16:50:47.222  regarde
+16:50:52.063  clic =outil-ellipse
+16:50:52.526  cibles opt
+16:50:54.233  etat
+16:50:57.133  clic =hex
+16:50:57.753  touche ctrl+a
+16:50:57.826  tape "#e8483a"
+16:50:57.954  touche entree
+16:50:58.037  clic =selecteur-c1
+16:50:58.441  clic =opt-rempli
+16:50:58.980  regarde
+16:51:06.672  va 15,30
+16:51:06.970  appuie
+16:51:06.974  va 47,36
+16:51:07.224  relache
+16:51:07.228  va 15,33
+16:51:07.489  regarde
+16:51:17.024  va 47,33
+16:51:17.268  regarde
+16:51:24.559  clic =outil-crayon
+16:51:25.072  trace 15,32 15,34
+16:51:25.671  regarde
+16:51:27.659  clic 14,34
+16:51:27.871  regarde
+16:51:29.846  trace 47,32 47,34
+16:51:30.306  regarde
+16:51:32.184  clic 48,34
+16:51:32.390  regarde
+16:51:36.442  clic =hex
+16:51:36.920  touche ctrl+a
+16:51:36.993  tape "#b8243f"
+16:51:37.163  touche entree
+16:51:37.244  clic =selecteur-c1
+16:51:37.635  clic =outil-seau
+16:51:38.170  clic 31,50
+16:51:38.655  regarde
+16:51:43.459  clic =onglet-controle
+16:51:43.999  cibles vue
+16:51:45.540  clic =vue-gris
+16:51:45.952  regarde
+16:52:02.347  clic =onglet-couleurs
+16:52:02.787  clic =hex
+16:52:03.255  touche ctrl+a
+16:52:03.330  tape "#ff8a3d"
+16:52:03.483  touche entree
+16:52:03.570  clic =selecteur-c1
+16:52:03.992  clic 31,33
+16:52:04.538  regarde
+16:52:06.694  clic =hex
+16:52:07.216  touche ctrl+a
+16:52:07.293  tape "#e8483a"
+16:52:07.415  touche entree
+16:52:07.492  clic =selecteur-c1
+16:52:07.893  clic 31,50
+16:52:08.357  regarde
+16:52:12.208  clic =onglet-controle
+16:52:12.725  va @1000,760
+16:52:12.731    ✗ Écris « @x y » en pixels d'écran.
+16:52:15.929  va @1000 760
+16:52:16.309  regarde
+16:52:22.282  clic =onglet-methode
+16:52:22.848  defile =coche-aplats.gris
+16:52:22.859  clic =coche-aplats.gris
+16:52:23.320  defile =etape-valide
+16:52:23.324  clic =etape-valide
+16:52:23.635  regarde
+16:52:59.353  clic =onglet-couleurs
+16:52:59.807  clic =hex
+16:53:00.270  touche ctrl+a
+16:53:00.361  tape "#b8243f"
+16:53:00.494  touche entree
+16:53:00.578  clic =selecteur-c1
+16:53:00.990  clic =outil-crayon
+16:53:01.589  trace 46,35 46,40 45,41 45,43 44,44 44,45 43,46 43,47 42,48 41,49 41,50 40,51 39,52 38,52 37,53 36,54 35,54 34,55 32,55 31,56 23,56 22,55 20,55 19,54 18,54 17,53 16,52
+16:53:03.914  regarde
+16:53:22.995  clic =hex
+16:53:23.501  touche ctrl+a
+16:53:23.588  tape "#e8483a"
+16:53:23.730  touche entree
+16:53:23.807  clic =selecteur-c1
+16:53:24.228  clic =opt-pp
+16:53:24.744  trace 17,53 18,54 19,54 20,55 21,55 22,55
+16:53:25.492  regarde
+16:53:28.555  clic =opt-pp
+16:53:29.040  clic =hex
+16:53:29.586  touche ctrl+a
+16:53:29.665  tape "#b8243f"
+16:53:29.793  touche entree
+16:53:29.870  clic =selecteur-c1
+16:53:30.275  clic 22,57
+16:53:30.765  regarde
+16:53:56.272  clic =hex
+16:53:56.779  touche ctrl+a
+16:53:56.856  tape "#e8483a"
+16:53:57.002  touche entree
+16:53:57.076  clic =selecteur-c1
+16:53:57.510  clic =opt-pp
+16:53:58.040  trace 22,57 23,56 25,56
+16:53:58.635  regarde
+16:54:00.950  clic 16,52
+16:54:01.269  regarde
+16:54:03.488  clic =hex
+16:54:04.013  touche ctrl+a
+16:54:04.087  tape "#b8243f"
+16:54:04.217  touche entree
+16:54:04.293  clic =selecteur-c1
+16:54:04.701  trace 24,57 25,57
+16:54:05.149  regarde
+16:54:11.836  clic =opt-pp
+16:54:12.322  clic =outil-seau
+16:54:12.836  clic 48,40
+16:54:13.358  regarde
+16:54:30.259  clic =hex
+16:54:30.762  touche ctrl+a
+16:54:30.839  tape "#6b3c26"
+16:54:30.954  touche entree
+16:54:31.029  clic =selecteur-c1
+16:54:31.448  clic =outil-rect
+16:54:31.973  va @700 700
+16:54:32.345  regarde
+16:54:36.462  va 33,2
+16:54:36.778  appuie
+16:54:36.788  va 34,7
+16:54:36.904  relache
+16:54:36.908  regarde
+16:54:39.809  va 34,15
+16:54:39.979  appuie
+16:54:39.996  va 36,16
+16:54:40.152  relache
+16:54:40.168  regarde
+16:54:43.729  clic =hex
+16:54:44.237  touche ctrl+a
+16:54:44.317  tape "#3a1f1a"
+16:54:44.445  touche entree
+16:54:44.520  clic =selecteur-c1
+16:54:44.956  va 34,12
+16:54:45.279  appuie
+16:54:45.294  va 35,13
+16:54:45.379  relache
+16:54:45.386  regarde
+16:54:48.010  clic =hex
+16:54:48.545  touche ctrl+a
+16:54:48.625  tape "#3a4868"
+16:54:48.770  touche entree
+16:54:48.846  clic =selecteur-c1
+16:54:49.269  va 34,9
+16:54:49.610  appuie
+16:54:49.624  va 37,10
+16:54:49.756  relache
+16:54:49.759  regarde
+16:54:52.634  va 40,27
+16:54:52.829  regarde
+16:55:58.281  clic =onglet-couleurs
+16:55:58.765  clic =hex
+16:55:59.243  touche ctrl+a
+16:55:59.333  tape "#232840"
+16:55:59.471  touche entree
+16:55:59.546  clic =selecteur-c1
+16:55:59.948  clic =outil-crayon
+16:56:00.482  clic =opt-pp
+16:56:00.951  etat
+16:56:03.510  trace 34,23 34,18 35,18 35,23 36,24 38,24 38,25 40,25 40,26 42,26 42,27 43,27 43,28 44,28 44,29 45,29 45,30 46,30 46,31 45,31
+16:56:05.316  va 40,26
+16:56:05.494  regarde
+16:56:15.214  touche ctrl+z
+16:56:15.296  regarde
+16:56:19.417  trace 34,22 34,18 35,18 35,23 34,23
+16:56:20.107  va 35,21
+16:56:20.197  regarde
+16:56:26.209  trace 36,24 37,24
+16:56:26.453  va 37,24
+16:56:26.474  regarde
+16:56:31.993  clic =onglet-controle
+16:56:32.553  clic =vue-gris
+16:56:33.024  va 20,40
+16:56:33.372  regarde
+16:56:38.961  clic =vue-gris
+16:56:39.455  clic =onglet-methode
+16:56:39.881  cibles coche-ombre
+16:56:42.070  clic =coche-ombre.terminateur
+16:56:42.543  clic =coche-ombre.grisOmbre
+16:56:42.829  defile =etape-valide
+16:56:42.833  clic =etape-valide
+16:56:43.180  etat porte
+16:56:43.199  cibles coche-
+16:56:52.917  va 40,53
+16:56:53.240  regarde
+16:57:29.819  clic =onglet-couleurs
+16:57:30.309  clic =hex
+16:57:30.794  touche ctrl+a
+16:57:30.881  tape "#7a1748"
+16:57:31.033  touche entree
+16:57:31.106  clic =selecteur-c1
+16:57:31.509  clic =opt-pp
+16:57:32.031  trace 47,45 47,47 46,48 46,49 45,50 44,51 44,52 43,53 42,54 41,55 40,55 39,56 38,56 37,57 36,57 35,57 34,58 33,58 32,58
+16:57:33.387  va 41,53
+16:57:33.578  regarde
+16:58:24.999  touche ctrl+z
+16:58:25.080  regarde
+16:58:28.265  clic =opt-pp
+16:58:28.743  trace 46,47 46,48 45,48 44,49 45,49 45,50 43,50 42,51 44,51 44,52 41,52 40,53 43,53 42,54 38,54 37,55 41,55 40,56 34,56 33,57 38,57 32,57 31,58 30,58 34,58
+16:58:31.520  va 40,54
+16:58:31.662  regarde
+16:59:07.689  clic =hex
+16:59:08.189  touche ctrl+a
+16:59:08.267  tape "#232840"
+16:59:08.392  touche entree
+16:59:08.469  clic =selecteur-c1
+16:59:08.869  trace 27,18 33,18
+16:59:09.523  va 30,18
+16:59:09.616  regarde
+16:59:13.741  clic =onglet-methode
+16:59:14.233  defile =coche-secondaires.ao
+16:59:14.239  clic =coche-secondaires.ao
+16:59:14.658  defile =etape-valide
+16:59:14.667  clic =etape-valide
+16:59:15.004  etat porte
+16:59:15.014  cibles coche-
+16:59:34.734  va 18,38
+16:59:35.065  regarde
+16:59:51.226  clic =onglet-couleurs
+16:59:51.736  clic =hex
+16:59:52.224  touche ctrl+a
+16:59:52.300  tape "#eaf7ff"
+16:59:52.420  touche entree
+16:59:52.496  clic =selecteur-c1
+16:59:52.905  trace 17,37 16,38 15,39 15,47 15,44 16,44 16,39
+16:59:54.106  va 16,41
+16:59:54.198  regarde
+16:59:59.798  va 22,27
+16:59:59.986  regarde
+17:00:07.007  clic =hex
+17:00:07.510  touche ctrl+a
+17:00:07.586  tape "#a9cbe0"
+17:00:07.704  touche entree
+17:00:07.778  clic =selecteur-c1
+17:00:08.200  trace 20,28 23,25
+17:00:08.747  va 22,27
+17:00:08.832  regarde
+17:00:14.387  touche ctrl+z
+17:00:14.472  regarde
+17:00:16.314  trace 21,28 24,25
+17:00:16.631  va 22,27
+17:00:16.722  regarde
+17:00:24.550  touche ctrl+z
+17:00:24.632  regarde
+17:00:27.403  trace 22,26 23,26 23,27 22,27
+17:00:27.755  va 22,27
+17:00:27.784  regarde
+17:00:35.882  clic =hex
+17:00:36.378  touche ctrl+a
+17:00:36.470  tape "#c98f52"
+17:00:36.592  touche entree
+17:00:36.672  clic =selecteur-c1
+17:00:37.087  trace 28,6 28,2 32,2
+17:00:37.829  va 30,4
+17:00:37.926  regarde
+17:00:42.249  clic =hex
+17:00:42.746  touche ctrl+a
+17:00:42.821  tape "#a9cbe0"
+17:00:42.970  touche entree
+17:00:43.044  clic =selecteur-c1
+17:00:43.451  trace 25,9 29,9
+17:00:44.047  va 27,10
+17:00:44.130  regarde
+17:00:46.588  clic =hex
+17:00:47.089  touche ctrl+a
+17:00:47.164  tape "#e2c88f"
+17:00:47.299  touche entree
+17:00:47.372  clic =selecteur-c1
+17:00:47.765  trace 26,15 29,15
+17:00:48.328  va 28,16
+17:00:48.400  regarde
+17:00:52.459  clic =hex
+17:00:52.963  touche ctrl+a
+17:00:53.037  tape "#ffd36b"
+17:00:53.160  touche entree
+17:00:53.239  clic =selecteur-c1
+17:00:53.635  trace 18,31 23,31
+17:00:54.264  va 20,32
+17:00:54.366  regarde
+17:00:58.395  va 18,52
+17:00:58.618  regarde
+17:01:58.439  clic =hex
+17:01:58.958  touche ctrl+a
+17:01:59.038  tape "#7a1748"
+17:01:59.186  touche entree
+17:01:59.264  clic =selecteur-c1
+17:01:59.666  trace 13,34 13,36 12,37 12,45 13,46 13,48 14,49 14,50 15,51 15,52 16,53 17,54 18,55 19,56 20,57 21,57 22,58 23,58
+17:02:01.239  regarde
+17:02:08.017  clic =onglet-methode
+17:02:08.525  cibles coche-
+17:02:10.565  clic =coche-eclats.selout
+17:02:10.996  defile =etape-valide
+17:02:11.003  clic =etape-valide
+17:02:11.327  etat porte
+17:02:17.270  va 45,45
+17:02:17.578  regarde
+17:02:29.455  clic =onglet-couleurs
+17:02:29.934  clic =hex
+17:02:30.408  touche ctrl+a
+17:02:30.537  tape "#5fe0d0"
+17:02:30.674  touche entree
+17:02:30.752  clic =selecteur-c1
+17:02:31.167  trace 49,41 49,45 48,46 48,48 47,49 47,50
+17:02:31.960  regarde
+17:02:37.902  clic =onglet-methode
+17:02:38.412  cibles coche-
+17:02:40.818  clic =coche-contrejour.autre
+17:02:41.223  defile =etape-valide
+17:02:41.227  clic =etape-valide
+17:02:41.563  etat porte
+17:02:46.572  clic =onglet-controle
+17:02:47.017  clic =vue-gris
+17:02:47.474  regarde
+17:02:47.844  clic =vue-gris
+17:02:56.405  clic =onglet-methode
+17:02:56.813  cibles coche-
+17:02:59.345  clic =coche-teinte.froid
+17:02:59.778  defile =etape-valide
+17:02:59.787  clic =etape-valide
+17:03:00.131  etat porte
+17:03:31.915  va 31,5
+17:03:32.262  regarde
+17:03:43.942  clic =onglet-couleurs
+17:03:44.413  clic =hex
+17:03:44.881  touche ctrl+a
+17:03:44.955  tape "#3a1f1a"
+17:03:45.078  touche entree
+17:03:45.161  clic =selecteur-c1
+17:03:45.586  trace 30,4 32,4
+17:03:46.144  regarde
+17:03:50.505  clic =hex
+17:03:51.023  touche ctrl+a
+17:03:51.125  tape "#c98f52"
+17:03:51.248  touche entree
+17:03:51.326  clic =selecteur-c1
+17:03:51.725  trace 30,5 31,5
+17:03:52.193  regarde
+17:03:59.237  clic =hex
+17:03:59.771  touche ctrl+a
+17:03:59.848  tape "#b8243f"
+17:03:59.970  touche entree
+17:04:00.056  clic =selecteur-c1
+17:04:00.481  clic 14,48
+17:04:00.988  regarde
+17:04:10.295  touche ctrl+z
+17:04:10.396  regarde
+17:04:18.202  clic =onglet-methode
+17:04:18.826  cibles justifie
+17:04:18.843  cibles coche-
+17:04:21.411  clic =justifie-L
+17:04:21.821  tape "Faux positif : les 16 px sont les coins des bandes d'ombre de 2 px de large (ombre propre #7a1748 et rebond #b8243f) en bas a droite. Ce sont des aplats de demi-teinte, pas un trait double. coinsL ne regarde pas l'epaisseur."
+17:04:25.660  touche tab
+17:04:25.765  etat porte
+17:04:29.644  defile =coche-details.aa
+17:04:29.979  clic =coche-details.levre
+17:04:30.324  clic =coche-details.lisible
+17:04:30.608  clic =coche-details.aa
+17:04:30.892  defile =etape-valide
+17:04:30.895  clic =etape-valide
+17:04:31.242  etat porte
+17:04:33.560  cibles planche
+17:05:07.056  defile =planche-q0
+17:05:07.061    ✗ Aucun élément « planche-q0 ».
+17:05:09.214  cibles planche
+17:05:11.919  clic =onglet-controle
+17:05:12.402  defile =planche-q0
+17:05:12.987  clic =planche-q0
+17:05:13.167  tape "Oui : sphère, goulot, collerette et bouchon se reconnaissent en aplat, même sans couleur."
+17:05:14.661  touche tab
+17:05:14.748  defile =planche-q1
+17:05:14.754  clic =planche-q1
+17:05:15.105  tape "Oui, après correction : verre ≈71, liquide ≈118, surface ≈164 en gris. Au départ verre et liquide étaient trop proches ; j'ai assombri le verre."
+17:05:17.553  touche tab
+17:05:17.638  defile =planche-q2
+17:05:17.643  clic =planche-q2
+17:05:17.983  tape "Oui. Une seule lumière en haut à gauche : reflet blanc à gauche, terminateur en arc, ombre propre en bas à droite. Le contre-jour turquoise est une lumière d'ambiance, plus faible que la principale."
+17:05:21.495  touche tab
+17:05:21.573  defile =planche-q3
+17:05:21.579  clic =planche-q3
+17:05:21.933  tape "Oui : le plus fort contraste est le reflet #eaf7ff posé sur le liquide rouge, là où est le sujet. Le bouchon reste en valeurs moyennes."
+17:05:24.254  touche tab
+17:05:24.336  defile =planche-q4
+17:05:24.342  clic =planche-q4
+17:05:24.750  tape "Pas d'orphelin, de banding ni de coussin signalés. 16 px en « L » restent : faux positif justifié, ce sont les coins des bandes d'ombre de 2 px (ombre propre et rebond), pas un trait doublé."
+17:05:28.046  touche tab
+17:05:28.138  defile =planche-q5
+17:05:28.144  clic =planche-q5
+17:05:28.505  tape "Grande : la sphère. Moyenne : goulot et bouchon. Petite : nœud et bouts de ficelle. À ×1 la sphère rouge et le bouchon se voient ; la ficelle ne se voit pas."
+17:05:31.205  touche tab
+17:05:31.315  defile =planche-q6
+17:05:31.321  clic =planche-q6
+17:05:31.666  tape "En partie. Icône 64×64 lisible et liquide qui va du rouge à l'orange en surface. Mais le rouge #e8483a est plus vermillon que cramoisi, et le liquide ne « rougeoie » pas vraiment : pas de lueur ni de halo."
+17:05:35.275  touche tab
+17:05:35.368  defile =planche-t0
+17:05:35.581  clic =planche-t0
+17:05:36.021  tape "Oui : flacon rond, liquide rouge et bouchon se lisent en moins d'une seconde à ×1."
+17:05:37.533  touche tab
+17:05:37.622  defile =planche-t1
+17:05:37.629  clic =planche-t1
+17:05:37.972  tape "Non vérifiable : pas d'autres objets du jeu à côté. Vue de face, lumière haut-gauche et contour #2a2238, à garder pour la suite."
+17:05:40.242  touche tab
+17:05:40.329  defile =planche-t2
+17:05:40.333  clic =planche-t2
+17:05:40.684  tape "Oui : corps 39 px (x12–50), goulot 11, collerette 15, bouchon 9. Tout est centré sur la colonne x31."
+17:05:42.457  touche tab
+17:05:42.549  defile =planche-t3
+17:05:42.661  clic =planche-t3
+17:05:43.085  tape "Oui en vue grise : contour, verre, liège, liquide et reflet ont des valeurs distinctes."
+17:05:44.616  touche tab
+17:05:44.699  defile =planche-t4
+17:05:44.706  clic =planche-t4
+17:05:45.033  tape "Fond clair (damier) et gris moyen : oui. Fond sombre : pas testé. Le contour #2a2238 s'y fondrait sans doute ; le liquide resterait lisible."
+17:05:47.518  touche tab
+17:05:47.620  defile =planche-reussi
+17:05:47.626  clic =planche-reussi
+17:05:47.968  tape "1. Les matières se séparent en gris après la correction verre/liquide. 2. Le selout #7a1748 côté lumière et le contre-jour turquoise côté ombre donnent le volume sans alourdir le contour. 3. Ombre propre en rangées exactes avec un rebond de 2 px, et fente du bouchon avec lèvre claire."
+17:05:52.979  touche tab
+17:05:53.064  defile =planche-ameliorer
+17:05:53.070  clic =planche-ameliorer
+17:05:53.414  tape "1. Détecteur « L » : coinsL ne regarde pas l'épaisseur et signale 16 faux positifs sur des bandes d'ombre de 2 px. Ajouter un test d'épaisseur. 2. Rampes non contrôlées par l'outil : hex choisis à la main, 0 rampe enregistrée, donc la porte rampesGris n'a rien vérifié. 3. Pas testé sur fond sombre, pas de lueur autour du liquide, ficelle invisible à ×1. AA : un seul pixel essayé (14,48), retiré car il ratait le test de l'enlèvement ; aucun AA dans le dessin."
+17:06:01.699  touche tab
+17:06:01.801  etat porte
+17:06:06.110  clic =onglet-methode
+17:06:06.633  defile =etape-valide
+17:06:07.073  clic =etape-valide
+17:06:07.241  clic =menu-fichier
+17:06:07.735  clic =fichier-enregistrer
+17:06:08.074  # fichier enregistré : fichiers/potion-de-vie.claude-pixel.json
+17:06:08.139  attends 800
+17:06:08.945  regarde
+17:06:15.834  fin
+17:06:17.067  # fin

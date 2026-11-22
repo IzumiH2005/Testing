@@ -1,0 +1,9 @@
+regard 019
+case 48,35 · couleur transparent · écran 598,401
+outil ellipse · taille 1 · c1 #2a2238ff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 3 · Déformer et séparer (B6-A · B6-B)
+porte : Case non cochée : « Une forme dominante, une moyenne, une petite »
+défauts : aucun
+messages : aucun
+images : seances/potion-64/regards/019-{ecran,loupe,dessin}.png

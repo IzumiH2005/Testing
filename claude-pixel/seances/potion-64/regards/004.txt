@@ -1,0 +1,9 @@
+regard 004
+case 26,22 · couleur #2a2238ff · écran 466,323
+outil crayon · taille 1 · c1 #2a2238ff · c2 #00000000
+calque 1/1 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 2 · Forme de base (B6-A · B6-B)
+porte : Case non cochée : « La primitive se lit à ×1 » | Case non cochée : « Repère de lumière posé » | Case non cochée : « Vue miroir regardée : aucune pente fausse »
+défauts : aucun
+messages : aucun
+images : seances/potion-64/regards/004-{ecran,loupe,dessin}.png

@@ -1,0 +1,9 @@
+regard 043
+case 22,57 · couleur #b8243fff · écran 442,533
+outil crayon · taille 1 · c1 #b8243fff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 5 · Ombrage de base (B6-A · A5-8)
+porte : Case non cochée : « Terminateur net, un côté d'ombre franc » | Case non cochée : « Ombre lue en gris : la forme tient sans couleur (règle 43) »
+défauts : Jaggies (segments irréguliers) [attention] 9 px (dont 23,56 24,56 25,56 26,56 près du curseur) ; Tramage en damier [conseil] 45 px (dont 22,56 23,56 22,57 23,57 près du curseur)
+messages : aucun
+images : seances/potion-64/regards/043-{ecran,loupe,dessin}.png

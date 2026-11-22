@@ -1,0 +1,9 @@
+regard 018
+case 48,35 · couleur transparent · écran 598,401
+outil ellipse · taille 1 · c1 #2a2238ff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 3 · Déformer et séparer (B6-A · B6-B)
+porte : Pixels doublés en « L » (A5-6 · règle 21) : 2 px. Corrige, ou justifie-le. | Case non cochée : « Une forme dominante, une moyenne, une petite »
+défauts : Pixels doublés en « L » [erreur] 2 px (dont 48,32 près du curseur)
+messages : aucun
+images : seances/potion-64/regards/018-{ecran,loupe,dessin}.png

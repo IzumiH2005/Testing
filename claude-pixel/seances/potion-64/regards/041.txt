@@ -1,0 +1,9 @@
+regard 041
+case 16,52 · couleur #b8243fff · écran 406,503
+outil crayon · taille 1 · c1 #b8243fff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 5 · Ombrage de base (B6-A · A5-8)
+porte : Pixels doublés en « L » (A5-6 · règle 21) : 2 px. Corrige, ou justifie-le. | Case non cochée : « Terminateur net, un côté d'ombre franc » | Case non cochée : « Ombre lue en gris : la forme tient sans couleur (règle 43) »
+défauts : Pixels doublés en « L » [erreur] 2 px ; Tramage en damier [conseil] 49 px (dont 19,54 20,54 19,55 20,55 près du curseur)
+messages : aucun
+images : seances/potion-64/regards/041-{ecran,loupe,dessin}.png

@@ -1,0 +1,9 @@
+regard 057
+case 37,24 · couleur #232840ff · écran 532,335
+outil crayon · taille 1 · c1 #232840ff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 5 · Ombrage de base (B6-A · A5-8)
+porte : Case non cochée : « Terminateur net, un côté d'ombre franc » | Case non cochée : « Ombre lue en gris : la forme tient sans couleur (règle 43) »
+défauts : aucun
+messages : aucun
+images : seances/potion-64/regards/057-{ecran,loupe,dessin}.png

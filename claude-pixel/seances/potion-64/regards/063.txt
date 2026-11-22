@@ -1,0 +1,9 @@
+regard 063
+case 30,18 · couleur #232840ff · écran 490,299
+outil crayon · taille 1 · c1 #232840ff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 6 · Ombres et lumières secondaires (B6-A · A6-E)
+porte : Case non cochée : « AO dans les creux, rebond plus sombre que la lumière »
+défauts : Pixels doublés en « L » [erreur] 16 px
+messages : aucun
+images : seances/potion-64/regards/063-{ecran,loupe,dessin}.png

@@ -1,0 +1,9 @@
+regard 079
+case 47,50 · couleur #5fe0d0ff · écran 592,491
+outil crayon · taille 1 · c1 #5fe0d0ff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 64×64 « Potion de vie » (objet)
+étape 8 · Contre-jour (B6-A · B6-G)
+porte : Case non cochée : « Le contre-jour a une autre teinte que la lumière principale »
+défauts : Pixels doublés en « L » [erreur] 16 px (dont 45,48 46,48 44,53 45,53 43,54 44,54 près du curseur)
+messages : aucun
+images : seances/potion-64/regards/079-{ecran,loupe,dessin}.png
