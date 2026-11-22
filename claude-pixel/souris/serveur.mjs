@@ -243,7 +243,7 @@ async function regarde() {
   fs.writeFileSync(base + '-loupe.png', Buffer.from(loupe, 'base64'));
   const dessin = await atelierYeux.evaluate(DESSINE, ['dessin', exp, { fond: '#8a8794', extra: [[vol.valeurs, 'valeurs'], [vol.guide, 'guide ' + vol.lumiere.nom]] }]);
   fs.writeFileSync(base + '-dessin.png', Buffer.from(dessin, 'base64'));
-  const couleur = cel.dedans ? (vis.lignes[cel.y][cel.x] || 'transparent') : '(hors toile)';
+  const couleur = cel.dedans ? (vis.lignes[cel.y][cel.x] || 'transparent') + ' (exportée : ' + (exp.lignes[cel.y][cel.x] || 'transparent') + ')' : '(hors toile)';
   const L = [
     'regard ' + n + (tenus.size ? '  (bouton tenu : aperçu avant de relâcher)' : ''),
     'case ' + cel.x + ',' + cel.y + (cel.dedans ? '' : ' (hors du dessin)') + ' · couleur ' + couleur + ' · écran ' + Math.round(pos.x) + ',' + Math.round(pos.y),

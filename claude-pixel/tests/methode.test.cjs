@@ -7,10 +7,10 @@ const { AP, trait, RACINE } = require('./aide.cjs');
 
 const FICHE = { quoi: 'potion', usage: 'inventaire', couleurs: '8', projection: 'de face', lumiere: 'haut gauche', matiere: 'verre', accent: 'rouge' };
 
-test('les 78 règles impératives sont extraites du document', () => {
+test('les 82 règles impératives sont extraites du document', () => {
   const R = AP.extraitRegles(fs.readFileSync(path.join(RACINE, 'METHODE_PIXEL_ART.md'), 'utf8'));
-  assert.equal(R.length, 78);
-  assert.deepEqual(R.map(r => r.n), Array.from({ length: 78 }, (_, i) => i + 1));
+  assert.equal(R.length, 82);
+  assert.deepEqual(R.map(r => r.n), Array.from({ length: 82 }, (_, i) => i + 1));
   assert.ok(R.every(r => r.texte && r.groupe));
 });
 
@@ -40,11 +40,41 @@ test('fiche + règles lues ouvrent l\'étape 2, qui exige ses cases cochées', (
   at.act('calque.ajoute', { type: 'construction' });
   at.act('outil', { nom: 'crayon' }); trait(at, [[3, 3], [3, 8]]);
   assert.match(at.act('etape.valide').refus, /Essai/);
-  for (let k = 0; k < 3; k++) at.act('carnet.ajoute', { rubrique: 'essai', texte: 'essai ' + k });
+  for (let k = 0; k < 6; k++) {
+    at.act('carnet.ajoute', { rubrique: 'essai', texte: 'silhouette ' + k });
+    at.act('carnet.ajoute', { rubrique: 'critique', texte: 'silhouette ' + k + ' : ' + (14 + k * 2) + '/30' });
+  }
+  assert.match(at.act('etape.valide').refus, /3 idées barrées/);
   at.act('carnet.barre', { i: 6, raison: 'silhouette illisible à ×1' });
-  at.act('carnet.ajoute', { rubrique: 'choix', texte: 'vignette 3 : le col tordu se lit' });
+  at.act('carnet.barre', { i: 8, raison: 'trop proche d\'une potion ronde' });
+  at.act('carnet.ajoute', { rubrique: 'choix', texte: 'silhouette 5 : 24/30, le col tordu se lit' });
   assert.ok(AP.etatEtape(at).portes.every(p => p.manque === null));
   assert.match(at.act('etape.valide').refus, /Case non cochée/);
+  for (const c of ['familles', 'generique', 'lisible']) at.act('coche', { cle: 'essais.' + c, valeur: true });
+  assert.deepEqual(at.act('etape.valide'), { ok: true, manque: [] });
+  // étape 4 (objet, v21) : le design des pièces, 9 variantes
+  assert.equal(AP.etapeCourante(at.doc).id, 'pieces');
+  assert.match(at.act('etape.valide').refus, /9 « Pièce »/);
+  for (let k = 0; k < 9; k++) at.act('carnet.ajoute', { rubrique: 'piece', texte: 'variante ' + k });
+  assert.equal(AP.etatEtape(at).portes.find(p => p.id === 'carnetPieces').manque, null);
+});
+
+test('un document v17 garde ses 15 étapes ; un nouveau document a l\'étape « pièces »', () => {
+  const d = AP.nouveauDoc({ w: 16, h: 16, type: 'objet' });
+  assert.equal(d.meta.methode, 21);
+  assert.ok(AP.etapesDe(d).some(e => e.id === 'pieces'));
+  d.meta.methode = 17;
+  assert.equal(AP.nbEtapes(d), 15);
+  assert.ok(!AP.etapesDe(d).some(e => e.id === 'pieces'));
+});
+
+test('la fusion silencieuse d\'une couleur est signalée', () => {
+  const at = new AP.Atelier({ doc: AP.nouveauDoc({ w: 8, h: 8 }) });
+  at.act('couleur', { c1: '#ff0000' }); at.act('outil', { nom: 'crayon' }); trait(at, [[1, 1], [1, 1]]);
+  at.act('couleur', { c1: '#00ff00' }); trait(at, [[3, 3], [3, 3]]);
+  at.act('outil', { nom: 'remplace' }); at.act('couleur', { c1: '#00ff00' });
+  trait(at, [[1, 1], [1, 1]]);
+  assert.ok(at.messages.some(m => /Fusion/.test(m.msg)));
 });
 
 test('v17 : l\'étape « deux familles » exige la lumière posée et un volume qui la suit', () => {

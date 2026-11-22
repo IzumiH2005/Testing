@@ -410,16 +410,17 @@ function rendMethode(c) {
     }
     if (st.index === 0 || e.portes.includes('fiche')) rendFiche(c);
     if (e.portes.includes('regles')) {
-      c.appendChild(titre('Les 78 règles', m.reglesLues ? h('span.aide-txt', { style: { color: 'var(--ok)' } }, 'lues ✓') : null));
+      c.appendChild(titre('Les 82 règles', m.reglesLues ? h('span.aide-txt', { style: { color: 'var(--ok)' } }, 'lues ✓') : null));
       c.appendChild(h('p.aide-txt', 'Elles s\'appliquent à chaque dessin. Lis-les toutes avant de confirmer.'));
       c.appendChild(h('div.ligne',
         btn(reglesOuvertes ? 'Replier les règles' : 'Lire les règles', { cible: 'regles-ouvre', click: () => { reglesOuvertes = !reglesOuvertes; rendu(true); } }),
-        btn(m.reglesLues ? 'Règles lues ✓' : 'J\'ai lu les 78 règles', { cls: m.reglesLues ? '.fantome' : '.prim', cible: 'regles-lues', inactif: m.reglesLues || !reglesOuvertes,
+        btn(m.reglesLues ? 'Règles lues ✓' : 'J\'ai lu les 82 règles', { cls: m.reglesLues ? '.fantome' : '.prim', cible: 'regles-lues', inactif: m.reglesLues || !reglesOuvertes,
           title: reglesOuvertes ? '' : 'Ouvre d\'abord les règles', click: () => act('regles.lues') })));
       if (reglesOuvertes) c.appendChild(listeRegles());
     }
 
-    if (e.portes.includes('carnetVision') || e.portes.includes('carnetEssais')) rendCarnet(c, true);
+    const etapeCarnet = e.portes.some(p => /^carnet/.test(p));
+    if (etapeCarnet) rendCarnet(c, true);
 
     /* Portes */
     c.appendChild(titre('Portes de l\'étape', h('span.aide-txt', claude ? 'bloquantes' : 'conseils')));
@@ -432,6 +433,13 @@ function rendMethode(c) {
         h('span.i', ok ? '✓' : '!'),
         h('div', h('span', p.nom), p.manque ? h('small', p.manque) : null, just ? h('small', 'Justifié : « ' + just + ' »') : null));
       portes.appendChild(ligne);
+      // Planche : chaque défaut restant peut être justifié ici (le détecteur peut se tromper, CLAUDE.md règle 5).
+      if (p.manque && p.id === 'defauts') {
+        const restants = AP.detecte(d, A.s.image).filter(x => x.niveau !== 'conseil' && !(m.justifs && m.justifs[x.id]));
+        for (const x of restants) portes.appendChild(h('div', { style: { gridColumn: '1 / -1', margin: '0 0 6px 26px' } },
+          h('small', x.titre), champ('textarea', '', { rows: 2, cible: 'justifie-' + x.id, label: 'Justifier ' + x.titre,
+            placeholder: 'Si le détecteur se trompe, écris pourquoi (12 caractères au moins).', change: v => act('justifie', { cle: x.id, texte: v }) })));
+      }
       if (p.manque && DETECTEURS.has(p.id)) {
         const zone = champ('textarea', just || '', { rows: 2, cible: 'justifie-' + p.id, label: 'Justifier ' + p.nom,
           placeholder: 'Si c\'est voulu, écris pourquoi en une phrase (12 caractères au moins).',
@@ -481,6 +489,7 @@ function rendMethode(c) {
     rendFiche(det, true);
     c.appendChild(det);
   }
+  if (!st.fini && !st.etape.portes.some(p => /^carnet/.test(p))) rendCarnet(c, true);
 }
 
 function rendFiche(c, sansTitre) {

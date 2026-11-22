@@ -14,3 +14,11 @@ test('la potion de la séance filmée : méthode terminée, journal intègre, au
   assert.ok(at.doc.meta.etape >= AP.nbEtapes(at.doc));
   assert.deepEqual(AP.detecte(at.doc).map(x => x.id), []);
 });
+
+const F2 = path.join(RACINE, 'seances', 'fiole-unique', 'fichiers', 'fiole-a-la-graine-d-aube.claude-pixel.json');
+test('la fiole de la séance fiole-unique : méthode v17 terminée, journal intègre', { skip: !fs.existsSync(F2) && 'séance absente' }, () => {
+  const at = new AP.Atelier(); at.charge(JSON.parse(fs.readFileSync(F2, 'utf8')));
+  assert.equal(at.integrite().ok, true);
+  assert.equal(at.doc.meta.methode, 17);
+  assert.ok(at.doc.meta.etape >= AP.nbEtapes(at.doc));
+});

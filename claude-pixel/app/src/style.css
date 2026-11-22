@@ -180,7 +180,7 @@ input[type="range"] { accent-color: var(--accent); }
 
 /* ---------- Panneau ---------- */
 .panneau { grid-area: panel; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
-.onglets { display: flex; gap: 2px; padding: 6px; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid var(--line); flex: none; }
+.onglets { display: flex; flex-wrap: wrap; gap: 2px; padding: 6px; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid var(--line); flex: none; }
 .onglets::-webkit-scrollbar { display: none; }
 .onglet { flex: none; min-height: 36px; padding: 0 10px; border-radius: var(--r-s); border: 0; background: transparent; color: var(--fg-2); font-size: 13px; display: inline-flex; align-items: center; gap: 6px; }
 .onglet:hover { background: var(--surface-2); color: var(--fg); }

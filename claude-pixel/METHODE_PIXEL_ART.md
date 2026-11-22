@@ -1,4 +1,4 @@
-# Méthode de pixel art — objets, personnages, créatures et décors (v20)
+# Méthode de pixel art — objets, personnages, créatures et décors (v21)
 
 On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin classique
 (construction par volumes, ligne d'action, anatomie) et les règles du pixel art
@@ -24,8 +24,8 @@ propres.
 
 | Partie | Sections |
 |---|---|
-| Règles impératives | 78 ordres courts, tirés des tests, des livres et des maîtres |
-| **0. Dessiner avant de pixelliser** | 0-A diagnostic de la potion 64 · 0-B voir et construire · 0-C lumière et forme (zones) · 0-D design des valeurs · 0-E design des formes · 0-F perspective · 0-G couleur · 0-H bords · 0-I matières · 0-J méthode du pro · **0-K les neuf planches analysées** · 0-L recettes (potion en verre, sphère, fruit, pain, flamme, ruines, gemme) · 0-M plan d'entraînement · **0-N vision et conception (carnet, essais)** · **0-O astuces de pro** · **0-P inventer (SCAMPER, tableau morphologique)** · 0-Q geste · 0-R harmonies de couleur · 0-S métal et textures · **0-T perspective avancée et raccourcis** · **0-U anatomie animale** · **0-V mains, expressions, jeu d'acteur** · **0-W éclairages complexes** · **0-X effets naturels** · **0-Y stylisation** · **0-Z raconter en une image** |
+| Règles impératives | 82 ordres courts, tirés des tests, des livres et des maîtres |
+| **0. Dessiner avant de pixelliser** | 0-A diagnostic de la potion 64 · 0-B voir et construire · 0-C lumière et forme (zones) · 0-D design des valeurs · 0-E design des formes · 0-F perspective · 0-G couleur · 0-H bords · 0-I matières · 0-J méthode du pro · **0-K les neuf planches analysées** · 0-L recettes (potion en verre, sphère, fruit, pain, flamme, ruines, gemme) · 0-M plan d'entraînement · **0-N vision et conception (carnet, essais)** · **0-O astuces de pro** · **0-P inventer (SCAMPER, tableau morphologique)** · 0-Q geste · 0-R harmonies de couleur · 0-S métal et textures · **0-T perspective avancée et raccourcis** · **0-U anatomie animale** · **0-V mains, expressions, jeu d'acteur** · **0-W éclairages complexes** · **0-X effets naturels** · **0-Y stylisation** · **0-Z raconter en une image** · **0-AA dessiner une forme belle (design d'objet, grille de critique)** |
 | **A. Règles communes** | A1 travail · A2 lisibilité · A3 table par taille · A4 règles du dessin · A4b simplifier · A5 pipeline pixel (silhouette → contour → palette → lumière → matières → détails → nettoyage → contrôle) · A6 finition pro · **A7 tramage** · **A8 lignes et formes** · **A9 perspectives de jeu** · **A10 leçons des maîtres** · **A11 geste du pro (outils, souris)** |
 | **B. Objets** | B0 intention · B0b projection · B1 cadre · B2 volumes · B3 forme iconique · B4 matière · B4b déclinaison par taille · B5 contrôle · **B6 recettes pas à pas (pierre, rocher, cristal, slime, livre)** |
 | **C. Personnages** | C0 intention · C1 proportions · C2 pose · C3 volumes · C4 tête et visage · C5 vêtements (design) · C6 cheveux · C7 astuces de figure · C8 contrôle · C9 anatomie · C10 tailles (8 à 128 px) · C11 portrait anime · C12 visage Loomis + anime · C13 chibi pas à pas · C14 corps nu puis vêtements en calque · C15 créatures · C16 créatures complexes · C17 vêtements (plis, matières) |
@@ -81,6 +81,7 @@ propres.
 | Fumée, eau, explosion, étincelles | **0-X** · E7 · B6-D |
 | Style d'un jeu, stylisation | **0-Y** · A10 |
 | Récit, point d'intérêt, lignes directrices | **0-Z** · F5 · 0-O |
+| Design d'une forme belle, proportions, jonctions, bouchon | **0-AA** · 0-E · 0-N |
 | Grandes formes, langage des formes, point d'intérêt, contraste | **0-O** · 0-E · A2 |
 
 **Sources (étiquettes) :** [Z] *Apprendre à tout dessiner avec Zephy* · [M] livre de dessin
@@ -99,7 +100,8 @@ fournies en v17 (potion, cristal, poire, sphère, livre, pain, portail, pierre, 
 de valeurs, [D7] Sinix, design des formes, [D8] droites et courbes, [D9] couleur, [D10]
 bords, [D11]-[D15] vision, vignettes, conception et astuces de pro, [D16]-[D20]
 créativité, geste, couleur, métal et textures, [D21]-[D28] perspective, anatomie animale,
-mains, expressions, éclairages, effets, style, récit ; liens en fin de document). Toutes les règles sont reformulées.
+mains, expressions, éclairages, effets, style, récit, [D29]-[D30] appeal et verre d'art ;
+[T17] séance `fiole-unique` ; liens en fin de document). Toutes les règles sont reformulées.
 
 ---
 
@@ -305,6 +307,16 @@ Chaque règle est un ordre. Le détail et le « pourquoi » sont dans la section
     densité, palette, proportions) ; styliser, c'est simplifier et exagérer exprès (0-Y).
 78. **Une image raconte une chose** : un point d'intérêt, l'instant clé, quelques indices ;
     le décor et l'usure racontent sans texte (0-Z).
+
+**Design de la forme (0-AA)**
+79. **La forme doit être belle en noir avant toute lumière** : le rendu sublime une forme, il
+    ne la sauve pas (0-AA).
+80. **Un langage dominant et un motif répété à trois échelles** : la panse, le bouchon et un
+    détail se répondent (0-AA-B).
+81. **Proportions franches, jamais 1:1 ; jonctions dessinées** (épaule, bague, lèvre, tige) :
+    c'est aux jonctions que la forme devient belle (0-AA-B).
+82. **Au moins 6 silhouettes dans 3 familles, notées avec la grille**, puis 3 variantes de
+    chaque pièce (bouchon, jonction, pied) ; rien sous 20/30 ne passe (0-AA-D, 0-AA-E).
 
 ---
 
@@ -1037,6 +1049,90 @@ art, on traduit** : pas de pixels semi-transparents (règle 46) ; la transparenc
 - **Laisser deviner** : quelques indices bien choisis valent mieux qu'une explication ; le
   spectateur complète.
 - **Dans l'app** : la rubrique *Ce qui la rend unique* du carnet porte souvent ce récit.
+
+## 0-AA. Dessiner une forme belle : le design d'objet [D7][D29][D30][T17]
+
+Le rendu sublime une forme, il ne la sauve pas. Avant toute lumière, la **silhouette et
+ses pièces** doivent déjà être belles en noir sur blanc. C'est le niveau où se joue la
+différence entre un débutant et un pro.
+
+### A. Contre-exemple : la fiole de la séance `fiole-unique` [T17]
+Rendu correct, design raté. Ce qui n'allait pas :
+1. **Quatre langages qui ne se parlent pas** : panse ronde, col en tube droit, bouchon en pique
+   triangulaire, pied en plaque. Aucune pièce ne répond à une autre.
+2. **Proportions molles** : col aussi haut que la panse et de largeur constante. On lit un
+   ballon de chimie, pas un objet précieux.
+3. **Jonctions nues** : le col sort de la panse sans épaule ni bague, le goulot n'a pas de
+   lèvre, le pied est posé sans tige. Or c'est aux jonctions que la forme devient belle.
+4. **Bouchon non dessiné** : 3 px en pique sur une barre, illisible et sans rapport avec la
+   panse.
+5. **Asymétrie timide** : un col penché d'1 px se lit comme une erreur, pas comme une
+   intention.
+6. **Processus pauvre** : 3 vignettes de 15 px, trop petites pour designer, choisies « la moins
+   mauvaise », sans critique de la beauté ni variantes des pièces.
+
+### B. Les principes d'une belle forme
+1. **Un langage dominant, un accent.** Rond dominant + une pointe, ou anguleux dominant + une
+   courbe (0-O). Toutes les pièces parlent ce langage.
+2. **Un motif répété à trois échelles.** La forme de la panse revient, plus petite, dans le
+   bouchon, puis en détail (perle, gravure, pied). Exemple : panse en goutte → bouchon en
+   goutte → petite goutte gravée sur le pied. C'est ce qui donne l'unité.
+3. **Des proportions franches, jamais 1:1.** Panse : col : bouchon ≈ 3 : 1,5 : 1 (ou le nombre
+   d'or, 1 : 1,6). Un col est soit court et trapu, soit long et très fin **exprès** ; jamais
+   entre les deux.
+4. **Les jonctions sont des moments de design.** Épaule qui s'arrondit, bague ou collerette au
+   col, lèvre retournée au goulot, tige puis disque au pied. Ces petites bandes créent le
+   rythme grand-petit-grand.
+5. **Le contour a un rythme.** Lire le contour comme une phrase : longue courbe calme,
+   pincement, évasement, petit détail, longue courbe. Jamais une suite de bosses égales.
+6. **Une ligne de flux traverse l'objet.** De la pointe du bouchon au pied, une courbe en S ou
+   en C (0-Q) organise tout. L'asymétrie est **franche** (au moins 2-3 px à 32 px) ou absente.
+7. **Le bouchon est un objet à part entière.** C'est la « tête » de la fiole : il porte le
+   motif en petit, il a sa silhouette, il se lit à ×1. Il se dessine en au moins 3 variantes.
+8. **Le poids visuel est en bas**, ou une fragilité voulue (pied fin sous une panse lourde) et
+   assumée.
+9. **Peu de zones de détail.** Une ou deux (col et bouchon, par exemple) ; la panse reste calme
+   pour porter la lumière et la matière.
+10. **Une silhouette qui ne se confond pas.** Test : la poser à côté de trois silhouettes de
+    potions génériques (ronde, conique, carrée). Si on hésite, on recommence.
+11. **Pousser, puis revenir.** Exagérer jusqu'à « un peu trop », puis reculer d'un cran : la
+    forme timide ne se lit pas en petit.
+12. **L'appeal** (*The Illusion of Life*) : charme, simplicité, clarté, magnétisme. Une forme
+    compliquée ou confuse n'a pas d'appeal, même bien rendue.
+
+### C. Chercher dans la nature et chez les maîtres du verre [D30]
+- **Prendre une structure, pas un décor.** Lalique tirait la **structure** de ses flacons de la
+  nature (fougère, libellule, scarabée, serpent) : la forme entière vient de l'analogie.
+- **Analogies fertiles pour une fiole** : goutte, bourgeon, graine, coquillage, larme de
+  verre, fleur fermée, cœur, flamme, fiole d'alchimiste, flacon de parfum.
+- **Deux sources au moins** (0-P-C) : une forme naturelle donne la silhouette, un objet fabriqué
+  donne les jonctions (bague, lèvre, pied).
+
+### D. La méthode de design (étapes Essais et Design des pièces)
+1. **Silhouettes, beaucoup** : au moins **6** silhouettes pleines, dans au moins **3 familles**
+   d'analogie différentes (ex. goutte, bourgeon, coquillage), à une taille où l'on peut
+   designer : **au moins la moitié de la taille finale** (16 à 20 px de haut pour une toile de
+   40), jamais 10 px.
+2. **Critique écrite** de chaque silhouette avec la grille E. On garde les **2 meilleures**.
+3. **Design des pièces** sur la meilleure : **3 bouchons, 3 jonctions (épaule, bague, lèvre),
+   3 pieds**, dessinés côte à côte à la taille finale, au calque de construction. Chaque
+   variante passe la grille ; on écrit le choix.
+4. **Assembler** la silhouette finale à la taille finale, puis le test de la silhouette
+   générique (B-10) et le miroir.
+5. **Seulement ensuite**, construction en volumes, trait, lumière, matière.
+
+### E. La grille de critique (1 à 5 par critère)
+| Critère | Question |
+|---|---|
+| **Lisibilité** | À ×1, en noir, sait-on ce que c'est en une seconde ? |
+| **Originalité** | Se distingue-t-elle de trois potions génériques ? |
+| **Appeal** | Est-elle charmante, simple, claire, a-t-on envie de la regarder ? |
+| **Cohérence** | Un langage dominant, un motif répété à trois échelles ? |
+| **Rythme** | Proportions franches, jonctions dessinées, contour long-court-long ? |
+| **Crédibilité** | Tient-elle debout, se bouche-t-elle, se tient-elle en main ? |
+
+Une silhouette sous **20/30** ne passe pas à la suite. On écrit la note et la raison au carnet
+(rubrique *Critique*).
 
 ---
 
@@ -3906,6 +4002,8 @@ Cours et livres légitimes, cités pour leurs idées ; tout est reformulé.
 | [D26] | [Kenney, sprites de particules](https://www.kenney.nl/learn/drawing-particle-effect-sprites) · [Game Developer, explosions en 2D](https://www.gamedeveloper.com/art/2d-game-art-for-programmers-back-with-a-bang-) | fumée en boules, flash bref, débris, étincelles (0-X) |
 | [D27] | [80.lv, la stylisation](https://80.lv/articles/stylization-in-video-games-a-deep-dive-analysis/) · [Unity, trouver le style d'un jeu](https://unity.com/blog/game-art-styles-guide) · [RocketBrush, réalisme et stylisation](https://rocketbrush.com/blog/realism-vs-stylization-art-in-games) | simplifier et exagérer exprès, fiche de style (0-Y) |
 | [D28] | [Creative Bloq, raconter une histoire en une image](https://creativebloq.com/how-to/tell-a-story-in-an-image) · [Creative Bloq, récit par le décor](https://creativebloq.com/how-to/10-key-techniques-for-creating-environment-art-that-drives-visual-storytelling) · [Clip Studio, récit visuel](https://clipstudio.net/how-to-draw/archives/158243) | point d'intérêt, moment clé, indices (0-Z) |
+| [D29] | [Le principe d'appeal (UIC)](https://www.evl.uic.edu/ralph/508S99/appeal.html) · [Animation Mentor, l'appeal](https://www.animationmentor.com/?p=4746) · Thomas et Johnston, *The Illusion of Life* | charme, simplicité, clarté ; ordre et intérêt (0-AA-B) |
+| [D30] | [Musée Lalique](https://www.musee-lalique.com/en/?p=1957) · [Lalique, flacons de parfum (Rau Antiques)](https://rauantiques.com/blogs/canvases-carats-and-curiosities/master-of-glass-lalique-perfume-bottles) · [René Lalique, structure et nature](https://runningxlate.substack.com/p/rene-lalique) | la structure tirée de la nature, flacons comme objets d'art (0-AA-C) |
 | [D10] | [Les bords en peinture](https://drawpaintacademy.com/edges/) · [Muddy Colors, bords](https://www.muddycolors.com/?p=8983) | bords durs, doux, perdus (0-H) |
 
 Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixeljoint.com/forum/forum_posts.asp?TID=20953)
@@ -4059,6 +4157,16 @@ Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixel
 ---
 
 # Historique des versions
+
+- **v21 :** **0-AA dessiner une forme belle** : contre-exemple de la fiole de la séance
+  `fiole-unique` [T17], douze principes (langage dominant, motif à trois échelles, proportions
+  franches, jonctions dessinées, rythme du contour, ligne de flux, bouchon comme objet, poids,
+  peu de zones de détail, test de la silhouette générique, pousser puis revenir, appeal),
+  analogies de la nature et du verre d'art, méthode de design (6 silhouettes en 3 familles,
+  grille de critique sur 30, 3 variantes par pièce) ; règles 79 à 82 ; sources [D29] et [D30].
+  Dans Claude Pixel : étape **Design des pièces**, rubriques *Critique* et *Pièce* au carnet,
+  carnet ouvert à toutes les étapes, justification des défauts restants à la planche, onglets
+  sur plusieurs lignes, couleur exportée dans le regard.
 
 - **v20 :** les manques comblés. **0-T** perspective avancée et raccourcis (diminution,
   convergence, raccourci, recouvrement ; 1, 2, 3 points ; membres en raccourci) ; **0-U**

@@ -27,7 +27,9 @@ Projet personnel, non officiel, sans lien avec Anthropic.
 - **Vision et essais** : avant le premier trait, un carnet de conception. Claude y écrit une
   idée à la fois (ce qu'il voit, la structure, les formes de base, l'idée unique, ce qui la
   rend crédible), barre ce qui ne tient pas en disant pourquoi, essaie au moins trois
-  silhouettes, puis écrit son choix.
+  silhouettes, puis écrit son choix. Depuis la v21 : au moins 6 silhouettes notées sur 30
+  (lisibilité, originalité, appeal, cohérence, rythme, crédibilité), puis, pour un objet,
+  3 variantes de chaque pièce (bouchon, jonctions, pied) avant toute construction.
 - **Lumière** : un onglet pour poser la source (direction, hauteur) et afficher sur la toile
   un guide de volume (lumière, demi-ton, terminateur, ombre propre, rebond, ombre portée),
   avec le repère de lumière des planches. Vues Couleur, Valeurs et Notan. L'app mesure si
@@ -49,7 +51,7 @@ claude-pixel/
 ├── README.md               ce fichier
 ├── SPEC.md                 la spécification validée
 ├── CLAUDE.md               règles de travail de Claude dans l'atelier
-├── METHODE_PIXEL_ART.md    la méthode (v20), embarquée dans l'app (onglet Aide, règles, portes)
+├── METHODE_PIXEL_ART.md    la méthode (v21), embarquée dans l'app (onglet Aide, règles, portes)
 ├── app/
 │   ├── src/                modules JS, style.css, template.html
 │   ├── build.mjs           assemble tout en un seul fichier

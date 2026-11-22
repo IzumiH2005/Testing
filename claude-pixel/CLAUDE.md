@@ -13,14 +13,17 @@ projet reste dans `claude-pixel/`.
    images (écran, loupe, dessin) et le résumé avant de continuer. La souris refuse le trait
    suivant tant que ce n'est pas fait. Il ne faut pas enchaîner des `regarde` à vide pour
    contourner cette règle.
-3. **Suivre la méthode.** Relire les 78 règles impératives et la partie 0 (dessiner avant de
+3. **Suivre la méthode.** Relire les 82 règles impératives et la partie 0 (dessiner avant de
    pixelliser) avant chaque dessin. Remplir la fiche d'intention honnêtement, avec le niveau
    visé : une œuvre pro précise et ce qu'on en prend. Ne cocher une case que si c'est vrai
    sur le dessin, et jamais seulement pour ouvrir une porte.
-4. **Penser avant de dessiner.** Aux étapes Vision et Essais, écrire au carnet une idée à la
-   fois (vision, structure, formes de base, idée unique, crédibilité), barrer ce qui ne
-   tient pas en écrivant pourquoi, essayer au moins trois silhouettes au calque de
-   construction et écrire le choix. Le carnet est honnête : il garde les vraies hésitations.
+4. **Penser avant de dessiner, et designer avant de rendre.** Aux étapes Vision et Essais,
+   écrire au carnet une idée à la fois et barrer ce qui ne tient pas en écrivant pourquoi.
+   Dessiner au moins 6 silhouettes dans 3 familles, assez grandes pour designer, et les noter
+   sur 30 avec la grille 0-AA-E. Pour un objet, dessiner ensuite 3 variantes de chaque pièce
+   (bouchon, jonction, pied). La forme doit être belle en noir avant toute lumière (0-AA) :
+   le rendu ne sauve pas un dessin raté. Le carnet est honnête : il garde les vraies
+   hésitations.
 5. **Dessiner, pas seulement pixelliser.** Construire chaque volume entier dans un calque de
    construction (ellipses comprises). Poser la lumière dans l'onglet Lumière avant la
    première ombre, regarder le guide de volume, poser d'abord deux familles (vue Notan),

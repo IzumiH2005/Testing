@@ -155,7 +155,7 @@ const E = (id, titre, ref, faire, o = {}) => Object.assign({ id, titre, ref, fai
 const C = (cle, txt) => ({ cle, txt });
 const ETAPE_FICHE = (ref) => E('fiche', 'Fiche d\'intention et règles', ref, [
   'Remplis la fiche : chaque champ est une décision prise avant le premier pixel.',
-  'Lis les 78 règles impératives (onglet Aide) et coche « lues ».',
+  'Lis les 82 règles impératives (onglet Aide) et coche « lues ».',
   'Règle la toile à la taille finale : on ne dessine jamais en grand pour réduire (A4b).',
   'Choisis ou construis la palette : une rampe par matière (A6-A).',
   'Nomme 2 ou 3 idées fortes, pas plus : ce qu\'on doit reconnaître de loin (A10-F, règle 44).'
@@ -440,7 +440,7 @@ for (const t of ['personnage', 'chibi', 'creature']) {
 /* Vision et essais (0-N) : avant tout trait, écrire ce qu'on voit et l'éprouver. */
 const RUBRIQUES = {
   vision: 'Ce que je vois', structure: 'Structure / physionomie', formes: 'Formes de base',
-  unique: 'Ce qui la rend unique', logique: 'Pourquoi c\'est crédible', variante: 'Variante (SCAMPER, tableau)', essai: 'Essai', choix: 'Choix retenu'
+  unique: 'Ce qui la rend unique', logique: 'Pourquoi c\'est crédible', variante: 'Variante (SCAMPER, tableau)', essai: 'Essai', critique: 'Critique (note sur 30)', piece: 'Pièce (bouchon, jonction, pied)', choix: 'Choix retenu'
 };
 const AIDE_STRUCTURE = {
   objet: 'De quoi il est fait, comment ses pièces tiennent ensemble, comment on le tient ou l\'utilise (la forme suit la fonction).',
@@ -473,8 +473,37 @@ for (const t of ['objet', 'personnage', 'chibi', 'creature', 'decor', 'animation
   L.splice(i + 1, 0, ETAPE_VISION(t), ETAPE_ESSAIS());
   ETAPES_V17[t] = L;
 }
-const ETAPES = ETAPES_V17;
-const etapesDe = doc => ((doc.meta && doc.meta.methode >= 17) ? ETAPES_V17 : ETAPES_V16)[typeDe(doc)];
+/* ---------- Méthode v21 : le design de la forme d'abord (0-AA) ----------
+ * Les essais demandent 6 silhouettes notées, et l'objet gagne l'étape « Design des pièces ». */
+const ETAPE_ESSAIS21 = () => E('essais', 'Essais : silhouettes, critique, choix', '0-AA-D · 0-AA-E · 0-N', [
+  'Au calque de construction : au moins 6 silhouettes pleines, dans au moins 3 familles d\'analogie (goutte, bourgeon, coquillage…), d\'au moins la moitié de la hauteur finale.',
+  'Pour chacune, une ligne « Essai » (ce que c\'est) et une ligne « Critique » : note sur 30 avec la grille 0-AA-E (lisibilité, originalité, appeal, cohérence, rythme, crédibilité).',
+  'Barre ce qui est sous 20/30. Garde les 2 meilleures, écris le « Choix retenu » et ce qu\'il faut encore pousser.',
+  'Test : la meilleure à côté de trois potions génériques (ronde, conique, carrée). Si on hésite, recommence.'
+], { pasEncore: 'Pas de trait final ni de couleur.', portes: ['construction', 'carnetEssais21'],
+  coches: [C('familles', 'Au moins 6 silhouettes dans 3 familles différentes'), C('generique', 'La silhouette choisie ne se confond pas avec une potion générique'), C('lisible', 'La silhouette choisie se lit à ×1 et en miroir')] });
+const ETAPE_PIECES = () => E('pieces', 'Design des pièces : bouchon, jonctions, pied', '0-AA-B · 0-AA-D', [
+  'Sur la silhouette choisie, à la taille finale et au calque de construction : 3 bouchons, 3 jonctions (épaule, bague, lèvre), 3 pieds ou bases, côte à côte.',
+  'Chaque variante va au carnet (rubrique « Pièce ») avec ce qu\'elle apporte ; barre celles qui cassent le langage.',
+  'Le motif de la panse revient en petit dans le bouchon et dans un détail (trois échelles).',
+  'Proportions franches (panse : col : bouchon ≈ 3 : 1,5 : 1, jamais 1:1), ligne de flux en S ou en C, asymétrie franche ou absente.',
+  'Assemble la silhouette finale et regarde-la en miroir et à ×1.'
+], { pasEncore: 'Pas de trait final ni de couleur.', portes: ['construction', 'carnetPieces'],
+  coches: [C('motif', 'Un motif répété à trois échelles'), C('proportions', 'Proportions franches, jamais 1:1'), C('jonctions', 'Chaque jonction est dessinée (épaule, bague, lèvre, tige)'), C('bouchon', 'Le bouchon se lit à ×1 et porte le motif')] });
+const ETAPES_V21 = Object.assign({}, ETAPES_V17);
+for (const t of Object.keys(ETAPES_V21)) {
+  ETAPES_V21[t] = ETAPES_V17[t].map(e => e.id === 'essais' ? ETAPE_ESSAIS21() : e);
+  if (t === 'objet') {
+    const L = ETAPES_V21[t].slice(), i = L.findIndex(e => e.id === 'essais');
+    L.splice(i + 1, 0, ETAPE_PIECES());
+    ETAPES_V21[t] = L;
+  }
+}
+const ETAPES = ETAPES_V21;
+const etapesDe = doc => {
+  const v = (doc.meta && doc.meta.methode) || 0;
+  return (v >= 21 ? ETAPES_V21 : v >= 17 ? ETAPES_V17 : ETAPES_V16)[typeDe(doc)];
+};
 
 const TYPES = {
   objet: { nom: 'Objet', ref: 'Partie B' },
@@ -515,7 +544,7 @@ function porte(id, at, cache) {
   }
   switch (id) {
     case 'fiche': { const r = ficheIncomplete(doc); return r ? 'Fiche incomplète : ' + r.join(', ') : null; }
-    case 'regles': return m.reglesLues ? null : 'Lis les 78 règles impératives et coche « lues ».';
+    case 'regles': return m.reglesLues ? null : 'Lis les 82 règles impératives et coche « lues ».';
     case 'nonVide': return AP.mesures(doc, f).opaques ? null : 'L\'image exportée est vide.';
     case 'construction': return aDesPixels(doc, c => c.type === 'construction') ? null : 'Dessine la construction dans au moins un calque de type « construction ».';
     case 'silhouette1': { const n = AP.mesures(doc, f).couleurs; return n <= 2 ? null : 'La silhouette se fait en une couleur sombre (2 au plus) : ' + n + ' couleurs.'; }
@@ -545,6 +574,18 @@ function porte(id, at, cache) {
       if (!choix) manque.push('un « Choix retenu »');
       if (barres < 2) manque.push('au moins 2 idées barrées au total');
       return manque.length ? 'Carnet : ' + manque.join(', ') + '.' : null;
+    }
+    case 'carnetEssais21': {
+      const c = m.carnet || [], n = r => c.filter(e => e.rubrique === r).length, manque = [];
+      if (n('essai') < 6) manque.push((6 - n('essai')) + ' ligne(s) « Essai » de plus (6 silhouettes au moins)');
+      if (n('critique') < 6) manque.push((6 - n('critique')) + ' « Critique » notée(s) de plus');
+      if (!c.some(e => e.rubrique === 'choix' && !e.barre)) manque.push('un « Choix retenu »');
+      if (c.filter(e => e.barre).length < 3) manque.push('au moins 3 idées barrées au total');
+      return manque.length ? 'Carnet : ' + manque.join(', ') + '.' : null;
+    }
+    case 'carnetPieces': {
+      const c = m.carnet || [], n = c.filter(e => e.rubrique === 'piece').length;
+      return n >= 9 ? null : 'Carnet : ' + (9 - n) + ' « Pièce » de plus (3 bouchons, 3 jonctions, 3 pieds).';
     }
     case 'reference': return doc.calques.some(c => c.type === 'reference') ? null : 'Importe la pièce dans un calque de référence.';
     case 'tuileOn': return doc.tuile.on ? null : 'Active le mode tuile (onglet Tuiles).';
@@ -581,6 +622,7 @@ const NOMS_PORTES = {
   analyse: 'Analyse écrite', timing: 'Feuille de timing', imagesValidees: 'Toutes les images validées', Ltoutes: 'Aucun L sur les images',
   planche: 'Planche remplie', defauts: 'Aucun défaut restant',
   carnetVision: 'Carnet : vision écrite et corrigée', carnetEssais: 'Carnet : essais et choix',
+  carnetEssais21: 'Carnet : 6 silhouettes notées et un choix', carnetPieces: 'Carnet : 9 variantes de pièces',
   lumierePosee: 'Lumière posée', volume: 'Le volume suit la lumière', lumiere: 'Ombrage du bon côté',
   L: 'Aucun « L »', jaggies: 'Pas de jaggies', orphelins: 'Pas d\'orphelin', bandes: 'Pas de banding', coussin: 'Pas d\'ombrage coussin',
   bruit: 'Pas de bruit', trame: 'Pas de trame décorative', superpixels: 'Pas de super pixels', budget: 'Budget de couleurs (A3)',
@@ -601,7 +643,7 @@ function verifieEtape(at) {
   return { ok: !manque.length, manque };
 }
 
-/* ---------- Les 78 règles, lues dans le texte de la méthode ---------- */
+/* ---------- Les 82 règles, lues dans le texte de la méthode ---------- */
 function extraitRegles(texte) {
   const lignes = texte.split('\n'), out = [];
   let i = lignes.findIndex(l => /^# Règles impératives/.test(l)), groupe = '';
@@ -618,7 +660,7 @@ function extraitRegles(texte) {
 }
 
 Object.assign(AP, {
-  RUBRIQUES, FICHES, QUESTIONS, QUESTIONS_TYPE, TESTS_PRO, TABLE_A3, ETAPES, ETAPES_V16, ETAPES_V17, etapesDe, TYPES, NOMS_PORTES,
+  RUBRIQUES, FICHES, QUESTIONS, QUESTIONS_TYPE, TESTS_PRO, TABLE_A3, ETAPES, ETAPES_V16, ETAPES_V17, ETAPES_V21, etapesDe, TYPES, NOMS_PORTES,
   colonneA3, ficheIncomplete, nbEtapes, etapeCourante, etatEtape, verifieEtape, extraitRegles, typeDe
 });
 if (typeof module !== 'undefined') module.exports = AP;

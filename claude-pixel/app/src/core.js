@@ -247,7 +247,7 @@ function nouveauDoc(o = {}) {
     rampes: [],
     calques: [], images: [{ ms: 100, role: '', change: '', principe: '', validee: false }],
     cels: {}, celData: {}, etiquettes: [], next: 1,
-    meta: { fiche: {}, etape: 0, coches: {}, justifs: {}, planche: {}, reglesLues: false, valideEtapes: [], methode: 17, carnet: [] },
+    meta: { fiche: {}, etape: 0, coches: {}, justifs: {}, planche: {}, reglesLues: false, valideEtapes: [], methode: 21, carnet: [] },
     lumiere: { az: 135, el: 40, forme: 'gonfle', posee: false },
     tuile: { on: false, tw: 16, th: 16 },
     carte: { cols: 20, rows: 12, terrain: [], tuiles: [] }
@@ -674,6 +674,8 @@ class Atelier {
     if (!this.dans(ev.x, ev.y)) return;
     const de = t.avant[ev.y * this.doc.w + ev.x];
     const vers = this._couleurTrait();
+    // Fusion silencieuse : si la couleur d'arrivée est déjà dans le calque, les deux tons se confondent pour de bon.
+    if (vers !== de && t.avant.some(c => c === vers)) this.dit('Fusion : ' + hex(de) + ' rejoint ' + hex(vers) + ', déjà présente. Les deux tons ne font plus qu\'un ; un remplacement suivant de ' + hex(vers) + ' changera les deux.', 'alerte');
     for (let i = 0; i < t.data.length; i++) if (t.avant[i] === de) this._ecrit(i % this.doc.w, (i / this.doc.w) | 0, vers);
   }
   _degrade(t, x, y) {
@@ -1282,7 +1284,7 @@ const ACTIONS = {
   'carnet.ajoute'(a) {
     const t = String(a.texte || '').trim().slice(0, 600);
     if (!t) this.refuse('Écris l\'idée avant de l\'ajouter au carnet.');
-    const R = ['vision', 'structure', 'formes', 'unique', 'logique', 'variante', 'essai', 'choix'];
+    const R = ['vision', 'structure', 'formes', 'unique', 'logique', 'variante', 'essai', 'critique', 'piece', 'choix'];
     const rub = R.includes(a.rubrique) ? a.rubrique : 'vision';
     const m = this.doc.meta; m.carnet = m.carnet || [];
     m.carnet.push({ n: m.carnet.length + 1, rubrique: rub, texte: t, barre: false, raison: '' });
