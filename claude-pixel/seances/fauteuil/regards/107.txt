@@ -1,0 +1,11 @@
+regard 107
+case 42,47 · couleur #2a1a2e99 (exportée : transparent) · écran 562,473
+outil rect · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 4/4 · image 1/1 · dessin 64×64 « Fauteuil coquille » (objet)
+étape 4 · Design des pièces : bouchon, jonctions, pied (0-AA-B · 0-AA-D)
+porte : Carnet : 9 « Pièce » de plus (3 bouchons, 3 jonctions, 3 pieds). | Case non cochée : « Un motif répété à trois échelles » | Case non cochée : « Proportions franches, jamais 1:1 » | Case non cochée : « Chaque jonction est dessinée (épaule, bague, lèvre, tige) » | Case non cochée : « Le bouchon se lit à ×1 et porte le motif »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 22 idée(s), 4 barrée(s) · dernière : [choix] A3 : coquille 5 lobes aux encoches profondes, volutes aux bras, ceinture, 4 pieds boule ; 
+messages : aucun
+images : seances/fauteuil/regards/107-{ecran,loupe,dessin}.png

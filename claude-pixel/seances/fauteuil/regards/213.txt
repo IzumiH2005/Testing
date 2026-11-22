@@ -1,0 +1,11 @@
+regard 213
+case 107,50 (hors du dessin) · couleur (hors toile) · écran 950,488
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 8/8 · image 1/1 · dessin 64×64 « Fauteuil coquille » (objet)
+étape 10 · Validation du dessin (avant la couleur) (0-AB-C · 0-AA-E)
+porte : prête
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 33 idée(s), 4 barrée(s) · dernière : [critique] Trait final, planche vue à x1, x2, en miroir et en silhouette : lisib 5 (fauteuil coquille
+messages : aucun
+images : seances/fauteuil/regards/213-{ecran,loupe,dessin}.png

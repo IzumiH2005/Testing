@@ -1,0 +1,11 @@
+regard 164
+case 22,26 · couleur #2a1a2e99 (exportée : transparent) · écran 442,347
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 7/7 · image 1/1 · dessin 64×64 « Fauteuil coquille » (objet)
+étape 7 · Esquisse nettoyée (0-AB-A · 0-AB-B)
+porte : Case non cochée : « Toile retournée : aucune pente ni proportion fausse » | Case non cochée : « Seuls les traits qui comptent sont gardés »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 31 idée(s), 4 barrée(s) · dernière : [piece] Pied P3 (toupie tournée à pointe) : plus fin et plus haut, mais la pointe de 2 px vibre et
+messages : aucun
+images : seances/fauteuil/regards/164-{ecran,loupe,dessin}.png

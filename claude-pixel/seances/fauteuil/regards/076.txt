@@ -1,0 +1,11 @@
+regard 076
+case 150,35 (hors du dessin) · couleur (hors toile) · écran 1211,400
+outil ellipse · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 3/3 · image 1/1 · dessin 64×64 « Fauteuil coquille » (objet)
+étape 3 · Essais : silhouettes, critique, choix (0-AA-D · 0-AA-E · 0-N)
+porte : Case non cochée : « Au moins 6 silhouettes dans 3 familles différentes » | Case non cochée : « La silhouette choisie ne se confond pas avec une potion générique » | Case non cochée : « La silhouette choisie se lit à ×1 et en miroir »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 22 idée(s), 4 barrée(s) · dernière : [choix] A3 : coquille 5 lobes aux encoches profondes, volutes aux bras, ceinture, 4 pieds boule ; 
+messages : aucun
+images : seances/fauteuil/regards/076-{ecran,loupe,dessin}.png

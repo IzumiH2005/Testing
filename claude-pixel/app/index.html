@@ -4875,7 +4875,10 @@ function rendCalques(c) {
       ca.type !== 'normal' ? h('label', 'Teinte d\'affichage',
         h('div.ligne', h('input', { type: 'color', value: ca.teinte || '#5a6fae', 'data-cible': 'calque-teinte', 'aria-label': 'Teinte du calque',
           on: { change: e => act('calque.prop', { teinte: e.target.value }) } }),
-          btn('Sans teinte', { cls: '.fantome', cible: 'calque-teinte-aucune', inactif: !ca.teinte, click: () => act('calque.prop', { teinte: null }) }))) : null));
+          btn('Sans teinte', { cls: '.fantome', cible: 'calque-teinte-aucune', inactif: !ca.teinte, click: () => act('calque.prop', { teinte: null }) })),
+        // Les teintes des passes du sketching (0-AB-A) : rough rouge, volumes bleu, esquisse vert.
+        h('div.ligne', ...[['rouge', 'Rough', '#d0453a'], ['bleu', 'Volumes', '#3a6fd0'], ['vert', 'Esquisse', '#2f9a52']].map(([k, n, v]) =>
+          btn(n, { cls: '.fantome', cible: 'calque-teinte-' + k, presse: ca.teinte === v, click: () => act('calque.prop', { teinte: v }) })))) : null));
   }
 
   if (AP.typeDe(d) === 'animation' || d.type === 'animation') {

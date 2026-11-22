@@ -1,0 +1,11 @@
+regard 173
+case 48,32 · couleur #2a1a2eff (exportée : #2a1a2eff) · écran 598,383
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 8/8 · image 1/1 · dessin 64×64 « Fauteuil coquille » (objet)
+étape 8 · Trait final (0-AB-A · A5-6 · 0-E)
+porte : Case non cochée : « Vue miroir regardée : aucune pente fausse » | Case non cochée : « Courbes tendues, aucune bosse molle »
+défauts : Bruit [attention] 30 px (dont 51,32 52,33 50,34 51,35 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 31 idée(s), 4 barrée(s) · dernière : [piece] Pied P3 (toupie tournée à pointe) : plus fin et plus haut, mais la pointe de 2 px vibre et
+messages : aucun
+images : seances/fauteuil/regards/173-{ecran,loupe,dessin}.png

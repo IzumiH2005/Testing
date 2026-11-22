@@ -1,0 +1,11 @@
+regard 205
+case 9,42 · couleur #2a1a2e4d (exportée : transparent) · écran 364,443
+outil gomme · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 8/8 · image 1/1 · dessin 64×64 « Fauteuil coquille » (objet)
+étape 9 · Polish du trait (0-AB-A · A5-6 · A8 · 0-H)
+porte : Case non cochée : « Contour plus fort que les traits intérieurs » | Case non cochée : « Chaque jonction est nette et dessinée »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 31 idée(s), 4 barrée(s) · dernière : [piece] Pied P3 (toupie tournée à pointe) : plus fin et plus haut, mais la pointe de 2 px vibre et
+messages : aucun
+images : seances/fauteuil/regards/205-{ecran,loupe,dessin}.png
