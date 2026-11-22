@@ -1,6 +1,17 @@
-# Atelier Pixel : spécification (à valider avant tout code)
+# Claude Pixel : spécification
 
-Statut : **proposition**. Rien n'est construit tant que cette spec n'est pas validée.
+Statut : **validée et construite** (anciennement « Atelier Pixel »). Choix retenus : les portes
+bloquent Claude et ne font que conseiller un humain ; pas d'agent critique ; sauvegarde
+localStorage plus fichiers `.claude-pixel.json` ; deux vidéos (Playwright et timelapse WebM
+dans l'app) ; ordre des phases conservé.
+
+## Identité
+
+- Nom : **Claude Pixel**. Devise : « Un pixel à la fois. »
+- Marque : un « C » dessiné sur une grille de 6×6 pixels, avec un seul pixel ambre en accent.
+- Couleur d'accent : ambre `#f2b84b` (thème sombre), `#a86400` (thème clair). Polices :
+  Silkscreen (marque), IBM Plex Sans (interface), IBM Plex Mono (valeurs).
+- Projet personnel, non officiel, sans lien avec Anthropic : ni son logo ni ses couleurs.
 
 ## 0. En une phrase
 
@@ -20,7 +31,7 @@ tient pas. Chaque séance est enregistrée et se revoit en vidéo.
 | Résultat | ton dessin, exportable | le dessin **et** la vidéo de la séance, que tu revois dans l'artifact |
 
 Le même fichier `app/index.html` sert aux deux. Le mode Claude s'active par l'adresse
-(`?mode=claude`) et ajoute un curseur visible, le journal strict et les contrôles d'intégrité.
+(`#claude`, ou `?mode=claude`) et ajoute un curseur visible, le journal strict et les contrôles d'intégrité.
 
 ## 2. Ce que les meilleurs éditeurs ont, et qu'on reprend
 
@@ -95,7 +106,7 @@ Pixquare, Pixel Artistry, PixelLab (liste Lospec en point de départ).
 - PNG à ×1 ou agrandi par un entier seulement (F3-C) ; GIF ; vidéo WebM.
 - **Planche de sprites** : cellule fixe prise sur la plus grande boîte, même pivot, données
   JSON à côté ; tailles OAM GBA proposées (E8).
-- Fichier projet `.atelier` (tout le document plus le journal), palette `.hex` ou `.gpl`.
+- Fichier projet `.claude-pixel.json` (tout le document plus le journal), palette `.hex` ou `.gpl`.
 - Les fichiers se donnent par la fenêtre d'enregistrement de claude.ai. Les liens de
   téléchargement classiques sont bloqués dans un artifact.
 
@@ -245,7 +256,7 @@ dessin, un **bilan** de 3 points réussis et 3 points à améliorer (A5-11).
 
 ### 4.5 Aide
 - Le doc entier est intégré, avec recherche plein texte et sommaire. Une copie du fichier
-  vit dans `atelier-pixel/` : aucun partage avec `methode-pixel-art/`.
+  vit dans `claude-pixel/` : aucun partage avec `methode-pixel-art/`.
 - Un **panneau contextuel** montre les sections et les règles impératives de l'étape en
   cours, et les tableaux utiles (table par taille, recettes d'yeux, plis de Bridgman…).
 - Chaque détecteur et chaque porte renvoie à la section du doc concernée.
@@ -262,19 +273,21 @@ dessin, un **bilan** de 3 points réussis et 3 points à améliorer (A5-11).
 - **Vidéos**, deux formes :
   1. la vidéo brute de la séance, filmée par le navigateur de Claude (Playwright) ;
   2. un timelapse WebM ou GIF exporté depuis le lecteur.
-- **Pour que tu les regardes** : chaque séance est enregistrée dans `atelier-pixel/seances/`
+- **Pour que tu les regardes** : chaque séance est enregistrée dans `claude-pixel/seances/`
   et publiée avec l'artifact. L'onglet « Séances de Claude » les liste et les rejoue. La
   vidéo t'est aussi envoyée directement dans la conversation.
 
 ## 6. Architecture
 
 ```
-atelier-pixel/
+claude-pixel/
 ├── README.md
 ├── SPEC.md                 ce fichier
 ├── CLAUDE.md               règles de travail de Claude dans l'atelier (protocole 3 et 4)
 ├── METHODE_PIXEL_ART.md    copie du doc, source de l'aide
 ├── app/
+│   ├── src/                modules JS, style.css et template.html
+│   ├── build.mjs           assemble les sources et la méthode en un seul fichier
 │   └── index.html          l'application entière (HTML, CSS et JS sans framework, canevas 2D)
 ├── souris/
 │   ├── serveur.mjs         navigateur Playwright persistant, filme la séance
@@ -285,7 +298,7 @@ atelier-pixel/
 
 - Une seule page HTML, sans dépendance réseau sauf deux bibliothèques épinglées sur cdnjs
   (rendu du Markdown de l'aide, encodeur GIF), ou écrites en interne si besoin.
-- Brouillon enregistré dans le navigateur (localStorage, en secours), et fichiers `.atelier`
+- Brouillon enregistré dans le navigateur (localStorage, en secours), et fichiers `.claude-pixel.json`
   à enregistrer et rouvrir. Rien de partagé entre visiteurs dans cette version.
 - Capacité d'artifact utilisée : `downloads`, pour les exports.
 

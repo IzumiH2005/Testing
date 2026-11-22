@@ -1,0 +1,9 @@
+regard 024
+case 6,-1 (hors du dessin) · couleur (hors toile) · écran 461,183
+outil remplace · taille 1 · c1 #78264eff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 16×16 « Potion de soin » (objet)
+méthode terminée · dernière étape : 11 · Contrôle final : la planche (A5-11 · B5 · B6-G)
+porte : prête
+défauts : aucun
+messages : aucun
+images : seances/potion/regards/024-{ecran,loupe,dessin}.png

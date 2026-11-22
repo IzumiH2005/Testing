@@ -1,0 +1,9 @@
+regard 014
+case 10,13 · couleur #7a2a34ff · écran 559,512
+outil crayon · taille 1 · c1 #7a2a34ff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 16×16 « Potion de soin » (objet)
+étape 5 · Ombrage de base (B6-A · A5-8)
+porte : Case non cochée : « Terminateur net, un côté d'ombre franc »
+défauts : aucun
+messages : aucun
+images : seances/potion/regards/014-{ecran,loupe,dessin}.png

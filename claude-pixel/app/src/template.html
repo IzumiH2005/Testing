@@ -1,0 +1,67 @@
+<title>Claude Pixel</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Claude Pixel : éditeur de pixel art guidé par la méthode : étapes, portes, contrôles, animation, tuiles et séances rejouables.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Silkscreen&display=swap">
+<style>/*CSS*/</style>
+
+<div class="app" id="app">
+  <header class="barre" role="toolbar" aria-label="Fichier et affichage">
+    <div class="marque" title="Claude Pixel — Un pixel à la fois. Projet personnel, non officiel."><svg viewBox="0 0 6 6" aria-hidden="true"><path class="c" d="M1 0h3v1H1zM0 1h1v4H0zM1 5h3v1H1z"/><rect class="a" x="4" y="4" width="1" height="1"/></svg><span>Claude Pixel</span><small>Un pixel à la fois.</small></div>
+    <button class="btn" id="b-fichier" data-cible="menu-fichier" aria-haspopup="menu" aria-expanded="false">Fichier</button>
+    <input class="titre-doc" id="titre-doc" data-cible="titre-doc" aria-label="Nom du dessin" spellcheck="false">
+    <div class="groupe" role="group" aria-label="Historique">
+      <button class="btn ico" id="b-annule" data-cible="annule" title="Annuler (Ctrl+Z)" aria-label="Annuler"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 7 4 12l5 5"/><path d="M4 12h10a6 6 0 0 1 0 12h-2" transform="translate(0 -6)"/></svg></button>
+      <button class="btn ico" id="b-refait" data-cible="refait" title="Refaire (Ctrl+Maj+Z)" aria-label="Refaire"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 7 5 5-5 5"/><path d="M20 12H10a6 6 0 0 0 0 12h2" transform="translate(0 -6)"/></svg></button>
+    </div>
+    <div class="groupe masque-tel" role="group" aria-label="Zoom">
+      <button class="btn ico" id="b-dezoom" data-cible="dezoom" title="Dézoomer (−)" aria-label="Dézoomer">−</button>
+      <button class="btn zoom-val mono" id="b-zoom" data-cible="zoom-ajuste" title="Ajuster à l'écran (0)">×8</button>
+      <button class="btn ico" id="b-zoom-plus" data-cible="zoom" title="Zoomer (+)" aria-label="Zoomer">+</button>
+    </div>
+    <div class="espace"></div>
+    <button class="etape-chip" id="etape-chip" data-cible="etape-chip" title="Étape de la méthode"><b>1/6</b><span>Fiche d'intention</span></button>
+    <button class="btn seul-tel" id="b-images" data-cible="images" aria-expanded="false" aria-controls="timeline">Images</button>
+    <span class="badge masque-tel" id="badge-mode"><span class="pt"></span><span>Humain</span></span>
+    <button class="btn ico fantome" id="b-theme" data-cible="theme" title="Thème clair ou sombre" aria-label="Changer de thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></button>
+    <button class="btn bouton-panneau" id="b-panneau" data-cible="panneau" aria-expanded="false" aria-controls="panneau">Panneau</button>
+  </header>
+
+  <nav class="rail carte" id="rail" aria-label="Outils"></nav>
+
+  <div class="options carte" id="options" role="toolbar" aria-label="Réglages de l'outil"></div>
+
+  <main class="scene" id="scene" aria-label="Toile">
+    <canvas class="toile" id="toile" data-cible="toile"></canvas>
+    <div class="apercu" id="apercu" data-cible="apercu">
+      <button class="masquer" id="b-apercu" title="Replier l'aperçu" aria-label="Replier l'aperçu">×</button>
+      <figure><canvas id="apercu-1"></canvas><figcaption>×1</figcaption></figure>
+      <figure><canvas id="apercu-2" class="x2"></canvas><figcaption>×2</figcaption></figure>
+    </div>
+    <div class="hud" id="hud" aria-live="polite"></div>
+    <div class="alerte-porte" id="alerte-porte" hidden></div>
+    <div class="precision" aria-label="Mode précision">
+      <button class="btn" id="b-prec-1" data-cible="precision-trace">Tracer</button>
+      <button class="btn" id="b-prec-2" data-cible="precision-c2">C2</button>
+    </div>
+  </main>
+
+  <aside class="panneau carte" id="panneau" aria-label="Panneau">
+    <div class="onglets" role="tablist" id="onglets">
+      <button class="onglet" role="tab" data-onglet="couleurs" data-cible="onglet-couleurs">Couleurs</button>
+      <button class="onglet" role="tab" data-onglet="calques" data-cible="onglet-calques">Calques</button>
+      <button class="onglet" role="tab" data-onglet="methode" data-cible="onglet-methode">Méthode<span class="pt" hidden></span></button>
+      <button class="onglet" role="tab" data-onglet="controle" data-cible="onglet-controle">Contrôle</button>
+      <button class="onglet" role="tab" data-onglet="tuiles" data-cible="onglet-tuiles">Tuiles</button>
+      <button class="onglet" role="tab" data-onglet="aide" data-cible="onglet-aide">Aide</button>
+      <button class="onglet" role="tab" data-onglet="seance" data-cible="onglet-seance">Séance</button>
+    </div>
+    <div class="contenu" id="contenu" role="tabpanel"></div>
+  </aside>
+
+  <section class="timeline carte" id="timeline" aria-label="Images de l'animation"></section>
+</div>
+
+<div class="toasts" id="toasts" aria-live="assertive"></div>
+<script>/*JS*/</script>

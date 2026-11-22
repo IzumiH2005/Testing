@@ -1,0 +1,9 @@
+regard 022
+case 28,21 (hors du dessin) · couleur (hors toile) · écran 995,694
+outil remplace · taille 1 · c1 #78264eff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 16×16 « Potion de soin » (objet)
+étape 11 · Contrôle final : la planche (A5-11 · B5 · B6-G)
+porte : Planche : réponds à Q1, Q2, Q3, Q4, Q5, Q6, Q7, T1, T2, T3, T4, T5, 3 réussis, 3 à améliorer.
+défauts : aucun
+messages : aucun
+images : seances/potion/regards/022-{ecran,loupe,dessin}.png

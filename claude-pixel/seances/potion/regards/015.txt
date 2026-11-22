@@ -1,0 +1,9 @@
+regard 015
+case 10,9 · couleur #f2704eff · écran 559,416
+outil crayon · taille 1 · c1 #f2704eff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 16×16 « Potion de soin » (objet)
+étape 6 · Ombres et lumières secondaires (B6-A · A6-E)
+porte : Case non cochée : « AO dans les creux, rebond plus sombre que la lumière »
+défauts : aucun
+messages : aucun
+images : seances/potion/regards/015-{ecran,loupe,dessin}.png

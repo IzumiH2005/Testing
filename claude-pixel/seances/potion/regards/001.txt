@@ -1,0 +1,9 @@
+regard 001
+case 28,24 (hors du dessin) · couleur (hors toile) · écran 991,770
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 1/1 · image 1/1 · dessin 16×16 « Potion de soin » (objet)
+étape 1 · Fiche d'intention et règles (B0 · B0b · A3)
+porte : Lis les 42 règles impératives et coche « lues ».
+défauts : aucun
+messages : aucun
+images : seances/potion/regards/001-{ecran,loupe,dessin}.png

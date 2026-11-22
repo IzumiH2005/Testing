@@ -1,0 +1,9 @@
+regard 019
+case 3,13 · couleur #7a2a34ff · écran 391,512
+outil crayon · taille 1 · c1 #7a2a34ff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 16×16 « Potion de soin » (objet)
+étape 7 · Éclats et contour coloré (B6-A · A6-C)
+porte : Case non cochée : « Contour coloré (selout) posé maintenant, pas avant »
+défauts : aucun
+messages : aucun
+images : seances/potion/regards/019-{ecran,loupe,dessin}.png

@@ -1,0 +1,9 @@
+regard 002
+case 5,4 · couleur #2a1a2eff · écran 439,296
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 1/1 · image 1/1 · dessin 16×16 « Potion de soin » (objet)
+étape 2 · Forme de base (B6-A · B6-B)
+porte : Case non cochée : « La primitive se lit à ×1 » | Case non cochée : « Repère de lumière posé »
+défauts : aucun
+messages : aucun
+images : seances/potion/regards/002-{ecran,loupe,dessin}.png

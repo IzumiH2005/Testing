@@ -1,0 +1,9 @@
+regard 020
+case 11,11 · couleur #8fb3c9ff · écran 583,464
+outil crayon · taille 1 · c1 #8fb3c9ff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 16×16 « Potion de soin » (objet)
+étape 8 · Contre-jour (B6-A · B6-G)
+porte : Case non cochée : « Le contre-jour a une autre teinte que la lumière principale »
+défauts : aucun
+messages : aucun
+images : seances/potion/regards/020-{ecran,loupe,dessin}.png

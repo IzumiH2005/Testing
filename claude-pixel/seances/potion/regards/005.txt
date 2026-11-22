@@ -1,0 +1,9 @@
+regard 005
+case 10,4 · couleur #2a1a2eff · écran 559,296
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 1/2 · image 1/1 · dessin 16×16 « Potion de soin » (objet)
+étape 3 · Déformer et séparer (B6-A · B6-B)
+porte : Case non cochée : « Une forme dominante, une moyenne, une petite »
+défauts : aucun
+messages : aucun
+images : seances/potion/regards/005-{ecran,loupe,dessin}.png

@@ -1,0 +1,279 @@
+14:13:42.111  # séance potion · claude · 1280×800
+14:13:42.285  clic =nouveau-type-objet
+14:13:43.510  clic =nouveau-taille-16
+14:13:44.258  clic =nouveau-nom
+14:13:45.473  touche ctrl+a
+14:13:45.605  tape "Potion de soin"
+14:13:45.984  clic =modale-oui
+14:13:46.765  attends 300
+14:13:47.068  molette 3
+14:13:47.242  clic =fiche-quoi
+14:13:48.215  tape "potion de soin"
+14:13:48.589  clic =fiche-usage
+14:13:49.048  tape "icône d'inventaire"
+14:13:49.510  clic =fiche-couleurs
+14:13:49.968  touche ctrl+a
+14:13:50.096  tape "8"
+14:13:50.123  choisis =fiche-projection "de face"
+14:13:50.964  choisis =fiche-lumiere "haut gauche"
+14:13:51.810  molette 2
+14:13:51.980  clic =fiche-matiere
+14:13:52.524  tape "verre"
+14:13:52.649  clic =fiche-accent
+14:13:53.104  tape "rouge du liquide"
+14:13:53.513  clic =regles-ouvre
+14:13:54.222  attends 400
+14:13:54.625  regarde
+14:13:54.850  clic =regles-lues
+14:13:55.507  defile =etape-valide
+14:13:57.438  clic =etape-valide
+14:13:58.235  attends 300
+14:13:58.701  etat porte
+14:14:01.666  clic =opt-pp
+14:14:02.906  clic =outil-crayon
+14:14:04.004  trace 5,4 9,4 9,6 10,7 11,7 12,8 12,12 11,13 10,14 4,14 3,13 2,12 2,8 3,7 4,7 5,6 5,4
+14:14:06.427  regarde
+14:14:06.865  clic =onglet-calques
+14:14:08.096  clic =calque-ajoute-construction
+14:14:08.713  attends 200
+14:14:08.916  clic =onglet-couleurs
+14:14:09.646  clic =hex
+14:14:10.863  touche ctrl+a
+14:14:10.992  tape "#f2b84b"
+14:14:11.165  touche entree
+14:14:11.289  clic =selecteur-c1
+14:14:12.072  trace 0,0 2,2
+14:14:13.266  regarde
+14:14:13.514  trace 3,1 3,3 1,3
+14:14:13.904  regarde
+14:14:14.165  clic =onglet-methode
+14:14:15.430  defile =coche-forme.primitive
+14:14:16.551  clic =coche-forme.primitive
+14:14:17.480  clic =coche-forme.reperelum
+14:14:17.807  defile =etape-valide
+14:14:17.834  clic =etape-valide
+14:14:18.239  attends 300
+14:14:18.658  etat porte
+14:14:22.419  clic =onglet-calques
+14:14:23.075  clic =calque-choisit-0
+14:14:23.778  clic =onglet-couleurs
+14:14:24.580  clic =hex
+14:14:25.786  touche ctrl+a
+14:14:25.915  tape "#2a1a2e"
+14:14:26.110  touche entree
+14:14:26.240  clic =selecteur-c1
+14:14:27.022  trace 4,4 10,4
+14:14:28.398  regarde
+14:14:28.620  trace 5,3 5,2 6,1 8,1 9,2 9,3
+14:14:29.293  regarde
+14:14:29.831  clic =onglet-methode
+14:14:31.065  defile =coche-deformer.masses
+14:14:32.179  clic =coche-deformer.masses
+14:14:32.407  defile =etape-valide
+14:14:32.412  clic =etape-valide
+14:14:32.845  attends 300
+14:14:33.147  clic =onglet-couleurs
+14:14:34.380  clic =hex
+14:14:35.606  touche ctrl+a
+14:14:35.733  tape "#c42a3c"
+14:14:35.931  touche entree
+14:14:36.059  clic =selecteur-c1
+14:14:36.858  trace 3,9 11,9
+14:14:38.346  regarde
+14:14:38.581  clic =outil-seau
+14:14:39.806  clic 6,11
+14:14:41.020  regarde
+14:14:41.274  clic =hex
+14:14:42.511  touche ctrl+a
+14:14:42.640  tape "#8fb3c9"
+14:14:42.821  touche entree
+14:14:42.947  clic =selecteur-c1
+14:14:43.741  clic 7,6
+14:14:44.956  regarde
+14:14:45.213  clic =hex
+14:14:46.420  touche ctrl+a
+14:14:46.549  tape "#a8744a"
+14:14:46.733  touche entree
+14:14:46.878  clic =selecteur-c1
+14:14:47.673  clic 7,2
+14:14:48.928  regarde
+14:14:49.475  clic =onglet-methode
+14:14:50.696  defile =coche-aplats.gris
+14:14:50.702  clic =coche-aplats.gris
+14:14:51.923  defile =etape-valide
+14:14:51.927  clic =etape-valide
+14:14:52.324  attends 300
+14:14:52.626  clic =onglet-couleurs
+14:14:53.841  clic =outil-crayon
+14:14:55.057  clic =hex
+14:14:56.297  touche ctrl+a
+14:14:56.426  tape "#6b4430"
+14:14:56.604  touche entree
+14:14:56.728  clic =selecteur-c1
+14:14:57.555  trace 8,2 8,3
+14:14:58.710  regarde
+14:14:58.971  clic =hex
+14:15:00.203  touche ctrl+a
+14:15:00.328  tape "#7a2a34"
+14:15:00.505  touche entree
+14:15:00.631  clic =selecteur-c1
+14:15:01.424  trace 11,10 11,12 9,12
+14:15:02.676  regarde
+14:15:02.955  clic 10,11
+14:15:03.268  regarde
+14:15:03.559  trace 8,13 10,13
+14:15:03.907  regarde
+14:15:04.151  clic =onglet-methode
+14:15:05.378  defile =coche-ombre.terminateur
+14:15:05.391  clic =coche-ombre.terminateur
+14:15:06.602  defile =etape-valide
+14:15:06.607  clic =etape-valide
+14:15:07.021  attends 300
+14:15:07.322  clic =onglet-couleurs
+14:15:08.560  clic =hex
+14:15:09.782  touche ctrl+a
+14:15:09.907  tape "#f2704e"
+14:15:10.098  touche entree
+14:15:10.222  clic =selecteur-c1
+14:15:11.003  trace 3,9 10,9
+14:15:12.443  regarde
+14:15:12.677  clic 5,10
+14:15:13.220  regarde
+14:15:13.487  clic =onglet-methode
+14:15:14.710  defile =coche-secondaires.ao
+14:15:14.717  clic =coche-secondaires.ao
+14:15:15.755  defile =etape-valide
+14:15:15.759  clic =etape-valide
+14:15:16.205  attends 300
+14:15:16.509  clic =onglet-couleurs
+14:15:17.596  clic =hex
+14:15:18.818  touche ctrl+a
+14:15:18.949  tape "#f5f1e6"
+14:15:19.120  touche entree
+14:15:19.246  clic =selecteur-c1
+14:15:20.037  trace 6,5 6,6 5,7 4,8
+14:15:21.223  regarde
+14:15:21.473  trace 4,10 4,11
+14:15:21.712  regarde
+14:15:21.978  clic =hex
+14:15:23.189  touche ctrl+a
+14:15:23.315  tape "#7a2a34"
+14:15:23.523  touche entree
+14:15:23.649  clic =selecteur-c1
+14:15:24.436  trace 2,9 2,12 3,13
+14:15:25.706  regarde
+14:15:25.965  clic =onglet-methode
+14:15:27.198  defile =coche-eclats.selout
+14:15:27.203  clic =coche-eclats.selout
+14:15:28.336  defile =etape-valide
+14:15:28.340  clic =etape-valide
+14:15:28.790  attends 300
+14:15:29.092  clic =onglet-couleurs
+14:15:30.305  clic =hex
+14:15:31.585  touche ctrl+a
+14:15:31.711  tape "#8fb3c9"
+14:15:31.893  touche entree
+14:15:32.024  clic =selecteur-c1
+14:15:32.819  trace 11,10 11,11
+14:15:33.952  regarde
+14:15:34.225  clic =onglet-methode
+14:15:35.467  defile =coche-contrejour.autre
+14:15:35.471  clic =coche-contrejour.autre
+14:15:36.370  defile =etape-valide
+14:15:36.379  clic =etape-valide
+14:15:36.820  attends 300
+14:15:37.125  clic =onglet-couleurs
+14:15:38.315  etat porte
+14:16:28.526  clic =onglet-couleurs
+14:16:28.779  clic =hex
+14:16:29.999  touche ctrl+a
+14:16:30.127  tape "#78264e"
+14:16:30.307  touche entree
+14:16:30.432  clic =selecteur-c1
+14:16:31.256  clic =outil-remplace
+14:16:32.524  clic 11,12
+14:16:33.774  regarde
+14:16:34.032  clic =onglet-methode
+14:16:35.285  defile =coche-teinte.froid
+14:16:35.297  clic =coche-teinte.froid
+14:16:36.296  defile =etape-valide
+14:16:36.300  clic =etape-valide
+14:16:36.751  attends 300
+14:16:37.053  clic =onglet-methode
+14:16:38.141  defile =coche-details.levre
+14:16:38.148  clic =coche-details.levre
+14:16:39.366  defile =coche-details.lisible
+14:16:39.373  clic =coche-details.lisible
+14:16:39.691  defile =etape-valide
+14:16:39.696  clic =etape-valide
+14:16:40.108  attends 300
+14:16:40.411  regarde
+14:16:40.868  clic =onglet-controle
+14:16:42.098  defile =planche-q0
+14:16:43.260  clic =planche-q0
+14:16:43.817  tape "Oui. La fiole ronde, son goulot et le bouchon se lisent même en silhouette pleine."
+14:16:45.912  touche tab
+14:16:46.037  defile =planche-q1
+14:16:46.044  clic =planche-q1
+14:16:46.537  tape "Oui. Verre clair, liquide moyen, bouchon brun et contour foncé ont chacun leur valeur en vue grise."
+14:16:49.023  touche tab
+14:16:49.155  defile =planche-q2
+14:16:49.291  clic =planche-q2
+14:16:50.132  tape "Oui. Une seule lumière en haut à gauche (repère posé à l'étape 2), ombre en bas à droite, contre-jour bleu à droite."
+14:16:53.074  touche tab
+14:16:53.213  defile =planche-q3
+14:16:53.219  clic =planche-q3
+14:16:53.699  tape "Oui. L'éclat blanc du verre et la surface orange du liquide, posés contre le rouge et l'ombre."
+14:16:56.052  touche tab
+14:16:56.180  defile =planche-q4
+14:16:56.185  clic =planche-q4
+14:16:56.722  tape "Aucun défaut restant. Un banding signalé pendant l'ombrage a disparu quand j'ai rempli le coin de l'ombre."
+14:16:59.441  touche tab
+14:16:59.595  defile =planche-q5
+14:16:59.727  clic =planche-q5
+14:17:00.531  tape "Dominante : la panse ronde. Moyenne : le goulot. Petite : le bouchon. Les trois se voient à x1."
+14:17:02.932  touche tab
+14:17:03.083  defile =planche-q6
+14:17:03.089  clic =planche-q6
+14:17:03.566  tape "Oui : une icône d'inventaire de potion de soin, lisible en 16x16."
+14:17:05.214  touche tab
+14:17:05.340  defile =planche-t0
+14:17:05.346  clic =planche-t0
+14:17:05.880  tape "Oui : fiole rouge à bouchon, la convention de la potion de soin."
+14:17:07.517  touche tab
+14:17:07.653  defile =planche-t1
+14:17:07.793  clic =planche-t1
+14:17:08.601  tape "Pas encore d'autres icônes du jeu pour comparer. Choix fixés : vue de face, lumière haut gauche, contour sombre."
+14:17:11.411  touche tab
+14:17:11.540  defile =planche-t2
+14:17:11.547  clic =planche-t2
+14:17:12.081  tape "Oui : 11 px de large, le centre tombe sur la colonne 7."
+14:17:13.481  touche tab
+14:17:13.611  defile =planche-t3
+14:17:13.618  clic =planche-t3
+14:17:14.098  tape "Oui, voir la question 2."
+14:17:14.708  touche tab
+14:17:14.842  defile =planche-t4
+14:17:14.850  clic =planche-t4
+14:17:15.336  tape "Sur fond clair, oui. Sur fond très sombre, pas encore vérifié : le contour foncé risque de s'y fondre."
+14:17:17.926  touche tab
+14:17:18.051  defile =planche-reussi
+14:17:18.175  clic =planche-reussi
+14:17:18.684  tape "Silhouette lisible ; valeurs séparées en gris ; ombre refroidie sans changer sa valeur (même clarté 0,406)."
+14:17:21.332  touche tab
+14:17:21.464  defile =planche-ameliorer
+14:17:21.471  clic =planche-ameliorer
+14:17:21.949  tape "Tracer les diagonales case par case ; prévoir l'ombre froide dès l'étape 5 ; tester l'icône sur fond sombre."
+14:17:24.645  touche tab
+14:17:24.774  clic =onglet-methode
+14:17:26.007  defile =etape-valide
+14:17:26.012  clic =etape-valide
+14:17:27.220  attends 300
+14:17:27.522  regarde
+14:17:27.762  clic =menu-fichier
+14:17:28.982  clic =fichier-enregistrer
+14:17:29.581  # fichier enregistré : fichiers/potion-de-soin.claude-pixel.json
+14:17:29.725  attends 800
+14:17:30.532  regarde
+14:17:35.506  fin
+14:17:36.721  # fin

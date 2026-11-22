@@ -1,0 +1,9 @@
+regard 004
+case 1,3 · couleur #f2b84b99 · écran 343,272
+outil crayon · taille 1 · c1 #f2b84bff · c2 #00000000
+calque 2/2 · image 1/1 · dessin 16×16 « Potion de soin » (objet)
+étape 2 · Forme de base (B6-A · B6-B)
+porte : Case non cochée : « La primitive se lit à ×1 » | Case non cochée : « Repère de lumière posé »
+défauts : aucun
+messages : aucun
+images : seances/potion/regards/004-{ecran,loupe,dessin}.png
