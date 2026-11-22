@@ -2,7 +2,7 @@
 const path = require('node:path');
 const SRC = path.join(__dirname, '..', 'app', 'src');
 const AP = require(path.join(SRC, 'core.js'));
-for (const m of ['detect.js', 'methode.js', 'exporte.js']) require(path.join(SRC, m));
+for (const m of ['volume.js', 'detect.js', 'methode.js', 'exporte.js']) require(path.join(SRC, m));
 
 // Un document w×h rempli des points [x, y, '#rrggbb'].
 function doc(w, h, pts) {

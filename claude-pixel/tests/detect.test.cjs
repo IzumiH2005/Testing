@@ -29,7 +29,7 @@ const rampe = ['#201030', '#403060', '#6050a0', '#8080d0', '#b0b0f0'];
 function disque(f) { const p = []; for (let y = 0; y < 20; y++) for (let x = 0; x < 20; x++) { const dx = x - 9.5, dy = y - 9.5; if (Math.hypot(dx, dy) < 9.5) p.push([x, y, rampe[f(dx, dy)]]); } return doc(20, 20, p); }
 
 test('ombrage en coussin détecté, éclairage haut-gauche accepté', () => {
-  assert.deepEqual(ids(disque((dx, dy) => Math.min(4, Math.floor((9.5 - Math.hypot(dx, dy)) / 2)))), ['coussin']);
+  assert.deepEqual(ids(disque((dx, dy) => Math.min(4, Math.floor((9.5 - Math.hypot(dx, dy)) / 2)))), ['coussin', 'lumiere']);
   assert.deepEqual(ids(disque((dx, dy) => Math.max(0, Math.min(4, Math.floor((-(dx + dy) / 19 + 0.5) * 5))))), []);
 });
 

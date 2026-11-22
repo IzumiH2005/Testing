@@ -17,7 +17,8 @@ const FICHES = {
     CH('projection', 'Projection', 'Une seule par jeu (B0b, règle 33).', { type: 'choix', options: PROJ }),
     CH('lumiere', 'Lumière', 'Une seule source. Par défaut : haut gauche.', { type: 'choix', options: ['haut gauche', 'haut droite', 'dessus', 'autre (dire pourquoi)'] }),
     CH('matiere', 'Matière principale', 'Verre, métal, bois, pierre, tissu, gel… (A5-8b)'),
-    CH('accent', 'Couleur d\'accent', 'La seule couleur saturée de l\'objet (B0).')
+    CH('accent', 'Couleur d\'accent', 'La seule couleur saturée de l\'objet (B0).'),
+    CH('vise', 'Niveau visé', 'Une œuvre pro précise et ce que tu en prends (0-J) : « planche potion, étape 9 : verre transparent, liquide vu au travers ».', { requis: false })
   ],
   personnage: [
     CH('qui', 'Qui', 'Nom, rôle, ce qu\'il fait dans le jeu (C0).'),
@@ -70,6 +71,7 @@ const QUESTIONS = [
   'Les matières se séparent-elles en gris ?',
   'Le volume se lit-il, et la lumière vient-elle d\'une seule source ?',
   'Le point d\'intérêt a-t-il le plus fort contraste ?',
+  'En notan (deux valeurs), lumière et ombre forment-elles deux grandes masses dont la frontière dessine le volume (0-C, 0-D) ?',
   'Reste-t-il des orphelins, du banding, de l\'ombrage coussin, des « L » dans le contour ?',
   'Y a-t-il une forme dominante, une moyenne et une petite (A4b) ? Les marqueurs d\'identité se voient-ils à ×1 ?',
   'L\'objectif de l\'étape 0 est-il atteint ?'
@@ -122,6 +124,8 @@ QUESTIONS_TYPE.chibi = QUESTIONS_TYPE.personnage;
 /* Tests du pro (A6-J) : la vue de l'interface associée. */
 const TESTS_PRO = [
   { id: 'plisser', nom: 'Plisser les yeux', vue: 'flou', voir: 'quelques grandes taches claires et sombres, pas de grésillement' },
+  { id: 'notan', nom: 'Notan', vue: 'notan', voir: 'deux grandes masses (lumière, ombre) ; leur frontière est le terminateur et suit la forme (0-D)' },
+  { id: 'guide', nom: 'Guide de volume', vue: 'guide', voir: 'ton ombrage place lumière, demi-ton, terminateur, ombre propre, rebond et ombre portée là où le guide les met, ou tu sais dire pourquoi pas (0-C)' },
   { id: 'gris', nom: 'Gris', vue: 'gris', voir: 'chaque matière a sa valeur ; le point d\'intérêt a le plus fort contraste' },
   { id: 'silhouette', nom: 'Silhouette', vue: 'silhouette', voir: 'pose et coiffure se reconnaissent sans couleur' },
   { id: 'reelle', nom: 'Taille réelle', vue: 'x1', voir: 'aucun détail ne devient bruit ; le contour tient sur les deux fonds' },
@@ -151,7 +155,7 @@ const E = (id, titre, ref, faire, o = {}) => Object.assign({ id, titre, ref, fai
 const C = (cle, txt) => ({ cle, txt });
 const ETAPE_FICHE = (ref) => E('fiche', 'Fiche d\'intention et règles', ref, [
   'Remplis la fiche : chaque champ est une décision prise avant le premier pixel.',
-  'Lis les 48 règles impératives (onglet Aide) et coche « lues ».',
+  'Lis les 60 règles impératives (onglet Aide) et coche « lues ».',
   'Règle la toile à la taille finale : on ne dessine jamais en grand pour réduire (A4b).',
   'Choisis ou construis la palette : une rampe par matière (A6-A).',
   'Nomme 2 ou 3 idées fortes, pas plus : ce qu\'on doit reconnaître de loin (A10-F, règle 44).'
@@ -164,7 +168,7 @@ const ETAPE_PLANCHE = (ref) => E('planche', 'Contrôle final : la planche', ref,
 ], { portes: ['planche', 'defauts'] });
 const NETTOYAGE = ['L', 'jaggies', 'orphelins', 'bandes', 'coussin', 'bruit', 'trame', 'superpixels', 'budget', 'rampesGris', 'alpha'];
 
-const ETAPES = {
+const ETAPES_V16 = {
   objet: [
     ETAPE_FICHE('B0 · B0b · A3'),
     E('forme', 'Forme de base', 'B6-A · B6-B', [
@@ -353,6 +357,89 @@ const ETAPES = {
   ]
 };
 
+/* ---------- Méthode v17 : dessiner avant de pixelliser (partie 0) ----------
+ * Les documents créés avant la v17 gardent leurs étapes (ETAPES_V16) : une séance
+ * filmée se recharge toujours terminée. */
+const PORTES_VOLUME = ['lumierePosee', 'volume', 'coussin', 'lumiere'];
+const ETAPES_V17 = Object.assign({}, ETAPES_V16, {
+  objet: [
+    ETAPE_FICHE('B0 · B0b · A3 · 0-J'),
+    E('construction', 'Construire en volumes (dessiner à travers)', '0-B · 0-F · B2', [
+      'Dans un calque de construction : l\'axe de symétrie, puis chaque volume ENTIER, même sa partie cachée (sphère, cylindre, boîte).',
+      'Les ellipses (ouverture, niveau du liquide, base) sont de vraies ellipses, alignées sur l\'axe ; plus elles sont loin du niveau de l\'œil, plus elles s\'ouvrent (0-F).',
+      'Grand, moyen, petit : une masse domine (A4b). Compare les proportions à la référence.',
+      'Pose ensuite la lumière (onglet Lumière) pour voir le guide sur la construction.'
+    ], { pasEncore: 'Aucun pixel final : seulement le calque de construction.', portes: ['construction'], outils: ['ellipse', 'ligne', 'rect'],
+      coches: [C('entier', 'Chaque volume est dessiné entier, partie cachée comprise'), C('ellipses', 'Les ellipses s\'ouvrent à mesure qu\'elles s\'éloignent du niveau de l\'œil'), C('proportions', 'Proportions comparées à la référence ou au guide grand/moyen/petit')] }),
+    E('forme', 'Trait de la forme', 'B6-A · A5-6 · 0-E', [
+      'Sur un calque normal, repasse la construction d\'un trait sombre et neutre, 1 px, pixel-perfect.',
+      'Le trait suit le volume : des courbes tendues contre des droites (0-E), pas des bosses molles.',
+      'Largeur impaire si l\'objet est symétrique.'
+    ], { pasEncore: 'Pas de couleur, pas de détail.', portes: ['nonVide', 'L', 'jaggies'], outils: ['ligne', 'ellipse'],
+      coches: [C('miroir', 'Vue miroir regardée : aucune pente fausse'), C('tendu', 'Courbes tendues, aucune bosse molle')] }),
+    E('deformer', 'Déformer et séparer', 'B6-A · B6-B', [
+      'Casse les coins, sépare les grandes pièces (bouchon, col, panse…).',
+      'Ce qui est derrière (paroi arrière d\'un verre, face cachée) se dessine aussi s\'il se voit à travers.'
+    ], { pasEncore: 'Pas de couleur.', portes: ['L', 'jaggies'], coches: [C('masses', 'Une forme dominante, une moyenne, une petite')] }),
+    E('aplats', 'Couleur locale à plat', 'B6-A · A5-7 · 0-G', [
+      'Un aplat par matière, dans le ton moyen de sa rampe (la couleur locale, sans lumière).',
+      'Verre : la couleur de ce qu\'on voit au travers, un peu assombrie et teintée, pas une couleur opaque (0-I).',
+      'Vérifie les valeurs en gris : chaque matière a la sienne.'
+    ], { pasEncore: 'Pas d\'ombre.', portes: ['L', 'jaggies', 'budget', 'rampesGris'], coches: [C('gris', 'Les matières se séparent en gris')] }),
+    E('lumiere', 'Placer la lumière, deux familles', '0-C · 0-D', [
+      'Onglet Lumière : choisis la direction et la hauteur, puis affiche le guide.',
+      'Dans chaque matière, DEUX valeurs seulement : la famille lumière et la famille ombre. Rien d\'autre.',
+      'Le terminateur (frontière des deux) suit la forme : une courbe qui épouse le volume, à l\'opposé de la source.',
+      'Vue Notan : deux grandes masses lisibles. Une lumière qui tombe dans l\'ombre, ou l\'inverse, est une faute.'
+    ], { pasEncore: 'Pas de demi-ton, pas de reflet, pas d\'éclat.', portes: ['lumierePosee', 'volume', 'coussin', 'lumiere', 'L'], outils: ['ombrage'],
+      coches: [C('notan', 'Vue Notan : deux masses claires, frontière qui suit la forme'), C('cote', 'L\'ombre est du côté opposé à la source, partout')] }),
+    E('modele', 'Modelé : demi-ton, ombre propre, rebond, ombre portée', '0-C · A5-8 · A6-E', [
+      'Demi-ton : une bande entre lumière et terminateur, plus large sur une forme douce, étroite sur une arête.',
+      'Ombre propre : la plus sombre de l\'ombre, juste après le terminateur.',
+      'Lumière réfléchie : plus claire que l\'ombre propre, TOUJOURS plus sombre que le demi-ton (règle 52).',
+      'Occlusion : les creux et les contacts sont les points les plus sombres. Ombre portée au sol, plus nette près du contact.'
+    ], { portes: PORTES_VOLUME.concat(['bandes']), coches: [C('rebond', 'Rebond plus sombre que la lumière, ombre propre visible'), C('portee', 'Ombre portée ou contact posé (ou raison écrite de s\'en passer)')] }),
+    E('matiere', 'Matière : ce que la surface fait de la lumière', '0-I · A5-8b · B6', [
+      'Mat (bois, tissu, pierre) : transitions larges, éclat faible ou absent.',
+      'Brillant (métal, verre, vernis) : contraste fort, reflets nets qui épousent la forme, reflet de l\'environnement.',
+      'Transparent (verre, eau) : on voit ce qui est derrière ; paroi arrière et contenu se dessinent ; l\'éclat est posé SUR le verre, par-dessus le contenu ; le liquide s\'éclaire du côté opposé à la lumière (la lumière le traverse).',
+      'Translucide (gelée, peau, feuille, cristal) : lumière diffuse dans la matière, ombre saturée et chaude près du terminateur.'
+    ], { portes: PORTES_VOLUME, coches: [C('matiere', 'La matière se reconnaît sans couleur (gris)')] }),
+    E('eclats', 'Éclats et contour coloré', 'B6-A · A6-C', [
+      'Éclats spéculaires : une FORME qui suit la courbure (arc, fenêtre, croissant), plus 1 ou 2 points, du côté de la lumière.',
+      'Selout : le contour prend la couleur sombre de la matière qu\'il borde, plus clair côté lumière.'
+    ], { portes: ['orphelins', 'noirPur', 'volume'], coches: [C('selout', 'Contour coloré (selout) posé maintenant, pas avant'), C('forme', 'Les éclats suivent la courbure de la surface')] }),
+    E('contrejour', 'Contre-jour', 'B6-A · B6-G', [
+      'Une 2e lumière, opposée, d\'une autre teinte, fine (1 px sur le bord), seulement sur les bords du côté ombre.'
+    ], { coches: [C('autre', 'Le contre-jour a une autre teinte que la lumière principale')] }),
+    E('teinte', 'Variation de couleur', 'B6-A · A5-8c · 0-G', [
+      'Les ombres virent au froid, les lumières au chaud, sans changer les valeurs.',
+      'La saturation la plus forte est dans le demi-ton et au bord du terminateur, pas dans la lumière (0-G).',
+      'Vérifie en gris que rien n\'a bougé.'
+    ], { portes: ['rampesGris', 'volume'], coches: [C('froid', 'Ombres plus froides, valeurs inchangées en gris')] }),
+    E('details', 'Détails et nettoyage', 'B6-A · A6-H · A5-10', [
+      'Détails dans le demi-ton et l\'ombre, la lumière reste calme (A4).',
+      'Fissure ou gravure = trait sombre + lèvre claire d\'1 px, attachée à une arête (règle 41).',
+      'Chasse les défauts : L, jaggies, orphelins, banding, coussin, bruit.',
+      'Supprime les calques de construction de l\'export.'
+    ], { portes: NETTOYAGE.concat(['volume']), coches: [C('levre', 'Fissures avec lèvre claire'), C('lisible', 'Chaque étape se lit à ×1'), C('aa', 'AA seulement sur les marches de 2 px ou plus, à l\'intérieur ; chaque pixel d\'AA passe le test de l\'enlèvement (règle 46)')] }),
+    ETAPE_PLANCHE('A5-11 · B5 · B6-G · 0-J')
+  ]
+});
+// Personnages, chibis, créatures : la lumière se pose et se mesure aussi.
+for (const t of ['personnage', 'chibi', 'creature']) {
+  ETAPES_V17[t] = ETAPES_V16[t].map(e => {
+    if (!['lumiere', 'ombres'].includes(e.id)) return e;
+    return Object.assign({}, e, {
+      faire: ['Onglet Lumière : pose la direction et affiche le guide ; deux familles d\'abord (0-D), puis demi-ton, ombre propre et rebond (0-C).'].concat(e.faire),
+      portes: [...new Set(['lumierePosee', 'volume'].concat(e.portes))],
+      coches: e.coches.concat([C('notan', 'Vue Notan : deux masses claires')])
+    });
+  });
+}
+const ETAPES = ETAPES_V17;
+const etapesDe = doc => ((doc.meta && doc.meta.methode >= 17) ? ETAPES_V17 : ETAPES_V16)[typeDe(doc)];
+
 const TYPES = {
   objet: { nom: 'Objet', ref: 'Partie B' },
   personnage: { nom: 'Personnage', ref: 'Partie C' },
@@ -369,11 +456,11 @@ function ficheIncomplete(doc) {
   for (const c of FICHES[typeDe(doc)]) if (c.requis && !String(f[c.cle] ?? '').trim()) manque.push(c.label);
   return manque.length ? manque : false;
 }
-function nbEtapes(doc) { return ETAPES[typeDe(doc)].length; }
-function etapeCourante(doc) { return ETAPES[typeDe(doc)][Math.min(doc.meta.etape, nbEtapes(doc) - 1)]; }
+function nbEtapes(doc) { return etapesDe(doc).length; }
+function etapeCourante(doc) { return etapesDe(doc)[Math.min(doc.meta.etape, nbEtapes(doc) - 1)]; }
 
 /* ---------- Portes ---------- */
-const DET_PORTES = { L: 'L', jaggies: 'jaggies', orphelins: 'orphelins', bandes: 'bandes', coussin: 'coussin', bruit: 'bruit', trame: 'trame', superpixels: 'superpixels', budget: 'budget', noirPur: 'noirPur', rampesGris: 'rampesGris', raccords: 'raccords', alpha: 'alpha' };
+const DET_PORTES = { lumiere: 'lumiere', L: 'L', jaggies: 'jaggies', orphelins: 'orphelins', bandes: 'bandes', coussin: 'coussin', bruit: 'bruit', trame: 'trame', superpixels: 'superpixels', budget: 'budget', noirPur: 'noirPur', rampesGris: 'rampesGris', raccords: 'raccords', alpha: 'alpha' };
 function aDesPixels(doc, filtre) {
   for (const c of doc.calques) {
     if (filtre && !filtre(c)) continue;
@@ -392,10 +479,21 @@ function porte(id, at, cache) {
   }
   switch (id) {
     case 'fiche': { const r = ficheIncomplete(doc); return r ? 'Fiche incomplète : ' + r.join(', ') : null; }
-    case 'regles': return m.reglesLues ? null : 'Lis les 48 règles impératives et coche « lues ».';
+    case 'regles': return m.reglesLues ? null : 'Lis les 60 règles impératives et coche « lues ».';
     case 'nonVide': return AP.mesures(doc, f).opaques ? null : 'L\'image exportée est vide.';
     case 'construction': return aDesPixels(doc, c => c.type === 'construction') ? null : 'Dessine la construction dans au moins un calque de type « construction ».';
     case 'silhouette1': { const n = AP.mesures(doc, f).couleurs; return n <= 2 ? null : 'La silhouette se fait en une couleur sombre (2 au plus) : ' + n + ' couleurs.'; }
+    case 'lumierePosee': return (doc.lumiere && doc.lumiere.posee) ? null : 'Pose la lumière dans l\'onglet Lumière (direction et hauteur), puis regarde le guide.';
+    case 'volume': {
+      if (m.justifs.volume) return null;
+      const M = AP.VOLUME.mesure(AP.compose(doc, f, 'export'), doc.w, doc.h, AP.VOLUME.lumiereDe(doc));
+      if (M.accord === null) return 'Aucune matière ombrée à mesurer : pose les deux familles (lumière, ombre) dans chaque matière.';
+      const manque = [];
+      if (M.accord < 0.5) manque.push('accord clarté/volume ' + M.accord.toFixed(2) + ' < 0,50');
+      if (M.ecart !== null && M.ecart < 0.08) manque.push('lumière et ombre trop proches (' + M.ecart.toFixed(2) + ' < 0,08)');
+      if (M.inverses !== null && M.inverses > 0.15) manque.push(Math.round(M.inverses * 100) + ' % de la lumière plus sombre que l\'ombre');
+      return manque.length ? 'Volume (0-C) : ' + manque.join(', ') + '. Affiche le guide (onglet Lumière), corrige, ou justifie.' : null;
+    }
     case 'reference': return doc.calques.some(c => c.type === 'reference') ? null : 'Importe la pièce dans un calque de référence.';
     case 'tuileOn': return doc.tuile.on ? null : 'Active le mode tuile (onglet Tuiles).';
     case 'carte': return (doc.carte.tuiles || []).filter(Boolean).length >= 12 ? null : 'Peins au moins 12 cases de carte dans l\'onglet Tuiles.';
@@ -430,6 +528,7 @@ const NOMS_PORTES = {
   silhouette1: 'Silhouette en 1-2 couleurs', reference: 'Calque de référence', tuileOn: 'Mode tuile', carte: 'Carte peinte',
   analyse: 'Analyse écrite', timing: 'Feuille de timing', imagesValidees: 'Toutes les images validées', Ltoutes: 'Aucun L sur les images',
   planche: 'Planche remplie', defauts: 'Aucun défaut restant',
+  lumierePosee: 'Lumière posée', volume: 'Le volume suit la lumière', lumiere: 'Ombrage du bon côté',
   L: 'Aucun « L »', jaggies: 'Pas de jaggies', orphelins: 'Pas d\'orphelin', bandes: 'Pas de banding', coussin: 'Pas d\'ombrage coussin',
   bruit: 'Pas de bruit', trame: 'Pas de trame décorative', superpixels: 'Pas de super pixels', budget: 'Budget de couleurs (A3)',
   noirPur: 'Pas de noir pur', rampesGris: 'Rampes lisibles en gris', raccords: 'Tuile sans couture', alpha: 'Pas de pixel semi-transparent'
@@ -449,7 +548,7 @@ function verifieEtape(at) {
   return { ok: !manque.length, manque };
 }
 
-/* ---------- Les 48 règles, lues dans le texte de la méthode ---------- */
+/* ---------- Les 60 règles, lues dans le texte de la méthode ---------- */
 function extraitRegles(texte) {
   const lignes = texte.split('\n'), out = [];
   let i = lignes.findIndex(l => /^# Règles impératives/.test(l)), groupe = '';
@@ -466,7 +565,7 @@ function extraitRegles(texte) {
 }
 
 Object.assign(AP, {
-  FICHES, QUESTIONS, QUESTIONS_TYPE, TESTS_PRO, TABLE_A3, ETAPES, TYPES, NOMS_PORTES,
+  FICHES, QUESTIONS, QUESTIONS_TYPE, TESTS_PRO, TABLE_A3, ETAPES, ETAPES_V16, ETAPES_V17, etapesDe, TYPES, NOMS_PORTES,
   colonneA3, ficheIncomplete, nbEtapes, etapeCourante, etatEtape, verifieEtape, extraitRegles, typeDe
 });
 if (typeof module !== 'undefined') module.exports = AP;

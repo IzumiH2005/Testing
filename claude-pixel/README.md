@@ -20,10 +20,17 @@ Projet personnel, non officiel, sans lien avec Anthropic.
   - Tuiles, palettes et aperçus ×1 et ×2.
   - Exports : PNG, GIF, planche, palettes `.hex` et `.gpl`.
   - Fonctionne sur téléphone, tablette et ordinateur, en thème clair ou sombre.
-- **Méthode** : fiche d'intention, parcours par type de dessin (objet, personnage, créature,
-  animation, décor, étude), portes d'étape, cases à cocher et planche de contrôle finale.
-- **Détecteurs** : « L », pixels orphelins, jaggies, ombrage en coussin, pixels doublés,
-  banding, etc. Ils sont signalés sur le dessin et dans la loupe.
+- **Méthode** : elle commence par la partie 0, *dessiner avant de pixelliser* (construction,
+  lumière et forme, valeurs, formes, couleur, matières, neuf planches pro analysées). Puis
+  fiche d'intention, parcours par type de dessin (objet, personnage, créature, animation,
+  décor, étude), portes d'étape, cases à cocher et planche de contrôle finale.
+- **Lumière** : un onglet pour poser la source (direction, hauteur) et afficher sur la toile
+  un guide de volume (lumière, demi-ton, terminateur, ombre propre, rebond, ombre portée),
+  avec le repère de lumière des planches. Vues Couleur, Valeurs et Notan. L'app mesure si
+  l'ombrage suit la lumière (accord, deux familles, inversions, étendue) ; une porte bloque
+  tant que le volume ne tourne pas. Le guide ne dessine rien.
+- **Détecteurs** : « L », pixels orphelins, jaggies, ombrage en coussin, ombrage qui ne suit
+  pas la lumière, pixels doublés, banding, etc. Ils sont signalés sur le dessin et dans la loupe.
 - **Journal** : chaque action est enregistrée. Une séance se rejoue image par image, et
   l'atelier en tire un timelapse WebM.
 - **Deux modes** :
@@ -38,7 +45,7 @@ claude-pixel/
 ├── README.md               ce fichier
 ├── SPEC.md                 la spécification validée
 ├── CLAUDE.md               règles de travail de Claude dans l'atelier
-├── METHODE_PIXEL_ART.md    la méthode, embarquée dans l'app (onglet Aide, règles, portes)
+├── METHODE_PIXEL_ART.md    la méthode (v17), embarquée dans l'app (onglet Aide, règles, portes)
 ├── app/
 │   ├── src/                modules JS, style.css, template.html
 │   ├── build.mjs           assemble tout en un seul fichier

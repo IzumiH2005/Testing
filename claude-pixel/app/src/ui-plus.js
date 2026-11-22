@@ -831,7 +831,21 @@ const lectureSeule = Object.freeze({
   ecranDeCellule(x, y) { return U.celluleVersEcran(x, y); },
   celluleDeEcran(x, y) { const p = U.ecranVersCellule(x, y), d = U.at.doc; const cx = Math.floor(p.x), cy = Math.floor(p.y); return { x: cx, y: cy, dedans: cx >= 0 && cy >= 0 && cx < d.w && cy < d.h }; },
   defauts() { return AP.detecte(U.at.doc, U.at.s.image).map(r => ({ id: r.id, niveau: r.niveau, titre: r.titre, ref: r.ref, msg: r.msg, pixels: r.pixels.slice(0, 200) })); },
-  palette() { return U.at.doc.palette.map(c => AP.hex(c, true)); }
+  palette() { return U.at.doc.palette.map(c => AP.hex(c, true)); },
+  /* Lumière et volume (0-C) : réglage, mesure, et trois images en lignes (valeurs, notan, guide). */
+  volume() {
+    const d = U.at.doc, f = U.at.s.image, VO = AP.VOLUME, L = VO.lumiereDe(d), px = AP.compose(d, f, 'export');
+    const M = VO.mesure(px, d.w, d.h, L), g = VO.guide(px, d.w, d.h, L), gr = AP.VUES.gris(px), nt = VO.notan(px);
+    const lignes = src => { const out = []; for (let y = 0; y < d.h; y++) { const r = []; for (let x = 0; x < d.w; x++) { const c = src(y * d.w + x); r.push(c); } out.push(r); } return out; };
+    const hx = c => c >>> 24 ? AP.hex(c, true) : null;
+    return {
+      lumiere: { az: L.az, el: L.el, forme: L.forme, posee: !!(d.lumiere && d.lumiere.posee), nom: VO.nomDirection(L.az) },
+      mesure: { accord: M.accord, ecart: M.ecart, inverses: M.inverses, etendue: M.etendue, fautifs: M.fautifs.length, n: M.n },
+      w: d.w, h: d.h,
+      valeurs: lignes(i => hx(gr[i])), notan: lignes(i => hx(nt[i])),
+      guide: lignes(i => g.zone[i] ? VO.ZONES[g.zone[i]].coul : null)
+    };
+  }
 });
 Object.defineProperty(G, 'claudePixel', { value: lectureSeule, writable: false, configurable: false });
 

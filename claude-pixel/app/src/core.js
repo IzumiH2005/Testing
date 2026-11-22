@@ -247,7 +247,8 @@ function nouveauDoc(o = {}) {
     rampes: [],
     calques: [], images: [{ ms: 100, role: '', change: '', principe: '', validee: false }],
     cels: {}, celData: {}, etiquettes: [], next: 1,
-    meta: { fiche: {}, etape: 0, coches: {}, justifs: {}, planche: {}, reglesLues: false, valideEtapes: [] },
+    meta: { fiche: {}, etape: 0, coches: {}, justifs: {}, planche: {}, reglesLues: false, valideEtapes: [], methode: 17 },
+    lumiere: { az: 135, el: 40, forme: 'gonfle', posee: false },
     tuile: { on: false, tw: 16, th: 16 },
     carte: { cols: 20, rows: 12, terrain: [], tuiles: [] }
   };
@@ -1261,6 +1262,14 @@ const ACTIONS = {
   'carte.efface'() { this.doc.carte.terrain = []; this.doc.carte.tuiles = []; this._emet('carte'); },
   /* méthode */
   'fiche'(a) { this._structure(() => { Object.assign(this.doc.meta.fiche, a.champs || {}); if (a.type) this.doc.type = a.type; }); this._emet('methode'); },
+  /* Lumière (partie 0-C) : d'où elle vient, sa hauteur et la forme imaginée pour le guide. */
+  'lumiere'(a) {
+    const l = this.doc.lumiere = Object.assign({ az: 135, el: 40, forme: 'gonfle', posee: false }, this.doc.lumiere || {});
+    if (a.az !== undefined) { const v = Number(a.az); if (!Number.isFinite(v)) this.refuse('Direction invalide.'); l.az = ((Math.round(v) % 360) + 360) % 360; l.posee = true; }
+    if (a.el !== undefined) { const v = Number(a.el); if (!(v >= 5 && v <= 85)) this.refuse('Hauteur entre 5 et 85 degrés.'); l.el = Math.round(v); }
+    if (a.forme !== undefined) { if (!['gonfle', 'sphere', 'cylindre'].includes(a.forme)) this.refuse('Forme : gonfle, sphere ou cylindre.'); l.forme = a.forme; }
+    this._emet('methode');
+  },
   'regles.lues'() { this.doc.meta.reglesLues = true; this._emet('methode'); },
   'coche'(a) { const k = String(a.cle); this.doc.meta.coches[k] = !!a.valeur; this._emet('methode'); },
   'justifie'(a) {

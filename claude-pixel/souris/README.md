@@ -98,7 +98,7 @@ seule s'écrit telle quelle.
 
 | Commande | Effet |
 |---|---|
-| `regarde` | photographie l'écran, une loupe de 15×15 cases autour du curseur et le dessin exporté (×1, ×2, grand), puis résume ce qu'il voit |
+| `regarde` | photographie l'écran, une loupe de 15×15 cases autour du curseur et le dessin exporté (×1, ×2, grand, valeurs, guide de volume), puis résume ce qu'il voit |
 | `etat [porte]` | l'état complet en JSON : curseur, boutons, outil, couleurs, calque, étape, porte |
 | `cibles [filtre]` | les éléments cliquables visibles et leur position à l'écran |
 | `attends ms` | attend, au plus 5 000 ms |
@@ -116,12 +116,14 @@ ligne. Les clics dans l'interface (outils, couleurs, panneaux) restent libres.
 |---|---|
 | `NNN-ecran.png` | l'écran tel que filmé |
 | `NNN-loupe.png` | 15×15 cases autour du curseur, numérotées, défauts encadrés en rouge |
-| `NNN-dessin.png` | l'export réel (sans calque de construction), à ×1, ×2 et grand |
+| `NNN-dessin.png` | l'export réel (sans calque de construction), à ×1, ×2 et grand, puis en valeurs (gris) et le guide de volume de la lumière posée, à la même taille : on compare son ombrage au guide d'un coup d'œil |
 | `NNN.txt` | le résumé texte, celui que la commande affiche |
 
 Le résumé donne : la case et la couleur sous le curseur, l'outil et les couleurs actives, le
 calque et l'image, l'étape de la méthode (ou « méthode terminée »), ce qui manque pour valider
-l'étape (`porte`), les défauts détectés (avec ceux qui sont près du curseur), les messages de
+l'étape (`porte`), les défauts détectés (avec ceux qui sont près du curseur), la ligne
+`volume` (direction et hauteur de la lumière, « NON POSÉE » si elle ne l'est pas, accord
+clarté/volume, écart des deux familles, inversions, étendue des valeurs), les messages de
 l'atelier et les erreurs de page.
 
 ## Ce que produit une séance

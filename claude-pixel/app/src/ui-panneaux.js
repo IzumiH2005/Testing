@@ -24,6 +24,8 @@ function ouvreOnglet(nom, o = {}) {
     const oui = b.dataset.onglet === nom;
     b.setAttribute('aria-selected', oui ? 'true' : 'false');
     b.tabIndex = oui ? 0 : -1;
+    // l'onglet choisi et ses voisins restent visibles quand la barre déborde
+    if (oui && b.scrollIntoView) { const n = b.nextElementSibling || b; try { n.scrollIntoView({ block: 'nearest', inline: 'nearest' }); b.scrollIntoView({ block: 'nearest', inline: 'nearest' }); } catch (e) { /* vieux navigateur */ } }
   }
   if (c) c.setAttribute('aria-label', ($('.onglet[data-onglet="' + nom + '"]') || {}).textContent || nom);
   U.stocke.ecris('onglet', nom);
@@ -430,7 +432,7 @@ function rendMethode(c) {
   /* Liste des étapes */
   c.appendChild(titre('Étapes'));
   const L = h('div.etapes-liste', { 'data-cible': 'etapes' });
-  AP.ETAPES[AP.typeDe(d)].forEach((x, i) => {
+  AP.etapesDe(d).forEach((x, i) => {
     const fait = (m.valideEtapes || []).includes(x.id) || i < m.etape;
     L.appendChild(h('button' + (i === m.etape ? '.cour' : ''), { 'data-cible': 'etape-' + i, 'aria-current': i === m.etape ? 'step' : undefined,
       disabled: claude && i > m.etape, on: { click: () => act('etape.va', { i }) } },
@@ -508,6 +510,8 @@ function vues() {
     { id: 'x1', nom: '×1', px, k: 1 },
     { id: 'x2', nom: '×2', px, k: 2 },
     { id: 'gris', nom: 'Gris', px: V.gris(px) },
+    { id: 'notan', nom: 'Notan', px: AP.VOLUME.notan(px) },
+    { id: 'guide', nom: 'Guide de volume', px: pxGuide(px, w, hh, AP.VOLUME.lumiereDe(d)) },
     { id: 'silhouette', nom: 'Silhouette', px: V.silhouette(px) },
     { id: 'miroir', nom: 'Miroir', px: V.miroir(px, w, hh) },
     { id: 'flou', nom: 'Plissé', px: V.flou(px, w, hh, Math.max(1, Math.round(Math.max(w, hh) / 32))) },
@@ -517,6 +521,14 @@ function vues() {
     { id: 'sombre', nom: 'Fond sombre', px: V.surFond(px, V.FONDS.sombre) }
   ];
 }
+/* Le guide de volume en image : chaque zone a sa couleur (légende dans l'onglet Lumière). */
+function pxGuide(px, w, hh, lum) {
+  const g = AP.VOLUME.guide(px, w, hh, lum), o = new Uint32Array(w * hh);
+  const C = AP.VOLUME.ZONES.map(z => z.coul ? AP.parseHex(z.coul) : 0);
+  for (let i = 0; i < o.length; i++) if (g.zone[i]) o[i] = C[g.zone[i]];
+  return o;
+}
+U.pxGuide = pxGuide;
 function dessineVue(cv, v, w, hh) {
   U.pxVersCanvas(cv, v.px, w, hh);
   const k = v.k || Math.max(1, Math.floor(88 / Math.max(w, hh)));
@@ -601,8 +613,64 @@ function rendPlanche(c) {
   c.appendChild(h('div.ligne', btn('Exporter la planche', { cible: 'planche-exporte', click: () => U.modaleExport && U.modaleExport('planche') })));
 }
 
+/* ======================================================================
+ * LUMIÈRE (partie 0-C) : direction, hauteur, forme, guide, mesure
+ * ==================================================================== */
+const ROSE = [['haut gauche', 'lum-hg', '↖'], ['haut', 'lum-h', '↑'], ['haut droite', 'lum-hd', '↗'],
+  ['gauche', 'lum-g', '←'], [null, 'lum-c', '●'], ['droite', 'lum-d', '→'],
+  ['bas gauche', 'lum-bg', '↙'], ['bas', 'lum-b', '↓'], ['bas droite', 'lum-bd', '↘']];
+function rendLumiere(c) {
+  const A = at(), d = A.doc, VO = AP.VOLUME, L = VO.lumiereDe(d), vue = U.vue;
+  c.appendChild(titre('Lumière', h('span.aide-txt', d.lumiere && d.lumiere.posee ? 'posée' : 'pas encore posée')));
+  c.appendChild(h('p.aide-txt', 'Une seule source, posée avant la première ombre (règle 50). Le guide montre où vont lumière, demi-ton, terminateur, ombre propre, rebond et ombre portée (0-C). Il ne dessine rien : tu poses chaque pixel.'));
+  const dir = VO.nomDirection(L.az);
+  const rose = h('div.rose', { role: 'group', 'aria-label': 'Direction de la lumière', 'data-cible': 'rose' });
+  for (const [nom, cible, sym] of ROSE) {
+    if (!nom) { rose.appendChild(h('span.rose-c', { title: 'L\'objet' }, sym)); continue; }
+    rose.appendChild(btn(sym, { cible, title: 'Lumière ' + nom, presse: !!(d.lumiere && d.lumiere.posee) && dir === nom,
+      click: () => act('lumiere', { az: VO.DIRECTIONS[nom] }) }));
+  }
+  const haut = h('div.mods', { role: 'group', 'aria-label': 'Hauteur de la lumière' });
+  for (const k in VO.HAUTEURS) haut.appendChild(btn(k, { cible: 'lum-' + k, presse: Math.abs(L.el - VO.HAUTEURS[k]) < 8,
+    click: () => act('lumiere', { el: VO.HAUTEURS[k], az: L.az }) }));
+  const NOMS_F = { gonfle: 'silhouette gonflée', sphere: 'sphère', cylindre: 'cylindre' };
+  const forme = h('div.mods', { role: 'group', 'aria-label': 'Forme imaginée' });
+  for (const k of VO.FORMES) forme.appendChild(btn(NOMS_F[k], { cible: 'lum-forme-' + k, presse: L.forme === k, click: () => act('lumiere', { forme: k }) }));
+  c.appendChild(h('div.lum-reglages', rose, h('div.pile',
+    h('div', h('small.aide-txt', 'Hauteur'), haut),
+    h('div', h('small.aide-txt', 'Forme du guide'), forme))));
+
+  /* Sur la toile */
+  c.appendChild(titre('Sur la toile'));
+  const vues = h('div.mods', { role: 'group', 'aria-label': 'Vue de la toile' });
+  for (const [k, t] of [['couleur', 'Couleur'], ['valeurs', 'Valeurs'], ['notan', 'Notan']])
+    vues.appendChild(btn(t, { cible: 'vue-toile-' + k, presse: (vue.mode || 'couleur') === k, click: () => { vue.mode = k; U.redessine(); rendu(true); } }));
+  c.appendChild(vues);
+  c.appendChild(h('div.ligne', { style: { marginTop: '8px' } },
+    btn(vue.guide ? 'Masquer le guide' : 'Afficher le guide', { cible: 'guide', presse: !!vue.guide, click: () => { vue.guide = !vue.guide; U.redessine(); rendu(true); } })));
+  c.appendChild(h('p.aide-txt', 'Le guide est calculé sur le calque courant (ou sur toute l\'image si le calque est vide). Valeurs et Notan aident à juger les deux familles (0-D).'));
+
+  /* Légende */
+  const leg = h('div.legende', { 'data-cible': 'legende' });
+  for (const z of VO.ZONES) if (z.coul) leg.appendChild(h('span', h('i', { style: { background: z.coul } }), z.nom));
+  c.appendChild(leg);
+
+  /* Mesure */
+  const px = AP.compose(d, A.s.image, 'export'), M = VO.mesure(px, d.w, d.h, L);
+  const f2 = x => x === null ? '—' : x.toFixed(2);
+  const ligne = (nom, val, ok, aide) => h('div.mesure' + (ok === null ? '' : ok ? '.ok' : '.ko'), h('b', nom), h('span.mono', val), h('small.aide-txt', aide));
+  c.appendChild(titre('Le dessin suit-il la lumière ?', h('span.aide-txt', 'image ' + (A.s.image + 1))));
+  c.appendChild(h('div.pile', { 'data-cible': 'mesure-volume' },
+    ligne('Accord', f2(M.accord), M.accord === null ? null : M.accord >= 0.5, 'corrélation clarté / volume, par matière : 0,50 pour passer, 0,70 et plus = forme qui tourne'),
+    ligne('Deux familles', f2(M.ecart), M.ecart === null ? null : M.ecart >= 0.08, 'clarté moyenne lumière − ombre : 0,08 au moins'),
+    ligne('Inversions', M.inverses === null ? '—' : Math.round(M.inverses * 100) + ' %', M.inverses === null ? null : M.inverses <= 0.15, 'pixels côté lumière plus sombres que l\'ombre : 15 % au plus'),
+    ligne('Étendue', f2(M.etendue), M.n < 12 ? null : M.etendue >= 0.45, 'du plus sombre au plus clair (5e-95e centile) : 0,45 au moins à 32 px et plus (règle 53)')));
+  if (M.fautifs.length) c.appendChild(h('div.ligne', btn('Montrer les ' + M.fautifs.length + ' pixels du mauvais côté', { cible: 'lum-fautifs', click: () => { U.marques = { pixels: M.fautifs, niveau: 'attention' }; U.redessine(); } })));
+}
+LEGERS.lumiere = () => { planifie(); };
+
 /* ---------- Branchement ---------- */
-Object.assign(RENDUS, { couleurs: rendCouleurs, calques: rendCalques, methode: rendMethode, controle: rendControle });
+Object.assign(RENDUS, { couleurs: rendCouleurs, calques: rendCalques, methode: rendMethode, controle: rendControle, lumiere: rendLumiere });
 
 function initPanneaux() {
   const onglets = $('#onglets');
@@ -624,7 +692,7 @@ function initPanneaux() {
     if (quoi === 'pixels' || quoi === 'trait') { leger(); return; }
     if (quoi === 'etat' || quoi === 'doc' || quoi === 'act' || quoi === 'methode' || quoi === 'carte') {
       if (quoi !== 'etat') defautsCle = '';
-      if (quoi === 'etat' && courant !== 'couleurs' && courant !== 'calques' && courant !== 'methode') { leger(); return; }
+      if (quoi === 'etat' && courant !== 'couleurs' && courant !== 'calques' && courant !== 'methode' && courant !== 'lumiere') { leger(); return; }
       planifie(); majPastille();
     }
   });

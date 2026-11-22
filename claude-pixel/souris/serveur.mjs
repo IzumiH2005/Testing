@@ -215,29 +215,33 @@ const DESSINE = ([mode, d, opts]) => {
     g.moveTo(ox - 6, oy + T / 2); g.lineTo(ox + 6, oy + T / 2); g.moveTo(ox + T - 6, oy + T / 2); g.lineTo(ox + T + 6, oy + T / 2); g.stroke();
     if (opts.defauts) { g.strokeStyle = '#ff5a6e'; g.lineWidth = 2; for (const [x, y] of opts.defauts) { const i = x - cx + R, j = y - cy + R; if (i >= 0 && j >= 0 && i < N && j < N) g.strokeRect(M + i * T + 4, M + j * T + 4, T - 8, T - 8); } }
   } else {
-    const gr = Math.max(4, Math.min(16, Math.floor(256 / Math.max(d.w, d.h)))), E = [1, 2, gr], G = 16, W = E.reduce((s, e) => s + d.w * e + G, G), H = d.h * gr + 2 * G + 14;
+    // ×1, ×2, agrandi ; puis, agrandis aussi, les valeurs (gris) et le guide de volume (0-C)
+    const gr = Math.max(4, Math.min(16, Math.floor(256 / Math.max(d.w, d.h))));
+    const P = [[d.lignes, 1, '×1'], [d.lignes, 2, '×2'], [d.lignes, gr, '×' + gr]].concat((opts.extra || []).map(([L, t]) => [L, gr, t]));
+    const G = 16, W = P.reduce((s, p) => s + d.w * p[1] + G, G), H = d.h * gr + 2 * G + 14;
     c.width = W; c.height = H; g.fillStyle = opts.fond; g.fillRect(0, 0, W, H);
     g.font = '11px monospace'; g.fillStyle = '#888'; let x0 = G;
-    for (const e of E) {
-      for (let y = 0; y < d.h; y++) for (let x = 0; x < d.w; x++) { const v = d.lignes[y][x]; if (v) { g.fillStyle = v; g.fillRect(x0 + x * e, G + y * e, e, e); } }
-      g.fillStyle = '#888'; g.fillText('×' + e, x0, H - 8); x0 += d.w * e + G;
+    for (const [L, e, t] of P) {
+      for (let y = 0; y < d.h; y++) for (let x = 0; x < d.w; x++) { const v = L[y][x]; if (v) { g.fillStyle = v; g.fillRect(x0 + x * e, G + y * e, e, e); } }
+      g.fillStyle = '#ddd'; g.fillText(t, x0, H - 8); x0 += d.w * e + G;
     }
   }
   return c.toDataURL('image/png').split(',')[1];
 };
 
+const f2 = x => x === null || x === undefined ? '—' : x.toFixed(2);
 async function regarde() {
   nRegard++;
   const n = String(nRegard).padStart(3, '0'), base = path.join(REGARDS, n);
   await pause(120);
   await page.screenshot({ path: base + '-ecran.png' });
-  const [et, vis, exp, msgs, defs, ver] = await Promise.all([lit('etat'), lit('pixels', { vue: 'visible' }), lit('pixels', { vue: 'export' }), lit('messages', 6), lit('defauts'), lit('verifie')]);
+  const [et, vis, exp, msgs, defs, ver, vol] = await Promise.all([lit('etat'), lit('pixels', { vue: 'visible' }), lit('pixels', { vue: 'export' }), lit('messages', 6), lit('defauts'), lit('verifie'), lit('volume')]);
   const cel = await lit('celluleDeEcran', pos.x, pos.y);
   const cx = Math.max(0, Math.min(vis.w - 1, cel.x)), cy = Math.max(0, Math.min(vis.h - 1, cel.y));
   const pres = defs.map(r => ({ ...r, pres: r.pixels.filter(([x, y]) => Math.max(Math.abs(x - cel.x), Math.abs(y - cel.y)) <= 4) }));
   const loupe = await atelierYeux.evaluate(DESSINE, ['loupe', vis, { cx, cy, defauts: pres.flatMap(r => r.pres) }]);
   fs.writeFileSync(base + '-loupe.png', Buffer.from(loupe, 'base64'));
-  const dessin = await atelierYeux.evaluate(DESSINE, ['dessin', exp, { fond: '#8a8794' }]);
+  const dessin = await atelierYeux.evaluate(DESSINE, ['dessin', exp, { fond: '#8a8794', extra: [[vol.valeurs, 'valeurs'], [vol.guide, 'guide ' + vol.lumiere.nom]] }]);
   fs.writeFileSync(base + '-dessin.png', Buffer.from(dessin, 'base64'));
   const couleur = cel.dedans ? (vis.lignes[cel.y][cel.x] || 'transparent') : '(hors toile)';
   const L = [
@@ -248,6 +252,8 @@ async function regarde() {
     (et.etape ? (et.etape.finie ? 'méthode terminée · dernière étape : ' : 'étape ') + (et.etape.i + 1) + ' · ' + et.etape.titre + ' (' + et.etape.ref + ')' : 'étape ?') + (et.panneau ? ' · onglet ' + et.panneau : '') + (et.modale ? ' · fenêtre ouverte' : '') + (et.menu ? ' · menu ouvert' : ''),
     'porte : ' + (ver.ok ? 'prête' : ver.manque.join(' | ')),
     'défauts : ' + (defs.length ? defs.map(r => r.titre + ' [' + r.niveau + '] ' + r.pixels.length + ' px' + (pres.find(p => p.id === r.id).pres.length ? ' (dont ' + pres.find(p => p.id === r.id).pres.map(p => p.join(',')).join(' ') + ' près du curseur)' : '')).join(' ; ') : 'aucun'),
+    'volume : lumière ' + vol.lumiere.nom + ' (az ' + vol.lumiere.az + '°, él ' + vol.lumiere.el + '°, ' + vol.lumiere.forme + ')' + (vol.lumiere.posee ? '' : ' NON POSÉE') +
+      ' · accord ' + f2(vol.mesure.accord) + ' · familles ' + f2(vol.mesure.ecart) + ' · inversions ' + (vol.mesure.inverses === null ? '—' : Math.round(vol.mesure.inverses * 100) + ' %') + ' · étendue ' + f2(vol.mesure.etendue),
     'messages : ' + (msgs.length ? msgs.map(m => '[' + m.niveau + '] ' + m.msg).join(' / ') : 'aucun'),
     'images : ' + path.relative(process.cwd(), base) + '-{ecran,loupe,dessin}.png'
   ];

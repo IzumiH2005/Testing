@@ -167,12 +167,13 @@ function correl(a, b) {
   return (sa && sb) ? s / Math.sqrt(sa * sb) : 0;
 }
 /* --- Ombrage coussin / flash : la clarté suit le bord au lieu de la lumière (A5-8, règle 25) --- */
-function coussin(px, w, h) {
+function coussin(px, w, h, lv) {
   const d = distanceBord(px, w, h), L = [], D = [], Dir = [], pts = [];
+  const lx = lv ? lv[0] : -1, ly = lv ? lv[1] : -1;
   for (let i = 0; i < w * h; i++) {
     if (d[i] < 2) continue;                       // le contour n'entre pas dans le calcul
     const x = i % w, y = (i / w) | 0;
-    L.push(lum(px[i])); D.push(d[i]); Dir.push(-(x + y)); pts.push([x, y]);
+    L.push(lum(px[i])); D.push(d[i]); Dir.push(x * lx + y * ly); pts.push([x, y]);
   }
   if (pts.length < 24) return { pts: [], cd: 0, cl: 0 };
   const cd = correl(L, D), cl = correl(L, Dir);
@@ -279,9 +280,18 @@ function detecte(doc, f = 0) {
   const B = banding(px, w, h);
   if (B.length) ajoute('bandes', 'attention', 'Banding', 'A6-H', B,
     'Un ton forme une bande fine qui longe deux autres tons : les marches de la rampe se suivent en escalier. Varie la largeur des zones, casse l\'alignement.');
-  const C = coussin(px, w, h);
+  const VO = AP.VOLUME, lumDoc = VO ? VO.lumiereDe(doc) : null, nomLum = VO ? VO.nomDirection(lumDoc.az) : 'haut gauche';
+  const C = coussin(px, w, h, VO ? VO.vecteur(lumDoc) : null);
   if (C.pts.length) ajoute('coussin', 'erreur', 'Ombrage coussin / flash', 'A5-8 · règle 25', C.pts,
-    'La clarté suit la distance au bord (r = ' + C.cd.toFixed(2) + ') et non la lumière haut-gauche (r = ' + C.cl.toFixed(2) + '). L\'ombre va du côté opposé à la source.');
+    'La clarté suit la distance au bord (r = ' + C.cd.toFixed(2) + ') et non la lumière ' + nomLum + ' (r = ' + C.cl.toFixed(2) + '). L\'ombre va du côté opposé à la source.');
+  if (VO) {
+    const M = VO.mesure(px, w, h, lumDoc);
+    if (M.accord !== null && M.accord < 0.3) ajoute('lumiere', 'attention', 'L\'ombrage ne suit pas la lumière', '0-C · règle 50', M.fautifs,
+      'Accord clarté / volume r = ' + M.accord.toFixed(2) + ' (il faut 0,30 au moins, 0,50 pour un rendu pro). Lumière ' + nomLum + ' : ouvre l\'onglet Lumière, affiche le guide et ' +
+      'regarde où passe le terminateur. Les pixels marqués sont du mauvais côté : clairs dans l\'ombre ou sombres dans la lumière.');
+    else if (M.ecart !== null && M.ecart < 0.05) ajoute('lumiere', 'attention', 'Lumière et ombre se confondent', '0-C · règle 51', M.fautifs,
+      'Les deux familles (lumière, ombre) ne s\'écartent que de ' + M.ecart.toFixed(2) + ' en clarté. Groupe : toute la lumière au-dessus, toute l\'ombre au-dessous, avec un vrai saut au terminateur.');
+  }
   const N = bruit(px, w, h);
   if (N.pts.length) ajoute('bruit', 'attention', 'Bruit', 'A6-H', N.pts,
     Math.round(N.part * 100) + ' % des pixels n\'ont aucun voisin de leur couleur. Regroupe la texture en amas de 2-3 (règle du tiers, A5-9).');

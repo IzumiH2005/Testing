@@ -7,7 +7,7 @@ const { $, h } = U;
 const ZOOMS = [1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 64];
 const TEINTE_CONSTR = '#3b82f6';
 
-const vue = U.vue = { zoom: 8, ox: 0, oy: 0, survol: null, pelure: false, vue3x3: true, grille: true, cacheConstr: false };
+const vue = U.vue = { zoom: 8, ox: 0, oy: 0, survol: null, pelure: false, vue3x3: true, grille: true, cacheConstr: false, mode: 'couleur', guide: false };
 U.marques = null; // { pixels:[[x,y]], niveau }
 
 let cv, ctx, scene, buf, bctx, dpr = 1, demande = false;
@@ -35,6 +35,42 @@ U.composeAffichage = composeAffichage;
 function constructionCachee() {
   if (vue.cacheConstr) return true;
   try { const e = AP.etapeCourante(U.at.doc); return e && e.id === 'planche'; } catch (e) { return false; }
+}
+
+/* ---------- Lumière : guide de volume et repère (partie 0-C) ---------- */
+function sourceGuide(d, f) {
+  const c = d.calques[U.at.s.calque], id = c && c.type === 'normal' && d.cels[c.id][f];
+  if (id) { const D = d.celData[id]; for (let i = 0; i < D.length; i++) if (D[i] >>> 24) return D; }
+  return AP.compose(d, f, 'export');
+}
+let guideCache = { cle: '', g: null };
+function guideDe(d, f) {
+  const L = AP.VOLUME.lumiereDe(d), cle = U.at.journal.length + ':' + f + ':' + U.at.s.calque + ':' + L.az + ':' + L.el + ':' + L.forme + ':' + d.w + 'x' + d.h;
+  if (guideCache.cle !== cle) guideCache = { cle, g: AP.VOLUME.guide(sourceGuide(d, f), d.w, d.h, L) };
+  return guideCache.g;
+}
+function dessineGuide(d, f, X, Y, z) {
+  const g = guideDe(d, f), Z = AP.VOLUME.ZONES;
+  ctx.save(); ctx.globalAlpha = 0.5;
+  for (let y = 0; y < d.h; y++) for (let x = 0; x < d.w; x++) {
+    const k = g.zone[y * d.w + x]; if (!k) continue;
+    ctx.fillStyle = Z[k].coul; ctx.fillRect(X + x * z, Y + y * z, z, z);
+  }
+  ctx.globalAlpha = 1; ctx.lineWidth = Math.max(2, z / 4); ctx.strokeStyle = '#ff3d6e'; ctx.lineCap = 'round';
+  ctx.beginPath();
+  for (const [x0, y0, x1, y1] of g.term) { ctx.moveTo(X + x0 * z, Y + y0 * z); ctx.lineTo(X + x1 * z, Y + y1 * z); }
+  ctx.stroke(); ctx.restore();
+}
+function dessineSoleil(d, X, Y, W, H) {
+  const L = AP.VOLUME.vecteur(d.lumiere), n = Math.hypot(L[0], L[1]) || 1, ux = L[0] / n, uy = L[1] / n;
+  const cx = X + W / 2, cy = Y + H / 2, R = Math.hypot(W, H) / 2 + 26;
+  const sx = cx + ux * R, sy = cy + uy * R, px = -uy, py = ux, demi = Math.min(W, H) * 0.32;
+  ctx.save();
+  ctx.fillStyle = 'rgba(255, 214, 102, 0.13)';
+  ctx.beginPath(); ctx.moveTo(sx, sy); ctx.lineTo(cx + px * demi, cy + py * demi); ctx.lineTo(cx - px * demi, cy - py * demi); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#ffd666'; ctx.strokeStyle = '#7a5a00'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.arc(sx, sy, 7, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+  ctx.restore();
 }
 
 /* ---------- Coordonnées ---------- */
@@ -101,7 +137,9 @@ function rendu() {
 
   // image composée
   if (buf.width !== d.w || buf.height !== d.h) { buf.width = d.w; buf.height = d.h; }
-  const px = composeAffichage(d, f, constructionCachee());
+  let px = composeAffichage(d, f, constructionCachee());
+  if (vue.mode === 'valeurs') px = AP.VUES.gris(px);
+  else if (vue.mode === 'notan') px = AP.VOLUME.notan(px);
   U.pxVersCanvas(buf, px, d.w, d.h);
 
   const tuile = d.tuile && d.tuile.on && vue.vue3x3 && d.w <= d.tuile.tw * 1 && d.h <= d.tuile.th * 1;
@@ -137,6 +175,11 @@ function rendu() {
     }
   }
   ctx.drawImage(buf, X, Y, W, H);
+
+  // guide de volume (0-C) : zones colorées et terminateur, par-dessus le dessin
+  if (vue.guide) dessineGuide(d, f, X, Y, z);
+  // repère de lumière : un point et un cône, comme sur les planches
+  if (d.lumiere && d.lumiere.posee) dessineSoleil(d, X, Y, W, H);
 
   // grilles
   if (vue.grille && z >= 6) {

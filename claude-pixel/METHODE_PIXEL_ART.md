@@ -1,10 +1,16 @@
-# Méthode de pixel art — objets, personnages, créatures et décors (v16)
+# Méthode de pixel art — objets, personnages, créatures et décors (v17)
 
 On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin classique
 (construction par volumes, ligne d'action, anatomie) et les règles du pixel art
-(silhouette, valeurs, clusters, lignes propres, rampes, lumière).
+(silhouette, valeurs, clusters, lignes propres, rampes, lumière). Depuis la v17, elle
+commence par **la partie 0 : dessiner avant de pixelliser** (construction, lumière et
+forme, design des valeurs et des formes, couleur, matières). Le pixel art n'est qu'un
+style de rendu : un dessin mal construit ou mal éclairé reste amateur, même en pixels
+propres.
 
 **Comment l'utiliser :**
+0. Avant tout : la **partie 0** (dessiner avant de pixelliser). Elle dit ce que les pixels
+   doivent montrer ; les parties suivantes disent comment.
 1. Relire les **règles impératives** avant chaque dessin.
 2. Construire avec la **partie B** (objet), la **partie C** (personnage, créature) ou la
    **partie F** (tuiles, fonds, scène).
@@ -18,7 +24,8 @@ On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin cla
 
 | Partie | Sections |
 |---|---|
-| Règles impératives | 48 ordres courts, tirés des tests, des livres et des maîtres |
+| Règles impératives | 60 ordres courts, tirés des tests, des livres et des maîtres |
+| **0. Dessiner avant de pixelliser** | 0-A diagnostic de la potion 64 · 0-B voir et construire · 0-C lumière et forme (zones) · 0-D design des valeurs · 0-E design des formes · 0-F perspective · 0-G couleur · 0-H bords · 0-I matières · 0-J méthode du pro · **0-K les neuf planches analysées** · 0-L recettes (potion en verre, sphère, fruit, pain, flamme, ruines) · 0-M plan d'entraînement |
 | **A. Règles communes** | A1 travail · A2 lisibilité · A3 table par taille · A4 règles du dessin · A4b simplifier · A5 pipeline pixel (silhouette → contour → palette → lumière → matières → détails → nettoyage → contrôle) · A6 finition pro · **A7 tramage** · **A8 lignes et formes** · **A9 perspectives de jeu** · **A10 leçons des maîtres** · **A11 geste du pro (outils, souris)** |
 | **B. Objets** | B0 intention · B0b projection · B1 cadre · B2 volumes · B3 forme iconique · B4 matière · B4b déclinaison par taille · B5 contrôle · **B6 recettes pas à pas (pierre, rocher, cristal, slime, livre)** |
 | **C. Personnages** | C0 intention · C1 proportions · C2 pose · C3 volumes · C4 tête et visage · C5 vêtements (design) · C6 cheveux · C7 astuces de figure · C8 contrôle · C9 anatomie · C10 tailles (8 à 128 px) · C11 portrait anime · C12 visage Loomis + anime · C13 chibi pas à pas · C14 corps nu puis vêtements en calque · C15 créatures · C16 créatures complexes · C17 vêtements (plis, matières) |
@@ -36,7 +43,12 @@ On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin cla
 | Couleur du contour | A5-6 · A6-C · C10-F · C11 (peau = trait chaud) · C13-D (selout) |
 | Langage de formes | A4b (règle) · C5 (vêtements) · C15-A (créatures) |
 | Cheveux, frange, sourcils | C6 · C10-J2 · C12-F · C13-D |
-| Liquide, verre | A5-8b · B5 · C13-D |
+| Liquide, verre | **0-I** · **0-L-A** · A5-8b · B5 · C13-D |
+| Lumière : terminateur, ombre propre, rebond, ombre portée | **0-C** (onglet Lumière, guide de volume) · A5-8 · A6-E |
+| Deux familles, notan, étendue des valeurs | **0-D** · A6-J · A11-C |
+| Construction, dessiner à travers, ellipses | **0-B** · **0-F** · B2 · C3 |
+| Design des formes (grand-moyen-petit, droites et courbes) | **0-E** · A4b |
+| Matières (mat, brillant, métal, verre, translucide, émissif) | **0-I** · A5-8b |
 | Vêtements | C5 (design) · C13-B · C14 (calque sur corps nu) · C17 (plis, matières, recettes) |
 | Rendu pro (rampes, AA, défauts) | A5-7 à A5-10 · **A6** |
 | Jointures du corps | C2 · C3 · C14-A |
@@ -55,7 +67,8 @@ On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin cla
 | Méthodes des grands artistes | **A10** · G2 |
 | Outils, souris, gestes | **A11** |
 | Tests en cours de dessin (miroir, gris, yeux plissés) | A6-J · **A11-C** |
-| Valeur d'abord, ombrer en gris | A6-A · **A10-F** |
+| Valeur d'abord, ombrer en gris | **0-D** · A6-A · **A10-F** |
+| Apprendre le dessin, exercices | **0-M** · G |
 
 **Sources (étiquettes) :** [Z] *Apprendre à tout dessiner avec Zephy* · [M] livre de dessin
 manga · [I] planches d'anatomie fournies · [C] planches sur les cheveux fournies · [P]
@@ -66,7 +79,12 @@ propres tests (partie D) · [B] livres de pixel art et de peinture ([B1] *Pixel 
 *Pixel Art for Game Developers*, [B3] *Make Your Own Pixel Art*, [B4] livres d'images,
 [B5] *Color and Light*, [B6] livres japonais et livres d'artistes ; détail en fin de
 document) · [P2] planches de tutoriels pas à pas
-fournies (pierre, cristal, slime, livre, rochers ; B6). Toutes les règles sont reformulées.
+fournies (pierre, cristal, slime, livre, rochers ; B6) · [P3] neuf planches de tutoriels
+fournies en v17 (potion, cristal, poire, sphère, livre, pain, portail, pierre, flamme ;
+0-K) · [D] fondamentaux du dessin et de la peinture ([D1] Drawabox, [D2] Scott Robertson,
+[D3] Proko, lumière et ombre, [D4] James Gurney, blog, [D5] Marco Bucci, [D6] Proko, groupes
+de valeurs, [D7] Sinix, design des formes, [D8] droites et courbes, [D9] couleur, [D10]
+bords ; liens en fin de document). Toutes les règles sont reformulées.
 
 ---
 
@@ -132,8 +150,8 @@ Chaque règle est un ordre. Le détail et le « pourquoi » sont dans la section
     « L » (A5-6).
 22. **Aucun pixel de bruit** : un pixel seul d'une couleur n'a le droit d'exister que s'il
     dit quelque chose (reflet, coin, bouton).
-23. **Lumière en haut à gauche, partout** : reflets des yeux, des cheveux et du tissu du même
-    côté.
+23. **Une seule direction de lumière pour tout le jeu** (haut gauche par défaut) : reflets
+    des yeux, des cheveux et du tissu du même côté.
 24. **Pas de détail qui suit le contour sur 1 px** au contact de la peau : une mèche, une
     pointe de frange ou un ourlet d'une seule rangée devient tout noir. Fais-les au moins
     2 rangées de haut (3 px de large pour une pointe, C6-C).
@@ -202,6 +220,335 @@ Chaque règle est un ordre. Le détail et le « pourquoi » sont dans la section
     refait (A11-A, A11-B).
 48. **Petit mouvement = couleurs qui changent, pas silhouette qui bouge** : respiration,
     clignement et transfert de poids se font en sous-pixel (E2-D).
+
+**Dessin, lumière et matière (partie 0)**
+49. **Construis avant de dessiner** : chaque volume entier dans un calque de construction,
+    partie cachée comprise ; les ellipses s'ouvrent en s'éloignant du niveau de l'œil
+    (0-B, 0-F).
+50. **Pose la lumière avant la première ombre** (onglet Lumière) et garde le guide à l'œil :
+    le terminateur suit la forme, l'ombre est à l'opposé de la source (0-C).
+51. **Deux familles d'abord** : dans chaque matière, une valeur de lumière et une valeur
+    d'ombre, rien d'autre, tant que la vue Notan ne montre pas deux masses nettes (0-D).
+52. **Le rebond reste dans l'ombre** : plus clair que l'ombre propre, toujours plus sombre
+    que le demi-ton. Les points les plus sombres sont l'occlusion et le contact (0-C).
+53. **Toute l'échelle des valeurs** : à 32 px et plus, de presque noir à presque blanc ; le
+    plus fort contraste au point d'intérêt (0-D).
+54. **La saturation culmine au demi-ton**, près du terminateur ; la lumière se désature vers
+    la couleur de la source, l'ombre vire vers la couleur ambiante (0-G).
+55. **L'éclat est le reflet de la source** : une forme qui épouse la courbure, du côté de la
+    lumière, seulement sur une matière brillante (0-I).
+56. **Le verre est transparent** : dessine ce qu'on voit au travers (contenu, paroi arrière),
+    assombri et teinté ; ses reflets passent par-dessus le contenu ; un liquide s'éclaire
+    du côté opposé à la lumière (0-I, 0-L-A).
+57. **Une ombre portée ancre l'objet** : la plus sombre et la plus nette au contact, plus
+    claire et plus large en s'éloignant, poussée à l'opposé de la lumière (0-C).
+58. **Dessine des formes, pas des choses** : grand-moyen-petit, droites contre courbes,
+    aucune tangente ni écart régulier ; les taches de lumière et d'ombre sont des formes
+    choisies (0-E).
+59. **Vise un niveau** : avant chaque dessin, choisis une œuvre pro et ce que tu en prends ;
+    à la planche, compare côte à côte et écris l'écart (0-J).
+60. **Le guide de volume aide, il ne dessine pas** : tu poses chaque pixel ; si tu t'écartes
+    du guide (forme complexe, matière), écris pourquoi (0-C, règle 2).
+
+---
+
+# Partie 0 — Dessiner avant de pixelliser (v17) [D][P3][R]
+
+Un pixel artist pro sait dessiner et peindre. Le pixel art n'est qu'un **style de rendu** :
+la construction, la lumière, la matière et le design des valeurs viennent du dessin et de la
+peinture. Les parties A à G apprennent le pixel. Cette partie apprend **ce que le pixel doit
+montrer**. Elle se lit avant toutes les autres. Dans Claude Pixel, elle a ses outils :
+calque de construction, **onglet Lumière** (direction, hauteur, guide de volume), vues
+**Notan** et **Valeurs** sur la toile, détecteur « L'ombrage ne suit pas la lumière » et
+porte « Le volume suit la lumière ».
+
+## 0-A. Pourquoi nos dessins font débutant (diagnostic de la potion 64×64)
+
+Comparée à l'étape 9 de la planche « Potion tutorial » [P3], la potion 64×64 de la séance
+`potion-64` respecte les règles du pixel (aucun orphelin, rampes propres) mais rate le dessin :
+
+| Ce qu'on a fait | Ce que fait la planche | Fondamental manqué |
+|---|---|---|
+| Panse bleu nuit opaque, liquide posé dessus | Verre bleu clair **transparent** : on voit le liquide à travers, et la paroi arrière | Matière (0-I) |
+| Surface du liquide = une ligne horizontale | Surface = une **ellipse** en perspective, plus claire (son dessus reçoit la lumière) | Construction, perspective (0-B, 0-F) |
+| Bande orange en haut, rouge partout, croissant sombre en bas | Lumière, demi-ton, terminateur courbe, ombre propre, rebond : la sphère **tourne** | Lumière et forme (0-C) |
+| Valeurs serrées au milieu de l'échelle | De presque noir (contour) à blanc (éclat), deux familles nettes | Design des valeurs (0-D) |
+| Éclat = barre verticale blanche | Éclat = **arc qui épouse la sphère** + 2 points, posé sur le verre | Spéculaire (0-I) |
+| Rouge pur partout, même dans la lumière | Saturation au demi-ton, lumière rosée et claire, ombre vers le violet | Couleur (0-G) |
+| Col long et étroit, bouchon en briques empilées | Col court et large, bouchon arrondi : un cylindre et une calotte | Proportions, primitives (0-B, 0-E) |
+| Liseré cyan saturé sur un seul bord, sans raison | Contre-jour d'une autre teinte, sur tout le bord opposé à la lumière | Lumière secondaire (0-C) |
+| Ni ombre portée ni contact | (Version finale : halo et étincelles, l'objet « existe ») | Ancrage (0-C) |
+
+Conclusion : on posait des pixels propres sur un dessin qui n'était pas construit ni
+éclairé. **Corriger le pixel ne corrige pas le dessin** (règle 4). D'où la v17 : construire,
+éclairer, donner la matière, puis seulement pixelliser.
+
+## 0-B. Voir et construire [D1][D2][L]
+
+1. **Tout objet est un assemblage de primitives** : sphère, cylindre, boîte, cône, tore.
+   Une potion = sphère (panse) + cylindre (col) + cylindre court ou calotte (bouchon). Une
+   poire = petite sphère + grande sphère fondues. Un pain = cylindre couché aux bouts
+   arrondis. Un portail = boîtes. Une flamme = une goutte qui ondule (geste en S).
+2. **Dessiner à travers** (Drawabox) : chaque volume se dessine **entier**, sa face cachée
+   comprise, dans le calque de construction. C'est ce qui donne la vraie ellipse du niveau
+   du liquide, la paroi arrière d'un verre et l'emboîtement des pièces.
+3. **Contours croisés** : des lignes qui courent **sur** la surface (équateur, méridiens,
+   bandes) montrent comment elle tourne. En pixel art, ces lignes deviennent la surface du
+   liquide, les bagues d'un col, les bandes d'ombre : une bande d'ombre est toujours **une
+   courbe parallèle à un contour croisé**, jamais une ligne droite sur une forme ronde.
+4. **Axe d'abord** : un objet symétrique se construit autour de son axe ; toutes ses
+   ellipses ont leur petit axe **sur** cet axe.
+5. **Mesurer au lieu de deviner** : compter en pixels sur la référence (« la panse fait
+   3 cols de large, le bouchon 1 col de haut ») et reporter les rapports sur la toile.
+6. **Recouvrement = profondeur** : ce qui est devant coupe le contour de ce qui est derrière
+   (jonction en T). Une pièce devant a un contour complet, celle de derrière s'arrête
+   contre elle.
+7. **Le geste avant le détail** : une ligne d'action (C2) pour un personnage, un S pour une
+   flamme, une courbe tendue pour un pain. Le contour suit le geste.
+
+## 0-C. Lumière et forme : les zones de la lumière [D3][D4][B5]
+
+Une seule source, placée **avant** la première ombre (onglet Lumière). Sur toute forme,
+dans cet ordre de clarté :
+
+| Zone | Ce que c'est | En pixels |
+|---|---|---|
+| **Éclat** (spéculaire) | Le reflet de la source elle-même, là où la surface renvoie la lumière vers l'œil | 1 à quelques px presque blancs, **une forme** qui épouse la courbure ; seulement sur une matière brillante |
+| **Lumière** | Les plans tournés vers la source | Le ton clair de la rampe, en grande masse calme |
+| **Demi-ton** | Les plans qui tournent, entre lumière et terminateur | Le ton moyen (la couleur locale), bande plus large sur une forme douce, fine sur une arête |
+| **Terminateur** | La frontière lumière / ombre, là où la surface cesse de voir la source | Une **courbe** qui épouse la forme (arc d'ellipse sur une sphère), jamais une droite ni un cercle concentrique au bord |
+| **Ombre propre** (cœur d'ombre) | La partie la plus sombre de l'ombre, juste après le terminateur, que le rebond n'atteint pas | Le ton sombre, bande le long du terminateur |
+| **Lumière réfléchie** (rebond) | La lumière renvoyée par le sol ou les voisins dans l'ombre | Un ton **entre** l'ombre propre et le demi-ton, sur le bord d'ombre tourné vers le sol, teinté par la couleur du sol |
+| **Occlusion** | Les creux et les contacts, où aucune lumière n'arrive | Les pixels les plus sombres de l'image (hors contour) |
+| **Ombre portée** | La forme projetée sur le sol, à l'opposé de la source | Ellipse sous une sphère ; la plus sombre et la plus nette **au contact**, plus claire et plus large en s'éloignant |
+
+Règles qui en découlent :
+- **Deux familles** : tout ce qui voit la source (éclat, lumière, demi-ton) est plus clair
+  que tout ce qui ne la voit pas (ombre propre, ombre, rebond), **dans une même matière**.
+  Un rebond plus clair que le demi-ton casse la forme (règle 52). C'est ce que mesure la
+  porte « Le volume suit la lumière » (part de la lumière plus sombre que l'ombre).
+- **La forme du terminateur dit la forme de l'objet.** Sphère : arc d'ellipse. Cylindre :
+  droite parallèle à l'axe. Boîte : une arête. Forme organique : une courbe qui ondule avec
+  les bosses.
+- **La hauteur de la lumière** règle la part éclairée : rasante = moitié dans l'ombre, haute =
+  un mince croissant d'ombre. L'onglet Lumière montre l'effet sur le guide.
+- **Bord du terminateur** : doux sur une forme ronde (une marche de demi-ton, un AA) ; dur
+  sur une arête (saut direct de la lumière à l'ombre).
+- **Le guide de volume** de l'onglet Lumière gonfle la silhouette (ou y inscrit une sphère,
+  un cylindre) et colore ces zones par-dessus la toile. **Il ne dessine rien** : tu poses
+  chaque pixel (règle 60). Il se trompe sur les formes complexes (creux, pièces qui se
+  recouvrent) : découpe alors la forme en pièces et raisonne pièce par pièce.
+
+## 0-D. Le design des valeurs [D5][D6]
+
+1. **Plisser les yeux** (vue Notan) : l'image se réduit à deux grandes masses, lumière et
+   ombre. Si elles sont morcelées, le volume ne se lit pas, quelle que soit la finition.
+2. **Deux valeurs, puis trois** (Marco Bucci) : d'abord une valeur de lumière et une
+   d'ombre par matière ; ensuite le demi-ton qui marque le passage. Le reste (rebond,
+   éclat, occlusion) vient après et **ne casse jamais** les deux masses.
+3. **Océans, lacs, rivières** (Proko) : une grande masse (l'océan) contient des formes
+   moyennes de l'autre famille (lacs) et de petites (rivières). Pas de semis de petites
+   taches de même taille.
+4. **Toute l'échelle** : à 32 px et plus, un sprite pro va de presque noir (contour,
+   occlusion) à presque blanc (éclat). L'onglet Lumière affiche l'**étendue** : sous 0,45, le
+   dessin est terne.
+5. **La valeur dit la lumière, la couleur dit la matière.** Une matière sombre en lumière
+   peut être plus sombre qu'une matière claire à l'ombre : la règle des familles s'applique
+   **matière par matière**, c'est ainsi que l'app la mesure.
+6. **Le plus fort contraste au point d'intérêt** (A2), les contrastes faibles ailleurs.
+
+## 0-E. Le design des formes [D7][D8]
+
+1. **Grand, moyen, petit** (Sinix) : une forme domine, une moyenne la complète, une petite
+   donne l'accent. Jamais trois formes de même taille (A4b).
+2. **Droites contre courbes** : une courbe prend sa tension contre une droite. Un contour
+   tout en courbes molles fait amateur ; une alternance (flanc tendu, bosse franche) fait
+   pro. En pixels : une courbe tendue = un long palier puis des marches qui s'accélèrent
+   (6-4-2-1-1), pas une suite de bosses égales.
+3. **Pas de tangentes** (deux contours qui se frôlent), **pas d'écarts réguliers**, **pas de
+   parallèles** inutiles : ils aplatissent l'image.
+4. **Les taches se dessinent** : la tache de lumière, la forme de l'ombre portée, l'éclat,
+   la surface du liquide sont des **formes** choisies (un croissant, une fenêtre, une
+   goutte), pas des restes de remplissage.
+5. **Silhouette lisible** (A2) : vides entre les pièces, pièce qui dépasse (marque-page du
+   livre, flamme qui s'échappe, feuille de la poire).
+
+## 0-F. Perspective utile au sprite [D1][D2]
+
+- **Niveau de l'œil** : une icône d'objet est vue un peu d'en haut. On voit donc **le dessus**
+  des ouvertures et des liquides : ce sont des ellipses.
+- **Les ellipses s'ouvrent en s'éloignant du niveau de l'œil** : celle du goulot (près de
+  l'œil) est plus fine que celle du niveau du liquide, plus fine que la base. Toutes ont
+  leur petit axe sur l'axe de l'objet.
+- **Moitié avant, moitié arrière** : la moitié avant d'une ellipse est plus marquée (plus
+  sombre, plus nette) que la moitié arrière, vue à travers le verre ou cachée.
+- **Boîte** : en vue de jeu, deux faces visibles + le dessus ; arêtes verticales
+  verticales ; isométrique en 2:1 (A9).
+- **Ce qui est loin rapetisse et pâlit** (F3-A) ; à l'échelle d'un objet, la face qui fuit
+  est plus étroite que la face de devant.
+
+## 0-G. Couleur [B5][D9]
+
+1. **Trois couleurs se mélangent** sur une surface : la couleur locale (la matière), la
+   couleur de la lumière (chaude ou froide) et la couleur ambiante (ciel, pièce) qui remplit
+   l'ombre. **Lumière chaude → ombre froide**, et inversement : c'est la vraie raison du
+   glissement de teinte (A6-A), pas une habitude.
+2. **La saturation culmine au demi-ton**, près du terminateur. La lumière se désature vers
+   la couleur de la source ; l'ombre perd en saturation et vire vers l'ambiante. Un rouge
+   pur dans la lumière fait plastique et plat.
+3. **Le rebond prend la couleur de ce qui le renvoie** (sol vert = rebond verdâtre).
+4. **Diffusion sous la surface** (peau, gelée, cire, feuille, liquide coloré) : au bord du
+   terminateur l'ombre devient **plus saturée et plus chaude**, et la matière s'éclaire à
+   contre-jour (Gurney).
+5. **Une couleur d'accent**, la plus saturée, seulement au point d'intérêt. Palette limitée
+   (masque de gamme, F4).
+6. **La variation de couleur vient en dernier** (planches : étape 7-8) : quelques taches de
+   teinte voisine dans les grandes masses, **sans changer la valeur** (vérifier en gris).
+
+## 0-H. Les bords [D10][R]
+
+- **Dur** au point d'intérêt et sur les arêtes ; **doux** sur les formes rondes ; **perdu**
+  là où deux valeurs se confondent (lumière forte contre fond clair).
+- En pixels : bord dur = saut direct de tons ; bord doux = une marche intermédiaire ou un
+  pixel d'AA (A6-F) ; bord perdu = contour éclairci (selout) ou interrompu côté lumière
+  (A6-C, contour cassé).
+- Varier les bords **relativement** : un seul type de bord partout aplatit l'image.
+
+## 0-I. Matières : ce que chaque surface fait de la lumière [D3][B5][P3]
+
+| Matière | Passage lumière/ombre | Éclat | Contraste | À faire |
+|---|---|---|---|---|
+| **Mat** (bois, tissu, pierre, pain) | large, doux | aucun ou très diffus | moyen | texture dans le demi-ton, lumière calme |
+| **Brillant** (plastique, vernis, fruit lisse) | assez net | net, en forme, de la couleur de la source | fort | un grand reflet en forme + 1-2 points |
+| **Métal** | presque pas de couleur locale : il reflète l'environnement | très net, très clair | extrême | ciel clair en haut, sol sombre en bas, ligne d'horizon nette ; ombres teintées par l'entourage |
+| **Verre transparent** | on voit **à travers** | arc net qui suit la forme, par-dessus tout | les reflets font le volume | voir la recette 0-L-A |
+| **Liquide coloré** (dans un verre) | la lumière le traverse | sur le verre, pas dans le liquide | moyen | surface en ellipse claire ; côté opposé à la lumière **plus clair** (lumière transmise) ; bulles = petits cercles clairs à bord sombre côté lumière |
+| **Translucide** (gelée, cristal, peau, feuille) | doux, saturé au terminateur | net si la surface est lisse | moyen | contre-jour coloré, zone claire du côté opposé à la lumière, ombre saturée |
+| **Émissif** (flamme, magie, lave) | **pas d'ombre propre** : la valeur monte vers le cœur | — | fort entre cœur et bord | couches de lueur (planche flamme), halo sur l'entourage, aucun contour sombre |
+
+## 0-J. Méthode de travail du pro [D6][R][P3]
+
+1. **Viser un niveau** : avant de dessiner, choisis une œuvre pro précise (une planche, un
+   sprite de jeu) et écris ce que tu en prends (champ « Niveau visé » de la fiche). Importe-la
+   en calque de référence (G2), à côté de la toile.
+2. **Du général au particulier** : silhouette → construction → deux valeurs → trois valeurs →
+   matière → finition. On ne passe à l'échelle suivante que si la précédente tient à ×1
+   (les planches montrent chaque étape lisible seule).
+3. **Toute la toile en même temps** : on ne finit pas un coin avant les autres ; chaque
+   passe couvre tout l'objet.
+4. **Comparer côte à côte**, à la même taille, souvent : référence, ×1, Notan, gris, miroir.
+   Écrire l'écart (« ma surface de liquide est plate, la sienne est une ellipse »).
+5. **Corriger la cause, pas le symptôme** : un volume qui ne tourne pas se corrige au
+   terminateur, pas avec un éclat de plus.
+6. **Finition des planches** : halo, étincelles en croix, ombre portée, contour d'accent :
+   seulement quand le volume est juste.
+
+## 0-K. Les neuf planches de tutoriels analysées [P3]
+
+Fournies par l'utilisateur : potion (anonyme), cristal, sphère, livre, pierre et flamme
+(style Rappenem), poire, pain (signé EMIL), portail en ruines (signé ELE). Les règles sont
+reformulées ; les planches ne sont pas copiées dans le projet.
+
+**Ce qu'elles font toutes :**
+1. **Chaque étape se lit seule à ×1**, et une seule idée change d'une étape à la suivante.
+2. **La construction précède la couleur** : trait de construction (cristal, livre, portail,
+   pierre) ou masse plate (poire, pain, flamme). Le portail garde ses lignes de construction
+   **par-dessus** la couleur jusqu'à l'étape 4.
+3. **La lumière est dessinée** sur la planche (un point jaune et un cône) avant l'ombrage.
+4. **Deux valeurs d'abord** (sphère 2, cristal 4, poire « shading », pain « shape »), puis
+   les secondaires.
+5. **Le contour devient couleur après la lumière** (« swap edge color », « colored
+   outlines ») ; le pain et la flamme n'ont **aucun** contour sombre.
+6. **Une deuxième lumière d'une autre teinte** (contre-jour, rebond coloré) arrive tard.
+7. **La variation de couleur** arrive presque à la fin.
+8. **La finition ancre et anime** : ombre portée (sphère, pain), halo, étincelles, braises.
+9. **Toute l'échelle des valeurs** est utilisée dans la version finale.
+
+**Ce que chacune apprend en plus :**
+
+| Planche | Leçon propre |
+|---|---|
+| **Potion** (9) | Le niveau du liquide est une ellipse **dès le trait** (étape 1). Verre bleu clair, liquide vu au travers. « Swap edge color » : le trait du verre s'éclaircit, celui du liquide devient rouge sombre. Lumières (5) : grand croissant clair sur le haut du verre, côté lumière. Ombres secondaires (6) : bande violette en bas du liquide, côté ombre. Éclats (7) : points blancs sur le verre. Bulles et contre-jour (8). Fin (9) : contour d'accent doré, étincelles. |
+| **Cristal** (9) | Esquisse libre puis trait nettoyé ; facettes tracées avant l'ombre ; contre-jour rose en bas à l'opposé (B6-D). |
+| **Sphère** (9) | L'exercice de base : 2 valeurs → ombre et lumière secondaires → **terminateur et éclat** → **rebond et contour coloré** → fondu et AA → variation de couleur → **ombre portée** → finition. À refaire dans 8 directions de lumière (0-M). |
+| **Poire** (4) | Masse plate sans contour → contour → ombrage **en plans** (facettes plates qui décrivent les deux sphères) → polissage (blush rouge, rebond violet en bas, éclat doux, variation). Penser en plans avant d'arrondir. |
+| **Livre** (9) | Boîte en perspective → séparer couverture et pages → nettoyer → décor au trait **avant** la couleur → aplats → ombrage → lumières et ombres secondaires → contour coloré et glissement de teinte → finition (B6-F). |
+| **Pain** (4) | Tache → formes (dessus clair, flanc sombre, entailles) → ombrage riche et chaud → polissage : liseré de lumière blanc-crème sur le haut, éclats, **ombre portée douce**. Aucun contour : les formes se séparent par la valeur. |
+| **Portail** (9) | Boîtes isométriques **dessinées à travers** → pièces (marches, piliers, socle) → masses colorées avec construction visible → construction effacée → pierres et fissures → lianes et mousse qui **cassent** les boîtes → variations de lumière → portail émissif qui éclaire l'intérieur de l'arche. |
+| **Pierre** (9) | Cube → arêtes cassées → ombrage → trait intérieur effacé → fissures → trous → lumières et contour coloré → couleur → finition (B6-C). |
+| **Flamme** (9) | Une goutte qui ondule (geste en S) → langues de tailles différentes → trois couches de lueur **vers l'intérieur** (le cœur, en bas, est le plus clair) → teinte plus sombre aux pointes → variation (rose et cyan près du cœur) → braises → nettoyage. Émissif : pas d'ombre propre, pas de contour. |
+
+## 0-L. Recettes en pixels
+
+### A. Potion en verre transparent (32 à 64 px) [P3]
+1. **Construction** : axe ; panse = cercle ; col = cylindre (deux ellipses fines) ; bouchon =
+   calotte ; **niveau du liquide = ellipse** entière (moitié arrière comprise) à 40-55 % de
+   la hauteur de la panse.
+2. **Trait** : contour 1 px sombre ; la moitié avant de l'ellipse du liquide est tracée, la
+   moitié arrière l'est d'un ton plus clair (vue à travers le verre).
+3. **Aplats** : verre vide = bleu clair désaturé (la couleur du fond vu à travers, teintée) ;
+   liquide = sa couleur moyenne ; surface du liquide = un ton plus clair que le liquide.
+4. **Deux familles** (lumière en haut à gauche) : liquide clair à gauche, sombre à droite et
+   en bas, terminateur en arc ; verre : sa moitié droite un ton plus sombre.
+5. **Modelé** : ombre propre du liquide le long du terminateur ; **le bas du liquide, côté
+   opposé à la lumière, s'éclaircit** (lumière transmise qui ressort, saturée) ; occlusion
+   sous le bouchon et au fond.
+6. **Matière** : grand reflet en croissant sur le haut gauche du verre, qui suit le cercle,
+   **par-dessus** le liquide ; 1 ou 2 points blancs ; reflet fin le long du bord droit (la
+   paroi qui renvoie le fond).
+7. **Contour coloré** : le trait du verre devient bleu sombre (ou violet), celui du liquide
+   rouge sombre ; plus clair côté lumière.
+8. **Contre-jour** : 1 px d'une autre teinte (rose, cyan) sur le bord bas droit.
+9. **Variation et finition** : 2 ou 3 bulles (cercle clair, 1-2 px, ombre côté lumière), un
+   reflet de surface sur l'ellipse, ombre portée en ellipse, étincelles si objet magique.
+
+### B. La sphère d'étude (à refaire souvent) [P3][D3]
+Toile 32×32, sphère de 24 px, 5 tons + contour. Dans l'ordre : 2 valeurs (terminateur en
+arc) → demi-ton → ombre propre → éclat (2×2 + 1 px) → rebond (1-2 px le long du bas, côté
+ombre) → contour coloré (clair en haut à gauche, sombre en bas à droite) → AA sur les
+marches de 2 px → ombre portée en ellipse aplatie (rapport 4:1), poussée à l'opposé. La
+porte « Le volume suit la lumière » doit passer sans justification.
+
+### C. Fruit (poire, pomme) [P3]
+Deux sphères fondues ; ombrage **en plans** d'abord (3 tons, facettes plates), puis
+fondre ; blush d'une teinte voisine sur le côté lumière ; rebond violet ou froid en bas ;
+éclat doux (2 tons) ; tige et feuille comme pièces qui dépassent ; taches de surface en
+groupes de 2-3 dans le demi-ton.
+
+### D. Pain, gâteau, matières molles [P3]
+Pas de contour noir : le bord le plus sombre est la couleur d'ombre de la croûte. Dessus
+clair, flanc sombre chaud, entailles = creux (sombres côté lumière, lèvre claire côté
+opposé, B6-C) ; liseré de lumière crème le long du haut ; ombre portée douce (deux tons, le
+plus sombre au contact).
+
+### E. Flamme et matières émissives [P3]
+Geste en S → langues de tailles différentes qui suivent le geste → couches de lueur
+concentriques vers le cœur (le plus clair près de la base) → bords des pointes plus sombres
+et plus rouges → 1 ou 2 notes de teinte inattendue (rose, cyan) près du cœur → braises
+détachées qui suivent le flux. Halo : 1-2 tons à peine plus clairs que le fond autour
+(B6-D). Aucune ombre propre.
+
+### F. Architecture en ruines (décor isométrique) [P3]
+Boîtes en 2:1 dessinées à travers → pièces (socle, marches, piliers, linteau) → masses
+colorées, une valeur par face (dessus clair, face éclairée moyenne, face d'ombre sombre) →
+construction effacée → pierres et fissures dans les faces moyennes → végétation qui
+**déborde** des arêtes (mousse sur le dessus, lianes qui pendent) → lumière d'une source
+émissive (portail) sur les faces qui la voient.
+
+## 0-M. Apprendre le dessin à la souris : le plan d'entraînement [D1][D3][R]
+
+Claude dessine à la souris : il peut apprendre le dessin, pas seulement le pixel. Entre deux
+projets (partie G), dans cet ordre, une séance par exercice (`--id etude-…`, non commitée) :
+
+1. **Sphère d'étude** (0-L-B) sous 8 directions de lumière et 3 hauteurs : la porte
+   « Le volume suit la lumière » doit passer chaque fois.
+2. **Cylindre et boîte** sous la même lumière : terminateur droit, arête dure.
+3. **Sphère en 4 matières** : mat, brillante, métal, verre avec liquide (0-I).
+4. **Notans** : 3 petites vignettes de 16×16 en deux valeurs avant chaque dessin.
+5. **Copies d'étude des neuf planches** (G2, type « Étude ») : analyser, copier à côté,
+   refaire de mémoire, noter l'écart. Les copies restent privées et créditées.
+6. **Construction** : 10 objets du quotidien en primitives dessinées à travers, au calque de
+   construction seulement.
 
 ---
 
@@ -2877,6 +3224,12 @@ on cite l'artiste d'origine si on les montre.
 
 # Résumé
 
+**Tout dessin (partie 0) :** niveau visé (œuvre pro) → construction à travers (primitives
+entières, ellipses) → trait → aplats de couleur locale → lumière posée, deux familles
+(Notan) → modelé (demi-ton, ombre propre, rebond, occlusion, ombre portée) → matière →
+éclats et contour coloré → contre-jour → variation de couleur → détails → planche avec
+comparaison côte à côte.
+
 **Objet :** intention, usage et projection → cadre (diagonale pour les objets longs) →
 volumes et terminateur → simplification (A4b) → forme iconique → silhouette → contour →
 palette → lumière selon la matière → variation de couleur → détails → nettoyage → contrôle
@@ -3032,6 +3385,27 @@ Les livres s'achètent chez l'éditeur ou en librairie. Pas de copies piratées.
 
 ---
 
+## [D] Fondamentaux du dessin et de la peinture (v17)
+Cours et livres légitimes, cités pour leurs idées ; tout est reformulé.
+
+| Étiquette | Source | Ce qu'on en prend |
+|---|---|---|
+| [D1] | [Drawabox, leçon 1 (ghosting)](https://drawabox.com/lesson/1/14/arc) · [leçon 2 (construction)](https://www.drawabox.com/lesson/2/3) | dessiner à travers, contours croisés, trait préparé (0-B) |
+| [D2] | Scott Robertson et Thomas Bertling, *How to Draw* et *How to Render* (Design Studio Press) | perspective, ellipses, matières et réflexion (0-F, 0-I) |
+| [D3] | [Proko, éléments de la lumière et de l'ombre](https://www.proko.com/course-lesson/elements-of-light-and-shadow/notes) · [lumière sur une sphère](https://www.proko.com/lesson/part-1-light-on-a-basic-sphere-and-intro-to-compression) | familles, terminateur, ombre propre, rebond, occlusion, ombre portée (0-C) |
+| [D4] | [James Gurney, diffusion sous la surface](https://gurneyjourney.blogspot.com/2008/05/subsurface-scattering-ii.html) · [caustiques](https://gurneyjourney.blogspot.com/2010/07/caustic-reflections.html) · [transparence de l'eau](https://gurneyjourney.blogspot.com/2008/03/transparency-of-water.html) | translucidité, liquides, verre (0-G, 0-I) |
+| [D5] | [Marco Bucci, deux valeurs puis trois](https://www.skillshare.com/en/classes/10-minutes-to-better-painting/1173043622) | séparer lumière et ombre, le demi-ton (0-D) |
+| [D6] | [Proko, contrôle des valeurs](https://www.proko.com/course-lesson/value-control) · [concevoir des groupes de valeurs](https://www.proko.com/course-lesson/demo-designing-value-groups-level-1) | océans, lacs, rivières ; viser, comparer (0-D, 0-J) |
+| [D7] | [Principes de design (grand-moyen-petit, d'après Sinix)](https://mayabeginner.readthedocs.io/en/latest/Design/L3_DesignPrinicplesPrimer.html) | hiérarchie des formes (0-E) |
+| [D8] | [Droites et courbes](https://animatedspirit.com/straights-curves) | tension du contour (0-E) |
+| [D9] | James Gurney, *Color and Light* (= [B5]) | couleur locale, lumière, ambiante ; saturation au demi-ton (0-G) |
+| [D10] | [Les bords en peinture](https://drawpaintacademy.com/edges/) · [Muddy Colors, bords](https://www.muddycolors.com/?p=8983) | bords durs, doux, perdus (0-H) |
+
+Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixeljoint.com/forum/forum_posts.asp?TID=20953)
+(on dessine les reflets extérieurs et la réfraction, pas une vraie transparence) ·
+[itch.io, tutoriel potion de soin](https://itch.io/t/2667098/pixel-tutorial-health-potion)
+(petits éclats sur la panse et le col).
+
 # Sources web [R]
 
 **Rendu général, couleurs, contour :**
@@ -3178,6 +3552,19 @@ Les livres s'achètent chez l'éditeur ou en librairie. Pas de copies piratées.
 ---
 
 # Historique des versions
+
+- **v17 :** **partie 0, dessiner avant de pixelliser**. Diagnostic de la potion 64×64 face
+  à une planche pro (0-A) ; construction et dessin à travers (0-B) ; zones de la lumière :
+  éclat, lumière, demi-ton, terminateur, ombre propre, rebond, occlusion, ombre portée
+  (0-C) ; design des valeurs (deux familles, notan, étendue ; 0-D) ; design des formes
+  (0-E) ; perspective utile (0-F) ; couleur (0-G) ; bords (0-H) ; matières (0-I) ; méthode
+  du pro (0-J) ; analyse de neuf planches fournies [P3] (0-K) ; recettes (potion en verre,
+  sphère d'étude, fruit, pain, flamme, ruines ; 0-L) ; plan d'entraînement (0-M) ; sources
+  [D] ; règles impératives 49 à 60 ; règle 23 élargie. Dans Claude Pixel : **onglet
+  Lumière** (direction, hauteur, forme, guide de volume sur la toile, repère de lumière),
+  vues **Notan** et **Valeurs** sur la toile, détecteur « L'ombrage ne suit pas la
+  lumière », porte « Le volume suit la lumière », étapes v17 (construction, deux familles,
+  modelé, matière), regard de la souris avec valeurs et guide.
 
 - **v16 :** **A10** leçons des maîtres (Kazuko Shibuya, Mark Ferrari, Paul Robertson, Henk
   Nieborg, Waneella, Toyoi Yuuta, Slynyrd, saint11, Pixel Parmesan) et ce qui revient chez

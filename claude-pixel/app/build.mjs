@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 
 const ici = dirname(fileURLToPath(import.meta.url));
 const src = f => readFileSync(join(ici, 'src', f), 'utf8');
-const ORDRE = ['core.js', 'detect.js', 'methode.js', 'exporte.js', 'ui-base.js', 'ui-scene.js', 'ui-outils.js', 'ui-panneaux.js', 'ui-plus.js'];
+const ORDRE = ['core.js', 'volume.js', 'detect.js', 'methode.js', 'exporte.js', 'ui-base.js', 'ui-scene.js', 'ui-outils.js', 'ui-panneaux.js', 'ui-plus.js'];
 
 // La méthode complète, embarquée telle quelle (onglet Aide, règles, portes).
 const methode = readFileSync(join(ici, '..', 'METHODE_PIXEL_ART.md'), 'utf8');
