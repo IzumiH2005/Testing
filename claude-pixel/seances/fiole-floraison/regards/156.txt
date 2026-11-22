@@ -1,0 +1,11 @@
+regard 156
+case 26,18 · couleur #25182bff (exportée : #1e1426ff) · écran 477,262
+outil crayon · taille 1 · c1 #1e1426ff · c2 #00000000
+calque 1/6 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 8 · Trait final (0-AB-A · A5-6 · 0-E)
+porte : Pixels doublés en « L » (A5-6 · règle 21) : 8 px. Corrige, ou justifie-le. | Case non cochée : « Vue miroir regardée : aucune pente fausse » | Case non cochée : « Courbes tendues, aucune bosse molle »
+défauts : Pixels doublés en « L » [erreur] 8 px (dont 26,18 27,18 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 21 idée(s), 10 barrée(s) · dernière : [choix] Bouchon 1, collerette 1 avec la lèvre en corolle 3 (le détail se concentre au col et au bo
+messages : aucun
+images : seances/fiole-floraison/regards/156-{ecran,loupe,dessin}.png

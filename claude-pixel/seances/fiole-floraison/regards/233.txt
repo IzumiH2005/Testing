@@ -1,0 +1,11 @@
+regard 233
+case 23,35 · couleur transparent (exportée : transparent) · écran 465,330
+outil gomme · taille 1 · c1 #1e1426ff · c2 #00000000
+calque 1/7 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 9 · Polish du trait (0-AB-A · A5-6 · A8 · 0-H)
+porte : Pixels orphelins (A5-10) : 2 px. Corrige, ou justifie-le. | Case non cochée : « Contour plus fort que les traits intérieurs » | Case non cochée : « Chaque jonction est nette et dessinée »
+défauts : Pixels orphelins [attention] 2 px ; Bruit [attention] 116 px (dont 24,31 23,32 22,33 22,36 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 21 idée(s), 10 barrée(s) · dernière : [choix] Bouchon 1, collerette 1 avec la lèvre en corolle 3 (le détail se concentre au col et au bo
+messages : aucun
+images : seances/fiole-floraison/regards/233-{ecran,loupe,dessin}.png

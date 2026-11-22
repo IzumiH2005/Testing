@@ -1,0 +1,11 @@
+regard 236
+case 38,30 · couleur #1e1426ff (exportée : #1e1426ff) · écran 525,310
+outil crayon · taille 1 · c1 #463a66ff · c2 #00000000
+calque 1/7 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 9 · Polish du trait (0-AB-A · A5-6 · A8 · 0-H)
+porte : Case non cochée : « Contour plus fort que les traits intérieurs » | Case non cochée : « Chaque jonction est nette et dessinée »
+défauts : Bruit [attention] 118 px (dont 37,29 38,30 39,31 35,32 40,32 36,33 41,33 37,34 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 21 idée(s), 10 barrée(s) · dernière : [choix] Bouchon 1, collerette 1 avec la lèvre en corolle 3 (le détail se concentre au col et au bo
+messages : aucun
+images : seances/fiole-floraison/regards/236-{ecran,loupe,dessin}.png

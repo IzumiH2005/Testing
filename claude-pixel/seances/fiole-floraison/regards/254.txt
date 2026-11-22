@@ -1,0 +1,11 @@
+regard 254
+case -43,28 (hors du dessin) · couleur (hors toile) · écran 200,300
+outil crayon · taille 1 · c1 #1e1426ff · c2 #00000000
+calque 1/7 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 10 · Validation du dessin (avant la couleur) (0-AB-C · 0-AA-E)
+porte : Case non cochée : « L'idée se lit en silhouette noire, sans trait intérieur » | Case non cochée : « Trois poids de trait (fort, moyen, fin) appliqués partout » | Case non cochée : « Chaque recouvrement est net, lignes de forme présentes » | Case non cochée : « Trait regardé à ×1, ×2, retourné et en silhouette » | Case non cochée : « Écart avec l'œuvre visée écrit au carnet » | Case non cochée : « Dessin montré à l'humain avant la couleur »
+défauts : Bruit [attention] 125 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 23 idée(s), 11 barrée(s) · dernière : [critique] Écart avec Lalique : chez lui la plante est sculptée en relief, avec des feuilles qui se r
+messages : aucun
+images : seances/fiole-floraison/regards/254-{ecran,loupe,dessin}.png

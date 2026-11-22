@@ -1,0 +1,11 @@
+regard 217
+case 11,65 · couleur transparent (exportée : transparent) · écran 417,450
+outil gomme · taille 1 · c1 #1e1426ff · c2 #00000000
+calque 1/6 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 8 · Trait final (0-AB-A · A5-6 · 0-E)
+porte : Case non cochée : « Vue miroir regardée : aucune pente fausse » | Case non cochée : « Courbes tendues, aucune bosse molle »
+défauts : Bruit [attention] 114 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 21 idée(s), 10 barrée(s) · dernière : [choix] Bouchon 1, collerette 1 avec la lèvre en corolle 3 (le détail se concentre au col et au bo
+messages : aucun
+images : seances/fiole-floraison/regards/217-{ecran,loupe,dessin}.png

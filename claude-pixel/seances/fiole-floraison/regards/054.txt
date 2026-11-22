@@ -1,0 +1,11 @@
+regard 054
+case 180,65 (hors du dessin) · couleur (hors toile) · écran 1094,450
+outil ellipse · taille 3 · c1 #2a1a2eff · c2 #00000000
+calque 2/2 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 3 · Essais : silhouettes, critique, choix (0-AA-D · 0-AA-E · 0-N)
+porte : Carnet : un « Choix retenu ». | Case non cochée : « Au moins 6 silhouettes dans 3 familles différentes » | Case non cochée : « La silhouette choisie ne se confond pas avec une potion générique » | Case non cochée : « La silhouette choisie se lit à ×1 et en miroir »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 16 idée(s), 4 barrée(s) · dernière : [critique] F : 4, 2, 3, 4, 3, 4 = 20/30. Propre, mais on lit un fruit.
+messages : aucun
+images : seances/fiole-floraison/regards/054-{ecran,loupe,dessin}.png

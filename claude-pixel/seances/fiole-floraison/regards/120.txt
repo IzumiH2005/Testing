@@ -1,0 +1,11 @@
+regard 120
+case 55,40 · couleur #2a1a2e99 (exportée : transparent) · écran 593,350
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 4/4 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 5 · Rough : le geste et les grandes masses (0-AB-A · 0-Q)
+porte : Case non cochée : « Une ligne de flux traverse l'objet » | Case non cochée : « Les grandes masses sont posées, rien de fini »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 21 idée(s), 10 barrée(s) · dernière : [choix] Bouchon 1, collerette 1 avec la lèvre en corolle 3 (le détail se concentre au col et au bo
+messages : aucun
+images : seances/fiole-floraison/regards/120-{ecran,loupe,dessin}.png

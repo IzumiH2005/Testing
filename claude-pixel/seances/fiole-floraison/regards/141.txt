@@ -1,0 +1,11 @@
+regard 141
+case 6,49 · couleur #2a1a2e99 (exportée : transparent) · écran 397,386
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 6/6 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 7 · Esquisse nettoyée (0-AB-A · 0-AB-B)
+porte : Baisse l'opacité des passes précédentes (20 à 40 %) ou masque-les : « volumes ». | Case non cochée : « Toile retournée : aucune pente ni proportion fausse » | Case non cochée : « Seuls les traits qui comptent sont gardés »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 21 idée(s), 10 barrée(s) · dernière : [choix] Bouchon 1, collerette 1 avec la lèvre en corolle 3 (le détail se concentre au col et au bo
+messages : aucun
+images : seances/fiole-floraison/regards/141-{ecran,loupe,dessin}.png

@@ -1,0 +1,11 @@
+regard 274
+case -43,28 (hors du dessin) · couleur (hors toile) · écran 200,300
+outil crayon · taille 1 · c1 #1e1426ff · c2 #00000000
+calque 1/7 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 10 · Validation du dessin (avant la couleur) (0-AB-C · 0-AA-E)
+porte : Case non cochée : « Dessin montré à l'humain avant la couleur »
+défauts : Bruit [attention] 125 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 24 idée(s), 11 barrée(s) · dernière : [critique] Vérification en silhouette pleine : la panse fuyait sous les sépales (contour arrêté à 3 p
+messages : aucun
+images : seances/fiole-floraison/regards/274-{ecran,loupe,dessin}.png
