@@ -124,10 +124,26 @@ function ligneDeCases([x0, y0], [x1, y1]) {
   for (;;) { r.push([x0, y0]); if (x0 === x1 && y0 === y1) return r; const e2 = 2 * e; if (e2 >= dy) { e += dy; x0 += sx; } if (e2 <= dx) { e += dx; y0 += sy; } }
 }
 
-async function bouge(x, y, lent = 1) {
-  const d = Math.hypot(x - pos.x, y - pos.y);
-  const steps = Math.max(1, Math.min(60, Math.round(d / (6 / lent))));
-  await page.mouse.move(x, y, { steps });
+/* Un geste de main, pas une téléportation.
+ * Durée selon la loi de Fitts (loin = un peu plus long, jamais lent), profil à jerk minimal
+ * (départ et arrivée en douceur, vitesse au milieu), légère courbe comme un poignet qui
+ * pivote, une position toutes les ~16 ms, et l'arrivée exactement sur la cible.
+ * Sans courbe quand un bouton est tenu : un glisser va droit. */
+const lisse = t => t * t * t * (10 - 15 * t + 6 * t * t);
+async function bouge(x, y, lent = 1, { courbe = true } = {}) {
+  const x0 = pos.x, y0 = pos.y, dx = x - x0, dy = y - y0, d = Math.hypot(dx, dy);
+  if (d < 0.5) { await page.mouse.move(x, y); pos = { x, y }; return; }
+  const duree = (30 + 55 * Math.log2(d / 16 + 1)) / lent;
+  const n = Math.max(2, Math.round(duree / 16));
+  // Courbe : décalage perpendiculaire en cloche, côté fixe selon le sens (main droite).
+  const flec = courbe && !tenus.size ? Math.min(d * 0.05, 14) * (dx >= 0 ? -1 : 1) : 0, px = -dy / d, py = dx / d;
+  const t0 = Date.now();
+  for (let k = 1; k <= n; k++) {
+    const t = k / n, s = lisse(t), b = Math.sin(Math.PI * s) * flec;
+    const ex = k === n ? x : x0 + dx * s + px * b, ey = k === n ? y : y0 + dy * s + py * b;
+    await page.mouse.move(ex, ey);
+    const reste = t0 + duree * t - Date.now(); if (reste > 1) await pause(reste);
+  }
   pos = { x, y };
 }
 
@@ -255,7 +271,7 @@ async function execute(ligne) {
     case 'pas': {
       const dx = Number(args[0] || 0), dy = Number(args[1] || 0);
       const cel = await lit('celluleDeEcran', pos.x, pos.y), e = await caseVersEcran(cel.x + dx, cel.y + dy);
-      await bouge(e.x, e.y, 0.5); return 'curseur sur la case ' + (cel.x + dx) + ',' + (cel.y + dy);
+      await bouge(e.x, e.y, 0.8, { courbe: false }); return 'curseur sur la case ' + (cel.x + dx) + ',' + (cel.y + dy);
     }
     case 'appuie': {
       const b = BOUTONS[args[0] || 'gauche']; if (!b) throw new Error('Bouton : gauche, droit ou milieu.');
@@ -274,9 +290,9 @@ async function execute(ligne) {
       if (BOUTONS[args[0]]) { b = BOUTONS[args[0]]; args.shift(); }
       if (args.length) { const p = await point(args); await bouge(p.x, p.y); }
       const sur = await surToile(pos.x, pos.y); refuseSiVerrou(sur);
-      await page.mouse.click(pos.x, pos.y, { button: b, clickCount: cmd === 'double' ? 2 : 1, delay: 50 });
+      await page.mouse.click(pos.x, pos.y, { button: b, clickCount: cmd === 'double' ? 2 : 1, delay: 40 });
       if (sur) verrou = true;
-      await pause(150);
+      await pause(90);
       return cmd + (sur ? ' sur la toile : regarde avant le suivant' : '');
     }
     case 'trace': {
@@ -285,17 +301,22 @@ async function execute(ligne) {
       for (const [x, y] of cases) pts.push(await caseVersEcran(x, y));
       await bouge(pts[0].x, pts[0].y);
       const sur = await surToile(pos.x, pos.y); refuseSiVerrou(sur);
-      await page.mouse.down();
+      await page.mouse.down(); await pause(30);
       // Case par case, de centre en centre : une diagonale ne frôle jamais le coin d'une case voisine.
-      let n = 1;
-      for (let i = 1; i < cases.length; i++) {
-        for (const [x, y] of ligneDeCases(cases[i - 1], cases[i]).slice(1)) {
-          const e = await caseVersEcran(x, y);
-          await page.mouse.move(e.x, e.y, { steps: 1 }); pos = { x: e.x, y: e.y }; n++;
-          await pause(25);
-        }
+      // Rythme d'une main sûre : vite sur une marche droite, un temps à chaque changement de
+      // direction, ralenti sur les dernières cases pour poser la fin juste.
+      const chemin = [];
+      for (let i = 1; i < cases.length; i++) for (const c of ligneDeCases(cases[i - 1], cases[i]).slice(1)) chemin.push(c);
+      let n = 1, avant = cases[0], dir = null;
+      for (let j = 0; j < chemin.length; j++) {
+        const [x, y] = chemin[j], d = (x - avant[0]) + ',' + (y - avant[1]);
+        const e = await caseVersEcran(x, y);
+        await page.mouse.move(e.x, e.y, { steps: 1 }); pos = { x: e.x, y: e.y }; n++;
+        const fin = chemin.length - j <= 2, coin = dir !== null && d !== dir;
+        await pause(fin ? 32 : coin ? 38 : 14);
+        dir = d; avant = chemin[j];
       }
-      await pause(60); await page.mouse.up();
+      await pause(45); await page.mouse.up();
       if (sur) verrou = true;
       return 'trait par ' + cases.length + ' points (' + n + ' cases)' + (sur ? ', regarde avant le suivant' : '');
     }
@@ -305,13 +326,13 @@ async function execute(ligne) {
       const a = await ec(args[0]), b = await ec(args[1]);
       await bouge(a.x, a.y);
       const sur = await surToile(pos.x, pos.y); refuseSiVerrou(sur);
-      await page.mouse.down(); await pause(60); await bouge(b.x, b.y, 0.4); await pause(80); await page.mouse.up();
+      await page.mouse.down(); await pause(45); await bouge(b.x, b.y, 0.6, { courbe: false }); await pause(60); await page.mouse.up();
       if (sur) verrou = true;
       return 'glissé de ' + args[0] + ' à ' + args[1] + (sur ? ', regarde avant le suivant' : '');
     }
     case 'molette': {
       const n = Number(args[0]); if (!Number.isFinite(n)) throw new Error('molette n : nombre de crans (négatif = vers le haut).');
-      await page.mouse.wheel(0, n * 100); await pause(150); return 'molette ' + n;
+      await page.mouse.wheel(0, n * 100); await pause(100); return 'molette ' + n;
     }
     case 'defile': {
       // Tourne la molette au-dessus du panneau jusqu'à voir l'élément.
@@ -323,7 +344,7 @@ async function execute(ligne) {
         const x = Math.min(Math.max(r.cx, 10), VUE.width - 10);
         if (Math.abs(pos.x - x) > 4 || pos.y < haut || pos.y > bas) await bouge(x, VUE.height / 2);
         const d = r.cy < haut ? Math.max(-500, r.cy - VUE.height / 2) : Math.min(500, r.cy - VUE.height / 2);
-        await page.mouse.wheel(0, d); await pause(110);
+        await page.mouse.wheel(0, d); await pause(90);
       }
       throw new Error('« ' + nom + ' » reste hors de vue après 80 crans.');
     }
@@ -335,13 +356,13 @@ async function execute(ligne) {
     case 'touche': {
       if (!args[0]) throw new Error('touche b, touche ctrl+z, touche echap…');
       const k = touche(args[0]);
-      await page.keyboard.press(k); await pause(120);
+      await page.keyboard.press(k); await pause(70);
       if (k === 'Escape' && tenus.size) { for (const b of tenus) await page.mouse.up({ button: b }); tenus.clear(); traitSurToile = false; }
       return 'touche ' + k;
     }
     case 'tape': {
       const t = args.join(' ').replace(/^"|"$/g, '');
-      await page.keyboard.type(t, { delay: 22 }); return 'tapé ' + t.length + ' caractère(s)';
+      await page.keyboard.type(t, { delay: 14 }); return 'tapé ' + t.length + ' caractère(s)';
     }
     case 'choisis': {
       // Ouvre une liste déroulante d'un vrai clic, puis descend avec les flèches jusqu'à l'option.
@@ -352,10 +373,10 @@ async function execute(ligne) {
       let j = info.o.findIndex(t => t.toLowerCase() === voulu); if (j < 0) j = info.o.findIndex(t => t.toLowerCase().startsWith(voulu));
       if (j < 0) throw new Error('Options de « ' + nom + ' » : ' + info.o.join(' | '));
       const p = await point(['=' + nom]); await bouge(p.x, p.y);
-      await page.mouse.click(pos.x, pos.y, { delay: 50 }); await pause(250);
+      await page.mouse.click(pos.x, pos.y, { delay: 40 }); await pause(160);
       const d = j - Math.max(0, info.i);
-      for (let k = 0; k < Math.abs(d); k++) { await page.keyboard.press(d > 0 ? 'ArrowDown' : 'ArrowUp'); await pause(120); }
-      await page.keyboard.press('Enter'); await pause(150);
+      for (let k = 0; k < Math.abs(d); k++) { await page.keyboard.press(d > 0 ? 'ArrowDown' : 'ArrowUp'); await pause(60); }
+      await page.keyboard.press('Enter'); await pause(100);
       return 'choisi « ' + info.o[j] + ' »';
     }
     case 'regarde': return regarde();

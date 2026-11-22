@@ -13,7 +13,7 @@ projet reste dans `claude-pixel/`.
    images (écran, loupe, dessin) et le résumé avant de continuer. La souris refuse le trait
    suivant tant que ce n'est pas fait. Il ne faut pas enchaîner des `regarde` à vide pour
    contourner cette règle.
-3. **Suivre la méthode.** Relire les 42 règles impératives avant chaque dessin. Remplir la
+3. **Suivre la méthode.** Relire les 48 règles impératives avant chaque dessin. Remplir la
    fiche d'intention honnêtement. Ne cocher une case que si c'est vrai sur le dessin, et
    jamais seulement pour ouvrir une porte.
 4. **Corriger tout de suite.** Un défaut signalé près du curseur se corrige avant le trait

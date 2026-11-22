@@ -44,6 +44,20 @@ Toutes les commandes qui prennent une position acceptent trois formes :
 Si un élément est hors de l'écran, la commande est refusée et invite à faire défiler son
 panneau (`defile =nom`).
 
+## Le geste
+
+La souris bouge comme une main, pas comme une téléportation :
+
+- **Déplacement** : la durée suit la loi de Fitts (un trajet long prend un peu plus de temps,
+  sans jamais traîner), avec un départ et une arrivée en douceur (profil à jerk minimal) et
+  une légère courbe de poignet. Le curseur arrive exactement sur la cible.
+- **Bouton tenu** : pas de courbe. Un glisser ou un trait à main levée (`appuie`, `va`,
+  `relache`) va droit.
+- **Trait** (`trace`) : rapide sur une marche droite, un temps à chaque changement de
+  direction, plus lent sur les deux dernières cases pour poser la fin juste.
+- **Pauses** : courtes après un clic, une touche ou un cran de molette, juste assez pour que
+  l'app réponde.
+
 ## Les commandes
 
 **Bouger**

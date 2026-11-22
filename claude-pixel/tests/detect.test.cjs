@@ -37,3 +37,11 @@ test('pixels doublés (superpixels)', () => {
   const p = []; for (let y = 0; y < 8; y++) for (let x = 0; x < 8; x++) p.push([x, y, ((x >> 1) + (y >> 1)) % 2 ? C : Y]);
   assert.deepEqual(ids(doc(8, 8, p)), ['superpixels']);
 });
+
+test('pixel semi-transparent : AA vers le vide signalé ; pixels opaques : rien', () => {
+  const p = []; for (let i = 2; i < 10; i++) p.push([i, 2, C], [i, 9, C], [2, i, C], [9, i, C]);
+  assert.deepEqual(ids(doc(16, 16, p)), []);
+  p.push([1, 1, '#3a2b4c80']);
+  const r = AP.detecte(doc(16, 16, p)).find(x => x.id === 'alpha');
+  assert.ok(r); assert.deepEqual(r.pixels, [[1, 1]]);
+});

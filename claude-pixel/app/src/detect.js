@@ -35,6 +35,13 @@ function coinsL(px, w, h) {
   return out;
 }
 
+/* --- Alpha partiel : de l'AA vers le vide, qui fait un halo sur un autre fond (A6-F, règle 46) --- */
+function alphaPartiel(px) {
+  const out = [];
+  for (let i = 0; i < px.length; i++) { const a = px[i] >>> 24; if (a > 0 && a < 255) out.push(i); }
+  return out;
+}
+
 /* --- Jaggies : longueurs de segments irrégulières (A5-6, règle 22) --- */
 function jaggies(px, w, h) {
   const at = grille(px, w, h), out = [];
@@ -304,6 +311,9 @@ function detecte(doc, f = 0) {
       } catch (e) { /* couleur invalide ignorée */ }
     }
   }
+  const A = alphaPartiel(px);
+  if (A.length) ajoute('alpha', 'attention', 'Pixels semi-transparents', 'A6-F · règle 46', A.map(i => [i % w, (i / w) | 0]),
+    A.length + ' pixel(s) à demi transparents : c\'est de l\'AA vers le vide, qui fait un halo sur tout autre fond. Rends-les opaques ou efface-les ; l\'AA se fait à l\'intérieur du contour.');
   if (doc.tuile && doc.tuile.on) {
     const R = raccords(px, w, h, doc.tuile.tw, doc.tuile.th);
     if (R.pts.length) ajoute('raccords', 'erreur', 'Couture de tuile', 'F2-A', R.pts,
@@ -320,6 +330,6 @@ function mesures(doc, f = 0) {
   return { couleurs: cols.size, opaques: n, palette: [...cols.keys()].map(c => hex(c)) };
 }
 
-Object.assign(AP, { detecte, mesures, DETECT: { coinsL, jaggies, banding, coussin, orphelins, bruit, damier, superpixels, raccords, composantes, distanceBord } });
+Object.assign(AP, { detecte, mesures, DETECT: { coinsL, alphaPartiel, jaggies, banding, coussin, orphelins, bruit, damier, superpixels, raccords, composantes, distanceBord } });
 if (typeof module !== 'undefined') module.exports = AP;
 })(typeof window !== 'undefined' ? window : globalThis);

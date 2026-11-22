@@ -1,4 +1,4 @@
-# Méthode de pixel art — objets, personnages, créatures et décors (v15)
+# Méthode de pixel art — objets, personnages, créatures et décors (v16)
 
 On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin classique
 (construction par volumes, ligne d'action, anatomie) et les règles du pixel art
@@ -9,7 +9,8 @@ On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin cla
 2. Construire avec la **partie B** (objet), la **partie C** (personnage, créature) ou la
    **partie F** (tuiles, fonds, scène).
 3. Poser les pixels avec le **pipeline A5**, puis finir avec **A6** (finition pro) ; tramage
-   en **A7**, lignes en **A8**, vue du jeu en **A9**.
+   en **A7**, lignes en **A8**, vue du jeu en **A9**, leçons des maîtres en **A10**, geste
+   du pro en **A11**.
 4. Contrôler avec la planche (A5-11, `planche.py`, partie D) et, pour un décor, F6.
 5. Pour progresser hors des projets : **partie G** (plan en quatre paliers, copies d'étude).
 
@@ -17,8 +18,8 @@ On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin cla
 
 | Partie | Sections |
 |---|---|
-| Règles impératives | 42 ordres courts, tirés des tests et des livres |
-| **A. Règles communes** | A1 travail · A2 lisibilité · A3 table par taille · A4 règles du dessin · A4b simplifier · A5 pipeline pixel (silhouette → contour → palette → lumière → matières → détails → nettoyage → contrôle) · A6 finition pro · **A7 tramage** · **A8 lignes et formes** · **A9 perspectives de jeu** |
+| Règles impératives | 48 ordres courts, tirés des tests, des livres et des maîtres |
+| **A. Règles communes** | A1 travail · A2 lisibilité · A3 table par taille · A4 règles du dessin · A4b simplifier · A5 pipeline pixel (silhouette → contour → palette → lumière → matières → détails → nettoyage → contrôle) · A6 finition pro · **A7 tramage** · **A8 lignes et formes** · **A9 perspectives de jeu** · **A10 leçons des maîtres** · **A11 geste du pro (outils, souris)** |
 | **B. Objets** | B0 intention · B0b projection · B1 cadre · B2 volumes · B3 forme iconique · B4 matière · B4b déclinaison par taille · B5 contrôle · **B6 recettes pas à pas (pierre, rocher, cristal, slime, livre)** |
 | **C. Personnages** | C0 intention · C1 proportions · C2 pose · C3 volumes · C4 tête et visage · C5 vêtements (design) · C6 cheveux · C7 astuces de figure · C8 contrôle · C9 anatomie · C10 tailles (8 à 128 px) · C11 portrait anime · C12 visage Loomis + anime · C13 chibi pas à pas · C14 corps nu puis vêtements en calque · C15 créatures · C16 créatures complexes · C17 vêtements (plis, matières) |
 | **E. Animation** | E0 méthode imposée image par image · E1 les 12 principes de *The Illusion of Life* · E2 techniques pixel (durées, espacement, smear, sous-pixel, pop, éclats, boucle) · E3 feuille de timing · E4 fichiers · E5 contrôles |
@@ -41,6 +42,7 @@ On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin cla
 | Jointures du corps | C2 · C3 · C14-A |
 | Tramage (dithering) | A6-H (défaut) · **A7** · C17-F (fourrure) · F3 |
 | Pentes, courbes, sous-pixel | A5-6 · A6-D · **A8** · E2-D |
+| Anticrénelage (AA) | A5-10 · **A6-F** |
 | Vue du jeu (profil, 3/4, iso) | B0b (objet) · C10-G · **A9** |
 | Tuiles, fonds, parallaxe | **F2** · **F3** |
 | Palette, harmonie | A5-7 · A6-A · A6-B · **F4** |
@@ -50,6 +52,10 @@ On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin cla
 | Cristal, halo, étincelles | A5-8b · C15-D · **B6-D** |
 | Gélatine, slime | A5-8b (liquide) · **B6-E** |
 | Ordre des étapes d'un objet | A6-I · **B6-A** |
+| Méthodes des grands artistes | **A10** · G2 |
+| Outils, souris, gestes | **A11** |
+| Tests en cours de dessin (miroir, gris, yeux plissés) | A6-J · **A11-C** |
+| Valeur d'abord, ombrer en gris | A6-A · **A10-F** |
 
 **Sources (étiquettes) :** [Z] *Apprendre à tout dessiner avec Zephy* · [M] livre de dessin
 manga · [I] planches d'anatomie fournies · [C] planches sur les cheveux fournies · [P]
@@ -58,7 +64,8 @@ recherches web (liens en fin de document) · [L] méthode Loomis et tutoriels de
 · [A] analyse de portraits anime en pixel art fournis en exemple · [T1]…[T16] leçons de nos
 propres tests (partie D) · [B] livres de pixel art et de peinture ([B1] *Pixel Logic*, [B2]
 *Pixel Art for Game Developers*, [B3] *Make Your Own Pixel Art*, [B4] livres d'images,
-[B5] *Color and Light* ; détail en fin de document) · [P2] planches de tutoriels pas à pas
+[B5] *Color and Light*, [B6] livres japonais et livres d'artistes ; détail en fin de
+document) · [P2] planches de tutoriels pas à pas
 fournies (pierre, cristal, slime, livre, rochers ; B6). Toutes les règles sont reformulées.
 
 ---
@@ -179,6 +186,22 @@ Chaque règle est un ordre. Le détail et le « pourquoi » sont dans la section
 42. **Primitive d'abord, déformation ensuite** : cube ou prisme propre et ombré en 3 tons,
     puis coins cassés et sous-plans ; un rocher composé = 2-3 blocs de tailles différentes
     (B6-B).
+
+**Leçons des maîtres et geste du pro (A10, A11)**
+43. **La valeur avant la teinte** : valide les aplats et l'ombre en gris avant de toucher aux
+    teintes. Une teinte ne corrige jamais une valeur fausse (A10-F, A6-A).
+44. **Peu d'idées fortes** : sous 32 px, 2 ou 3 traits d'identité (coiffure, couleur
+    dominante, accessoire). Tout autre détail doit prouver qu'il se lit à ×1 (A10-A).
+45. **Regarde autrement à chaque étape, pas seulement à la fin** : miroir après la
+    silhouette et après la lumière, gris après les aplats, yeux plissés avant la finition
+    (A11-C).
+46. **AA seulement sur une marche de 2 px ou plus**, un pixel par coin, à l'intérieur du
+    contour, et chaque pixel d'AA survit au test de l'enlèvement (A6-F).
+47. **Un trait = un geste décidé** : départ, arrivée et marches connus avant de tracer ;
+    droites à l'outil ligne, courbes en segments prévus. Un trait raté s'annule et se
+    refait (A11-A, A11-B).
+48. **Petit mouvement = couleurs qui changent, pas silhouette qui bouge** : respiration,
+    clignement et transfert de poids se font en sous-pixel (E2-D).
 
 ---
 
@@ -522,6 +545,14 @@ palette 7, lumière 8, nettoyage 10) ; A6 ajoute les chiffres et les tests pour 
 7. **Rampes partagées** : l'ombre de la peau peut être le ton moyen des cheveux, l'ombre du
    tissu rouge un violet déjà dans la palette. Le trait le plus sombre est le bas de la
    rampe la plus sombre (ici `O #2a1a2e`, un violet).
+8. **Repère chiffré** [R] : environ **+5 % de saturation pour −10 % de luminosité** en
+   descendant la rampe. Une palette de départ peut tourner la teinte d'environ 45° d'une
+   rampe à l'autre (Slynyrd) pour couvrir le cercle sans doublon.
+9. **Pas de glissement par habitude** : le glissement de teinte sert la lumière de la scène
+   (soleil chaud → ombres froides). Sous une lumière froide, c'est l'inverse. On décide le
+   sens, on ne l'applique pas par réflexe.
+10. **En cas de doute, ombrer en gris** : poser les valeurs en gris, les valider, puis
+    remplacer chaque gris par la couleur de même valeur.
 
 ### B. Budget de couleurs
 - Nombre de tons par matière et de couleurs au total : **table A3**.
@@ -583,6 +614,16 @@ Règles de base : A5-10. En plus :
 - **Longueur** : elle suit la marche (marche de 4 px → AA de 2 px ; de 2 px → 1 px), dans le
   sens de la pente.
 - Trop d'AA rend flou : à ×1, le contour reste net.
+- **Seulement sur des marches de 2 px ou plus** [R] : une marche d'1 px n'a pas besoin d'AA.
+  Le nombre de pixels d'AA dépend de la longueur de la marche et des tons disponibles.
+- **Dans les coins des marches, espacés** : un pixel d'AA par coin, jamais une rangée
+  continue le long du bord (ce serait du banding).
+- **Test de l'enlèvement** : retirer chaque pixel d'AA un par un. Si le bord n'est pas pire
+  à ×1, il reste retiré.
+- **Pas d'AA vers l'extérieur** quand le fond change (sprite de jeu) : l'AA mélange avec un
+  fond qu'on ne connaît pas.
+- **Tous les styles n'en veulent pas** : un style très graphique, à contour noir franc, peut
+  s'en passer complètement.
 
 ### G. Penser en volumes
 - Avant l'ombrage, réduire chaque pièce à un **volume simple** (boule, cylindre, boîte) et
@@ -714,6 +755,123 @@ premier sprite, car elle commande le nombre de dessins.
   ne sait plus si l'objet est en l'air ou loin derrière.
 - **Compter le travail avant de choisir** : une vue 3/4 avec 4 directions × marche ×
   attaque multiplie les images. Un jeu de profil est le choix le plus économe.
+- **Isométrique en pratique** [R] : garder un **calque règle** avec une seule ligne 2:1
+  propre (2-2-2) et copier ses marches au lieu de les recompter. Hauteurs et décalages en
+  **multiples de 4 px** : les boîtes s'emboîtent sans demi-marche. Les pentes 1:1 vont
+  avec les 2:1 (toits, rampes) ; aucune autre pente sur un même objet.
+
+## A10. Leçons des maîtres [B6][R]
+Ce que des artistes reconnus disent de leur façon de travailler, réduit à ce qui change un
+dessin. Chaque leçon renvoie à la section où elle s'applique. Les noms servent à retrouver
+la source, pas à imiter un style.
+
+### A. Kazuko Shibuya (sprites des *Final Fantasy* des années 1980-1990)
+- **Peu d'idées fortes.** À 16 ou 24 px de haut, un personnage tient sur 2 ou 3 traits
+  d'identité : la coiffure (souvent le premier), une couleur dominante, un accessoire. Le
+  reste se simplifie (A4b, C10-I).
+- **Grosse tête, cheveux expressifs** : la tête fait près de la moitié du sprite ; la
+  coiffure porte la personnalité, le visage reste minimal.
+- **Plus grand = plus réaliste** : un monstre plusieurs fois plus grand que les héros a
+  droit à plus de rendu et d'anatomie. Le niveau de détail suit la taille, pas l'importance
+  (A3).
+- **Dessiner pour l'écran d'arrivée.** Un écran à tube adoucissait les pixels ; un écran
+  plat les montre tous. On vérifie donc chaque pixel à ×1 sur l'écran réel (A5-11).
+- **Retenue en reprise** : quand on refait un sprite, on garde ce qui marchait et on
+  n'ajoute pas de détail pour « moderniser ». Une limite (16 couleurs, une taille fixe) aide
+  à décider.
+
+### B. Mark Ferrari (fonds de *Loom*, *Monkey Island*, travaux de cycle de couleurs)
+- **Le tramage se pose à la main, pixel par pixel**, pour suggérer une matière (brume,
+  pierre, feuillage). Le motif automatique est l'exception (A7).
+- **Plus la palette est grande, plus le fondu est doux** : avec peu de couleurs, on choisit
+  la marche nette plutôt que de forcer un tramage.
+- **Cycle de couleurs** : un fond peut s'animer (eau, cascade, feu, lumière qui tourne) en
+  faisant tourner quelques couleurs de la palette, sans redessiner une image (E7, F3).
+
+### C. Paul Robertson (animation : *Scott Pilgrim*, *Mercenary Kings*)
+- **Apprendre en regardant** : des jeux d'arcade classiques et des films d'animation
+  entiers, image par image. C'est la copie d'étude appliquée au mouvement (G2).
+- **Garder les clés, tordre les intervalles** : les images de départ et d'arrivée restent
+  propres ; seules les images du milieu s'étirent, se déforment ou se multiplient (smear,
+  E2-C).
+- **Des outils simples bien maîtrisés** valent mieux que des outils nouveaux : la vitesse
+  vient de la répétition des mêmes gestes (A11).
+
+### D. Henk Nieborg (*Lomax*, *Flink*, *Battle Axe*)
+- **D'abord la résolution, puis les couleurs, puis les pixels** : la taille de l'écran et la
+  palette sont fixées avant le premier trait, puis il pixelise directement à la taille
+  finale, sans filtre ni réduction (A4b, F4).
+- **La profondeur vient des plans** : plusieurs couches de parallaxe, chacune avec sa
+  valeur et sa saturation (F3).
+- **Textures par familles** : cratères, écorce, roche se construisent avec un petit
+  vocabulaire de clusters répétés et variés, pas avec du bruit (A5-8b).
+
+### E. Artistes d'aujourd'hui
+- **Waneella** (scènes de ville animées) : grandes formes de base d'abord, détails ensuite,
+  beaucoup de changements en chemin. Les scènes vivent par de petites boucles (lumières,
+  passants, fumée) sur un fond fixe (F5, E2-I).
+- **Toyoi Yuuta** (illustrations animées) : quelques éléments qui bougent sur une image
+  fixe suffisent à faire vivre une illustration.
+- **Raymond Schlitter (Slynyrd, *Pixelblog*)** : une palette se construit en rampes dont la
+  teinte tourne régulièrement (A6-A) ; on ombre en gris d'abord si on hésite sur les
+  valeurs.
+- **Pedro Medeiros (saint11, *Celeste*)** : l'AA ne se pose que sur des marches de 2 px ou
+  plus ; sa longueur dépend de la marche et des couleurs disponibles (A6-F).
+- **Pixel Parmesan, Tiny Warrior Games** : chaque pixel d'AA doit survivre au test « je
+  l'enlève, est-ce pire ? » ; l'AA automatique crée flou et banding.
+
+### F. Ce qui revient chez tous
+1. **La valeur avant la teinte** : une image juste en gris est presque finie ; une teinte ne
+   rattrape jamais une valeur fausse.
+2. **Les grandes masses avant les détails** : plan des valeurs (clair, moyen, sombre) en
+   grandes formes, puis seulement les petites.
+3. **Moins de clusters, plus gros** : le moins de clusters possible, pas de cluster d'un
+   pixel sans rôle.
+4. **Des transitions franches** : le pixel art préfère le passage net lumière/ombre au
+   dégradé lent (A6-E).
+5. **Regarder souvent autrement** : ×1, miroir, gris, yeux plissés, et une pause avant la
+   finition (A11-C).
+
+## A11. Le geste du pro : outils et souris [R]
+Un pro ne dessine pas plus vite parce qu'il bouge plus vite, mais parce que chaque geste
+est décidé avant d'être fait. Ces règles valent pour un humain à la souris et pour Claude,
+qui dessine avec la souris virtuelle (`souris/`).
+
+### A. Avant le geste
+- **Savoir où va le trait** : point de départ, point d'arrivée, marches de la pente
+  (A5-6). Si on ne peut pas le dire, on n'est pas prêt à tracer.
+- **Le bon outil pour la forme** : une droite ou une pente régulière → l'outil ligne (ou
+  clic, puis Maj + clic) ; une courbe → une suite de segments aux marches prévues (5-3-2-1) ;
+  un aplat → rectangle ou pot ; quelques pixels isolés → des clics. Jamais de tracé à main
+  levée pour une droite.
+- **Crayon pixel-perfect** pour les traits à main levée : il retire les doubles des coins.
+
+### B. Pendant le geste
+- **Un trait = un geste continu**, sans hésitation au milieu. Un trait raté s'annule
+  (Ctrl+Z) et se refait ; on ne le « rattrape » pas par-dessus.
+- **Lent dans les virages, vif dans les droites** : la précision compte aux changements de
+  marche et au point d'arrivée.
+- **Pipette plutôt que palette** : on reprend la couleur sur le dessin (Alt + clic), ce qui
+  garde les rampes cohérentes.
+- **Zoom fixe pendant un passage**, aperçu ×1 toujours visible à côté.
+
+### C. Entre deux gestes : regarder autrement
+| Quand | Test | Pourquoi |
+|---|---|---|
+| après chaque trait | aperçu ×1 | ce qui ne se lit pas à ×1 n'existe pas (R1) |
+| après la silhouette, puis après la lumière | **miroir** | l'œil s'habitue aux erreurs ; retourné, un côté penché ou une proportion fausse saute aux yeux |
+| après les aplats, puis après la lumière | **gris** | les matières se séparent par la valeur ; une teinte ne corrige pas une valeur |
+| avant la finition | **yeux plissés** | seules les grandes masses restent : on voit si le volume tient |
+| avant la finition | **palette seule** | la palette se juge à part du dessin : rampes régulières, pas de doublon de valeur |
+| avant la planche | **pause** | un regard reposé voit ce que l'œil habitué ne voit plus |
+
+### D. Rythme d'un pro
+- **Du grand au petit à chaque passage** : masses, puis pièces, puis pixels. On ne descend
+  au pixel qu'une fois la masse juste.
+- **Peu de gestes, tous utiles** : un pixel posé puis effacé trois fois est un pixel mal
+  décidé. Mieux vaut regarder une seconde de plus.
+- **Les mêmes gestes, toujours** : raccourcis appris, outils au même endroit. La vitesse
+  vient de la répétition (A10-C).
 
 ---
 
@@ -2209,6 +2367,14 @@ même à 80 ms, parce qu'elle fait « sauter » la silhouette.
 - Pour un mouvement **plus petit qu'un pixel** (respiration, flottement), on ne déplace pas
   la silhouette : on **décale les couleurs** d'un demi-ton sur le bord (le pixel de bord
   passe du clair au moyen). Le contour reste fixe.
+- **On change des couleurs au lieu de changer des positions** [R] : respiration, clignement,
+  transfert de poids, tissu qui ondule. Le mouvement reste doux même à 16×16, à condition
+  d'avoir au moins deux tons voisins sur la zone qui bouge.
+- **Méthode** : poser les deux images clés, puis ajouter et retirer des pixels de ton
+  intermédiaire d'une image à l'autre jusqu'à ce que le mouvement glisse. On regarde en GIF
+  aux vraies durées à chaque essai.
+- Une animation pixel détaillée (style arcade des années 1990) combine les deux : la
+  silhouette bouge par pixels entiers sur les grandes actions, les détails par sous-pixels.
 
 **E. Volume, pelure d'oignon, calques**
 - Vérifie chaque image sur la précédente en transparence (pelure d'oignon). Compte les
@@ -2762,6 +2928,10 @@ contour coloré → contre-jour d'une autre teinte → glissement de teinte → 
 **Tramage (A7) :** les trois conditions → limite seulement, entre tons voisins → rampe
 25 / 50 / 75 % → un seul style par image → contrôle à ×1.
 
+**Geste du pro (A10, A11) :** valeur avant teinte → peu d'idées fortes → le bon outil par
+forme → un trait décidé → ×1 après chaque trait → miroir et gris à chaque étape → yeux
+plissés et palette seule avant la finition → pause avant la planche.
+
 **Progresser (G) :** 30 min par jour → paliers pixel, lumière, sujet, monde → une copie
 d'étude entre deux projets → retours précis et « edits » → portfolio court, en situation.
 
@@ -2784,6 +2954,7 @@ officielle : sites des auteurs et des éditeurs, voir les sources).
 | **[B3]** | *Make Your Own Pixel Art*, Jennifer Dawe et Matthew Humphries (No Starch Press, 2019, 200 p.) | l'apprentissage pas à pas, du premier pixel à l'animation |
 | **[B4]** | Livres d'images : *The Unofficial Game Boy Advance Pixel Book* (Bitmap Books), *Pixelscapes* (Waneella), *The Masters of Pixel Art* | matière pour les copies d'étude (G2) |
 | **[B5]** | *Color and Light*, James Gurney (2010) | couleur et lumière pour peintres, cité par les pixel artists (masque de gamme) |
+| **[B6]** | Livres japonais et livres d'artistes (détail ci-dessous) | méthode des décors, copies d'étude, maîtres (A10) |
 | Déjà cités | Loomis [L] ; Thomas et Johnston, *The Illusion of Life* (partie E) | construction du visage ; principes d'animation |
 
 ## [B1] Pixel Logic (Michael Azzi)
@@ -2841,6 +3012,23 @@ Un livre de peinture réaliste, dense et avancé. Ce que les pixel artists en re
   (A6-E, lumière réfléchie).
 - **La couleur est relative** : un ton paraît chaud ou froid, clair ou sombre selon ses
   voisins. On juge une couleur **en place**, jamais seule dans le sélecteur.
+
+## [B6] Livres japonais et livres d'artistes
+Résumés d'après les présentations des éditeurs. Ils servent aux copies d'étude (G2) et aux
+leçons des maîtres (A10).
+
+| Livre | Ce que c'est | Pour quoi |
+|---|---|---|
+| *ULTIMATE PIXEL CREW REPORT ピクセルアートではじめる背景の描き方* (Born Digital) | méthode de décor en pixel art : bases, making-of, composition, concept | décors et scènes (F1, F5) |
+| *NEW PIXEL ART* (APO+, 33 artistes) | recueil d'artistes japonais d'aujourd'hui, avec leur façon de faire | copies d'étude, styles variés |
+| *ゲームドット絵の匠* (Home-sha, 2018) | entretiens avec des pixel artists de jeux japonais classiques | métier, contraintes de machine (A10-A) |
+| *Pixel Vistas* (Graphic-sha) | recueil de paysages en pixel art | décors, lumière d'un lieu (F4) |
+| *水と手と目* Toyoi Yuuta (Graphic-sha, ISBN 978-4-7661-3746-0) | recueil d'illustrations, **pas** un manuel | copies d'étude, animation légère (A10-E) |
+| *FF DOT: The Pixel Art of Final Fantasy* (Dark Horse) | les sprites des *Final Fantasy* classiques, dont ceux de Kazuko Shibuya | petits personnages, identité en peu de pixels (A10-A) |
+| *Pixelscapes*, Waneella (Thames & Hudson) | scènes de ville animées | grandes formes puis détails, boucles (A10-E) |
+| *Arcade Game Typography*, Toshi Omagari (Thames & Hudson) | les polices des jeux d'arcade, lettre par lettre | lettrage en pixels, interface |
+
+Les livres s'achètent chez l'éditeur ou en librairie. Pas de copies piratées.
 
 ---
 
@@ -2964,6 +3152,24 @@ Un livre de peinture réaliste, dense et avancé. Ce que les pixel artists en re
 · [Pixel Parmesan, théorie des couleurs](https://pixelparmesan.com/color-theory-for-pixel-artists-its-all-relative/)
 · [GitHub, profondeur dans les scènes 2D](https://github.com/joeuk89/pixel-art/issues/65)
 
+**Maîtres et geste du pro (A10, A11) :**
+[Square Enix, Kazuko Shibuya et les Pixel Remaster](https://www.square-enix-games.com/en_GB/news/final-fantasy-pixel-remaster-kazuko-shibuya)
+· [Wikipédia, Kazuko Shibuya](https://en.wikipedia.org/wiki/Kazuko_Shibuya)
+· [GDC Vault, Mark Ferrari, *8 Bit & '8 Bitish' Graphics*](https://www.gdcvault.com/play/1023586)
+· [Game Developer, 5 conseils d'animation 2D (Paul Robertson)](https://www.gamedeveloper.com/)
+· [Bloop Animation, images étirées](https://www.bloopanimation.com/the-art-of-smear-frames/)
+· [Lospec, tutoriels de Henk Nieborg](https://lospec.com/pixel-art-tutorials/author/henk-neiborg)
+· [Retronator, Waneella](https://medium.com/retronator-magazine/the-mysterious-world-of-waneella-281d5b52a68)
+· [pixivision, entretien avec Toyoi Yuuta](https://www.pixivision.net/en/a/2686)
+· [Pixel Parmesan, bases de l'AA](https://pixelparmesan.com/anti-aliasing-fundamentals-for-pixel-artists)
+· [MiniBoss, articles de Pedro Medeiros](https://blog.studiominiboss.com/pixelart)
+· [Pixel Grimoire #2](https://medium.com/pixel-grimoire/how-to-start-making-pixel-art-2-bcd705cb04d7)
+· [Slynyrd #41, isométrique](https://www.slynyrd.com/blog)
+· [gamedev.net, palettes de couleurs](https://gamedev.net/tutorials/visual-arts/pixel-art-tutorial-basics-r5287)
+· [Aseprite, flux de travail](https://www.aseprite.org/docs/workflow/)
+· [Aseprite, stylet ou souris](https://community.aseprite.org/t/do-you-use-pen-input-to-control-aseprite-does-it-improve-your-work/4753)
+· [PixelJoint, banding (Helm)](https://pixeljoint.com/forum/forum_posts.asp?TID=11299)
+
 **Progresser (G) :**
 [pixelart.school, feuille de route](https://pixelart.school/learn/how-to-learn-pixel-art)
 · [pixnote, 15 astuces](https://pixnote.net/en/learn/tips/)
@@ -2973,6 +3179,16 @@ Un livre de peinture réaliste, dense et avancé. Ce que les pixel artists en re
 
 # Historique des versions
 
+- **v16 :** **A10** leçons des maîtres (Kazuko Shibuya, Mark Ferrari, Paul Robertson, Henk
+  Nieborg, Waneella, Toyoi Yuuta, Slynyrd, saint11, Pixel Parmesan) et ce qui revient chez
+  tous ; **A11** geste du pro (le bon outil par forme, un trait = un geste décidé, tests en
+  cours de dessin : miroir, gris, yeux plissés, palette seule, pause) ; A6-A complétée
+  (repère saturation/luminosité, rotation de 45° entre rampes, pas de glissement de teinte
+  par habitude, ombrer en gris) ; A6-F complétée (AA sur marches de 2 px ou plus, un pixel
+  par coin, test de l'enlèvement) ; E2-D sous-pixel détaillé ; A9 isométrique en pratique
+  (calque règle, multiples de 4) ; livres [B6] ; règles impératives 43 à 48 ; sommaire,
+  index, sources et résumé mis à jour. Dans Claude Pixel : nouvelles cases et portes, détecteur
+  d'AA isolé, souris plus fluide.
 - **v15 :** **B6** recettes pas à pas tirées de cinq planches fournies [P2] : ordre commun
   en 9 étapes (contour neutre jusqu'à la lumière, teinte après les valeurs), primitive puis
   déformation (rochers, strates), pierre (arêtes cassées, trait intérieur effacé, fissures à

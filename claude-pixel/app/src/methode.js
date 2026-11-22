@@ -151,17 +151,18 @@ const E = (id, titre, ref, faire, o = {}) => Object.assign({ id, titre, ref, fai
 const C = (cle, txt) => ({ cle, txt });
 const ETAPE_FICHE = (ref) => E('fiche', 'Fiche d\'intention et règles', ref, [
   'Remplis la fiche : chaque champ est une décision prise avant le premier pixel.',
-  'Lis les 42 règles impératives (onglet Aide) et coche « lues ».',
+  'Lis les 48 règles impératives (onglet Aide) et coche « lues ».',
   'Règle la toile à la taille finale : on ne dessine jamais en grand pour réduire (A4b).',
-  'Choisis ou construis la palette : une rampe par matière (A6-A).'
+  'Choisis ou construis la palette : une rampe par matière (A6-A).',
+  'Nomme 2 ou 3 idées fortes, pas plus : ce qu\'on doit reconnaître de loin (A10-F, règle 44).'
 ], { portes: ['fiche', 'regles'], pasEncore: 'Aucun pixel tant que la fiche n\'est pas remplie.' });
 const ETAPE_PLANCHE = (ref) => E('planche', 'Contrôle final : la planche', ref, [
   'Ouvre l\'onglet Contrôle : ×1, ×2, agrandi, fond clair et sombre, miroir, silhouette, gris, en situation.',
-  'Passe les tests du pro (A6-J) un par un.',
+  'Fais une pause, puis regarde d\'un œil neuf (A11-C) avant de passer les tests du pro (A6-J) un par un.',
   'Réponds aux 7 questions communes et aux questions propres au type.',
   'Bilan : 3 points réussis, 3 points à améliorer. Les 3 à améliorer deviennent les objectifs du prochain dessin.'
 ], { portes: ['planche', 'defauts'] });
-const NETTOYAGE = ['L', 'jaggies', 'orphelins', 'bandes', 'coussin', 'bruit', 'trame', 'superpixels', 'budget', 'rampesGris'];
+const NETTOYAGE = ['L', 'jaggies', 'orphelins', 'bandes', 'coussin', 'bruit', 'trame', 'superpixels', 'budget', 'rampesGris', 'alpha'];
 
 const ETAPES = {
   objet: [
@@ -171,7 +172,7 @@ const ETAPES = {
       'Pose un repère de lumière (flèche haut-gauche) dans un calque de construction.',
       'Largeur impaire si l\'objet est symétrique.'
     ], { pasEncore: 'Pas de détail.', portes: ['nonVide', 'L'], outils: ['ligne', 'ellipse', 'rect'],
-      coches: [C('primitive', 'La primitive se lit à ×1'), C('reperelum', 'Repère de lumière posé')] }),
+      coches: [C('primitive', 'La primitive se lit à ×1'), C('reperelum', 'Repère de lumière posé'), C('miroir', 'Vue miroir regardée : aucune pente fausse')] }),
     E('deformer', 'Déformer et séparer', 'B6-A · B6-B', [
       'Casse les coins, sépare les grandes pièces (bouchon, col, panse…).',
       'Un objet composé = 2-3 masses de tailles différentes (dominante, moyenne, petite ; A4b).'
@@ -185,7 +186,7 @@ const ETAPES = {
       'Une seule lumière, haut-gauche. Un ton par face.',
       'Pose d\'abord le terminateur (limite ombre/lumière), net.',
       'Sur un bloc ombré, efface le trait des arêtes intérieures (règle 40).'
-    ], { pasEncore: 'Pas de reflet fin.', portes: ['coussin', 'L'], outils: ['ombrage'], coches: [C('terminateur', 'Terminateur net, un côté d\'ombre franc')] }),
+    ], { pasEncore: 'Pas de reflet fin.', portes: ['coussin', 'L'], outils: ['ombrage'], coches: [C('terminateur', 'Terminateur net, un côté d\'ombre franc'), C('grisOmbre', 'Ombre lue en gris : la forme tient sans couleur (règle 43)')] }),
     E('secondaires', 'Ombres et lumières secondaires', 'B6-A · A6-E', [
       'Sous-plans, occlusion ambiante dans les creux, lumière réfléchie (rebond) côté ombre.'
     ], { portes: ['coussin', 'bandes'], coches: [C('ao', 'AO dans les creux, rebond plus sombre que la lumière')] }),
@@ -204,7 +205,7 @@ const ETAPES = {
       'Fissure ou gravure = trait sombre + lèvre claire d\'1 px, attachée à une arête (règle 41).',
       'Chasse les défauts : L, jaggies, orphelins, banding, coussin, bruit.',
       'Supprime les calques de construction de l\'export.'
-    ], { portes: NETTOYAGE, coches: [C('levre', 'Fissures avec lèvre claire'), C('lisible', 'Chaque étape se lit à ×1')] }),
+    ], { portes: NETTOYAGE, coches: [C('levre', 'Fissures avec lèvre claire'), C('lisible', 'Chaque étape se lit à ×1'), C('aa', 'AA seulement sur les marches de 2 px ou plus, à l\'intérieur ; chaque pixel d\'AA passe le test de l\'enlèvement (règle 46)')] }),
     ETAPE_PLANCHE('A5-11 · B5 · B6-G')
   ],
   personnage: [
@@ -218,7 +219,7 @@ const ETAPES = {
       'Une seule couleur sombre. Regarde à ×1 : la pose doit se lire.',
       'Des vides clairs (entre bras et torse, entre les jambes).',
       'Remplis une rangée de plus sous les pieds (règle 12).'
-    ], { pasEncore: 'Pas de vêtement, pas de détail.', portes: ['nonVide', 'silhouette1'], coches: [C('vides', 'Espaces négatifs lisibles'), C('pose', 'La pose se lit à ×1')] }),
+    ], { pasEncore: 'Pas de vêtement, pas de détail.', portes: ['nonVide', 'silhouette1'], coches: [C('vides', 'Espaces négatifs lisibles'), C('pose', 'La pose se lit à ×1'), C('miroir', 'Vue miroir regardée : la pose ne penche pas')] }),
     E('contour', 'Contour', 'A5-6 · A6-D', [
       '1 px, aucun L. Courbes 5-3-2-1-1, jamais 5-2-1-2-1. Diagonales régulières.',
       'Tête ronde ou ovale, jamais en œuf (règle 13).'
@@ -230,7 +231,7 @@ const ETAPES = {
     E('lumiere', 'Lumière et ombres du corps', 'A5-8 · A6-E', [
       'Une source haut-gauche. Terminateur d\'abord. Pas de coussin.',
       'Marque chaque jointure (aisselle, coude, poignet, aine, genou, cheville ; C14-A).'
-    ], { portes: ['coussin', 'bandes'], outils: ['ombrage'], coches: [C('jointures', 'Les 6 jointures sont marquées'), C('valide', 'Corps validé : silhouette, ombres, ×1')] }),
+    ], { portes: ['coussin', 'bandes'], outils: ['ombrage'], coches: [C('jointures', 'Les 6 jointures sont marquées'), C('valide', 'Corps validé : silhouette, ombres, ×1'), C('grisOmbre', 'Ombres lues en gris (règle 43)')] }),
     E('vetements', 'Vêtements en calque', 'C14-B · C17', [
       'Nouveau calque. Tissu 1 px au-delà du bord du corps.',
       'Contour du calque seul ; bords intérieurs tracés à la main.',
@@ -245,7 +246,8 @@ const ETAPES = {
       'Les accents les plus sombres dans les creux.'
     ], { portes: ['bruit', 'orphelins', 'budget'] }),
     E('nettoyage', 'Nettoyage', 'A5-10 · A6-F · A6-H', [
-      'Orphelins, AA (aucun sous 32 px, et seulement à l\'intérieur du contour).',
+      'Orphelins, AA (aucun sous 32 px, et seulement à l\'intérieur du contour, sur les marches de 2 px ou plus ; règle 46).',
+      'Yeux plissés, puis palette seule : les grandes masses tiennent (A11-C).',
       'Supprime les pixels de construction.'
     ], { portes: NETTOYAGE }),
     ETAPE_PLANCHE('A5-11 · C8')
@@ -289,7 +291,7 @@ const ETAPES = {
     E('aplats', 'Palette et aplats', 'A5-7 · C15-G', ['Une rampe par matière, un seul accent saturé.'], { portes: ['budget', 'rampesGris'] }),
     E('lumiere', 'Lumière', 'A5-8 · C15-D', [
       'Une source haut-gauche. Matière émissive : elle éclaire autour d\'elle et n\'a pas d\'ombre propre.'
-    ], { portes: ['coussin', 'bandes'] }),
+    ], { portes: ['coussin', 'bandes'], coches: [C('grisOmbre', 'Ombres lues en gris (règle 43)')] }),
     E('bords', 'Bords intérieurs à la main', 'C15-E', ['Sépare les pièces qui se chevauchent par un trait posé à la main.'], { portes: ['L'] }),
     E('details', 'Détails et marqueurs', 'A5-9 · C15-F', ['Les 2-3 marqueurs d\'abord, le reste en groupes de 2-3.'], { portes: ['bruit', 'orphelins'] }),
     E('nettoyage', 'Nettoyage', 'A5-10 · A6-H', ['Chasse aux défauts.'], { portes: NETTOYAGE }),
@@ -306,7 +308,8 @@ const ETAPES = {
     ], { portes: ['timing'] }),
     E('poseapose', 'Pose à pose', 'E0-4 · E1', [
       'Clés → extrêmes → passages → intervalles. Effets dans un calque à part.',
-      'Pelure d\'oignon pour placer chaque pièce.'
+      'Pelure d\'oignon pour placer chaque pièce.',
+      'Petit mouvement (respiration, cheveux, flamme) : change les couleurs du bord, pas la silhouette (sous-pixel, E2-D, règle 48).'
     ], { portes: ['timing'], coches: [C('ordre', 'Clés, puis extrêmes, puis passages, puis intervalles')] }),
     E('pipeline', 'Tout le pipeline par image', 'E0-5 · E5-A', [
       'Chaque image : silhouette → contour → aplats → lumière → détails → contrôle, puis coche « validée ».',
@@ -370,7 +373,7 @@ function nbEtapes(doc) { return ETAPES[typeDe(doc)].length; }
 function etapeCourante(doc) { return ETAPES[typeDe(doc)][Math.min(doc.meta.etape, nbEtapes(doc) - 1)]; }
 
 /* ---------- Portes ---------- */
-const DET_PORTES = { L: 'L', jaggies: 'jaggies', orphelins: 'orphelins', bandes: 'bandes', coussin: 'coussin', bruit: 'bruit', trame: 'trame', superpixels: 'superpixels', budget: 'budget', noirPur: 'noirPur', rampesGris: 'rampesGris', raccords: 'raccords' };
+const DET_PORTES = { L: 'L', jaggies: 'jaggies', orphelins: 'orphelins', bandes: 'bandes', coussin: 'coussin', bruit: 'bruit', trame: 'trame', superpixels: 'superpixels', budget: 'budget', noirPur: 'noirPur', rampesGris: 'rampesGris', raccords: 'raccords', alpha: 'alpha' };
 function aDesPixels(doc, filtre) {
   for (const c of doc.calques) {
     if (filtre && !filtre(c)) continue;
@@ -389,7 +392,7 @@ function porte(id, at, cache) {
   }
   switch (id) {
     case 'fiche': { const r = ficheIncomplete(doc); return r ? 'Fiche incomplète : ' + r.join(', ') : null; }
-    case 'regles': return m.reglesLues ? null : 'Lis les 42 règles impératives et coche « lues ».';
+    case 'regles': return m.reglesLues ? null : 'Lis les 48 règles impératives et coche « lues ».';
     case 'nonVide': return AP.mesures(doc, f).opaques ? null : 'L\'image exportée est vide.';
     case 'construction': return aDesPixels(doc, c => c.type === 'construction') ? null : 'Dessine la construction dans au moins un calque de type « construction ».';
     case 'silhouette1': { const n = AP.mesures(doc, f).couleurs; return n <= 2 ? null : 'La silhouette se fait en une couleur sombre (2 au plus) : ' + n + ' couleurs.'; }
@@ -429,7 +432,7 @@ const NOMS_PORTES = {
   planche: 'Planche remplie', defauts: 'Aucun défaut restant',
   L: 'Aucun « L »', jaggies: 'Pas de jaggies', orphelins: 'Pas d\'orphelin', bandes: 'Pas de banding', coussin: 'Pas d\'ombrage coussin',
   bruit: 'Pas de bruit', trame: 'Pas de trame décorative', superpixels: 'Pas de super pixels', budget: 'Budget de couleurs (A3)',
-  noirPur: 'Pas de noir pur', rampesGris: 'Rampes lisibles en gris', raccords: 'Tuile sans couture'
+  noirPur: 'Pas de noir pur', rampesGris: 'Rampes lisibles en gris', raccords: 'Tuile sans couture', alpha: 'Pas de pixel semi-transparent'
 };
 
 /* État de chaque porte et case de l'étape courante. */
@@ -446,7 +449,7 @@ function verifieEtape(at) {
   return { ok: !manque.length, manque };
 }
 
-/* ---------- Les 42 règles, lues dans le texte de la méthode ---------- */
+/* ---------- Les 48 règles, lues dans le texte de la méthode ---------- */
 function extraitRegles(texte) {
   const lignes = texte.split('\n'), out = [];
   let i = lignes.findIndex(l => /^# Règles impératives/.test(l)), groupe = '';
