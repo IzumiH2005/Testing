@@ -437,6 +437,40 @@ for (const t of ['personnage', 'chibi', 'creature']) {
     });
   });
 }
+/* Vision et essais (0-N) : avant tout trait, écrire ce qu'on voit et l'éprouver. */
+const RUBRIQUES = {
+  vision: 'Ce que je vois', structure: 'Structure / physionomie', formes: 'Formes de base',
+  unique: 'Ce qui la rend unique', logique: 'Pourquoi c\'est crédible', essai: 'Essai', choix: 'Choix retenu'
+};
+const AIDE_STRUCTURE = {
+  objet: 'De quoi il est fait, comment ses pièces tiennent ensemble, comment on le tient ou l\'utilise (la forme suit la fonction).',
+  personnage: 'Squelette, proportions en têtes, appuis, ce que le corps dit de sa vie (métier, âge, force).',
+  chibi: 'Proportions 2,5 à 3 têtes, ce qu\'on exagère, ce qu\'on supprime.',
+  creature: 'Squelette de quels animaux réels, comment elle se tient, se déplace, mange, se défend (0-N).',
+  decor: 'Ce qui porte, ce qui est porté, ce qui pousse dessus, d\'où vient la lumière.',
+  animation: 'Ce qui est rigide, ce qui est souple, d\'où part le mouvement.'
+};
+const ETAPE_VISION = (type) => E('vision', 'Vision : écrire ce que je vois', '0-N', [
+  'Avant tout trait : écris dans le carnet ce que tu as en tête, une idée à la fois. On n\'efface rien : une idée qui ne tient pas se BARRE, avec la raison.',
+  'Ce que je vois : l\'impression d\'ensemble, l\'ambiance, ce qu\'on doit sentir en 1 seconde.',
+  'Structure : ' + (AIDE_STRUCTURE[type] || AIDE_STRUCTURE.objet),
+  'Formes de base : de quelles primitives on part (sphère, cylindre, boîte, cône) et comment on les déforme ensuite.',
+  'Ce qui la rend unique : UNE idée forte (une forme inattendue, une matière, un détail de récit), pas cinq.',
+  'Pourquoi c\'est crédible : même un objet inventé a une logique (comment il tient, s\'ouvre, se remplit, vit).'
+], { pasEncore: 'Aucun pixel : on écrit et on se corrige.', portes: ['carnetVision'] });
+const ETAPE_ESSAIS = () => E('essais', 'Essais : vignettes, effacer, recommencer', '0-N · 0-B', [
+  'Dans un calque de construction, petit (8 à 16 px de haut) : au moins 3 silhouettes différentes de l\'idée. Pousse chaque essai : ne fais pas deux fois la même.',
+  'Après chaque essai, une ligne « Essai » au carnet : ce qui marche, ce qui ne marche pas. Barre les idées que l\'essai a tuées.',
+  'Vue miroir et ×1 sur chaque vignette : la silhouette se lit-elle ?',
+  'Choisis une vignette et écris le « Choix retenu » : pourquoi celle-là, ce qu\'on va encore pousser.',
+  'Efface ou masque les vignettes rejetées avant la construction.'
+], { pasEncore: 'Pas de trait final ni de couleur.', portes: ['construction', 'carnetEssais'],
+  coches: [C('trois', 'Au moins 3 silhouettes vraiment différentes essayées'), C('lisible', 'La vignette choisie se lit à ×1 et en miroir')] });
+for (const t of ['objet', 'personnage', 'chibi', 'creature', 'decor', 'animation']) {
+  const L = ETAPES_V17[t].slice(), i = L.findIndex(e => e.id === 'fiche');
+  L.splice(i + 1, 0, ETAPE_VISION(t), ETAPE_ESSAIS());
+  ETAPES_V17[t] = L;
+}
 const ETAPES = ETAPES_V17;
 const etapesDe = doc => ((doc.meta && doc.meta.methode >= 17) ? ETAPES_V17 : ETAPES_V16)[typeDe(doc)];
 
@@ -494,6 +528,22 @@ function porte(id, at, cache) {
       if (M.inverses !== null && M.inverses > 0.15) manque.push(Math.round(M.inverses * 100) + ' % de la lumière plus sombre que l\'ombre');
       return manque.length ? 'Volume (0-C) : ' + manque.join(', ') + '. Affiche le guide (onglet Lumière), corrige, ou justifie.' : null;
     }
+    case 'carnetVision': {
+      const c = m.carnet || [], vivantes = c.filter(e => !e.barre), manque = [];
+      for (const r of ['vision', 'structure', 'formes', 'unique', 'logique']) if (!vivantes.some(e => e.rubrique === r)) manque.push('« ' + RUBRIQUES[r] + ' »');
+      if (manque.length) return 'Carnet : écris au moins une idée pour ' + manque.join(', ') + '.';
+      if (!c.some(e => e.barre)) return 'Carnet : barre au moins une idée en disant pourquoi. On ne tombe pas juste du premier coup (0-N).';
+      return null;
+    }
+    case 'carnetEssais': {
+      const c = m.carnet || [];
+      const essais = c.filter(e => e.rubrique === 'essai').length, choix = c.filter(e => e.rubrique === 'choix' && !e.barre).length, barres = c.filter(e => e.barre).length;
+      const manque = [];
+      if (essais < 3) manque.push((3 - essais) + ' ligne(s) « Essai » de plus');
+      if (!choix) manque.push('un « Choix retenu »');
+      if (barres < 2) manque.push('au moins 2 idées barrées au total');
+      return manque.length ? 'Carnet : ' + manque.join(', ') + '.' : null;
+    }
     case 'reference': return doc.calques.some(c => c.type === 'reference') ? null : 'Importe la pièce dans un calque de référence.';
     case 'tuileOn': return doc.tuile.on ? null : 'Active le mode tuile (onglet Tuiles).';
     case 'carte': return (doc.carte.tuiles || []).filter(Boolean).length >= 12 ? null : 'Peins au moins 12 cases de carte dans l\'onglet Tuiles.';
@@ -528,6 +578,7 @@ const NOMS_PORTES = {
   silhouette1: 'Silhouette en 1-2 couleurs', reference: 'Calque de référence', tuileOn: 'Mode tuile', carte: 'Carte peinte',
   analyse: 'Analyse écrite', timing: 'Feuille de timing', imagesValidees: 'Toutes les images validées', Ltoutes: 'Aucun L sur les images',
   planche: 'Planche remplie', defauts: 'Aucun défaut restant',
+  carnetVision: 'Carnet : vision écrite et corrigée', carnetEssais: 'Carnet : essais et choix',
   lumierePosee: 'Lumière posée', volume: 'Le volume suit la lumière', lumiere: 'Ombrage du bon côté',
   L: 'Aucun « L »', jaggies: 'Pas de jaggies', orphelins: 'Pas d\'orphelin', bandes: 'Pas de banding', coussin: 'Pas d\'ombrage coussin',
   bruit: 'Pas de bruit', trame: 'Pas de trame décorative', superpixels: 'Pas de super pixels', budget: 'Budget de couleurs (A3)',
@@ -565,7 +616,7 @@ function extraitRegles(texte) {
 }
 
 Object.assign(AP, {
-  FICHES, QUESTIONS, QUESTIONS_TYPE, TESTS_PRO, TABLE_A3, ETAPES, ETAPES_V16, ETAPES_V17, etapesDe, TYPES, NOMS_PORTES,
+  RUBRIQUES, FICHES, QUESTIONS, QUESTIONS_TYPE, TESTS_PRO, TABLE_A3, ETAPES, ETAPES_V16, ETAPES_V17, etapesDe, TYPES, NOMS_PORTES,
   colonneA3, ficheIncomplete, nbEtapes, etapeCourante, etatEtape, verifieEtape, extraitRegles, typeDe
 });
 if (typeof module !== 'undefined') module.exports = AP;

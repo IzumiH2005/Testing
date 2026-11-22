@@ -351,8 +351,34 @@ LEGERS.calques = c => {
 /* ======================================================================
  * MÉTHODE
  * ==================================================================== */
-const DETECTEURS = new Set(['L', 'jaggies', 'orphelins', 'bandes', 'coussin', 'bruit', 'trame', 'superpixels', 'budget', 'noirPur', 'rampesGris', 'raccords']);
+const DETECTEURS = new Set(['L', 'jaggies', 'orphelins', 'bandes', 'coussin', 'bruit', 'trame', 'superpixels', 'budget', 'noirPur', 'rampesGris', 'raccords', 'alpha', 'lumiere', 'volume']);
 let reglesOuvertes = false;
+
+/* Carnet de conception (0-N) : chaque idée reste, une idée abandonnée est barrée avec sa raison. */
+let carnetRubrique = 'vision';
+function rendCarnet(c, saisie) {
+  const m = at().doc.meta, L = m.carnet || [], R = AP.RUBRIQUES;
+  c.appendChild(titre('Carnet de conception', h('span.mono.aide-txt', L.filter(x => !x.barre).length + ' idée(s) · ' + L.filter(x => x.barre).length + ' barrée(s)')));
+  c.appendChild(h('p.aide-txt', 'Une idée à la fois. Rien ne s\'efface : barre ce qui ne tient pas et écris pourquoi. Le carnet raconte comment le dessin a été pensé (0-N).'));
+  const liste = h('ol.carnet-liste', { 'data-cible': 'carnet' });
+  L.forEach((x, i) => {
+    const li = h('li.idee' + (x.barre ? '.idee-barree' : ''), { 'data-cible': 'carnet-' + i },
+      h('span.rub', R[x.rubrique] || x.rubrique), h('p', x.texte),
+      x.barre ? h('small', 'Barrée : ' + x.raison) : null);
+    if (saisie && !x.barre) {
+      const raison = champ('input', '', { cible: 'carnet-raison-' + i, label: 'Pourquoi barrer l\'idée ' + (i + 1), placeholder: 'Pourquoi je l\'abandonne' });
+      li.appendChild(h('div.ligne', raison, btn('Barrer', { cls: '.fantome', cible: 'carnet-barre-' + i, click: () => act('carnet.barre', { i, raison: raison.value }) })));
+    }
+    liste.appendChild(li);
+  });
+  if (L.length) c.appendChild(liste);
+  if (!saisie) return;
+  const rub = h('div.mods.rubriques', { role: 'group', 'aria-label': 'Rubrique' });
+  for (const k in R) rub.appendChild(btn(R[k], { cible: 'carnet-rub-' + k, presse: carnetRubrique === k, click: () => { carnetRubrique = k; rendu(true); } }));
+  const zone = champ('textarea', '', { rows: 3, cible: 'carnet-texte', label: 'Nouvelle idée', placeholder: 'Une idée, et pourquoi.' });
+  c.appendChild(h('div.pile', rub, zone, h('div.ligne', btn('Ajouter au carnet', { cls: '.prim', cible: 'carnet-ajoute', click: () => { const r = act('carnet.ajoute', { rubrique: carnetRubrique, texte: zone.value }); if (!(r && r.refus)) zone.value = ''; } }))));
+}
+U.rendCarnet = rendCarnet;
 
 function rendMethode(c) {
   const A = at(), d = A.doc, m = d.meta, st = AP.etatEtape(A), e = st.etape, T = AP.TYPES[AP.typeDe(d)];
@@ -384,14 +410,16 @@ function rendMethode(c) {
     }
     if (st.index === 0 || e.portes.includes('fiche')) rendFiche(c);
     if (e.portes.includes('regles')) {
-      c.appendChild(titre('Les 42 règles', m.reglesLues ? h('span.aide-txt', { style: { color: 'var(--ok)' } }, 'lues ✓') : null));
+      c.appendChild(titre('Les 60 règles', m.reglesLues ? h('span.aide-txt', { style: { color: 'var(--ok)' } }, 'lues ✓') : null));
       c.appendChild(h('p.aide-txt', 'Elles s\'appliquent à chaque dessin. Lis-les toutes avant de confirmer.'));
       c.appendChild(h('div.ligne',
         btn(reglesOuvertes ? 'Replier les règles' : 'Lire les règles', { cible: 'regles-ouvre', click: () => { reglesOuvertes = !reglesOuvertes; rendu(true); } }),
-        btn(m.reglesLues ? 'Règles lues ✓' : 'J\'ai lu les 42 règles', { cls: m.reglesLues ? '.fantome' : '.prim', cible: 'regles-lues', inactif: m.reglesLues || !reglesOuvertes,
+        btn(m.reglesLues ? 'Règles lues ✓' : 'J\'ai lu les 60 règles', { cls: m.reglesLues ? '.fantome' : '.prim', cible: 'regles-lues', inactif: m.reglesLues || !reglesOuvertes,
           title: reglesOuvertes ? '' : 'Ouvre d\'abord les règles', click: () => act('regles.lues') })));
       if (reglesOuvertes) c.appendChild(listeRegles());
     }
+
+    if (e.portes.includes('carnetVision') || e.portes.includes('carnetEssais')) rendCarnet(c, true);
 
     /* Portes */
     c.appendChild(titre('Portes de l\'étape', h('span.aide-txt', claude ? 'bloquantes' : 'conseils')));

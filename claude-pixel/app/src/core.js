@@ -247,7 +247,7 @@ function nouveauDoc(o = {}) {
     rampes: [],
     calques: [], images: [{ ms: 100, role: '', change: '', principe: '', validee: false }],
     cels: {}, celData: {}, etiquettes: [], next: 1,
-    meta: { fiche: {}, etape: 0, coches: {}, justifs: {}, planche: {}, reglesLues: false, valideEtapes: [], methode: 17 },
+    meta: { fiche: {}, etape: 0, coches: {}, justifs: {}, planche: {}, reglesLues: false, valideEtapes: [], methode: 17, carnet: [] },
     lumiere: { az: 135, el: 40, forme: 'gonfle', posee: false },
     tuile: { on: false, tw: 16, th: 16 },
     carte: { cols: 20, rows: 12, terrain: [], tuiles: [] }
@@ -1276,6 +1276,24 @@ const ACTIONS = {
     const t = String(a.texte || '').trim();
     if (t && t.length < 12) this.refuse('Une justification tient en une vraie phrase (12 caractères au moins).');
     if (t) this.doc.meta.justifs[a.cle] = t; else delete this.doc.meta.justifs[a.cle];
+    this._emet('methode');
+  },
+  /* Carnet de conception (0-N) : on n'efface jamais une idée, on la barre en disant pourquoi. */
+  'carnet.ajoute'(a) {
+    const t = String(a.texte || '').trim().slice(0, 600);
+    if (!t) this.refuse('Écris l\'idée avant de l\'ajouter au carnet.');
+    const R = ['vision', 'structure', 'formes', 'unique', 'logique', 'essai', 'choix'];
+    const rub = R.includes(a.rubrique) ? a.rubrique : 'vision';
+    const m = this.doc.meta; m.carnet = m.carnet || [];
+    m.carnet.push({ n: m.carnet.length + 1, rubrique: rub, texte: t, barre: false, raison: '' });
+    this._emet('methode');
+  },
+  'carnet.barre'(a) {
+    const m = this.doc.meta, e = (m.carnet || [])[a.i | 0];
+    if (!e) this.refuse('Idée inexistante.');
+    const r = String(a.raison || '').trim().slice(0, 300);
+    if (r.length < 8) this.refuse('Pour barrer une idée, écris pourquoi (8 caractères au moins).');
+    e.barre = true; e.raison = r;
     this._emet('methode');
   },
   'planche.reponse'(a) { this.doc.meta.planche[a.cle] = String(a.texte || '').slice(0, 400); this._emet('methode'); },

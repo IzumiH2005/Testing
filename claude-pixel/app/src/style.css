@@ -403,3 +403,15 @@ input[type="range"] { accent-color: var(--accent); }
 .mesure.ok .mono { color: var(--ok); }
 .mesure.ko .mono { color: var(--warn); }
 @media (max-width: 420px) { .lum-reglages { grid-template-columns: 1fr; } .mesure { grid-template-columns: 1fr auto; } .mesure small { grid-column: 1 / -1; } }
+
+/* Carnet de conception (0-N) */
+.carnet-liste { list-style: decimal; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; margin: 6px 0 10px; }
+.carnet-liste > li { display: list-item; padding: 6px 8px; border-radius: var(--r-s); background: var(--surface-2); border: 1px solid var(--line); }
+.carnet-liste p { margin: 2px 0 0; }
+.carnet-liste .rub { font: 600 11px var(--mono); color: var(--accent); text-transform: uppercase; letter-spacing: .04em; }
+.carnet-liste .idee-barree p { text-decoration: line-through; color: var(--fg-3); }
+.carnet-liste small { display: block; color: var(--fg-2); margin-top: 2px; }
+.carnet-liste .ligne { margin-top: 6px; }
+.carnet-liste .ligne .champ { flex: 1; min-width: 0; }
+.mods.rubriques { flex-wrap: wrap; }
+.mods.rubriques .btn { min-width: 0; font: 500 12px var(--font); padding: 0 10px; }

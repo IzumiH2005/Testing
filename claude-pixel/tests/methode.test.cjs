@@ -25,10 +25,24 @@ test('fiche + règles lues ouvrent l\'étape 2, qui exige ses cases cochées', (
   at.act('fiche', { champs: FICHE }); at.act('regles.lues');
   assert.deepEqual(at.act('etape.valide'), { ok: true, manque: [] });
   assert.equal(at.doc.meta.etape, 1);
-  assert.equal(AP.etapeCourante(at.doc).id, 'construction');
-  assert.match(at.act('etape.valide').refus, /construction/);
+  // étape 2 : la vision s'écrit, et se corrige
+  assert.equal(AP.etapeCourante(at.doc).id, 'vision');
+  assert.match(at.act('etape.valide').refus, /Carnet/);
+  for (const r of ['vision', 'structure', 'formes', 'unique', 'logique']) at.act('carnet.ajoute', { rubrique: r, texte: 'idée ' + r });
+  assert.match(at.act('etape.valide').refus, /barre au moins une idée/);
+  assert.ok(at.act('carnet.barre', { i: 0, raison: 'court' }).refus, 'une raison trop courte est refusée');
+  at.act('carnet.ajoute', { rubrique: 'vision', texte: 'fiole en goutte inversée' });
+  at.act('carnet.barre', { i: 0, raison: 'trop banal, on ne le reconnaît pas' });
+  assert.equal(at.doc.meta.carnet[0].barre, true);
+  assert.deepEqual(at.act('etape.valide'), { ok: true, manque: [] });
+  // étape 3 : les essais, en calque de construction
+  assert.equal(AP.etapeCourante(at.doc).id, 'essais');
   at.act('calque.ajoute', { type: 'construction' });
   at.act('outil', { nom: 'crayon' }); trait(at, [[3, 3], [3, 8]]);
+  assert.match(at.act('etape.valide').refus, /Essai/);
+  for (let k = 0; k < 3; k++) at.act('carnet.ajoute', { rubrique: 'essai', texte: 'essai ' + k });
+  at.act('carnet.barre', { i: 6, raison: 'silhouette illisible à ×1' });
+  at.act('carnet.ajoute', { rubrique: 'choix', texte: 'vignette 3 : le col tordu se lit' });
   assert.ok(AP.etatEtape(at).portes.every(p => p.manque === null));
   assert.match(at.act('etape.valide').refus, /Case non cochée/);
 });
