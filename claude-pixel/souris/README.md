@@ -123,7 +123,8 @@ Le résumé donne : la case et la couleur sous le curseur, l'outil et les couleu
 calque et l'image, l'étape de la méthode (ou « méthode terminée »), ce qui manque pour valider
 l'étape (`porte`), les défauts détectés (avec ceux qui sont près du curseur), la ligne
 `volume` (direction et hauteur de la lumière, « NON POSÉE » si elle ne l'est pas, accord
-clarté/volume, écart des deux familles, inversions, étendue des valeurs), les messages de
+clarté/volume, écart des deux familles, inversions, étendue des valeurs), la ligne `carnet`
+(idées vivantes, idées barrées, dernière idée et sa rubrique), les messages de
 l'atelier et les erreurs de page.
 
 ## Ce que produit une séance

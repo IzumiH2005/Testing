@@ -1,4 +1,4 @@
-# Méthode de pixel art — objets, personnages, créatures et décors (v18)
+# Méthode de pixel art — objets, personnages, créatures et décors (v19)
 
 On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin classique
 (construction par volumes, ligne d'action, anatomie) et les règles du pixel art
@@ -24,8 +24,8 @@ propres.
 
 | Partie | Sections |
 |---|---|
-| Règles impératives | 66 ordres courts, tirés des tests, des livres et des maîtres |
-| **0. Dessiner avant de pixelliser** | 0-A diagnostic de la potion 64 · 0-B voir et construire · 0-C lumière et forme (zones) · 0-D design des valeurs · 0-E design des formes · 0-F perspective · 0-G couleur · 0-H bords · 0-I matières · 0-J méthode du pro · **0-K les neuf planches analysées** · 0-L recettes (potion en verre, sphère, fruit, pain, flamme, ruines, gemme) · 0-M plan d'entraînement · **0-N vision et conception (carnet, essais)** · **0-O astuces de pro** |
+| Règles impératives | 70 ordres courts, tirés des tests, des livres et des maîtres |
+| **0. Dessiner avant de pixelliser** | 0-A diagnostic de la potion 64 · 0-B voir et construire · 0-C lumière et forme (zones) · 0-D design des valeurs · 0-E design des formes · 0-F perspective · 0-G couleur · 0-H bords · 0-I matières · 0-J méthode du pro · **0-K les neuf planches analysées** · 0-L recettes (potion en verre, sphère, fruit, pain, flamme, ruines, gemme) · 0-M plan d'entraînement · **0-N vision et conception (carnet, essais)** · **0-O astuces de pro** · **0-P inventer (SCAMPER, tableau morphologique)** · 0-Q geste · 0-R harmonies de couleur · 0-S métal et textures |
 | **A. Règles communes** | A1 travail · A2 lisibilité · A3 table par taille · A4 règles du dessin · A4b simplifier · A5 pipeline pixel (silhouette → contour → palette → lumière → matières → détails → nettoyage → contrôle) · A6 finition pro · **A7 tramage** · **A8 lignes et formes** · **A9 perspectives de jeu** · **A10 leçons des maîtres** · **A11 geste du pro (outils, souris)** |
 | **B. Objets** | B0 intention · B0b projection · B1 cadre · B2 volumes · B3 forme iconique · B4 matière · B4b déclinaison par taille · B5 contrôle · **B6 recettes pas à pas (pierre, rocher, cristal, slime, livre)** |
 | **C. Personnages** | C0 intention · C1 proportions · C2 pose · C3 volumes · C4 tête et visage · C5 vêtements (design) · C6 cheveux · C7 astuces de figure · C8 contrôle · C9 anatomie · C10 tailles (8 à 128 px) · C11 portrait anime · C12 visage Loomis + anime · C13 chibi pas à pas · C14 corps nu puis vêtements en calque · C15 créatures · C16 créatures complexes · C17 vêtements (plis, matières) |
@@ -69,7 +69,10 @@ propres.
 | Tests en cours de dessin (miroir, gris, yeux plissés) | A6-J · **A11-C** |
 | Valeur d'abord, ombrer en gris | **0-D** · A6-A · **A10-F** |
 | Apprendre le dessin, exercices | **0-M** · G |
-| Vision, carnet, vignettes, créer une forme unique | **0-N** · 0-O |
+| Vision, carnet, vignettes, créer une forme unique | **0-N** · 0-O · **0-P** |
+| Geste, ligne d'action, courbes C et S | **0-Q** · C2 |
+| Harmonies de couleur, accent | **0-R** · F4 · A6-A |
+| Métal, bois, tissu, fourrure, feuillage | **0-S** · 0-I · C17 |
 | Grandes formes, langage des formes, point d'intérêt, contraste | **0-O** · 0-E · A2 |
 
 **Sources (étiquettes) :** [Z] *Apprendre à tout dessiner avec Zephy* · [M] livre de dessin
@@ -86,8 +89,8 @@ fournies en v17 (potion, cristal, poire, sphère, livre, pain, portail, pierre, 
 0-K) · [P4] planches fournies en v18 (slime, gemmes ; 0-K, 0-L-G) · [D] fondamentaux du dessin et de la peinture ([D1] Drawabox, [D2] Scott Robertson,
 [D3] Proko, lumière et ombre, [D4] James Gurney, blog, [D5] Marco Bucci, [D6] Proko, groupes
 de valeurs, [D7] Sinix, design des formes, [D8] droites et courbes, [D9] couleur, [D10]
-bords, [D11]-[D15] vision, vignettes, conception et astuces de pro ; liens en fin de
-document). Toutes les règles sont reformulées.
+bords, [D11]-[D15] vision, vignettes, conception et astuces de pro, [D16]-[D20]
+créativité, geste, couleur, métal et textures ; liens en fin de document). Toutes les règles sont reformulées.
 
 ---
 
@@ -266,6 +269,14 @@ Chaque règle est un ordre. Le détail et le « pourquoi » sont dans la section
     sur un squelette plausible (0-N-B).
 66. **Grandes formes calmes, détails groupés, un seul point d'intérêt** : la plus forte
     valeur, le bord le plus dur et la couleur la plus saturée s'y retrouvent (0-O).
+67. **Cherche avant de choisir** : SCAMPER sur une forme connue, puis un tableau
+    morphologique ; tire trois combinaisons très différentes pour les trois vignettes (0-P).
+68. **Le geste en trois traits** : une ligne d'action, puis des C, des S et des droites ;
+    un côté tendu face à un côté droit (0-Q).
+69. **Une couleur domine, une soutient, une accentue** (environ 60 / 30 / 10) ; l'accent
+    seulement au point d'intérêt (0-R).
+70. **Une texture = quelques amas répétés, distribués irrégulièrement, dans le demi-ton** ;
+    rien en pleine lumière ni dans l'ombre profonde (0-S).
 
 ---
 
@@ -687,6 +698,111 @@ problème (verre, métal, feuillage, plis).
 
 **Accepter le raté.** Les pros annulent, effacent et refont beaucoup. Un dessin juste vient
 d'une suite de corrections, pas d'un premier jet parfait.
+
+## 0-P. Inventer : des méthodes pour trouver des formes neuves [D16][D13][D14]
+
+La créativité se travaille. Ces méthodes servent à l'étape **Vision** : chaque idée qu'elles
+donnent va au carnet, rubrique **Variante**, puis se garde ou se barre.
+
+### A. SCAMPER : questionner une forme connue
+On part d'un objet connu (une fiole ronde) et on lui pose sept questions :
+
+| Lettre | Question | Exemple sur une fiole |
+|---|---|---|
+| **S**ubstituer | Et si une pièce était faite d'autre chose ? | un bouchon en cristal, une panse en coquille |
+| **C**ombiner | Et si on fondait deux objets ? | fiole + sablier : le liquide s'écoule d'une panse à l'autre |
+| **A**dapter | Qu'est-ce qui, ailleurs, résout le même problème ? | une goutte de rosée, une graine, un fruit |
+| **M**odifier | Et si on agrandissait, étirait, tordait une partie ? | un col très long et tordu, une panse aplatie |
+| **P**roposer un autre usage | Et si l'objet servait aussi à autre chose ? | une fiole qui sert de lanterne |
+| **É**liminer | Que se passe-t-il sans telle pièce ? | pas de bouchon : le liquide est tenu par une bulle de magie |
+| **R**enverser | Et à l'envers, à l'intérieur dehors ? | la fiole en bas, le liquide qui monte vers le haut |
+
+SCAMPER ne garantit rien : il donne des pistes. On en garde une ou deux, on teste en
+vignette, on barre le reste.
+
+### B. Le tableau morphologique : combiner les solutions
+Lister les **parties** de l'objet en lignes et, pour chacune, 3 ou 4 **solutions** en
+colonnes. Une combinaison = une ligne choisie par partie. Exemple :
+
+| Partie | Solution 1 | Solution 2 | Solution 3 | Solution 4 |
+|---|---|---|---|---|
+| Panse | sphère | goutte | cœur | cristal taillé |
+| Col | court et large | long et fin | tordu | double |
+| Bouchon | liège | cristal | métal à anneau | cire scellée |
+| Décor | aucun | cerclage de métal | étiquette | runes gravées |
+
+On tire 3 combinaisons très différentes : ce sont les trois vignettes de l'étape **Essais**.
+
+### C. Mélanger les références, pas les copier
+- **Deux sources ou plus**, jamais une seule : une forme naturelle (coquillage, graine,
+  insecte) + un objet fabriqué (verrerie, armure) donnent une forme neuve **et** crédible.
+- Pour une créature : un squelette, une peau, un comportement tirés d'animaux réels
+  différents (Whitlatch, 0-N-B).
+- On prend un **principe** à chaque source (une courbe, une articulation, une matière), pas
+  son apparence entière.
+
+### D. Les contraintes aident
+Une palette imposée, une taille fixe, une forme de départ unique : moins de choix forcent
+des solutions plus inventives. La fiche (taille, couleurs, projection) fixe ces contraintes
+avant la vision.
+
+## 0-Q. Le geste : courbes en C, en S, et droites [D17]
+
+- **Trois traits seulement** pour le geste : la courbe en **C**, la courbe en **S** et la
+  **droite**. Rien de plus compliqué.
+- **La ligne d'action d'abord** : la plus longue courbe qui traverse le sujet (de la tête aux
+  pieds, du bouchon au fond d'une fiole). Tout le reste s'y accroche.
+- **Courbe contre droite** : un côté tendu (C) face à un côté droit donne du rythme ; deux
+  côtés courbes identiques donnent une forme molle (0-E).
+- **Rythme** : des S qui s'enchaînent = calme et souple ; des zigzags = tension, danger.
+- **En pixels** : un C = une suite de marches qui s'allongent puis raccourcissent (1-2-3-3-2-1) ;
+  une droite = des marches égales ; un S = deux C opposés qui se rejoignent par leur marche
+  la plus longue.
+- Même un objet a un geste : une fiole qui « penche » un peu, une flamme qui monte en S, un
+  pain légèrement cintré paraissent vivants.
+
+## 0-R. Harmonies de couleur [D9][D18]
+
+- **Palette limitée** : moins de teintes = plus d'unité et plus d'attention aux valeurs.
+- **Une couleur domine**, une seconde la soutient, une **troisième sert d'accent**. Repère :
+  environ 60 % / 30 % / 10 % de la surface.
+- **Analogue** (teintes voisines) : calme, unité ; ajouter un accent pour vivre.
+- **Complémentaire** (opposées) : contraste fort ; une domine, l'autre seulement en accent,
+  près du point d'intérêt.
+- **Complémentaire adjacente** (une teinte + les deux voisines de son opposée) : contraste
+  plus doux, plus facile à tenir.
+- **Varier sans ajouter de teinte** : éclaircir, assombrir, désaturer une teinte de la
+  palette plutôt qu'en inventer une nouvelle.
+- Le glissement de teinte des ombres et lumières (A6-A, 0-G) suit la **lumière** choisie :
+  une harmonie se décide en même temps que la lumière.
+
+## 0-S. Matières, suite : métal et textures [D19][D20]
+
+### A. Métal
+- **Le métal n'a presque pas de couleur propre** : il reflète son entourage. Décider
+  l'entourage d'abord (ciel clair au-dessus, sol sombre en dessous).
+- **Chrome / poli** : reflets **nets et durs**, contraste extrême, ombre presque noire,
+  ligne d'horizon nette dans le reflet, contour net.
+- **Brossé** : les reflets **s'étirent dans le sens du grain** (bandes longues au lieu de
+  taches rondes), contraste moindre.
+- **Usé** : arêtes plus claires là où on touche, creux plus sombres et ternes, quelques
+  rayures (sombre + lèvre claire, B6-C).
+- Le métal **reprend un peu la couleur** des objets voisins dans ses reflets.
+
+### B. Textures en pixels
+- **Une texture = quelques amas répétés**, de même forme, mais distribués de façon
+  irrégulière. Pas de pixels isolés, qui font du bruit (A5-9).
+- **Bois** : lignes presque parallèles mais ondulées, nœuds en ovales autour desquels les
+  lignes s'écartent. Si le contexte dit « bois » (planche, manche), peu de texture suffit.
+- **Tissu** : la texture se lit surtout par les plis (C17) ; usure = pièces, coutures,
+  accrocs, plutôt qu'une trame partout.
+- **Fourrure, herbe** : trop fines pour être dessinées brin à brin : on **suggère** par le
+  contour (petites mèches qui dépassent) et quelques mèches dans le demi-ton.
+- **Feuillage** : des amas en forme de feuille, d'œuf ou de boule, de taille et
+  d'espacement réguliers dans une masse, éclairés comme une seule grande forme (0-C) :
+  la masse d'abord, les feuilles ensuite.
+- **La texture vit dans le demi-ton** : elle disparaît dans la pleine lumière et dans
+  l'ombre profonde (A4, 0-D).
 
 ---
 
@@ -3543,6 +3659,11 @@ Cours et livres légitimes, cités pour leurs idées ; tout est reformulé.
 | [D13] | [Creative Bloq, créatures crédibles](https://www.creativebloq.com/art/digital-art/pro-artists-reveal-how-they-design-imaginary-creatures-that-feel-believable) · [Terryl Whitlatch (ArtStation)](https://magazine.artstation.com/2016/09/profile-creature-design-legend-terryl-whitlatch/) · Terryl Whitlatch, *Science of Creature Design* et *Principles of Creature Design* | squelettes d'animaux réels, récit de la créature (0-N-B) |
 | [D14] | [Creative Bloq, conseils de concept design](https://creativebloq.com/how-to/concept-design-tips-for-artists/2) · [The Rookies, design d'objets](https://blog.therookies.co/2019/08/11/prop-design-tips-for-newbie/) | la forme suit la fonction, lisibilité d'un objet (0-N-B) |
 | [D15] | [Les grandes formes](https://drawpaintacademy.com/big-simple-shapes-and-colors/) · [langage des formes (21-draw)](https://www.21-draw.com/pl/why-is-shape-language-so-important/) · [rythme et répétition (The Noun Project)](https://blog.thenounproject.com/?p=7993) | grandes formes, économie, langage des formes, rythme (0-O) |
+| [D16] | [SCAMPER (UBC Design Studio)](https://dstudio.ubc.ca/toolkit/techniques/scamper/) · [SCAMPER (Interaction Design Foundation)](https://ixdf.org/literature/topics/SCAMPER) · [DelftX, fiche SCAMPER](https://courses.edx.org/c4x/DelftX/DDA691x/asset/DDG_Scamper.pdf) | questionner une forme connue, tableau morphologique (0-P) |
+| [D17] | [Proko, dessiner le geste](https://www.proko.com/course-lesson/how-to-draw-gesture/notes) · [Creative Bloq, le geste](https://www.creativebloq.com/art/traditional-art/gesture-drawing) | C, S, droite, ligne d'action, rythme (0-Q) |
+| [D18] | [Palettes limitées (Clip Studio)](https://www.clipstudio.net/how-to-draw/archives/168546) · [palettes de couleurs (UNH)](https://it502.cs.unh.edu/tutorials/spring25/jlb1207/color_palettes.html) | dominante, soutien, accent ; analogues et complémentaires (0-R) |
+| [D19] | [Creative Bloq, peindre le métal](https://creativebloq.com/3d/paint-different-metal-surfaces-10121080) · [KeyShot, métal brossé](https://www.keyshot.com/blog/how-to-render-brushed-metals-in-keyshot/) · [Muddy Colors, reflets](https://www.muddycolors.com/?p=46120) | chrome, brossé, usé (0-S-A) |
+| [D20] | [Slynyrd, texture](https://www.slynyrd.com/blog/2018/2/15/pixelblog-2-texture) · [Slynyrd, arbres vus de dessus](https://slynyrd.com/blog/2023/5/22/pixelblog-44-top-down-trees) · [OpenGameArt, textures et tramage](https://opengameart.org/content/chapter-7-textures-and-dithering) · [Kenney, améliorer un dessin 2D](https://kenney.nl/learn/improving-2d-vector-art) | amas répétés, bois, fourrure suggérée, feuillage (0-S-B) |
 | [D10] | [Les bords en peinture](https://drawpaintacademy.com/edges/) · [Muddy Colors, bords](https://www.muddycolors.com/?p=8983) | bords durs, doux, perdus (0-H) |
 
 Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixeljoint.com/forum/forum_posts.asp?TID=20953)
@@ -3696,6 +3817,13 @@ Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixel
 ---
 
 # Historique des versions
+
+- **v19 :** **0-P inventer** (SCAMPER, tableau morphologique, mélange de références,
+  contraintes) ; **0-Q geste** (C, S, droite, ligne d'action, rythme, en pixels) ; **0-R
+  harmonies de couleur** (dominante, soutien, accent ; analogue, complémentaire,
+  complémentaire adjacente) ; **0-S métal et textures** (chrome, brossé, usé ; bois, tissu,
+  fourrure, feuillage) ; sources [D16] à [D20] ; règles impératives 67 à 70. Dans Claude
+  Pixel : rubrique « Variante » au carnet, carnet résumé dans chaque regard de la souris.
 
 - **v18 :** **0-N vision et conception** : carnet (une idée par ligne, rien ne s'efface,
   on barre avec la raison), cinq questions (vision, structure ou physionomie, formes de

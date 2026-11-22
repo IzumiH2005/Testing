@@ -1282,7 +1282,7 @@ const ACTIONS = {
   'carnet.ajoute'(a) {
     const t = String(a.texte || '').trim().slice(0, 600);
     if (!t) this.refuse('Écris l\'idée avant de l\'ajouter au carnet.');
-    const R = ['vision', 'structure', 'formes', 'unique', 'logique', 'essai', 'choix'];
+    const R = ['vision', 'structure', 'formes', 'unique', 'logique', 'variante', 'essai', 'choix'];
     const rub = R.includes(a.rubrique) ? a.rubrique : 'vision';
     const m = this.doc.meta; m.carnet = m.carnet || [];
     m.carnet.push({ n: m.carnet.length + 1, rubrique: rub, texte: t, barre: false, raison: '' });

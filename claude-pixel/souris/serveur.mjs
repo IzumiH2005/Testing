@@ -235,7 +235,7 @@ async function regarde() {
   const n = String(nRegard).padStart(3, '0'), base = path.join(REGARDS, n);
   await pause(120);
   await page.screenshot({ path: base + '-ecran.png' });
-  const [et, vis, exp, msgs, defs, ver, vol] = await Promise.all([lit('etat'), lit('pixels', { vue: 'visible' }), lit('pixels', { vue: 'export' }), lit('messages', 6), lit('defauts'), lit('verifie'), lit('volume')]);
+  const [et, vis, exp, msgs, defs, ver, vol, car] = await Promise.all([lit('etat'), lit('pixels', { vue: 'visible' }), lit('pixels', { vue: 'export' }), lit('messages', 6), lit('defauts'), lit('verifie'), lit('volume'), lit('carnet')]);
   const cel = await lit('celluleDeEcran', pos.x, pos.y);
   const cx = Math.max(0, Math.min(vis.w - 1, cel.x)), cy = Math.max(0, Math.min(vis.h - 1, cel.y));
   const pres = defs.map(r => ({ ...r, pres: r.pixels.filter(([x, y]) => Math.max(Math.abs(x - cel.x), Math.abs(y - cel.y)) <= 4) }));
@@ -254,6 +254,7 @@ async function regarde() {
     'défauts : ' + (defs.length ? defs.map(r => r.titre + ' [' + r.niveau + '] ' + r.pixels.length + ' px' + (pres.find(p => p.id === r.id).pres.length ? ' (dont ' + pres.find(p => p.id === r.id).pres.map(p => p.join(',')).join(' ') + ' près du curseur)' : '')).join(' ; ') : 'aucun'),
     'volume : lumière ' + vol.lumiere.nom + ' (az ' + vol.lumiere.az + '°, él ' + vol.lumiere.el + '°, ' + vol.lumiere.forme + ')' + (vol.lumiere.posee ? '' : ' NON POSÉE') +
       ' · accord ' + f2(vol.mesure.accord) + ' · familles ' + f2(vol.mesure.ecart) + ' · inversions ' + (vol.mesure.inverses === null ? '—' : Math.round(vol.mesure.inverses * 100) + ' %') + ' · étendue ' + f2(vol.mesure.etendue),
+    'carnet : ' + (car.length ? car.filter(e => !e.barre).length + ' idée(s), ' + car.filter(e => e.barre).length + ' barrée(s) · dernière : [' + car[car.length - 1].rubrique + '] ' + car[car.length - 1].texte.slice(0, 90) + (car[car.length - 1].barre ? ' (barrée : ' + car[car.length - 1].raison.slice(0, 60) + ')' : '') : 'vide'),
     'messages : ' + (msgs.length ? msgs.map(m => '[' + m.niveau + '] ' + m.msg).join(' / ') : 'aucun'),
     'images : ' + path.relative(process.cwd(), base) + '-{ecran,loupe,dessin}.png'
   ];

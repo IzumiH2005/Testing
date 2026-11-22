@@ -832,6 +832,8 @@ const lectureSeule = Object.freeze({
   celluleDeEcran(x, y) { const p = U.ecranVersCellule(x, y), d = U.at.doc; const cx = Math.floor(p.x), cy = Math.floor(p.y); return { x: cx, y: cy, dedans: cx >= 0 && cy >= 0 && cx < d.w && cy < d.h }; },
   defauts() { return AP.detecte(U.at.doc, U.at.s.image).map(r => ({ id: r.id, niveau: r.niveau, titre: r.titre, ref: r.ref, msg: r.msg, pixels: r.pixels.slice(0, 200) })); },
   palette() { return U.at.doc.palette.map(c => AP.hex(c, true)); },
+  /* Carnet de conception (0-N) : chaque idée, barrée ou non. */
+  carnet() { return (U.at.doc.meta.carnet || []).map(e => ({ n: e.n, rubrique: e.rubrique, texte: e.texte, barre: !!e.barre, raison: e.raison || '' })); },
   /* Lumière et volume (0-C) : réglage, mesure, et trois images en lignes (valeurs, notan, guide). */
   volume() {
     const d = U.at.doc, f = U.at.s.image, VO = AP.VOLUME, L = VO.lumiereDe(d), px = AP.compose(d, f, 'export');

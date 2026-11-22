@@ -155,7 +155,7 @@ const E = (id, titre, ref, faire, o = {}) => Object.assign({ id, titre, ref, fai
 const C = (cle, txt) => ({ cle, txt });
 const ETAPE_FICHE = (ref) => E('fiche', 'Fiche d\'intention et règles', ref, [
   'Remplis la fiche : chaque champ est une décision prise avant le premier pixel.',
-  'Lis les 66 règles impératives (onglet Aide) et coche « lues ».',
+  'Lis les 70 règles impératives (onglet Aide) et coche « lues ».',
   'Règle la toile à la taille finale : on ne dessine jamais en grand pour réduire (A4b).',
   'Choisis ou construis la palette : une rampe par matière (A6-A).',
   'Nomme 2 ou 3 idées fortes, pas plus : ce qu\'on doit reconnaître de loin (A10-F, règle 44).'
@@ -440,7 +440,7 @@ for (const t of ['personnage', 'chibi', 'creature']) {
 /* Vision et essais (0-N) : avant tout trait, écrire ce qu'on voit et l'éprouver. */
 const RUBRIQUES = {
   vision: 'Ce que je vois', structure: 'Structure / physionomie', formes: 'Formes de base',
-  unique: 'Ce qui la rend unique', logique: 'Pourquoi c\'est crédible', essai: 'Essai', choix: 'Choix retenu'
+  unique: 'Ce qui la rend unique', logique: 'Pourquoi c\'est crédible', variante: 'Variante (SCAMPER, tableau)', essai: 'Essai', choix: 'Choix retenu'
 };
 const AIDE_STRUCTURE = {
   objet: 'De quoi il est fait, comment ses pièces tiennent ensemble, comment on le tient ou l\'utilise (la forme suit la fonction).',
@@ -456,7 +456,8 @@ const ETAPE_VISION = (type) => E('vision', 'Vision : écrire ce que je vois', '0
   'Structure : ' + (AIDE_STRUCTURE[type] || AIDE_STRUCTURE.objet),
   'Formes de base : de quelles primitives on part (sphère, cylindre, boîte, cône) et comment on les déforme ensuite.',
   'Ce qui la rend unique : UNE idée forte (une forme inattendue, une matière, un détail de récit), pas cinq.',
-  'Pourquoi c\'est crédible : même un objet inventé a une logique (comment il tient, s\'ouvre, se remplit, vit).'
+  'Pourquoi c\'est crédible : même un objet inventé a une logique (comment il tient, s\'ouvre, se remplit, vit).',
+  'Variantes : passe la forme connue au SCAMPER et remplis un tableau morphologique (0-P) ; chaque piste va au carnet, puis se garde ou se barre.'
 ], { pasEncore: 'Aucun pixel : on écrit et on se corrige.', portes: ['carnetVision'] });
 const ETAPE_ESSAIS = () => E('essais', 'Essais : vignettes, effacer, recommencer', '0-N · 0-B', [
   'Dans un calque de construction, petit (8 à 16 px de haut) : au moins 3 silhouettes différentes de l\'idée. Pousse chaque essai : ne fais pas deux fois la même.',
@@ -513,7 +514,7 @@ function porte(id, at, cache) {
   }
   switch (id) {
     case 'fiche': { const r = ficheIncomplete(doc); return r ? 'Fiche incomplète : ' + r.join(', ') : null; }
-    case 'regles': return m.reglesLues ? null : 'Lis les 66 règles impératives et coche « lues ».';
+    case 'regles': return m.reglesLues ? null : 'Lis les 70 règles impératives et coche « lues ».';
     case 'nonVide': return AP.mesures(doc, f).opaques ? null : 'L\'image exportée est vide.';
     case 'construction': return aDesPixels(doc, c => c.type === 'construction') ? null : 'Dessine la construction dans au moins un calque de type « construction ».';
     case 'silhouette1': { const n = AP.mesures(doc, f).couleurs; return n <= 2 ? null : 'La silhouette se fait en une couleur sombre (2 au plus) : ' + n + ' couleurs.'; }
@@ -599,7 +600,7 @@ function verifieEtape(at) {
   return { ok: !manque.length, manque };
 }
 
-/* ---------- Les 66 règles, lues dans le texte de la méthode ---------- */
+/* ---------- Les 70 règles, lues dans le texte de la méthode ---------- */
 function extraitRegles(texte) {
   const lignes = texte.split('\n'), out = [];
   let i = lignes.findIndex(l => /^# Règles impératives/.test(l)), groupe = '';

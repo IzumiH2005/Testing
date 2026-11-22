@@ -7,10 +7,10 @@ const { AP, trait, RACINE } = require('./aide.cjs');
 
 const FICHE = { quoi: 'potion', usage: 'inventaire', couleurs: '8', projection: 'de face', lumiere: 'haut gauche', matiere: 'verre', accent: 'rouge' };
 
-test('les 66 règles impératives sont extraites du document', () => {
+test('les 70 règles impératives sont extraites du document', () => {
   const R = AP.extraitRegles(fs.readFileSync(path.join(RACINE, 'METHODE_PIXEL_ART.md'), 'utf8'));
-  assert.equal(R.length, 66);
-  assert.deepEqual(R.map(r => r.n), Array.from({ length: 66 }, (_, i) => i + 1));
+  assert.equal(R.length, 70);
+  assert.deepEqual(R.map(r => r.n), Array.from({ length: 70 }, (_, i) => i + 1));
   assert.ok(R.every(r => r.texte && r.groupe));
 });
 
