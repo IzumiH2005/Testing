@@ -1,0 +1,11 @@
+regard 104
+case 10,22 · couleur #2a1a2e99 (exportée : transparent) · écran 451,368
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 3/3 · image 1/1 · dessin 33×48 « Fiole bourgeon » (objet)
+étape 4 · Design des pièces : bouchon, jonctions, pied (0-AA-B · 0-AA-D)
+porte : Carnet : 9 « Pièce » de plus (3 bouchons, 3 jonctions, 3 pieds). | Case non cochée : « Un motif répété à trois échelles » | Case non cochée : « Proportions franches, jamais 1:1 » | Case non cochée : « Chaque jonction est dessinée (épaule, bague, lèvre, tige) » | Case non cochée : « Le bouchon se lit à ×1 et porte le motif »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 16 idée(s), 5 barrée(s) · dernière : [choix] A poussée avec les proportions de C : panse en ogive plus haute que large ; sépales collés
+messages : aucun
+images : seances/fiole-bourgeon-reprise/regards/104-{ecran,loupe,dessin}.png

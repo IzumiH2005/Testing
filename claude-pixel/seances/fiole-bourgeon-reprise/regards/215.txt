@@ -1,0 +1,11 @@
+regard 215
+case 12,39 · couleur #4e3e60ff (exportée : #5a4a70ff) · écran 467,504
+outil crayon · taille 1 · c1 #5a4a70ff · c2 #00000000
+calque 1/6 · image 1/1 · dessin 33×48 « Fiole bourgeon » (objet)
+étape 8 · Trait final (0-AB-A · A5-6 · 0-E)
+porte : Jaggies (segments irréguliers) (A5-6 · règle 22) : 6 px. Corrige, ou justifie-le. | Case non cochée : « Vue miroir regardée : aucune pente fausse » | Case non cochée : « Courbes tendues, aucune bosse molle »
+défauts : Jaggies (segments irréguliers) [attention] 6 px ; Bruit [attention] 28 px (dont 8,37 8,40 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 21 idée(s), 13 barrée(s) · dernière : [piece] Collerette 3 (réécrite) : gardée en réserve si le col paraît nu.
+messages : aucun
+images : seances/fiole-bourgeon-reprise/regards/215-{ecran,loupe,dessin}.png
