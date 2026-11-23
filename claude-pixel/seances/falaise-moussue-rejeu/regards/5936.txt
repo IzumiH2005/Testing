@@ -1,0 +1,11 @@
+regard 5936
+case 126,41 · couleur #7bb348ff (exportée : #7bb348ff) · écran 639,313
+outil crayon · taille 1 · c1 #7bb348ff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 12 · Détails et nettoyage (A6-H · A5-10)
+porte : Banding (A6-H) : 61 px. Corrige, ou justifie-le. | Carnet : 4 « Détail » de plus : chaque élément retravaillé à la loupe laisse une ligne (0-AE). | Passe à la loupe : 272 zone(s) sur 288 à retravailler et marquer (zones de 8 px). | Case non cochée : « Lisible à ×1 sur la carte »
+défauts : Pixels doublés en « L » [erreur] 200 px ; Banding [attention] 61 px (dont 129,41 129,42 128,42 128,43 130,41 près du curseur) ; L'ombrage ne suit pas la lumière [attention] 200 px ; Tramage en damier [conseil] 102 px (dont 125,40 126,40 125,41 126,41 près du curseur) ; Tirets dans la texture [conseil] 200 px
+volume : lumière haut (az 90°, él 65°, gonfle) · accord 0.08 · familles 0.07 · inversions 41 % · étendue 0.51
+carnet : 36 idée(s), 1 barrée(s) · dernière : [detail] Coins rentrants : d'après l'assemblage par quarts, seule une encoche d'air de 4×7 px au po
+messages : aucun
+images : seances/falaise-moussue-rejeu/regards/5936-{ecran,loupe,dessin}.png
