@@ -1,0 +1,11 @@
+regard 387
+case 77,36 · couleur #2f6b3aff (exportée : transparent) · écran 492,298
+outil crayon · taille 1 · c1 #2f6b3aff · c2 #00000000
+calque 4/4 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 3 · Itérations sur une forme de base (0-AD · 0-AA-E)
+porte : Carnet : 1 « Itération » de plus (3 versions au moins), 1 « Critique » notée(s) sur 30 de plus, un « Choix retenu ». | Case non cochée : « Parti d'une forme de base simple » | Case non cochée : « Au moins 3 versions de la même forme, chacune critiquée » | Case non cochée : « La version retenue est mieux notée que la v1 »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 9 idée(s), 1 barrée(s) · dernière : [critique] v2 : lisibilité 3, originalité 2, appeal 2, cohérence 3, rythme 2, crédibilité 3 = 15/30. 
+messages : aucun
+images : seances/falaise-moussue-rejeu/regards/387-{ecran,loupe,dessin}.png
