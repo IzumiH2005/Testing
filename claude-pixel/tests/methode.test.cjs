@@ -10,10 +10,10 @@ const v22 = d => { d.meta.methode = 22; return d; };
 
 const FICHE = { quoi: 'potion', usage: 'inventaire', couleurs: '8', projection: 'de face', lumiere: 'haut gauche', matiere: 'verre', accent: 'rouge' };
 
-test('les 88 règles impératives sont extraites du document', () => {
+test('les 90 règles impératives sont extraites du document', () => {
   const R = AP.extraitRegles(fs.readFileSync(path.join(RACINE, 'METHODE_PIXEL_ART.md'), 'utf8'));
-  assert.equal(R.length, 88);
-  assert.deepEqual(R.map(r => r.n), Array.from({ length: 88 }, (_, i) => i + 1));
+  assert.equal(R.length, 90);
+  assert.deepEqual(R.map(r => r.n), Array.from({ length: 90 }, (_, i) => i + 1));
   assert.ok(R.every(r => r.texte && r.groupe));
 });
 
@@ -133,7 +133,7 @@ test('v22 : le sketching d\'illustrateur, calque par calque, puis la validation 
 
 test('v24 : un nouveau document itère sur une forme de base, sans essais ni pièces', () => {
   const at = new AP.Atelier({ doc: AP.nouveauDoc({ w: 64, h: 64, type: 'objet' }) }), d = at.doc;
-  assert.equal(d.meta.methode, 25);
+  assert.equal(d.meta.methode, 26);
   const ids = AP.etapesDe(d).map(e => e.id);
   assert.ok(!ids.includes('essais') && !ids.includes('pieces'));
   assert.equal(ids.indexOf('iterations'), ids.indexOf('vision') + 1);
@@ -177,11 +177,41 @@ test('v25 : un document v24 passe à la méthode actuelle sans perdre son étape
   d.meta.etape = AP.etapesDe(d).findIndex(e => e.id === 'variantes');
   d.meta.valideEtapes[0] = { ok: true, manque: [] };
   at.act('methode.migre');
-  assert.equal(d.meta.methode, 25);
+  assert.equal(d.meta.methode, AP.METHODE_ACTUELLE);
   assert.equal(AP.etapeCourante(d).id, 'variantes');
   assert.deepEqual(d.meta.valideEtapes[0], { ok: true, manque: [] });
   // on peut revenir à l'étape nouvelle qui précède
   at.act('etape.va', { i: AP.etapesDe(d).findIndex(e => e.id === 'micro') });
   assert.equal(AP.etapeCourante(d).id, 'micro');
   assert.ok(at.act('methode.migre').refus);
+});
+
+test('v26 : la passe à la loupe demande chaque zone de la tuile centrale, marquée une par une', () => {
+  const at = new AP.Atelier({ doc: { w: 160, h: 128, type: 'decor' } }), d = at.doc;
+  at.act('tuile.reglage', { on: true, tw: 32, th: 32 });
+  // de la terre partout
+  const id = d.cels[d.calques[0].id][0] = 'cz'; d.celData[id] = new Uint32Array(160 * 128).fill(AP.parseHex('#8e5a4a'));
+  d.meta.etape = AP.etapesDe(d).findIndex(e => e.id === 'micro');
+  const porte = () => AP.etatEtape(at).portes.find(p => p.id === 'zonesTuile').manque;
+  assert.match(porte(), /4 zone\(s\) sur 4/);           // tuile centrale, zones de 16 px
+  at.act('zones.taille', { taille: 8 });
+  assert.match(porte(), /16 zone\(s\) sur 16/);
+  for (let y = 4; y < 8; y++) for (let x = 4; x < 8; x++) at.act('zones.marque', { x, y });
+  assert.equal(porte(), null);
+  assert.ok(at.act('zones.marque', { x: 40, y: 0 }).refus);
+});
+
+test('v26 : la tuile centrale se rend en six passes notées au carnet', () => {
+  const d = AP.nouveauDoc({ w: 160, h: 128, type: 'decor' });
+  const e = AP.etapesDe(d).find(x => x.id === 'centre');
+  assert.ok(e.portes.includes('carnetPasses'));
+  assert.equal(e.faire.filter(f => /^\d\. /.test(f)).length, 6);
+});
+
+test('ramener un calque à la palette', () => {
+  const at = new AP.Atelier({ doc: { w: 4, h: 1 } }), d = at.doc;
+  d.palette = ['#000000', '#ffffff', '#ff0000'];
+  const id = d.cels[d.calques[0].id][0] = 'cz'; d.celData[id] = Uint32Array.from([AP.parseHex('#101010'), AP.parseHex('#f0f0f0'), AP.parseHex('#e01010'), 0]);
+  at.act('calque.indexe');
+  assert.deepEqual([...d.celData[d.cels[d.calques[0].id][0]]].map(c => c ? AP.hex(c) : 0), ['#000000', '#ffffff', '#ff0000', 0]);
 });

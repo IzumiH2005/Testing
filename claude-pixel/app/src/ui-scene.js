@@ -7,7 +7,7 @@ const { $, h } = U;
 const ZOOMS = [1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 64];
 const TEINTE_CONSTR = '#3b82f6';
 
-const vue = U.vue = { zoom: 8, ox: 0, oy: 0, survol: null, pelure: false, vue3x3: true, grille: true, cacheConstr: false, mode: 'couleur', guide: false, miroir: false };
+const vue = U.vue = { zoom: 8, ox: 0, oy: 0, zone: null, survol: null, pelure: false, vue3x3: true, grille: true, cacheConstr: false, mode: 'couleur', guide: false, miroir: false };
 U.marques = null; // { pixels:[[x,y]], niveau }
 
 let cv, ctx, scene, buf, bctx, dpr = 1, demande = false;
@@ -114,6 +114,15 @@ function zoomPas(sens, cx, cy) {
 }
 function majZoom() { const b = $('#b-zoom'); if (b) b.textContent = '×' + vue.zoom; }
 U.ajuste = ajuste; U.zoomPas = zoomPas; U.zoomA = zoomA;
+/* Passe à la loupe : cadre la toile sur une zone de t px (elle remplit environ les deux tiers de la vue). */
+function cadreZone(zx, zy, t) {
+  const r = scene.getBoundingClientRect(); let z = ZOOMS[0];
+  for (const zz of ZOOMS) if (t * zz <= Math.min(r.width, r.height) * 0.66) z = zz;
+  vue.zoom = z; vue.zone = { x: zx, y: zy, t };
+  vue.ox = Math.round(r.width / 2 - (zx * t + t / 2) * z); vue.oy = Math.round(r.height / 2 - (zy * t + t / 2) * z);
+  majZoom(); redessine();
+}
+U.cadreZone = cadreZone;
 
 /* ---------- Rendu ---------- */
 function redessine() { if (demande) return; demande = true; requestAnimationFrame(rendu); }
@@ -224,6 +233,13 @@ function rendu() {
     ctx.save(); ctx.lineWidth = 1.5;
     ctx.strokeStyle = '#000'; ctx.stroke(path);
     ctx.setLineDash([4, 4]); ctx.strokeStyle = '#fff'; ctx.stroke(path); ctx.restore();
+  }
+
+  // zone de la passe à la loupe
+  if (vue.zone) {
+    const t = vue.zone.t;
+    ctx.save(); ctx.lineWidth = 2; ctx.setLineDash([6, 4]); ctx.strokeStyle = tok('--warn');
+    ctx.strokeRect(X + vue.zone.x * t * z - 1, Y + vue.zone.y * t * z - 1, t * z + 2, t * z + 2); ctx.restore();
   }
 
   // défauts montrés depuis le Contrôle

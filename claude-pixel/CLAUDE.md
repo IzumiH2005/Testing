@@ -13,7 +13,7 @@ projet reste dans `claude-pixel/`.
    images (écran, loupe, dessin) et le résumé avant de continuer. La souris refuse le trait
    suivant tant que ce n'est pas fait. Il ne faut pas enchaîner des `regarde` à vide pour
    contourner cette règle.
-3. **Suivre la méthode.** Relire les 88 règles impératives et la partie 0 (dessiner avant de
+3. **Suivre la méthode.** Relire les 90 règles impératives et la partie 0 (dessiner avant de
    pixelliser) avant chaque dessin. Remplir la fiche d'intention honnêtement, avec le niveau
    visé : une œuvre pro précise et ce qu'on en prend. Ne cocher une case que si c'est vrai
    sur le dessin, et jamais seulement pour ouvrir une porte.
@@ -40,6 +40,13 @@ projet reste dans `claude-pixel/`.
    lumière, 2 ou 3 tons et un contour décidé ; passer tout le dessin à la loupe, zone par zone,
    et écrire au carnet une ligne « Détail » par élément retravaillé. Ne jamais livrer un
    résultat banal là où un travail plus poussé est possible.
+   **Le niveau des planches pro (0-AF).** Rendre par passes (bandes de valeur, structure,
+   matière secondaire, ombres, volume, éclats) et par unités : chaque brique, pierre, feuille
+   dessinée et éclairée une par une, toutes différentes. 6 à 8 tons par matière, facettes,
+   taches irrégulières de 2 à 6 px, jamais de tirets ni de points isolés, quasi-noir coloré au
+   fond des creux, liseré clair sur les arêtes. Ne pas générer des éléments en série ni les
+   tamponner : chacun se décide. Finir par la passe à la loupe, zone par zone, et ne marquer
+   une zone que si elle a vraiment été reprise. Prendre le temps qu'il faut.
 5. **Dessiner, pas seulement pixelliser.** Construire chaque volume entier dans un calque de
    construction (ellipses comprises). Poser la lumière dans l'onglet Lumière avant la
    première ombre, regarder le guide de volume, poser d'abord deux familles (vue Notan),

@@ -57,3 +57,20 @@ test('raccords : dans un gabarit d\'autotile, seules les tuiles qui se répèten
   for (let k = 0; k < tw; k++) { px[(tw + k) * w + tw] = H; px[tw * w + tw + k] = H; }
   assert.ok(AP.DETECT.raccords(px, w, h, tw, tw, true).pts.length > 0);
 });
+
+test('tampons : un même motif riche copié deux fois dans une tuile est signalé', () => {
+  const w = 32, h = 32, px = new Uint32Array(w * h).fill(AP.parseHex('#8e5a4a'));
+  // une pierre : corps moyen 4×3, dessus clair, dessous sombre
+  const motif = (ox, oy) => { for (let j = 0; j < 3; j++) for (let i = 0; i < 4; i++) px[(oy + j) * w + ox + i] = AP.parseHex('#82737f');
+    for (let i = 0; i < 4; i++) { px[(oy - 1) * w + ox + i] = AP.parseHex('#b0a3a6'); px[(oy + 3) * w + ox + i] = AP.parseHex('#5a4a5c'); } };
+  motif(2, 2);
+  assert.equal(AP.DETECT.tampons(px, w, h, 32, 32).length, 0);
+  motif(18, 20);
+  assert.ok(AP.DETECT.tampons(px, w, h, 32, 32).length > 0);
+});
+
+test('tirets : des barres de 1 px posées seules dans un fond sont signalées', () => {
+  const w = 40, h = 40, px = new Uint32Array(w * h).fill(AP.parseHex('#8e5a4a'));
+  for (let k = 0; k < 6; k++) for (let i = 0; i < 4; i++) px[(4 + k * 6) * w + 5 + i] = AP.parseHex('#a9765a');
+  assert.ok(AP.DETECT.tirets(px, w, h).length >= 12);
+});

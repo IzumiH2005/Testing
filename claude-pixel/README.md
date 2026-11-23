@@ -40,6 +40,11 @@ Projet personnel, non officiel, sans lien avec Anthropic.
   motte, pétale, boucle, œil) est retravaillé à la loupe comme un dessin entier, une ligne
   « Détail » au carnet par élément. Un document en cours passe à la méthode actuelle par un
   bouton, sans perdre son étape.
+- **Rendu par passes et passe à la loupe** (v26) : la tuile centrale se rend en six passes
+  (bandes de valeur, structure, matière secondaire, ombres, volume, éclats) ; une grille de
+  zones de 8 ou 16 px cadre la toile zone par zone et chaque zone se marque une fois reprise ;
+  détecteurs « éléments tamponnés » et « tirets dans la texture » ; « Ramener à la palette »
+  après des passes en opacité.
 - **Sketching d'illustrateur** (v22) : rough, construction, esquisse nettoyée, trait final et
   polish, chacun sur son calque d'esquisse, celui du dessous baissé ; bouton « Retourner la
   toile » ; étape « Validation du dessin » avant toute couleur (note de 22/30 au moins).

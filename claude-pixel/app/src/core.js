@@ -247,7 +247,7 @@ function nouveauDoc(o = {}) {
     rampes: [],
     calques: [], images: [{ ms: 100, role: '', change: '', principe: '', validee: false }],
     cels: {}, celData: {}, etiquettes: [], next: 1,
-    meta: { fiche: {}, etape: 0, coches: {}, justifs: {}, planche: {}, reglesLues: false, valideEtapes: [], methode: 25, carnet: [] },
+    meta: { fiche: {}, etape: 0, coches: {}, justifs: {}, planche: {}, reglesLues: false, valideEtapes: [], methode: 26, carnet: [], zones: { taille: 16, faites: {} } },
     lumiere: { az: 135, el: 40, forme: 'gonfle', posee: false },
     tuile: { on: false, tw: 16, th: 16 },
     carte: { cols: 20, rows: 12, terrain: [], tuiles: [] }
@@ -1284,7 +1284,7 @@ const ACTIONS = {
   'carnet.ajoute'(a) {
     const t = String(a.texte || '').trim().slice(0, 600);
     if (!t) this.refuse('Écris l\'idée avant de l\'ajouter au carnet.');
-    const R = ['vision', 'structure', 'formes', 'unique', 'logique', 'variante', 'essai', 'iteration', 'detail', 'critique', 'piece', 'choix'];
+    const R = ['vision', 'structure', 'formes', 'unique', 'logique', 'variante', 'essai', 'iteration', 'detail', 'passe', 'critique', 'piece', 'choix'];
     const rub = R.includes(a.rubrique) ? a.rubrique : 'vision';
     const m = this.doc.meta; m.carnet = m.carnet || [];
     m.carnet.push({ n: m.carnet.length + 1, rubrique: rub, texte: t, barre: false, raison: '' });
@@ -1310,6 +1310,40 @@ const ACTIONS = {
     m.etape = Math.min(m.etape + 1, (AP.nbEtapes ? AP.nbEtapes(this.doc) : 99));
     this._emet('methode');
     return res;
+  },
+  /* Passe à la loupe (0-AE, 0-AF) : chaque zone de 8×8 ou 16×16 se retravaille puis se marque. */
+  'zones.taille'(a) {
+    const t = a.taille === 8 ? 8 : 16, m = this.doc.meta;
+    m.zones = Object.assign({ faites: {} }, m.zones || {}, { taille: t }); this._emet('methode');
+  },
+  'zones.marque'(a) {
+    const m = this.doc.meta; m.zones = m.zones || { taille: 16, faites: {} };
+    const t = m.zones.taille, x = a.x | 0, y = a.y | 0;
+    if (x < 0 || y < 0 || x * t >= this.doc.w || y * t >= this.doc.h) this.refuse('Zone hors du dessin.');
+    const k = t + ':' + x + ',' + y;
+    if (a.faite === false) delete m.zones.faites[k]; else m.zones.faites[k] = true;
+    this._emet('methode');
+  },
+  /* Ramener le calque à la palette : chaque pixel prend la couleur de palette la plus proche
+   * (après des passes en opacité, pour garder des tons choisis). */
+  'calque.indexe'() {
+    const pal = this.doc.palette.map(parseHex);
+    if (!pal.length) this.refuse('La palette est vide.');
+    const lab = c => { const r = c & 255, g = (c >>> 8) & 255, b = (c >>> 16) & 255; return [0.299 * r + 0.587 * g + 0.114 * b, r - g, (r + g) / 2 - b]; };
+    const P = pal.map(lab), cache = new Map();
+    this._pixels(D => {
+      for (let i = 0; i < D.length; i++) {
+        const c = D[i]; if (!(c >>> 24)) continue;
+        let v = cache.get(c);
+        if (v === undefined) {
+          const L = lab(c); let best = 0, bd = Infinity;
+          P.forEach((q, j) => { const d = 3 * (q[0] - L[0]) ** 2 + (q[1] - L[1]) ** 2 + (q[2] - L[2]) ** 2; if (d < bd) { bd = d; best = j; } });
+          v = ((pal[best] & 0xffffff) | (c & 0xff000000)) >>> 0; cache.set(c, v);
+        }
+        D[i] = v;
+      }
+    });
+    this._emet('doc');
   },
   'methode.migre'() {
     // Passe un document à la méthode actuelle sans perdre où il en est : on garde l'étape

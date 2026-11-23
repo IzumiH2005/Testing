@@ -311,6 +311,7 @@ function rendCalques(c) {
     btn('Descendre', { cls: '.fantome', cible: 'calque-descend', inactif: ia <= 0, click: () => act('calque.deplace', { sens: -1 }) }),
     btn('Dupliquer', { cls: '.fantome', cible: 'calque-duplique', click: () => act('calque.duplique') }),
     btn('Fusionner ↓', { cls: '.fantome', cible: 'calque-fusionne', inactif: ia <= 0, title: 'Fusionne avec le calque du dessous', click: () => act('calque.fusionne') }),
+    btn('Ramener à la palette', { cls: '.fantome', cible: 'calque-indexe', title: 'Chaque pixel du calque prend la couleur de palette la plus proche (après des passes en opacité, 0-AF)', click: () => act('calque.indexe') }),
     btn('Supprimer', { cls: '.fantome', cible: 'calque-supprime', inactif: d.calques.length <= 1, click: async () => {
       if (await U.confirme('Supprimer le calque', 'Le calque « ' + ca.nom + ' » et ses pixels sur toutes les images seront supprimés. Ctrl+Z annule.', 'Supprimer')) act('calque.supprime');
     } })));
@@ -353,8 +354,32 @@ LEGERS.calques = c => {
 /* ======================================================================
  * MÉTHODE
  * ==================================================================== */
-const DETECTEURS = new Set(['L', 'jaggies', 'orphelins', 'bandes', 'coussin', 'bruit', 'trame', 'superpixels', 'budget', 'noirPur', 'rampesGris', 'raccords', 'alpha', 'lumiere', 'volume']);
+const DETECTEURS = new Set(['L', 'jaggies', 'orphelins', 'bandes', 'coussin', 'bruit', 'trame', 'superpixels', 'budget', 'noirPur', 'rampesGris', 'raccords', 'alpha', 'lumiere', 'volume', 'tampons']);
 let reglesOuvertes = false;
+
+/* Passe à la loupe : grille des zones à retravailler, une par une. */
+function rendLoupe(c, tuileSeule) {
+  const d = at().doc, Z = d.meta.zones || { taille: 16, faites: {} }, t = Z.taille || 16;
+  const L = AP.zonesAFaire(d, tuileSeule), faites = L.filter(k => Z.faites[k]).length;
+  c.appendChild(titre('Passe à la loupe', h('span.mono.aide-txt', faites + ' / ' + L.length + ' zones')));
+  c.appendChild(h('p.aide-txt', 'Va dans une zone (la toile s\'y cadre), retravaille chaque élément comme un dessin entier (0-AE), puis marque-la. Ne marque une zone que si elle a vraiment été reprise.'));
+  c.appendChild(h('div.mods', btn('Zones de 8 px', { cible: 'zones-taille-8', presse: t === 8, click: () => act('zones.taille', { taille: 8 }) }),
+    btn('Zones de 16 px', { cible: 'zones-taille-16', presse: t === 16, click: () => act('zones.taille', { taille: 16 }) })));
+  const grille = h('div.zones-grille', { 'data-cible': 'zones' });
+  const cour = U.vue.zone;
+  for (const k of L) {
+    const [zx, zy] = k.split(':')[1].split(',').map(Number), fait = !!Z.faites[k], ici = cour && cour.x === zx && cour.y === zy && cour.t === t;
+    grille.appendChild(h('button.zone' + (fait ? '.faite' : '') + (ici ? '.ici' : ''), { 'data-cible': 'zone-' + zx + '-' + zy, title: 'Zone ' + zx + ',' + zy + ' (x ' + zx * t + ', y ' + zy * t + ')',
+      on: { click: () => { U.cadreZone && U.cadreZone(zx, zy, t); rendu(true); } } }, fait ? '✓' : zx + ',' + zy));
+  }
+  c.appendChild(grille);
+  if (cour && cour.t === t) {
+    const k = t + ':' + cour.x + ',' + cour.y, fait = !!Z.faites[k];
+    c.appendChild(h('div.ligne', { style: { marginTop: '6px' } },
+      btn(fait ? 'Zone ' + cour.x + ',' + cour.y + ' : rouvrir' : 'Zone ' + cour.x + ',' + cour.y + ' retravaillée', { cls: fait ? '.fantome' : '.prim', cible: 'zone-faite', click: () => act('zones.marque', { x: cour.x, y: cour.y, faite: !fait }) }),
+      btn('Vue entière', { cls: '.fantome', cible: 'zone-sortie', click: () => { U.vue.zone = null; U.ajuste(); rendu(true); } })));
+  }
+}
 
 /* Carnet de conception (0-N) : chaque idée reste, une idée abandonnée est barrée avec sa raison. */
 let carnetRubrique = 'vision';
@@ -412,11 +437,11 @@ function rendMethode(c) {
     }
     if (st.index === 0 || e.portes.includes('fiche')) rendFiche(c);
     if (e.portes.includes('regles')) {
-      c.appendChild(titre('Les 88 règles', m.reglesLues ? h('span.aide-txt', { style: { color: 'var(--ok)' } }, 'lues ✓') : null));
+      c.appendChild(titre('Les 90 règles', m.reglesLues ? h('span.aide-txt', { style: { color: 'var(--ok)' } }, 'lues ✓') : null));
       c.appendChild(h('p.aide-txt', 'Elles s\'appliquent à chaque dessin. Lis-les toutes avant de confirmer.'));
       c.appendChild(h('div.ligne',
         btn(reglesOuvertes ? 'Replier les règles' : 'Lire les règles', { cible: 'regles-ouvre', click: () => { reglesOuvertes = !reglesOuvertes; rendu(true); } }),
-        btn(m.reglesLues ? 'Règles lues ✓' : 'J\'ai lu les 88 règles', { cls: m.reglesLues ? '.fantome' : '.prim', cible: 'regles-lues', inactif: m.reglesLues || !reglesOuvertes,
+        btn(m.reglesLues ? 'Règles lues ✓' : 'J\'ai lu les 90 règles', { cls: m.reglesLues ? '.fantome' : '.prim', cible: 'regles-lues', inactif: m.reglesLues || !reglesOuvertes,
           title: reglesOuvertes ? '' : 'Ouvre d\'abord les règles', click: () => act('regles.lues') })));
       if (reglesOuvertes) c.appendChild(listeRegles());
     }
@@ -451,6 +476,10 @@ function rendMethode(c) {
       }
     }
     c.appendChild(portes);
+
+    /* Passe à la loupe (0-AE, 0-AF) : chaque zone se retravaille, puis se marque. */
+    const pz = st.portes.find(p => p.id === 'zonesTuile' || p.id === 'zonesToutes');
+    if (pz) rendLoupe(c, pz.id === 'zonesTuile');
 
     /* Cases à cocher */
     if (st.coches.length) {

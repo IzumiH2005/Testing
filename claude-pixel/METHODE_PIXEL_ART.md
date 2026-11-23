@@ -1,4 +1,4 @@
-# Méthode de pixel art — objets, personnages, créatures et décors (v25)
+# Méthode de pixel art — objets, personnages, créatures et décors (v26)
 
 On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin classique
 (construction par volumes, ligne d'action, anatomie) et les règles du pixel art
@@ -87,6 +87,7 @@ propres.
 | Partir d'une forme de base et l'itérer | **0-AD** · 0-AA-E |
 | Tileset de plateforme, dans l'ordre | **F2-F** · F2-C · F2-D |
 | Travailler chaque détail comme un dessin entier | **0-AE** · 0-O · F2-A |
+| Rendu par passes et par unités, facettes, rampes riches | **0-AF** · 0-AE · F2-F |
 | Grandes formes, langage des formes, point d'intérêt, contraste | **0-O** · 0-E · A2 |
 
 **Sources (étiquettes) :** [U] demandes de l'utilisateur (v24 : itérer au lieu d'essayer) · [Z] *Apprendre à tout dessiner avec Zephy* · [M] livre de dessin
@@ -107,7 +108,7 @@ bords, [D11]-[D15] vision, vignettes, conception et astuces de pro, [D16]-[D20]
 créativité, geste, couleur, métal et textures, [D21]-[D28] perspective, anatomie animale,
 mains, expressions, éclairages, effets, style, récit, [D29]-[D30] appeal et verre d'art ;
 [T17] séance `fiole-unique`, [D31]-[D32] sketching d'illustrateur, [D33]-[D34] line art
-fini, [T18] séance `fiole-bourgeon`, [D35] tilesets de plateforme ; liens en fin de document). Toutes les règles sont reformulées.
+fini, [T18] séance `fiole-bourgeon`, [D35] tilesets de plateforme, [P5] planches de détail fournies en v26 (tuile 64×64 en six passes, buissons, falaise et eau, passes en opacité, portes, bûches, rochers ; 0-AF) ; liens en fin de document). Toutes les règles sont reformulées.
 
 ---
 
@@ -348,6 +349,14 @@ Chaque règle est un ordre. Le détail et le « pourquoi » sont dans la section
     lumière, 2 ou 3 tons et un contour décidé ; on passe tout à la loupe, zone par zone, sans
     limite de temps. Une tuile ou un objet ne se fait qu'une fois : il doit être du niveau d'un
     pro, pas banal (0-AE).
+89. **Rendre par passes et par unités** : bandes de valeur, structure (chaque unité dessinée
+    une par une, toutes différentes), matière secondaire et usure, ombres par unité, volume
+    par unité en facettes, éclats sur les arêtes ; chaque zone de 8 ou 16 px est ensuite
+    reprise à la loupe et marquée (0-AF).
+90. **Des rampes riches et des facettes, jamais des tirets** : 6 à 8 tons par matière avec
+    décalage de teinte et un quasi-noir coloré pour le fond des creux ; une roche est faite
+    de plans francs ; une texture est faite de taches irrégulières de 2 à 6 px, pas de points
+    isolés ni de barres de 1 px (0-AF).
 
 ---
 
@@ -1336,6 +1345,102 @@ un pétale, une boucle de ceinture, un œil) **se dessine comme s'il était le p
 - Les éléments qui passent par-dessus un bord de tuile se vérifient **raccord compris**.
 - La texture de fond (la terre entre les pierres) est un élément elle aussi : des mottes, des
   creux, des grains, avec leur lumière, pas un aplat.
+
+## 0-AF. Le niveau de détail des planches pro : rendre par passes et par unités (v26) [P5]
+
+Les planches fournies en v26 sont si travaillées qu'on oublie parfois que c'est du pixel art.
+Ce qui les sépare d'un résultat banal n'est pas un secret : c'est **la quantité de décisions**.
+Chaque unité est dessinée, éclairée et usée une par une, et chaque pixel a une raison d'être.
+Ce qui suit est ce qu'on y lit, pixel par pixel.
+
+### A. La tuile 64×64 en six passes (planche « Tile 64x64 »)
+1. **Bandes de valeur** : trois aplats seulement, le corps de la matière, une bande de
+   transition un peu plus sombre, le pied très sombre. La lecture d'ensemble est posée avant
+   tout détail.
+2. **Structure** : les blocs sont dessinés **un par un** au trait sombre, de tailles toutes
+   différentes, avec des joints décalés et parfois cassés. Aucun bloc n'est la copie d'un autre.
+3. **Matière secondaire et usure** : une rangée de pierres sombres au pied, des fissures en
+   diagonale sur quelques blocs, une transition qui coule entre les deux matières.
+4. **Ombres par unité** : chaque bloc s'assombrit en bas, les joints se creusent, les pierres
+   du pied gagnent leur contour.
+5. **Volume par unité** : chaque bloc a son dessus éclairé, ses paliers vers le bas, et des
+   taches d'usure claires et sombres, irrégulières, de 2 à 6 px.
+6. **Éclats** : un liseré clair de 1 px court sur l'arête haute de chaque bloc ; le contraste
+   final pousse les joints vers le plus sombre et les arêtes vers le plus clair.
+
+### B. Les passes en opacité (planche « flat colors / bump / highlights »)
+- Couleurs à plat, puis un **calque de variation à 50 %** (taches de la couleur voisine).
+- Un calque de **relief en 3 couleurs** (plaques fissurées en haut, mottes en bas), lui aussi à
+  50 %, puis une **couleur dominante à 50 %** par-dessus tout pour unifier.
+- Des **éclats à 25 %** en dernier.
+- Dans Claude Pixel : chaque passe sur son calque, l'opacité du calque réglée, puis
+  « Fusionner ↓ » (la fusion respecte l'opacité) ; « Ramener à la palette » remet chaque pixel
+  sur le ton de palette le plus proche si les tons intermédiaires se multiplient.
+
+### C. Les roches (planche des neuf rochers)
+- **Des plans, pas des ovales** : chaque roche est découpée en facettes ; le plan du dessus est
+  le plus clair, les faces sont moyennes, le dessous est sombre ; la frontière entre deux
+  plans est franche.
+- **Un liseré clair sur les arêtes** qui regardent la lumière, et quelques pixels très clairs
+  sur l'arête la plus exposée.
+- **Fissures et éclats** : un trait sombre avec sa lèvre claire ; un coin cassé change la
+  silhouette.
+- **Texture dans chaque plan** : quelques taches de 2 à 4 px du ton voisin, jamais un dégradé
+  lisse ni un pixel seul.
+- **Contour coloré** : le plus sombre en bas et du côté de l'ombre, plus clair en haut.
+- **Mousse** : sur les plans du dessus seulement, avec son propre éclat.
+
+### D. La falaise et l'eau
+- **Des blocs de roche empilés** à des profondeurs différentes, chacun avec sa calotte claire ;
+  les creux entre les blocs sont presque noirs.
+- **Le bord d'herbe** : des brins pointus de 2 à 4 px, plus sombres à la base, qui retombent
+  sur la roche ; l'ombre portée de l'herbe sur le haut de la roche.
+- **Matière secondaire** : mousse olive sur le dessus des blocs, taches de terre orange dans
+  l'herbe, hautes herbes en premier plan.
+- **L'eau** : un liseré clair à la ligne d'eau et quelques reflets en tirets ondulés.
+
+### E. Le végétal (planche des buissons)
+- **Chaque feuille est dessinée** : une forme pointue, au bord dentelé, la moitié haute plus
+  claire, une nervure, la base plus sombre.
+- **Profondeur par couches** : les feuilles du fond plus sombres et moins contrastées, celles du
+  devant plus claires.
+- **Les ombres d'un feuillage vert virent au bordeaux** (le quasi-noir est un violet chaud) et
+  les lumières vers la menthe : le décalage de teinte donne la richesse.
+- **Le contact au sol** : une ombre plate et un halo d'herbe claire autour du pied.
+
+### F. Le bois et les objets fabriqués (bûches, portes)
+- **La texture suit la forme** : l'écorce est faite de longues taches dans le sens du fil, de
+  4 à 10 px sur 1 ou 2 de haut, en quatre ou cinq bruns.
+- **Bouts cassés** : silhouette déchiquetée, échardes, bois clair et chaud à la cassure.
+- **Ombre portée** séparée, plate, décalée vers le bas.
+- **Portes** : chaque pierre de l'arc a sa mousse en haut et son creux sombre ; le métal a des
+  reflets nets bleu-blanc ; le bois a son fil, ses clous et ses ferrures ; une lumière chaude de
+  torche pose un liseré orange sur le haut ; la vue de côté montre l'épaisseur.
+
+### G. Ce qui revient partout
+1. **Des unités, pas une texture** : chaque brique, pierre, feuille, planche est une petite
+   pièce dessinée et éclairée à part.
+2. **Des rampes riches** : 6 à 8 tons par matière, un quasi-noir coloré pour les creux et le
+   contour, un presque-blanc chaud réservé aux arêtes.
+3. **Le plus sombre et le plus clair sont rares** : le plus sombre seulement au fond des creux,
+   le plus clair seulement sur les arêtes exposées.
+4. **Des taches irrégulières** de 2 à 6 px : jamais de tirets, jamais de points isolés, jamais de
+   rangées alignées.
+5. **Une matière secondaire** (mousse, herbe, poussière, rouille) sur les faces qui regardent la
+   lumière.
+6. **La silhouette se casse** : feuilles dentelées, bois éclaté, brins qui dépassent, coins
+   ébréchés.
+7. **Le temps** : un tel résultat demande des heures. On ne compte pas les traits, on compte les
+   décisions.
+
+### H. Dans Claude Pixel
+- La tuile centrale se rend en **six passes**, chacune notée au carnet (rubrique *Passe de
+  rendu*).
+- La **passe à la loupe** : l'onglet Méthode montre la grille des zones (8 ou 16 px) ; chaque
+  zone se cadre sur la toile, se retravaille, puis se marque. La porte reste fermée tant qu'il
+  reste une zone.
+- Deux détecteurs : **éléments tamponnés** (une même tache, entourage compris, deux fois dans
+  une tuile) et **tirets dans la texture**.
 
 ---
 
@@ -4402,6 +4507,13 @@ Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixel
 ---
 
 # Historique des versions
+
+- **v26 :** **0-AF le niveau de détail des planches pro** [P5] : la tuile 64×64 en six passes,
+  les passes en opacité, les roches en facettes, la falaise, le végétal, le bois et les portes,
+  ce qui revient partout ; règles 89 et 90. Dans Claude Pixel : la tuile centrale en six passes
+  notées au carnet (rubrique *Passe de rendu*), palette du décor de 6 à 8 tons par matière,
+  passe à la loupe zone par zone (grille de zones, cadrage de la toile, porte), détecteurs
+  « éléments tamponnés » et « tirets », bouton « Ramener à la palette ».
 
 - **v25 :** **0-AE chaque détail comme un dessin entier**, à la demande de l'utilisateur [U] :
   un modèle ne se fait qu'une fois, donc chaque élément complexe (pierre, motte, brin, pétale,

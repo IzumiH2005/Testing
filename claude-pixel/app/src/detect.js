@@ -266,6 +266,65 @@ function raccords(px, w, h, tw, th, gabarit) {
   return { pts: part > ref * 1.8 + 0.1 ? out : [], part, ref };
 }
 
+/* Tirets (0-AF) : petites barres horizontales de 1 px d'un ton, posées seules dans une texture
+ * (« mottes » ou grains faits d'un trait). Une texture se fait de taches irrégulières de 2 à 6 px. */
+function tirets(px, w, h) {
+  const at = grille(px, w, h), out = [];
+  for (let y = 1; y < h - 1; y++) {
+    let x = 0;
+    while (x < w) {
+      const c = at(x, y); if (!op(c)) { x++; continue; }
+      let x1 = x; while (x1 + 1 < w && at(x1 + 1, y) === c) x1++;
+      const n = x1 - x + 1;
+      if (n >= 3 && n <= 7) {
+        let seul = true;
+        for (let k = x; k <= x1 && seul; k++) if (at(k, y - 1) === c || at(k, y + 1) === c) seul = false;
+        // un trait de contour touche le vide ou un trait du même ton en diagonale : on ne compte que les barres posées dans un fond opaque
+        const fond = op(at(x - 1, y)) && op(at(x1 + 1, y)) && [...Array(n).keys()].every(k => op(at(x + k, y - 1)) && op(at(x + k, y + 1)));
+        if (seul && fond && at(x - 1, y - 1) !== c && at(x1 + 1, y - 1) !== c && at(x - 1, y + 1) !== c && at(x1 + 1, y + 1) !== c)
+          for (let k = x; k <= x1; k++) out.push([k, y]);
+      }
+      x = x1 + 1;
+    }
+  }
+  return out.length >= 12 ? out : [];
+}
+/* Tampons (0-AE, 0-AF) : une tache d'un ton (6 à 30 px, au plus 10×10, pas un trait droit) qui
+ * revient deux fois à l'identique, entourage compris, dans une même tuile (ou une même image sans
+ * tuiles) : un élément copié au lieu d'être dessiné. Les longues bandes d'un dégradé n'entrent pas. */
+function tampons(px, w, h, tw, th) {
+  const at = grille(px, w, h), out = [];
+  tw = tw || w; th = th || h;
+  for (let ty = 0; ty < h; ty += th) for (let tx = 0; tx < w; tx += tw) {
+    const X1 = Math.min(w, tx + tw), Y1 = Math.min(h, ty + th), vu = new Uint8Array(w * h), sig = new Map();
+    for (let y = ty; y < Y1; y++) for (let x = tx; x < X1; x++) {
+      if (vu[y * w + x]) continue;
+      const c = at(x, y); if (!op(c)) continue;
+      const pile = [[x, y]], pts = []; vu[y * w + x] = 1;
+      while (pile.length && pts.length <= 31) {
+        const [a, b] = pile.pop(); pts.push([a, b]);
+        for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+          const nx = a + dx, ny = b + dy;
+          if (nx < tx || ny < ty || nx >= X1 || ny >= Y1 || vu[ny * w + nx] || at(nx, ny) !== c) continue;
+          vu[ny * w + nx] = 1; pile.push([nx, ny]);
+        }
+      }
+      if (pts.length < 6 || pts.length > 30) continue;
+      const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]), x0 = Math.min(...xs), y0 = Math.min(...ys), bw = Math.max(...xs) - x0 + 1, bh = Math.max(...ys) - y0 + 1;
+      if (bw > 10 || bh > 10 || bw === 1 || bh === 1) continue;
+      // forme + entourage (anneau de 1 px autour de la boîte)
+      let cle = c + '|' + bw + 'x' + bh + '|' + pts.map(p => (p[0] - x0) + ',' + (p[1] - y0)).sort().join(';') + '|';
+      for (let yy = y0 - 1; yy <= y0 + bh; yy++) for (let xx = x0 - 1; xx <= x0 + bw; xx++) {
+        if (yy >= y0 && yy < y0 + bh && xx >= x0 && xx < x0 + bw) continue;
+        cle += (xx < tx || yy < ty || xx >= X1 || yy >= Y1 ? 'b' : at(xx, yy).toString(36)) + ',';
+      }
+      const p = sig.get(cle);
+      if (p) out.push(...pts, ...p); else sig.set(cle, pts);
+    }
+  }
+  return out;
+}
+
 /* Tous les détecteurs. doc + image ; renvoie la liste des défauts trouvés. */
 function detecte(doc, f = 0) {
   const { w, h } = doc, px = compose(doc, f, 'export'), res = [];
@@ -330,6 +389,12 @@ function detecte(doc, f = 0) {
   const A = alphaPartiel(px);
   if (A.length) ajoute('alpha', 'attention', 'Pixels semi-transparents', 'A6-F · règle 46', A.map(i => [i % w, (i / w) | 0]),
     A.length + ' pixel(s) à demi transparents : c\'est de l\'AA vers le vide, qui fait un halo sur tout autre fond. Rends-les opaques ou efface-les ; l\'AA se fait à l\'intérieur du contour.');
+  const Ti = tirets(px, w, h);
+  if (Ti.length) ajoute('tirets', 'conseil', 'Tirets dans la texture', '0-AF', Ti,
+    'Des barres horizontales de 1 px posées seules dans un fond : une texture se fait de taches irrégulières de 2 à 6 px, avec un dessus clair et un dessous sombre.');
+  const Tp = tampons(px, w, h, doc.tuile && doc.tuile.on ? doc.tuile.tw : 0, doc.tuile && doc.tuile.on ? doc.tuile.th : 0);
+  if (Tp.length) ajoute('tampons', 'attention', 'Éléments tamponnés', '0-AE', Tp,
+    'Le même motif revient à l\'identique dans une tuile : chaque élément se dessine un par un, avec sa taille et sa forme.');
   if (doc.tuile && doc.tuile.on) {
     const tw = doc.tuile.tw, th = doc.tuile.th, R = raccords(px, w, h, tw, th, w >= 5 * tw && h >= 3 * th);
     if (R.pts.length) ajoute('raccords', 'erreur', 'Couture de tuile', 'F2-A', R.pts,
@@ -346,6 +411,6 @@ function mesures(doc, f = 0) {
   return { couleurs: cols.size, opaques: n, palette: [...cols.keys()].map(c => hex(c)) };
 }
 
-Object.assign(AP, { detecte, mesures, DETECT: { coinsL, alphaPartiel, jaggies, banding, coussin, orphelins, bruit, damier, superpixels, raccords, composantes, distanceBord } });
+Object.assign(AP, { detecte, mesures, DETECT: { tirets, tampons, coinsL, alphaPartiel, jaggies, banding, coussin, orphelins, bruit, damier, superpixels, raccords, composantes, distanceBord } });
 if (typeof module !== 'undefined') module.exports = AP;
 })(typeof window !== 'undefined' ? window : globalThis);
