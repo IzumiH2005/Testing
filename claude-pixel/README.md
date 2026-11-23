@@ -48,6 +48,8 @@ Projet personnel, non officiel, sans lien avec Anthropic.
 - **L'ordre de travail d'un pro** (v27) : grille isométrique affichable sur la toile ; esquisse
   codée par pièce, trait depuis le sol, aplats par orientation de plan, passes de détail avec
   les couleurs essayées en place, texture en dernier (gestes tirés d'une vidéo de pixel artist).
+- **Références documentées** (v28) : l'étape Vision demande au moins trois références au carnet
+  (comment le sujet est fait en vrai, comment des pros le dessinent), avec la source.
 - **Sketching d'illustrateur** (v22) : rough, construction, esquisse nettoyée, trait final et
   polish, chacun sur son calque d'esquisse, celui du dessous baissé ; bouton « Retourner la
   toile » ; étape « Validation du dessin » avant toute couleur (note de 22/30 au moins).

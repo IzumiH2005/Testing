@@ -1,4 +1,4 @@
-# Méthode de pixel art — objets, personnages, créatures et décors (v27)
+# Méthode de pixel art — objets, personnages, créatures et décors (v28)
 
 On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin classique
 (construction par volumes, ligne d'action, anatomie) et les règles du pixel art
@@ -89,6 +89,7 @@ propres.
 | Travailler chaque détail comme un dessin entier | **0-AE** · 0-O · F2-A |
 | Rendu par passes et par unités, facettes, rampes riches | **0-AF** · 0-AE · F2-F |
 | L'ordre de travail d'un pro, vu en vidéo | **0-AG** · 0-AB · A9 |
+| Se documenter avant de dessiner | **0-AH** · 0-N · 0-P |
 | Grandes formes, langage des formes, point d'intérêt, contraste | **0-O** · 0-E · A2 |
 
 **Sources (étiquettes) :** [U] demandes de l'utilisateur (v24 : itérer au lieu d'essayer) · [Z] *Apprendre à tout dessiner avec Zephy* · [M] livre de dessin
@@ -363,6 +364,10 @@ Chaque règle est un ordre. Le détail et le « pourquoi » sont dans la section
     l'orientation des plans, des dizaines de petites passes de détail avec les couleurs
     essayées en place, la texture des grandes surfaces en dernier, le contour coloré à la fin
     (0-AG).
+92. **Documente-toi avant de dessiner** : cherche comment le sujet est fait dans la réalité
+    (structure, matière, usure, ce qui pousse où, comment ça casse) et comment des pros le
+    dessinent ; écris au moins trois références au carnet, chacune avec sa source et ce que tu
+    en appliques, puis applique-le (0-AH).
 
 ---
 
@@ -1498,6 +1503,36 @@ accélérée » et qu'il « n'a pas compté le temps passé ». Ce qu'on y voit,
   ci-dessus sont écrits dans « Ce que je fais ».
 - **Le temps** : ce que la vidéo montre en une minute a pris des heures ; un résultat
   comparable demande la même patience, passe après passe.
+
+## 0-AH. Se documenter avant de dessiner (v28) [U][D36]
+
+On dessine mieux ce qu'on comprend. Avant le premier trait, on cherche **comment le sujet est
+fait** et **comment d'autres l'ont dessiné**, on l'écrit, puis on s'en sert.
+
+### A. Quoi chercher
+- **La réalité** : comment c'est construit (ce qui porte, ce qui est porté), la matière, comment
+  ça s'use, se casse, se salit, ce qui pousse dessus et où, comment la lumière y tombe.
+- **Les pros** : des planches, des tutoriels, des jeux qui ont résolu le même sujet ; ce qu'ils
+  simplifient, ce qu'ils exagèrent.
+- **Des mots autant que des images** : une description précise (« une pierre sur deux, deux sur
+  une ») donne une règle qu'on applique ; une image donne une forme qu'on étudie sans la
+  copier.
+
+### B. Comment l'écrire
+- Au carnet, rubrique **Référence** : la source, ce qu'on y apprend, **ce qu'on en applique**
+  au dessin. Trois au moins.
+- Une image de référence va dans un **calque de référence**, jamais exportée, jamais décalquée.
+
+### C. Exemple : la falaise moussue (séance `falaise-moussue`)
+- **Murs en pierre sèche** [D36] : une pierre sur deux, deux sur une ; un joint vertical qui
+  traverse plusieurs rangées est un point faible ; les plus grosses pierres en bas ; de petites
+  pierres de calage dans les vides. Appliqué : aucun joint vertical continu, une pierre de
+  calage dans le joint le plus large.
+- **Mousses des murs** [D36] : sur les dessus et en lignes le long des joints, là où l'eau
+  reste. Appliqué : mousse sur les dessus et dans deux joints, jamais sous une pierre.
+- **Géologie des falaises** [D36] : des blocs entre lits horizontaux et fissures presque
+  verticales ; l'eau use d'abord les coins. Appliqué : blocs plus larges que hauts, coins
+  arrondis, fissures presque verticales.
 
 ---
 
@@ -4411,6 +4446,7 @@ Cours et livres légitimes, cités pour leurs idées ; tout est reformulé.
 | [D33] | [Clip Studio, améliorer son line art](https://www.clipstudio.net/how-to-draw/archives/163108) · [Cursa, poids, effilés et angles](https://cursa.app/en/page/digital-drawing-on-a-tablet-clean-line-art-techniques-line-weight-tapers-and-corners) · [Proko, Jeff Watts et la qualité du trait](https://www.proko.com/lesson/jeff-watts-on-line-quality) | système de poids, traits décidés, recouvrements, nettoyage (0-AC-B) |
 | [D34] | [Core77, poids du trait en design produit](https://core77.com/posts/99154/Sketching-Tutorial-How-To-Use-Line-Weight-In-Your-Sketches-2-Rules-n-2-Techniques) · [The Design Sketchbook, poids du trait](https://www.thedesignsketchbook.com/?p=37086) · [Lospec, contours en pixel art](https://lospec.com/articles/pixel-art-outlines) | trois poids (fin, moyen, fort), traits intérieurs d'un ton plus clair (0-AC-B) |
 | [D35] | [Slynyrd #28, tuiles de profil](https://slynyrd.com/blog/2020/5/21/pixelblog-28-side-view-tiles) · [NESdev, dessiner un terrain (d'après MortMort)](https://www.nesdev.org/wiki/Drawing_terrain) · [itch.io, herbe et terre de profil](https://itch.io/t/1865993/pixel-tutorial-dirtgrass-side-view) | tileset de plateforme : blocage, tuile centrale en strates, croûte de bas en haut, fissures, coins, pentes, clusters gras, miroir sous lumière zénithale (F2-F) |
+| [D36] | [Masonry Magazine, principes du mur en pierre sèche](https://www.masonrymagazine.com/blog/2018/11/01/dry-stone-walls-principles-of-structurally-sound-construction/) · [Fine Homebuilding, des murs qui tiennent](https://www.finehomebuilding.com/project-guides/foundations-and-masonry-work/stone-walls-stay-built) · [British Bryological Society, mousses des murs](https://britishbryologicalsociety.org.uk/learning/some-common-bryophytes/common-mosses-on-walls) · [OpenLearn, lire les roches (joints et strates)](https://www.open.edu/openlearn/science-maths-technology/geology/practising-science-reading-the-rocks-and-ecology/content-section-1.7.2) | références documentées d'une falaise de pierres moussues (0-AH) |
 | [D10] | [Les bords en peinture](https://drawpaintacademy.com/edges/) · [Muddy Colors, bords](https://www.muddycolors.com/?p=8983) | bords durs, doux, perdus (0-H) |
 
 Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixeljoint.com/forum/forum_posts.asp?TID=20953)
@@ -4564,6 +4600,12 @@ Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixel
 ---
 
 # Historique des versions
+
+- **v28 :** **0-AH se documenter avant de dessiner**, à la demande de l'utilisateur [U] :
+  chercher comment le sujet est fait en vrai et comment des pros le dessinent, l'écrire avec sa
+  source et ce qu'on en applique ; exemple de la falaise moussue [D36] ; règle 92. Dans Claude
+  Pixel : l'étape Vision devient « Vision et références », rubrique *Référence* au carnet,
+  trois références au moins.
 
 - **v27 :** **0-AG ce qu'on apprend en regardant un pro travailler** [V1] : grille de
   projection en fond, boîte de base, rough sale, ancienne version en transparence, esquisse

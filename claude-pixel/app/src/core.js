@@ -247,7 +247,7 @@ function nouveauDoc(o = {}) {
     rampes: [],
     calques: [], images: [{ ms: 100, role: '', change: '', principe: '', validee: false }],
     cels: {}, celData: {}, etiquettes: [], next: 1,
-    meta: { fiche: {}, etape: 0, coches: {}, justifs: {}, planche: {}, reglesLues: false, valideEtapes: [], methode: 27, carnet: [], zones: { taille: 16, faites: {} } },
+    meta: { fiche: {}, etape: 0, coches: {}, justifs: {}, planche: {}, reglesLues: false, valideEtapes: [], methode: 28, carnet: [], zones: { taille: 16, faites: {} } },
     lumiere: { az: 135, el: 40, forme: 'gonfle', posee: false },
     tuile: { on: false, tw: 16, th: 16 },
     carte: { cols: 20, rows: 12, terrain: [], tuiles: [] }
@@ -1284,7 +1284,7 @@ const ACTIONS = {
   'carnet.ajoute'(a) {
     const t = String(a.texte || '').trim().slice(0, 600);
     if (!t) this.refuse('Écris l\'idée avant de l\'ajouter au carnet.');
-    const R = ['vision', 'structure', 'formes', 'unique', 'logique', 'variante', 'essai', 'iteration', 'detail', 'passe', 'critique', 'piece', 'choix'];
+    const R = ['vision', 'structure', 'formes', 'unique', 'logique', 'variante', 'essai', 'iteration', 'detail', 'passe', 'reference', 'critique', 'piece', 'choix'];
     const rub = R.includes(a.rubrique) ? a.rubrique : 'vision';
     const m = this.doc.meta; m.carnet = m.carnet || [];
     m.carnet.push({ n: m.carnet.length + 1, rubrique: rub, texte: t, barre: false, raison: '' });

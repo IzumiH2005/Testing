@@ -156,7 +156,7 @@ const E = (id, titre, ref, faire, o = {}) => Object.assign({ id, titre, ref, fai
 const C = (cle, txt) => ({ cle, txt });
 const ETAPE_FICHE = (ref) => E('fiche', 'Fiche d\'intention et règles', ref, [
   'Remplis la fiche : chaque champ est une décision prise avant le premier pixel.',
-  'Lis les 91 règles impératives (onglet Aide) et coche « lues ».',
+  'Lis les 92 règles impératives (onglet Aide) et coche « lues ».',
   'Règle la toile à la taille finale : on ne dessine jamais en grand pour réduire (A4b).',
   'Choisis ou construis la palette : une rampe par matière (A6-A).',
   'Nomme 2 ou 3 idées fortes, pas plus : ce qu\'on doit reconnaître de loin (A10-F, règle 44).'
@@ -441,7 +441,7 @@ for (const t of ['personnage', 'chibi', 'creature']) {
 /* Vision et essais (0-N) : avant tout trait, écrire ce qu'on voit et l'éprouver. */
 const RUBRIQUES = {
   vision: 'Ce que je vois', structure: 'Structure / physionomie', formes: 'Formes de base',
-  unique: 'Ce qui la rend unique', logique: 'Pourquoi c\'est crédible', variante: 'Variante (SCAMPER, tableau)', essai: 'Essai', iteration: 'Itération', detail: 'Détail travaillé', passe: 'Passe de rendu', critique: 'Critique (note sur 30)', piece: 'Pièce (bouchon, jonction, pied)', choix: 'Choix retenu'
+  unique: 'Ce qui la rend unique', logique: 'Pourquoi c\'est crédible', variante: 'Variante (SCAMPER, tableau)', essai: 'Essai', iteration: 'Itération', detail: 'Détail travaillé', passe: 'Passe de rendu', reference: 'Référence (avec sa source)', critique: 'Critique (note sur 30)', piece: 'Pièce (bouchon, jonction, pied)', choix: 'Choix retenu'
 };
 const AIDE_STRUCTURE = {
   objet: 'De quoi il est fait, comment ses pièces tiennent ensemble, comment on le tient ou l\'utilise (la forme suit la fonction).',
@@ -698,11 +698,20 @@ const AJOUTS_V27 = {
 };
 const ETAPES_V27 = {};
 for (const t of Object.keys(ETAPES_V26)) ETAPES_V27[t] = ETAPES_V26[t].map(e => AJOUTS_V27[e.id] ? Object.assign({}, e, { faire: e.faire.concat(AJOUTS_V27[e.id]) }) : e);
-const METHODE_ACTUELLE = 27;
-const ETAPES = ETAPES_V27;
+/* ---------- Méthode v28 : des références documentées avant de dessiner (0-AH) ----------
+ * Chercher comment le sujet est fait dans la réalité (structure, matière, usure, où pousse quoi)
+ * et comment des pros le dessinent ; l'écrire au carnet avec la source, puis s'en servir. */
+const ETAPES_V28 = {};
+for (const t of Object.keys(ETAPES_V27)) ETAPES_V28[t] = ETAPES_V27[t].map(e => e.id !== 'vision' ? e : Object.assign({}, e, {
+  titre: 'Vision et références : écrire ce que je vois, chercher ce qui existe',
+  faire: e.faire.concat(['Références (0-AH) : cherche comment le sujet est fait dans la réalité (structure, matière, usure, ce qui pousse où, comment ça casse) et comment des pros le dessinent. Au moins 3 lignes « Référence » au carnet, chacune avec sa source et ce que tu en appliques ; une image de référence peut aller dans un calque de référence (jamais copiée).']),
+  portes: e.portes.concat(['carnetReferences'])
+}));
+const METHODE_ACTUELLE = 28;
+const ETAPES = ETAPES_V28;
 const etapesDe = doc => {
   const v = (doc.meta && doc.meta.methode) || 0;
-  return (v >= 27 ? ETAPES_V27 : v >= 26 ? ETAPES_V26 : v >= 25 ? ETAPES_V25 : v >= 24 ? ETAPES_V24 : v >= 22 ? ETAPES_V22 : v >= 21 ? ETAPES_V21 : v >= 17 ? ETAPES_V17 : ETAPES_V16)[typeDe(doc)];
+  return (v >= 28 ? ETAPES_V28 : v >= 27 ? ETAPES_V27 : v >= 26 ? ETAPES_V26 : v >= 25 ? ETAPES_V25 : v >= 24 ? ETAPES_V24 : v >= 22 ? ETAPES_V22 : v >= 21 ? ETAPES_V21 : v >= 17 ? ETAPES_V17 : ETAPES_V16)[typeDe(doc)];
 };
 /* Calques de construction qui contiennent des pixels, dans l'ordre de la pile. */
 function calquesConstr(doc) {
@@ -762,7 +771,7 @@ function porte(id, at, cache) {
   }
   switch (id) {
     case 'fiche': { const r = ficheIncomplete(doc); return r ? 'Fiche incomplète : ' + r.join(', ') : null; }
-    case 'regles': return m.reglesLues ? null : 'Lis les 91 règles impératives et coche « lues ».';
+    case 'regles': return m.reglesLues ? null : 'Lis les 92 règles impératives et coche « lues ».';
     case 'nonVide': return AP.mesures(doc, f).opaques ? null : 'L\'image exportée est vide.';
     case 'construction': return aDesPixels(doc, c => c.type === 'construction') ? null : 'Dessine la construction dans au moins un calque de type « construction ».';
     case 'silhouette1': { const n = AP.mesures(doc, f).couleurs; return n <= 2 ? null : 'La silhouette se fait en une couleur sombre (2 au plus) : ' + n + ' couleurs.'; }
@@ -804,6 +813,10 @@ function porte(id, at, cache) {
     case 'carnetDetails6': case 'carnetDetails8': case 'carnetDetails12': case 'carnetDetails16': {
       const n = +id.slice('carnetDetails'.length), k = (m.carnet || []).filter(e => e.rubrique === 'detail' && !e.barre).length;
       return k >= n ? null : 'Carnet : ' + (n - k) + ' « Détail » de plus : chaque élément retravaillé à la loupe laisse une ligne (0-AE).';
+    }
+    case 'carnetReferences': {
+      const k = (m.carnet || []).filter(e => e.rubrique === 'reference' && !e.barre).length;
+      return k >= 3 ? null : 'Carnet : ' + (3 - k) + ' « Référence » de plus (comment c\'est fait en vrai, comment des pros le dessinent ; source et ce que tu en appliques, 0-AH).';
     }
     case 'carnetPasses': {
       const k = (m.carnet || []).filter(e => e.rubrique === 'passe' && !e.barre).length;
@@ -884,7 +897,7 @@ const NOMS_PORTES = {
   analyse: 'Analyse écrite', timing: 'Feuille de timing', imagesValidees: 'Toutes les images validées', Ltoutes: 'Aucun L sur les images',
   planche: 'Planche remplie', defauts: 'Aucun défaut restant',
   carnetVision: 'Carnet : vision écrite et corrigée', carnetEssais: 'Carnet : essais et choix',
-  carnetEssais21: 'Carnet : 6 silhouettes notées et un choix', carnetPieces: 'Carnet : 9 variantes de pièces', carnetIterations: 'Carnet : 3 itérations notées et un choix', carnetDetails8: 'Carnet : 8 détails travaillés', carnetPasses: 'Carnet : les six passes de rendu', zonesTuile: 'Passe à la loupe de la tuile centrale', zonesToutes: 'Passe à la loupe de tout le dessin', tampons: 'Aucun élément tamponné', carnetDetails16: 'Carnet : 16 détails travaillés', carnetDetails6: 'Carnet : 6 détails travaillés', carnetDetails12: 'Carnet : 12 détails travaillés',
+  carnetEssais21: 'Carnet : 6 silhouettes notées et un choix', carnetPieces: 'Carnet : 9 variantes de pièces', carnetIterations: 'Carnet : 3 itérations notées et un choix', carnetDetails8: 'Carnet : 8 détails travaillés', carnetPasses: 'Carnet : les six passes de rendu', carnetReferences: 'Carnet : 3 références documentées', zonesTuile: 'Passe à la loupe de la tuile centrale', zonesToutes: 'Passe à la loupe de tout le dessin', tampons: 'Aucun élément tamponné', carnetDetails16: 'Carnet : 16 détails travaillés', carnetDetails6: 'Carnet : 6 détails travaillés', carnetDetails12: 'Carnet : 12 détails travaillés',
   calquesConstr2: '2 calques d\'esquisse', calquesConstr3: '3 calques d\'esquisse', calquesConstr4: '4 calques d\'esquisse',
   dessousBaisse: 'Passes précédentes baissées', critiqueDessin: 'Dessin noté 22/30 au moins', taille64: 'Dessin à 64 px de haut au moins',
   lumierePosee: 'Lumière posée', volume: 'Le volume suit la lumière', lumiere: 'Ombrage du bon côté',
@@ -907,7 +920,7 @@ function verifieEtape(at) {
   return { ok: !manque.length, manque };
 }
 
-/* ---------- Les 91 règles, lues dans le texte de la méthode ---------- */
+/* ---------- Les 92 règles, lues dans le texte de la méthode ---------- */
 function extraitRegles(texte) {
   const lignes = texte.split('\n'), out = [];
   let i = lignes.findIndex(l => /^# Règles impératives/.test(l)), groupe = '';
@@ -924,7 +937,7 @@ function extraitRegles(texte) {
 }
 
 Object.assign(AP, {
-  RUBRIQUES, FICHES, QUESTIONS, QUESTIONS_TYPE, TESTS_PRO, TABLE_A3, ETAPES, ETAPES_V16, ETAPES_V17, ETAPES_V21, ETAPES_V22, ETAPES_V24, ETAPES_V25, ETAPES_V26, ETAPES_V27, METHODE_ACTUELLE, etapesDe, zonesAFaire, TYPES, NOMS_PORTES,
+  RUBRIQUES, FICHES, QUESTIONS, QUESTIONS_TYPE, TESTS_PRO, TABLE_A3, ETAPES, ETAPES_V16, ETAPES_V17, ETAPES_V21, ETAPES_V22, ETAPES_V24, ETAPES_V25, ETAPES_V26, ETAPES_V27, ETAPES_V28, METHODE_ACTUELLE, etapesDe, zonesAFaire, TYPES, NOMS_PORTES,
   colonneA3, ficheIncomplete, nbEtapes, etapeCourante, etatEtape, verifieEtape, extraitRegles, typeDe
 });
 if (typeof module !== 'undefined') module.exports = AP;

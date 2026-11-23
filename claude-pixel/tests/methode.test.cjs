@@ -10,10 +10,10 @@ const v22 = d => { d.meta.methode = 22; return d; };
 
 const FICHE = { quoi: 'potion', usage: 'inventaire', couleurs: '8', projection: 'de face', lumiere: 'haut gauche', matiere: 'verre', accent: 'rouge' };
 
-test('les 91 règles impératives sont extraites du document', () => {
+test('les 92 règles impératives sont extraites du document', () => {
   const R = AP.extraitRegles(fs.readFileSync(path.join(RACINE, 'METHODE_PIXEL_ART.md'), 'utf8'));
-  assert.equal(R.length, 91);
-  assert.deepEqual(R.map(r => r.n), Array.from({ length: 91 }, (_, i) => i + 1));
+  assert.equal(R.length, 92);
+  assert.deepEqual(R.map(r => r.n), Array.from({ length: 92 }, (_, i) => i + 1));
   assert.ok(R.every(r => r.texte && r.groupe));
 });
 
@@ -223,4 +223,13 @@ test('v27 : les gestes du pro (esquisse codée, trait depuis le sol, aplats par 
   assert.match(txt('forme'), /contact avec le sol/);
   assert.match(txt('aplats'), /orientation/);
   assert.match(txt('matiere'), /en dernier/);
+});
+
+test('v28 : la vision demande trois références documentées au carnet', () => {
+  const at = new AP.Atelier({ doc: { w: 64, h: 64, type: 'objet' } }), d = at.doc;
+  d.meta.etape = AP.etapesDe(d).findIndex(e => e.id === 'vision');
+  const manque = () => AP.etatEtape(at).portes.find(p => p.id === 'carnetReferences').manque;
+  assert.match(manque(), /3 « Référence »/);
+  for (let k = 0; k < 3; k++) at.act('carnet.ajoute', { rubrique: 'reference', texte: 'murs en pierre sèche (source ' + k + ') : une pierre sur deux' });
+  assert.equal(manque(), null);
 });
