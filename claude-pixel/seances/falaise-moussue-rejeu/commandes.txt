@@ -619,3 +619,484 @@
 10:26:53.783  clic =selecteur-c1
 10:26:54.232  trace 106,46 118,46
 10:26:55.325  regarde
+10:26:56.724  clic =couleur-c1
+10:26:57.419  defile =hex
+10:26:57.433  clic =hex
+10:26:58.055  touche ctrl+a
+10:26:58.145  tape "#73697c"
+10:26:58.297  touche entree
+10:26:58.379  clic =selecteur-c1
+10:26:58.908  trace 121,35 133,48
+10:27:00.350  regarde
+10:27:01.431  clic =couleur-c1
+10:27:02.020  defile =hex
+10:27:02.023  clic =hex
+10:27:02.659  touche ctrl+a
+10:27:02.736  tape "#948a99"
+10:27:02.905  touche entree
+10:27:03.029  clic =selecteur-c1
+10:27:03.453  trace 123,35 131,36
+10:27:04.422  regarde
+10:27:05.458  clic =couleur-c1
+10:27:05.958  defile =hex
+10:27:05.973  clic =hex
+10:27:06.557  touche ctrl+a
+10:27:06.634  tape "#554b60"
+10:27:06.794  touche entree
+10:27:06.870  clic =selecteur-c1
+10:27:07.294  trace 122,48 132,48
+10:27:08.308  regarde
+10:27:09.395  clic =couleur-c1
+10:27:10.013  defile =hex
+10:27:10.019  clic =hex
+10:27:10.575  touche ctrl+a
+10:27:10.651  tape "#73697c"
+10:27:10.807  touche entree
+10:27:10.905  clic =selecteur-c1
+10:27:11.333  trace 26,49 46,68
+10:27:12.736  regarde
+10:27:13.779  clic =couleur-c1
+10:27:14.335  defile =hex
+10:27:14.347  clic =hex
+10:27:14.905  touche ctrl+a
+10:27:14.987  tape "#948a99"
+10:27:15.140  touche entree
+10:27:15.220  clic =selecteur-c1
+10:27:15.680  trace 29,49 43,50
+10:27:16.864  regarde
+10:27:18.014  clic =couleur-c1
+10:27:18.580  defile =hex
+10:27:18.595  clic =hex
+10:27:19.161  touche ctrl+a
+10:27:19.270  tape "#554b60"
+10:27:19.436  touche entree
+10:27:19.517  clic =selecteur-c1
+10:27:19.968  trace 27,68 45,68
+10:27:21.223  regarde
+10:27:22.438  clic =couleur-c1
+10:27:23.021  defile =hex
+10:27:23.033  clic =hex
+10:27:23.601  touche ctrl+a
+10:27:23.676  tape "#73697c"
+10:27:23.857  touche entree
+10:27:23.945  clic =selecteur-c1
+10:27:24.407  trace 48,47 63,66
+10:27:25.895  regarde
+10:27:27.072  clic =couleur-c1
+10:27:27.683  defile =hex
+10:27:27.688  clic =hex
+10:27:28.268  touche ctrl+a
+10:27:28.364  tape "#948a99"
+10:27:28.510  touche entree
+10:27:28.588  clic =selecteur-c1
+10:27:29.011  trace 51,47 60,48
+10:27:29.946  regarde
+10:27:30.989  clic =couleur-c1
+10:27:31.563  defile =hex
+10:27:31.617  clic =hex
+10:27:32.208  touche ctrl+a
+10:27:32.290  tape "#554b60"
+10:27:32.433  touche entree
+10:27:32.516  clic =selecteur-c1
+10:27:32.955  trace 49,66 62,66
+10:27:34.239  regarde
+10:27:35.285  clic =couleur-c1
+10:27:35.870  defile =hex
+10:27:35.878  clic =hex
+10:27:36.454  touche ctrl+a
+10:27:36.531  tape "#73697c"
+10:27:36.700  touche entree
+10:27:36.785  clic =selecteur-c1
+10:27:37.207  trace 65,50 87,70
+10:27:38.729  regarde
+10:27:39.898  clic =couleur-c1
+10:27:40.426  defile =hex
+10:27:40.429  clic =hex
+10:27:41.017  touche ctrl+a
+10:27:41.125  tape "#948a99"
+10:27:41.327  touche entree
+10:27:41.402  clic =selecteur-c1
+10:27:41.812  trace 68,50 84,51
+10:27:43.217  regarde
+10:27:44.461  clic =couleur-c1
+10:27:45.060  defile =hex
+10:27:45.066  clic =hex
+10:27:45.633  touche ctrl+a
+10:27:45.735  tape "#554b60"
+10:27:45.881  touche entree
+10:27:45.955  clic =selecteur-c1
+10:27:46.391  trace 66,70 86,70
+10:27:47.872  regarde
+10:27:49.207  clic =couleur-c1
+10:27:49.818  defile =hex
+10:27:49.832  clic =hex
+10:27:50.481  touche ctrl+a
+10:27:50.582  tape "#73697c"
+10:27:50.755  touche entree
+10:27:50.842  clic =selecteur-c1
+10:27:51.322  trace 89,51 102,67
+10:27:52.870  regarde
+10:27:54.166  clic =couleur-c1
+10:27:54.815  defile =hex
+10:27:54.824  clic =hex
+10:27:55.370  touche ctrl+a
+10:27:55.481  tape "#948a99"
+10:27:55.683  touche entree
+10:27:55.759  clic =selecteur-c1
+10:27:56.198  trace 91,51 100,52
+10:27:57.165  regarde
+10:27:58.301  clic =couleur-c1
+10:27:58.862  defile =hex
+10:27:58.875  clic =hex
+10:27:59.501  touche ctrl+a
+10:27:59.589  tape "#554b60"
+10:27:59.780  touche entree
+10:27:59.864  clic =selecteur-c1
+10:28:00.287  trace 90,67 101,67
+10:28:01.342  regarde
+10:28:02.473  clic =couleur-c1
+10:28:03.002  defile =hex
+10:28:03.012  clic =hex
+10:28:03.623  touche ctrl+a
+10:28:03.710  tape "#73697c"
+10:28:03.853  touche entree
+10:28:03.930  clic =selecteur-c1
+10:28:04.386  trace 104,48 133,69
+10:28:06.427  regarde
+10:28:07.574  clic =couleur-c1
+10:28:08.191  defile =hex
+10:28:08.201  clic =hex
+10:28:08.825  touche ctrl+a
+10:28:08.915  tape "#948a99"
+10:28:09.108  touche entree
+10:28:09.181  clic =selecteur-c1
+10:28:09.635  trace 108,48 129,49
+10:28:11.152  regarde
+10:28:12.348  clic =couleur-c1
+10:28:12.961  defile =hex
+10:28:12.972  clic =hex
+10:28:13.610  touche ctrl+a
+10:28:13.714  tape "#554b60"
+10:28:13.895  touche entree
+10:28:13.980  clic =selecteur-c1
+10:28:14.460  trace 105,69 132,69
+10:28:16.088  regarde
+10:28:17.400  clic =couleur-c1
+10:28:18.045  defile =hex
+10:28:18.056  clic =hex
+10:28:18.656  touche ctrl+a
+10:28:18.743  tape "#73697c"
+10:28:18.906  touche entree
+10:28:18.981  clic =selecteur-c1
+10:28:19.420  trace 26,70 53,94
+10:28:21.200  regarde
+10:28:22.384  clic =couleur-c1
+10:28:22.928  defile =hex
+10:28:22.934  clic =hex
+10:28:23.508  touche ctrl+a
+10:28:23.634  tape "#948a99"
+10:28:23.823  touche entree
+10:28:23.905  clic =selecteur-c1
+10:28:24.358  trace 30,70 49,71
+10:28:25.811  regarde
+10:28:27.025  clic =couleur-c1
+10:28:27.613  defile =hex
+10:28:27.624  clic =hex
+10:28:28.307  touche ctrl+a
+10:28:28.396  tape "#554b60"
+10:28:28.592  touche entree
+10:28:28.678  clic =selecteur-c1
+10:28:29.111  trace 27,94 52,94
+10:28:30.761  regarde
+10:28:31.912  clic =couleur-c1
+10:28:32.429  defile =hex
+10:28:32.450  clic =hex
+10:28:33.006  touche ctrl+a
+10:28:33.088  tape "#73697c"
+10:28:33.285  touche entree
+10:28:33.372  clic =selecteur-c1
+10:28:33.830  trace 55,68 78,93
+10:28:35.631  regarde
+10:28:36.961  clic =couleur-c1
+10:28:37.561  defile =hex
+10:28:37.592  clic =hex
+10:28:38.192  touche ctrl+a
+10:28:38.278  tape "#948a99"
+10:28:38.472  touche entree
+10:28:38.568  clic =selecteur-c1
+10:28:39.009  trace 58,68 75,69
+10:28:40.499  regarde
+10:28:41.900  clic =couleur-c1
+10:28:42.493  defile =hex
+10:28:42.497  clic =hex
+10:28:43.174  touche ctrl+a
+10:28:43.263  tape "#554b60"
+10:28:43.455  touche entree
+10:28:43.535  clic =selecteur-c1
+10:28:44.014  trace 56,93 77,93
+10:28:45.487  regarde
+10:28:46.927  clic =couleur-c1
+10:28:47.503  defile =hex
+10:28:47.506  clic =hex
+10:28:48.202  touche ctrl+a
+10:28:48.318  tape "#73697c"
+10:28:48.534  touche entree
+10:28:48.613  clic =selecteur-c1
+10:28:49.056  trace 80,72 110,96
+10:28:51.032  regarde
+10:28:52.147  clic =couleur-c1
+10:28:52.816  defile =hex
+10:28:52.821  clic =hex
+10:28:53.387  touche ctrl+a
+10:28:53.480  tape "#948a99"
+10:28:53.629  touche entree
+10:28:53.717  clic =selecteur-c1
+10:28:54.118  trace 84,72 106,73
+10:28:55.673  regarde
+10:28:57.106  clic =couleur-c1
+10:28:57.741  defile =hex
+10:28:57.749  clic =hex
+10:28:58.334  touche ctrl+a
+10:28:58.414  tape "#554b60"
+10:28:58.599  touche entree
+10:28:58.673  clic =selecteur-c1
+10:28:59.105  trace 81,96 109,96
+10:29:00.923  regarde
+10:29:02.394  clic =couleur-c1
+10:29:02.953  defile =hex
+10:29:02.960  clic =hex
+10:29:03.595  touche ctrl+a
+10:29:03.682  tape "#73697c"
+10:29:03.892  touche entree
+10:29:04.006  clic =selecteur-c1
+10:29:04.419  trace 112,71 133,95
+10:29:06.142  regarde
+10:29:07.478  clic =couleur-c1
+10:29:08.184  defile =hex
+10:29:08.210  clic =hex
+10:29:08.849  touche ctrl+a
+10:29:08.925  tape "#948a99"
+10:29:09.156  touche entree
+10:29:09.238  clic =selecteur-c1
+10:29:09.690  trace 115,71 130,72
+10:29:10.891  regarde
+10:29:12.110  clic =couleur-c1
+10:29:12.767  defile =hex
+10:29:12.772  clic =hex
+10:29:13.407  touche ctrl+a
+10:29:13.509  tape "#554b60"
+10:29:13.738  touche entree
+10:29:13.839  clic =selecteur-c1
+10:29:14.289  trace 113,95 132,95
+10:29:15.654  regarde
+10:29:17.016  trace 26,96 44,109
+10:29:18.448  regarde
+10:29:19.565  clic =couleur-c1
+10:29:20.138  defile =hex
+10:29:20.151  clic =hex
+10:29:20.792  touche ctrl+a
+10:29:20.879  tape "#948a99"
+10:29:21.054  touche entree
+10:29:21.144  clic =selecteur-c1
+10:29:21.620  trace 29,96 41,97
+10:29:22.859  regarde
+10:29:24.065  clic =couleur-c1
+10:29:24.682  defile =hex
+10:29:24.701  clic =hex
+10:29:25.298  touche ctrl+a
+10:29:25.380  tape "#3a3346"
+10:29:25.534  touche entree
+10:29:25.653  clic =selecteur-c1
+10:29:26.107  trace 27,109 43,109
+10:29:27.450  regarde
+10:29:28.604  clic =couleur-c1
+10:29:29.151  defile =hex
+10:29:29.163  clic =hex
+10:29:29.885  touche ctrl+a
+10:29:29.970  tape "#554b60"
+10:29:30.169  touche entree
+10:29:30.252  clic =selecteur-c1
+10:29:30.693  trace 46,95 71,109
+10:29:32.767  regarde
+10:29:34.165  clic =couleur-c1
+10:29:34.724  defile =hex
+10:29:34.734  clic =hex
+10:29:35.374  touche ctrl+a
+10:29:35.451  tape "#948a99"
+10:29:35.603  touche entree
+10:29:35.698  clic =selecteur-c1
+10:29:36.162  trace 49,95 68,96
+10:29:37.635  regarde
+10:29:38.738  clic =couleur-c1
+10:29:39.332  defile =hex
+10:29:39.355  clic =hex
+10:29:40.038  touche ctrl+a
+10:29:40.115  tape "#3a3346"
+10:29:40.362  touche entree
+10:29:40.445  clic =selecteur-c1
+10:29:40.852  trace 47,109 70,109
+10:29:42.428  regarde
+10:29:43.712  clic =couleur-c1
+10:29:44.283  defile =hex
+10:29:44.289  clic =hex
+10:29:44.912  touche ctrl+a
+10:29:44.998  tape "#554b60"
+10:29:45.178  touche entree
+10:29:45.278  clic =selecteur-c1
+10:29:45.707  trace 73,98 96,109
+10:29:47.823  regarde
+10:29:49.017  clic =couleur-c1
+10:29:49.581  defile =hex
+10:29:49.589  clic =hex
+10:29:50.231  touche ctrl+a
+10:29:50.328  tape "#948a99"
+10:29:50.530  touche entree
+10:29:50.617  clic =selecteur-c1
+10:29:51.070  trace 75,98 94,99
+10:29:52.559  regarde
+10:29:54.021  clic =couleur-c1
+10:29:54.632  defile =hex
+10:29:54.637  clic =hex
+10:29:55.273  touche ctrl+a
+10:29:55.371  tape "#3a3346"
+10:29:55.523  touche entree
+10:29:55.630  clic =selecteur-c1
+10:29:56.070  trace 74,109 95,109
+10:29:57.661  regarde
+10:29:59.144  clic =couleur-c1
+10:29:59.758  defile =hex
+10:29:59.766  clic =hex
+10:30:00.401  touche ctrl+a
+10:30:00.497  tape "#554b60"
+10:30:00.680  touche entree
+10:30:00.787  clic =selecteur-c1
+10:30:01.235  trace 98,97 133,109
+10:30:03.738  regarde
+10:30:05.160  clic =couleur-c1
+10:30:05.826  defile =hex
+10:30:05.835  clic =hex
+10:30:06.454  touche ctrl+a
+10:30:06.532  tape "#948a99"
+10:30:06.743  touche entree
+10:30:06.830  clic =selecteur-c1
+10:30:07.282  trace 101,97 130,98
+10:30:09.159  regarde
+10:30:10.571  clic =couleur-c1
+10:30:11.227  defile =hex
+10:30:11.237  clic =hex
+10:30:11.904  touche ctrl+a
+10:30:11.996  tape "#3a3346"
+10:30:12.159  touche entree
+10:30:12.271  clic =selecteur-c1
+10:30:12.733  trace 99,109 132,109
+10:30:14.787  regarde
+10:30:15.831  clic =outil-crayon
+10:30:16.494  clic =couleur-c1
+10:30:17.108  defile =hex
+10:30:17.115  clic =hex
+10:30:17.687  touche ctrl+a
+10:30:17.767  tape "#241626"
+10:30:17.987  touche entree
+10:30:18.075  clic =selecteur-c1
+10:30:18.522  trace 26,35 27,35
+10:30:19.124  regarde
+10:30:20.458  trace 38,35 39,35
+10:30:20.860  regarde
+10:30:22.111  trace 26,47 27,47
+10:30:22.564  regarde
+10:30:24.010  trace 38,47 39,47
+10:30:24.399  regarde
+10:30:25.876  clic 26,36
+10:30:26.285  regarde
+10:30:27.704  clic 39,36
+10:30:28.103  regarde
+10:30:29.466  clic 26,46
+10:30:29.843  regarde
+10:30:31.145  clic 39,46
+10:30:31.473  regarde
+10:30:32.720  trace 41,34 42,34
+10:30:33.059  regarde
+10:30:34.307  trace 51,34 52,34
+10:30:34.634  regarde
+10:30:35.961  trace 41,45 42,45
+10:30:36.395  regarde
+10:30:37.452  trace 51,45 52,45
+10:30:37.886  regarde
+10:30:39.356  clic 41,35
+10:30:39.782  regarde
+10:30:41.100  clic 52,35
+10:30:41.424  regarde
+10:30:42.771  clic 41,44
+10:30:43.087  regarde
+10:30:44.372  clic 52,44
+10:30:44.658  regarde
+10:30:45.795  trace 54,35 56,35
+10:30:46.185  regarde
+10:30:47.583  trace 70,35 72,35
+10:30:48.092  regarde
+10:30:49.290  trace 54,48 56,48
+10:30:49.772  regarde
+10:30:51.283  trace 70,48 72,48
+10:30:51.826  regarde
+10:30:53.182  trace 54,36 55,36
+10:30:53.577  regarde
+10:30:54.844  trace 71,36 72,36
+10:30:55.216  regarde
+10:30:56.422  trace 54,47 55,47
+10:30:56.851  regarde
+10:30:58.273  trace 71,47 72,47
+10:30:58.744  regarde
+10:30:59.935  clic 54,37
+10:31:00.288  regarde
+10:31:01.492  clic 72,37
+10:31:01.882  regarde
+10:31:03.243  clic 54,46
+10:31:03.622  regarde
+10:31:05.090  clic 72,46
+10:31:05.490  regarde
+10:31:07.031  trace 74,34 75,34
+10:31:07.433  regarde
+10:31:08.713  trace 85,34 86,34
+10:31:09.063  regarde
+10:31:10.268  trace 74,46 75,46
+10:31:10.617  regarde
+10:31:12.028  trace 85,46 86,46
+10:31:12.435  regarde
+10:31:13.725  clic 74,35
+10:31:14.214  regarde
+10:31:15.605  clic 86,35
+10:31:15.978  regarde
+10:31:17.161  clic 74,45
+10:31:17.529  regarde
+10:31:19.084  clic 86,45
+10:31:19.470  regarde
+10:31:20.708  trace 88,35 90,35
+10:31:21.172  regarde
+10:31:22.467  trace 101,35 103,35
+10:31:22.953  regarde
+10:31:24.441  trace 88,49 90,49
+10:31:25.137  regarde
+10:31:26.356  trace 101,49 103,49
+10:31:26.805  regarde
+10:31:28.039  trace 88,36 89,36
+10:31:28.451  regarde
+10:31:29.771  trace 102,36 103,36
+10:31:30.167  regarde
+10:31:31.428  trace 88,48 89,48
+10:31:31.790  regarde
+10:31:32.984  trace 102,48 103,48
+10:31:33.401  regarde
+10:31:34.601  clic 88,37
+10:31:34.963  regarde
+10:31:36.334  clic 103,37
+10:31:36.727  regarde
+10:31:38.032  clic 88,47
+10:31:38.451  regarde
+10:31:39.751  clic 103,47
+10:31:40.130  regarde
+10:31:41.564  trace 105,34 106,34
+10:31:41.954  regarde
+10:31:43.211  trace 118,34 119,34
+10:31:43.590  regarde
+10:31:44.785  trace 105,46 106,46
+10:31:45.172  regarde
