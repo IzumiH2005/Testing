@@ -1,0 +1,11 @@
+regard 6640
+case 26,123 · couleur #4b5a26ff (exportée : #4b5a26ff) · écran 339,559
+outil crayon · taille 1 · c1 #4b5a26ff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 12 · Détails et nettoyage (A6-H · A5-10)
+porte : Carnet : 3 « Détail » de plus : chaque élément retravaillé à la loupe laisse une ligne (0-AE). | Passe à la loupe : 272 zone(s) sur 288 à retravailler et marquer (zones de 8 px). | Case non cochée : « Lisible à ×1 sur la carte »
+défauts : Pixels doublés en « L » [erreur] 200 px ; L'ombrage ne suit pas la lumière [attention] 200 px ; Tramage en damier [conseil] 162 px ; Tirets dans la texture [conseil] 200 px
+volume : lumière haut (az 90°, él 65°, gonfle) · accord 0.09 · familles 0.07 · inversions 42 % · étendue 0.51
+carnet : 37 idée(s), 1 barrée(s) · dernière : [detail] Croûte d'herbe : le peigne de lames verticales (même brin tous les 5 px, rayures sombres e
+messages : aucun
+images : seances/falaise-moussue-rejeu/regards/6640-{ecran,loupe,dessin}.png

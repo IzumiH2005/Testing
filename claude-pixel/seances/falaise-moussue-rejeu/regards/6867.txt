@@ -1,0 +1,11 @@
+regard 6867
+case 119,13 · couleur #a9a2b3ff (exportée : #a9a2b3ff) · écran 618,229
+outil crayon · taille 1 · c1 #a9a2b3ff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 12 · Détails et nettoyage (A6-H · A5-10)
+porte : Carnet : 2 « Détail » de plus : chaque élément retravaillé à la loupe laisse une ligne (0-AE). | Passe à la loupe : 272 zone(s) sur 288 à retravailler et marquer (zones de 8 px). | Case non cochée : « Lisible à ×1 sur la carte »
+défauts : Pixels doublés en « L » [erreur] 200 px (dont 117,12 près du curseur) ; L'ombrage ne suit pas la lumière [attention] 200 px (dont 115,9 116,9 117,9 118,9 119,9 120,9 121,9 122,9 123,9 115,10 116,10 117,10 118,10 119,10 120,10 121,10 122,10 123,10 118,11 119,11 120,11 121,11 122,11 123,11 119,12 120,12 121,12 122,12 120,13 121,13 122,13 121,14 122,14 121,15 près du curseur) ; Tramage en damier [conseil] 158 px ; Tirets dans la texture [conseil] 200 px
+volume : lumière haut (az 90°, él 65°, gonfle) · accord 0.09 · familles 0.07 · inversions 43 % · étendue 0.51
+carnet : 38 idée(s), 1 barrée(s) · dernière : [detail] Plateforme, dessous : chaque pierre gardait un liseré sombre d'épaisseur constante en L (b
+messages : aucun
+images : seances/falaise-moussue-rejeu/regards/6867-{ecran,loupe,dessin}.png
