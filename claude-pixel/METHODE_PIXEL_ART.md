@@ -1,4 +1,4 @@
-# Méthode de pixel art — objets, personnages, créatures et décors (v26)
+# Méthode de pixel art — objets, personnages, créatures et décors (v27)
 
 On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin classique
 (construction par volumes, ligne d'action, anatomie) et les règles du pixel art
@@ -88,6 +88,7 @@ propres.
 | Tileset de plateforme, dans l'ordre | **F2-F** · F2-C · F2-D |
 | Travailler chaque détail comme un dessin entier | **0-AE** · 0-O · F2-A |
 | Rendu par passes et par unités, facettes, rampes riches | **0-AF** · 0-AE · F2-F |
+| L'ordre de travail d'un pro, vu en vidéo | **0-AG** · 0-AB · A9 |
 | Grandes formes, langage des formes, point d'intérêt, contraste | **0-O** · 0-E · A2 |
 
 **Sources (étiquettes) :** [U] demandes de l'utilisateur (v24 : itérer au lieu d'essayer) · [Z] *Apprendre à tout dessiner avec Zephy* · [M] livre de dessin
@@ -108,7 +109,7 @@ bords, [D11]-[D15] vision, vignettes, conception et astuces de pro, [D16]-[D20]
 créativité, geste, couleur, métal et textures, [D21]-[D28] perspective, anatomie animale,
 mains, expressions, éclairages, effets, style, récit, [D29]-[D30] appeal et verre d'art ;
 [T17] séance `fiole-unique`, [D31]-[D32] sketching d'illustrateur, [D33]-[D34] line art
-fini, [T18] séance `fiole-bourgeon`, [D35] tilesets de plateforme, [P5] planches de détail fournies en v26 (tuile 64×64 en six passes, buissons, falaise et eau, passes en opacité, portes, bûches, rochers ; 0-AF) ; liens en fin de document). Toutes les règles sont reformulées.
+fini, [T18] séance `fiole-bourgeon`, [D35] tilesets de plateforme, [V1] vidéo d'un pixel artist au travail (cottage isométrique, v27 ; 0-AG), [P5] planches de détail fournies en v26 (tuile 64×64 en six passes, buissons, falaise et eau, passes en opacité, portes, bûches, rochers ; 0-AF) ; liens en fin de document). Toutes les règles sont reformulées.
 
 ---
 
@@ -357,6 +358,11 @@ Chaque règle est un ordre. Le détail et le « pourquoi » sont dans la section
     décalage de teinte et un quasi-noir coloré pour le fond des creux ; une roche est faite
     de plans francs ; une texture est faite de taches irrégulières de 2 à 6 px, pas de points
     isolés ni de barres de 1 px (0-AF).
+91. **Travailler comme le pro de la vidéo** : grille de projection en fond, rough sale, esquisse
+    codée par pièce, trait propre pièce par pièce depuis le sol, aplats qui suivent
+    l'orientation des plans, des dizaines de petites passes de détail avec les couleurs
+    essayées en place, la texture des grandes surfaces en dernier, le contour coloré à la fin
+    (0-AG).
 
 ---
 
@@ -1441,6 +1447,57 @@ Ce qui suit est ce qu'on y lit, pixel par pixel.
   reste une zone.
 - Deux détecteurs : **éléments tamponnés** (une même tache, entourage compris, deux fois dans
   une tuile) et **tirets dans la texture**.
+
+## 0-AG. Ce qu'on apprend en regardant un pro travailler (v27) [V1]
+
+Une vidéo accélérée d'un pixel artist (un cottage isométrique d'environ 140 px de large) montre
+son travail du premier trait à l'autocollant final. Il écrit lui-même qu'il l'a « beaucoup
+accélérée » et qu'il « n'a pas compté le temps passé ». Ce qu'on y voit, dans l'ordre :
+
+### A. Le départ : une grille, une boîte, un rough sale
+1. **La grille de projection reste en fond tout du long** (ici l'isométrique 2:1 du jeu) :
+   chaque arête de la maison suit la grille. Dans Claude Pixel : onglet Lumière, « Grille
+   isométrique ».
+2. **Une boîte de base d'abord** : la dalle du socle, en perspective juste.
+3. **Un rough très libre** du volume, à gros traits sombres, plusieurs fois repassés.
+4. **Une ancienne version du même sujet, en transparence dessous**, sert de référence ; il
+   redessine par-dessus, plus précis, sans la décalquer.
+
+### B. L'esquisse codée par pièce
+- Le toit en bleu, la cheminée en rouge, les colombages en orange, le socle en lavande :
+  **une couleur franche par pièce**. On voit d'un coup d'œil où finit une pièce et où commence
+  l'autre, et la forme du toit (une vague) se règle avant tout trait propre.
+
+### C. Le trait propre, pièce par pièce, depuis le sol
+- L'esquisse codée baissée dessous, il pose le trait noir de 1 px **en commençant par ce qui
+  touche le sol** : le bord de la dalle, les poteaux, les marches ; puis les murs et le toit ;
+  la cheminée en dernier. Les droites suivent la grille, les courbes du toit sont tendues.
+
+### D. Les aplats par orientation de plan
+- Chaque pièce reçoit sa couleur, et **chaque plan sa valeur selon son orientation** (le
+  dessous du toit plus sombre, la face du mur à l'ombre plus grise) : le volume se lit avant
+  la moindre ombre ou texture.
+
+### E. Des dizaines de passes, une chose à la fois
+- Colombages courbes du pignon, fenêtres et volets, bûches empilées, girouette, buissons,
+  pierres du socle, jardinière avec ses fleurs, arbre derrière : **chaque détail est une petite
+  passe**, regardée sur le dessin entier avant la suivante.
+- **Les couleurs s'essaient en place** : les volets passent du violet au bleu nuit, la
+  girouette noire disparaît. On garde ce qui sert la lecture.
+
+### F. La texture en dernier, puis le contour coloré, puis la présentation
+- Les tuiles du toit arrivent à la fin, **rangée par rangée, en suivant la courbe** du toit,
+  avec des reflets le long du faîtage et des bords.
+- Le trait noir devient un **contour coloré par matière**.
+- Le dessin est **posé sur un îlot d'herbe** avec des fleurs et une ombre : il appartient à un
+  monde.
+
+### G. Ce que ça change pour Claude Pixel
+- Une grille de projection affichable sur la toile.
+- Aux étapes rough, esquisse, trait, aplats, micro-détails, matière et éclats : les gestes
+  ci-dessus sont écrits dans « Ce que je fais ».
+- **Le temps** : ce que la vidéo montre en une minute a pris des heures ; un résultat
+  comparable demande la même patience, passe après passe.
 
 ---
 
@@ -4507,6 +4564,13 @@ Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixel
 ---
 
 # Historique des versions
+
+- **v27 :** **0-AG ce qu'on apprend en regardant un pro travailler** [V1] : grille de
+  projection en fond, boîte de base, rough sale, ancienne version en transparence, esquisse
+  codée par pièce, trait propre depuis le sol, aplats par orientation de plan, dizaines de
+  passes avec les couleurs essayées en place, texture en dernier, contour coloré, présentation ;
+  règle 91. Dans Claude Pixel : bouton « Grille isométrique » sur la toile, et les gestes
+  ajoutés aux étapes rough, esquisse, trait, aplats, micro-détails, matière et éclats.
 
 - **v26 :** **0-AF le niveau de détail des planches pro** [P5] : la tuile 64×64 en six passes,
   les passes en opacité, les roches en facettes, la falaise, le végétal, le bois et les portes,

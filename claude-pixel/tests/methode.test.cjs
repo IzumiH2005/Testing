@@ -10,10 +10,10 @@ const v22 = d => { d.meta.methode = 22; return d; };
 
 const FICHE = { quoi: 'potion', usage: 'inventaire', couleurs: '8', projection: 'de face', lumiere: 'haut gauche', matiere: 'verre', accent: 'rouge' };
 
-test('les 90 règles impératives sont extraites du document', () => {
+test('les 91 règles impératives sont extraites du document', () => {
   const R = AP.extraitRegles(fs.readFileSync(path.join(RACINE, 'METHODE_PIXEL_ART.md'), 'utf8'));
-  assert.equal(R.length, 90);
-  assert.deepEqual(R.map(r => r.n), Array.from({ length: 90 }, (_, i) => i + 1));
+  assert.equal(R.length, 91);
+  assert.deepEqual(R.map(r => r.n), Array.from({ length: 91 }, (_, i) => i + 1));
   assert.ok(R.every(r => r.texte && r.groupe));
 });
 
@@ -133,7 +133,7 @@ test('v22 : le sketching d\'illustrateur, calque par calque, puis la validation 
 
 test('v24 : un nouveau document itère sur une forme de base, sans essais ni pièces', () => {
   const at = new AP.Atelier({ doc: AP.nouveauDoc({ w: 64, h: 64, type: 'objet' }) }), d = at.doc;
-  assert.equal(d.meta.methode, 26);
+  assert.equal(d.meta.methode, AP.METHODE_ACTUELLE);
   const ids = AP.etapesDe(d).map(e => e.id);
   assert.ok(!ids.includes('essais') && !ids.includes('pieces'));
   assert.equal(ids.indexOf('iterations'), ids.indexOf('vision') + 1);
@@ -214,4 +214,13 @@ test('ramener un calque à la palette', () => {
   const id = d.cels[d.calques[0].id][0] = 'cz'; d.celData[id] = Uint32Array.from([AP.parseHex('#101010'), AP.parseHex('#f0f0f0'), AP.parseHex('#e01010'), 0]);
   at.act('calque.indexe');
   assert.deepEqual([...d.celData[d.cels[d.calques[0].id][0]]].map(c => c ? AP.hex(c) : 0), ['#000000', '#ffffff', '#ff0000', 0]);
+});
+
+test('v27 : les gestes du pro (esquisse codée, trait depuis le sol, aplats par plan, texture en dernier)', () => {
+  const E = AP.etapesDe(AP.nouveauDoc({ w: 64, h: 64, type: 'objet' }));
+  const txt = id => E.find(e => e.id === id).faire.join(' ');
+  assert.match(txt('esquisse'), /codée par pièce/);
+  assert.match(txt('forme'), /contact avec le sol/);
+  assert.match(txt('aplats'), /orientation/);
+  assert.match(txt('matiere'), /en dernier/);
 });

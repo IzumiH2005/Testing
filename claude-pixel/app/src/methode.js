@@ -156,7 +156,7 @@ const E = (id, titre, ref, faire, o = {}) => Object.assign({ id, titre, ref, fai
 const C = (cle, txt) => ({ cle, txt });
 const ETAPE_FICHE = (ref) => E('fiche', 'Fiche d\'intention et règles', ref, [
   'Remplis la fiche : chaque champ est une décision prise avant le premier pixel.',
-  'Lis les 90 règles impératives (onglet Aide) et coche « lues ».',
+  'Lis les 91 règles impératives (onglet Aide) et coche « lues ».',
   'Règle la toile à la taille finale : on ne dessine jamais en grand pour réduire (A4b).',
   'Choisis ou construis la palette : une rampe par matière (A6-A).',
   'Nomme 2 ou 3 idées fortes, pas plus : ce qu\'on doit reconnaître de loin (A10-F, règle 44).'
@@ -683,11 +683,26 @@ for (const t of Object.keys(ETAPES_V25)) {
     return e;
   });
 }
-const METHODE_ACTUELLE = 26;
-const ETAPES = ETAPES_V26;
+/* ---------- Méthode v27 : ce qu'on voit en regardant un pro travailler (0-AG) ----------
+ * Vidéo d'un pixel artist (cottage isométrique) : grille de projection, rough sale, esquisse codée
+ * par pièce, trait pièce par pièce depuis le sol, aplats par orientation de plan, des dizaines de
+ * passes de détail avec des couleurs essayées en place, la texture en dernier. */
+const AJOUTS_V27 = {
+  rough: ['Une grille de projection en fond (onglet Lumière, « Grille isométrique » pour un jeu en iso) : toutes les arêtes la suivent. Une ancienne version du dessin peut rester dessous, en transparence, comme référence.'],
+  esquisse: ['Esquisse codée par pièce : une couleur franche par pièce (corps, toit ou bouchon, pied, ornements, matière secondaire). Chaque pièce doit se lire avant le trait (0-AG).'],
+  forme: ['Trait propre pièce par pièce, en partant du contact avec le sol : la base, les appuis, puis les grands volumes, puis les pièces secondaires. L\'esquisse codée reste dessous, baissée.'],
+  aplats: ['Dès les aplats, chaque plan prend la valeur de son orientation (dessus, face éclairée, face à l\'ombre) : le volume se lit avant toute ombre (0-AG).'],
+  micro: ['Des dizaines de petites passes, une chose à la fois (une fenêtre, un volet, une pierre du socle, une fleur). Essaie les couleurs en place, sur le dessin : garde celle qui sert la lecture, barre l\'autre au carnet.'],
+  matiere: ['La texture qui couvre une grande surface (tuiles, écorce, briques, pavés) se pose en dernier, quand la forme est juste ; ses rangées suivent la courbure du volume.'],
+  eclats: ['À la fin, le trait sombre devient un contour coloré par matière ; on présente le dessin sur un petit socle de décor (herbe, ombre) qui le pose dans le monde.']
+};
+const ETAPES_V27 = {};
+for (const t of Object.keys(ETAPES_V26)) ETAPES_V27[t] = ETAPES_V26[t].map(e => AJOUTS_V27[e.id] ? Object.assign({}, e, { faire: e.faire.concat(AJOUTS_V27[e.id]) }) : e);
+const METHODE_ACTUELLE = 27;
+const ETAPES = ETAPES_V27;
 const etapesDe = doc => {
   const v = (doc.meta && doc.meta.methode) || 0;
-  return (v >= 26 ? ETAPES_V26 : v >= 25 ? ETAPES_V25 : v >= 24 ? ETAPES_V24 : v >= 22 ? ETAPES_V22 : v >= 21 ? ETAPES_V21 : v >= 17 ? ETAPES_V17 : ETAPES_V16)[typeDe(doc)];
+  return (v >= 27 ? ETAPES_V27 : v >= 26 ? ETAPES_V26 : v >= 25 ? ETAPES_V25 : v >= 24 ? ETAPES_V24 : v >= 22 ? ETAPES_V22 : v >= 21 ? ETAPES_V21 : v >= 17 ? ETAPES_V17 : ETAPES_V16)[typeDe(doc)];
 };
 /* Calques de construction qui contiennent des pixels, dans l'ordre de la pile. */
 function calquesConstr(doc) {
@@ -747,7 +762,7 @@ function porte(id, at, cache) {
   }
   switch (id) {
     case 'fiche': { const r = ficheIncomplete(doc); return r ? 'Fiche incomplète : ' + r.join(', ') : null; }
-    case 'regles': return m.reglesLues ? null : 'Lis les 90 règles impératives et coche « lues ».';
+    case 'regles': return m.reglesLues ? null : 'Lis les 91 règles impératives et coche « lues ».';
     case 'nonVide': return AP.mesures(doc, f).opaques ? null : 'L\'image exportée est vide.';
     case 'construction': return aDesPixels(doc, c => c.type === 'construction') ? null : 'Dessine la construction dans au moins un calque de type « construction ».';
     case 'silhouette1': { const n = AP.mesures(doc, f).couleurs; return n <= 2 ? null : 'La silhouette se fait en une couleur sombre (2 au plus) : ' + n + ' couleurs.'; }
@@ -892,7 +907,7 @@ function verifieEtape(at) {
   return { ok: !manque.length, manque };
 }
 
-/* ---------- Les 90 règles, lues dans le texte de la méthode ---------- */
+/* ---------- Les 91 règles, lues dans le texte de la méthode ---------- */
 function extraitRegles(texte) {
   const lignes = texte.split('\n'), out = [];
   let i = lignes.findIndex(l => /^# Règles impératives/.test(l)), groupe = '';
@@ -909,7 +924,7 @@ function extraitRegles(texte) {
 }
 
 Object.assign(AP, {
-  RUBRIQUES, FICHES, QUESTIONS, QUESTIONS_TYPE, TESTS_PRO, TABLE_A3, ETAPES, ETAPES_V16, ETAPES_V17, ETAPES_V21, ETAPES_V22, ETAPES_V24, ETAPES_V25, ETAPES_V26, METHODE_ACTUELLE, etapesDe, zonesAFaire, TYPES, NOMS_PORTES,
+  RUBRIQUES, FICHES, QUESTIONS, QUESTIONS_TYPE, TESTS_PRO, TABLE_A3, ETAPES, ETAPES_V16, ETAPES_V17, ETAPES_V21, ETAPES_V22, ETAPES_V24, ETAPES_V25, ETAPES_V26, ETAPES_V27, METHODE_ACTUELLE, etapesDe, zonesAFaire, TYPES, NOMS_PORTES,
   colonneA3, ficheIncomplete, nbEtapes, etapeCourante, etatEtape, verifieEtape, extraitRegles, typeDe
 });
 if (typeof module !== 'undefined') module.exports = AP;

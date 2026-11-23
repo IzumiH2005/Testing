@@ -247,7 +247,7 @@ function nouveauDoc(o = {}) {
     rampes: [],
     calques: [], images: [{ ms: 100, role: '', change: '', principe: '', validee: false }],
     cels: {}, celData: {}, etiquettes: [], next: 1,
-    meta: { fiche: {}, etape: 0, coches: {}, justifs: {}, planche: {}, reglesLues: false, valideEtapes: [], methode: 26, carnet: [], zones: { taille: 16, faites: {} } },
+    meta: { fiche: {}, etape: 0, coches: {}, justifs: {}, planche: {}, reglesLues: false, valideEtapes: [], methode: 27, carnet: [], zones: { taille: 16, faites: {} } },
     lumiere: { az: 135, el: 40, forme: 'gonfle', posee: false },
     tuile: { on: false, tw: 16, th: 16 },
     carte: { cols: 20, rows: 12, terrain: [], tuiles: [] }

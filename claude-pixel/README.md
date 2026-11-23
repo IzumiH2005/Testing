@@ -45,6 +45,9 @@ Projet personnel, non officiel, sans lien avec Anthropic.
   zones de 8 ou 16 px cadre la toile zone par zone et chaque zone se marque une fois reprise ;
   détecteurs « éléments tamponnés » et « tirets dans la texture » ; « Ramener à la palette »
   après des passes en opacité.
+- **L'ordre de travail d'un pro** (v27) : grille isométrique affichable sur la toile ; esquisse
+  codée par pièce, trait depuis le sol, aplats par orientation de plan, passes de détail avec
+  les couleurs essayées en place, texture en dernier (gestes tirés d'une vidéo de pixel artist).
 - **Sketching d'illustrateur** (v22) : rough, construction, esquisse nettoyée, trait final et
   polish, chacun sur son calque d'esquisse, celui du dessous baissé ; bouton « Retourner la
   toile » ; étape « Validation du dessin » avant toute couleur (note de 22/30 au moins).

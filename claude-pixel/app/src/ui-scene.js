@@ -7,7 +7,7 @@ const { $, h } = U;
 const ZOOMS = [1, 2, 3, 4, 5, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 64];
 const TEINTE_CONSTR = '#3b82f6';
 
-const vue = U.vue = { zoom: 8, ox: 0, oy: 0, zone: null, survol: null, pelure: false, vue3x3: true, grille: true, cacheConstr: false, mode: 'couleur', guide: false, miroir: false };
+const vue = U.vue = { zoom: 8, ox: 0, oy: 0, zone: null, grilleIso: false, survol: null, pelure: false, vue3x3: true, grille: true, cacheConstr: false, mode: 'couleur', guide: false, miroir: false };
 U.marques = null; // { pixels:[[x,y]], niveau }
 
 let cv, ctx, scene, buf, bctx, dpr = 1, demande = false;
@@ -233,6 +233,18 @@ function rendu() {
     ctx.save(); ctx.lineWidth = 1.5;
     ctx.strokeStyle = '#000'; ctx.stroke(path);
     ctx.setLineDash([4, 4]); ctx.strokeStyle = '#fff'; ctx.stroke(path); ctx.restore();
+  }
+
+  // grille isométrique 2:1 (0-AG) : losanges de la taille de tuile (16 par défaut)
+  if (vue.grilleIso) {
+    const tw = (d.tuile && d.tuile.on ? d.tuile.tw : 16), pas = tw / 2;
+    ctx.save(); ctx.beginPath(); ctx.rect(X, Y, d.w * z, d.h * z); ctx.clip();
+    ctx.strokeStyle = 'rgba(80,200,255,.35)'; ctx.lineWidth = 1; ctx.beginPath();
+    for (let c = -d.w; c <= d.h + d.w; c += pas) {
+      ctx.moveTo(X, Y + c * z); ctx.lineTo(X + d.w * z, Y + (c + d.w / 2) * z);   // descend vers la droite (pente 1/2)
+      ctx.moveTo(X, Y + c * z); ctx.lineTo(X + d.w * z, Y + (c - d.w / 2) * z);   // monte vers la droite
+    }
+    ctx.stroke(); ctx.restore();
   }
 
   // zone de la passe à la loupe

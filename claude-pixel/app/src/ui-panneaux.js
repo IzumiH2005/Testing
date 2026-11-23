@@ -437,11 +437,11 @@ function rendMethode(c) {
     }
     if (st.index === 0 || e.portes.includes('fiche')) rendFiche(c);
     if (e.portes.includes('regles')) {
-      c.appendChild(titre('Les 90 règles', m.reglesLues ? h('span.aide-txt', { style: { color: 'var(--ok)' } }, 'lues ✓') : null));
+      c.appendChild(titre('Les 91 règles', m.reglesLues ? h('span.aide-txt', { style: { color: 'var(--ok)' } }, 'lues ✓') : null));
       c.appendChild(h('p.aide-txt', 'Elles s\'appliquent à chaque dessin. Lis-les toutes avant de confirmer.'));
       c.appendChild(h('div.ligne',
         btn(reglesOuvertes ? 'Replier les règles' : 'Lire les règles', { cible: 'regles-ouvre', click: () => { reglesOuvertes = !reglesOuvertes; rendu(true); } }),
-        btn(m.reglesLues ? 'Règles lues ✓' : 'J\'ai lu les 90 règles', { cls: m.reglesLues ? '.fantome' : '.prim', cible: 'regles-lues', inactif: m.reglesLues || !reglesOuvertes,
+        btn(m.reglesLues ? 'Règles lues ✓' : 'J\'ai lu les 91 règles', { cls: m.reglesLues ? '.fantome' : '.prim', cible: 'regles-lues', inactif: m.reglesLues || !reglesOuvertes,
           title: reglesOuvertes ? '' : 'Ouvre d\'abord les règles', click: () => act('regles.lues') })));
       if (reglesOuvertes) c.appendChild(listeRegles());
     }
@@ -719,7 +719,9 @@ function rendLumiere(c) {
   c.appendChild(vues);
   c.appendChild(h('div.ligne', { style: { marginTop: '8px' } },
     btn(vue.miroir ? 'Remettre la toile à l\'endroit' : 'Retourner la toile', { cible: 'retourne', presse: !!vue.miroir, click: () => { U.retourne(); rendu(true); } }),
-    btn(vue.guide ? 'Masquer le guide' : 'Afficher le guide', { cible: 'guide', presse: !!vue.guide, click: () => { vue.guide = !vue.guide; U.redessine(); rendu(true); } })));
+    btn(vue.guide ? 'Masquer le guide' : 'Afficher le guide', { cible: 'guide', presse: !!vue.guide, click: () => { vue.guide = !vue.guide; U.redessine(); rendu(true); } }),
+    // grille de projection (0-AG) : les arêtes suivent la grille isométrique 2:1 du jeu
+    btn(vue.grilleIso ? 'Masquer la grille iso' : 'Grille isométrique', { cible: 'grille-iso', presse: !!vue.grilleIso, title: 'Lignes 2:1 tous les ' + ((d.tuile && d.tuile.on ? d.tuile.tw : 16) / 2) + ' px de haut', click: () => { vue.grilleIso = !vue.grilleIso; U.redessine(); rendu(true); } })));
   c.appendChild(h('p.aide-txt', 'Le guide est calculé sur le calque courant (ou sur toute l\'image si le calque est vide). Valeurs et Notan aident à juger les deux familles (0-D).'));
 
   /* Légende */
