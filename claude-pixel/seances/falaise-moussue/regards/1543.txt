@@ -1,0 +1,11 @@
+regard 1543
+case 135,29 · couleur #423c52ff (exportée : #423c52ff) · écran 666,277
+outil rect · taille 1 · c1 #423c52ff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 5 · Gabarit en aplats et carte de test (F2-C · F2-F)
+porte : Active le mode tuile (onglet Tuiles). | Peins au moins 12 cases de terrain (onglet Tuiles, pinceau Terrain) : en U, en L et en îlot. | Case non cochée : « Toutes les tuiles du gabarit sont posées en aplats » | Case non cochée : « Carte de test en U, L et îlot sans trou ni carré qui dépasse »
+défauts : Lumière et ombre se confondent [attention] 200 px (dont 131,25 132,25 133,25 134,25 135,25 131,26 132,26 133,26 134,26 135,26 131,27 132,27 133,27 134,27 131,28 132,28 133,28 131,29 132,29 133,29 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord 0.33 · familles 0.04 · inversions 4 % · étendue 0.08
+carnet : 14 idée(s), 1 barrée(s) · dernière : [choix] v4 : pierres de tailles décroissantes vers le haut, coins cassés propres à chacune, joints
+messages : aucun
+images : seances/falaise-moussue/regards/1543-{ecran,loupe,dessin}.png
