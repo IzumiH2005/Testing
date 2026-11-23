@@ -1,4 +1,4 @@
-# Méthode de pixel art — objets, personnages, créatures et décors (v23)
+# Méthode de pixel art — objets, personnages, créatures et décors (v24)
 
 On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin classique
 (construction par volumes, ligne d'action, anatomie) et les règles du pixel art
@@ -84,9 +84,11 @@ propres.
 | Design d'une forme belle, proportions, jonctions, bouchon | **0-AA** · 0-E · 0-N |
 | Sketching : rough, esquisse, trait, polish, calques, retourner la toile | **0-AB** · A11 |
 | Sketch fini, poids du trait, lignes de forme, taille du dessin | **0-AC** · 0-H · A6-C |
+| Partir d'une forme de base et l'itérer | **0-AD** · 0-AA-E |
+| Tileset de plateforme, dans l'ordre | **F2-F** · F2-C · F2-D |
 | Grandes formes, langage des formes, point d'intérêt, contraste | **0-O** · 0-E · A2 |
 
-**Sources (étiquettes) :** [Z] *Apprendre à tout dessiner avec Zephy* · [M] livre de dessin
+**Sources (étiquettes) :** [U] demandes de l'utilisateur (v24 : itérer au lieu d'essayer) · [Z] *Apprendre à tout dessiner avec Zephy* · [M] livre de dessin
 manga · [I] planches d'anatomie fournies · [C] planches sur les cheveux fournies · [P]
 planches fournies (cheveux, œil, arche, cristal, flamme, déclinaisons, projections) · [R]
 recherches web (liens en fin de document) · [L] méthode Loomis et tutoriels de visage anime
@@ -104,7 +106,7 @@ bords, [D11]-[D15] vision, vignettes, conception et astuces de pro, [D16]-[D20]
 créativité, geste, couleur, métal et textures, [D21]-[D28] perspective, anatomie animale,
 mains, expressions, éclairages, effets, style, récit, [D29]-[D30] appeal et verre d'art ;
 [T17] séance `fiole-unique`, [D31]-[D32] sketching d'illustrateur, [D33]-[D34] line art
-fini, [T18] séance `fiole-bourgeon` ; liens en fin de document). Toutes les règles sont reformulées.
+fini, [T18] séance `fiole-bourgeon`, [D35] tilesets de plateforme ; liens en fin de document). Toutes les règles sont reformulées.
 
 ---
 
@@ -318,8 +320,9 @@ Chaque règle est un ordre. Le détail et le « pourquoi » sont dans la section
     détail se répondent (0-AA-B).
 81. **Proportions franches, jamais 1:1 ; jonctions dessinées** (épaule, bague, lèvre, tige) :
     c'est aux jonctions que la forme devient belle (0-AA-B).
-82. **Au moins 6 silhouettes dans 3 familles, notées avec la grille**, puis 3 variantes de
-    chaque pièce (bouchon, jonction, pied) ; rien sous 20/30 ne passe (0-AA-D, 0-AA-E).
+82. **Pars d'une forme de base simple et itère-la au moins 3 fois**, chaque version notée
+    avec la grille ; on améliore la même forme au lieu d'en essayer de nouvelles, et rien
+    sous 20/30 ne passe (0-AD, 0-AA-E).
 
 **Sketching (0-AB)**
 83. **Sketcher calque par calque** : rough (geste, masses), construction, esquisse nettoyée,
@@ -1126,7 +1129,9 @@ Rendu correct, design raté. Ce qui n'allait pas :
 - **Deux sources au moins** (0-P-C) : une forme naturelle donne la silhouette, un objet fabriqué
   donne les jonctions (bague, lèvre, pied).
 
-### D. La méthode de design (étapes Essais et Design des pièces)
+### D. La méthode de design d'avant la v24 (étapes Essais et Design des pièces)
+*Remplacée en v24 par l'itération sur une forme de base (0-AD). Gardée pour les documents
+v21 à v23, qui gardent leurs étapes.*
 1. **Silhouettes, beaucoup** : au moins **6** silhouettes pleines, dans au moins **3 familles**
    d'analogie différentes (ex. goutte, bourgeon, coquillage), à une taille où l'on peut
    designer : **au moins la moitié de la taille finale** (16 à 20 px de haut pour une toile de
@@ -1163,8 +1168,8 @@ ne la sauvera pas (0-AA).
 ### A. Les étapes (dans Claude Pixel, chacune est une étape de la méthode)
 | # | Étape | Calque | Ce qu'on fait | Ce qu'on ne fait pas |
 |---|---|---|---|---|
-| 1 | **Vignettes** | construction « vignettes » | beaucoup de silhouettes rapides, notées (0-AA-D) | aucun détail |
-| 2 | **Design des pièces** | construction « pièces » | variantes du bouchon, des jonctions, du pied | aucun trait propre |
+| 1 | **Itérations** (v24) | construction « v1 », « v2 », « v3 »… | une forme de base simple, poussée version après version, chacune notée (0-AD) ; les pièces (bouchon, jonctions, pied) se règlent dans ces versions | aucun détail, aucune forme radicalement nouvelle |
+| 2 | *(v22-v23 : Vignettes puis Design des pièces)* | — | remplacés en v24 par les itérations | — |
 | 3 | **Rough** | construction « rough » (rouge) | à la taille finale : le geste (ligne de flux en S ou en C), les grandes masses, en traits longs et libres ; plusieurs passages superposés sont permis | pas de trait propre, pas de petit détail |
 | 4 | **Construction** | construction « volumes » (bleu), rough à 30-40 % | axe, primitives entières dessinées à travers, ellipses, proportions mesurées | pas de détail |
 | 5 | **Esquisse nettoyée** | construction « esquisse » (vert), dessous à 20-30 % | on **choisit** les traits qui comptent et on les **redessine** d'un geste sûr ; on corrige les proportions ; on intègre les pièces choisies ; on retourne la toile | pas de couleur ; on ne décalque pas en aveugle |
@@ -1253,6 +1258,36 @@ validé, comme une déclinaison (B4b) : on ne réduit jamais une image.
 - Chaque recouvrement est-il net ?
 - Les lignes de forme disent-elles le volume ?
 - Montré tel quel, passerait-il pour une planche de concept art ?
+
+## 0-AD. Itérer sur une forme de base (v24) [U]
+
+**Le principe :** on ne cherche pas six idées différentes pour en garder une. On part d'**une
+forme de base simple** et on la **pousse par versions successives**, comme un designer qui
+reprend le même croquis. Chaque version garde ce qui marchait et change une ou deux choses.
+Les essais de formes très différentes dispersaient l'effort : chaque silhouette restait au
+niveau d'une ébauche.
+
+### A. La forme de base
+- Une primitive ou deux (0-B) : bloc, sphère, cylindre, cône, rectangle aux coins cassés.
+  Pour un décor de plateforme : **un bloc de terrain** (rectangle) avec sa croûte.
+- Dessinée **à la taille finale**, dans un calque de construction « v1 ».
+
+### B. Une itération
+1. Nouveau calque de construction (« v2 », « v3 »…), le précédent baissé à 20-40 % ou masqué.
+2. On change **une ou deux choses**, nommées à l'avance : proportions, coins (arrondis,
+   cassés), rythme du contour (long-court-long), place des grandes masses, une pièce
+   (bouchon, croûte, pied), le langage (rond contre anguleux).
+3. Au carnet : une ligne **Itération** (ce qui change et pourquoi), puis une **Critique** notée
+   sur 30 avec la grille 0-AA-E. Ce qui n'a pas marché se **barre**, avec la raison ; on peut
+   revenir à la version d'avant.
+4. **Au moins 3 versions.** On s'arrête quand une version ne gagne plus rien, ou dépasse
+   22/30.
+
+### C. Le choix
+- On garde la meilleure version et on écrit le **Choix retenu** : ce qu'elle a gagné sur la
+  v1, ce qu'il faut encore pousser au rough.
+- La version retenue doit être **mieux notée que la v1** ; sinon, on n'a pas itéré, on a
+  seulement redessiné.
 
 ---
 
@@ -3787,6 +3822,43 @@ tuiles de transition.
 - **Ombre portée** des murs et des objets vers le bas-droite (lumière haut-gauche), sur 1 à
   3 px, dans un ton plus sombre et plus froid du sol.
 
+### F. Un tileset de plateforme, dans l'ordre [D35]
+**Taille** : 16×16 est la plus courante ; 32×32 donne la place pour des clusters et une
+croûte détaillés ; au-delà, c'est de trop pour des tuiles (Slynyrd). La planche fait alors
+plusieurs tuiles de large (160×128 pour un gabarit 5×3 de 32 px plus une rangée de
+plateformes et de décors).
+
+1. **Blocage de couleur** : chaque tuile du gabarit en grands aplats (croûte, face, bas plus
+   sombre). La face semble **pencher vers le fond** ; aux coins, une petite projection
+   oblique donne de la profondeur. Test immédiat sur une carte en U, en L et en îlot.
+2. **La tuile centrale d'abord**, comme une **coupe de terrain en strates** (MortMort) :
+   grandes masses, puis clusters moyens, puis petits. Des clusters **francs** et de tailles
+   proches ; quelques clusters clés **répétés** à plusieurs endroits, **jamais collés** entre
+   eux (un contact coin à coin suffit) ; ils passent par-dessus les bords et tournent autour
+   de la tuile pour cacher la couture. **Poids visuel égal** dans toute la tuile.
+3. **Le bord haut** : on repart du centre et on construit la croûte **de bas en haut**, du
+   plus sombre au plus clair, avec des touffes de plus en plus petites ; quelques brins plus
+   sombres ; **une ombre entre la croûte et la terre**. L'herbe **retombe sur la terre comme
+   une couverture** et déborde un peu.
+4. **Le bord bas** : le centre, des **fissures sombres** dans la moitié basse, fondues dans la
+   texture. **Les côtés** : le centre répété en hauteur, fissures et clusters prolongés
+   jusqu'au bord.
+5. **Les coins** partent des bords haut et bas : on fait tourner les fissures et la croûte
+   autour du coin et on **éclaire l'arête**. **Coins rentrants** : le centre dans chaque coin,
+   plus l'ombre de transition sous la croûte.
+6. **Pentes** (si le jeu en a) : 1 pour 2 sur un bloc de 4×2 tuiles, 1 pour 1 sur 3×2 ; on
+   cisaille le centre d'un pixel par pas, puis on redessine la croûte.
+7. **Plateformes** : trois pièces (bout gauche, milieu, bout droit) et un **appui dans le
+   fond** qui les rattache au décor.
+8. **Détails fins** à la fin : éclats, ombres poussées, clusters affinés. **Garder des
+   clusters bien gras** : trop de détail rend la tuile floue ou bruitée. **Peu de couleurs par
+   texture** ; une texture chargée à côté d'une autre texture chargée fait du bruit : **le vide
+   est ton ami**.
+9. **Répétition** : 1 ou 2 variantes des tuiles qu'on aligne souvent ; touffes et plantes
+   posées par-dessus le bord haut, qui cachent le dessus plat sans toucher aux collisions.
+10. **Miroir** : on peut retourner une tuile pour le côté opposé **seulement si la lumière
+    vient d'en haut** (zénithale) ou de partout ; sinon l'éclairage se retrouve à l'envers.
+
 ## F3. Fonds et parallaxe [R]
 
 ### A. Perspective atmosphérique
@@ -4128,6 +4200,7 @@ Cours et livres légitimes, cités pour leurs idées ; tout est reformulé.
 | [D32] | [Clip Studio, un trait vivant](https://www.clipstudio.net/how-to-draw/archives/155333) · [Clip Studio, le trait pour débutants](https://tips.clip-studio.com/en-us/articles/8771) · [Creative Bloq, 20 conseils d'esquisse](https://www.creativebloq.com/illustration/sketching-tips-beginners-81516497/2) · [Pixel Grimoire #7](https://medium.com/pixel-grimoire/how-to-start-making-pixel-art-7-e504bfa4ddf2) | redessiner, baisser l'opacité, retourner la toile, poids du trait, peu de traits en petit (0-AB-B) |
 | [D33] | [Clip Studio, améliorer son line art](https://www.clipstudio.net/how-to-draw/archives/163108) · [Cursa, poids, effilés et angles](https://cursa.app/en/page/digital-drawing-on-a-tablet-clean-line-art-techniques-line-weight-tapers-and-corners) · [Proko, Jeff Watts et la qualité du trait](https://www.proko.com/lesson/jeff-watts-on-line-quality) | système de poids, traits décidés, recouvrements, nettoyage (0-AC-B) |
 | [D34] | [Core77, poids du trait en design produit](https://core77.com/posts/99154/Sketching-Tutorial-How-To-Use-Line-Weight-In-Your-Sketches-2-Rules-n-2-Techniques) · [The Design Sketchbook, poids du trait](https://www.thedesignsketchbook.com/?p=37086) · [Lospec, contours en pixel art](https://lospec.com/articles/pixel-art-outlines) | trois poids (fin, moyen, fort), traits intérieurs d'un ton plus clair (0-AC-B) |
+| [D35] | [Slynyrd #28, tuiles de profil](https://slynyrd.com/blog/2020/5/21/pixelblog-28-side-view-tiles) · [NESdev, dessiner un terrain (d'après MortMort)](https://www.nesdev.org/wiki/Drawing_terrain) · [itch.io, herbe et terre de profil](https://itch.io/t/1865993/pixel-tutorial-dirtgrass-side-view) | tileset de plateforme : blocage, tuile centrale en strates, croûte de bas en haut, fissures, coins, pentes, clusters gras, miroir sous lumière zénithale (F2-F) |
 | [D10] | [Les bords en peinture](https://drawpaintacademy.com/edges/) · [Muddy Colors, bords](https://www.muddycolors.com/?p=8983) | bords durs, doux, perdus (0-H) |
 
 Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixeljoint.com/forum/forum_posts.asp?TID=20953)
@@ -4281,6 +4354,17 @@ Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixel
 ---
 
 # Historique des versions
+
+- **v24 :** **0-AD itérer sur une forme de base** : à la demande de l'utilisateur [U], on ne
+  dessine plus 6 silhouettes dans 3 familles ni 3 variantes de chaque pièce ; on part d'une
+  forme de base simple et on la pousse en 3 versions au moins, chacune notée ; règle 82
+  réécrite. **F2-F, un tileset de plateforme dans l'ordre** [D35] : blocage en aplats et
+  carte de test, tuile centrale en strates, bords, coins et coins rentrants, pentes,
+  plateformes, détails, répétition, miroir. Dans Claude Pixel : étape « Itérations sur une
+  forme de base » (rubrique *Itération* au carnet) à la place des essais et du design des
+  pièces ; le décor suit un pipeline de 12 étapes (gabarit, tuile centrale, bords et coins,
+  lumière, plateformes et décors, carte, détails) ; dans un gabarit d'autotile, seules les
+  tuiles qui se répètent doivent se raccorder.
 
 - **v23 :** **0-AC le sketch fini de pro** : le trait seul doit passer pour une planche de
   concept art ; contre-exemple de la fiole-bourgeon [T18] ; huit critères (idée en silhouette,

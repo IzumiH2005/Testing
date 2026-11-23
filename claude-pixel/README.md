@@ -30,6 +30,12 @@ Projet personnel, non officiel, sans lien avec Anthropic.
   silhouettes, puis écrit son choix. Depuis la v21 : au moins 6 silhouettes notées sur 30
   (lisibilité, originalité, appeal, cohérence, rythme, crédibilité), puis, pour un objet,
   3 variantes de chaque pièce (bouchon, jonctions, pied) avant toute construction.
+  Depuis la v24 : plus d'essais de formes différentes ; Claude part d'une forme de base
+  simple et l'itère au moins 3 fois (rubrique « Itération » au carnet, chaque version notée).
+- **Tilesets de plateforme** (v24) : le type décor suit un pipeline en 12 étapes : gabarit
+  d'autotile en aplats testé sur une carte, tuile centrale en strates, bords, coins et coins
+  rentrants, lumière, plateformes, variantes et décors, carte, détails. Dans un gabarit, seules
+  les tuiles qui se répètent doivent se raccorder.
 - **Sketching d'illustrateur** (v22) : rough, construction, esquisse nettoyée, trait final et
   polish, chacun sur son calque d'esquisse, celui du dessous baissé ; bouton « Retourner la
   toile » ; étape « Validation du dessin » avant toute couleur (note de 22/30 au moins).

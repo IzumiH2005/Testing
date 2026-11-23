@@ -355,7 +355,7 @@ function bouclePara() {
 RENDUS.tuiles = c => {
   const d = U.at.doc, t = d.tuile, { tw, th } = tailleTuile(d);
   c.appendChild(titre('Tuiles et décor'));
-  c.appendChild(h('p.aide-txt', 'Décor : une tuile 16×16 ou 32×32 par toile, ou un gabarit de 5×3 tuiles pour l\'autotile (B6-A, A5-8c).'));
+  c.appendChild(h('p.aide-txt', 'Décor : une tuile 16×16 ou 32×32 par toile, ou une planche avec un gabarit de 5×3 tuiles pour l\'autotile (bloc 3×3 en colonnes 1-3, coins rentrants en colonnes 4-5) et la plateforme en ligne 4 (F2-C, F2-F).'));
   const L = h('div.pile');
   L.appendChild(caseACocher('Mode tuile (répétition et raccords)', t.on, { cible: 'tuile-on', change: v => U.act('tuile.reglage', { on: v }) }));
   L.appendChild(h('div.grille2',
@@ -365,7 +365,7 @@ RENDUS.tuiles = c => {
   c.appendChild(L);
 
   if (t.on) {
-    const r = AP.DETECT.raccords(AP.compose(d, U.at.s.image, 'export'), d.w, d.h, t.tw, t.th);
+    const r = AP.DETECT.raccords(AP.compose(d, U.at.s.image, 'export'), d.w, d.h, t.tw, t.th, d.w >= 5 * t.tw && d.h >= 3 * t.th);
     const pc = x => Math.round(x * 100) + ' %';
     const mauvais = r.pts.length > 0;
     c.appendChild(h('div.etape-carte', { 'data-cible': 'raccords' },

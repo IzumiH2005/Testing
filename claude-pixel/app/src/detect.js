@@ -238,7 +238,12 @@ function superpixels(px, w, h) {
 }
 
 /* --- Raccords de tuile : le bord droit doit continuer le bord gauche (F2-A) --- */
-function raccords(px, w, h, tw, th) {
+function raccords(px, w, h, tw, th, gabarit) {
+  // Gabarit d'autotile (5×3 tuiles ou plus, F2-C) : seules les tuiles qui se posent à côté
+  // d'elles-mêmes doivent se raccorder. Le milieu des bords haut et bas, le centre et le
+  // milieu de la plateforme (ligne 4) dans le sens horizontal ; les bords gauche et droit et
+  // le centre dans le sens vertical. Les coins et les bouts n'ont pas à se raccorder.
+  const H = gabarit ? new Set(['1,0', '1,1', '1,2', '1,3']) : null, V = gabarit ? new Set(['0,1', '1,1', '2,1']) : null;
   const at = grille(px, w, h), out = [];
   const diff = (a, b) => a !== b ? 1 : 0;
   let interne = 0, ni = 0;
@@ -247,11 +252,12 @@ function raccords(px, w, h, tw, th) {
   const ref = ni ? interne / ni : 0;
   let nb = 0, mb = 0;
   for (let ty = 0; ty < h; ty += th) for (let tx = 0; tx < w; tx += tw) {
-    for (let y = ty; y < Math.min(h, ty + th); y++) {
+    const cle = (tx / tw) + ',' + (ty / th);
+    if (!gabarit || H.has(cle)) for (let y = ty; y < Math.min(h, ty + th); y++) {
       const a = at(tx, y), b = at(Math.min(w, tx + tw) - 1, y); nb++;
       if (diff(a, b)) { mb++; out.push([tx, y], [Math.min(w, tx + tw) - 1, y]); }
     }
-    for (let x = tx; x < Math.min(w, tx + tw); x++) {
+    if (!gabarit || V.has(cle)) for (let x = tx; x < Math.min(w, tx + tw); x++) {
       const a = at(x, ty), b = at(x, Math.min(h, ty + th) - 1); nb++;
       if (diff(a, b)) { mb++; out.push([x, ty], [x, Math.min(h, ty + th) - 1]); }
     }
@@ -325,7 +331,7 @@ function detecte(doc, f = 0) {
   if (A.length) ajoute('alpha', 'attention', 'Pixels semi-transparents', 'A6-F · règle 46', A.map(i => [i % w, (i / w) | 0]),
     A.length + ' pixel(s) à demi transparents : c\'est de l\'AA vers le vide, qui fait un halo sur tout autre fond. Rends-les opaques ou efface-les ; l\'AA se fait à l\'intérieur du contour.');
   if (doc.tuile && doc.tuile.on) {
-    const R = raccords(px, w, h, doc.tuile.tw, doc.tuile.th);
+    const tw = doc.tuile.tw, th = doc.tuile.th, R = raccords(px, w, h, tw, th, w >= 5 * tw && h >= 3 * th);
     if (R.pts.length) ajoute('raccords', 'erreur', 'Couture de tuile', 'F2-A', R.pts,
       Math.round(R.part * 100) + ' % des bords ne se raccordent pas (intérieur : ' + Math.round(R.ref * 100) + ' %). Regarde la grille 3×3 et corrige les bords.');
   }

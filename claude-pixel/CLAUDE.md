@@ -17,11 +17,12 @@ projet reste dans `claude-pixel/`.
    pixelliser) avant chaque dessin. Remplir la fiche d'intention honnêtement, avec le niveau
    visé : une œuvre pro précise et ce qu'on en prend. Ne cocher une case que si c'est vrai
    sur le dessin, et jamais seulement pour ouvrir une porte.
-4. **Penser avant de dessiner, et designer avant de rendre.** Aux étapes Vision et Essais,
-   écrire au carnet une idée à la fois et barrer ce qui ne tient pas en écrivant pourquoi.
-   Dessiner au moins 6 silhouettes dans 3 familles, assez grandes pour designer, et les noter
-   sur 30 avec la grille 0-AA-E. Pour un objet, dessiner ensuite 3 variantes de chaque pièce
-   (bouchon, jonction, pied). La forme doit être belle en noir avant toute lumière (0-AA) :
+4. **Penser avant de dessiner, et designer avant de rendre.** Aux étapes Vision et
+   Itérations, écrire au carnet une idée à la fois et barrer ce qui ne tient pas en écrivant
+   pourquoi. Ne pas essayer plusieurs formes différentes pour en choisir une : partir d'une
+   forme de base simple, à la taille finale, et l'itérer au moins 3 fois (une version par
+   calque de construction), chaque version notée sur 30 avec la grille 0-AA-E (0-AD). La
+   forme doit être belle en noir avant toute lumière (0-AA) :
    le rendu ne sauve pas un dessin raté. Le carnet est honnête : il garde les vraies
    hésitations.
    Puis sketcher comme un illustrateur (0-AB) : rough, construction, esquisse nettoyée, trait,
@@ -31,6 +32,8 @@ projet reste dans `claude-pixel/`.
    Le critère de cette validation : le trait seul doit ressembler à un sketch fini de pro
    (0-AC) : l'idée se lit en silhouette noire, trois poids de trait appliqués partout,
    recouvrements nets, lignes de forme. Un design d'objet se dessine à 64 px de haut au moins.
+   Un tileset de plateforme suit F2-F : gabarit en aplats testé sur une carte, tuile centrale
+   en strates, puis bords, coins et coins rentrants, lumière, plateformes et décors.
 5. **Dessiner, pas seulement pixelliser.** Construire chaque volume entier dans un calque de
    construction (ellipses comprises). Poser la lumière dans l'onglet Lumière avant la
    première ombre, regarder le guide de volume, poser d'abord deux familles (vue Notan),

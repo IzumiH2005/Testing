@@ -45,3 +45,15 @@ test('pixel semi-transparent : AA vers le vide signalé ; pixels opaques : rien'
   const r = AP.detecte(doc(16, 16, p)).find(x => x.id === 'alpha');
   assert.ok(r); assert.deepEqual(r.pixels, [[1, 1]]);
 });
+
+test('raccords : dans un gabarit d\'autotile, seules les tuiles qui se répètent doivent se raccorder', () => {
+  // 5×3 tuiles de 4 px : un bloc dont le bord haut est clair, le reste sombre.
+  const tw = 4, w = 20, h = 12, px = new Uint32Array(w * h), C = AP.parseHex('#404040'), H = AP.parseHex('#c0c0c0');
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) px[y * w + x] = (y % tw === 0 && y < tw) ? H : C;
+  // coin haut gauche : arrondi (un pixel vide) ; il n'a pas à se raccorder
+  px[0] = 0;
+  assert.equal(AP.DETECT.raccords(px, w, h, tw, tw, true).pts.length, 0);
+  // le centre (tuile 1,1) qui ne se raccorde pas est signalé
+  for (let k = 0; k < tw; k++) { px[(tw + k) * w + tw] = H; px[tw * w + tw + k] = H; }
+  assert.ok(AP.DETECT.raccords(px, w, h, tw, tw, true).pts.length > 0);
+});

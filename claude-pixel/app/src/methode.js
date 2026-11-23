@@ -440,7 +440,7 @@ for (const t of ['personnage', 'chibi', 'creature']) {
 /* Vision et essais (0-N) : avant tout trait, écrire ce qu'on voit et l'éprouver. */
 const RUBRIQUES = {
   vision: 'Ce que je vois', structure: 'Structure / physionomie', formes: 'Formes de base',
-  unique: 'Ce qui la rend unique', logique: 'Pourquoi c\'est crédible', variante: 'Variante (SCAMPER, tableau)', essai: 'Essai', critique: 'Critique (note sur 30)', piece: 'Pièce (bouchon, jonction, pied)', choix: 'Choix retenu'
+  unique: 'Ce qui la rend unique', logique: 'Pourquoi c\'est crédible', variante: 'Variante (SCAMPER, tableau)', essai: 'Essai', iteration: 'Itération', critique: 'Critique (note sur 30)', piece: 'Pièce (bouchon, jonction, pied)', choix: 'Choix retenu'
 };
 const AIDE_STRUCTURE = {
   objet: 'De quoi il est fait, comment ses pièces tiennent ensemble, comment on le tient ou l\'utilise (la forme suit la fonction).',
@@ -557,10 +557,76 @@ const ETAPES_V22 = Object.assign({}, ETAPES_V21);
   }
   ETAPES_V22.objet = L;
 }
-const ETAPES = ETAPES_V22;
+/* ---------- Méthode v24 : itérer sur une forme de base (0-AD) ----------
+ * On ne cherche plus six silhouettes différentes pour en choisir une : on part d'une forme
+ * de base simple et on la pousse par itérations, chacune critiquée. Le décor devient un vrai
+ * pipeline de tileset de plateforme (F2-F). */
+const ETAPE_ITERATIONS = () => E('iterations', 'Itérations sur une forme de base', '0-AD · 0-AA-E', [
+  'Pars d\'une forme de base simple (bloc, sphère, cylindre, rectangle aux coins cassés), à la taille finale, dans un calque de construction « v1 ».',
+  'Itère sur la MÊME forme : chaque version dans un nouveau calque de construction (v2, v3…), celle du dessous baissée ou masquée. Une ou deux choses changent à chaque fois : proportions, coins, rythme du contour, une pièce, la place des masses.',
+  'Après chaque version : une ligne « Itération » au carnet (ce qui change et pourquoi) et une « Critique » notée sur 30 avec la grille 0-AA-E. Ce qui n\'a pas marché se barre, avec la raison.',
+  'Au moins 3 versions. Garde la meilleure et écris le « Choix retenu » : ce qu\'elle a gagné sur la v1 et ce qu\'il faut encore pousser.'
+], { pasEncore: 'Pas de trait final ni de couleur. Pas de forme radicalement différente : on améliore la même.', portes: ['construction', 'carnetIterations'],
+  coches: [C('base', 'Parti d\'une forme de base simple'), C('trois', 'Au moins 3 versions de la même forme, chacune critiquée'), C('mieux', 'La version retenue est mieux notée que la v1')] });
+const ETAPES_V24 = {};
+for (const t of Object.keys(ETAPES_V22)) ETAPES_V24[t] = ETAPES_V22[t].filter(e => e.id !== 'pieces').map(e => e.id === 'essais' ? ETAPE_ITERATIONS() : e);
+ETAPES_V24.decor = [
+  ETAPE_FICHE('F0 · F1 · F2-F'),
+  ETAPE_VISION('decor'),
+  ETAPE_ITERATIONS(),
+  E('palette', 'Palette du lieu', 'F4 · F1', [
+    'Plan jouable au milieu des valeurs ; fond plus clair et désaturé ; premier plan sombre.',
+    'Une rampe par matière (croûte, terre ou pierre, détails), qui partagent leurs tons sombres. Peu de couleurs par texture : trop de tons rendent la texture floue (F2-F).',
+    'Le personnage et les dangers gardent le plus fort contraste (règle 34).'
+  ], { portes: ['rampesGris'], coches: [C('hierarchie', 'Hiérarchie de contraste respectée'), C('peu', '3 ou 4 tons par matière, pas plus')] }),
+  E('gabarit', 'Gabarit en aplats et carte de test', 'F2-C · F2-F', [
+    'Onglet Tuiles : mode tuile, taille de tuile de la fiche. Planche : bloc 3×3 (coins, bords, centre) en colonnes 1-3, coins rentrants en colonnes 4-5, plateformes et décors en dessous.',
+    'Dans un calque de construction, pose chaque tuile en GRANDS APLATS (blocage de couleur) : croûte claire, face moyenne, bas plus sombre. Pas de texture.',
+    'Peins tout de suite une carte de test (pinceau Terrain) en U, en L et en îlot : un carré qui dépasse dans un coin rentrant veut dire qu\'il manque la tuile de coin intérieur.',
+    'Les bords ne sont jamais des rectangles parfaits : coins arrondis ou cassés, croûte qui déborde un peu sur la face.'
+  ], { pasEncore: 'Pas de texture, pas de détail.', portes: ['tuileOn', 'construction', 'carteTerrain'], outils: ['rect', 'seau', 'crayon'],
+    coches: [C('gabarit', 'Toutes les tuiles du gabarit sont posées en aplats'), C('carte', 'Carte de test en U, L et îlot sans trou ni carré qui dépasse')] }),
+  E('centre', 'Tuile centrale en strates', 'F2-A · F2-F', [
+    'Sur le calque normal : la tuile centrale d\'abord, comme une coupe de terrain. Grandes masses (strates, gros blocs), puis clusters moyens, puis quelques petits.',
+    'Des clusters francs et de tailles proches ; des clusters clés répétés à plusieurs endroits, jamais collés entre eux (un contact coin à coin suffit).',
+    'Les clusters passent par-dessus les bords et tournent autour de la tuile : décalage cyclique (onglet Calques) pour vérifier qu\'aucune couture ne se voit.',
+    'Poids visuel égal partout dans la tuile : pas de gros sujet au centre, pas de coin vide.'
+  ], { pasEncore: 'Pas encore les bords ni les coins.', portes: ['nonVide', 'raccords', 'orphelins', 'bruit'],
+    coches: [C('strates', 'Grandes masses, puis clusters moyens, puis petits'), C('centre', 'Aucun gros sujet au centre, poids égal'), C('raccords', 'Décalée d\'une demi-tuile, la tuile ne montre aucune couture')] }),
+  E('bords', 'Bords, coins et coins rentrants', 'F2-C · F2-D · F2-F', [
+    'Le dessus d\'abord : la croûte (herbe, mousse, neige) se construit de bas en haut, du plus sombre au plus clair, en touffes qui débordent un peu ; une ombre entre la croûte et la face.',
+    'Puis le bas (fissures, terre plus sombre) et les côtés (on repart du centre, on prolonge les clusters jusqu\'au bord). Avec une lumière zénithale, le côté droit est le miroir du gauche.',
+    'Les coins partent des bords haut et bas : on fait tourner les fissures et la croûte autour du coin, et on éclaire l\'arête.',
+    'Coins rentrants : le centre plus une ombre de transition sous la croûte, comme au bord haut. Vérifie tout sur la carte de test.'
+  ], { pasEncore: 'Pas d\'éclat ni de décor.', portes: ['raccords', 'L', 'orphelins'],
+    coches: [C('croute', 'Même hauteur de croûte partout'), C('coins', 'Coins arrondis ou cassés, arête du coin éclairée'), C('carte', 'Carte de test regardée : aucun raccord ne casse')] }),
+  E('lumiere', 'Lumière et volume des blocs', 'F2-A · F2-D · 0-C', [
+    'Onglet Lumière : la même lumière pour tout le jeu. Zénithale (haut) si les tuiles doivent se retourner en miroir.',
+    'Le haut d\'un bloc s\'éclaire, la face s\'assombrit vers le bas, les creux et le dessous de la croûte sont les plus sombres (occlusion).',
+    'Chaque cluster a sa lumière : arête claire du côté de la source, ombre propre de l\'autre. Pas d\'ombre coussin autour des clusters.',
+    'Vue Notan : la croûte claire et le bloc sombre se lisent en deux masses.'
+  ], { portes: ['lumierePosee', 'coussin', 'L'], outils: ['ombrage'],
+    coches: [C('haut', 'Haut éclairé, bas plus sombre, dessous de croûte ombré'), C('clusters', 'Chaque cluster est éclairé du même côté')] }),
+  E('variantes', 'Plateformes, variantes et décors', 'F2-B · F2-D · F2-F', [
+    'Plateforme traversable : bout gauche, milieu, bout droit ; un appui dans le fond la rattache au décor.',
+    '1 à 3 variantes des tuiles qu\'on aligne souvent (centre, bord haut), issues de la première par petites retouches.',
+    'Décors posés par-dessus et hors grille : touffes, fleurs, cailloux, racines, qui cachent le dessus plat sans toucher aux collisions.'
+  ], { portes: ['raccords', 'orphelins'], coches: [C('plateforme', 'Plateforme en trois pièces posée'), C('variantes', '1 à 3 variantes'), C('decors', 'Décors hors grille qui cassent la répétition')] }),
+  E('carte', 'Carte et scène', 'F6 · F3 · F1', [
+    'Peins une carte 20×12 dans l\'onglet Tuiles (terrain, plateformes, décors) et regarde-la dézoomée : la répétition se voit de loin.',
+    'Passe-la en gris : le plan jouable se lit d\'abord ; la croûte dit « on peut marcher ici ».',
+    'Agrandis seulement par un entier, une seule taille de pixel (règle 37).'
+  ], { portes: ['carteTerrain', 'carte'], coches: [C('loin', 'Carte regardée dézoomée : pas de grille visible'), C('gris', 'En gris, le plan jouable se lit')] }),
+  E('details', 'Détails et nettoyage', 'A6-H · A5-10', [
+    'Quelques détails dans les zones calmes : fissure (trait sombre + lèvre claire), racine, éclat d\'une pierre. Le dessus reste lisible.',
+    'Chasse les défauts : L, orphelins, banding, coussin, bruit. Les calques de construction ne s\'exportent pas.'
+  ], { portes: NETTOYAGE.filter(p => p !== 'superpixels'), coches: [C('lisible', 'Lisible à ×1 sur la carte')] }),
+  ETAPE_PLANCHE('A5-11 · F6')
+];
+const ETAPES = ETAPES_V24;
 const etapesDe = doc => {
   const v = (doc.meta && doc.meta.methode) || 0;
-  return (v >= 22 ? ETAPES_V22 : v >= 21 ? ETAPES_V21 : v >= 17 ? ETAPES_V17 : ETAPES_V16)[typeDe(doc)];
+  return (v >= 24 ? ETAPES_V24 : v >= 22 ? ETAPES_V22 : v >= 21 ? ETAPES_V21 : v >= 17 ? ETAPES_V17 : ETAPES_V16)[typeDe(doc)];
 };
 /* Calques de construction qui contiennent des pixels, dans l'ordre de la pile. */
 function calquesConstr(doc) {
@@ -645,6 +711,14 @@ function porte(id, at, cache) {
       if (c.filter(e => e.barre).length < 3) manque.push('au moins 3 idées barrées au total');
       return manque.length ? 'Carnet : ' + manque.join(', ') + '.' : null;
     }
+    case 'carnetIterations': {
+      const c = m.carnet || [], n = r => c.filter(e => e.rubrique === r).length, manque = [];
+      const notees = c.filter(e => e.rubrique === 'critique' && /\d+(?:[.,]\d+)?\s*\/\s*30/.test(e.texte)).length;
+      if (n('iteration') < 3) manque.push((3 - n('iteration')) + ' « Itération » de plus (3 versions au moins)');
+      if (notees < 3) manque.push((3 - notees) + ' « Critique » notée(s) sur 30 de plus');
+      if (!c.some(e => e.rubrique === 'choix' && !e.barre)) manque.push('un « Choix retenu »');
+      return manque.length ? 'Carnet : ' + manque.join(', ') + '.' : null;
+    }
     case 'calquesConstr2': case 'calquesConstr3': case 'calquesConstr4': {
       const n = +id.slice(-1), k = calquesConstr(doc).length;
       return k >= n ? null : 'Il faut ' + n + ' calques de construction dessinés (un par passe : vignettes, rough, volumes, esquisse) ; il y en a ' + k + '.';
@@ -673,6 +747,7 @@ function porte(id, at, cache) {
     }
     case 'reference': return doc.calques.some(c => c.type === 'reference') ? null : 'Importe la pièce dans un calque de référence.';
     case 'tuileOn': return doc.tuile.on ? null : 'Active le mode tuile (onglet Tuiles).';
+    case 'carteTerrain': return (doc.carte.terrain || []).filter(Boolean).length >= 12 ? null : 'Peins au moins 12 cases de terrain (onglet Tuiles, pinceau Terrain) : en U, en L et en îlot.';
     case 'carte': return (doc.carte.tuiles || []).filter(Boolean).length >= 12 ? null : 'Peins au moins 12 cases de carte dans l\'onglet Tuiles.';
     case 'analyse': return String(m.planche.analyse || '').trim().length >= 40 ? null : 'Écris l\'analyse (40 caractères au moins) dans l\'onglet Méthode.';
     case 'timing': {
@@ -702,11 +777,11 @@ function porte(id, at, cache) {
 }
 const NOMS_PORTES = {
   fiche: 'Fiche remplie', regles: 'Règles lues', nonVide: 'Image non vide', construction: 'Construction en calque',
-  silhouette1: 'Silhouette en 1-2 couleurs', reference: 'Calque de référence', tuileOn: 'Mode tuile', carte: 'Carte peinte',
+  silhouette1: 'Silhouette en 1-2 couleurs', reference: 'Calque de référence', tuileOn: 'Mode tuile', carte: 'Carte peinte', carteTerrain: 'Carte de test en terrain',
   analyse: 'Analyse écrite', timing: 'Feuille de timing', imagesValidees: 'Toutes les images validées', Ltoutes: 'Aucun L sur les images',
   planche: 'Planche remplie', defauts: 'Aucun défaut restant',
   carnetVision: 'Carnet : vision écrite et corrigée', carnetEssais: 'Carnet : essais et choix',
-  carnetEssais21: 'Carnet : 6 silhouettes notées et un choix', carnetPieces: 'Carnet : 9 variantes de pièces',
+  carnetEssais21: 'Carnet : 6 silhouettes notées et un choix', carnetPieces: 'Carnet : 9 variantes de pièces', carnetIterations: 'Carnet : 3 itérations notées et un choix',
   calquesConstr2: '2 calques d\'esquisse', calquesConstr3: '3 calques d\'esquisse', calquesConstr4: '4 calques d\'esquisse',
   dessousBaisse: 'Passes précédentes baissées', critiqueDessin: 'Dessin noté 22/30 au moins', taille64: 'Dessin à 64 px de haut au moins',
   lumierePosee: 'Lumière posée', volume: 'Le volume suit la lumière', lumiere: 'Ombrage du bon côté',
@@ -746,7 +821,7 @@ function extraitRegles(texte) {
 }
 
 Object.assign(AP, {
-  RUBRIQUES, FICHES, QUESTIONS, QUESTIONS_TYPE, TESTS_PRO, TABLE_A3, ETAPES, ETAPES_V16, ETAPES_V17, ETAPES_V21, ETAPES_V22, etapesDe, TYPES, NOMS_PORTES,
+  RUBRIQUES, FICHES, QUESTIONS, QUESTIONS_TYPE, TESTS_PRO, TABLE_A3, ETAPES, ETAPES_V16, ETAPES_V17, ETAPES_V21, ETAPES_V22, ETAPES_V24, etapesDe, TYPES, NOMS_PORTES,
   colonneA3, ficheIncomplete, nbEtapes, etapeCourante, etatEtape, verifieEtape, extraitRegles, typeDe
 });
 if (typeof module !== 'undefined') module.exports = AP;

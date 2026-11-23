@@ -5,6 +5,9 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { AP, trait, RACINE } = require('./aide.cjs');
 
+// Les documents v22 gardent les essais à 6 silhouettes et le design des pièces.
+const v22 = d => { d.meta.methode = 22; return d; };
+
 const FICHE = { quoi: 'potion', usage: 'inventaire', couleurs: '8', projection: 'de face', lumiere: 'haut gauche', matiere: 'verre', accent: 'rouge' };
 
 test('les 87 règles impératives sont extraites du document', () => {
@@ -20,8 +23,8 @@ test('en mode Claude, rien ne se dessine avant la lecture des règles', () => {
   assert.match(at.act('etape.valide').refus, /Fiche incomplète/);
 });
 
-test('fiche + règles lues ouvrent l\'étape 2, qui exige ses cases cochées', () => {
-  const at = new AP.Atelier({ mode: 'claude', doc: AP.nouveauDoc({ w: 16, h: 16, type: 'objet' }) });
+test('v22 : fiche + règles lues ouvrent l\'étape 2, qui exige ses cases cochées', () => {
+  const at = new AP.Atelier({ mode: 'claude', doc: { w: 16, h: 16, type: 'objet' } }); v22(at.doc);
   at.act('fiche', { champs: FICHE }); at.act('regles.lues');
   assert.deepEqual(at.act('etape.valide'), { ok: true, manque: [] });
   assert.equal(at.doc.meta.etape, 1);
@@ -59,8 +62,8 @@ test('fiche + règles lues ouvrent l\'étape 2, qui exige ses cases cochées', (
   assert.equal(AP.etatEtape(at).portes.find(p => p.id === 'carnetPieces').manque, null);
 });
 
-test('un document v17 garde ses 15 étapes ; un nouveau document a l\'étape « pièces »', () => {
-  const d = AP.nouveauDoc({ w: 16, h: 16, type: 'objet' });
+test('un document v17 garde ses 15 étapes ; un document v22 a l\'étape « pièces »', () => {
+  const d = v22(AP.nouveauDoc({ w: 16, h: 16, type: 'objet' }));
   assert.equal(d.meta.methode, 22);
   assert.ok(AP.etapesDe(d).some(e => e.id === 'pieces'));
   d.meta.methode = 17;
@@ -100,7 +103,7 @@ test('un document d\'avant la v17 garde ses étapes', () => {
 });
 
 test('v22 : le sketching d\'illustrateur, calque par calque, puis la validation du dessin', () => {
-  const at = new AP.Atelier({ doc: AP.nouveauDoc({ w: 16, h: 16, type: 'objet' }) }), d = at.doc;
+  const at = new AP.Atelier({ doc: { w: 16, h: 16, type: 'objet' } }), d = v22(at.doc);
   const ids = AP.etapesDe(d).map(e => e.id);
   for (const [a, b] of [['pieces', 'rough'], ['rough', 'construction'], ['construction', 'esquisse'], ['esquisse', 'forme'], ['forme', 'polish'], ['polish', 'validation'], ['validation', 'aplats']])
     assert.equal(ids.indexOf(b), ids.indexOf(a) + 1, a + ' puis ' + b);
@@ -126,4 +129,31 @@ test('v22 : le sketching d\'illustrateur, calque par calque, puis la validation 
   // un écart écrit après la note, sans note, ne la masque pas
   at.act('carnet.ajoute', { rubrique: 'critique', texte: 'Écart avec la référence : le calice reste plat.' });
   assert.equal(porte('validation').find(p => p.id === 'critiqueDessin').manque, null);
+});
+
+test('v24 : un nouveau document itère sur une forme de base, sans essais ni pièces', () => {
+  const at = new AP.Atelier({ doc: AP.nouveauDoc({ w: 64, h: 64, type: 'objet' }) }), d = at.doc;
+  assert.equal(d.meta.methode, 24);
+  const ids = AP.etapesDe(d).map(e => e.id);
+  assert.ok(!ids.includes('essais') && !ids.includes('pieces'));
+  assert.equal(ids.indexOf('iterations'), ids.indexOf('vision') + 1);
+  assert.equal(ids.indexOf('rough'), ids.indexOf('iterations') + 1);
+  d.meta.etape = ids.indexOf('iterations');
+  const manque = () => AP.etatEtape(at).portes.find(p => p.id === 'carnetIterations').manque;
+  assert.match(manque(), /3 « Itération »/);
+  for (let k = 1; k <= 3; k++) {
+    at.act('carnet.ajoute', { rubrique: 'iteration', texte: 'v' + k + ' : coins cassés' });
+    at.act('carnet.ajoute', { rubrique: 'critique', texte: 'v' + k + ' : ' + (16 + k * 2) + '/30' });
+  }
+  assert.match(manque(), /Choix retenu/);
+  at.act('carnet.ajoute', { rubrique: 'choix', texte: 'v3, la plus lisible' });
+  assert.equal(manque(), null);
+});
+
+test('v24 : le décor suit le pipeline d\'un tileset de plateforme', () => {
+  const d = AP.nouveauDoc({ w: 160, h: 128, type: 'decor' });
+  assert.deepEqual(AP.etapesDe(d).map(e => e.id),
+    ['fiche', 'vision', 'iterations', 'palette', 'gabarit', 'centre', 'bords', 'lumiere', 'variantes', 'carte', 'details', 'planche']);
+  // un document décor v22 garde ses étapes
+  assert.ok(AP.etapesDe(v22(AP.nouveauDoc({ w: 16, h: 16, type: 'decor' }))).some(e => e.id === 'essais'));
 });
