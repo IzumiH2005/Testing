@@ -102,6 +102,7 @@ seule s'écrit telle quelle.
 | `etat [porte]` | l'état complet en JSON : curseur, boutons, outil, couleurs, calque, étape, porte |
 | `cibles [filtre]` | les éléments cliquables visibles et leur position à l'écran |
 | `attends ms` | attend, au plus 5 000 ms |
+| `fichier chemin` | choisit ce fichier (dans `seances/`) à la prochaine fenêtre « Ouvrir » de l'atelier ; puis `clic =menu-fichier` et `clic =fichier-ouvrir` |
 | `fin` | ferme la séance et enregistre la vidéo |
 
 ## La règle : regarder avant le trait suivant

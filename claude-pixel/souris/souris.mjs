@@ -52,7 +52,7 @@ async function envoie(texte) {
 
 if (!argv.length || argv[0] === 'aide') {
   console.log(fs.readFileSync(path.join(ICI, 'serveur.mjs'), 'utf8').match(/\/\*[\s\S]*?\*\//)[0]);
-  console.log('Commandes : va, pas, choisis, defile, appuie, relache, clic, double, trace, glisse, molette, tiens, lache, touche, tape, survole, regarde, etat, cibles, attends, fin. Détails : souris/README.md');
+  console.log('Commandes : va, pas, choisis, defile, appuie, relache, clic, double, trace, glisse, molette, tiens, lache, touche, tape, survole, regarde, etat, cibles, attends, fichier, fin. Détails : souris/README.md');
 } else if (argv[0] === 'demarre') await demarre();
 else if (argv[0] === '-') await envoie(fs.readFileSync(0, 'utf8'));
 else await envoie(argv.filter((a, i) => !(a === '--port' || argv[i - 1] === '--port')).join(' '));

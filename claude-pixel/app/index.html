@@ -3554,6 +3554,7 @@ function choisitFichier(accept) {
   return new Promise(ok => {
     const i = h('input', { type: 'file', accept, style: { display: 'none' } });
     i.addEventListener('change', () => { ok(i.files && i.files[0] || null); i.remove(); });
+    i.addEventListener('cancel', () => { ok(null); i.remove(); });
     document.body.appendChild(i); i.click();
   });
 }
@@ -4354,13 +4355,14 @@ U.enregistreProjet = function () {
   return U.telecharge(U.nomFichier(U.at.doc.nom) + '.claude-pixel.json', JSON.stringify(p), 'application/json');
 };
 async function ouvreProjet() {
-  const f = await U.choisitFichier('.json,application/json'); if (!f) return;
+  const f = await U.choisitFichier('.json,application/json'); if (!f) return false;
   try {
     const p = JSON.parse(await U.litTexte(f));
     if (!p || !AP.FORMATS.includes(p.format)) throw new Error('Ce fichier n\'est pas un projet Claude Pixel.');
     U.at.charge(p); U.ajuste(); U.redessine(); sauveAuto();
     U.toast('Projet ouvert : ' + U.at.doc.nom, 'ok');
-  } catch (e) { U.toast('Ouverture impossible : ' + e.message, 'refus'); }
+    return true;
+  } catch (e) { U.toast('Ouverture impossible : ' + e.message, 'refus'); return false; }
 }
 
 /* ---------- Exports ---------- */
@@ -4470,8 +4472,14 @@ function modaleNouveau(bloque) {
     h('div.grille2', h('label', 'Palette de départ', pal), h('label', 'Nom', nom)));
   const boutons = [];
   if (!bloque) boutons.push({ txt: 'Annuler', valeur: false, cible: 'non' });
+  boutons.push({ txt: 'Ouvrir un projet…', valeur: 'ouvrir', cible: 'ouvrir' });
   boutons.push({ txt: 'Créer', valeur: true, prim: true, cible: 'oui', action: () => { if (!(w >= 1 && w <= 512 && hh >= 1 && hh <= 512)) { U.toast('Taille entre 1 et 512 px.', 'refus'); return false; } } });
-  return U.modale('Nouveau dessin', corps, boutons, { large: true, bloque }).then(ok => {
+  return U.modale('Nouveau dessin', corps, boutons, { large: true, bloque }).then(async ok => {
+    if (ok === 'ouvrir') {
+      // Reprendre un dessin enregistré ; si l'ouverture échoue au premier lancement, on revient au choix.
+      if (await ouvreProjet()) return true;
+      return bloque ? modaleNouveau(true) : false;
+    }
     if (!ok) return false;
     const r = U.act('doc.nouveau', { w, h: hh, palette: pal.value, type, nom: nom.value.trim() || 'sans titre' });
     if (r && r.refus) return false;

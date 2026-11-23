@@ -397,8 +397,17 @@ async function execute(ligne) {
       return L.filter(c => c.nom.includes(f)).map(c => c.nom + ' @' + Math.round(c.cx) + ',' + Math.round(c.cy)).join('\n') || 'aucune';
     }
     case 'attends': { const ms = Math.min(5000, Number(args[0]) || 500); await pause(ms); return 'attendu ' + ms + ' ms'; }
+    case 'fichier': {
+      // Prépare la prochaine fenêtre « Ouvrir un fichier » de l'atelier : un humain y choisirait ce fichier.
+      // Seuls les fichiers rangés dans seances/ sont acceptés, et le fichier n'est jamais modifié.
+      const f = path.resolve(RACINE, args.join(' '));
+      if (!f.startsWith(path.join(RACINE, 'seances') + path.sep)) throw new Error('Le fichier doit être dans seances/.');
+      if (!fs.existsSync(f)) throw new Error('Fichier introuvable : ' + path.relative(RACINE, f));
+      page.once('filechooser', fc => fc.setFiles(f).catch(e => erreurs.push('fichier : ' + e.message)));
+      return 'prochaine fenêtre de fichier : ' + path.relative(RACINE, f);
+    }
     case 'fin': return null;
-    default: throw new Error('Commande inconnue « ' + cmd + ' ». Commandes : va, pas, choisis, defile, appuie, relache, clic, double, trace, glisse, molette, tiens, lache, touche, tape, survole, regarde, etat, cibles, attends, fin.');
+    default: throw new Error('Commande inconnue « ' + cmd + ' ». Commandes : va, pas, choisis, defile, appuie, relache, clic, double, trace, glisse, molette, tiens, lache, touche, tape, survole, regarde, etat, cibles, attends, fichier, fin.');
   }
 }
 

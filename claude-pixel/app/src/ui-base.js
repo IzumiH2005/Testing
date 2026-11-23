@@ -158,6 +158,7 @@ function choisitFichier(accept) {
   return new Promise(ok => {
     const i = h('input', { type: 'file', accept, style: { display: 'none' } });
     i.addEventListener('change', () => { ok(i.files && i.files[0] || null); i.remove(); });
+    i.addEventListener('cancel', () => { ok(null); i.remove(); });
     document.body.appendChild(i); i.click();
   });
 }
