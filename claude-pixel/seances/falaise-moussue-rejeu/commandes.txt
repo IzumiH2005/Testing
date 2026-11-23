@@ -10276,3 +10276,101 @@
 12:18:13.725  regarde
 12:18:14.791  clic 128,35
 12:18:15.017  regarde
+12:18:16.110  trace 134,35 135,35
+12:18:16.456  regarde
+12:18:17.643  clic 132,36
+12:18:17.887  regarde
+12:18:18.984  clic =menu-fichier
+12:18:19.477  clic =fichier-exporter
+12:18:19.927  attends 500
+12:18:20.452  clic =export-png1
+12:18:20.857  # fichier enregistré : fichiers/falaise-moussue.png
+12:18:20.933  attends 800
+12:18:21.734  clic @866 630
+12:18:22.254  attends 300
+12:18:22.569  clic =onglet-methode
+12:18:23.304  attends 300
+12:18:23.610  defile =carnet-rub-passe
+12:18:24.086  clic =carnet-rub-passe
+12:18:24.691  attends 250
+12:18:24.950  defile =carnet-texte
+12:18:24.955  clic =carnet-texte
+12:18:25.319  tape "Bords, passes 1 à 6 : air (encoches, marges, dessous), structure de la croûte (brins sombres et franges), mousse (filaments sous la falaise), ombres (contours des pierres au bord, ombre de l'herbe sur les dessus), volume (corps de la croûte, faces latérales), éclats (pointes des brins, liserés)."
+12:18:31.599  defile =carnet-ajoute
+12:18:39.542    ✗ « carnet-ajoute » reste hors de vue après 80 crans.
+12:18:39.582  clic =carnet-ajoute
+12:18:40.134  attends 300
+12:18:40.524  clic =onglet-methode
+12:18:41.137  attends 300
+12:18:41.438  defile =carnet-rub-detail
+12:18:41.829  clic =carnet-rub-detail
+12:18:42.330  attends 250
+12:18:42.582  defile =carnet-texte
+12:18:42.591  clic =carnet-texte
+12:18:42.967  tape "Croûte d'herbe : chaque colonne est un brin (clair, moyen, sombre ou très clair selon un motif de 32 px), sommet ondulé de 2 à 4 px, brins dressés au-dessus, franges qui retombent de 1 à 5 px, ombre de contact puis un ton plus sombre sur le haut des pierres."
+12:18:47.531  defile =carnet-ajoute
+12:18:55.452    ✗ « carnet-ajoute » reste hors de vue après 80 crans.
+12:18:55.493  clic =carnet-ajoute
+12:18:56.034  attends 300
+12:18:56.361  clic =onglet-methode
+12:18:56.989  attends 300
+12:18:57.294  defile =carnet-rub-detail
+12:18:57.693  clic =carnet-rub-detail
+12:18:58.143  attends 250
+12:18:58.396  defile =carnet-texte
+12:18:58.408  clic =carnet-texte
+12:18:58.800  tape "Côtés de la falaise : le bord suit les pierres ; il rentre de 3 px au droit de chaque joint horizontal et de 1 px juste avant et après, comme des coins usés ; contour sombre sur la pierre au bord, face latérale un ton plus sombre."
+12:19:02.929  defile =carnet-ajoute
+12:19:10.925    ✗ « carnet-ajoute » reste hors de vue après 80 crans.
+12:19:10.965  clic =carnet-ajoute
+12:19:11.470  attends 300
+12:19:11.804  clic =onglet-methode
+12:19:12.469  attends 300
+12:19:12.771  defile =carnet-rub-detail
+12:19:13.159  clic =carnet-rub-detail
+12:19:13.623  attends 250
+12:19:13.876  defile =carnet-texte
+12:19:13.886  clic =carnet-texte
+12:19:14.266  tape "Dessous de la falaise : le bord remonte de 3 px au droit des joints verticaux, les pierres gardent un fond arrondi ; filaments de mousse (deux tons) et deux racines fines qui pendent ; le bas fonce d'un ton sur 7 px."
+12:19:18.127  defile =carnet-ajoute
+12:19:26.061    ✗ « carnet-ajoute » reste hors de vue après 80 crans.
+12:19:26.107  clic =carnet-ajoute
+12:19:26.686  attends 300
+12:19:27.044  clic =onglet-methode
+12:19:27.714  attends 300
+12:19:28.020  defile =carnet-rub-detail
+12:19:28.424  clic =carnet-rub-detail
+12:19:28.880  attends 250
+12:19:29.132  defile =carnet-texte
+12:19:29.135  clic =carnet-texte
+12:19:29.520  tape "Coins rentrants : d'après l'assemblage par quarts, seule une encoche d'air de 4×7 px au point de rencontre ; la croûte du sol enveloppe le pied du mur ; un premier jet creusait à tort une fente sur toute la hauteur, corrigé avant le dessin."
+12:19:33.932  defile =carnet-ajoute
+12:19:41.869    ✗ « carnet-ajoute » reste hors de vue après 80 crans.
+12:19:41.909  clic =carnet-ajoute
+12:19:42.434  attends 300
+12:19:42.795  clic =onglet-methode
+12:19:43.449  attends 300
+12:19:43.751  defile =justifie-L
+12:19:45.748  clic =justifie-L
+12:19:46.064  touche ctrl+a
+12:19:46.141  tape "Les « L » sont des bords de formes pleines : escaliers du bas des pierres et des dalles, contours des pierres au bord de la falaise, brins et franges de la croûte. Ce ne sont pas des traits de 1 px."
+12:19:49.950  touche tab
+12:19:50.235  attends 250
+12:19:50.487  defile =coche-bords.croute
+12:19:50.494  clic =coche-bords.croute
+12:19:50.959  attends 200
+12:19:51.213  defile =coche-bords.coins
+12:19:51.224  clic =coche-bords.coins
+12:19:51.593  attends 200
+12:19:51.859  defile =coche-bords.carte
+12:19:51.887  clic =coche-bords.carte
+12:19:52.314  attends 200
+12:19:52.555  defile =etape-valide
+12:19:52.560  clic =etape-valide
+12:19:52.979  attends 400
+12:19:53.430  va @200 300
+12:19:53.833  regarde
+12:19:55.014  clic =onglet-lumiere
+12:19:55.595  attends 400
+12:19:55.997  defile =lum-h
+12:19:56.000  clic =lum-h
