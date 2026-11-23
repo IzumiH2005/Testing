@@ -1,0 +1,11 @@
+regard 630
+case 32,5 · couleur #5f5ea8ff (exportée : #5f5ea8ff) · écran 501,210
+outil remplace · taille 1 · c1 #5f5ea8ff · c2 #3a3f58ff
+calque 1/6 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 17 · Variation de couleur (B6-A · A5-8c · 0-G)
+porte : Case non cochée : « Ombres plus froides, valeurs inchangées en gris »
+défauts : Pixels doublés en « L » [erreur] 72 px ; Pixels orphelins [attention] 2 px ; Tramage en damier [conseil] 78 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) · accord 0.31 · familles 0.05 · inversions 21 % · étendue 0.49
+carnet : 25 idée(s), 11 barrée(s) · dernière : [critique] Montré à l'humain : feu vert pour passer à la couleur, en gardant les réserves notées (ryt
+messages : aucun
+images : seances/fiole-floraison-couleur/regards/630-{ecran,loupe,dessin}.png

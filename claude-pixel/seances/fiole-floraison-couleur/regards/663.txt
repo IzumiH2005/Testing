@@ -1,0 +1,11 @@
+regard 663
+case 52,33 · couleur transparent (exportée : transparent) · écran 581,322
+outil crayon · taille 1 · c1 #343f5eff · c2 #3a3f58ff
+calque 1/6 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 18 · Détails et nettoyage (B6-A · A6-H · A5-10)
+porte : Jaggies (segments irréguliers) (A5-6 · règle 22) : 2 px. Corrige, ou justifie-le. | Case non cochée : « Fissures avec lèvre claire » | Case non cochée : « Chaque étape se lit à ×1 » | Case non cochée : « AA seulement sur les marches de 2 px ou plus, à l'intérieur ; chaque pixel d'AA passe le test de l'enlèvement (règle 46) »
+défauts : Pixels doublés en « L » [erreur] 74 px ; Jaggies (segments irréguliers) [attention] 2 px ; Pixels orphelins [attention] 2 px ; L'ombrage ne suit pas la lumière [attention] 199 px ; Tramage en damier [conseil] 86 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) · accord 0.26 · familles 0.04 · inversions 21 % · étendue 0.49
+carnet : 25 idée(s), 11 barrée(s) · dernière : [critique] Montré à l'humain : feu vert pour passer à la couleur, en gardant les réserves notées (ryt
+messages : aucun
+images : seances/fiole-floraison-couleur/regards/663-{ecran,loupe,dessin}.png

@@ -1,0 +1,11 @@
+regard 633
+case 45,57 · couleur #6a2a1eff (exportée : #6a2a1eff) · écran 553,418
+outil remplace · taille 1 · c1 #6a2a1eff · c2 #3a3f58ff
+calque 1/6 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 17 · Variation de couleur (B6-A · A5-8c · 0-G)
+porte : Case non cochée : « Ombres plus froides, valeurs inchangées en gris »
+défauts : Pixels doublés en « L » [erreur] 72 px (dont 42,54 près du curseur) ; Pixels orphelins [attention] 2 px ; L'ombrage ne suit pas la lumière [attention] 192 px (dont 41,54 42,54 42,55 43,55 42,56 43,56 43,57 44,57 43,58 44,58 43,59 44,59 près du curseur) ; Tramage en damier [conseil] 78 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) · accord 0.27 · familles 0.04 · inversions 20 % · étendue 0.49
+carnet : 25 idée(s), 11 barrée(s) · dernière : [critique] Montré à l'humain : feu vert pour passer à la couleur, en gardant les réserves notées (ryt
+messages : aucun
+images : seances/fiole-floraison-couleur/regards/633-{ecran,loupe,dessin}.png

@@ -1,0 +1,11 @@
+regard 602
+case 35,9 · couleur #7fc8c8ff (exportée : #7fc8c8ff) · écran 513,226
+outil crayon · taille 1 · c1 #7fc8c8ff · c2 #3a3f58ff
+calque 1/6 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 16 · Contre-jour (B6-A · B6-G)
+porte : Case non cochée : « Le contre-jour a une autre teinte que la lumière principale »
+défauts : Pixels doublés en « L » [erreur] 72 px ; Jaggies (segments irréguliers) [attention] 2 px (dont 34,6 34,7 près du curseur) ; Pixels orphelins [attention] 2 px ; Banding [attention] 22 px ; Tramage en damier [conseil] 78 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) · accord 0.36 · familles 0.06 · inversions 25 % · étendue 0.49
+carnet : 25 idée(s), 11 barrée(s) · dernière : [critique] Montré à l'humain : feu vert pour passer à la couleur, en gardant les réserves notées (ryt
+messages : aucun
+images : seances/fiole-floraison-couleur/regards/602-{ecran,loupe,dessin}.png

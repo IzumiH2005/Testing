@@ -1,0 +1,11 @@
+regard 091
+case 8,60 · couleur #7880a2ff (exportée : #7880a2ff) · écran 405,430
+outil seau · taille 1 · c1 #7880a2ff · c2 #00000000
+calque 1/6 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 12 · Placer la lumière, deux familles (0-C · 0-D)
+porte : Volume (0-C) : accord clarté/volume 0.34 < 0,50, lumière et ombre trop proches (0.05 < 0,08), 20 % de la lumière plus sombre que l'ombre. Affiche le guide (onglet Lumière), corrige, ou justifie. | Lumière et ombre se confondent (0-C · règle 51) : 198 px. Corrige, ou justifie-le. | Pixels doublés en « L » (A5-6 · règle 21) : 72 px. Corrige, ou justifie-le. | Case non cochée : « Vue Notan : deux masses claires, frontière qui suit la forme » | Case non cochée : « L'ombre est du côté opposé à la source, partout »
+défauts : Pixels doublés en « L » [erreur] 72 px (dont 5,59 6,59 près du curseur) ; Banding [attention] 48 px (dont 5,56 5,57 5,58 5,59 6,59 6,60 6,61 6,62 7,63 7,64 près du curseur) ; Lumière et ombre se confondent [attention] 198 px (dont 9,56 9,57 9,58 10,59 10,60 10,61 11,62 11,63 11,64 près du curseur) ; Tramage en damier [conseil] 102 px (dont 6,58 7,58 6,59 7,59 7,62 8,62 7,63 8,63 8,64 9,64 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) · accord 0.34 · familles 0.05 · inversions 20 % · étendue 0.49
+carnet : 25 idée(s), 11 barrée(s) · dernière : [critique] Montré à l'humain : feu vert pour passer à la couleur, en gardant les réserves notées (ryt
+messages : aucun
+images : seances/fiole-floraison-couleur/regards/091-{ecran,loupe,dessin}.png

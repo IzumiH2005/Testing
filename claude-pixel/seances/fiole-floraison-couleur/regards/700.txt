@@ -1,0 +1,11 @@
+regard 700
+case -43,28 (hors du dessin) · couleur (hors toile) · écran 200,300
+outil crayon · taille 1 · c1 #80809eff · c2 #3a3f58ff
+calque 1/6 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+méthode terminée · dernière étape : 19 · Contrôle final : la planche (A5-11 · B5 · B6-G · 0-J)
+porte : prête
+défauts : Pixels doublés en « L » [erreur] 74 px ; Pixels orphelins [attention] 2 px ; L'ombrage ne suit pas la lumière [attention] 199 px ; Tramage en damier [conseil] 86 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) · accord 0.25 · familles 0.04 · inversions 21 % · étendue 0.49
+carnet : 26 idée(s), 11 barrée(s) · dernière : [critique] Rendu final : lisibilité 4, originalité 4, appeal 4, cohérence 4, rythme 3, crédibilité 4 
+messages : aucun
+images : seances/fiole-floraison-couleur/regards/700-{ecran,loupe,dessin}.png

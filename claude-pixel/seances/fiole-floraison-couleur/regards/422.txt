@@ -1,0 +1,11 @@
+regard 422
+case 52,50 · couleur #d98c35ff (exportée : #d98c35ff) · écran 581,390
+outil crayon · taille 1 · c1 #d98c35ff · c2 #00000000
+calque 1/6 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 14 · Matière : ce que la surface fait de la lumière (0-I · A5-8b · B6)
+porte : Case non cochée : « La matière se reconnaît sans couleur (gris) »
+défauts : Pixels doublés en « L » [erreur] 73 px (dont 51,49 51,50 près du curseur) ; Banding [attention] 35 px ; Tramage en damier [conseil] 68 px (dont 49,48 50,48 49,49 50,49 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) · accord 0.45 · familles 0.08 · inversions 26 % · étendue 0.49
+carnet : 25 idée(s), 11 barrée(s) · dernière : [critique] Montré à l'humain : feu vert pour passer à la couleur, en gardant les réserves notées (ryt
+messages : aucun
+images : seances/fiole-floraison-couleur/regards/422-{ecran,loupe,dessin}.png

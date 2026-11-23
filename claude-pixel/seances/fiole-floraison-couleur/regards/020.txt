@@ -1,0 +1,11 @@
+regard 020
+case 35,19 · couleur #ab9fd6ff (exportée : #ab9fd6ff) · écran 513,266
+outil crayon · taille 1 · c1 #ab9fd6ff · c2 #00000000
+calque 1/6 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 11 · Couleur locale à plat (B6-A · A5-7 · 0-G)
+porte : Pixels doublés en « L » (A5-6 · règle 21) : 2 px. Corrige, ou justifie-le. | Case non cochée : « Les matières se séparent en gris »
+défauts : Pixels doublés en « L » [erreur] 2 px (dont 36,20 près du curseur) ; L'ombrage ne suit pas la lumière [attention] 6 px (dont 38,17 près du curseur) ; Tramage en damier [conseil] 16 px (dont 35,19 36,19 35,20 36,20 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord 0.09 · familles 0.02 · inversions 6 % · étendue 0.12
+carnet : 25 idée(s), 11 barrée(s) · dernière : [critique] Montré à l'humain : feu vert pour passer à la couleur, en gardant les réserves notées (ryt
+messages : aucun
+images : seances/fiole-floraison-couleur/regards/020-{ecran,loupe,dessin}.png

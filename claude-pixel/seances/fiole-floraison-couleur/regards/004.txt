@@ -1,0 +1,11 @@
+regard 004
+case 26,22 · couleur #1e1426ff (exportée : #1e1426ff) · écran 477,278
+outil crayon · taille 1 · c1 #1e1426ff · c2 #00000000
+calque 1/6 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 11 · Couleur locale à plat (B6-A · A5-7 · 0-G)
+porte : Case non cochée : « Les matières se séparent en gris »
+défauts : Bruit [attention] 125 px (dont 22,18 26,18 23,19 24,20 24,23 25,24 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 25 idée(s), 11 barrée(s) · dernière : [critique] Montré à l'humain : feu vert pour passer à la couleur, en gardant les réserves notées (ryt
+messages : aucun
+images : seances/fiole-floraison-couleur/regards/004-{ecran,loupe,dessin}.png

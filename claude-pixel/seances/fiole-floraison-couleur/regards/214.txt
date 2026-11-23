@@ -1,0 +1,11 @@
+regard 214
+case 12,68 · couleur #5a6180ff (exportée : #5a6180ff) · écran 421,462
+outil crayon · taille 1 · c1 #5a6180ff · c2 #00000000
+calque 1/6 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 13 · Modelé : demi-ton, ombre propre, rebond, ombre portée (0-C · A5-8 · A6-E)
+porte : Banding (A6-H) : 70 px. Corrige, ou justifie-le. | Case non cochée : « Rebond plus sombre que la lumière, ombre propre visible » | Case non cochée : « Ombre portée ou contact posé (ou raison écrite de s'en passer) »
+défauts : Pixels doublés en « L » [erreur] 89 px (dont 8,65 8,67 9,67 9,69 10,69 12,70 13,70 13,71 14,71 14,72 15,72 près du curseur) ; Banding [attention] 70 px (dont 8,65 8,66 8,67 9,67 9,68 9,69 10,69 10,70 12,69 12,70 13,70 13,71 14,71 14,72 15,72 près du curseur) ; Tramage en damier [conseil] 68 px (dont 8,64 9,64 8,65 9,65 9,66 10,66 9,67 10,67 10,68 11,68 10,69 11,69 11,70 12,70 11,71 12,71 13,71 12,72 13,72 14,72 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) · accord 0.41 · familles 0.07 · inversions 26 % · étendue 0.49
+carnet : 25 idée(s), 11 barrée(s) · dernière : [critique] Montré à l'humain : feu vert pour passer à la couleur, en gardant les réserves notées (ryt
+messages : aucun
+images : seances/fiole-floraison-couleur/regards/214-{ecran,loupe,dessin}.png

@@ -1,0 +1,11 @@
+regard 034
+case 23,34 · couleur #596079ff (exportée : #596079ff) · écran 465,326
+outil seau · taille 1 · c1 #596079ff · c2 #00000000
+calque 1/6 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 12 · Placer la lumière, deux familles (0-C · 0-D)
+porte : Volume (0-C) : accord clarté/volume -0.13 < 0,50. Affiche le guide (onglet Lumière), corrige, ou justifie. | L'ombrage ne suit pas la lumière (0-C · règle 50) : 26 px. Corrige, ou justifie-le. | Case non cochée : « Vue Notan : deux masses claires, frontière qui suit la forme » | Case non cochée : « L'ombre est du côté opposé à la source, partout »
+défauts : L'ombrage ne suit pas la lumière [attention] 26 px (dont 27,30 26,31 27,31 25,32 26,32 27,32 24,33 25,33 26,33 27,33 23,34 24,34 25,34 26,34 22,35 23,35 24,35 25,35 22,36 23,36 près du curseur) ; Tramage en damier [conseil] 8 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) · accord -0.13 · familles 0.08 · inversions 13 % · étendue 0.25
+carnet : 25 idée(s), 11 barrée(s) · dernière : [critique] Montré à l'humain : feu vert pour passer à la couleur, en gardant les réserves notées (ryt
+messages : aucun
+images : seances/fiole-floraison-couleur/regards/034-{ecran,loupe,dessin}.png

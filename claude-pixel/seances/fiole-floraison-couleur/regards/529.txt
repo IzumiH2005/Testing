@@ -1,0 +1,11 @@
+regard 529
+case 9,70 · couleur #3a3f58ff (exportée : #3a3f58ff) · écran 409,470
+outil crayon · taille 1 · c1 #3a3f58ff · c2 #00000000
+calque 1/6 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 15 · Éclats et contour coloré (B6-A · A6-C)
+porte : Pixels orphelins (A5-10) : 2 px. Corrige, ou justifie-le. | Case non cochée : « Contour coloré (selout) posé maintenant, pas avant » | Case non cochée : « Les éclats suivent la courbure de la surface »
+défauts : Pixels doublés en « L » [erreur] 71 px (dont 8,67 9,67 9,69 10,69 près du curseur) ; Jaggies (segments irréguliers) [attention] 5 px ; Pixels orphelins [attention] 2 px ; Banding [attention] 22 px (dont 8,66 8,67 9,67 9,68 9,69 10,69 10,70 près du curseur) ; Tramage en damier [conseil] 78 px (dont 9,66 10,66 9,67 10,67 10,68 11,68 10,69 11,69 11,70 12,70 11,71 12,71 13,71 12,72 13,72 13,73 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) · accord 0.38 · familles 0.07 · inversions 26 % · étendue 0.49
+carnet : 25 idée(s), 11 barrée(s) · dernière : [critique] Montré à l'humain : feu vert pour passer à la couleur, en gardant les réserves notées (ryt
+messages : aucun
+images : seances/fiole-floraison-couleur/regards/529-{ecran,loupe,dessin}.png

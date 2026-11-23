@@ -1,0 +1,11 @@
+regard 668
+case 41,54 · couleur #bf6a20ff (exportée : #bf6a20ff) · écran 537,406
+outil remplace · taille 1 · c1 #bf6a20ff · c2 #3a3f58ff
+calque 1/6 · image 1/1 · dessin 64×96 « Fiole de floraison » (objet)
+étape 19 · Contrôle final : la planche (A5-11 · B5 · B6-G · 0-J)
+porte : Planche : réponds à Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, T1, T2, T3, T4, T5, 3 réussis, 3 à améliorer. | Défauts restants : L'ombrage ne suit pas la lumière.
+défauts : Pixels doublés en « L » [erreur] 74 px (dont 42,50 43,50 42,51 42,54 près du curseur) ; Pixels orphelins [attention] 2 px ; L'ombrage ne suit pas la lumière [attention] 199 px (dont 44,50 43,51 44,51 41,54 42,54 42,55 43,55 42,56 43,56 43,57 44,57 43,58 44,58 près du curseur) ; Tramage en damier [conseil] 86 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) · accord 0.26 · familles 0.04 · inversions 21 % · étendue 0.49
+carnet : 25 idée(s), 11 barrée(s) · dernière : [critique] Montré à l'humain : feu vert pour passer à la couleur, en gardant les réserves notées (ryt
+messages : aucun
+images : seances/fiole-floraison-couleur/regards/668-{ecran,loupe,dessin}.png
