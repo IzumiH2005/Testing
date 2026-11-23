@@ -1,0 +1,11 @@
+regard 002
+case -20,37 (hors du dessin) · couleur (hors toile) · écran 200,300
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 1/1 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 2 · Vision : écrire ce que je vois (0-N)
+porte : Carnet : écris au moins une idée pour « Ce que je vois », « Structure / physionomie », « Formes de base », « Ce qui la rend unique », « Pourquoi c'est crédible ».
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : vide
+messages : aucun
+images : seances/falaise-moussue/regards/002-{ecran,loupe,dessin}.png
