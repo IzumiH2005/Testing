@@ -1,0 +1,11 @@
+regard 3882
+case -20,37 (hors du dessin) · couleur (hors toile) · écran 200,300
+outil crayon · taille 1 · c1 #d8ec86ff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 9 · Lumière et volume des blocs (F2-A · F2-D · 0-C)
+porte : Case non cochée : « Haut éclairé, bas plus sombre, dessous de croûte ombré » | Case non cochée : « Chaque cluster est éclairé du même côté »
+défauts : Pixels doublés en « L » [erreur] 200 px ; L'ombrage ne suit pas la lumière [attention] 200 px ; Tramage en damier [conseil] 80 px ; Tirets dans la texture [conseil] 200 px
+volume : lumière haut (az 90°, él 65°, gonfle) · accord 0.08 · familles 0.05 · inversions 43 % · étendue 0.51
+carnet : 36 idée(s), 1 barrée(s) · dernière : [detail] Coins rentrants : d'après l'assemblage par quarts, seule une encoche d'air de 4×7 px au po
+messages : aucun
+images : seances/falaise-moussue/regards/3882-{ecran,loupe,dessin}.png
