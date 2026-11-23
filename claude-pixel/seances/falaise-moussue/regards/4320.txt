@@ -1,0 +1,11 @@
+regard 4320
+case 114,71 · couleur #2e1d2cff (exportée : #2e1d2cff) · écran 603,403
+outil crayon · taille 1 · c1 #2e1d2cff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 10 · Plateformes, variantes et décors (F2-B · F2-D · F2-F)
+porte : Pixels orphelins (A5-10) : 8 px. Corrige, ou justifie-le. | Case non cochée : « Plateforme en trois pièces posée » | Case non cochée : « 1 à 3 variantes » | Case non cochée : « Décors hors grille qui cassent la répétition »
+défauts : Pixels doublés en « L » [erreur] 200 px ; Pixels orphelins [attention] 8 px ; L'ombrage ne suit pas la lumière [attention] 200 px ; Tramage en damier [conseil] 88 px ; Tirets dans la texture [conseil] 200 px
+volume : lumière haut (az 90°, él 65°, gonfle) · accord 0.08 · familles 0.07 · inversions 44 % · étendue 0.51
+carnet : 36 idée(s), 1 barrée(s) · dernière : [detail] Coins rentrants : d'après l'assemblage par quarts, seule une encoche d'air de 4×7 px au po
+messages : aucun
+images : seances/falaise-moussue/regards/4320-{ecran,loupe,dessin}.png
