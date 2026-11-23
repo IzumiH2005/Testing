@@ -1,0 +1,11 @@
+regard 1976
+case -20,37 (hors du dessin) · couleur (hors toile) · écran 200,300
+outil crayon · taille 1 · c1 #cdc6cfff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 6 · Tuile centrale : six passes de rendu (F2-A · F2-F · 0-AF)
+porte : prête
+défauts : Pixels doublés en « L » [erreur] 25 px ; Banding [attention] 10 px ; L'ombrage ne suit pas la lumière [attention] 200 px ; Tirets dans la texture [conseil] 75 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord 0.26 · familles 0.04 · inversions 8 % · étendue 0.18
+carnet : 23 idée(s), 1 barrée(s) · dernière : [passe] Passe 6, éclats : un liseré très clair de 1 px sur l'arête haute de chaque pierre, plus lo
+messages : aucun
+images : seances/falaise-moussue/regards/1976-{ecran,loupe,dessin}.png

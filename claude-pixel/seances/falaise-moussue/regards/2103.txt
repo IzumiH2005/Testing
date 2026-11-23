@@ -1,0 +1,11 @@
+regard 2103
+case 52,58 · couleur #6e6781ff (exportée : #6e6781ff) · écran 200,300
+outil crayon · taille 1 · c1 #1e1424ff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 7 · Micro-détails : chaque élément comme un dessin entier (0-AE)
+porte : Case non cochée : « Chaque zone regardée à la loupe et retravaillée » | Case non cochée : « Chaque élément a sa silhouette, sa lumière et 2 ou 3 tons » | Case non cochée : « Vu de loin, le détail ne fait pas de bruit »
+défauts : Pixels doublés en « L » [erreur] 37 px (dont 53,59 près du curseur) ; L'ombrage ne suit pas la lumière [attention] 200 px ; Tirets dans la texture [conseil] 53 px (dont 48,57 49,57 51,57 52,57 53,57 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord 0.26 · familles 0.04 · inversions 8 % · étendue 0.18
+carnet : 31 idée(s), 1 barrée(s) · dernière : [detail] Gros bloc, grande dalle, pierres du bas : taches d'usure de 2 px sur chaque face d'un seul
+messages : aucun
+images : seances/falaise-moussue/regards/2103-{ecran,loupe,dessin}.png

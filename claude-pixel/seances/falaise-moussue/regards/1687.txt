@@ -1,0 +1,11 @@
+regard 1687
+case 50,55 · couleur #b5c255ff (exportée : #b5c255ff) · écran 411,355
+outil crayon · taille 1 · c1 #b5c255ff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 6 · Tuile centrale : six passes de rendu (F2-A · F2-F · 0-AF)
+porte : Pixels orphelins (A5-10) : 5 px. Corrige, ou justifie-le. | Carnet : 4 « Passe de rendu » de plus (les six passes de 0-AF, une ligne chacune). | Case non cochée : « Grandes masses, puis clusters moyens, puis petits » | Case non cochée : « Aucun gros sujet au centre, poids égal » | Case non cochée : « Décalée d'une demi-tuile, la tuile ne montre aucune couture »
+défauts : Pixels doublés en « L » [erreur] 4 px ; Pixels orphelins [attention] 5 px ; Lumière et ombre se confondent [attention] 200 px ; Tramage en damier [conseil] 12 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord 0.38 · familles 0.05 · inversions 3 % · étendue 0.16
+carnet : 16 idée(s), 1 barrée(s) · dernière : [passe] Passe 2, structure : neuf pierres posées une par une, chacune dans son polygone choisi à l
+messages : aucun
+images : seances/falaise-moussue/regards/1687-{ecran,loupe,dessin}.png
