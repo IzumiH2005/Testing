@@ -1,0 +1,11 @@
+regard 1526
+case -20,37 (hors du dessin) · couleur (hors toile) · écran 200,300
+outil crayon · taille 1 · c1 #241626ff · c2 #00000000
+calque 5/5 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 4 · Palette du lieu (F4 · F1)
+porte : Case non cochée : « Hiérarchie de contraste respectée » | Case non cochée : « 6 à 8 tons par matière, teinte décalée, quasi-noir coloré pour les creux »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 14 idée(s), 1 barrée(s) · dernière : [choix] v4 : pierres de tailles décroissantes vers le haut, coins cassés propres à chacune, joints
+messages : aucun
+images : seances/falaise-moussue-rejeu/regards/1526-{ecran,loupe,dessin}.png
