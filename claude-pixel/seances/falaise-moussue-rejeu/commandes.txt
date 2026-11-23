@@ -6282,3 +6282,1226 @@
 11:33:16.829  defile =zone-5-4
 11:33:16.832  clic =zone-5-4
 11:33:17.225  attends 300
+11:33:17.530  va @200 300
+11:33:17.898  regarde
+11:33:18.959  defile =zone-faite
+11:33:18.964  clic =zone-faite
+11:33:19.658  attends 200
+11:33:19.948  defile =zone-6-4
+11:33:19.955  clic =zone-6-4
+11:33:20.392  attends 300
+11:33:20.699  va @200 300
+11:33:21.064  regarde
+11:33:22.151  defile =zone-faite
+11:33:22.170  clic =zone-faite
+11:33:22.811  attends 200
+11:33:23.142  defile =zone-7-4
+11:33:23.156  clic =zone-7-4
+11:33:23.621  attends 300
+11:33:23.955  va @200 300
+11:33:24.326  regarde
+11:33:25.428  defile =zone-faite
+11:33:25.435  clic =zone-faite
+11:33:26.087  attends 200
+11:33:26.295  defile =zone-4-5
+11:33:26.304  clic =zone-4-5
+11:33:26.806  attends 300
+11:33:27.197  va @200 300
+11:33:27.579  regarde
+11:33:28.768  defile =zone-faite
+11:33:28.775  clic =zone-faite
+11:33:29.385  attends 200
+11:33:29.599  defile =zone-5-5
+11:33:29.609  clic =zone-5-5
+11:33:30.087  attends 300
+11:33:30.436  va @200 300
+11:33:30.800  regarde
+11:33:31.888  defile =zone-faite
+11:33:31.893  clic =zone-faite
+11:33:32.467  attends 200
+11:33:32.669  defile =zone-6-5
+11:33:32.674  clic =zone-6-5
+11:33:33.188  attends 300
+11:33:33.526  va @200 300
+11:33:33.911  regarde
+11:33:35.067  defile =zone-faite
+11:33:35.074  clic =zone-faite
+11:33:35.621  attends 200
+11:33:35.831  defile =zone-7-5
+11:33:35.834  clic =zone-7-5
+11:33:36.243  attends 300
+11:33:36.545  va @200 300
+11:33:36.892  regarde
+11:33:37.792  defile =zone-faite
+11:33:37.803  clic =zone-faite
+11:33:38.351  attends 200
+11:33:38.559  defile =zone-4-6
+11:33:38.563  clic =zone-4-6
+11:33:38.937  attends 300
+11:33:39.239  va @200 300
+11:33:39.597  regarde
+11:33:40.670  defile =zone-faite
+11:33:40.674  clic =zone-faite
+11:33:41.260  attends 200
+11:33:41.466  defile =zone-5-6
+11:33:41.470  clic =zone-5-6
+11:33:41.860  attends 300
+11:33:42.161  va @200 300
+11:33:42.547  regarde
+11:33:43.714  defile =zone-faite
+11:33:43.719  clic =zone-faite
+11:33:44.305  attends 200
+11:33:44.507  defile =zone-6-6
+11:33:44.511  clic =zone-6-6
+11:33:44.909  attends 300
+11:33:45.214  va @200 300
+11:33:45.576  regarde
+11:33:46.505  defile =zone-faite
+11:33:46.510  clic =zone-faite
+11:33:47.074  attends 200
+11:33:47.280  defile =zone-7-6
+11:33:47.287  clic =zone-7-6
+11:33:47.701  attends 300
+11:33:48.002  va @200 300
+11:33:48.361  regarde
+11:33:49.439  defile =zone-faite
+11:33:49.443  clic =zone-faite
+11:33:50.015  attends 200
+11:33:50.238  defile =zone-4-7
+11:33:50.241  clic =zone-4-7
+11:33:50.679  attends 300
+11:33:50.982  va @200 300
+11:33:51.359  regarde
+11:33:52.378  defile =zone-faite
+11:33:52.385  clic =zone-faite
+11:33:52.953  attends 200
+11:33:53.157  defile =zone-5-7
+11:33:53.163  clic =zone-5-7
+11:33:53.614  attends 300
+11:33:53.916  va @200 300
+11:33:54.327  regarde
+11:33:55.386  defile =zone-faite
+11:33:55.390  clic =zone-faite
+11:33:55.949  attends 200
+11:33:56.151  defile =zone-6-7
+11:33:56.154  clic =zone-6-7
+11:33:56.541  attends 300
+11:33:56.844  va @200 300
+11:33:57.195  regarde
+11:33:58.134  defile =zone-faite
+11:33:58.138  clic =zone-faite
+11:33:58.735  attends 200
+11:33:58.980  defile =zone-7-7
+11:33:58.985  clic =zone-7-7
+11:33:59.326  attends 300
+11:33:59.627  va @200 300
+11:33:59.993  regarde
+11:34:01.054  defile =zone-faite
+11:34:01.060  clic =zone-faite
+11:34:01.654  attends 200
+11:34:01.881  clic =onglet-methode
+11:34:02.397  attends 300
+11:34:02.717  defile =carnet-rub-detail
+11:34:03.100  clic =carnet-rub-detail
+11:34:03.360  attends 250
+11:34:03.612  defile =carnet-texte
+11:34:03.616  clic =carnet-texte
+11:34:03.993  tape "Joint entre la petite pierre du bord et la dalle haute : les deux se fondaient en une masse. Le joint ajouté au même endroit aurait prolongé celui de la rangée du bas (joint vertical continu, interdit en pierre sèche) : la petite pierre s'élargit de 3 px et le joint passe en u = 4, avec contours sombres des deux côtés."
+11:34:09.692  defile =carnet-ajoute
+11:34:09.698  clic =carnet-ajoute
+11:34:10.089  attends 300
+11:34:10.397  clic =onglet-methode
+11:34:10.942  attends 300
+11:34:11.252  defile =carnet-rub-detail
+11:34:11.260  clic =carnet-rub-detail
+11:34:11.800  attends 250
+11:34:12.051  defile =carnet-texte
+11:34:12.418  clic =carnet-texte
+11:34:12.578  tape "Pierre de calage de 3×2 px dans le trou noir de 7 px entre la grande dalle et le gros bloc, comme dans les vrais murs (dessus clair, dessous sombre, contact) ; la mousse qui y poussait se décale à côté."
+11:34:16.214  defile =carnet-ajoute
+11:34:16.216  clic =carnet-ajoute
+11:34:16.622  attends 300
+11:34:16.928  clic =onglet-methode
+11:34:17.427  attends 300
+11:34:17.730  defile =carnet-rub-detail
+11:34:17.739  clic =carnet-rub-detail
+11:34:18.253  attends 250
+11:34:18.505  defile =carnet-texte
+11:34:18.515  clic =carnet-texte
+11:34:18.898  tape "Mousse en lignes dans deux joints humides (bord droit, en haut, et le long du gros bloc), trois tons, d'après les références : la mousse suit les joints où l'eau reste."
+11:34:21.878  defile =carnet-ajoute
+11:34:21.881  clic =carnet-ajoute
+11:34:22.269  attends 300
+11:34:22.576  clic =onglet-methode
+11:34:23.128  attends 300
+11:34:23.430  defile =carnet-rub-detail
+11:34:23.432  clic =carnet-rub-detail
+11:34:23.978  attends 250
+11:34:24.233  defile =carnet-texte
+11:34:24.599  clic =carnet-texte
+11:34:24.756  tape "Liserés : trop de pixels très clairs sur les dessus de la petite pierre et du gros bloc ; cinq pixels repassent au ton du dessus pour garder un liseré de 1 px qui suit l'arête."
+11:34:27.776  defile =carnet-ajoute
+11:34:27.784  clic =carnet-ajoute
+11:34:28.168  attends 300
+11:34:28.472  clic =onglet-methode
+11:34:28.988  attends 300
+11:34:29.290  defile =carnet-rub-detail
+11:34:29.296  clic =carnet-rub-detail
+11:34:29.812  attends 250
+11:34:30.064  defile =carnet-texte
+11:34:30.068  clic =carnet-texte
+11:34:30.448  tape "Grande dalle à cheval sur le bord : sa face latérale sombre faisait un rectangle posé au milieu ; l'arête de la facette passe en biais (trois pixels)."
+11:34:33.123  defile =carnet-ajoute
+11:34:33.131  clic =carnet-ajoute
+11:34:33.519  attends 300
+11:34:33.856  clic =onglet-methode
+11:34:34.488  attends 300
+11:34:34.791  defile =carnet-rub-detail
+11:34:34.796  clic =carnet-rub-detail
+11:34:35.326  attends 250
+11:34:35.582  defile =carnet-texte
+11:34:35.966  clic =carnet-texte
+11:34:36.150  tape "Dalle haute : deux taches claires d'usure sous l'arête et une tache plus sombre, pour casser la face d'un seul ton ; la fissure garde sa lèvre claire."
+11:34:38.854  defile =carnet-ajoute
+11:34:38.864  clic =carnet-ajoute
+11:34:39.274  attends 300
+11:34:39.618  clic =onglet-methode
+11:34:40.119  attends 300
+11:34:40.421  defile =carnet-rub-detail
+11:34:40.433  clic =carnet-rub-detail
+11:34:40.941  attends 250
+11:34:41.194  defile =carnet-texte
+11:34:41.198  clic =carnet-texte
+11:34:41.573  tape "Pierre en haut à droite (moussue) : deux taches claires et une sombre sur la face, qui était un aplat de sept pixels de large."
+11:34:43.858  defile =carnet-ajoute
+11:34:43.862  clic =carnet-ajoute
+11:34:44.280  attends 300
+11:34:44.605  clic =onglet-methode
+11:34:45.229  attends 300
+11:34:45.531  defile =carnet-rub-detail
+11:34:45.536  clic =carnet-rub-detail
+11:34:46.060  attends 250
+11:34:46.311  defile =carnet-texte
+11:34:46.666  clic =carnet-texte
+11:34:46.824  tape "Gros bloc, grande dalle, pierres du bas : taches d'usure de 2 px sur chaque face d'un seul ton, jamais un pixel seul, jamais en rangée ; le liseré de la pierre du bas à gauche est coupé une fois pour ne pas faire une règle."
+11:34:50.759  defile =carnet-ajoute
+11:34:50.769  clic =carnet-ajoute
+11:34:51.173  attends 300
+11:34:51.496  va @200 300
+11:34:51.842  regarde
+11:34:52.844  clic =menu-fichier
+11:34:53.278  clic =fichier-exporter
+11:34:53.694  attends 500
+11:34:54.196  clic =export-png1
+11:34:54.562  # fichier enregistré : fichiers/falaise-moussue.png
+11:34:54.646  attends 800
+11:34:55.448  clic @866 630
+11:34:55.877  attends 300
+11:34:56.179  clic =onglet-methode
+11:34:56.717  attends 300
+11:34:57.019  defile =coche-micro.loupe
+11:34:57.417  clic =coche-micro.loupe
+11:34:57.877  attends 200
+11:34:58.104  defile =coche-micro.element
+11:34:58.113  clic =coche-micro.element
+11:34:58.447  attends 200
+11:34:58.662  defile =coche-micro.ensemble
+11:34:58.772  clic =coche-micro.ensemble
+11:34:59.246  attends 200
+11:34:59.479  defile =etape-valide
+11:34:59.484  clic =etape-valide
+11:34:59.870  attends 400
+11:35:00.285  va @200 300
+11:35:00.629  regarde
+11:35:01.629  regarde
+11:35:02.599  clic =outil-selrect
+11:35:03.066  attends 200
+11:35:03.267  glisse 32,32 63,63
+11:35:04.570  regarde
+11:35:05.601  clic =outil-deplace
+11:35:06.133  attends 200
+11:35:06.342  tiens alt
+11:35:06.345  glisse 48,48 16,16
+11:35:07.568  lache alt
+11:35:07.571  regarde
+11:35:08.492  tiens alt
+11:35:08.495  glisse 16,16 48,16
+11:35:09.268  lache alt
+11:35:09.270  regarde
+11:35:10.205  tiens alt
+11:35:10.209  glisse 48,16 80,16
+11:35:10.986  lache alt
+11:35:10.989  regarde
+11:35:11.950  tiens alt
+11:35:11.953  glisse 80,16 80,48
+11:35:12.718  lache alt
+11:35:12.721  regarde
+11:35:13.638  tiens alt
+11:35:13.644  glisse 80,48 80,80
+11:35:14.419  lache alt
+11:35:14.424  regarde
+11:35:15.479  tiens alt
+11:35:15.482  glisse 80,80 48,80
+11:35:16.251  lache alt
+11:35:16.254  regarde
+11:35:17.232  tiens alt
+11:35:17.235  glisse 48,80 16,80
+11:35:18.002  lache alt
+11:35:18.005  regarde
+11:35:18.953  tiens alt
+11:35:18.964  glisse 16,80 16,48
+11:35:19.735  lache alt
+11:35:19.738  regarde
+11:35:20.715  tiens alt
+11:35:20.720  glisse 16,48 112,48
+11:35:21.635  lache alt
+11:35:21.639  regarde
+11:35:22.827  tiens alt
+11:35:22.830  glisse 112,48 112,16
+11:35:23.601  lache alt
+11:35:23.605  regarde
+11:35:24.585  tiens alt
+11:35:24.589  glisse 112,16 144,16
+11:35:25.368  lache alt
+11:35:25.371  regarde
+11:35:26.274  tiens alt
+11:35:26.277  glisse 144,16 144,48
+11:35:27.052  lache alt
+11:35:27.055  regarde
+11:35:28.004  touche ctrl+d
+11:35:28.216  clic =menu-fichier
+11:35:28.841  clic =fichier-exporter
+11:35:29.294  attends 500
+11:35:29.799  clic =export-png1
+11:35:30.169  # fichier enregistré : fichiers/falaise-moussue.png
+11:35:30.248  attends 800
+11:35:31.050  clic @866 630
+11:35:31.491  attends 300
+11:35:31.792  va @200 300
+11:35:32.139  regarde
+11:35:33.215  touche ctrl+d
+11:35:33.409  clic =outil-crayon
+11:35:33.872  va @200 300
+11:35:34.138  touche 0
+11:35:34.216  attends 300
+11:35:34.517  va @200 300
+11:35:34.539  regarde
+11:35:35.496  clic =outil-selrect
+11:35:35.956  attends 200
+11:35:36.174  glisse 32,32 63,63
+11:35:37.023  regarde
+11:35:37.989  clic =outil-deplace
+11:35:38.500  attends 200
+11:35:38.704  tiens alt
+11:35:38.707  glisse 48,48 16,16
+11:35:39.505  lache alt
+11:35:39.513  regarde
+11:35:40.493  tiens alt
+11:35:40.496  glisse 16,16 48,16
+11:35:40.995  lache alt
+11:35:40.998  regarde
+11:35:42.066  tiens alt
+11:35:42.069  glisse 48,16 80,16
+11:35:42.551  lache alt
+11:35:42.553  regarde
+11:35:43.544  tiens alt
+11:35:43.550  glisse 80,16 80,48
+11:35:44.090  lache alt
+11:35:44.092  regarde
+11:35:45.057  tiens alt
+11:35:45.060  glisse 80,48 80,80
+11:35:45.553  lache alt
+11:35:45.561  regarde
+11:35:46.682  tiens alt
+11:35:46.686  glisse 80,80 48,80
+11:35:47.243  lache alt
+11:35:47.247  regarde
+11:35:48.259  tiens alt
+11:35:48.263  glisse 48,80 16,80
+11:35:48.756  lache alt
+11:35:48.762  regarde
+11:35:49.873  tiens alt
+11:35:49.876  glisse 16,80 16,48
+11:35:50.415  lache alt
+11:35:50.417  regarde
+11:35:51.393  tiens alt
+11:35:51.397  glisse 16,48 112,48
+11:35:52.118  lache alt
+11:35:52.120  regarde
+11:35:53.325  tiens alt
+11:35:53.328  glisse 112,48 112,16
+11:35:53.817  lache alt
+11:35:53.820  regarde
+11:35:54.998  tiens alt
+11:35:55.001  glisse 112,16 144,16
+11:35:55.550  lache alt
+11:35:55.552  regarde
+11:35:56.612  tiens alt
+11:35:56.615  glisse 144,16 144,48
+11:35:57.083  lache alt
+11:35:57.085  regarde
+11:35:58.082  touche ctrl+d
+11:35:58.416  clic =outil-crayon
+11:35:58.991  clic =menu-fichier
+11:35:59.479  clic =fichier-exporter
+11:35:59.906  attends 500
+11:36:00.406  clic =export-png1
+11:36:00.777  # fichier enregistré : fichiers/falaise-moussue.png
+11:36:00.858  attends 800
+11:36:01.660  clic @866 630
+11:36:02.086  attends 300
+11:36:02.387  clic =outil-gomme
+11:36:02.980  trace 0,0 1,0
+11:36:03.433  regarde
+11:36:04.620  trace 3,0 6,0
+11:36:04.956  regarde
+11:36:05.924  trace 8,0 19,0
+11:36:06.519  regarde
+11:36:07.590  trace 21,0 33,0
+11:36:08.254  regarde
+11:36:09.282  trace 35,0 38,0
+11:36:09.575  regarde
+11:36:10.575  trace 40,0 51,0
+11:36:11.174  regarde
+11:36:12.194  trace 53,0 65,0
+11:36:12.871  regarde
+11:36:13.942  trace 67,0 70,0
+11:36:14.256  regarde
+11:36:15.431  trace 72,0 83,0
+11:36:16.027  regarde
+11:36:17.032  trace 85,0 95,0
+11:36:17.606  regarde
+11:36:18.617  trace 0,1 1,1
+11:36:19.061  regarde
+11:36:20.160  trace 3,1 5,1
+11:36:20.443  regarde
+11:36:21.610  trace 8,1 13,1
+11:36:21.989  regarde
+11:36:22.961  trace 15,1 17,1
+11:36:23.215  regarde
+11:36:24.253  trace 21,1 26,1
+11:36:24.657  regarde
+11:36:25.665  trace 28,1 33,1
+11:36:26.053  regarde
+11:36:27.104  trace 35,1 37,1
+11:36:27.371  regarde
+11:36:28.460  trace 40,1 45,1
+11:36:28.874  regarde
+11:36:30.031  trace 47,1 49,1
+11:36:30.323  regarde
+11:36:31.408  trace 53,1 58,1
+11:36:31.825  regarde
+11:36:33.121  trace 60,1 65,1
+11:36:33.514  regarde
+11:36:34.491  trace 67,1 69,1
+11:36:34.773  regarde
+11:36:35.844  trace 72,1 77,1
+11:36:36.237  regarde
+11:36:37.283  trace 79,1 81,1
+11:36:37.529  regarde
+11:36:38.582  trace 85,1 90,1
+11:36:39.002  regarde
+11:36:40.173  trace 92,1 95,1
+11:36:40.492  regarde
+11:36:41.610  trace 0,2 1,2
+11:36:42.032  regarde
+11:36:43.208  trace 4,2 5,2
+11:36:43.449  regarde
+11:36:44.516  trace 9,2 10,2
+11:36:44.766  regarde
+11:36:45.908  clic 13,2
+11:36:46.145  regarde
+11:36:47.173  trace 15,2 17,2
+11:36:47.463  regarde
+11:36:48.439  clic 22,2
+11:36:48.693  regarde
+11:36:49.731  trace 25,2 26,2
+11:36:49.962  regarde
+11:36:51.063  trace 31,2 32,2
+11:36:51.308  regarde
+11:36:52.382  trace 36,2 37,2
+11:36:52.640  regarde
+11:36:53.703  trace 41,2 42,2
+11:36:53.967  regarde
+11:36:55.024  clic 45,2
+11:36:55.245  regarde
+11:36:56.326  trace 47,2 49,2
+11:36:56.605  regarde
+11:36:57.641  clic 54,2
+11:36:57.889  regarde
+11:36:59.027  trace 57,2 58,2
+11:36:59.254  regarde
+11:37:00.232  trace 63,2 64,2
+11:37:00.471  regarde
+11:37:01.470  trace 68,2 69,2
+11:37:01.711  regarde
+11:37:02.763  trace 73,2 74,2
+11:37:03.007  regarde
+11:37:04.084  clic 77,2
+11:37:04.318  regarde
+11:37:05.404  trace 79,2 81,2
+11:37:05.723  regarde
+11:37:06.700  clic 86,2
+11:37:06.947  regarde
+11:37:08.046  trace 89,2 90,2
+11:37:08.283  regarde
+11:37:09.334  trace 94,2 95,2
+11:37:09.575  regarde
+11:37:10.543  clic 0,3
+11:37:10.974  regarde
+11:37:12.103  clic 4,3
+11:37:12.357  regarde
+11:37:13.465  clic 10,3
+11:37:13.725  regarde
+11:37:14.901  clic 26,3
+11:37:15.214  regarde
+11:37:16.260  clic 36,3
+11:37:16.542  regarde
+11:37:17.649  clic 42,3
+11:37:17.906  regarde
+11:37:18.911  clic 58,3
+11:37:19.199  regarde
+11:37:20.236  clic 68,3
+11:37:20.519  regarde
+11:37:21.519  clic 74,3
+11:37:21.783  regarde
+11:37:22.782  clic 90,3
+11:37:23.087  regarde
+11:37:24.081  clic 95,3
+11:37:24.332  regarde
+11:37:25.311  clic 0,4
+11:37:25.733  regarde
+11:37:26.841  clic 95,4
+11:37:27.254  regarde
+11:37:28.364  clic 2,16
+11:37:28.803  regarde
+11:37:29.836  trace 91,16 93,16
+11:37:30.295  regarde
+11:37:31.377  clic 0,17
+11:37:31.804  regarde
+11:37:32.926  trace 2,17 4,17
+11:37:33.190  regarde
+11:37:34.332  clic 93,17
+11:37:34.768  regarde
+11:37:36.062  clic 95,17
+11:37:36.278  regarde
+11:37:37.303  clic 0,18
+11:37:37.773  regarde
+11:37:38.884  clic 2,18
+11:37:39.089  regarde
+11:37:40.146  clic 93,18
+11:37:40.599  regarde
+11:37:41.843  clic 95,18
+11:37:42.052  regarde
+11:37:43.151  trace 0,19 1,19
+11:37:43.592  regarde
+11:37:44.745  trace 91,19 95,19
+11:37:45.340  regarde
+11:37:46.443  trace 0,20 2,20
+11:37:46.940  regarde
+11:37:48.032  trace 91,20 95,20
+11:37:48.624  regarde
+11:37:49.726  trace 0,21 4,21
+11:37:50.279  regarde
+11:37:51.441  trace 91,21 95,21
+11:37:52.003  regarde
+11:37:53.204  trace 0,22 4,22
+11:37:53.786  regarde
+11:37:54.897  trace 91,22 95,22
+11:37:55.472  regarde
+11:37:56.620  trace 0,23 4,23
+11:37:57.160  regarde
+11:37:58.436  trace 91,23 95,23
+11:37:59.025  regarde
+11:38:00.235  trace 0,24 4,24
+11:38:00.787  regarde
+11:38:01.987  trace 93,24 95,24
+11:38:02.455  regarde
+11:38:03.720  trace 0,25 4,25
+11:38:04.306  regarde
+11:38:05.545  trace 94,25 95,25
+11:38:05.956  regarde
+11:38:07.169  trace 0,26 2,26
+11:38:07.658  regarde
+11:38:08.869  trace 94,26 95,26
+11:38:09.315  regarde
+11:38:10.545  trace 0,27 1,27
+11:38:10.989  regarde
+11:38:12.163  trace 94,27 95,27
+11:38:12.603  regarde
+11:38:13.800  trace 0,28 2,28
+11:38:14.292  regarde
+11:38:15.300  trace 94,28 95,28
+11:38:15.716  regarde
+11:38:17.006  trace 126,28 129,28
+11:38:17.474  regarde
+11:38:18.540  trace 0,29 4,29
+11:38:19.146  regarde
+11:38:20.360  trace 93,29 95,29
+11:38:20.890  regarde
+11:38:22.008  trace 126,29 129,29
+11:38:22.476  regarde
+11:38:23.715  trace 0,30 4,30
+11:38:24.336  regarde
+11:38:25.510  trace 91,30 95,30
+11:38:26.151  regarde
+11:38:27.286  trace 126,30 129,30
+11:38:27.716  regarde
+11:38:28.800  trace 0,31 4,31
+11:38:29.443  regarde
+11:38:30.699  trace 91,31 95,31
+11:38:31.335  regarde
+11:38:32.472  trace 126,31 129,31
+11:38:32.885  regarde
+11:38:34.131  trace 0,32 4,32
+11:38:34.757  regarde
+11:38:35.906  trace 91,32 95,32
+11:38:36.502  regarde
+11:38:37.747  trace 118,32 124,32
+11:38:38.275  regarde
+11:38:39.383  trace 126,32 129,32
+11:38:39.720  regarde
+11:38:40.745  trace 131,32 134,32
+11:38:41.055  regarde
+11:38:42.133  trace 136,32 137,32
+11:38:42.358  regarde
+11:38:43.450  trace 0,33 4,33
+11:38:44.018  regarde
+11:38:45.095  trace 91,33 95,33
+11:38:45.675  regarde
+11:38:46.733  trace 118,33 122,33
+11:38:47.198  regarde
+11:38:48.252  clic 124,33
+11:38:48.462  regarde
+11:38:49.608  trace 126,33 129,33
+11:38:49.914  regarde
+11:38:51.041  trace 131,33 133,33
+11:38:51.316  regarde
+11:38:52.432  trace 136,33 137,33
+11:38:52.658  regarde
+11:38:53.821  trace 0,34 4,34
+11:38:54.384  regarde
+11:38:55.550  trace 91,34 95,34
+11:38:56.086  regarde
+11:38:57.111  clic 118,34
+11:38:57.450  regarde
+11:38:58.608  trace 121,34 122,34
+11:38:58.827  regarde
+11:39:00.004  trace 126,34 129,34
+11:39:00.320  regarde
+11:39:01.463  trace 132,34 133,34
+11:39:01.703  regarde
+11:39:02.892  clic 137,34
+11:39:03.141  regarde
+11:39:04.391  trace 0,35 4,35
+11:39:04.999  regarde
+11:39:05.960  trace 93,35 95,35
+11:39:06.419  regarde
+11:39:07.486  clic 122,35
+11:39:07.832  regarde
+11:39:08.852  clic 132,35
+11:39:09.119  regarde
+11:39:10.167  trace 0,36 4,36
+11:39:10.755  regarde
+11:39:11.865  trace 91,36 95,36
+11:39:12.445  regarde
+11:39:13.545  trace 0,37 4,37
+11:39:14.103  regarde
+11:39:15.155  trace 91,37 95,37
+11:39:15.706  regarde
+11:39:16.677  trace 0,38 4,38
+11:39:17.218  regarde
+11:39:18.332  trace 91,38 95,38
+11:39:18.892  regarde
+11:39:20.103  trace 0,39 4,39
+11:39:20.669  regarde
+11:39:21.828  trace 91,39 95,39
+11:39:22.401  regarde
+11:39:23.470  trace 0,40 4,40
+11:39:24.022  regarde
+11:39:25.211  trace 91,40 95,40
+11:39:25.769  regarde
+11:39:26.982  trace 0,41 4,41
+11:39:27.517  regarde
+11:39:28.660  trace 91,41 95,41
+11:39:29.239  regarde
+11:39:30.272  trace 0,42 4,42
+11:39:30.868  regarde
+11:39:32.005  trace 91,42 95,42
+11:39:32.535  regarde
+11:39:33.613  trace 0,43 2,43
+11:39:34.085  regarde
+11:39:35.142  trace 91,43 95,43
+11:39:35.665  regarde
+11:39:36.760  trace 0,44 1,44
+11:39:37.181  regarde
+11:39:38.220  trace 91,44 95,44
+11:39:38.786  regarde
+11:39:39.918  trace 0,45 1,45
+11:39:40.340  regarde
+11:39:41.449  trace 91,45 95,45
+11:39:42.034  regarde
+11:39:43.151  trace 0,46 1,46
+11:39:43.583  regarde
+11:39:44.815  trace 91,46 95,46
+11:39:45.384  regarde
+11:39:46.614  trace 0,47 1,47
+11:39:47.034  regarde
+11:39:48.209  trace 93,47 95,47
+11:39:48.716  regarde
+11:39:49.796  trace 0,48 1,48
+11:39:50.219  regarde
+11:39:51.354  trace 94,48 95,48
+11:39:51.762  regarde
+11:39:53.151  trace 0,49 1,49
+11:39:53.570  regarde
+11:39:54.755  trace 94,49 95,49
+11:39:55.166  regarde
+11:39:56.245  trace 0,50 1,50
+11:39:56.647  regarde
+11:39:57.736  trace 93,50 95,50
+11:39:58.235  regarde
+11:39:59.225  trace 0,51 1,51
+11:39:59.632  regarde
+11:40:00.626  trace 91,51 95,51
+11:40:01.170  regarde
+11:40:02.309  trace 0,52 2,52
+11:40:02.796  regarde
+11:40:03.843  trace 91,52 95,52
+11:40:04.382  regarde
+11:40:05.410  trace 0,53 4,53
+11:40:05.930  regarde
+11:40:07.066  trace 91,53 95,53
+11:40:07.584  regarde
+11:40:08.631  trace 0,54 4,54
+11:40:09.178  regarde
+11:40:10.183  trace 91,54 95,54
+11:40:10.736  regarde
+11:40:11.922  trace 0,55 4,55
+11:40:12.464  regarde
+11:40:13.503  trace 91,55 95,55
+11:40:14.029  regarde
+11:40:15.144  trace 0,56 4,56
+11:40:15.734  regarde
+11:40:16.889  trace 93,56 95,56
+11:40:17.372  regarde
+11:40:18.552  trace 0,57 4,57
+11:40:19.067  regarde
+11:40:20.279  trace 94,57 95,57
+11:40:20.703  regarde
+11:40:21.905  trace 0,58 2,58
+11:40:22.384  regarde
+11:40:23.560  trace 94,58 95,58
+11:40:23.962  regarde
+11:40:25.100  trace 0,59 1,59
+11:40:25.515  regarde
+11:40:26.642  trace 94,59 95,59
+11:40:27.047  regarde
+11:40:28.249  trace 0,60 2,60
+11:40:28.751  regarde
+11:40:29.807  trace 94,60 95,60
+11:40:30.232  regarde
+11:40:31.391  trace 0,61 4,61
+11:40:31.927  regarde
+11:40:33.213  trace 93,61 95,61
+11:40:33.671  regarde
+11:40:34.757  trace 0,62 4,62
+11:40:35.296  regarde
+11:40:36.578  trace 91,62 95,62
+11:40:37.151  regarde
+11:40:38.162  trace 0,63 4,63
+11:40:38.679  regarde
+11:40:39.795  trace 91,63 95,63
+11:40:40.407  regarde
+11:40:41.549  trace 0,64 4,64
+11:40:42.107  regarde
+11:40:43.137  trace 91,64 95,64
+11:40:43.663  regarde
+11:40:44.802  trace 0,65 4,65
+11:40:45.351  regarde
+11:40:46.431  trace 91,65 95,65
+11:40:46.963  regarde
+11:40:47.974  trace 0,66 4,66
+11:40:48.498  regarde
+11:40:49.500  trace 91,66 95,66
+11:40:50.032  regarde
+11:40:51.140  trace 0,67 4,67
+11:40:51.715  regarde
+11:40:52.946  trace 93,67 95,67
+11:40:53.416  regarde
+11:40:54.617  trace 0,68 4,68
+11:40:55.179  regarde
+11:40:56.262  trace 91,68 95,68
+11:40:56.796  regarde
+11:40:57.889  trace 0,69 4,69
+11:40:58.410  regarde
+11:40:59.499  trace 91,69 95,69
+11:41:00.073  regarde
+11:41:01.101  trace 0,70 4,70
+11:41:01.612  regarde
+11:41:02.630  trace 91,70 95,70
+11:41:03.161  regarde
+11:41:04.178  trace 0,71 4,71
+11:41:04.712  regarde
+11:41:05.730  trace 91,71 95,71
+11:41:06.244  regarde
+11:41:07.306  trace 0,72 4,72
+11:41:07.845  regarde
+11:41:08.862  trace 91,72 95,72
+11:41:09.382  regarde
+11:41:10.460  trace 0,73 4,73
+11:41:10.977  regarde
+11:41:12.062  trace 91,73 95,73
+11:41:12.579  regarde
+11:41:13.644  trace 0,74 4,74
+11:41:14.219  regarde
+11:41:15.267  trace 91,74 95,74
+11:41:15.812  regarde
+11:41:16.975  trace 0,75 2,75
+11:41:17.432  regarde
+11:41:18.555  trace 91,75 95,75
+11:41:19.094  regarde
+11:41:20.228  trace 0,76 1,76
+11:41:20.631  regarde
+11:41:21.764  trace 91,76 95,76
+11:41:22.297  regarde
+11:41:23.389  trace 0,77 1,77
+11:41:23.814  regarde
+11:41:24.907  trace 91,77 95,77
+11:41:25.497  regarde
+11:41:26.723  trace 0,78 1,78
+11:41:27.176  regarde
+11:41:28.430  trace 91,78 95,78
+11:41:29.032  regarde
+11:41:30.136  trace 0,79 1,79
+11:41:30.559  regarde
+11:41:31.841  trace 93,79 95,79
+11:41:32.349  regarde
+11:41:33.644  trace 0,80 1,80
+11:41:34.064  regarde
+11:41:35.275  trace 94,80 95,80
+11:41:35.699  regarde
+11:41:36.875  trace 0,81 1,81
+11:41:37.315  regarde
+11:41:38.591  trace 94,81 95,81
+11:41:39.096  regarde
+11:41:40.227  trace 0,82 1,82
+11:41:40.643  regarde
+11:41:41.917  trace 93,82 95,82
+11:41:42.432  regarde
+11:41:43.629  trace 0,83 1,83
+11:41:44.081  regarde
+11:41:45.335  trace 91,83 95,83
+11:41:45.952  regarde
+11:41:47.086  trace 0,84 2,84
+11:41:47.603  regarde
+11:41:48.750  trace 91,84 95,84
+11:41:49.332  regarde
+11:41:50.529  trace 0,85 4,85
+11:41:51.062  regarde
+11:41:52.292  trace 91,85 95,85
+11:41:52.863  regarde
+11:41:54.094  trace 0,86 4,86
+11:41:54.666  regarde
+11:41:55.991  trace 91,86 95,86
+11:41:56.564  regarde
+11:41:57.833  trace 0,87 4,87
+11:41:58.446  regarde
+11:41:59.781  trace 91,87 95,87
+11:42:00.331  regarde
+11:42:01.507  trace 0,88 4,88
+11:42:02.078  regarde
+11:42:03.267  trace 12,88 16,88
+11:42:03.679  regarde
+11:42:04.933  clic 20,88
+11:42:05.250  regarde
+11:42:06.539  trace 22,88 26,88
+11:42:06.948  regarde
+11:42:08.143  trace 31,88 35,88
+11:42:08.489  regarde
+11:42:09.561  trace 44,88 48,88
+11:42:09.963  regarde
+11:42:11.265  trace 53,88 58,88
+11:42:11.750  regarde
+11:42:12.901  trace 62,88 65,88
+11:42:13.247  regarde
+11:42:14.393  clic 67,88
+11:42:14.600  regarde
+11:42:15.839  trace 76,88 80,88
+11:42:16.240  regarde
+11:42:17.431  trace 84,88 90,88
+11:42:17.950  regarde
+11:42:19.116  trace 93,88 95,88
+11:42:19.398  regarde
+11:42:20.446  trace 0,89 4,89
+11:42:21.014  regarde
+11:42:21.992  trace 12,89 16,89
+11:42:22.431  regarde
+11:42:23.555  clic 20,89
+11:42:23.788  regarde
+11:42:24.979  trace 22,89 26,89
+11:42:25.328  regarde
+11:42:26.434  trace 31,89 35,89
+11:42:26.829  regarde
+11:42:28.033  trace 44,89 48,89
+11:42:28.513  regarde
+11:42:29.796  trace 53,89 58,89
+11:42:30.275  regarde
+11:42:31.468  trace 62,89 65,89
+11:42:31.860  regarde
+11:42:32.888  clic 67,89
+11:42:33.095  regarde
+11:42:34.195  trace 76,89 80,89
+11:42:34.610  regarde
+11:42:35.734  trace 84,89 90,89
+11:42:36.209  regarde
+11:42:37.429  trace 92,89 95,89
+11:42:37.775  regarde
+11:42:38.815  trace 0,90 2,90
+11:42:39.278  regarde
+11:42:40.495  trace 11,90 17,90
+11:42:40.988  regarde
+11:42:42.166  trace 19,90 20,90
+11:42:42.362  regarde
+11:42:43.625  trace 22,90 27,90
+11:42:44.043  regarde
+11:42:45.309  clic 29,90
+11:42:45.513  regarde
+11:42:46.731  trace 31,90 36,90
+11:42:47.159  regarde
+11:42:48.284  trace 43,90 49,90
+11:42:48.784  regarde
+11:42:49.936  clic 51,90
+11:42:50.141  regarde
+11:42:51.276  trace 53,90 59,90
+11:42:51.740  regarde
+11:42:52.939  trace 61,90 65,90
+11:42:53.296  regarde
+11:42:54.515  trace 67,90 68,90
+11:42:54.733  regarde
+11:42:55.850  trace 75,90 80,90
+11:42:56.291  regarde
+11:42:57.507  trace 83,90 91,90
+11:42:58.074  regarde
+11:42:59.287  trace 94,90 95,90
+11:42:59.515  regarde
+11:43:00.686  trace 0,91 8,91
+11:43:01.403  regarde
+11:43:02.570  trace 10,91 29,91
+11:43:03.502  regarde
+11:43:04.595  trace 31,91 36,91
+11:43:04.978  regarde
+11:43:06.109  trace 38,91 65,91
+11:43:07.334  regarde
+11:43:08.400  trace 67,91 71,91
+11:43:08.766  regarde
+11:43:09.890  trace 73,91 80,91
+11:43:10.380  regarde
+11:43:11.439  trace 82,91 95,91
+11:43:12.089  regarde
+11:43:13.166  trace 0,92 8,92
+11:43:13.895  regarde
+11:43:15.016  trace 10,92 36,92
+11:43:16.230  regarde
+11:43:17.443  trace 38,92 71,92
+11:43:18.899  regarde
+11:43:20.148  trace 73,92 80,92
+11:43:20.610  regarde
+11:43:21.952  trace 82,92 95,92
+11:43:22.671  regarde
+11:43:23.867  trace 0,93 8,93
+11:43:24.543  regarde
+11:43:25.686  trace 10,93 36,93
+11:43:26.917  regarde
+11:43:28.074  trace 38,93 71,93
+11:43:29.515  regarde
+11:43:30.625  trace 73,93 95,93
+11:43:31.650  regarde
+11:43:32.841  trace 0,94 8,94
+11:43:33.487  regarde
+11:43:34.717  trace 10,94 36,94
+11:43:35.849  regarde
+11:43:36.877  trace 38,94 71,94
+11:43:38.228  regarde
+11:43:39.386  trace 73,94 95,94
+11:43:40.414  regarde
+11:43:41.691  trace 0,95 36,95
+11:43:43.408  regarde
+11:43:44.479  trace 38,95 71,95
+11:43:45.863  regarde
+11:43:46.960  trace 73,95 95,95
+11:43:47.990  regarde
+11:43:49.082  clic =outil-crayon
+11:43:49.633  clic =couleur-c1
+11:43:50.221  defile =hex
+11:43:50.235  clic =hex
+11:43:50.819  touche ctrl+a
+11:43:50.898  tape "#357236"
+11:43:51.030  touche entree
+11:43:51.105  clic =selecteur-c1
+11:43:51.586  clic 0,5
+11:43:52.108  regarde
+11:43:53.274  clic 95,5
+11:43:53.710  regarde
+11:43:54.819  clic 0,6
+11:43:55.236  regarde
+11:43:56.379  clic 95,6
+11:43:56.818  regarde
+11:43:57.824  clic 0,7
+11:43:58.252  regarde
+11:43:59.237  clic 3,7
+11:43:59.467  regarde
+11:44:00.586  clic 20,7
+11:44:00.891  regarde
+11:44:01.918  clic 25,7
+11:44:02.158  regarde
+11:44:03.161  clic 31,7
+11:44:03.408  regarde
+11:44:04.405  clic 35,7
+11:44:04.641  regarde
+11:44:05.736  clic 52,7
+11:44:06.043  regarde
+11:44:07.156  clic 57,7
+11:44:07.403  regarde
+11:44:08.423  clic 63,7
+11:44:08.690  regarde
+11:44:09.728  clic 67,7
+11:44:09.985  regarde
+11:44:11.042  clic 84,7
+11:44:11.336  regarde
+11:44:12.324  clic 89,7
+11:44:12.563  regarde
+11:44:13.557  clic 95,7
+11:44:13.867  regarde
+11:44:14.882  clic 0,8
+11:44:15.302  regarde
+11:44:16.369  clic 3,8
+11:44:16.592  regarde
+11:44:17.671  clic 10,8
+11:44:17.928  regarde
+11:44:19.021  clic 15,8
+11:44:19.256  regarde
+11:44:20.334  clic 20,8
+11:44:20.578  regarde
+11:44:21.641  clic 25,8
+11:44:21.868  regarde
+11:44:22.921  clic 31,8
+11:44:23.193  regarde
+11:44:24.467  clic 35,8
+11:44:24.717  regarde
+11:44:25.718  clic 42,8
+11:44:25.978  regarde
+11:44:27.069  clic 47,8
+11:44:27.305  regarde
+11:44:28.395  clic 52,8
+11:44:28.645  regarde
+11:44:29.757  clic 57,8
+11:44:29.998  regarde
+11:44:31.081  clic 63,8
+11:44:31.339  regarde
+11:44:32.470  clic 67,8
+11:44:32.730  regarde
+11:44:33.790  clic 74,8
+11:44:34.077  regarde
+11:44:35.321  clic 79,8
+11:44:35.567  regarde
+11:44:36.713  clic 84,8
+11:44:36.970  regarde
+11:44:38.071  clic 89,8
+11:44:38.320  regarde
+11:44:39.325  clic 95,8
+11:44:39.585  regarde
+11:44:40.528  clic 0,9
+11:44:40.968  regarde
+11:44:42.190  clic 3,9
+11:44:42.415  regarde
+11:44:43.455  clic 10,9
+11:44:43.702  regarde
+11:44:44.716  clic 15,9
+11:44:44.957  regarde
+11:44:46.092  clic 20,9
+11:44:46.329  regarde
+11:44:47.307  clic 25,9
+11:44:47.553  regarde
+11:44:48.649  clic 31,9
+11:44:48.910  regarde
+11:44:49.951  clic 35,9
+11:44:50.185  regarde
+11:44:51.352  clic 42,9
+11:44:51.614  regarde
+11:44:52.648  clic 47,9
+11:44:52.898  regarde
+11:44:53.900  clic 52,9
+11:44:54.159  regarde
+11:44:55.137  clic 57,9
+11:44:55.387  regarde
+11:44:56.350  clic 63,9
+11:44:56.622  regarde
+11:44:57.616  clic 67,9
+11:44:57.863  regarde
+11:44:58.882  clic 74,9
+11:44:59.143  regarde
+11:45:00.249  clic 79,9
+11:45:00.499  regarde
+11:45:01.476  clic 84,9
+11:45:01.718  regarde
+11:45:02.725  clic 89,9
+11:45:02.970  regarde
+11:45:04.016  clic 95,9
+11:45:04.297  regarde
+11:45:05.485  clic 0,10
+11:45:05.900  regarde
+11:45:06.958  trace 2,10 3,10
+11:45:07.152  regarde
+11:45:08.166  clic 10,10
+11:45:08.432  regarde
+11:45:09.513  clic 15,10
+11:45:09.751  regarde
+11:45:10.655  clic 20,10
+11:45:10.887  regarde
+11:45:12.079  clic 23,10
+11:45:12.321  regarde
+11:45:13.394  clic 25,10
+11:45:13.619  regarde
+11:45:14.771  clic 31,10
+11:45:15.027  regarde
+11:45:16.059  trace 34,10 35,10
+11:45:16.287  regarde
+11:45:17.413  clic 42,10
+11:45:17.674  regarde
+11:45:18.641  clic 47,10
+11:45:18.877  regarde
+11:45:19.941  clic 52,10
+11:45:20.197  regarde
+11:45:21.389  clic 55,10
+11:45:21.609  regarde
+11:45:22.721  clic 57,10
+11:45:22.926  regarde
+11:45:23.982  clic 63,10
+11:45:24.238  regarde
+11:45:25.344  trace 66,10 67,10
+11:45:25.567  regarde
+11:45:26.653  clic 74,10
+11:45:26.898  regarde
+11:45:28.041  clic 79,10
+11:45:28.271  regarde
+11:45:29.423  clic 84,10
+11:45:29.671  regarde
+11:45:30.802  clic 87,10
+11:45:31.023  regarde
+11:45:32.166  clic 89,10
+11:45:32.370  regarde
+11:45:33.491  clic 95,10
+11:45:33.783  regarde
+11:45:34.749  trace 1,11 3,11
+11:45:35.199  regarde
+11:45:36.193  clic 5,11
+11:45:36.397  regarde
+11:45:37.367  trace 7,11 11,11
+11:45:37.700  regarde
+11:45:38.645  clic 13,11
+11:45:38.846  regarde
+11:45:39.779  trace 15,11 17,11
+11:45:40.036  regarde
+11:45:40.989  trace 19,11 20,11
+11:45:41.183  regarde
+11:45:42.175  trace 22,11 23,11
+11:45:42.366  regarde
+11:45:43.455  clic 25,11
+11:45:43.667  regarde
+11:45:44.659  clic 27,11
+11:45:44.858  regarde
+11:45:45.979  trace 29,11 31,11
+11:45:46.250  regarde
+11:45:47.254  trace 33,11 35,11
+11:45:47.519  regarde
+11:45:48.514  clic 37,11
+11:45:48.718  regarde
+11:45:49.669  trace 39,11 43,11
+11:45:49.983  regarde
+11:45:50.909  clic 45,11
+11:45:51.129  regarde
+11:45:52.207  trace 47,11 49,11
+11:45:52.543  regarde
+11:45:53.524  trace 51,11 52,11
+11:45:53.759  regarde
+11:45:54.942  trace 54,11 55,11
+11:45:55.154  regarde
+11:45:56.142  clic 57,11
+11:45:56.349  regarde
+11:45:57.444  clic 59,11
+11:45:57.657  regarde
+11:45:58.661  trace 61,11 63,11
+11:45:58.915  regarde
+11:45:59.953  trace 65,11 67,11
+11:46:00.248  regarde
+11:46:01.262  clic 69,11
+11:46:01.481  regarde
+11:46:02.675  trace 71,11 75,11
+11:46:03.035  regarde
+11:46:04.077  clic 77,11
+11:46:04.286  regarde
+11:46:05.367  trace 79,11 81,11
+11:46:05.627  regarde
+11:46:06.710  trace 83,11 84,11
+11:46:06.923  regarde
+11:46:07.932  trace 86,11 87,11
+11:46:08.157  regarde
+11:46:09.198  clic 89,11
+11:46:09.401  regarde
+11:46:10.459  clic 91,11
+11:46:10.678  regarde
+11:46:11.721  trace 93,11 94,11
+11:46:11.970  regarde
+11:46:13.153  trace 5,13 6,13
+11:46:13.581  regarde
+11:46:14.662  trace 12,13 14,13
+11:46:14.965  regarde
+11:46:15.969  trace 20,13 21,13
+11:46:16.214  regarde
+11:46:17.336  clic 26,13
+11:46:17.578  regarde
+11:46:18.651  clic 30,13
+11:46:18.909  regarde
+11:46:19.983  clic 33,13
+11:46:20.203  regarde
+11:46:21.405  trace 37,13 38,13
+11:46:21.667  regarde
+11:46:22.808  trace 44,13 46,13
+11:46:23.119  regarde
+11:46:24.295  trace 52,13 53,13
+11:46:24.570  regarde
+11:46:25.678  clic 58,13
+11:46:25.925  regarde
+11:46:26.949  clic 62,13
+11:46:27.194  regarde
+11:46:28.258  clic 65,13
+11:46:28.497  regarde
+11:46:29.550  trace 69,13 70,13
+11:46:29.769  regarde
+11:46:30.855  trace 76,13 78,13
+11:46:31.171  regarde
+11:46:32.293  trace 84,13 85,13
+11:46:32.567  regarde
+11:46:33.612  clic 90,13
+11:46:33.859  regarde
+11:46:35.080  clic 121,39
+11:46:35.474  regarde
+11:46:36.661  clic 127,39
+11:46:36.925  regarde
+11:46:37.978  clic 131,39
+11:46:38.235  regarde
+11:46:39.476  clic 121,40
+11:46:39.751  regarde
+11:46:40.819  clic 127,40
+11:46:41.065  regarde
+11:46:42.203  clic 131,40
+11:46:42.457  regarde
+11:46:43.581  clic 121,41
+11:46:43.880  regarde
+11:46:44.940  clic 127,41
+11:46:45.196  regarde
+11:46:46.356  clic 131,41
+11:46:46.617  regarde
+11:46:47.804  clic 119,42
+11:46:48.096  regarde

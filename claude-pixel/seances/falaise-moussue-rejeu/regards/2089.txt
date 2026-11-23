@@ -1,0 +1,11 @@
+regard 2089
+case 28,42 · couleur #6e6781ff (exportée : #6e6781ff) · écran 200,300
+outil crayon · taille 1 · c1 #1e1424ff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 7 · Micro-détails : chaque élément comme un dessin entier (0-AE)
+porte : Carnet : 8 « Détail » de plus : chaque élément retravaillé à la loupe laisse une ligne (0-AE). | Passe à la loupe : 12 zone(s) sur 16 à retravailler et marquer (zones de 8 px). | Case non cochée : « Chaque zone regardée à la loupe et retravaillée » | Case non cochée : « Chaque élément a sa silhouette, sa lumière et 2 ou 3 tons » | Case non cochée : « Vu de loin, le détail ne fait pas de bruit »
+défauts : Pixels doublés en « L » [erreur] 37 px ; L'ombrage ne suit pas la lumière [attention] 200 px (dont 32,38 près du curseur) ; Tirets dans la texture [conseil] 53 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord 0.26 · familles 0.04 · inversions 8 % · étendue 0.18
+carnet : 23 idée(s), 1 barrée(s) · dernière : [passe] Passe 6, éclats : un liseré très clair de 1 px sur l'arête haute de chaque pierre, plus lo
+messages : aucun
+images : seances/falaise-moussue-rejeu/regards/2089-{ecran,loupe,dessin}.png
