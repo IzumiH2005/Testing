@@ -1,0 +1,11 @@
+regard 7207
+case 85,116 · couleur #423c52ff (exportée : #423c52ff) · écran 1094,625
+outil crayon · taille 1 · c1 #cdc6cfff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 12 · Détails et nettoyage (A6-H · A5-10)
+porte : Passe à la loupe : 14 zone(s) sur 73 à retravailler et marquer (zones de 16 px). | Case non cochée : « Lisible à ×1 sur la carte »
+défauts : Pixels doublés en « L » [erreur] 200 px ; L'ombrage ne suit pas la lumière [attention] 200 px ; Tramage en damier [conseil] 134 px (dont 84,115 85,115 84,116 85,116 près du curseur) ; Tirets dans la texture [conseil] 200 px
+volume : lumière haut (az 90°, él 65°, gonfle) · accord 0.09 · familles 0.07 · inversions 42 % · étendue 0.51
+carnet : 42 idée(s), 1 barrée(s) · dernière : [detail] Cailloux : le gros caillou avait une face plate d'un seul ton ; il reçoit un plan éclairé 
+messages : aucun
+images : seances/falaise-moussue-rejeu/regards/7207-{ecran,loupe,dessin}.png
