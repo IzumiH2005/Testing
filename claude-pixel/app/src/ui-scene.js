@@ -21,7 +21,7 @@ function composeAffichage(d, f, cacheConstr) {
     const id = d.cels[c.id][f]; if (!id) continue;
     const src = d.celData[id], op = c.opacite / 100;
     let teinte = null;
-    if (c.type === 'construction') { try { teinte = AP.parseHex(c.teinte || TEINTE_CONSTR) & 0xffffff; } catch (e) { teinte = AP.parseHex(TEINTE_CONSTR) & 0xffffff; } }
+    if (c.type === 'construction' && c.teinte !== 'aucune') { try { teinte = AP.parseHex(c.teinte || TEINTE_CONSTR) & 0xffffff; } catch (e) { teinte = AP.parseHex(TEINTE_CONSTR) & 0xffffff; } }
     for (let i = 0; i < out.length; i++) {
       let s = src[i]; const a = s >>> 24; if (!a) continue;
       if (teinte !== null) s = (teinte | (a << 24)) >>> 0;

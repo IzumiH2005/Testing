@@ -55,7 +55,8 @@ const FICHES = {
     CH('tuile', 'Taille de tuile', 'F0.', { type: 'choix', options: ['8', '16', '32'] }),
     CH('plans', 'Plans', 'Premier plan, plan jouable, fond… (F1)'),
     CH('lecture', 'Ce qui doit se lire d\'un coup d\'œil', 'Chemin, danger, sortie… (F1)'),
-    CH('lieu', 'Palette du lieu', 'Heure, climat, ambiance, teinte dominante (F4).')
+    CH('lieu', 'Palette du lieu', 'Heure, climat, ambiance, teinte dominante (F4).'),
+    CH('vise', 'Niveau visé', 'Une œuvre pro précise et ce que tu en prends (0-J) : « tuiles de Celeste : croûte qui déborde, clusters gras ».', { requis: false })
   ],
   etude: [
     CH('oeuvre', 'Pièce étudiée', 'Titre et jeu.'),
@@ -155,7 +156,7 @@ const E = (id, titre, ref, faire, o = {}) => Object.assign({ id, titre, ref, fai
 const C = (cle, txt) => ({ cle, txt });
 const ETAPE_FICHE = (ref) => E('fiche', 'Fiche d\'intention et règles', ref, [
   'Remplis la fiche : chaque champ est une décision prise avant le premier pixel.',
-  'Lis les 87 règles impératives (onglet Aide) et coche « lues ».',
+  'Lis les 88 règles impératives (onglet Aide) et coche « lues ».',
   'Règle la toile à la taille finale : on ne dessine jamais en grand pour réduire (A4b).',
   'Choisis ou construis la palette : une rampe par matière (A6-A).',
   'Nomme 2 ou 3 idées fortes, pas plus : ce qu\'on doit reconnaître de loin (A10-F, règle 44).'
@@ -440,7 +441,7 @@ for (const t of ['personnage', 'chibi', 'creature']) {
 /* Vision et essais (0-N) : avant tout trait, écrire ce qu'on voit et l'éprouver. */
 const RUBRIQUES = {
   vision: 'Ce que je vois', structure: 'Structure / physionomie', formes: 'Formes de base',
-  unique: 'Ce qui la rend unique', logique: 'Pourquoi c\'est crédible', variante: 'Variante (SCAMPER, tableau)', essai: 'Essai', iteration: 'Itération', critique: 'Critique (note sur 30)', piece: 'Pièce (bouchon, jonction, pied)', choix: 'Choix retenu'
+  unique: 'Ce qui la rend unique', logique: 'Pourquoi c\'est crédible', variante: 'Variante (SCAMPER, tableau)', essai: 'Essai', iteration: 'Itération', detail: 'Détail travaillé', critique: 'Critique (note sur 30)', piece: 'Pièce (bouchon, jonction, pied)', choix: 'Choix retenu'
 };
 const AIDE_STRUCTURE = {
   objet: 'De quoi il est fait, comment ses pièces tiennent ensemble, comment on le tient ou l\'utilise (la forme suit la fonction).',
@@ -581,7 +582,7 @@ ETAPES_V24.decor = [
   ], { portes: ['rampesGris'], coches: [C('hierarchie', 'Hiérarchie de contraste respectée'), C('peu', '3 ou 4 tons par matière, pas plus')] }),
   E('gabarit', 'Gabarit en aplats et carte de test', 'F2-C · F2-F', [
     'Onglet Tuiles : mode tuile, taille de tuile de la fiche. Planche : bloc 3×3 (coins, bords, centre) en colonnes 1-3, coins rentrants en colonnes 4-5, plateformes et décors en dessous.',
-    'Dans un calque de construction, pose chaque tuile en GRANDS APLATS (blocage de couleur) : croûte claire, face moyenne, bas plus sombre. Pas de texture.',
+    'Sur le calque normal (la carte de test ne montre que ce qui s\'exporte), pose chaque tuile en GRANDS APLATS (blocage de couleur) : croûte claire, face moyenne, bas plus sombre. Pas de texture.',
     'Peins tout de suite une carte de test (pinceau Terrain) en U, en L et en îlot : un carré qui dépasse dans un coin rentrant veut dire qu\'il manque la tuile de coin intérieur.',
     'Les bords ne sont jamais des rectangles parfaits : coins arrondis ou cassés, croûte qui déborde un peu sur la face.'
   ], { pasEncore: 'Pas de texture, pas de détail.', portes: ['tuileOn', 'construction', 'carteTerrain'], outils: ['rect', 'seau', 'crayon'],
@@ -623,10 +624,36 @@ ETAPES_V24.decor = [
   ], { portes: NETTOYAGE.filter(p => p !== 'superpixels'), coches: [C('lisible', 'Lisible à ×1 sur la carte')] }),
   ETAPE_PLANCHE('A5-11 · F6')
 ];
-const ETAPES = ETAPES_V24;
+/* ---------- Méthode v25 : chaque détail travaillé comme un dessin entier (0-AE) ----------
+ * Un modèle (une tuile, un objet) ne se fait qu'une fois : chaque élément complexe (une pierre,
+ * une motte, un pétale, une boucle, un œil) se traite comme un pixel art complet, à la loupe,
+ * zone par zone, sans limite de temps. Chaque élément retravaillé laisse une ligne au carnet. */
+const ETAPE_MICRO = (n, quoi) => E('micro', 'Micro-détails : chaque élément comme un dessin entier', '0-AE', [
+  'Loupe : passe ' + quoi + ' zone par zone (8×8 ou 16×16). Chaque élément (une pierre, une motte, un brin, une fissure, un pétale, une boucle, un œil) se dessine comme un pixel art complet : silhouette lisible, sa propre lumière, 2 ou 3 tons, contour décidé, aucun pâté.',
+  'Pour chaque élément, la même démarche que pour le dessin entier : la forme de base, puis une ou deux itérations jusqu\'à ce qu\'il soit juste. Pas de limite de temps : on ne fait ce modèle qu\'une fois.',
+  'Après chaque élément retravaillé : une ligne « Détail » au carnet (ce que c\'est, ce qui clochait, ce qui a changé). ' + n + ' éléments au moins.',
+  'Puis un regard d\'ensemble (×1, carte ou planche dézoomée) : le détail sert la lecture, il ne fait pas de bruit ; les clusters restent francs.'
+], { pasEncore: 'Pas de nouvel élément : on perfectionne ceux qui existent.', portes: ['carnetDetails' + n],
+  coches: [C('loupe', 'Chaque zone regardée à la loupe et retravaillée'), C('element', 'Chaque élément a sa silhouette, sa lumière et 2 ou 3 tons'), C('ensemble', 'Vu de loin, le détail ne fait pas de bruit')] });
+const ETAPES_V25 = {};
+for (const t of Object.keys(ETAPES_V24)) {
+  const L = ETAPES_V24[t].slice();
+  if (t === 'decor') {
+    // la tuile centrale se perfectionne avant d'être recopiée dans les bords (MortMort, F2-F)
+    L.splice(L.findIndex(e => e.id === 'centre') + 1, 0, ETAPE_MICRO(8, 'la tuile centrale'));
+    const i = L.findIndex(e => e.id === 'details');
+    L[i] = Object.assign({}, L[i], { portes: L[i].portes.concat(['carnetDetails16']), faire: ['Repasse les bords, les coins et la plateforme à la loupe comme la tuile centrale (0-AE) : une ligne « Détail » par élément retravaillé, 16 au total.'].concat(L[i].faire) });
+  } else if (t !== 'animation' && t !== 'etude') {
+    const i = L.findIndex(e => ['details', 'fin', 'nettoyage'].includes(e.id));
+    if (i > 0) L.splice(i, 0, ETAPE_MICRO(8, 'tout le dessin'));
+  }
+  ETAPES_V25[t] = L;
+}
+const METHODE_ACTUELLE = 25;
+const ETAPES = ETAPES_V25;
 const etapesDe = doc => {
   const v = (doc.meta && doc.meta.methode) || 0;
-  return (v >= 24 ? ETAPES_V24 : v >= 22 ? ETAPES_V22 : v >= 21 ? ETAPES_V21 : v >= 17 ? ETAPES_V17 : ETAPES_V16)[typeDe(doc)];
+  return (v >= 25 ? ETAPES_V25 : v >= 24 ? ETAPES_V24 : v >= 22 ? ETAPES_V22 : v >= 21 ? ETAPES_V21 : v >= 17 ? ETAPES_V17 : ETAPES_V16)[typeDe(doc)];
 };
 /* Calques de construction qui contiennent des pixels, dans l'ordre de la pile. */
 function calquesConstr(doc) {
@@ -672,7 +699,7 @@ function porte(id, at, cache) {
   }
   switch (id) {
     case 'fiche': { const r = ficheIncomplete(doc); return r ? 'Fiche incomplète : ' + r.join(', ') : null; }
-    case 'regles': return m.reglesLues ? null : 'Lis les 87 règles impératives et coche « lues ».';
+    case 'regles': return m.reglesLues ? null : 'Lis les 88 règles impératives et coche « lues ».';
     case 'nonVide': return AP.mesures(doc, f).opaques ? null : 'L\'image exportée est vide.';
     case 'construction': return aDesPixels(doc, c => c.type === 'construction') ? null : 'Dessine la construction dans au moins un calque de type « construction ».';
     case 'silhouette1': { const n = AP.mesures(doc, f).couleurs; return n <= 2 ? null : 'La silhouette se fait en une couleur sombre (2 au plus) : ' + n + ' couleurs.'; }
@@ -710,6 +737,10 @@ function porte(id, at, cache) {
       if (!c.some(e => e.rubrique === 'choix' && !e.barre)) manque.push('un « Choix retenu »');
       if (c.filter(e => e.barre).length < 3) manque.push('au moins 3 idées barrées au total');
       return manque.length ? 'Carnet : ' + manque.join(', ') + '.' : null;
+    }
+    case 'carnetDetails6': case 'carnetDetails8': case 'carnetDetails12': case 'carnetDetails16': {
+      const n = +id.slice('carnetDetails'.length), k = (m.carnet || []).filter(e => e.rubrique === 'detail' && !e.barre).length;
+      return k >= n ? null : 'Carnet : ' + (n - k) + ' « Détail » de plus : chaque élément retravaillé à la loupe laisse une ligne (0-AE).';
     }
     case 'carnetIterations': {
       const c = m.carnet || [], n = r => c.filter(e => e.rubrique === r).length, manque = [];
@@ -781,7 +812,7 @@ const NOMS_PORTES = {
   analyse: 'Analyse écrite', timing: 'Feuille de timing', imagesValidees: 'Toutes les images validées', Ltoutes: 'Aucun L sur les images',
   planche: 'Planche remplie', defauts: 'Aucun défaut restant',
   carnetVision: 'Carnet : vision écrite et corrigée', carnetEssais: 'Carnet : essais et choix',
-  carnetEssais21: 'Carnet : 6 silhouettes notées et un choix', carnetPieces: 'Carnet : 9 variantes de pièces', carnetIterations: 'Carnet : 3 itérations notées et un choix',
+  carnetEssais21: 'Carnet : 6 silhouettes notées et un choix', carnetPieces: 'Carnet : 9 variantes de pièces', carnetIterations: 'Carnet : 3 itérations notées et un choix', carnetDetails8: 'Carnet : 8 détails travaillés', carnetDetails16: 'Carnet : 16 détails travaillés', carnetDetails6: 'Carnet : 6 détails travaillés', carnetDetails12: 'Carnet : 12 détails travaillés',
   calquesConstr2: '2 calques d\'esquisse', calquesConstr3: '3 calques d\'esquisse', calquesConstr4: '4 calques d\'esquisse',
   dessousBaisse: 'Passes précédentes baissées', critiqueDessin: 'Dessin noté 22/30 au moins', taille64: 'Dessin à 64 px de haut au moins',
   lumierePosee: 'Lumière posée', volume: 'Le volume suit la lumière', lumiere: 'Ombrage du bon côté',
@@ -804,7 +835,7 @@ function verifieEtape(at) {
   return { ok: !manque.length, manque };
 }
 
-/* ---------- Les 87 règles, lues dans le texte de la méthode ---------- */
+/* ---------- Les 88 règles, lues dans le texte de la méthode ---------- */
 function extraitRegles(texte) {
   const lignes = texte.split('\n'), out = [];
   let i = lignes.findIndex(l => /^# Règles impératives/.test(l)), groupe = '';
@@ -821,7 +852,7 @@ function extraitRegles(texte) {
 }
 
 Object.assign(AP, {
-  RUBRIQUES, FICHES, QUESTIONS, QUESTIONS_TYPE, TESTS_PRO, TABLE_A3, ETAPES, ETAPES_V16, ETAPES_V17, ETAPES_V21, ETAPES_V22, ETAPES_V24, etapesDe, TYPES, NOMS_PORTES,
+  RUBRIQUES, FICHES, QUESTIONS, QUESTIONS_TYPE, TESTS_PRO, TABLE_A3, ETAPES, ETAPES_V16, ETAPES_V17, ETAPES_V21, ETAPES_V22, ETAPES_V24, ETAPES_V25, METHODE_ACTUELLE, etapesDe, TYPES, NOMS_PORTES,
   colonneA3, ficheIncomplete, nbEtapes, etapeCourante, etatEtape, verifieEtape, extraitRegles, typeDe
 });
 if (typeof module !== 'undefined') module.exports = AP;

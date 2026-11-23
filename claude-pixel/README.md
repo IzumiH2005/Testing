@@ -36,6 +36,10 @@ Projet personnel, non officiel, sans lien avec Anthropic.
   d'autotile en aplats testé sur une carte, tuile centrale en strates, bords, coins et coins
   rentrants, lumière, plateformes, variantes et décors, carte, détails. Dans un gabarit, seules
   les tuiles qui se répètent doivent se raccorder.
+- **Micro-détails** (v25) : chaque parcours a une étape où chaque élément complexe (pierre,
+  motte, pétale, boucle, œil) est retravaillé à la loupe comme un dessin entier, une ligne
+  « Détail » au carnet par élément. Un document en cours passe à la méthode actuelle par un
+  bouton, sans perdre son étape.
 - **Sketching d'illustrateur** (v22) : rough, construction, esquisse nettoyée, trait final et
   polish, chacun sur son calque d'esquisse, celui du dessous baissé ; bouton « Retourner la
   toile » ; étape « Validation du dessin » avant toute couleur (note de 22/30 au moins).

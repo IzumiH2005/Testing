@@ -296,7 +296,7 @@ function rendCalques(c) {
         'data-cible': 'calque-oeil-' + i, html: L.visible ? OEIL : OEIL_NON, on: { click: () => act('calque.prop', { i, visible: !L.visible }) } }),
       h('div.nom', { role: 'button', tabIndex: 0, 'data-cible': 'calque-choisit-' + i, 'aria-current': i === ia ? 'true' : undefined,
         on: { click: () => act('calque.choisit', { i }), keydown: e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act('calque.choisit', { i }); } } } },
-        h('b', L.nom), h('small', nomType(L.type) + ' · ' + L.opacite + ' %' + (L.teinte ? ' · teinté' : ''))),
+        h('b', L.nom), h('small', nomType(L.type) + ' · ' + L.opacite + ' %' + (L.teinte === 'aucune' ? ' · sans teinte' : L.teinte ? ' · teinté' : ''))),
       h('button.btn.ico.fantome', { title: L.verrou ? 'Déverrouiller' : 'Verrouiller', 'aria-label': (L.verrou ? 'Déverrouiller ' : 'Verrouiller ') + L.nom, 'aria-pressed': String(L.verrou),
         'data-cible': 'calque-verrou-' + i, html: L.verrou ? CADENAS : CADENAS_NON, on: { click: () => act('calque.prop', { i, verrou: !L.verrou }) } })));
   }
@@ -327,9 +327,11 @@ function rendCalques(c) {
         : ca.type === 'reference' ? 'Pour copier à côté, jamais par-dessus (G2). Jamais exporté.' : 'Exporté et contrôlé.')),
       h('label', 'Opacité', h('div.ligne', op, h('span.mono.aide-txt', ca.opacite + ' %'))),
       ca.type !== 'normal' ? h('label', 'Teinte d\'affichage',
-        h('div.ligne', h('input', { type: 'color', value: ca.teinte || '#5a6fae', 'data-cible': 'calque-teinte', 'aria-label': 'Teinte du calque',
+        h('div.ligne', h('input', { type: 'color', value: (ca.teinte && ca.teinte !== 'aucune') ? ca.teinte : '#5a6fae', 'data-cible': 'calque-teinte', 'aria-label': 'Teinte du calque',
           on: { change: e => act('calque.prop', { teinte: e.target.value }) } }),
-          btn('Sans teinte', { cls: '.fantome', cible: 'calque-teinte-aucune', inactif: !ca.teinte, click: () => act('calque.prop', { teinte: null }) }))) : null));
+          // « Sans teinte » : les vraies couleurs (esquisse en valeurs, itérations) ; « Bleu » : la teinte par défaut
+          btn('Sans teinte', { cls: '.fantome', cible: 'calque-teinte-aucune', inactif: ca.teinte === 'aucune', click: () => act('calque.prop', { teinte: 'aucune' }) }),
+          btn('Bleu', { cls: '.fantome', cible: 'calque-teinte-defaut', inactif: !ca.teinte, click: () => act('calque.prop', { teinte: null }) }))) : null));
   }
 
   if (AP.typeDe(d) === 'animation' || d.type === 'animation') {
@@ -410,11 +412,11 @@ function rendMethode(c) {
     }
     if (st.index === 0 || e.portes.includes('fiche')) rendFiche(c);
     if (e.portes.includes('regles')) {
-      c.appendChild(titre('Les 87 règles', m.reglesLues ? h('span.aide-txt', { style: { color: 'var(--ok)' } }, 'lues ✓') : null));
+      c.appendChild(titre('Les 88 règles', m.reglesLues ? h('span.aide-txt', { style: { color: 'var(--ok)' } }, 'lues ✓') : null));
       c.appendChild(h('p.aide-txt', 'Elles s\'appliquent à chaque dessin. Lis-les toutes avant de confirmer.'));
       c.appendChild(h('div.ligne',
         btn(reglesOuvertes ? 'Replier les règles' : 'Lire les règles', { cible: 'regles-ouvre', click: () => { reglesOuvertes = !reglesOuvertes; rendu(true); } }),
-        btn(m.reglesLues ? 'Règles lues ✓' : 'J\'ai lu les 87 règles', { cls: m.reglesLues ? '.fantome' : '.prim', cible: 'regles-lues', inactif: m.reglesLues || !reglesOuvertes,
+        btn(m.reglesLues ? 'Règles lues ✓' : 'J\'ai lu les 88 règles', { cls: m.reglesLues ? '.fantome' : '.prim', cible: 'regles-lues', inactif: m.reglesLues || !reglesOuvertes,
           title: reglesOuvertes ? '' : 'Ouvre d\'abord les règles', click: () => act('regles.lues') })));
       if (reglesOuvertes) c.appendChild(listeRegles());
     }
@@ -467,6 +469,9 @@ function rendMethode(c) {
 
   /* Liste des étapes */
   c.appendChild(titre('Étapes'));
+  if ((m.methode || 0) < AP.METHODE_ACTUELLE)
+    c.appendChild(h('div.ligne', { style: { margin: '0 0 8px' } }, btn('Passer à la méthode v' + AP.METHODE_ACTUELLE, { cls: '.fantome', cible: 'methode-migre', title: 'Garde l\'étape en cours ; les étapes nouvelles d\'avant restent à faire', click: () => act('methode.migre') }),
+      h('span.aide-txt', 'Ce document suit la méthode v' + (m.methode || 16) + '.')));
   const L = h('div.etapes-liste', { 'data-cible': 'etapes' });
   AP.etapesDe(d).forEach((x, i) => {
     const fait = (m.valideEtapes || []).includes(x.id) || i < m.etape;

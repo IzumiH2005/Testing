@@ -247,7 +247,7 @@ function nouveauDoc(o = {}) {
     rampes: [],
     calques: [], images: [{ ms: 100, role: '', change: '', principe: '', validee: false }],
     cels: {}, celData: {}, etiquettes: [], next: 1,
-    meta: { fiche: {}, etape: 0, coches: {}, justifs: {}, planche: {}, reglesLues: false, valideEtapes: [], methode: 24, carnet: [] },
+    meta: { fiche: {}, etape: 0, coches: {}, justifs: {}, planche: {}, reglesLues: false, valideEtapes: [], methode: 25, carnet: [] },
     lumiere: { az: 135, el: 40, forme: 'gonfle', posee: false },
     tuile: { on: false, tw: 16, th: 16 },
     carte: { cols: 20, rows: 12, terrain: [], tuiles: [] }
@@ -1284,7 +1284,7 @@ const ACTIONS = {
   'carnet.ajoute'(a) {
     const t = String(a.texte || '').trim().slice(0, 600);
     if (!t) this.refuse('Écris l\'idée avant de l\'ajouter au carnet.');
-    const R = ['vision', 'structure', 'formes', 'unique', 'logique', 'variante', 'essai', 'iteration', 'critique', 'piece', 'choix'];
+    const R = ['vision', 'structure', 'formes', 'unique', 'logique', 'variante', 'essai', 'iteration', 'detail', 'critique', 'piece', 'choix'];
     const rub = R.includes(a.rubrique) ? a.rubrique : 'vision';
     const m = this.doc.meta; m.carnet = m.carnet || [];
     m.carnet.push({ n: m.carnet.length + 1, rubrique: rub, texte: t, barre: false, raison: '' });
@@ -1310,6 +1310,21 @@ const ACTIONS = {
     m.etape = Math.min(m.etape + 1, (AP.nbEtapes ? AP.nbEtapes(this.doc) : 99));
     this._emet('methode');
     return res;
+  },
+  'methode.migre'() {
+    // Passe un document à la méthode actuelle sans perdre où il en est : on garde l'étape
+    // courante par son identifiant (ou la dernière étape commune qui la précède).
+    const m = this.doc.meta, ancien = AP.etapesDe(this.doc), cour = ancien[Math.min(m.etape, ancien.length - 1)];
+    const v = AP.METHODE_ACTUELLE; if (!v || (m.methode || 0) >= v) this.refuse('Le document suit déjà la méthode actuelle.');
+    const avant = m.methode || 0; m.methode = v;
+    const neuf = AP.etapesDe(this.doc);
+    let i = neuf.findIndex(e => e.id === cour.id);
+    for (let k = ancien.indexOf(cour); i < 0 && k >= 0; k--) i = neuf.findIndex(e => e.id === ancien[k].id);
+    const vieux = m.valideEtapes || [];
+    m.valideEtapes = neuf.map(e => { const k = ancien.findIndex(x => x.id === e.id); return k >= 0 ? vieux[k] : undefined; });
+    m.etape = Math.max(0, i);
+    this.dit('Méthode v' + avant + ' → v' + v + ' : étape « ' + neuf[m.etape].titre + ' ». Les étapes nouvelles d\'avant restent à faire : reviens-y depuis la liste des étapes.', 'info');
+    this._emet('methode');
   },
   'etape.va'(a) {
     const i = a.i | 0, m = this.doc.meta;

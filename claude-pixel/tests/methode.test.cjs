@@ -10,10 +10,10 @@ const v22 = d => { d.meta.methode = 22; return d; };
 
 const FICHE = { quoi: 'potion', usage: 'inventaire', couleurs: '8', projection: 'de face', lumiere: 'haut gauche', matiere: 'verre', accent: 'rouge' };
 
-test('les 87 règles impératives sont extraites du document', () => {
+test('les 88 règles impératives sont extraites du document', () => {
   const R = AP.extraitRegles(fs.readFileSync(path.join(RACINE, 'METHODE_PIXEL_ART.md'), 'utf8'));
-  assert.equal(R.length, 87);
-  assert.deepEqual(R.map(r => r.n), Array.from({ length: 87 }, (_, i) => i + 1));
+  assert.equal(R.length, 88);
+  assert.deepEqual(R.map(r => r.n), Array.from({ length: 88 }, (_, i) => i + 1));
   assert.ok(R.every(r => r.texte && r.groupe));
 });
 
@@ -133,7 +133,7 @@ test('v22 : le sketching d\'illustrateur, calque par calque, puis la validation 
 
 test('v24 : un nouveau document itère sur une forme de base, sans essais ni pièces', () => {
   const at = new AP.Atelier({ doc: AP.nouveauDoc({ w: 64, h: 64, type: 'objet' }) }), d = at.doc;
-  assert.equal(d.meta.methode, 24);
+  assert.equal(d.meta.methode, 25);
   const ids = AP.etapesDe(d).map(e => e.id);
   assert.ok(!ids.includes('essais') && !ids.includes('pieces'));
   assert.equal(ids.indexOf('iterations'), ids.indexOf('vision') + 1);
@@ -153,7 +153,35 @@ test('v24 : un nouveau document itère sur une forme de base, sans essais ni pi�
 test('v24 : le décor suit le pipeline d\'un tileset de plateforme', () => {
   const d = AP.nouveauDoc({ w: 160, h: 128, type: 'decor' });
   assert.deepEqual(AP.etapesDe(d).map(e => e.id),
-    ['fiche', 'vision', 'iterations', 'palette', 'gabarit', 'centre', 'bords', 'lumiere', 'variantes', 'carte', 'details', 'planche']);
+    ['fiche', 'vision', 'iterations', 'palette', 'gabarit', 'centre', 'micro', 'bords', 'lumiere', 'variantes', 'carte', 'details', 'planche']);
   // un document décor v22 garde ses étapes
   assert.ok(AP.etapesDe(v22(AP.nouveauDoc({ w: 16, h: 16, type: 'decor' }))).some(e => e.id === 'essais'));
+});
+
+test('v25 : chaque parcours a une étape de micro-détails tenue au carnet', () => {
+  for (const t of ['objet', 'personnage', 'chibi', 'creature', 'decor']) {
+    const ids = AP.etapesDe(AP.nouveauDoc({ w: 64, h: 64, type: t })).map(e => e.id);
+    assert.ok(ids.includes('micro'), t);
+  }
+  const at = new AP.Atelier({ doc: { w: 64, h: 64, type: 'objet' } }), d = at.doc;
+  d.meta.etape = AP.etapesDe(d).findIndex(e => e.id === 'micro');
+  const manque = () => AP.etatEtape(at).portes.find(p => p.id === 'carnetDetails8').manque;
+  assert.match(manque(), /8 « Détail »/);
+  for (let k = 0; k < 8; k++) at.act('carnet.ajoute', { rubrique: 'detail', texte: 'pierre ' + k + ' : contour repris, deux tons' });
+  assert.equal(manque(), null);
+});
+
+test('v25 : un document v24 passe à la méthode actuelle sans perdre son étape', () => {
+  const at = new AP.Atelier({ doc: { w: 160, h: 128, type: 'decor' } }), d = at.doc;
+  d.meta.methode = 24;
+  d.meta.etape = AP.etapesDe(d).findIndex(e => e.id === 'variantes');
+  d.meta.valideEtapes[0] = { ok: true, manque: [] };
+  at.act('methode.migre');
+  assert.equal(d.meta.methode, 25);
+  assert.equal(AP.etapeCourante(d).id, 'variantes');
+  assert.deepEqual(d.meta.valideEtapes[0], { ok: true, manque: [] });
+  // on peut revenir à l'étape nouvelle qui précède
+  at.act('etape.va', { i: AP.etapesDe(d).findIndex(e => e.id === 'micro') });
+  assert.equal(AP.etapeCourante(d).id, 'micro');
+  assert.ok(at.act('methode.migre').refus);
 });

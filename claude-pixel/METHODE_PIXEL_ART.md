@@ -1,4 +1,4 @@
-# Méthode de pixel art — objets, personnages, créatures et décors (v24)
+# Méthode de pixel art — objets, personnages, créatures et décors (v25)
 
 On construit d'abord, on détaille ensuite. Cette méthode réunit le dessin classique
 (construction par volumes, ligne d'action, anatomie) et les règles du pixel art
@@ -86,6 +86,7 @@ propres.
 | Sketch fini, poids du trait, lignes de forme, taille du dessin | **0-AC** · 0-H · A6-C |
 | Partir d'une forme de base et l'itérer | **0-AD** · 0-AA-E |
 | Tileset de plateforme, dans l'ordre | **F2-F** · F2-C · F2-D |
+| Travailler chaque détail comme un dessin entier | **0-AE** · 0-O · F2-A |
 | Grandes formes, langage des formes, point d'intérêt, contraste | **0-O** · 0-E · A2 |
 
 **Sources (étiquettes) :** [U] demandes de l'utilisateur (v24 : itérer au lieu d'essayer) · [Z] *Apprendre à tout dessiner avec Zephy* · [M] livre de dessin
@@ -277,16 +278,18 @@ Chaque règle est un ordre. Le détail et le « pourquoi » sont dans la section
     tu vois, la structure, les formes de base, l'idée unique, ce qui la rend crédible (0-N).
 62. **N'efface jamais une idée : barre-la et écris pourquoi.** Le carnet garde le chemin
     qui mène à la bonne forme (0-N-A).
-63. **Essaie au moins trois silhouettes vraiment différentes**, petites, au calque de
-    construction, avant de choisir ; écris le choix et ce qu'il reste à pousser (0-N-C).
+63. **Pousse une seule silhouette en trois versions au moins**, à la taille finale, au
+    calque de construction ; écris à chaque fois ce qui change, puis le choix et ce qu'il
+    reste à pousser (0-AD, 0-N-C).
 64. **Pars de formes géométriques simples, puis transforme-les** : étirer, tordre, couper,
     combiner. La base géométrique est un repère, pas le résultat (0-N-B).
 65. **Une forme inventée reste logique** : la forme suit la fonction, une créature tient
     sur un squelette plausible (0-N-B).
 66. **Grandes formes calmes, détails groupés, un seul point d'intérêt** : la plus forte
     valeur, le bord le plus dur et la couleur la plus saturée s'y retrouvent (0-O).
-67. **Cherche avant de choisir** : SCAMPER sur une forme connue, puis un tableau
-    morphologique ; tire trois combinaisons très différentes pour les trois vignettes (0-P).
+67. **Cherche en itérant** : SCAMPER sur la forme de base (agrandir, retirer, combiner une
+    pièce) donne les changements de chaque version ; on garde ce qui gagne des points (0-P,
+    0-AD).
 68. **Le geste en trois traits** : une ligne d'action, puis des C, des S et des droites ;
     un côté tendu face à un côté droit (0-Q).
 69. **Une couleur domine, une soutient, une accentue** (environ 60 / 30 / 10) ; l'accent
@@ -338,6 +341,13 @@ Chaque règle est un ordre. Le détail et le « pourquoi » sont dans la section
     noire, trois poids de trait appliqués partout, recouvrements nets, lignes de forme (0-AC).
 87. **Dessiner un design d'objet à 64 px de haut au moins** ; une icône plus petite se
     redessine ensuite à sa taille depuis le sketch validé, jamais par réduction (0-AC-C).
+
+**Le détail (0-AE)**
+88. **Chaque élément d'un dessin complexe se travaille comme un dessin entier** : une pierre,
+    une motte, un brin, un pétale, une boucle, un œil ont chacun leur silhouette, leur
+    lumière, 2 ou 3 tons et un contour décidé ; on passe tout à la loupe, zone par zone, sans
+    limite de temps. Une tuile ou un objet ne se fait qu'une fois : il doit être du niveau d'un
+    pro, pas banal (0-AE).
 
 ---
 
@@ -1288,6 +1298,44 @@ niveau d'une ébauche.
   v1, ce qu'il faut encore pousser au rough.
 - La version retenue doit être **mieux notée que la v1** ; sinon, on n'a pas itéré, on a
   seulement redessiné.
+
+## 0-AE. Chaque détail comme un dessin entier (v25) [U]
+
+**Le principe :** un modèle ne se fait **qu'une fois**. Une tuile de terrain sera posée des
+centaines de fois, un objet sera vu à chaque partie : il n'y a qu'**un** exemplaire à réussir,
+donc on y met **tout le travail qu'il faut**, même des heures, au lieu de livrer un résultat
+banal. Chaque élément d'un dessin complexe (une pierre, une motte, un brin d'herbe, une fissure,
+un pétale, une boucle de ceinture, un œil) **se dessine comme s'il était le pixel art complet**.
+
+### A. Ce qu'un élément doit avoir, à son échelle
+1. **Une silhouette lisible** : une pierre n'est pas un ovale, elle a des facettes, un côté
+   plus plat, une cassure ; une motte a un dessus et un dessous ; un brin a une base épaisse et
+   une pointe.
+2. **Sa propre lumière** : la même source que tout le dessin, avec un côté éclairé, un côté à
+   l'ombre, un contact plus sombre là où il touche ce qui l'entoure (occlusion).
+3. **2 ou 3 tons, pas plus**, choisis dans les rampes du dessin ; un pixel clair bien placé
+   vaut mieux que cinq tons.
+4. **Un contour décidé** : contour coloré (selout) ou bord par contraste de valeur ; aucun pixel
+   qui hésite, aucun pâté de pixels de même couleur sans forme.
+5. **Une variété de tailles** : grand, moyen, petit dans les éléments d'une même famille
+   (pierres, touffes) ; jamais trois fois le même élément au même endroit de la tuile.
+
+### B. La passe à la loupe
+1. Découper le dessin en **zones de 8×8 ou 16×16** et les passer une par une, à fort zoom.
+2. Pour chaque élément : la **forme de base**, puis **une ou deux itérations** jusqu'à ce qu'il
+   soit juste (la démarche de 0-AD, à l'échelle du détail).
+3. Une ligne **Détail** au carnet par élément retravaillé : ce que c'est, ce qui clochait, ce
+   qui a changé.
+4. **Regarder de loin après chaque zone** (×1, grille 3×3, carte dézoomée) : le détail sert la
+   lecture ; s'il fait du bruit, on le simplifie. Les clusters restent **francs**.
+
+### C. Pour une tuile en particulier
+- Chaque pixel de la tuile sera vu partout : la tuile centrale se perfectionne **avant** d'être
+  recopiée dans les bords (F2-F), puis chaque bord, coin et coin rentrant passe à son tour à la
+  loupe.
+- Les éléments qui passent par-dessus un bord de tuile se vérifient **raccord compris**.
+- La texture de fond (la terre entre les pierres) est un élément elle aussi : des mottes, des
+  creux, des grains, avec leur lumière, pas un aplat.
 
 ---
 
@@ -4355,10 +4403,19 @@ Pour le verre en pixel art : [PixelJoint, transparence d'un verre](https://pixel
 
 # Historique des versions
 
+- **v25 :** **0-AE chaque détail comme un dessin entier**, à la demande de l'utilisateur [U] :
+  un modèle ne se fait qu'une fois, donc chaque élément complexe (pierre, motte, brin, pétale,
+  boucle, œil) a sa silhouette, sa lumière, 2 ou 3 tons et un contour décidé ; passe à la
+  loupe zone par zone, sans limite de temps ; règle 88. Dans Claude Pixel : étape
+  « Micro-détails » dans les parcours objet, personnage, chibi, créature et décor (pour le
+  décor, juste après la tuile centrale), rubrique *Détail travaillé* au carnet, 8 détails au
+  moins (16 au total pour un tileset) ; bouton « Passer à la méthode v25 » pour un document en
+  cours.
+
 - **v24 :** **0-AD itérer sur une forme de base** : à la demande de l'utilisateur [U], on ne
   dessine plus 6 silhouettes dans 3 familles ni 3 variantes de chaque pièce ; on part d'une
-  forme de base simple et on la pousse en 3 versions au moins, chacune notée ; règle 82
-  réécrite. **F2-F, un tileset de plateforme dans l'ordre** [D35] : blocage en aplats et
+  forme de base simple et on la pousse en 3 versions au moins, chacune notée ; règles 63,
+  67 et 82 réécrites. **F2-F, un tileset de plateforme dans l'ordre** [D35] : blocage en aplats et
   carte de test, tuile centrale en strates, bords, coins et coins rentrants, pentes,
   plateformes, détails, répétition, miroir. Dans Claude Pixel : étape « Itérations sur une
   forme de base » (rubrique *Itération* au carnet) à la place des essais et du design des
