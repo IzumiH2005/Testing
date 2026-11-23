@@ -1,0 +1,11 @@
+regard 2967
+case 65,18 · couleur #57506aff (exportée : #57506aff) · écran 456,244
+outil crayon · taille 1 · c1 #57506aff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 8 · Bords, coins et coins rentrants (F2-C · F2-D · F2-F)
+porte : Pixels doublés en « L » (A5-6 · règle 21) : 434 px. Corrige, ou justifie-le. | Case non cochée : « Même hauteur de croûte partout » | Case non cochée : « Coins arrondis ou cassés, arête du coin éclairée » | Case non cochée : « Carte de test regardée : aucun raccord ne casse »
+défauts : Pixels doublés en « L » [erreur] 200 px (dont 69,14 66,15 67,15 63,16 64,16 62,17 61,19 61,20 près du curseur) ; L'ombrage ne suit pas la lumière [attention] 200 px (dont 61,18 69,18 69,22 près du curseur) ; Tramage en damier [conseil] 48 px (dont 62,18 63,18 62,19 63,19 près du curseur) ; Tirets dans la texture [conseil] 200 px (dont 69,22 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord 0.03 · familles 0.01 · inversions 48 % · étendue 0.51
+carnet : 31 idée(s), 1 barrée(s) · dernière : [detail] Gros bloc, grande dalle, pierres du bas : taches d'usure de 2 px sur chaque face d'un seul
+messages : aucun
+images : seances/falaise-moussue-rejeu/regards/2967-{ecran,loupe,dessin}.png
