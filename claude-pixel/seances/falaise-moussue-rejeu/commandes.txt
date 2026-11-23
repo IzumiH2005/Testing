@@ -1,0 +1,621 @@
+10:18:24.440  # séance falaise-moussue-rejeu · claude · 1280×800
+10:18:28.533  clic =nouveau-type-decor
+10:18:29.090  clic =nouveau-w
+10:18:29.826  touche ctrl+a
+10:18:30.018  tape "160"
+10:18:30.104  clic =nouveau-h
+10:18:30.717  touche ctrl+a
+10:18:30.808  tape "128"
+10:18:30.953  clic =nouveau-nom
+10:18:31.429  touche ctrl+a
+10:18:31.609  tape "Falaise moussue"
+10:18:32.016  clic =modale-oui
+10:18:32.472  attends 600
+10:18:33.080  clic =apercu-replie
+10:18:33.678  attends 200
+10:18:33.890  defile =fiche-vue
+10:18:34.457  choisis =fiche-vue "profil (plateforme)"
+10:18:35.338  defile =fiche-tuile
+10:18:35.347  choisis =fiche-tuile "32"
+10:18:36.117  defile =fiche-plans
+10:18:36.154  clic =fiche-plans
+10:18:36.542  touche ctrl+a
+10:18:36.636  tape "Plan jouable : une falaise de pierres empilées, couverte de mousse, avec une croûte d'herbe épaisse ; plateformes de pierre traversables. Premier plan : touffes, fougères et cailloux posés par-dessus. Fond : sous-bois plus clair, hors de ce tileset."
+10:18:42.335  touche tab
+10:18:42.421  attends 250
+10:18:42.675  defile =fiche-lecture
+10:18:42.681  clic =fiche-lecture
+10:18:43.045  touche ctrl+a
+10:18:43.154  tape "Où marcher : la croûte d'herbe claire, même hauteur partout. La falaise se lit comme un mur de blocs solides, calme et plus sombre vers le bas. Les plateformes de pierre se lisent comme traversables."
+10:18:47.454  touche tab
+10:18:47.561  attends 250
+10:18:47.814  defile =fiche-lieu
+10:18:47.929  clic =fiche-lieu
+10:18:48.436  touche ctrl+a
+10:18:48.602  tape "Sous-bois humide en fin d'après-midi, lumière zénithale un peu chaude. Herbe vert-jaune, pierre gris-violet froid, mousse olive, creux en violet très sombre. Teinte dominante : vert et gris-violet."
+10:18:53.000  touche tab
+10:18:53.090  attends 250
+10:18:53.342  defile =fiche-vise
+10:18:53.347  clic =fiche-vise
+10:18:53.711  touche ctrl+a
+10:18:53.784  tape "Les planches fournies (falaise et eau, rochers, tuile 64×64 en six passes) : chaque bloc dessiné à part, en facettes, liseré clair sur l'arête haute, creux presque noirs, mousse sur les dessus, brins d'herbe qui retombent. Ce que j'en prends : des unités toutes différentes et six passes par tuile."
+10:19:00.632  touche tab
+10:19:00.713  attends 250
+10:19:00.965  va @200 300
+10:19:01.403  defile =regles-ouvre
+10:19:01.415  clic =regles-ouvre
+10:19:02.097  attends 400
+10:19:02.510  defile =regles-lues
+10:19:02.516  clic =regles-lues
+10:19:02.921  attends 300
+10:19:03.275  defile =etape-valide
+10:19:05.235  clic =etape-valide
+10:19:05.653  attends 400
+10:19:06.099  va @200 300
+10:19:06.471  clic =onglet-methode
+10:19:07.173  attends 300
+10:19:07.479  defile =carnet-rub-vision
+10:19:08.025  va @1094 450
+10:19:08.227  molette -2
+10:19:08.348  attends 250
+10:19:08.607  clic =carnet-rub-vision
+10:19:09.136  attends 250
+10:19:09.398  defile =carnet-texte
+10:19:09.412  clic =carnet-texte
+10:19:09.890  tape "Une falaise ancienne et humide : des blocs de pierre empilés comme un vieux mur que la forêt a repris, une herbe épaisse qui déborde, de la mousse sur chaque dessus. On doit sentir le poids, le calme et l'humidité."
+10:19:14.924  defile =carnet-ajoute
+10:19:14.941  clic =carnet-ajoute
+10:19:15.363  attends 300
+10:19:15.664  clic =onglet-methode
+10:19:16.272  attends 300
+10:19:16.588  defile =carnet-rub-structure
+10:19:16.608  clic =carnet-rub-structure
+10:19:17.099  attends 250
+10:19:17.353  defile =carnet-texte
+10:19:17.693  clic =carnet-texte
+10:19:17.859  tape "Ce qui porte : des blocs de pierre irréguliers, posés les uns sur les autres, calés par de la terre sombre dans les joints. Ce qui est porté : une couverture d'herbe qui retombe en franges. Ce qui pousse : mousse sur les dessus des blocs (là où la pluie et la lumière tombent), fougères au pied."
+10:19:24.560  defile =carnet-ajoute
+10:19:24.572  clic =carnet-ajoute
+10:19:24.961  attends 300
+10:19:25.266  clic =onglet-methode
+10:19:25.808  attends 300
+10:19:26.109  defile =carnet-rub-formes
+10:19:26.117  clic =carnet-rub-formes
+10:19:26.601  attends 250
+10:19:26.861  defile =carnet-texte
+10:19:26.876  clic =carnet-texte
+10:19:27.350  tape "Forme de base : un bloc rectangulaire. On le transforme : il se découpe en blocs de pierre de tailles différentes, aux coins cassés, en facettes ; la croûte d'herbe déborde ; le bas rentre dans l'ombre."
+10:19:31.935  defile =carnet-ajoute
+10:19:31.983  clic =carnet-ajoute
+10:19:32.372  attends 300
+10:19:32.685  clic =onglet-methode
+10:19:33.214  attends 300
+10:19:33.528  defile =carnet-rub-unique
+10:19:33.534  clic =carnet-rub-unique
+10:19:34.066  attends 250
+10:19:34.321  defile =carnet-texte
+10:19:34.752  clic =carnet-texte
+10:19:34.934  tape "Une seule idée forte : chaque bloc de pierre est un petit rocher dessiné à part, en facettes, avec sa mousse et son liseré clair, et les joints entre eux sont des creux presque noirs. La falaise est une collection de pierres, pas une texture."
+10:19:40.396  defile =carnet-ajoute
+10:19:40.424  clic =carnet-ajoute
+10:19:40.796  attends 300
+10:19:41.107  clic =onglet-methode
+10:19:41.642  attends 300
+10:19:41.944  defile =carnet-rub-logique
+10:19:41.970  clic =carnet-rub-logique
+10:19:42.482  attends 250
+10:19:42.762  defile =carnet-texte
+10:19:42.769  clic =carnet-texte
+10:19:43.213  tape "Les blocs les plus gros sont en bas (ils portent), les plus petits en haut ; la mousse pousse sur les faces qui reçoivent la pluie et la lumière, jamais dessous ; la terre noire des joints retient l'humidité, d'où la mousse qui en sort."
+10:19:48.949  defile =carnet-ajoute
+10:19:48.975  clic =carnet-ajoute
+10:19:49.374  attends 300
+10:19:49.687  clic =onglet-methode
+10:19:50.258  attends 300
+10:19:50.577  defile =carnet-rub-vision
+10:19:50.584  clic =carnet-rub-vision
+10:19:51.213  attends 250
+10:19:51.494  defile =carnet-texte
+10:19:51.948  clic =carnet-texte
+10:19:52.179  tape "Une pierre bleue saturée, presque turquoise, pour faire fantastique."
+10:19:53.998  defile =carnet-ajoute
+10:19:54.014  clic =carnet-ajoute
+10:19:54.432  attends 300
+10:19:54.814  clic =onglet-methode
+10:19:55.376  attends 300
+10:19:55.679  clic =onglet-methode
+10:19:55.927  attends 300
+10:19:56.258  defile =carnet-raison-5
+10:19:56.273  clic =carnet-raison-5
+10:19:56.718  tape "Une pierre saturée volerait le contraste au personnage (règle 34) et casserait l'humidité calme du sous-bois : gris-violet froid, la saturation reste à l'herbe."
+10:20:00.644  clic =carnet-barre-5
+10:20:01.008  attends 300
+10:20:01.340  defile =etape-valide
+10:20:01.786  clic =etape-valide
+10:20:02.003  attends 400
+10:20:02.425  va @200 300
+10:20:02.865  regarde
+10:20:04.699  clic =onglet-calques
+10:20:05.395  attends 300
+10:20:05.699  defile =calque-ajoute-construction
+10:20:05.702  clic =calque-ajoute-construction
+10:20:06.133  attends 300
+10:20:06.463  defile =calque-nom
+10:20:06.476  clic =calque-nom
+10:20:07.006  touche ctrl+a
+10:20:07.119  tape "v1"
+10:20:07.171  touche tab
+10:20:07.253  attends 200
+10:20:07.459  defile =calque-teinte-aucune
+10:20:07.816  clic =calque-teinte-aucune
+10:20:08.267  attends 200
+10:20:08.470  defile =calque-opacite
+10:20:08.475  glisse @1099,619 @1230,619
+10:20:09.313  attends 200
+10:20:09.515  clic =outil-rect
+10:20:10.217  clic =opt-rempli
+10:20:10.678  clic =couleur-c1
+10:20:11.302  defile =hex
+10:20:11.314  clic =hex
+10:20:11.950  touche ctrl+a
+10:20:12.038  tape "#79b043"
+10:20:12.246  touche entree
+10:20:12.330  clic =selecteur-c1
+10:20:12.842  trace 24,24 135,33
+10:20:18.280  clic =couleur-c1
+10:20:18.815  defile =hex
+10:20:18.828  clic =hex
+10:20:19.492  touche ctrl+a
+10:20:19.596  tape "#73697c"
+10:20:19.899  touche entree
+10:20:19.998  clic =selecteur-c1
+10:20:20.551  trace 26,34 133,109
+10:20:21.235    ✗ Refusé : un trait vient d'être relâché sur la toile. Fais « souris regarde » avant de dessiner à nouveau (SPEC 3.4).
+10:21:08.525  regarde
+10:21:10.116  trace 26,34 133,109
+10:21:16.714  regarde
+10:21:18.157  clic =couleur-c1
+10:21:18.856  defile =hex
+10:21:18.871  clic =hex
+10:21:19.567  touche ctrl+a
+10:21:19.666  tape "#554b60"
+10:21:19.878  touche entree
+10:21:19.962  clic =selecteur-c1
+10:21:20.367  trace 26,98 133,109
+10:21:26.281  regarde
+10:21:27.539  clic =onglet-methode
+10:21:28.213  attends 300
+10:21:28.531  defile =carnet-rub-iteration
+10:21:29.040  clic =carnet-rub-iteration
+10:21:29.314  attends 250
+10:21:29.573  defile =carnet-texte
+10:21:29.598  clic =carnet-texte
+10:21:30.102  tape "v1 : la forme de base, un bloc de 112×86 : une bande d'herbe de 10 px, une masse de pierre grise, un pied plus sombre. Rien d'autre."
+10:21:33.895  defile =carnet-ajoute
+10:21:33.922  clic =carnet-ajoute
+10:21:34.411  attends 300
+10:21:34.734  clic =onglet-methode
+10:21:35.427  attends 300
+10:21:35.729  defile =carnet-rub-critique
+10:21:35.747  clic =carnet-rub-critique
+10:21:36.429  attends 250
+10:21:36.687  defile =carnet-texte
+10:21:37.220  clic =carnet-texte
+10:21:37.396  tape "v1 : lisibilité 3, originalité 1, appeal 1, cohérence 3, rythme 1, crédibilité 2 = 11/30. On lit « sol » mais c'est un drapeau : la pierre n'est pas une pierre, l'herbe est un ruban."
+10:21:41.864  defile =carnet-ajoute
+10:21:41.867  clic =carnet-ajoute
+10:21:42.310  attends 300
+10:21:42.630  clic =onglet-calques
+10:21:43.172  attends 300
+10:21:43.549  defile =calque-oeil-3
+10:21:43.583    ✗ Aucun élément « calque-oeil-3 ».
+10:21:43.641  defile =calque-ajoute-construction
+10:21:43.650  clic =calque-ajoute-construction
+10:21:44.098  attends 300
+10:21:44.420  defile =calque-nom
+10:21:44.480  clic =calque-nom
+10:21:45.054  touche ctrl+a
+10:21:45.163  tape "v2"
+10:21:45.243  touche tab
+10:21:45.352  attends 200
+10:21:45.567  defile =calque-teinte-aucune
+10:21:45.904  clic =calque-teinte-aucune
+10:21:46.391  attends 200
+10:21:46.592  defile =calque-opacite
+10:21:46.657  glisse @1099,618 @1230,618
+10:21:47.908  attends 200
+10:21:48.126  clic =outil-rect
+10:21:48.842  clic =couleur-c1
+10:21:49.442  defile =hex
+10:21:49.458  clic =hex
+10:21:50.189  touche ctrl+a
+10:21:50.273  tape "#79b043"
+10:21:50.502  touche entree
+10:21:50.586  clic =selecteur-c1
+10:21:51.085  trace 24,24 135,33
+10:21:56.803  regarde
+10:21:57.959  clic =couleur-c1
+10:21:58.599  defile =hex
+10:21:58.613  clic =hex
+10:21:59.441  touche ctrl+a
+10:21:59.526  tape "#73697c"
+10:21:59.787  touche entree
+10:21:59.887  clic =selecteur-c1
+10:22:00.308  trace 26,34 133,109
+10:22:06.991  regarde
+10:22:08.363  clic =couleur-c1
+10:22:09.142  defile =hex
+10:22:09.153  clic =hex
+10:22:09.775  touche ctrl+a
+10:22:09.868  tape "#554b60"
+10:22:10.110  touche entree
+10:22:10.203  clic =selecteur-c1
+10:22:10.665  trace 26,98 133,109
+10:22:16.748  regarde
+10:22:18.326  clic =outil-crayon
+10:22:19.011  clic =couleur-c1
+10:22:19.671  defile =hex
+10:22:19.692  clic =hex
+10:22:20.457  touche ctrl+a
+10:22:20.555  tape "#241626"
+10:22:20.759  touche entree
+10:22:20.851  clic =selecteur-c1
+10:22:21.407  trace 26,50 133,50
+10:22:26.770  regarde
+10:22:28.227  trace 26,71 133,71
+10:22:33.558  regarde
+10:22:34.911  trace 26,96 133,96
+10:22:40.033  regarde
+10:22:41.348  trace 42,34 42,49
+10:22:42.799  regarde
+10:22:44.251  trace 56,34 56,49
+10:22:45.729  regarde
+10:22:47.031  trace 75,34 75,49
+10:22:48.109  regarde
+10:22:49.390  trace 88,34 88,49
+10:22:50.527  regarde
+10:22:51.846  trace 107,34 107,49
+10:22:53.056  regarde
+10:22:54.264  trace 122,34 122,49
+10:22:55.409  regarde
+10:22:56.792  trace 48,51 48,70
+10:22:58.260  regarde
+10:22:59.445  trace 64,51 64,70
+10:23:00.661  regarde
+10:23:02.047  trace 89,51 89,70
+10:23:03.419  regarde
+10:23:04.654  trace 105,51 105,70
+10:23:06.051  regarde
+10:23:07.451  trace 56,72 56,95
+10:23:09.134  regarde
+10:23:10.411  trace 80,72 80,95
+10:23:12.228  regarde
+10:23:13.567  trace 112,72 112,95
+10:23:15.301  regarde
+10:23:16.653  trace 44,97 44,109
+10:23:18.060  regarde
+10:23:19.545  trace 73,97 73,109
+10:23:20.539  regarde
+10:23:21.853  trace 98,97 98,109
+10:23:22.940  regarde
+10:23:24.448  clic =couleur-c1
+10:23:25.083  defile =hex
+10:23:25.092  clic =hex
+10:23:25.714  touche ctrl+a
+10:23:25.790  tape "#79b043"
+10:23:26.031  touche entree
+10:23:26.110  clic =selecteur-c1
+10:23:26.625  clic 27,34
+10:23:27.677  regarde
+10:23:29.321  trace 28,34 28,36
+10:23:29.732  regarde
+10:23:31.237  trace 29,34 29,35
+10:23:31.503  regarde
+10:23:33.041  trace 34,34 34,35
+10:23:33.384  regarde
+10:23:35.133  trace 35,34 35,36
+10:23:35.502  regarde
+10:23:36.875  trace 36,34 36,35
+10:23:37.188  regarde
+10:23:38.888  clic 41,34
+10:23:39.313  regarde
+10:23:40.778  trace 45,34 45,36
+10:23:41.300  regarde
+10:23:42.661  trace 46,34 46,37
+10:23:43.530  regarde
+10:23:45.048  trace 47,34 47,36
+10:23:45.769  regarde
+10:23:47.388  clic 48,34
+10:23:47.828  regarde
+10:23:49.276  trace 54,34 54,35
+10:23:49.653  regarde
+10:23:51.399  trace 55,34 55,35
+10:23:51.702  regarde
+10:23:53.148  clic 59,34
+10:23:53.521  regarde
+10:23:54.911  trace 60,34 60,36
+10:23:55.280  regarde
+10:23:56.624  trace 61,34 61,35
+10:23:56.975  regarde
+10:23:58.330  trace 66,34 66,35
+10:23:58.639  regarde
+10:24:00.012  trace 67,34 67,36
+10:24:00.391  regarde
+10:24:01.867  trace 68,34 68,35
+10:24:02.248  regarde
+10:24:03.696  clic 73,34
+10:24:03.971  regarde
+10:24:05.713  trace 77,34 77,36
+10:24:06.124  regarde
+10:24:07.621  trace 78,34 78,37
+10:24:08.168  regarde
+10:24:09.521  trace 79,34 79,36
+10:24:09.936  regarde
+10:24:11.403  clic 80,34
+10:24:11.727  regarde
+10:24:13.399  trace 86,34 86,35
+10:24:13.825  regarde
+10:24:15.023  trace 87,34 87,35
+10:24:15.281  regarde
+10:24:16.644  clic 91,34
+10:24:17.022  regarde
+10:24:18.421  trace 92,34 92,36
+10:24:18.828  regarde
+10:24:20.232  trace 93,34 93,35
+10:24:20.552  regarde
+10:24:21.942  trace 98,34 98,35
+10:24:22.249  regarde
+10:24:23.724  trace 99,34 99,36
+10:24:24.253  regarde
+10:24:25.640  trace 100,34 100,35
+10:24:25.969  regarde
+10:24:27.378  clic 105,34
+10:24:27.679  regarde
+10:24:28.948  trace 109,34 109,36
+10:24:29.298  regarde
+10:24:30.572  trace 110,34 110,37
+10:24:30.908  regarde
+10:24:32.609  trace 111,34 111,36
+10:24:33.235  regarde
+10:24:34.609  clic 112,34
+10:24:34.891  regarde
+10:24:36.143  trace 118,34 118,35
+10:24:36.551  regarde
+10:24:37.800  trace 119,34 119,35
+10:24:38.094  regarde
+10:24:39.652  clic 123,34
+10:24:39.927  regarde
+10:24:41.299  trace 124,34 124,36
+10:24:41.731  regarde
+10:24:43.183  trace 125,34 125,35
+10:24:43.623  regarde
+10:24:45.052  trace 130,34 130,35
+10:24:45.420  regarde
+10:24:47.290  trace 131,34 131,36
+10:24:47.703  regarde
+10:24:49.683  trace 132,34 132,35
+10:24:49.946  regarde
+10:24:51.385  clic =onglet-calques
+10:24:51.947  attends 300
+10:24:52.266  defile =calque-oeil-1
+10:24:52.272  va @1094 450
+10:24:52.719  molette -2
+10:24:52.842  attends 250
+10:24:53.097  clic =calque-oeil-1
+10:24:53.618  attends 200
+10:24:53.839  va @200 300
+10:24:54.467  regarde
+10:24:55.739  clic =onglet-methode
+10:24:56.582  attends 300
+10:24:56.892  defile =carnet-rub-iteration
+10:24:56.927  clic =carnet-rub-iteration
+10:24:57.454  attends 250
+10:24:57.726  defile =carnet-texte
+10:24:57.747  clic =carnet-texte
+10:24:58.228  tape "v2 : même bloc. La masse de pierre se découpe en quatre rangées de blocs de tailles différentes, joints sombres de 1 px ; l'herbe retombe en franges (motif de 32 px)."
+10:25:02.982  defile =carnet-ajoute
+10:25:02.990  clic =carnet-ajoute
+10:25:03.599  attends 300
+10:25:03.901  clic =onglet-methode
+10:25:04.513  attends 300
+10:25:04.816  defile =carnet-rub-critique
+10:25:04.822  clic =carnet-rub-critique
+10:25:05.372  attends 250
+10:25:05.628  defile =carnet-texte
+10:25:06.053  clic =carnet-texte
+10:25:06.229  tape "v2 : lisibilité 3, originalité 2, appeal 2, cohérence 3, rythme 2, crédibilité 3 = 15/30. On lit un mur de briques maçonné : joints horizontaux alignés, rectangles parfaits. Rien de naturel."
+10:25:10.465  defile =carnet-ajoute
+10:25:10.488  clic =carnet-ajoute
+10:25:10.954  attends 300
+10:25:11.262  clic =onglet-calques
+10:25:11.803  attends 300
+10:25:12.108  defile =calque-oeil-2
+10:25:12.119  clic =calque-oeil-2
+10:25:12.509  attends 200
+10:25:12.731  defile =calque-ajoute-construction
+10:25:12.759  clic =calque-ajoute-construction
+10:25:13.229  attends 300
+10:25:13.532  defile =calque-nom
+10:25:13.549  clic =calque-nom
+10:25:14.040  touche ctrl+a
+10:25:14.148  tape "v3"
+10:25:14.236  touche tab
+10:25:14.414  attends 200
+10:25:14.632  defile =calque-teinte-aucune
+10:25:15.063  clic =calque-teinte-aucune
+10:25:15.525  attends 200
+10:25:15.739  defile =calque-opacite
+10:25:15.764  glisse @1099,619 @1230,619
+10:25:16.885  attends 200
+10:25:17.100  clic =outil-rect
+10:25:17.717  clic =couleur-c1
+10:25:18.384  defile =hex
+10:25:18.404  clic =hex
+10:25:19.141  touche ctrl+a
+10:25:19.235  tape "#241626"
+10:25:19.480  touche entree
+10:25:19.609  clic =selecteur-c1
+10:25:20.048  trace 26,34 133,109
+10:25:26.450  regarde
+10:25:27.996  clic =couleur-c1
+10:25:28.634  defile =hex
+10:25:28.639  clic =hex
+10:25:29.340  touche ctrl+a
+10:25:29.446  tape "#73697c"
+10:25:29.715  touche entree
+10:25:29.803  clic =selecteur-c1
+10:25:30.327  trace 26,35 39,47
+10:25:32.046  regarde
+10:25:33.435  clic =couleur-c1
+10:25:34.158  defile =hex
+10:25:34.181  clic =hex
+10:25:34.976  touche ctrl+a
+10:25:35.090  tape "#948a99"
+10:25:35.416  touche entree
+10:25:35.490  clic =selecteur-c1
+10:25:36.035  trace 28,35 37,36
+10:25:37.316  regarde
+10:25:38.931  clic =couleur-c1
+10:25:39.617  defile =hex
+10:25:39.642  clic =hex
+10:25:40.541  touche ctrl+a
+10:25:40.618  tape "#554b60"
+10:25:40.872  touche entree
+10:25:40.982  clic =selecteur-c1
+10:25:41.443  trace 27,47 38,47
+10:25:42.910  regarde
+10:25:44.490  clic =couleur-c1
+10:25:45.144  defile =hex
+10:25:45.149  clic =hex
+10:25:45.899  touche ctrl+a
+10:25:45.975  tape "#73697c"
+10:25:46.176  touche entree
+10:25:46.253  clic =selecteur-c1
+10:25:46.690  trace 41,34 52,45
+10:25:48.058  regarde
+10:25:49.409  clic =couleur-c1
+10:25:50.109  defile =hex
+10:25:50.127  clic =hex
+10:25:50.924  touche ctrl+a
+10:25:51.082  tape "#948a99"
+10:25:51.335  touche entree
+10:25:51.419  clic =selecteur-c1
+10:25:51.884  trace 43,34 50,35
+10:25:53.007  regarde
+10:25:54.425  clic =couleur-c1
+10:25:55.247  defile =hex
+10:25:55.258  clic =hex
+10:25:55.961  touche ctrl+a
+10:25:56.059  tape "#554b60"
+10:25:56.224  touche entree
+10:25:56.299  clic =selecteur-c1
+10:25:56.723  trace 42,45 51,45
+10:25:57.854  regarde
+10:25:59.031  clic =couleur-c1
+10:25:59.600  defile =hex
+10:25:59.626  clic =hex
+10:26:00.232  touche ctrl+a
+10:26:00.306  tape "#73697c"
+10:26:00.500  touche entree
+10:26:00.575  clic =selecteur-c1
+10:26:00.995  trace 54,35 72,48
+10:26:02.812  regarde
+10:26:04.053  clic =couleur-c1
+10:26:04.844  defile =hex
+10:26:04.852  clic =hex
+10:26:05.740  touche ctrl+a
+10:26:05.890  tape "#948a99"
+10:26:06.162  touche entree
+10:26:06.249  clic =selecteur-c1
+10:26:06.797  trace 57,35 69,36
+10:26:08.395  regarde
+10:26:09.747  clic =couleur-c1
+10:26:10.391  defile =hex
+10:26:10.414  clic =hex
+10:26:11.250  touche ctrl+a
+10:26:11.375  tape "#554b60"
+10:26:11.650  touche entree
+10:26:11.749  clic =selecteur-c1
+10:26:12.307  trace 55,48 71,48
+10:26:14.100  regarde
+10:26:15.305  clic =couleur-c1
+10:26:15.967  defile =hex
+10:26:15.975  clic =hex
+10:26:16.628  touche ctrl+a
+10:26:16.704  tape "#73697c"
+10:26:16.874  touche entree
+10:26:16.956  clic =selecteur-c1
+10:26:17.442  trace 74,34 86,46
+10:26:18.706  regarde
+10:26:19.964  clic =couleur-c1
+10:26:20.651  defile =hex
+10:26:20.662  clic =hex
+10:26:21.444  touche ctrl+a
+10:26:21.546  tape "#948a99"
+10:26:21.786  touche entree
+10:26:21.873  clic =selecteur-c1
+10:26:22.325  trace 76,34 84,35
+10:26:23.609  regarde
+10:26:24.863  clic =couleur-c1
+10:26:25.581  defile =hex
+10:26:25.635  clic =hex
+10:26:26.485  touche ctrl+a
+10:26:26.626  tape "#554b60"
+10:26:26.886  touche entree
+10:26:26.970  clic =selecteur-c1
+10:26:27.394  trace 75,46 85,46
+10:26:28.689  regarde
+10:26:30.187  clic =couleur-c1
+10:26:30.772  defile =hex
+10:26:30.777  clic =hex
+10:26:31.413  touche ctrl+a
+10:26:31.503  tape "#73697c"
+10:26:31.805  touche entree
+10:26:31.878  clic =selecteur-c1
+10:26:32.275  trace 88,35 103,49
+10:26:33.711  regarde
+10:26:34.985  clic =couleur-c1
+10:26:35.756  defile =hex
+10:26:35.774  clic =hex
+10:26:36.501  touche ctrl+a
+10:26:36.589  tape "#948a99"
+10:26:36.801  touche entree
+10:26:36.897  clic =selecteur-c1
+10:26:37.401  trace 91,35 100,36
+10:26:38.339  regarde
+10:26:39.463  clic =couleur-c1
+10:26:40.057  defile =hex
+10:26:40.064  clic =hex
+10:26:40.628  touche ctrl+a
+10:26:40.706  tape "#554b60"
+10:26:40.868  touche entree
+10:26:40.962  clic =selecteur-c1
+10:26:41.393  trace 89,49 102,49
+10:26:42.539  regarde
+10:26:43.668  clic =couleur-c1
+10:26:44.236  defile =hex
+10:26:44.239  clic =hex
+10:26:44.827  touche ctrl+a
+10:26:44.907  tape "#73697c"
+10:26:45.096  touche entree
+10:26:45.180  clic =selecteur-c1
+10:26:45.644  trace 105,34 119,46
+10:26:46.988  regarde
+10:26:48.113  clic =couleur-c1
+10:26:48.640  defile =hex
+10:26:48.657  clic =hex
+10:26:49.192  touche ctrl+a
+10:26:49.280  tape "#948a99"
+10:26:49.432  touche entree
+10:26:49.511  clic =selecteur-c1
+10:26:49.930  trace 107,34 117,35
+10:26:51.021  regarde
+10:26:52.155  clic =couleur-c1
+10:26:52.759  defile =hex
+10:26:52.768  clic =hex
+10:26:53.427  touche ctrl+a
+10:26:53.514  tape "#554b60"
+10:26:53.702  touche entree
+10:26:53.783  clic =selecteur-c1
+10:26:54.232  trace 106,46 118,46
+10:26:55.325  regarde

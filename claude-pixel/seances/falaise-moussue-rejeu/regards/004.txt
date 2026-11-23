@@ -1,0 +1,11 @@
+regard 004
+case 133,109 · couleur #554b60ff (exportée : transparent) · écran 660,517
+outil rect · taille 1 · c1 #554b60ff · c2 #00000000
+calque 2/2 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 3 · Itérations sur une forme de base (0-AD · 0-AA-E)
+porte : Carnet : 3 « Itération » de plus (3 versions au moins), 3 « Critique » notée(s) sur 30 de plus, un « Choix retenu ». | Case non cochée : « Parti d'une forme de base simple » | Case non cochée : « Au moins 3 versions de la même forme, chacune critiquée » | Case non cochée : « La version retenue est mieux notée que la v1 »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 5 idée(s), 1 barrée(s) · dernière : [vision] Une pierre bleue saturée, presque turquoise, pour faire fantastique. (barrée : Une pierre saturée volerait le contraste au personnage (règl)
+messages : aucun
+images : seances/falaise-moussue-rejeu/regards/004-{ecran,loupe,dessin}.png
