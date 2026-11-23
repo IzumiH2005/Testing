@@ -1,0 +1,11 @@
+regard 631
+case 47,93 · couleur transparent (exportée : transparent) · écran 402,469
+outil gomme · taille 1 · c1 #6e3d45ff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Tileset forêt » (decor)
+étape 7 · Bords, coins et coins rentrants (F2-C · F2-D · F2-F)
+porte : Pixels doublés en « L » (A5-6 · règle 21) : 158 px. Corrige, ou justifie-le. | Case non cochée : « Même hauteur de croûte partout » | Case non cochée : « Coins arrondis ou cassés, arête du coin éclairée » | Case non cochée : « Carte de test regardée : aucun raccord ne casse »
+défauts : Pixels doublés en « L » [erreur] 158 px ; L'ombrage ne suit pas la lumière [attention] 200 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord 0.03 · familles 0.00 · inversions 22 % · étendue 0.19
+carnet : 14 idée(s), 1 barrée(s) · dernière : [choix] v4 : le bloc à croûte débordante en franges (motif de 32 px), trois strates qui fonçent ve
+messages : aucun
+images : seances/tileset-foret-2/regards/631-{ecran,loupe,dessin}.png

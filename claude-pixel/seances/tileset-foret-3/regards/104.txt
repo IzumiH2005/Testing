@@ -1,0 +1,11 @@
+regard 104
+case 48,41 · couleur #82737fff (exportée : #82737fff) · écran 405,313
+outil crayon · taille 1 · c1 #82737fff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Tileset forêt » (decor)
+étape 7 · Micro-détails : chaque élément comme un dessin entier (0-AE)
+porte : Carnet : 8 « Détail » de plus : chaque élément retravaillé à la loupe laisse une ligne (0-AE). | Case non cochée : « Chaque zone regardée à la loupe et retravaillée » | Case non cochée : « Chaque élément a sa silhouette, sa lumière et 2 ou 3 tons » | Case non cochée : « Vu de loin, le détail ne fait pas de bruit »
+défauts : Pixels doublés en « L » [erreur] 117 px ; Banding [attention] 26 px ; L'ombrage ne suit pas la lumière [attention] 200 px ; Tramage en damier [conseil] 28 px
+volume : lumière haut (az 90°, él 65°, gonfle) · accord 0.14 · familles 0.04 · inversions 31 % · étendue 0.35
+carnet : 14 idée(s), 1 barrée(s) · dernière : [choix] v4 : le bloc à croûte débordante en franges (motif de 32 px), trois strates qui fonçent ve
+messages : [info] Méthode v24 → v25 : étape « Plateformes, variantes et décors ». Les étapes nouvelles d'avant restent à faire : reviens-y depuis la liste des étapes.
+images : seances/tileset-foret-3/regards/104-{ecran,loupe,dessin}.png

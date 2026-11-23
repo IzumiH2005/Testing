@@ -1,0 +1,11 @@
+regard 177
+case 23,59 · couleur #727a8f99 (exportée : transparent) · écran 330,367
+outil rect · taille 1 · c1 #727a8fff · c2 #00000000
+calque 4/4 · image 1/1 · dessin 160×128 « Tileset forêt » (decor)
+étape 3 · Itérations sur une forme de base (0-AD · 0-AA-E)
+porte : Carnet : 1 « Itération » de plus (3 versions au moins), 1 « Critique » notée(s) sur 30 de plus, un « Choix retenu ». | Case non cochée : « Parti d'une forme de base simple » | Case non cochée : « Au moins 3 versions de la même forme, chacune critiquée » | Case non cochée : « La version retenue est mieux notée que la v1 »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 9 idée(s), 1 barrée(s) · dernière : [critique] v2 : lisibilité 4, originalité 2, appeal 3, cohérence 3, rythme 3, crédibilité 3 = 18/30. 
+messages : aucun
+images : seances/tileset-foret-2/regards/177-{ecran,loupe,dessin}.png

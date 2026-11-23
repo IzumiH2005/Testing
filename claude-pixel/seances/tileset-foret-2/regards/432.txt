@@ -1,0 +1,11 @@
+regard 432
+case -20,37 (hors du dessin) · couleur (hors toile) · écran 200,300
+outil gomme · taille 1 · c1 #c9e06aff · c2 #00000000
+calque 5/5 · image 1/1 · dessin 160×128 « Tileset forêt » (decor)
+étape 4 · Palette du lieu (F4 · F1)
+porte : Case non cochée : « Hiérarchie de contraste respectée » | Case non cochée : « 3 ou 4 tons par matière, pas plus »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 14 idée(s), 1 barrée(s) · dernière : [choix] v4 : le bloc à croûte débordante en franges (motif de 32 px), trois strates qui fonçent ve
+messages : aucun
+images : seances/tileset-foret-2/regards/432-{ecran,loupe,dessin}.png

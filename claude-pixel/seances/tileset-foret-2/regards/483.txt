@@ -1,0 +1,11 @@
+regard 483
+case 49,50 · couleur #6e3d45ff (exportée : #6e3d45ff) · écran 408,340
+outil crayon · taille 1 · c1 #6e3d45ff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Tileset forêt » (decor)
+étape 6 · Tuile centrale en strates (F2-A · F2-F)
+porte : Case non cochée : « Grandes masses, puis clusters moyens, puis petits » | Case non cochée : « Aucun gros sujet au centre, poids égal » | Case non cochée : « Décalée d'une demi-tuile, la tuile ne montre aucune couture »
+défauts : L'ombrage ne suit pas la lumière [attention] 200 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord 0.25 · familles 0.03 · inversions 5 % · étendue 0.26
+carnet : 14 idée(s), 1 barrée(s) · dernière : [choix] v4 : le bloc à croûte débordante en franges (motif de 32 px), trois strates qui fonçent ve
+messages : aucun
+images : seances/tileset-foret-2/regards/483-{ecran,loupe,dessin}.png

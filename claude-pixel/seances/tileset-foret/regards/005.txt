@@ -1,0 +1,11 @@
+regard 005
+case -20,37 (hors du dessin) · couleur (hors toile) · écran 200,300
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 1/1 · image 1/1 · dessin 160×128 « Tileset forêt » (decor)
+étape 2 · Vision : écrire ce que je vois (0-N)
+porte : prête
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 5 idée(s), 1 barrée(s) · dernière : [vision] Une terre rouge vif très saturée pour que le sol claque. (barrée : Le décor passerait devant le personnage en contraste (règle )
+messages : [refus] Étape non validée : Lis les 87 règles impératives et coche « lues ».
+images : seances/tileset-foret/regards/005-{ecran,loupe,dessin}.png

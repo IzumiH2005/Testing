@@ -1,0 +1,222 @@
+04:06:47.631  # séance tileset-foret · claude · 1280×800
+04:06:47.776  cibles nouveau
+04:06:52.599  clic =nouveau-type-decor
+04:06:53.085  clic =nouveau-w
+04:06:53.584  touche ctrl+a
+04:06:53.750  tape "160"
+04:06:53.808  clic =nouveau-h
+04:06:54.280  touche ctrl+a
+04:06:54.358  tape "128"
+04:06:54.422  clic =nouveau-nom
+04:06:54.799  touche ctrl+a
+04:06:54.878  tape "Tileset forêt"
+04:06:55.144  clic =modale-oui
+04:06:55.555  attends 600
+04:06:56.158  va @200 300
+04:06:56.513  regarde
+04:06:57.682  cibles fiche
+04:07:06.592  defile =fiche-vue
+04:07:07.090  choisis =fiche-vue "profil (plateforme)"
+04:07:07.917  defile =fiche-tuile
+04:07:07.922  choisis =fiche-tuile "32"
+04:07:08.909  defile =fiche-plans
+04:07:08.975  cibles fiche-plans
+04:07:09.055  clic =fiche-plans
+04:07:09.383  tape "Plan jouable : sol en terre et herbe avec blocs, plateformes traversables. Premier plan : touffes et racines posées par-dessus. Fond : forêt plus claire, hors de ce tileset."
+04:07:12.356  touche tab
+04:07:12.429  attends 250
+04:07:12.755  defile =fiche-lecture
+04:07:12.830  cibles fiche-lecture
+04:07:12.929  clic =fiche-lecture
+04:07:13.264  tape "Où marcher : la croûte d'herbe claire dit « sol » partout, même hauteur sur chaque bord. Le plein de terre est calme et plus sombre vers le bas. Les plateformes se lisent comme traversables."
+04:07:16.543  touche tab
+04:07:16.626  attends 250
+04:07:16.947  defile =fiche-lieu
+04:07:17.117  cibles fiche-lieu
+04:07:17.200  clic =fiche-lieu
+04:07:17.612  tape "Forêt en fin d'après-midi : lumière zénithale un peu chaude, herbe vert-jaune, terre brun-prune, pierres gris-violet. Teinte dominante : vert et prune, ombres qui partagent un violet très sombre."
+04:07:21.047  touche tab
+04:07:21.123  attends 250
+04:07:21.439  defile =fiche-vise
+04:07:21.508  cibles fiche-vise
+04:07:21.596  clic =fiche-vise
+04:07:21.930  tape "Tuiles de profil de Slynyrd (Pixelblog 28) et terrain de MortMort : coupe en strates, clusters gras, croûte qui retombe en couverture, coins éclairés. Ce que j'en prends : peu de tons par texture et des clusters francs."
+04:07:25.719  touche tab
+04:07:25.794  attends 250
+04:07:26.106  cibles regles
+04:07:26.174  va @200 300
+04:07:26.532  regarde
+04:07:51.362  defile =regles-lues
+04:07:51.371  clic =regles-lues
+04:07:51.889  attends 300
+04:07:52.191  defile =etape-valide
+04:07:52.576  clic =etape-valide
+04:07:52.750  attends 400
+04:07:53.151  va @200 300
+04:07:53.495  regarde
+04:07:56.851  cibles regles
+04:07:59.576  clic =regles-ouvre
+04:08:00.108  attends 400
+04:08:00.510  defile =regles-lues
+04:08:00.513  clic =regles-lues
+04:08:00.898  attends 300
+04:08:01.203  defile =etape-valide
+04:08:02.875  clic =etape-valide
+04:08:03.247  attends 400
+04:08:03.649  va @200 300
+04:08:04.019  regarde
+04:08:22.490  defile =carnet-rub-vision
+04:08:23.129  cibles carnet-rub-vision
+04:08:23.244  clic =carnet-rub-vision
+04:08:23.690  attends 250
+04:08:24.013  defile =carnet-texte
+04:08:24.128  cibles carnet-texte
+04:08:24.220  clic =carnet-texte
+04:08:24.648  tape "Une forêt de fin d'après-midi : un sol épais, moelleux en haut, rocheux en profondeur. Le joueur doit sentir un monde ancien et accueillant."
+04:08:27.446  defile =carnet-ajoute
+04:08:27.527  cibles carnet-ajoute
+04:08:27.620  clic =carnet-ajoute
+04:08:28.006  attends 300
+04:08:28.424  defile =carnet-rub-structure
+04:08:28.502  cibles carnet-rub-structure
+04:08:28.597  clic =carnet-rub-structure
+04:08:28.983  attends 250
+04:08:29.356  defile =carnet-texte
+04:08:29.469  cibles carnet-texte
+04:08:29.570  clic =carnet-texte
+04:08:30.000  tape "Ce qui porte : la terre en strates, plus dense et plus sombre en bas, avec des pierres prises dedans. Ce qui est porté : une épaisse couverture d'herbe qui retombe sur les bords. Ce qui pousse : touffes, fleurs, racines qui sortent des côtés."
+04:08:34.389  defile =carnet-ajoute
+04:08:34.474  cibles carnet-ajoute
+04:08:34.548  clic =carnet-ajoute
+04:08:34.921  attends 300
+04:08:35.298  defile =carnet-rub-formes
+04:08:35.377  cibles carnet-rub-formes
+04:08:35.474  clic =carnet-rub-formes
+04:08:35.786  attends 250
+04:08:36.134  defile =carnet-texte
+04:08:36.581  cibles carnet-texte
+04:08:36.677  clic =carnet-texte
+04:08:36.843  tape "Forme de base : un bloc rectangulaire. On le transforme : coins cassés, croûte qui déborde, face qui penche vers le fond, strates obliques."
+04:08:39.409  defile =carnet-ajoute
+04:08:39.510  cibles carnet-ajoute
+04:08:39.608  clic =carnet-ajoute
+04:08:39.959  attends 300
+04:08:40.344  defile =carnet-rub-unique
+04:08:40.438  cibles carnet-rub-unique
+04:08:40.517  clic =carnet-rub-unique
+04:08:40.890  attends 250
+04:08:41.213  defile =carnet-texte
+04:08:41.305  cibles carnet-texte
+04:08:41.405  clic =carnet-texte
+04:08:41.812  tape "Une seule idée forte : l'herbe est une vraie couverture épaisse qui retombe en franges sur les bords et dans les coins, et la terre montre des strates prune et des pierres gris-violet."
+04:08:45.245  defile =carnet-ajoute
+04:08:45.316  cibles carnet-ajoute
+04:08:45.411  clic =carnet-ajoute
+04:08:45.771  attends 300
+04:08:46.159  defile =carnet-rub-logique
+04:08:46.239  cibles carnet-rub-logique
+04:08:46.320  clic =carnet-rub-logique
+04:08:46.600  attends 250
+04:08:46.957  defile =carnet-texte
+04:08:47.383  cibles carnet-texte
+04:08:47.462  clic =carnet-texte
+04:08:47.625  tape "Les racines tiennent la terre sous l'herbe, donc la croûte est continue ; plus on descend, plus la terre est tassée et sombre, et plus il y a de pierres."
+04:08:50.441  defile =carnet-ajoute
+04:08:50.516  cibles carnet-ajoute
+04:08:50.603  clic =carnet-ajoute
+04:08:50.983  attends 300
+04:08:51.388  defile =carnet-rub-vision
+04:08:51.464  cibles carnet-rub-vision
+04:08:51.570  clic =carnet-rub-vision
+04:08:51.947  attends 250
+04:08:52.283  defile =carnet-texte
+04:08:52.367  cibles carnet-texte
+04:08:52.468  clic =carnet-texte
+04:08:52.875  tape "Une terre rouge vif très saturée pour que le sol claque."
+04:08:53.930  defile =carnet-ajoute
+04:08:54.021  cibles carnet-ajoute
+04:08:54.113  clic =carnet-ajoute
+04:08:54.463  attends 300
+04:08:54.873  cibles carnet-raison
+04:08:59.048  defile =carnet-raison-5
+04:08:59.128  cibles carnet-raison-5
+04:08:59.208  clic =carnet-raison-5
+04:08:59.640  tape "Le décor passerait devant le personnage en contraste (règle 34) : la terre reste prune et calme, l'herbe porte la lecture."
+04:09:01.889  clic =carnet-barre-5
+04:09:02.261  attends 300
+04:09:02.652  va @200 300
+04:09:03.033  regarde
+04:09:15.413  defile =etape-valide
+04:09:15.889  clic =etape-valide
+04:09:16.077  attends 400
+04:09:16.482  clic =outil-rect
+04:09:17.008  attends 200
+04:09:17.211  cibles opt
+04:09:26.296  clic =onglet-calques
+04:09:26.847  regarde
+04:09:28.028  attends 300
+04:09:28.330  regarde
+04:09:29.485  clic =calque-ajoute-construction
+04:09:29.876  regarde
+04:09:30.963  attends 300
+04:09:31.267  regarde
+04:09:32.411  clic =calque-nom
+04:09:32.824  regarde
+04:09:33.904  touche ctrl+a
+04:09:33.980  regarde
+04:09:34.997  tape "v1"
+04:09:35.036  regarde
+04:09:36.201  touche tab
+04:09:36.278  regarde
+04:09:37.372  attends 200
+04:09:37.575  regarde
+04:09:38.667  clic =outil-rect
+04:09:39.193  clic =opt-rempli
+04:09:39.611  regarde
+04:09:40.818  clic =couleur-c1
+04:09:41.337  defile =hex
+04:09:41.341  clic =hex
+04:09:41.878  touche ctrl+a
+04:09:41.953  tape "#8e5a4a"
+04:09:42.081  touche entree
+04:09:42.165  clic =selecteur-c1
+04:09:42.577  trace 16,40 143,111
+04:09:49.387  regarde
+04:09:50.421  clic =couleur-c1
+04:09:50.931  defile =hex
+04:09:50.934  clic =hex
+04:09:51.471  touche ctrl+a
+04:09:51.551  tape "#6b3b42"
+04:09:51.688  touche entree
+04:09:51.769  clic =selecteur-c1
+04:09:52.178  trace 16,92 143,111
+04:09:57.640  regarde
+04:09:58.839  clic =couleur-c1
+04:09:59.360  defile =hex
+04:09:59.367  clic =hex
+04:09:59.898  touche ctrl+a
+04:09:59.974  tape "#8cbf4a"
+04:10:00.094  touche entree
+04:10:00.168  clic =selecteur-c1
+04:10:00.557  trace 16,36 143,43
+04:10:05.502  regarde
+04:10:22.705  cibles apercu
+04:10:22.780  cibles teinte
+04:10:22.858  cibles ferme
+04:10:34.882  clic @404 124
+04:10:35.336  attends 300
+04:10:35.646  clic =calque-teinte-aucune
+04:10:35.658    ✗ Aucun élément visible « calque-teinte-aucune ». Essaie : souris cibles calq
+04:10:37.948  clic =onglet-calques
+04:10:38.453  attends 300
+04:10:38.756  cibles calque-teinte
+04:10:41.340  clic =calque-teinte-aucune
+04:10:41.831  attends 300
+04:10:42.134  va @200 300
+04:10:42.491  regarde
+04:11:14.127  clic =menu-fichier
+04:11:14.558  clic =fichier-enregistrer
+04:11:14.868  # fichier enregistré : fichiers/tileset-foret.claude-pixel.json
+04:11:14.985  attends 800
+04:11:15.793  fin
+04:11:18.404  # fin

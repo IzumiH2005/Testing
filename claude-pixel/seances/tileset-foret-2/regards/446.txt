@@ -1,0 +1,11 @@
+regard 446
+case 131,44 · couleur #6fae45ff (exportée : #6fae45ff) · écran 654,322
+outil rect · taille 1 · c1 #6fae45ff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Tileset forêt » (decor)
+étape 5 · Gabarit en aplats et carte de test (F2-C · F2-F)
+porte : Peins au moins 12 cases de terrain (onglet Tuiles, pinceau Terrain) : en U, en L et en îlot. | Case non cochée : « Toutes les tuiles du gabarit sont posées en aplats » | Case non cochée : « Carte de test en U, L et îlot sans trou ni carré qui dépasse »
+défauts : Lumière et ombre se confondent [attention] 200 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord 0.31 · familles 0.04 · inversions 5 % · étendue 0.26
+carnet : 14 idée(s), 1 barrée(s) · dernière : [choix] v4 : le bloc à croûte débordante en franges (motif de 32 px), trois strates qui fonçent ve
+messages : aucun
+images : seances/tileset-foret-2/regards/446-{ecran,loupe,dessin}.png

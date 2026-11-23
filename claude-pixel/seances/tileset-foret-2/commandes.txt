@@ -1,0 +1,3934 @@
+04:11:26.797  # séance tileset-foret-2 · claude · 1280×800
+04:11:26.994  fichier seances/tileset-foret/fichiers/tileset-foret.claude-pixel.json
+04:11:26.997  clic =modale-ouvrir
+04:11:27.458  attends 1500
+04:11:28.975  clic =apercu-replie
+04:11:29.495  attends 300
+04:11:29.797  clic =onglet-calques
+04:11:30.301  attends 300
+04:11:30.604  clic =calque-teinte-aucune
+04:11:30.607    ✗ Aucun élément visible « calque-teinte-aucune ». Essaie : souris cibles calq
+04:11:33.076  cibles calque-
+04:11:33.172  va @200 300
+04:11:33.571  regarde
+04:11:39.717  clic =calque-choisit-1
+04:11:40.263  attends 300
+04:11:40.638  defile =calque-teinte-aucune
+04:11:41.083  cibles calque-teinte-aucune
+04:11:41.177  clic =calque-teinte-aucune
+04:11:41.604  attends 300
+04:11:41.906  va @200 300
+04:11:42.288  regarde
+04:12:14.842  defile =carnet-rub-iteration
+04:12:14.847    ✗ Aucun élément « carnet-rub-iteration ».
+04:12:14.910  cibles carnet-rub-iteration
+04:12:15.054  clic =onglet-calques
+04:12:15.594  attends 300
+04:12:15.898  clic =calque-oeil-1
+04:12:16.263  clic =calque-ajoute-construction
+04:12:16.644  attends 300
+04:12:16.951  clic =calque-nom
+04:12:17.380  touche ctrl+a
+04:12:17.460  tape "v2"
+04:12:17.503  touche tab
+04:12:17.575  attends 200
+04:12:17.783  clic =outil-rect
+04:12:18.338  clic =couleur-c1
+04:12:18.851  defile =hex
+04:12:18.854  clic =hex
+04:12:19.402  touche ctrl+a
+04:12:19.499  tape "#8e5a4a"
+04:12:19.746  touche entree
+04:12:19.878  clic =selecteur-c1
+04:12:20.270  trace 18,42 141,111
+04:12:26.648  regarde
+04:12:27.799  clic =couleur-c1
+04:12:28.305  defile =hex
+04:12:28.308  clic =hex
+04:12:28.836  touche ctrl+a
+04:12:28.913  tape "#6b3b42"
+04:12:29.035  touche entree
+04:12:29.109  clic =selecteur-c1
+04:12:29.526  trace 18,94 141,111
+04:12:34.760  regarde
+04:12:35.853  trace 18,44 141,46
+04:12:40.392  regarde
+04:12:41.528  clic =couleur-c1
+04:12:42.047  defile =hex
+04:12:42.053  clic =hex
+04:12:42.586  touche ctrl+a
+04:12:42.663  tape "#47283a"
+04:12:42.776  touche entree
+04:12:42.849  clic =selecteur-c1
+04:12:43.249  trace 18,106 141,111
+04:12:48.000  regarde
+04:12:49.162  clic =couleur-c1
+04:12:49.678  defile =hex
+04:12:49.681  clic =hex
+04:12:50.224  touche ctrl+a
+04:12:50.301  tape "#8cbf4a"
+04:12:50.430  touche entree
+04:12:50.504  clic =selecteur-c1
+04:12:50.899  trace 16,36 143,43
+04:12:55.807  regarde
+04:12:56.942  clic =outil-crayon
+04:12:57.435  trace 22,44 22,45
+04:12:57.861  regarde
+04:12:58.868  trace 23,44 23,45
+04:12:59.075  regarde
+04:13:00.121  clic 27,44
+04:13:00.362  regarde
+04:13:01.467  trace 28,44 28,46
+04:13:01.737  regarde
+04:13:02.721  trace 29,44 29,45
+04:13:02.953  regarde
+04:13:03.978  trace 34,44 34,45
+04:13:04.221  regarde
+04:13:05.257  trace 35,44 35,46
+04:13:05.502  regarde
+04:13:06.481  trace 36,44 36,45
+04:13:06.687  regarde
+04:13:07.745  clic 41,44
+04:13:07.998  regarde
+04:13:08.983  trace 45,44 45,46
+04:13:09.285  regarde
+04:13:10.289  trace 46,44 46,47
+04:13:10.637  regarde
+04:13:11.832  trace 47,44 47,46
+04:13:12.104  regarde
+04:13:13.230  clic 48,44
+04:13:13.468  regarde
+04:13:14.623  trace 54,44 54,45
+04:13:14.869  regarde
+04:13:15.845  trace 55,44 55,45
+04:13:16.084  regarde
+04:13:17.312  clic 59,44
+04:13:17.558  regarde
+04:13:18.689  trace 60,44 60,46
+04:13:18.956  regarde
+04:13:20.180  trace 61,44 61,45
+04:13:20.408  regarde
+04:13:21.594  trace 66,44 66,45
+04:13:21.857  regarde
+04:13:22.975  trace 67,44 67,46
+04:13:23.264  regarde
+04:13:24.698  trace 68,44 68,45
+04:13:24.968  regarde
+04:13:26.071  clic 73,44
+04:13:26.306  regarde
+04:13:27.382  trace 77,44 77,46
+04:13:27.723  regarde
+04:13:28.869  trace 78,44 78,47
+04:13:29.152  regarde
+04:13:30.216  trace 79,44 79,46
+04:13:30.494  regarde
+04:13:31.648  clic 80,44
+04:13:31.871  regarde
+04:13:32.956  trace 86,44 86,45
+04:13:33.202  regarde
+04:13:34.353  trace 87,44 87,45
+04:13:34.552  regarde
+04:13:35.529  clic 91,44
+04:13:35.790  regarde
+04:13:36.784  trace 92,44 92,46
+04:13:37.036  regarde
+04:13:38.148  trace 93,44 93,45
+04:13:38.363  regarde
+04:13:39.429  trace 98,44 98,45
+04:13:39.670  regarde
+04:13:40.714  trace 99,44 99,46
+04:13:40.956  regarde
+04:13:42.072  trace 100,44 100,45
+04:13:42.282  regarde
+04:13:43.440  clic 105,44
+04:13:43.690  regarde
+04:13:44.819  trace 109,44 109,46
+04:13:45.137  regarde
+04:13:46.269  trace 110,44 110,47
+04:13:46.600  regarde
+04:13:47.603  trace 111,44 111,46
+04:13:47.885  regarde
+04:13:49.069  clic 112,44
+04:13:49.283  regarde
+04:13:50.362  trace 118,44 118,45
+04:13:50.617  regarde
+04:13:51.699  trace 119,44 119,45
+04:13:51.925  regarde
+04:13:53.230  clic 123,44
+04:13:53.478  regarde
+04:13:54.647  trace 124,44 124,46
+04:13:54.906  regarde
+04:13:56.058  trace 125,44 125,45
+04:13:56.257  regarde
+04:13:57.349  trace 130,44 130,45
+04:13:57.592  regarde
+04:13:58.880  trace 131,44 131,46
+04:13:59.149  regarde
+04:14:00.315  trace 132,44 132,45
+04:14:00.553  regarde
+04:14:01.719  clic 137,44
+04:14:01.984  regarde
+04:14:03.125  trace 141,44 141,46
+04:14:03.415  regarde
+04:14:04.694  trace 16,44 16,47
+04:14:05.271  regarde
+04:14:06.553  trace 17,44 17,46
+04:14:06.825  regarde
+04:14:07.982  trace 143,44 143,47
+04:14:08.519  regarde
+04:14:09.536  trace 142,44 142,46
+04:14:09.832  regarde
+04:14:10.935  clic =outil-gomme
+04:14:11.433  clic 16,36
+04:14:11.871  regarde
+04:14:13.031  clic 17,36
+04:14:13.242  regarde
+04:14:14.272  clic 16,37
+04:14:14.484  regarde
+04:14:15.671  clic 143,36
+04:14:16.152  regarde
+04:14:17.328  clic 142,36
+04:14:17.546  regarde
+04:14:18.725  clic 143,37
+04:14:18.938  regarde
+04:14:20.085  clic 18,111
+04:14:20.584  regarde
+04:14:21.679  clic 19,111
+04:14:21.884  regarde
+04:14:22.861  clic 18,110
+04:14:23.091  regarde
+04:14:24.237  clic 141,111
+04:14:24.684  regarde
+04:14:25.726  clic 140,111
+04:14:25.937  regarde
+04:14:27.072  clic 141,110
+04:14:27.295  regarde
+04:14:29.552  touche ctrl+a
+04:14:29.628  touche Delete
+04:14:29.703  touche ctrl+d
+04:14:29.779  attends 300
+04:14:30.081  clic =onglet-calques
+04:14:30.573  attends 300
+04:14:30.947  defile =calque-teinte-aucune
+04:14:31.416  cibles calque-teinte-aucune
+04:14:31.496  clic =calque-teinte-aucune
+04:14:31.933  attends 200
+04:14:32.136  va @200 300
+04:14:32.516  regarde
+04:14:41.645  clic =outil-rect
+04:14:42.031  clic =opt-rempli
+04:14:42.452  clic =couleur-c1
+04:14:43.003  defile =hex
+04:14:43.010  clic =hex
+04:14:43.568  touche ctrl+a
+04:14:43.643  tape "#8e5a4a"
+04:14:43.780  touche entree
+04:14:43.854  clic =selecteur-c1
+04:14:44.249  trace 18,42 141,111
+04:14:50.800  regarde
+04:14:52.054  clic =couleur-c1
+04:14:52.568  defile =hex
+04:14:52.572  clic =hex
+04:14:53.098  touche ctrl+a
+04:14:53.172  tape "#6b3b42"
+04:14:53.308  touche entree
+04:14:53.389  clic =selecteur-c1
+04:14:53.795  trace 18,94 141,111
+04:14:58.997  regarde
+04:15:00.045  trace 18,44 141,46
+04:15:04.611  regarde
+04:15:05.513  clic =couleur-c1
+04:15:06.032  defile =hex
+04:15:06.036  clic =hex
+04:15:06.574  touche ctrl+a
+04:15:06.652  tape "#47283a"
+04:15:06.780  touche entree
+04:15:06.857  clic =selecteur-c1
+04:15:07.262  trace 18,106 141,111
+04:15:12.077  regarde
+04:15:13.171  clic =couleur-c1
+04:15:13.670  defile =hex
+04:15:13.677  clic =hex
+04:15:14.223  touche ctrl+a
+04:15:14.313  tape "#8cbf4a"
+04:15:14.435  touche entree
+04:15:14.508  clic =selecteur-c1
+04:15:14.914  trace 16,36 143,43
+04:15:19.879  regarde
+04:15:20.861  clic =outil-crayon
+04:15:21.360  trace 22,44 22,45
+04:15:21.809  regarde
+04:15:22.868  trace 23,44 23,45
+04:15:23.064  regarde
+04:15:24.142  clic 27,44
+04:15:24.382  regarde
+04:15:25.390  trace 28,44 28,46
+04:15:25.648  regarde
+04:15:26.679  trace 29,44 29,45
+04:15:26.894  regarde
+04:15:27.906  trace 34,44 34,45
+04:15:28.156  regarde
+04:15:29.234  trace 35,44 35,46
+04:15:29.477  regarde
+04:15:30.602  trace 36,44 36,45
+04:15:30.839  regarde
+04:15:32.034  clic 41,44
+04:15:32.272  regarde
+04:15:33.355  trace 45,44 45,46
+04:15:33.635  regarde
+04:15:34.723  trace 46,44 46,47
+04:15:35.086  regarde
+04:15:36.379  trace 47,44 47,46
+04:15:36.685  regarde
+04:15:37.926  clic 48,44
+04:15:38.162  regarde
+04:15:39.209  trace 54,44 54,45
+04:15:39.464  regarde
+04:15:40.592  trace 55,44 55,45
+04:15:40.800  regarde
+04:15:41.867  clic 59,44
+04:15:42.106  regarde
+04:15:43.166  trace 60,44 60,46
+04:15:43.415  regarde
+04:15:44.605  trace 61,44 61,45
+04:15:44.852  regarde
+04:15:46.034  trace 66,44 66,45
+04:15:46.272  regarde
+04:15:47.303  trace 67,44 67,46
+04:15:47.619  regarde
+04:15:48.646  trace 68,44 68,45
+04:15:48.853  regarde
+04:15:50.045  clic 73,44
+04:15:50.301  regarde
+04:15:51.334  trace 77,44 77,46
+04:15:51.612  regarde
+04:15:52.638  trace 78,44 78,47
+04:15:52.962  regarde
+04:15:54.125  trace 79,44 79,46
+04:15:54.420  regarde
+04:15:55.523  clic 80,44
+04:15:55.748  regarde
+04:15:56.845  trace 86,44 86,45
+04:15:57.116  regarde
+04:15:58.320  trace 87,44 87,45
+04:15:58.523  regarde
+04:15:59.699  clic 91,44
+04:15:59.926  regarde
+04:16:01.027  trace 92,44 92,46
+04:16:01.311  regarde
+04:16:02.467  trace 93,44 93,45
+04:16:02.690  regarde
+04:16:03.939  trace 98,44 98,45
+04:16:04.175  regarde
+04:16:05.410  trace 99,44 99,46
+04:16:05.714  regarde
+04:16:06.834  trace 100,44 100,45
+04:16:07.047  regarde
+04:16:08.282  clic 105,44
+04:16:08.517  regarde
+04:16:09.623  trace 109,44 109,46
+04:16:09.931  regarde
+04:16:11.038  trace 110,44 110,47
+04:16:11.344  regarde
+04:16:12.564  trace 111,44 111,46
+04:16:12.868  regarde
+04:16:14.034  clic 112,44
+04:16:14.259  regarde
+04:16:15.463  trace 118,44 118,45
+04:16:15.696  regarde
+04:16:16.802  trace 119,44 119,45
+04:16:16.997  regarde
+04:16:18.059  clic 123,44
+04:16:18.305  regarde
+04:16:19.451  trace 124,44 124,46
+04:16:19.708  regarde
+04:16:20.985  trace 125,44 125,45
+04:16:21.232  regarde
+04:16:22.542  trace 130,44 130,45
+04:16:22.761  regarde
+04:16:23.824  trace 131,44 131,46
+04:16:24.085  regarde
+04:16:25.197  trace 132,44 132,45
+04:16:25.416  regarde
+04:16:26.582  clic 137,44
+04:16:26.818  regarde
+04:16:27.861  trace 141,44 141,46
+04:16:28.146  regarde
+04:16:29.080  trace 16,44 16,47
+04:16:29.649  regarde
+04:16:30.759  trace 17,44 17,46
+04:16:31.067  regarde
+04:16:32.163  trace 143,44 143,47
+04:16:32.708  regarde
+04:16:33.836  trace 142,44 142,46
+04:16:34.108  regarde
+04:16:35.075  clic =outil-gomme
+04:16:35.573  clic 16,36
+04:16:36.012  regarde
+04:16:37.235  clic 17,36
+04:16:37.424  regarde
+04:16:38.447  clic 16,37
+04:16:38.665  regarde
+04:16:39.767  clic 143,36
+04:16:40.230  regarde
+04:16:41.293  clic 142,36
+04:16:41.493  regarde
+04:16:42.549  clic 143,37
+04:16:42.750  regarde
+04:16:43.795  clic 18,111
+04:16:44.260  regarde
+04:16:45.469  clic 19,111
+04:16:45.698  regarde
+04:16:46.781  clic 18,110
+04:16:46.986  regarde
+04:16:48.038  clic 141,111
+04:16:48.495  regarde
+04:16:49.692  clic 140,111
+04:16:49.923  regarde
+04:16:51.018  clic 141,110
+04:16:51.239  regarde
+04:17:04.475  clic =onglet-methode
+04:17:04.967  attends 300
+04:17:05.349  defile =carnet-rub-iteration
+04:17:06.007  cibles carnet-rub-iteration
+04:17:06.089  clic =carnet-rub-iteration
+04:17:06.464  attends 250
+04:17:06.894  defile =carnet-texte
+04:17:06.977  cibles carnet-texte
+04:17:07.059  clic =carnet-texte
+04:17:07.440  tape "v1 : la forme de base, un bloc rectangulaire de 128×76, une bande d'herbe de 8 px, la terre, un bas plus sombre. Rien d'autre."
+04:17:09.756  defile =carnet-ajoute
+04:17:10.216  cibles carnet-ajoute
+04:17:10.305  clic =carnet-ajoute
+04:17:10.479  attends 300
+04:17:10.894  va @200 300
+04:17:11.249  regarde
+04:17:18.871  clic =onglet-methode
+04:17:19.406  attends 300
+04:17:19.810  defile =carnet-rub-critique
+04:17:19.903  cibles carnet-rub-critique
+04:17:20.008  clic =carnet-rub-critique
+04:17:20.447  attends 250
+04:17:20.783  defile =carnet-texte
+04:17:20.883  cibles carnet-texte
+04:17:20.985  clic =carnet-texte
+04:17:21.356  tape "v1 : lisibilité 3, originalité 1, appeal 2, cohérence 3, rythme 1, crédibilité 2 = 12/30. On lit « sol » mais c'est un drapeau à trois bandes : bords droits, herbe posée comme un ruban, aucun poids."
+04:17:24.997  defile =carnet-ajoute
+04:17:25.066  cibles carnet-ajoute
+04:17:25.157  clic =carnet-ajoute
+04:17:25.516  attends 300
+04:17:25.914  clic =onglet-methode
+04:17:26.391  attends 300
+04:17:26.769  defile =carnet-rub-iteration
+04:17:26.838  cibles carnet-rub-iteration
+04:17:26.929  clic =carnet-rub-iteration
+04:17:27.405  attends 250
+04:17:27.723  defile =carnet-texte
+04:17:27.815  cibles carnet-texte
+04:17:27.899  clic =carnet-texte
+04:17:28.272  tape "v2 : même bloc. Deux changements : l'herbe déborde de 2 px sur les côtés et retombe en franges (motif de 32 px, comme une tuile), et une ombre sous la croûte ; coins du haut arrondis, coins du bas cassés."
+04:17:32.263  defile =carnet-ajoute
+04:17:32.740  cibles carnet-ajoute
+04:17:32.834  clic =carnet-ajoute
+04:17:33.012  attends 300
+04:17:33.399  clic =onglet-methode
+04:17:33.846  attends 300
+04:17:34.266  defile =carnet-rub-critique
+04:17:34.359  cibles carnet-rub-critique
+04:17:34.456  clic =carnet-rub-critique
+04:17:34.928  attends 250
+04:17:35.283  defile =carnet-texte
+04:17:35.380  cibles carnet-texte
+04:17:35.500  clic =carnet-texte
+04:17:35.876  tape "v2 : lisibilité 4, originalité 2, appeal 3, cohérence 3, rythme 3, crédibilité 3 = 18/30. La croûte devient une couverture, mais la terre est un aplat vide : rien ne dit qu'elle est épaisse et ancienne."
+04:17:39.759  defile =carnet-ajoute
+04:17:39.842  cibles carnet-ajoute
+04:17:39.929  clic =carnet-ajoute
+04:17:40.291  attends 300
+04:17:40.658  va @200 300
+04:17:41.025  regarde
+04:17:55.515  clic =onglet-calques
+04:17:56.030  attends 300
+04:17:56.331  clic =calque-oeil-2
+04:17:56.703  clic =calque-ajoute-construction
+04:17:56.706    ✗ Aucun élément visible « calque-ajoute-construction ». Essaie : souris cibles calq
+04:17:56.795  tape "#4b4f66"
+04:17:57.054  touche entree
+04:17:57.180  clic =selecteur-c1
+04:17:57.185    ✗ Aucun élément visible « selecteur-c1 ». Essaie : souris cibles sele
+04:17:57.288  clic =selecteur-c1
+04:17:57.299    ✗ Aucun élément visible « selecteur-c1 ». Essaie : souris cibles sele
+04:18:01.888  va @200 300
+04:18:02.240  regarde
+04:18:19.845  clic =onglet-calques
+04:18:20.360  attends 300
+04:18:20.662  defile =calque-ajoute-construction
+04:18:20.668  cibles calque-oeil
+04:18:27.144  defile =calque-oeil-2
+04:18:27.629  cibles calque-oeil-2
+04:18:27.726  clic =calque-oeil-2
+04:18:28.129  attends 200
+04:18:28.422  defile =calque-ajoute-construction
+04:18:28.525  cibles calque-ajoute-construction
+04:18:28.605  clic =calque-ajoute-construction
+04:18:29.000  attends 300
+04:18:29.387  defile =calque-nom
+04:18:29.480  cibles calque-nom
+04:18:29.569  clic =calque-nom
+04:18:30.019  touche ctrl+a
+04:18:30.095  tape "v3"
+04:18:30.144  touche tab
+04:18:30.238  attends 200
+04:18:30.527  defile =calque-teinte-aucune
+04:18:30.950  cibles calque-teinte-aucune
+04:18:31.049  clic =calque-teinte-aucune
+04:18:31.524  attends 200
+04:18:31.726  va @200 300
+04:18:32.086  regarde
+04:18:33.380  cibles calque-choisit
+04:18:37.731  cibles opt-rempli
+04:18:42.457  clic =outil-rect
+04:18:42.856  clic =couleur-c1
+04:18:43.370  defile =hex
+04:18:43.377  clic =hex
+04:18:43.903  touche ctrl+a
+04:18:43.979  tape "#8e5a4a"
+04:18:44.111  touche entree
+04:18:44.188  clic =selecteur-c1
+04:18:44.594  trace 18,42 141,111
+04:18:51.140  regarde
+04:18:52.332  clic =couleur-c1
+04:18:52.838  defile =hex
+04:18:52.841  clic =hex
+04:18:53.374  touche ctrl+a
+04:18:53.451  tape "#6b3b42"
+04:18:53.570  touche entree
+04:18:53.643  clic =selecteur-c1
+04:18:54.036  trace 18,94 141,111
+04:18:59.196  regarde
+04:19:00.429  trace 18,44 141,46
+04:19:05.060  regarde
+04:19:06.161  clic =couleur-c1
+04:19:06.658  defile =hex
+04:19:06.668  clic =hex
+04:19:07.256  touche ctrl+a
+04:19:07.362  tape "#47283a"
+04:19:07.488  touche entree
+04:19:07.562  clic =selecteur-c1
+04:19:07.951  trace 18,106 141,111
+04:19:12.795  regarde
+04:19:13.973  clic =couleur-c1
+04:19:14.481  defile =hex
+04:19:14.484  clic =hex
+04:19:15.038  touche ctrl+a
+04:19:15.112  tape "#6b3b42"
+04:19:15.247  touche entree
+04:19:15.324  clic =selecteur-c1
+04:19:15.724  trace 18,47 19,105
+04:19:18.186  regarde
+04:19:19.407  trace 140,47 141,105
+04:19:21.890  regarde
+04:19:23.023  clic =couleur-c1
+04:19:23.522  defile =hex
+04:19:23.525  clic =hex
+04:19:24.054  touche ctrl+a
+04:19:24.134  tape "#8cbf4a"
+04:19:24.261  touche entree
+04:19:24.337  clic =selecteur-c1
+04:19:24.738  trace 16,36 143,43
+04:19:29.709  regarde
+04:19:30.636  clic =couleur-c1
+04:19:31.137  defile =hex
+04:19:31.140  clic =hex
+04:19:31.670  touche ctrl+a
+04:19:31.748  tape "#4f8a3e"
+04:19:31.873  touche entree
+04:19:31.947  clic =selecteur-c1
+04:19:32.342  trace 16,43 143,43
+04:19:37.058  regarde
+04:19:38.054  clic =couleur-c1
+04:19:38.573  defile =hex
+04:19:38.576  clic =hex
+04:19:39.100  touche ctrl+a
+04:19:39.175  tape "#c9e06a"
+04:19:39.297  touche entree
+04:19:39.371  clic =selecteur-c1
+04:19:39.771  trace 18,36 141,36
+04:19:44.352  regarde
+04:19:45.406  clic =outil-ligne
+04:19:45.889  clic =couleur-c1
+04:19:46.358  defile =hex
+04:19:46.364  clic =hex
+04:19:46.921  touche ctrl+a
+04:19:46.997  tape "#6b3b42"
+04:19:47.124  touche entree
+04:19:47.196  clic =selecteur-c1
+04:19:47.600  trace 20,64 60,62
+04:19:49.489  regarde
+04:19:50.589  trace 20,65 60,63
+04:19:52.312  regarde
+04:19:53.257  trace 60,62 100,66
+04:19:54.907  regarde
+04:19:55.850  trace 60,63 100,67
+04:19:57.724  regarde
+04:19:58.747  trace 100,66 139,63
+04:20:00.348  regarde
+04:20:01.288  trace 100,67 139,64
+04:20:03.054  regarde
+04:20:04.089  clic =couleur-c1
+04:20:04.593  defile =hex
+04:20:04.600  clic =hex
+04:20:05.137  touche ctrl+a
+04:20:05.215  tape "#47283a"
+04:20:05.337  touche entree
+04:20:05.414  clic =selecteur-c1
+04:20:05.817  trace 20,88 50,90
+04:20:07.361  regarde
+04:20:08.359  trace 20,89 50,91
+04:20:09.774  regarde
+04:20:10.761  trace 50,90 90,87
+04:20:12.405  regarde
+04:20:13.541  trace 50,91 90,88
+04:20:15.337  regarde
+04:20:16.419  trace 90,87 139,89
+04:20:18.343  regarde
+04:20:19.411  trace 90,88 139,90
+04:20:21.523  regarde
+04:20:22.668  clic =outil-rect
+04:20:23.153  clic =couleur-c1
+04:20:23.620  defile =hex
+04:20:23.626  clic =hex
+04:20:24.147  touche ctrl+a
+04:20:24.227  tape "#727a8f"
+04:20:24.343  touche entree
+04:20:24.421  clic =selecteur-c1
+04:20:24.814  trace 28,70 38,77
+04:20:25.749  regarde
+04:20:26.956  trace 92,84 103,91
+04:20:27.860  regarde
+04:20:28.997  trace 55,56 61,60
+04:20:29.638  regarde
+04:20:30.808  trace 118,62 124,66
+04:20:31.458  regarde
+04:20:32.542  trace 70,96 76,100
+04:20:33.173  regarde
+04:20:34.219  trace 45,80 46,81
+04:20:34.582  regarde
+04:20:35.554  trace 110,52 111,53
+04:20:35.934  regarde
+04:20:37.037  trace 130,98 131,99
+04:20:37.397  regarde
+04:20:38.360  trace 22,58 23,59
+04:20:38.787  regarde
+04:20:39.775  clic =couleur-c1
+04:20:40.233  defile =hex
+04:20:40.236  clic =hex
+04:20:40.765  touche ctrl+a
+04:20:40.839  tape "#4b4f66"
+04:20:40.956  touche entree
+04:20:41.031  clic =selecteur-c1
+04:20:41.431  trace 28,77 38,77
+04:20:42.216  regarde
+04:20:43.160  trace 92,91 103,91
+04:20:43.882  regarde
+04:20:44.811  trace 55,60 61,60
+04:20:45.382  regarde
+04:20:46.329  trace 118,66 124,66
+04:20:46.915  regarde
+04:20:47.833  trace 70,100 76,100
+04:20:48.401  regarde
+04:20:49.304  clic =couleur-c1
+04:20:49.784  defile =hex
+04:20:49.788  clic =hex
+04:20:50.335  touche ctrl+a
+04:20:50.412  tape "#a7b0bd"
+04:20:50.542  touche entree
+04:20:50.616  clic =selecteur-c1
+04:20:51.013  trace 29,70 37,70
+04:20:51.747  regarde
+04:20:52.784  trace 93,84 102,84
+04:20:53.451  regarde
+04:20:54.381  trace 56,56 60,56
+04:20:54.888  regarde
+04:20:55.871  trace 119,62 123,62
+04:20:56.366  regarde
+04:20:57.380  trace 71,96 75,96
+04:20:57.880  regarde
+04:20:58.923  clic =outil-crayon
+04:20:59.423  clic =couleur-c1
+04:20:59.934  defile =hex
+04:20:59.936  clic =hex
+04:21:00.462  touche ctrl+a
+04:21:00.537  tape "#8cbf4a"
+04:21:00.657  touche entree
+04:21:00.730  clic =selecteur-c1
+04:21:01.129  trace 22,44 22,45
+04:21:01.615  regarde
+04:21:02.507  trace 23,44 23,45
+04:21:02.704  regarde
+04:21:03.687  clic 27,44
+04:21:03.916  regarde
+04:21:04.862  trace 28,44 28,46
+04:21:05.116  regarde
+04:21:06.033  trace 29,44 29,45
+04:21:06.237  regarde
+04:21:07.248  trace 34,44 34,45
+04:21:07.487  regarde
+04:21:08.461  trace 35,44 35,46
+04:21:08.731  regarde
+04:21:09.756  trace 36,44 36,45
+04:21:09.975  regarde
+04:21:10.904  clic 41,44
+04:21:11.168  regarde
+04:21:12.084  trace 45,44 45,46
+04:21:12.349  regarde
+04:21:13.254  trace 46,44 46,47
+04:21:13.569  regarde
+04:21:14.580  trace 47,44 47,46
+04:21:14.865  regarde
+04:21:15.835  clic 48,44
+04:21:16.050  regarde
+04:21:17.032  trace 54,44 54,45
+04:21:17.288  regarde
+04:21:18.301  trace 55,44 55,45
+04:21:18.501  regarde
+04:21:19.616  clic 59,44
+04:21:19.863  regarde
+04:21:20.939  trace 60,44 60,46
+04:21:21.198  regarde
+04:21:22.251  trace 61,44 61,45
+04:21:22.450  regarde
+04:21:23.474  trace 66,44 66,45
+04:21:23.719  regarde
+04:21:24.717  trace 67,44 67,46
+04:21:24.951  regarde
+04:21:25.946  trace 68,44 68,45
+04:21:26.146  regarde
+04:21:27.209  clic 73,44
+04:21:27.462  regarde
+04:21:28.482  trace 77,44 77,46
+04:21:28.751  regarde
+04:21:29.722  trace 78,44 78,47
+04:21:30.015  regarde
+04:21:31.015  trace 79,44 79,46
+04:21:31.265  regarde
+04:21:32.229  clic 80,44
+04:21:32.456  regarde
+04:21:33.513  trace 86,44 86,45
+04:21:33.747  regarde
+04:21:34.661  trace 87,44 87,45
+04:21:34.836  regarde
+04:21:35.919  clic 91,44
+04:21:36.144  regarde
+04:21:37.224  trace 92,44 92,46
+04:21:37.448  regarde
+04:21:38.456  trace 93,44 93,45
+04:21:38.666  regarde
+04:21:39.610  trace 98,44 98,45
+04:21:39.833  regarde
+04:21:40.865  trace 99,44 99,46
+04:21:41.136  regarde
+04:21:42.327  trace 100,44 100,45
+04:21:42.543  regarde
+04:21:43.486  clic 105,44
+04:21:43.726  regarde
+04:21:44.689  trace 109,44 109,46
+04:21:44.964  regarde
+04:21:46.014  trace 110,44 110,47
+04:21:46.339  regarde
+04:21:47.445  trace 111,44 111,46
+04:21:47.717  regarde
+04:21:48.815  clic 112,44
+04:21:49.037  regarde
+04:21:50.167  trace 118,44 118,45
+04:21:50.413  regarde
+04:21:51.417  trace 119,44 119,45
+04:21:51.639  regarde
+04:21:52.588  clic 123,44
+04:21:52.816  regarde
+04:21:53.725  trace 124,44 124,46
+04:21:53.960  regarde
+04:21:54.810  trace 125,44 125,45
+04:21:55.031  regarde
+04:21:55.951  trace 130,44 130,45
+04:21:56.196  regarde
+04:21:57.115  trace 131,44 131,46
+04:21:57.366  regarde
+04:21:58.280  trace 132,44 132,45
+04:21:58.483  regarde
+04:21:59.486  clic 137,44
+04:21:59.721  regarde
+04:22:00.673  trace 141,44 141,46
+04:22:00.952  regarde
+04:22:01.893  trace 16,44 16,47
+04:22:02.432  regarde
+04:22:03.388  trace 17,44 17,46
+04:22:03.652  regarde
+04:22:04.639  trace 143,44 143,47
+04:22:05.177  regarde
+04:22:06.227  trace 142,44 142,46
+04:22:06.505  regarde
+04:22:07.443  clic =couleur-c1
+04:22:07.946  defile =hex
+04:22:07.951  clic =hex
+04:22:08.479  touche ctrl+a
+04:22:08.558  tape "#c9e06a"
+04:22:08.670  touche entree
+04:22:08.752  clic =selecteur-c1
+04:22:09.146  clic 18,35
+04:22:09.648  regarde
+04:22:10.558  clic 19,35
+04:22:10.764  regarde
+04:22:11.814  trace 24,35 24,34
+04:22:12.048  regarde
+04:22:13.022  trace 25,35 25,33
+04:22:13.262  regarde
+04:22:14.267  clic 26,35
+04:22:14.490  regarde
+04:22:15.486  clic 37,35
+04:22:15.766  regarde
+04:22:16.711  trace 38,35 38,34
+04:22:16.913  regarde
+04:22:17.936  clic 39,35
+04:22:18.130  regarde
+04:22:19.047  clic 50,35
+04:22:19.317  regarde
+04:22:20.325  clic 51,35
+04:22:20.533  regarde
+04:22:21.542  trace 56,35 56,34
+04:22:21.784  regarde
+04:22:22.692  trace 57,35 57,33
+04:22:22.946  regarde
+04:22:23.830  clic 58,35
+04:22:24.054  regarde
+04:22:25.034  clic 69,35
+04:22:25.313  regarde
+04:22:26.250  trace 70,35 70,34
+04:22:26.444  regarde
+04:22:27.464  clic 71,35
+04:22:27.667  regarde
+04:22:28.599  clic 82,35
+04:22:28.864  regarde
+04:22:29.817  clic 83,35
+04:22:30.013  regarde
+04:22:30.957  trace 88,35 88,34
+04:22:31.182  regarde
+04:22:32.175  trace 89,35 89,33
+04:22:32.431  regarde
+04:22:33.435  clic 90,35
+04:22:33.652  regarde
+04:22:34.600  clic 101,35
+04:22:34.877  regarde
+04:22:35.859  trace 102,35 102,34
+04:22:36.066  regarde
+04:22:37.045  clic 103,35
+04:22:37.255  regarde
+04:22:38.289  clic 114,35
+04:22:38.559  regarde
+04:22:39.518  clic 115,35
+04:22:39.721  regarde
+04:22:40.695  trace 120,35 120,34
+04:22:40.916  regarde
+04:22:41.931  trace 121,35 121,33
+04:22:42.231  regarde
+04:22:43.169  clic 122,35
+04:22:43.387  regarde
+04:22:44.362  clic 133,35
+04:22:44.634  regarde
+04:22:45.638  trace 134,35 134,34
+04:22:45.845  regarde
+04:22:46.850  clic 135,35
+04:22:47.063  regarde
+04:22:48.147  clic =outil-gomme
+04:22:48.645  clic 16,36
+04:22:49.080  regarde
+04:22:50.046  clic 17,36
+04:22:50.270  regarde
+04:22:51.313  clic 16,37
+04:22:51.514  regarde
+04:22:52.619  clic 143,36
+04:22:53.083  regarde
+04:22:54.235  clic 142,36
+04:22:54.441  regarde
+04:22:55.408  clic 143,37
+04:22:55.619  regarde
+04:22:56.593  clic 18,111
+04:22:57.075  regarde
+04:22:58.113  clic 19,111
+04:22:58.324  regarde
+04:22:59.397  clic 18,110
+04:22:59.600  regarde
+04:23:00.675  clic 20,111
+04:23:00.900  regarde
+04:23:01.963  clic 141,111
+04:23:02.428  regarde
+04:23:03.351  clic 140,111
+04:23:03.545  regarde
+04:23:04.623  clic 141,110
+04:23:04.846  regarde
+04:23:05.829  clic 139,111
+04:23:06.047  regarde
+04:23:26.112  clic =onglet-methode
+04:23:26.623  attends 300
+04:23:27.003  defile =carnet-rub-iteration
+04:23:27.083  cibles carnet-rub-iteration
+04:23:27.162  clic =carnet-rub-iteration
+04:23:27.640  attends 250
+04:23:27.968  defile =carnet-texte
+04:23:28.410  cibles carnet-texte
+04:23:28.485  clic =carnet-texte
+04:23:28.676  tape "v3 : même bloc et même croûte. Ajouts : brins clairs au-dessus de la croûte, arête claire et dessous sombre de la croûte, côtés plus sombres, deux strates ondulées, pierres grandes, moyennes et petites."
+04:23:32.590  defile =carnet-ajoute
+04:23:32.667  cibles carnet-ajoute
+04:23:32.754  clic =carnet-ajoute
+04:23:33.109  attends 300
+04:23:33.483  clic =onglet-methode
+04:23:33.938  attends 300
+04:23:34.307  defile =carnet-rub-critique
+04:23:34.385  cibles carnet-rub-critique
+04:23:34.463  clic =carnet-rub-critique
+04:23:34.917  attends 250
+04:23:35.250  defile =carnet-texte
+04:23:35.333  cibles carnet-texte
+04:23:35.417  clic =carnet-texte
+04:23:35.776  tape "v3 : lisibilité 4, originalité 3, appeal 3, cohérence 4, rythme 3, crédibilité 3 = 20/30. La terre a enfin une structure, mais les pierres sont des briques grises qui flottent et les strates sont des traits fins : on lit un gâteau, pas un sol."
+04:23:40.264  defile =carnet-ajoute
+04:23:40.346  cibles carnet-ajoute
+04:23:40.438  clic =carnet-ajoute
+04:23:40.794  attends 300
+04:23:48.825  clic =onglet-calques
+04:23:49.318  attends 300
+04:23:49.707  defile =calque-oeil-3
+04:23:50.211  cibles calque-oeil-3
+04:23:50.308  clic =calque-oeil-3
+04:23:50.691  attends 200
+04:23:50.976  defile =calque-ajoute-construction
+04:23:51.066  cibles calque-ajoute-construction
+04:23:51.166  clic =calque-ajoute-construction
+04:23:51.562  attends 300
+04:23:51.956  defile =calque-nom
+04:23:52.036  cibles calque-nom
+04:23:52.122  clic =calque-nom
+04:23:52.558  touche ctrl+a
+04:23:52.641  tape "v4"
+04:23:52.680  touche tab
+04:23:52.754  attends 200
+04:23:53.033  defile =calque-teinte-aucune
+04:23:53.464  cibles calque-teinte-aucune
+04:23:53.545  clic =calque-teinte-aucune
+04:23:53.976  attends 200
+04:23:54.278  defile =calque-opacite
+04:23:54.399  cibles calque-opacite
+04:23:54.485  cibles calque-opacite
+04:23:58.870  glisse @1102 619 @1220 619
+04:23:58.873    ✗ glisse a b : deux cases « x,y » (ou « @x,y » à l'écran).
+04:23:58.947  cibles calque-3
+04:24:03.502  cibles calque-choisit
+04:24:03.571  defile =calque-ajoute-construction
+04:24:03.574  va @200 300
+04:24:03.976  regarde
+04:24:21.294  glisse @1099,619 @1225,619
+04:24:22.127  attends 300
+04:24:22.559  clic =outil-rect
+04:24:23.092  clic =couleur-c1
+04:24:23.575  defile =hex
+04:24:23.591  clic =hex
+04:24:24.191  touche ctrl+a
+04:24:24.277  tape "#8e5a4a"
+04:24:24.400  touche entree
+04:24:24.474  clic =selecteur-c1
+04:24:24.872  trace 18,42 141,111
+04:24:31.308  regarde
+04:24:32.458  clic =couleur-c1
+04:24:32.979  defile =hex
+04:24:32.984  clic =hex
+04:24:33.530  touche ctrl+a
+04:24:33.605  tape "#47283a"
+04:24:33.724  touche entree
+04:24:33.797  clic =selecteur-c1
+04:24:34.191  trace 18,106 141,111
+04:24:39.016  regarde
+04:24:40.234  clic =couleur-c1
+04:24:40.760  defile =hex
+04:24:40.763  clic =hex
+04:24:41.307  touche ctrl+a
+04:24:41.387  tape "#6b3b42"
+04:24:41.526  touche entree
+04:24:41.614  clic =selecteur-c1
+04:24:42.036  trace 18,44 141,46
+04:24:46.835  regarde
+04:24:47.931  trace 18,47 19,105
+04:24:50.357  regarde
+04:24:51.625  trace 140,47 141,105
+04:24:54.078  regarde
+04:24:55.199  clic =couleur-c1
+04:24:55.714  defile =hex
+04:24:55.717  clic =hex
+04:24:56.250  touche ctrl+a
+04:24:56.333  tape "#8cbf4a"
+04:24:56.459  touche entree
+04:24:56.534  clic =selecteur-c1
+04:24:56.939  trace 16,36 143,43
+04:25:01.984  regarde
+04:25:03.351  clic =couleur-c1
+04:25:03.859  defile =hex
+04:25:03.861  clic =hex
+04:25:04.391  touche ctrl+a
+04:25:04.464  tape "#4f8a3e"
+04:25:04.593  touche entree
+04:25:04.671  clic =selecteur-c1
+04:25:05.079  trace 16,43 143,43
+04:25:09.747  regarde
+04:25:10.998  clic =couleur-c1
+04:25:11.507  defile =hex
+04:25:11.510  clic =hex
+04:25:12.042  touche ctrl+a
+04:25:12.119  tape "#c9e06a"
+04:25:12.244  touche entree
+04:25:12.323  clic =selecteur-c1
+04:25:12.722  trace 18,36 141,36
+04:25:17.393  regarde
+04:25:18.532  clic =outil-crayon
+04:25:19.052  clic =opt-taille
+04:25:19.448  touche ctrl+a
+04:25:19.524  tape "3"
+04:25:19.545  touche tab
+04:25:19.618  clic =couleur-c1
+04:25:20.149  defile =hex
+04:25:20.152  clic =hex
+04:25:20.705  touche ctrl+a
+04:25:20.780  tape "#7d4c48"
+04:25:20.895  touche entree
+04:25:20.970  clic =selecteur-c1
+04:25:21.369  trace 20,62 44,60
+04:25:22.709  regarde
+04:25:23.735  trace 44,60 70,63
+04:25:24.894  regarde
+04:25:25.963  trace 70,63 96,61
+04:25:27.132  regarde
+04:25:28.149  trace 96,61 120,64
+04:25:29.305  regarde
+04:25:30.342  trace 120,64 139,62
+04:25:31.286  regarde
+04:25:32.242  clic =couleur-c1
+04:25:32.742  defile =hex
+04:25:32.748  clic =hex
+04:25:33.272  touche ctrl+a
+04:25:33.346  tape "#5e3442"
+04:25:33.463  touche entree
+04:25:33.541  clic =selecteur-c1
+04:25:33.936  trace 20,86 40,89
+04:25:35.151  regarde
+04:25:36.093  trace 40,89 66,86
+04:25:37.242  regarde
+04:25:38.196  trace 66,86 92,90
+04:25:39.372  regarde
+04:25:40.382  trace 92,90 118,87
+04:25:41.494  regarde
+04:25:42.432  trace 118,87 139,89
+04:25:43.375  regarde
+04:25:44.312  clic =couleur-c1
+04:25:44.807  defile =hex
+04:25:44.810  clic =hex
+04:25:45.336  touche ctrl+a
+04:25:45.412  tape "#47283a"
+04:25:45.527  touche entree
+04:25:45.603  clic =selecteur-c1
+04:25:46.005  trace 20,99 50,101
+04:25:47.523  regarde
+04:25:48.436  trace 50,101 80,98
+04:25:49.675  regarde
+04:25:50.589  trace 80,98 110,101
+04:25:51.801  regarde
+04:25:52.780  trace 110,101 139,99
+04:25:53.975  regarde
+04:25:54.906  clic =opt-taille
+04:25:55.384  touche ctrl+a
+04:25:55.459  tape "1"
+04:25:55.477  touche tab
+04:25:55.551  clic =outil-ellipse
+04:25:55.985  clic =couleur-c1
+04:25:56.457  defile =hex
+04:25:56.462  clic =hex
+04:25:56.985  touche ctrl+a
+04:25:57.059  tape "#4b4f66"
+04:25:57.196  touche entree
+04:25:57.275  clic =selecteur-c1
+04:25:57.669  trace 26,68 40,78
+04:25:58.725  regarde
+04:25:59.856  trace 41,74 45,78
+04:26:00.185  regarde
+04:26:01.119  trace 24,79 25,80
+04:26:01.440  regarde
+04:26:02.529  trace 88,80 104,92
+04:26:03.511  regarde
+04:26:04.444  trace 105,86 111,91
+04:26:04.888  regarde
+04:26:05.861  trace 54,52 62,58
+04:26:06.533  regarde
+04:26:07.423  trace 63,55 66,58
+04:26:07.718  regarde
+04:26:08.741  trace 116,58 126,65
+04:26:09.501  regarde
+04:26:10.529  trace 68,96 72,100
+04:26:11.019  regarde
+04:26:11.916  trace 74,98 76,100
+04:26:12.204  regarde
+04:26:13.090  trace 132,92 137,97
+04:26:13.601  regarde
+04:26:14.619  clic =couleur-c1
+04:26:15.123  defile =hex
+04:26:15.125  clic =hex
+04:26:15.667  touche ctrl+a
+04:26:15.742  tape "#727a8f"
+04:26:15.855  touche entree
+04:26:15.928  clic =selecteur-c1
+04:26:16.323  trace 27,68 39,76
+04:26:17.486  regarde
+04:26:18.595  trace 42,74 44,76
+04:26:18.886  regarde
+04:26:19.819  trace 89,80 103,90
+04:26:20.789  regarde
+04:26:21.874  trace 106,86 110,89
+04:26:22.204  regarde
+04:26:23.174  trace 55,52 61,56
+04:26:23.768  regarde
+04:26:24.672  trace 117,58 125,63
+04:26:25.384  regarde
+04:26:26.288  trace 69,96 71,98
+04:26:26.725  regarde
+04:26:27.587  trace 133,92 136,95
+04:26:28.036  regarde
+04:26:29.018  clic =couleur-c1
+04:26:29.523  defile =hex
+04:26:29.533  clic =hex
+04:26:30.068  touche ctrl+a
+04:26:30.141  tape "#a7b0bd"
+04:26:30.254  touche entree
+04:26:30.326  clic =selecteur-c1
+04:26:30.719  trace 29,69 36,71
+04:26:31.473  regarde
+04:26:32.508  trace 91,81 100,83
+04:26:33.198  regarde
+04:26:34.147  trace 57,53 58,55
+04:26:34.576  regarde
+04:26:35.500  trace 119,59 122,61
+04:26:35.949  regarde
+04:26:37.007  clic =outil-crayon
+04:26:37.486  clic =couleur-c1
+04:26:37.986  defile =hex
+04:26:37.989  clic =hex
+04:26:38.515  touche ctrl+a
+04:26:38.591  tape "#8cbf4a"
+04:26:38.714  touche entree
+04:26:38.790  clic =selecteur-c1
+04:26:39.183  trace 22,44 22,45
+04:26:39.676  regarde
+04:26:40.653  trace 23,44 23,45
+04:26:40.853  regarde
+04:26:41.820  clic 27,44
+04:26:42.062  regarde
+04:26:43.072  trace 28,44 28,46
+04:26:43.338  regarde
+04:26:44.428  trace 29,44 29,45
+04:26:44.656  regarde
+04:26:45.643  trace 34,44 34,45
+04:26:45.893  regarde
+04:26:46.922  trace 35,44 35,46
+04:26:47.168  regarde
+04:26:48.116  trace 36,44 36,45
+04:26:48.340  regarde
+04:26:49.334  clic 41,44
+04:26:49.572  regarde
+04:26:50.628  trace 45,44 45,46
+04:26:50.893  regarde
+04:26:51.964  trace 46,44 46,47
+04:26:52.269  regarde
+04:26:53.237  trace 47,44 47,46
+04:26:53.498  regarde
+04:26:54.470  clic 48,44
+04:26:54.688  regarde
+04:26:55.662  trace 54,44 54,45
+04:26:55.903  regarde
+04:26:56.808  trace 55,44 55,45
+04:26:57.005  regarde
+04:26:57.993  clic 59,44
+04:26:58.226  regarde
+04:26:59.200  trace 60,44 60,46
+04:26:59.448  regarde
+04:27:00.361  trace 61,44 61,45
+04:27:00.580  regarde
+04:27:01.624  trace 66,44 66,45
+04:27:01.861  regarde
+04:27:02.804  trace 67,44 67,46
+04:27:03.049  regarde
+04:27:03.975  trace 68,44 68,45
+04:27:04.181  regarde
+04:27:05.105  clic 73,44
+04:27:05.339  regarde
+04:27:06.237  trace 77,44 77,46
+04:27:06.497  regarde
+04:27:07.424  trace 78,44 78,47
+04:27:07.717  regarde
+04:27:08.618  trace 79,44 79,46
+04:27:08.901  regarde
+04:27:09.825  clic 80,44
+04:27:10.054  regarde
+04:27:10.971  trace 86,44 86,45
+04:27:11.216  regarde
+04:27:12.226  trace 87,44 87,45
+04:27:12.410  regarde
+04:27:13.337  clic 91,44
+04:27:13.568  regarde
+04:27:14.540  trace 92,44 92,46
+04:27:14.800  regarde
+04:27:15.788  trace 93,44 93,45
+04:27:15.986  regarde
+04:27:16.965  trace 98,44 98,45
+04:27:17.202  regarde
+04:27:18.167  trace 99,44 99,46
+04:27:18.421  regarde
+04:27:19.287  trace 100,44 100,45
+04:27:19.482  regarde
+04:27:20.419  clic 105,44
+04:27:20.649  regarde
+04:27:21.601  trace 109,44 109,46
+04:27:21.865  regarde
+04:27:22.816  trace 110,44 110,47
+04:27:23.118  regarde
+04:27:24.102  trace 111,44 111,46
+04:27:24.371  regarde
+04:27:25.242  clic 112,44
+04:27:25.458  regarde
+04:27:26.349  trace 118,44 118,45
+04:27:26.582  regarde
+04:27:27.478  trace 119,44 119,45
+04:27:27.669  regarde
+04:27:28.533  clic 123,44
+04:27:28.769  regarde
+04:27:29.637  trace 124,44 124,46
+04:27:29.864  regarde
+04:27:30.780  trace 125,44 125,45
+04:27:31.022  regarde
+04:27:31.981  trace 130,44 130,45
+04:27:32.214  regarde
+04:27:33.120  trace 131,44 131,46
+04:27:33.347  regarde
+04:27:34.209  trace 132,44 132,45
+04:27:34.416  regarde
+04:27:35.329  clic 137,44
+04:27:35.570  regarde
+04:27:36.556  trace 141,44 141,46
+04:27:36.847  regarde
+04:27:37.784  trace 16,44 16,47
+04:27:38.331  regarde
+04:27:39.240  trace 17,44 17,46
+04:27:39.520  regarde
+04:27:40.486  trace 143,44 143,47
+04:27:41.025  regarde
+04:27:42.072  trace 142,44 142,46
+04:27:42.350  regarde
+04:27:43.324  clic =couleur-c1
+04:27:43.821  defile =hex
+04:27:43.826  clic =hex
+04:27:44.348  touche ctrl+a
+04:27:44.424  tape "#c9e06a"
+04:27:44.555  touche entree
+04:27:44.633  clic =selecteur-c1
+04:27:45.035  clic 18,35
+04:27:45.529  regarde
+04:27:46.498  clic 19,35
+04:27:46.702  regarde
+04:27:47.716  trace 24,35 24,34
+04:27:47.935  regarde
+04:27:48.849  trace 25,35 25,33
+04:27:49.098  regarde
+04:27:50.056  clic 26,35
+04:27:50.264  regarde
+04:27:51.196  clic 37,35
+04:27:51.468  regarde
+04:27:52.462  trace 38,35 38,34
+04:27:52.667  regarde
+04:27:53.607  clic 39,35
+04:27:53.818  regarde
+04:27:54.706  clic 50,35
+04:27:54.982  regarde
+04:27:55.939  clic 51,35
+04:27:56.150  regarde
+04:27:57.132  trace 56,35 56,34
+04:27:57.368  regarde
+04:27:58.281  trace 57,35 57,33
+04:27:58.516  regarde
+04:27:59.419  clic 58,35
+04:27:59.644  regarde
+04:28:00.581  clic 69,35
+04:28:00.851  regarde
+04:28:01.777  trace 70,35 70,34
+04:28:01.962  regarde
+04:28:02.834  clic 71,35
+04:28:03.034  regarde
+04:28:03.867  clic 82,35
+04:28:04.140  regarde
+04:28:05.098  clic 83,35
+04:28:05.310  regarde
+04:28:06.182  trace 88,35 88,34
+04:28:06.416  regarde
+04:28:07.385  trace 89,35 89,33
+04:28:07.629  regarde
+04:28:08.494  clic 90,35
+04:28:08.716  regarde
+04:28:09.653  clic 101,35
+04:28:09.918  regarde
+04:28:10.782  trace 102,35 102,34
+04:28:10.982  regarde
+04:28:11.955  clic 103,35
+04:28:12.176  regarde
+04:28:13.054  clic 114,35
+04:28:13.315  regarde
+04:28:14.206  clic 115,35
+04:28:14.405  regarde
+04:28:15.350  trace 120,35 120,34
+04:28:15.565  regarde
+04:28:16.455  trace 121,35 121,33
+04:28:16.680  regarde
+04:28:17.585  clic 122,35
+04:28:17.795  regarde
+04:28:18.719  clic 133,35
+04:28:18.978  regarde
+04:28:19.884  trace 134,35 134,34
+04:28:20.083  regarde
+04:28:21.045  clic 135,35
+04:28:21.250  regarde
+04:28:22.177  clic =outil-gomme
+04:28:22.664  clic 16,36
+04:28:23.097  regarde
+04:28:23.951  clic 17,36
+04:28:24.151  regarde
+04:28:25.080  clic 16,37
+04:28:25.290  regarde
+04:28:26.209  clic 143,36
+04:28:26.663  regarde
+04:28:27.560  clic 142,36
+04:28:27.767  regarde
+04:28:28.672  clic 143,37
+04:28:28.870  regarde
+04:28:29.910  clic 18,111
+04:28:30.373  regarde
+04:28:31.329  clic 19,111
+04:28:31.528  regarde
+04:28:32.460  clic 18,110
+04:28:32.671  regarde
+04:28:33.624  clic 20,111
+04:28:33.831  regarde
+04:28:34.756  clic 141,111
+04:28:35.195  regarde
+04:28:36.148  clic 140,111
+04:28:36.364  regarde
+04:28:37.286  clic 141,110
+04:28:37.485  regarde
+04:28:38.407  clic 139,111
+04:28:38.640  regarde
+04:28:55.449  clic =onglet-methode
+04:28:55.935  attends 300
+04:28:56.314  defile =carnet-rub-iteration
+04:28:56.383  cibles carnet-rub-iteration
+04:28:56.469  clic =carnet-rub-iteration
+04:28:56.959  attends 250
+04:28:57.277  defile =carnet-texte
+04:28:57.732  cibles carnet-texte
+04:28:57.831  clic =carnet-texte
+04:28:57.996  tape "v4 : même bloc, même croûte. Les pierres deviennent rondes et groupées (une grosse, une ou deux petites à côté, à moitié prises dans la terre) ; les strates deviennent trois bandes larges et irrégulières, de plus en plus sombres vers le bas."
+04:29:02.143  defile =carnet-ajoute
+04:29:02.218  cibles carnet-ajoute
+04:29:02.285  clic =carnet-ajoute
+04:29:02.628  attends 300
+04:29:02.989  clic =onglet-methode
+04:29:03.455  attends 300
+04:29:03.837  defile =carnet-rub-critique
+04:29:03.908  cibles carnet-rub-critique
+04:29:04.007  clic =carnet-rub-critique
+04:29:04.496  attends 250
+04:29:04.810  defile =carnet-texte
+04:29:04.877  cibles carnet-texte
+04:29:04.950  clic =carnet-texte
+04:29:05.314  tape "v4 : lisibilité 4, originalité 3, appeal 4, cohérence 4, rythme 4, crédibilité 3 = 22/30. On lit un sol épais et ancien. Reste générique : la face est un aplat uniforme et la croûte n'a pas de volume ; c'est le travail du rendu."
+04:29:09.275  defile =carnet-ajoute
+04:29:09.339  cibles carnet-ajoute
+04:29:09.421  clic =carnet-ajoute
+04:29:09.765  attends 300
+04:29:10.144  clic =onglet-methode
+04:29:10.655  attends 300
+04:29:11.040  defile =carnet-rub-choix
+04:29:11.500  cibles carnet-rub-choix
+04:29:11.587  clic =carnet-rub-choix
+04:29:11.790  attends 250
+04:29:12.120  defile =carnet-texte
+04:29:12.193  cibles carnet-texte
+04:29:12.275  clic =carnet-texte
+04:29:12.642  tape "v4 : le bloc à croûte débordante en franges (motif de 32 px), trois strates qui fonçent vers le bas, des pierres rondes en groupes grand-petit. À pousser au rendu : croûte en volume (dessus clair, dessous sombre, plis de couverture), face qui fonce progressivement, clusters de terre."
+04:29:17.590  defile =carnet-ajoute
+04:29:17.654  cibles carnet-ajoute
+04:29:17.729  clic =carnet-ajoute
+04:29:18.066  attends 300
+04:29:18.447  clic =onglet-methode
+04:29:18.948  attends 300
+04:29:19.319  defile =coche-iterations.base
+04:29:19.781  cibles coche-iterations.base
+04:29:19.865  clic =coche-iterations.base
+04:29:20.127  attends 200
+04:29:20.394  defile =coche-iterations.trois
+04:29:20.480  cibles coche-iterations.trois
+04:29:20.581  clic =coche-iterations.trois
+04:29:20.858  attends 200
+04:29:21.151  defile =coche-iterations.mieux
+04:29:21.223  cibles coche-iterations.mieux
+04:29:21.329  clic =coche-iterations.mieux
+04:29:21.626  attends 200
+04:29:21.896  defile =etape-valide
+04:29:21.992  cibles etape-valide
+04:29:22.075  clic =etape-valide
+04:29:22.395  attends 400
+04:29:22.805  va @200 300
+04:29:23.176  regarde
+04:29:40.313  clic =onglet-couleurs
+04:29:40.813  attends 300
+04:29:41.180  cibles palette
+04:29:41.257  cibles ajout
+04:29:48.987  defile =hex
+04:29:48.991  clic =hex
+04:29:49.462  touche ctrl+a
+04:29:49.537  tape "#2e1c2c"
+04:29:49.673  touche entree
+04:29:49.750  defile =selecteur-ajoute
+04:29:49.756  clic =selecteur-ajoute
+04:29:50.121  attends 150
+04:29:50.274  defile =hex
+04:29:50.277  clic =hex
+04:29:50.625  touche ctrl+a
+04:29:50.700  tape "#4a2a3a"
+04:29:50.816  touche entree
+04:29:50.889  defile =selecteur-ajoute
+04:29:50.891  clic =selecteur-ajoute
+04:29:51.244  attends 150
+04:29:51.396  defile =hex
+04:29:51.399  clic =hex
+04:29:51.750  touche ctrl+a
+04:29:51.825  tape "#6e3d45"
+04:29:51.947  touche entree
+04:29:52.019  defile =selecteur-ajoute
+04:29:52.022  clic =selecteur-ajoute
+04:29:52.377  attends 150
+04:29:52.528  defile =hex
+04:29:52.533  clic =hex
+04:29:52.883  touche ctrl+a
+04:29:52.958  tape "#8e5a4a"
+04:29:53.077  touche entree
+04:29:53.150  defile =selecteur-ajoute
+04:29:53.153  clic =selecteur-ajoute
+04:29:53.494  attends 150
+04:29:53.646  defile =hex
+04:29:53.648  clic =hex
+04:29:53.994  touche ctrl+a
+04:29:54.075  tape "#a9765a"
+04:29:54.200  touche entree
+04:29:54.294  defile =selecteur-ajoute
+04:29:54.304  clic =selecteur-ajoute
+04:29:54.643  attends 150
+04:29:54.795  defile =hex
+04:29:54.803  clic =hex
+04:29:55.141  touche ctrl+a
+04:29:55.216  tape "#3f7a3c"
+04:29:55.330  touche entree
+04:29:55.403  defile =selecteur-ajoute
+04:29:55.406  clic =selecteur-ajoute
+04:29:55.760  attends 150
+04:29:55.911  defile =hex
+04:29:55.918  clic =hex
+04:29:56.259  touche ctrl+a
+04:29:56.332  tape "#6fae45"
+04:29:56.450  touche entree
+04:29:56.526  defile =selecteur-ajoute
+04:29:56.530  clic =selecteur-ajoute
+04:29:56.877  attends 150
+04:29:57.030  defile =hex
+04:29:57.033  clic =hex
+04:29:57.375  touche ctrl+a
+04:29:57.453  tape "#a9d455"
+04:29:57.576  touche entree
+04:29:57.651  defile =selecteur-ajoute
+04:29:57.655  clic =selecteur-ajoute
+04:29:58.009  attends 150
+04:29:58.161  defile =hex
+04:29:58.165  clic =hex
+04:29:58.513  touche ctrl+a
+04:29:58.600  tape "#e0ef7a"
+04:29:58.716  touche entree
+04:29:58.810  defile =selecteur-ajoute
+04:29:58.815  clic =selecteur-ajoute
+04:29:59.162  attends 150
+04:29:59.314  defile =hex
+04:29:59.319  clic =hex
+04:29:59.659  touche ctrl+a
+04:29:59.734  tape "#4b4f66"
+04:29:59.864  touche entree
+04:29:59.937  defile =selecteur-ajoute
+04:29:59.940  clic =selecteur-ajoute
+04:30:00.295  attends 150
+04:30:00.451  defile =hex
+04:30:00.454  clic =hex
+04:30:00.793  touche ctrl+a
+04:30:00.867  tape "#727a8f"
+04:30:00.996  touche entree
+04:30:01.074  defile =selecteur-ajoute
+04:30:01.079  clic =selecteur-ajoute
+04:30:01.426  attends 150
+04:30:01.578  defile =hex
+04:30:01.581  clic =hex
+04:30:01.927  touche ctrl+a
+04:30:02.002  tape "#a7b0bd"
+04:30:02.120  touche entree
+04:30:02.195  defile =selecteur-ajoute
+04:30:02.209  clic =selecteur-ajoute
+04:30:02.559  attends 150
+04:30:02.795  defile =palette-ajoute
+04:30:02.804  va @200 300
+04:30:03.176  regarde
+04:30:11.402  clic =onglet-methode
+04:30:11.940  attends 300
+04:30:12.324  defile =coche-palette.hierarchie
+04:30:13.371  cibles coche-palette.hierarchie
+04:30:13.461  clic =coche-palette.hierarchie
+04:30:13.791  attends 200
+04:30:14.089  defile =coche-palette.peu
+04:30:14.174  cibles coche-palette.peu
+04:30:14.271  clic =coche-palette.peu
+04:30:14.566  attends 200
+04:30:14.845  defile =etape-valide
+04:30:14.919  cibles etape-valide
+04:30:14.995  clic =etape-valide
+04:30:15.311  attends 400
+04:30:15.713  va @200 300
+04:30:16.061  regarde
+04:30:57.801  clic =onglet-tuiles
+04:30:58.338  attends 300
+04:30:58.719  cibles tuile-
+04:31:03.215  clic =tuile-tw
+04:31:03.628  touche ctrl+a
+04:31:03.703  tape "32"
+04:31:03.756  touche tab
+04:31:03.835  attends 200
+04:31:04.041  clic =tuile-th
+04:31:04.425  touche ctrl+a
+04:31:04.499  tape "32"
+04:31:04.533  touche tab
+04:31:04.608  attends 300
+04:31:04.910  va @200 300
+04:31:05.272  regarde
+04:31:47.726  clic =onglet-calques
+04:31:48.246  attends 300
+04:31:48.617  defile =calque-oeil-4
+04:31:49.070  cibles calque-oeil-4
+04:31:49.163  clic =calque-oeil-4
+04:31:49.549  attends 200
+04:31:49.823  defile =calque-choisit-0
+04:31:49.915  cibles calque-choisit-0
+04:31:49.991  clic =calque-choisit-0
+04:31:50.458  attends 200
+04:31:50.790  clic =outil-rect
+04:31:51.356  clic =couleur-c1
+04:31:51.872  defile =hex
+04:31:51.876  clic =hex
+04:31:52.440  touche ctrl+a
+04:31:52.563  tape "#8e5a4a"
+04:31:52.729  touche entree
+04:31:52.813  clic =selecteur-c1
+04:31:53.228  trace 2,13 93,89
+04:31:57.313  regarde
+04:31:58.421  trace 96,0 159,63
+04:32:00.955  regarde
+04:32:02.059  clic =couleur-c1
+04:32:02.558  defile =hex
+04:32:02.561  clic =hex
+04:32:03.090  touche ctrl+a
+04:32:03.164  tape "#6e3d45"
+04:32:03.284  touche entree
+04:32:03.356  clic =selecteur-c1
+04:32:03.758  trace 2,13 4,89
+04:32:06.878  regarde
+04:32:07.814  trace 91,13 93,89
+04:32:10.809  regarde
+04:32:11.779  trace 2,80 93,89
+04:32:15.510  regarde
+04:32:16.458  trace 2,13 93,14
+04:32:19.980  regarde
+04:32:21.009  clic =couleur-c1
+04:32:21.506  defile =hex
+04:32:21.509  clic =hex
+04:32:22.036  touche ctrl+a
+04:32:22.112  tape "#4a2a3a"
+04:32:22.226  touche entree
+04:32:22.301  clic =selecteur-c1
+04:32:22.702  trace 3,90 92,91
+04:32:26.201  regarde
+04:32:27.163  clic =couleur-c1
+04:32:27.643  defile =hex
+04:32:27.647  clic =hex
+04:32:28.168  touche ctrl+a
+04:32:28.243  tape "#6fae45"
+04:32:28.356  touche entree
+04:32:28.431  clic =selecteur-c1
+04:32:28.835  trace 0,4 95,12
+04:32:32.696  regarde
+04:32:33.671  clic =couleur-c1
+04:32:34.172  defile =hex
+04:32:34.176  clic =hex
+04:32:34.706  touche ctrl+a
+04:32:34.780  tape "#a9d455"
+04:32:34.897  touche entree
+04:32:34.970  clic =selecteur-c1
+04:32:35.371  trace 1,4 94,4
+04:32:38.924  regarde
+04:32:39.906  clic =couleur-c1
+04:32:40.407  defile =hex
+04:32:40.411  clic =hex
+04:32:40.936  touche ctrl+a
+04:32:41.010  tape "#3f7a3c"
+04:32:41.128  touche entree
+04:32:41.203  clic =selecteur-c1
+04:32:41.602  trace 0,12 95,12
+04:32:45.270  regarde
+04:32:46.247  clic =couleur-c1
+04:32:46.756  defile =hex
+04:32:46.759  clic =hex
+04:32:47.284  touche ctrl+a
+04:32:47.360  tape "#6fae45"
+04:32:47.508  touche entree
+04:32:47.582  clic =selecteur-c1
+04:32:47.984  trace 124,36 131,44
+04:32:48.703  regarde
+04:32:49.634  clic =couleur-c1
+04:32:50.139  defile =hex
+04:32:50.145  clic =hex
+04:32:50.668  touche ctrl+a
+04:32:50.741  tape "#a9d455"
+04:32:50.861  touche entree
+04:32:50.934  clic =selecteur-c1
+04:32:51.334  trace 124,36 131,36
+04:32:52.004  regarde
+04:32:52.944  clic =couleur-c1
+04:32:53.440  defile =hex
+04:32:53.442  clic =hex
+04:32:53.971  touche ctrl+a
+04:32:54.044  tape "#3f7a3c"
+04:32:54.162  touche entree
+04:32:54.249  clic =selecteur-c1
+04:32:54.653  trace 124,44 131,44
+04:32:55.323  regarde
+04:32:56.222  clic =couleur-c1
+04:32:56.724  defile =hex
+04:32:56.726  clic =hex
+04:32:57.253  touche ctrl+a
+04:32:57.328  tape "#6e3d45"
+04:32:57.456  touche entree
+04:32:57.529  clic =selecteur-c1
+04:32:57.920  trace 124,45 131,46
+04:32:58.643  regarde
+04:32:59.566  trace 122,24 133,29
+04:33:00.394  regarde
+04:33:01.320  clic =couleur-c1
+04:33:01.860  defile =hex
+04:33:01.864  clic =hex
+04:33:02.384  touche ctrl+a
+04:33:02.460  tape "#4a2a3a"
+04:33:02.592  touche entree
+04:33:02.665  clic =selecteur-c1
+04:33:03.074  trace 122,30 133,31
+04:33:03.960  regarde
+04:33:04.943  clic =couleur-c1
+04:33:05.458  defile =hex
+04:33:05.467  clic =hex
+04:33:06.025  touche ctrl+a
+04:33:06.101  tape "#8e5a4a"
+04:33:06.228  touche entree
+04:33:06.302  clic =selecteur-c1
+04:33:06.701  trace 4,105 91,111
+04:33:10.274  regarde
+04:33:11.175  clic =couleur-c1
+04:33:11.660  defile =hex
+04:33:11.667  clic =hex
+04:33:12.200  touche ctrl+a
+04:33:12.276  tape "#6e3d45"
+04:33:12.391  touche entree
+04:33:12.464  clic =selecteur-c1
+04:33:12.852  trace 5,112 90,113
+04:33:16.290  regarde
+04:33:17.250  clic =couleur-c1
+04:33:17.737  defile =hex
+04:33:17.741  clic =hex
+04:33:18.267  touche ctrl+a
+04:33:18.343  tape "#6fae45"
+04:33:18.472  touche entree
+04:33:18.546  clic =selecteur-c1
+04:33:18.931  trace 2,99 93,105
+04:33:22.553  regarde
+04:33:23.463  clic =couleur-c1
+04:33:23.953  defile =hex
+04:33:23.955  clic =hex
+04:33:24.485  touche ctrl+a
+04:33:24.560  tape "#a9d455"
+04:33:24.675  touche entree
+04:33:24.750  clic =selecteur-c1
+04:33:25.150  trace 3,99 92,99
+04:33:28.592  regarde
+04:33:29.468  clic =couleur-c1
+04:33:29.953  defile =hex
+04:33:29.956  clic =hex
+04:33:30.488  touche ctrl+a
+04:33:30.561  tape "#3f7a3c"
+04:33:30.678  touche entree
+04:33:30.751  clic =selecteur-c1
+04:33:31.148  trace 2,105 93,105
+04:33:34.623  regarde
+04:33:35.459  clic =outil-gomme
+04:33:35.933  clic 0,4
+04:33:36.337  regarde
+04:33:37.231  clic 1,4
+04:33:37.437  regarde
+04:33:38.280  clic 0,5
+04:33:38.481  regarde
+04:33:39.342  clic 95,4
+04:33:39.768  regarde
+04:33:40.690  clic 94,4
+04:33:40.883  regarde
+04:33:41.784  clic 95,5
+04:33:41.985  regarde
+04:33:42.882  clic 2,99
+04:33:43.332  regarde
+04:33:44.252  clic 3,99
+04:33:44.454  regarde
+04:33:45.458  clic 2,100
+04:33:45.670  regarde
+04:33:46.562  clic 93,99
+04:33:46.985  regarde
+04:33:47.859  clic 92,99
+04:33:48.054  regarde
+04:33:48.982  clic 93,100
+04:33:49.198  regarde
+04:33:50.119  clic 3,91
+04:33:50.554  regarde
+04:33:51.472  clic 92,91
+04:33:51.884  regarde
+04:33:52.846  clic 2,89
+04:33:53.270  regarde
+04:33:54.176  clic 93,89
+04:33:54.584  regarde
+04:33:55.506  trace 126,32 129,35
+04:33:55.982  regarde
+04:34:08.052  clic =onglet-tuiles
+04:34:08.512  attends 300
+04:34:08.892  defile =carte
+04:34:09.333  cibles carte
+04:34:09.412  cibles carte
+04:34:09.492  va @200 300
+04:34:09.848  regarde
+04:34:20.373  clic =carte-terrain
+04:34:20.894  attends 200
+04:34:21.095  glisse @945,500 @1243,500
+04:34:21.962  attends 150
+04:34:22.113  glisse @945,515 @1243,515
+04:34:23.012  attends 150
+04:34:23.165  glisse @945,484 @1243,484
+04:34:24.046  attends 150
+04:34:24.210  glisse @945,468 @961,468
+04:34:24.746  attends 150
+04:34:24.898  glisse @945,453 @961,453
+04:34:25.261  attends 150
+04:34:25.412  glisse @945,437 @961,437
+04:34:25.777  attends 150
+04:34:25.928  glisse @1133,468 @1243,468
+04:34:26.618  attends 150
+04:34:26.778  glisse @1133,453 @1243,453
+04:34:27.422  attends 150
+04:34:27.595  glisse @1180,437 @1243,437
+04:34:28.133  attends 150
+04:34:28.290  glisse @1008,406 @1070,406
+04:34:28.955  attends 150
+04:34:29.113  glisse @1008,390 @1070,390
+04:34:29.661  attends 150
+04:34:29.813  glisse @1039,421 @1055,421
+04:34:30.214  attends 150
+04:34:30.374  va @200 300
+04:34:30.732  regarde
+04:34:49.022  clic =onglet-methode
+04:34:49.603  attends 300
+04:34:50.014  defile =coche-gabarit.gabarit
+04:34:50.110  cibles coche-gabarit.gabarit
+04:34:50.193  clic =coche-gabarit.gabarit
+04:34:50.681  attends 200
+04:34:50.985  defile =coche-gabarit.carte
+04:34:51.093  cibles coche-gabarit.carte
+04:34:51.179  clic =coche-gabarit.carte
+04:34:51.513  attends 200
+04:34:51.772  defile =etape-valide
+04:34:52.221  cibles etape-valide
+04:34:52.319  clic =etape-valide
+04:34:52.529  attends 400
+04:34:52.933  va @200 300
+04:34:53.285  regarde
+04:35:27.362  clic =outil-crayon
+04:35:27.846  clic =couleur-c1
+04:35:28.351  defile =hex
+04:35:28.355  clic =hex
+04:35:28.914  touche ctrl+a
+04:35:28.994  tape "#6e3d45"
+04:35:29.115  touche entree
+04:35:29.188  clic =selecteur-c1
+04:35:29.623  trace 32,50 37,50
+04:35:30.280  regarde
+04:35:31.297  trace 32,51 37,51
+04:35:31.759  regarde
+04:35:32.713  trace 32,52 37,52
+04:35:33.095  regarde
+04:35:34.012  trace 38,49 43,49
+04:35:34.382  regarde
+04:35:35.340  trace 38,50 43,50
+04:35:35.748  regarde
+04:35:36.788  trace 38,51 43,51
+04:35:37.179  regarde
+04:35:38.196  trace 44,50 49,50
+04:35:38.564  regarde
+04:35:39.496  trace 44,51 49,51
+04:35:39.916  regarde
+04:35:40.826  trace 44,52 49,52
+04:35:41.195  regarde
+04:35:42.173  trace 50,51 55,51
+04:35:42.531  regarde
+04:35:43.529  trace 50,52 55,52
+04:35:43.916  regarde
+04:35:44.815  trace 50,53 55,53
+04:35:45.210  regarde
+04:35:46.137  trace 56,52 60,52
+04:35:46.464  regarde
+04:35:47.457  trace 56,53 60,53
+04:35:47.816  regarde
+04:35:48.802  trace 56,54 60,54
+04:35:49.164  regarde
+04:35:50.220  trace 61,51 63,51
+04:35:50.496  regarde
+04:35:51.419  trace 61,52 63,52
+04:35:51.664  regarde
+04:35:52.603  trace 61,53 63,53
+04:35:52.856  regarde
+04:35:53.821  clic =couleur-c1
+04:35:54.304  defile =hex
+04:35:54.307  clic =hex
+04:35:54.845  touche ctrl+a
+04:35:54.920  tape "#6e3d45"
+04:35:55.042  touche entree
+04:35:55.119  clic =selecteur-c1
+04:35:55.555  trace 40,52 42,52
+04:35:56.099  regarde
+04:35:57.059  trace 52,54 54,54
+04:35:57.363  regarde
+04:35:58.324  trace 58,55 59,55
+04:35:58.564  regarde
+04:35:59.485  clic =couleur-c1
+04:35:59.966  defile =hex
+04:35:59.968  clic =hex
+04:36:00.495  touche ctrl+a
+04:36:00.569  tape "#4b4f66"
+04:36:00.691  touche entree
+04:36:00.765  clic =selecteur-c1
+04:36:01.209  trace 36,43 42,43
+04:36:01.878  regarde
+04:36:02.964  trace 35,42 43,42
+04:36:03.481  regarde
+04:36:04.486  clic 35,41
+04:36:04.743  regarde
+04:36:05.654  clic 43,41
+04:36:05.904  regarde
+04:36:06.829  clic =couleur-c1
+04:36:07.314  defile =hex
+04:36:07.316  clic =hex
+04:36:07.845  touche ctrl+a
+04:36:07.920  tape "#727a8f"
+04:36:08.040  touche entree
+04:36:08.114  clic =selecteur-c1
+04:36:08.556  trace 36,39 42,39
+04:36:09.231  regarde
+04:36:10.165  trace 35,40 43,40
+04:36:10.644  regarde
+04:36:11.521  trace 36,41 42,41
+04:36:11.948  regarde
+04:36:12.830  clic =couleur-c1
+04:36:13.334  defile =hex
+04:36:13.338  clic =hex
+04:36:13.863  touche ctrl+a
+04:36:13.938  tape "#a7b0bd"
+04:36:14.058  touche entree
+04:36:14.134  clic =selecteur-c1
+04:36:14.588  trace 37,38 41,38
+04:36:15.209  regarde
+04:36:16.144  trace 36,39 37,39
+04:36:16.389  regarde
+04:36:17.308  clic =couleur-c1
+04:36:17.797  defile =hex
+04:36:17.800  clic =hex
+04:36:18.328  touche ctrl+a
+04:36:18.401  tape "#4a2a3a"
+04:36:18.535  touche entree
+04:36:18.612  clic =selecteur-c1
+04:36:19.058  trace 36,44 42,44
+04:36:19.744  regarde
+04:36:20.720  clic =couleur-c1
+04:36:21.237  defile =hex
+04:36:21.241  clic =hex
+04:36:21.775  touche ctrl+a
+04:36:21.850  tape "#4b4f66"
+04:36:21.971  touche entree
+04:36:22.048  clic =selecteur-c1
+04:36:22.486  trace 60,44 63,44
+04:36:23.028  regarde
+04:36:23.905  trace 32,44 33,44
+04:36:24.225  regarde
+04:36:25.154  clic 59,43
+04:36:25.494  regarde
+04:36:26.421  clic 34,43
+04:36:26.748  regarde
+04:36:27.732  clic =couleur-c1
+04:36:28.229  defile =hex
+04:36:28.231  clic =hex
+04:36:28.761  touche ctrl+a
+04:36:28.838  tape "#727a8f"
+04:36:28.966  touche entree
+04:36:29.041  clic =selecteur-c1
+04:36:29.498  trace 60,42 63,42
+04:36:30.046  regarde
+04:36:30.960  trace 32,42 33,42
+04:36:31.294  regarde
+04:36:32.210  trace 59,43 63,43
+04:36:32.660  regarde
+04:36:33.567  trace 32,43 34,43
+04:36:33.944  regarde
+04:36:34.881  clic =couleur-c1
+04:36:35.362  defile =hex
+04:36:35.365  clic =hex
+04:36:35.892  touche ctrl+a
+04:36:35.969  tape "#a7b0bd"
+04:36:36.087  touche entree
+04:36:36.159  clic =selecteur-c1
+04:36:36.607  trace 61,41 63,41
+04:36:37.126  regarde
+04:36:38.005  clic 32,41
+04:36:38.360  regarde
+04:36:39.297  clic =couleur-c1
+04:36:39.781  defile =hex
+04:36:39.787  clic =hex
+04:36:40.310  touche ctrl+a
+04:36:40.384  tape "#4a2a3a"
+04:36:40.495  touche entree
+04:36:40.568  clic =selecteur-c1
+04:36:40.999  trace 60,45 63,45
+04:36:41.542  regarde
+04:36:42.426  trace 32,45 33,45
+04:36:42.760  regarde
+04:36:43.696  clic =couleur-c1
+04:36:44.179  defile =hex
+04:36:44.182  clic =hex
+04:36:44.713  touche ctrl+a
+04:36:44.786  tape "#4b4f66"
+04:36:44.913  touche entree
+04:36:44.986  clic =selecteur-c1
+04:36:45.419  trace 53,60 57,60
+04:36:45.993  regarde
+04:36:46.872  clic 52,59
+04:36:47.114  regarde
+04:36:47.981  clic 58,59
+04:36:48.227  regarde
+04:36:49.085  clic =couleur-c1
+04:36:49.579  defile =hex
+04:36:49.581  clic =hex
+04:36:50.120  touche ctrl+a
+04:36:50.193  tape "#727a8f"
+04:36:50.321  touche entree
+04:36:50.394  clic =selecteur-c1
+04:36:50.843  trace 53,58 57,58
+04:36:51.426  regarde
+04:36:52.418  trace 53,59 57,59
+04:36:52.760  regarde
+04:36:53.645  clic =couleur-c1
+04:36:54.130  defile =hex
+04:36:54.134  clic =hex
+04:36:54.658  touche ctrl+a
+04:36:54.733  tape "#a7b0bd"
+04:36:54.849  touche entree
+04:36:54.923  clic =selecteur-c1
+04:36:55.362  trace 54,57 56,57
+04:36:55.875  regarde
+04:36:56.775  clic =couleur-c1
+04:36:57.261  defile =hex
+04:36:57.267  clic =hex
+04:36:57.790  touche ctrl+a
+04:36:57.867  tape "#4a2a3a"
+04:36:57.982  touche entree
+04:36:58.059  clic =selecteur-c1
+04:36:58.501  trace 53,61 57,61
+04:36:59.078  regarde
+04:36:59.952  clic =couleur-c1
+04:37:00.431  defile =hex
+04:37:00.434  clic =hex
+04:37:00.960  touche ctrl+a
+04:37:01.035  tape "#727a8f"
+04:37:01.154  touche entree
+04:37:01.228  clic =selecteur-c1
+04:37:01.680  trace 49,37 50,37
+04:37:02.171  regarde
+04:37:03.050  trace 39,56 40,56
+04:37:03.342  regarde
+04:37:04.223  clic =couleur-c1
+04:37:04.696  defile =hex
+04:37:04.699  clic =hex
+04:37:05.225  touche ctrl+a
+04:37:05.301  tape "#4b4f66"
+04:37:05.417  touche entree
+04:37:05.491  clic =selecteur-c1
+04:37:05.938  trace 49,38 50,38
+04:37:06.426  regarde
+04:37:07.443  trace 39,57 40,57
+04:37:07.744  regarde
+04:37:08.656  trace 46,60 47,60
+04:37:08.894  regarde
+04:37:09.831  clic =couleur-c1
+04:37:10.316  defile =hex
+04:37:10.319  clic =hex
+04:37:10.842  touche ctrl+a
+04:37:10.921  tape "#a9765a"
+04:37:11.045  touche entree
+04:37:11.118  clic =selecteur-c1
+04:37:11.557  trace 46,42 48,42
+04:37:12.096  regarde
+04:37:12.970  trace 57,36 58,36
+04:37:13.229  regarde
+04:37:14.187  trace 36,61 37,61
+04:37:14.530  regarde
+04:37:15.430  trace 44,55 45,55
+04:37:15.694  regarde
+04:37:16.610  trace 61,56 62,56
+04:37:16.910  regarde
+04:37:17.887  clic =couleur-c1
+04:37:18.379  defile =hex
+04:37:18.386  clic =hex
+04:37:18.940  touche ctrl+a
+04:37:19.020  tape "#6e3d45"
+04:37:19.135  touche entree
+04:37:19.208  clic =selecteur-c1
+04:37:19.654  trace 50,45 52,45
+04:37:20.176  regarde
+04:37:21.114  trace 41,47 42,47
+04:37:21.398  regarde
+04:37:22.303  trace 60,61 61,61
+04:37:22.621  regarde
+04:37:23.525  trace 45,34 46,34
+04:37:23.856  regarde
+04:37:24.730  trace 34,35 35,35
+04:37:24.996  regarde
+04:37:25.943  va 48,48
+04:37:26.098  regarde
+04:37:38.296  clic =menu-fichier
+04:37:38.726  clic =fichier-exporter
+04:37:39.125  attends 500
+04:37:39.626  clic =export-png1
+04:37:40.026  # fichier enregistré : fichiers/tileset-foret.png
+04:37:40.093  attends 800
+04:37:40.895  clic @866 630
+04:37:41.323  attends 300
+04:38:16.290  clic =outil-rect
+04:38:16.908  clic =couleur-c1
+04:38:17.379  defile =hex
+04:38:17.384  clic =hex
+04:38:17.938  touche ctrl+a
+04:38:18.012  tape "#8e5a4a"
+04:38:18.133  touche entree
+04:38:18.208  clic =selecteur-c1
+04:38:18.662  trace 32,32 63,63
+04:38:20.232  regarde
+04:38:21.349  clic =outil-crayon
+04:38:21.895  clic =couleur-c1
+04:38:22.410  defile =hex
+04:38:22.413  clic =hex
+04:38:22.954  touche ctrl+a
+04:38:23.029  tape "#6e3d45"
+04:38:23.148  touche entree
+04:38:23.224  clic =selecteur-c1
+04:38:23.666  trace 38,48 44,48
+04:38:24.340  regarde
+04:38:25.283  trace 32,49 47,49
+04:38:26.056  regarde
+04:38:26.956  trace 58,49 63,49
+04:38:27.373  regarde
+04:38:28.307  trace 32,50 49,50
+04:38:29.205  regarde
+04:38:30.138  trace 56,50 63,50
+04:38:30.607  regarde
+04:38:31.545  trace 32,51 51,51
+04:38:32.496  regarde
+04:38:33.441  trace 54,51 63,51
+04:38:33.941  regarde
+04:38:34.872  trace 32,52 63,52
+04:38:36.241  regarde
+04:38:37.262  trace 32,53 41,53
+04:38:37.873  regarde
+04:38:38.813  trace 45,53 63,53
+04:38:39.661  regarde
+04:38:40.554  trace 32,54 38,54
+04:38:41.073  regarde
+04:38:42.096  trace 48,54 60,54
+04:38:42.740  regarde
+04:38:43.687  trace 34,55 36,55
+04:38:44.072  regarde
+04:38:45.034  trace 51,55 57,55
+04:38:45.524  regarde
+04:38:46.503  clic =couleur-c1
+04:38:46.991  defile =hex
+04:38:46.993  clic =hex
+04:38:47.522  touche ctrl+a
+04:38:47.596  tape "#4a2a3a"
+04:38:47.724  touche entree
+04:38:47.798  clic =selecteur-c1
+04:38:48.236  trace 35,52 39,52
+04:38:48.838  regarde
+04:38:49.821  trace 52,52 56,52
+04:38:50.221  regarde
+04:38:51.187  trace 34,53 38,53
+04:38:51.606  regarde
+04:38:52.662  trace 50,53 58,53
+04:38:53.172  regarde
+04:38:54.119  trace 35,54 37,54
+04:38:54.473  regarde
+04:38:55.514  trace 52,54 56,54
+04:38:55.912  regarde
+04:38:56.848  clic =couleur-c1
+04:38:57.326  defile =hex
+04:38:57.329  clic =hex
+04:38:57.858  touche ctrl+a
+04:38:57.935  tape "#4b4f66"
+04:38:58.060  touche entree
+04:38:58.135  clic =selecteur-c1
+04:38:58.574  trace 38,44 45,44
+04:38:59.287  regarde
+04:39:00.309  trace 37,43 46,43
+04:39:00.904  regarde
+04:39:01.890  trace 36,42 47,42
+04:39:02.504  regarde
+04:39:03.449  clic 36,41
+04:39:03.741  regarde
+04:39:04.824  clic 47,41
+04:39:05.090  regarde
+04:39:06.160  clic 36,40
+04:39:06.446  regarde
+04:39:07.512  clic 47,40
+04:39:07.806  regarde
+04:39:08.805  clic =couleur-c1
+04:39:09.306  defile =hex
+04:39:09.310  clic =hex
+04:39:09.840  touche ctrl+a
+04:39:09.913  tape "#727a8f"
+04:39:10.039  touche entree
+04:39:10.113  clic =selecteur-c1
+04:39:10.541  trace 38,38 45,38
+04:39:11.243  regarde
+04:39:12.262  trace 37,39 46,39
+04:39:12.805  regarde
+04:39:13.796  trace 37,40 46,40
+04:39:14.338  regarde
+04:39:15.232  trace 37,41 46,41
+04:39:15.771  regarde
+04:39:16.695  trace 38,42 45,42
+04:39:17.172  regarde
+04:39:18.142  clic =couleur-c1
+04:39:18.642  defile =hex
+04:39:18.648  clic =hex
+04:39:19.171  touche ctrl+a
+04:39:19.251  tape "#a7b0bd"
+04:39:19.373  touche entree
+04:39:19.446  clic =selecteur-c1
+04:39:19.888  trace 39,37 44,37
+04:39:20.546  regarde
+04:39:21.568  clic 38,38
+04:39:21.822  regarde
+04:39:22.847  trace 39,38 42,38
+04:39:23.104  regarde
+04:39:24.031  clic =couleur-c1
+04:39:24.507  defile =hex
+04:39:24.510  clic =hex
+04:39:25.036  touche ctrl+a
+04:39:25.110  tape "#4a2a3a"
+04:39:25.228  touche entree
+04:39:25.304  clic =selecteur-c1
+04:39:25.747  trace 38,45 45,45
+04:39:26.442  regarde
+04:39:27.525  clic =couleur-c1
+04:39:28.007  defile =hex
+04:39:28.010  clic =hex
+04:39:28.539  touche ctrl+a
+04:39:28.613  tape "#4b4f66"
+04:39:28.729  touche entree
+04:39:28.802  clic =selecteur-c1
+04:39:29.247  trace 49,44 52,44
+04:39:29.787  regarde
+04:39:30.711  trace 53,45 54,45
+04:39:30.908  regarde
+04:39:31.860  clic =couleur-c1
+04:39:32.355  defile =hex
+04:39:32.362  clic =hex
+04:39:32.886  touche ctrl+a
+04:39:32.961  tape "#727a8f"
+04:39:33.080  touche entree
+04:39:33.153  clic =selecteur-c1
+04:39:33.593  trace 50,42 51,42
+04:39:34.055  regarde
+04:39:34.981  trace 49,43 52,43
+04:39:35.268  regarde
+04:39:36.268  trace 53,44 54,44
+04:39:36.481  regarde
+04:39:37.491  clic =couleur-c1
+04:39:37.991  defile =hex
+04:39:37.995  clic =hex
+04:39:38.518  touche ctrl+a
+04:39:38.592  tape "#a7b0bd"
+04:39:38.704  touche entree
+04:39:38.781  clic =selecteur-c1
+04:39:39.208  clic 50,42
+04:39:39.694  regarde
+04:39:40.762  clic =couleur-c1
+04:39:41.243  defile =hex
+04:39:41.247  clic =hex
+04:39:41.787  touche ctrl+a
+04:39:41.865  tape "#4b4f66"
+04:39:42.007  touche entree
+04:39:42.088  clic =selecteur-c1
+04:39:42.527  trace 60,62 63,62
+04:39:43.073  regarde
+04:39:43.954  trace 32,62 33,62
+04:39:44.269  regarde
+04:39:45.241  trace 59,61 63,61
+04:39:45.671  regarde
+04:39:46.695  trace 32,61 34,61
+04:39:47.088  regarde
+04:39:48.068  clic =couleur-c1
+04:39:48.542  defile =hex
+04:39:48.549  clic =hex
+04:39:49.085  touche ctrl+a
+04:39:49.162  tape "#727a8f"
+04:39:49.283  touche entree
+04:39:49.359  clic =selecteur-c1
+04:39:49.794  trace 60,59 63,59
+04:39:50.339  regarde
+04:39:51.303  trace 32,59 33,59
+04:39:51.635  regarde
+04:39:52.568  trace 59,60 63,60
+04:39:53.021  regarde
+04:39:53.956  trace 32,60 34,60
+04:39:54.318  regarde
+04:39:55.277  clic =couleur-c1
+04:39:55.756  defile =hex
+04:39:55.759  clic =hex
+04:39:56.288  touche ctrl+a
+04:39:56.361  tape "#a7b0bd"
+04:39:56.476  touche entree
+04:39:56.549  clic =selecteur-c1
+04:39:56.997  trace 61,58 63,58
+04:39:57.520  regarde
+04:39:58.568  clic 32,58
+04:39:58.901  regarde
+04:39:59.927  clic =couleur-c1
+04:40:00.396  defile =hex
+04:40:00.401  clic =hex
+04:40:00.935  touche ctrl+a
+04:40:01.013  tape "#4a2a3a"
+04:40:01.129  touche entree
+04:40:01.202  clic =selecteur-c1
+04:40:01.651  trace 60,63 63,63
+04:40:02.207  regarde
+04:40:03.151  trace 32,63 33,63
+04:40:03.468  regarde
+04:40:04.400  clic =couleur-c1
+04:40:04.871  defile =hex
+04:40:04.874  clic =hex
+04:40:05.400  touche ctrl+a
+04:40:05.473  tape "#a9765a"
+04:40:05.592  touche entree
+04:40:05.668  clic =selecteur-c1
+04:40:06.114  trace 54,36 59,36
+04:40:06.755  regarde
+04:40:07.704  trace 36,59 39,59
+04:40:08.118  regarde
+04:40:09.056  trace 45,58 48,58
+04:40:09.370  regarde
+04:40:10.351  trace 58,45 60,45
+04:40:10.685  regarde
+04:40:11.653  clic =couleur-c1
+04:40:12.141  defile =hex
+04:40:12.145  clic =hex
+04:40:12.672  touche ctrl+a
+04:40:12.745  tape "#6e3d45"
+04:40:12.854  touche entree
+04:40:12.927  clic =selecteur-c1
+04:40:13.352  trace 53,39 60,39
+04:40:14.039  regarde
+04:40:14.974  trace 35,62 40,62
+04:40:15.452  regarde
+04:40:16.501  trace 44,60 49,60
+04:40:16.884  regarde
+04:40:17.815  trace 57,47 61,47
+04:40:18.218  regarde
+04:40:19.191  clic =menu-fichier
+04:40:19.622  clic =fichier-exporter
+04:40:20.021  attends 500
+04:40:20.524  clic =export-png1
+04:40:20.891  # fichier enregistré : fichiers/tileset-foret.png
+04:40:20.972  attends 800
+04:40:21.774  clic @866 630
+04:40:22.202  attends 300
+04:40:31.519  va 48,48
+04:40:31.849  regarde
+04:40:47.503  clic =onglet-methode
+04:40:48.062  attends 300
+04:40:48.435  defile =coche-centre.strates
+04:40:48.510  cibles coche-centre.strates
+04:40:48.610  va @1094 450
+04:40:48.899  molette -2
+04:40:49.018  attends 250
+04:40:49.329  cibles coche-centre.strates
+04:40:49.421  clic =coche-centre.strates
+04:40:49.845  attends 200
+04:40:50.108  defile =coche-centre.centre
+04:40:50.177  cibles coche-centre.centre
+04:40:50.259  clic =coche-centre.centre
+04:40:50.592  attends 200
+04:40:50.864  defile =coche-centre.raccords
+04:40:50.949  cibles coche-centre.raccords
+04:40:51.026  clic =coche-centre.raccords
+04:40:51.342  attends 200
+04:40:51.611  defile =etape-valide
+04:40:51.684  cibles etape-valide
+04:40:51.759  clic =etape-valide
+04:40:52.142  attends 400
+04:40:52.545  va @200 300
+04:40:52.916  regarde
+04:41:30.096  clic =outil-selrect
+04:41:30.572  glisse 32,32 63,63
+04:41:31.439  attends 200
+04:41:31.716  clic =outil-deplace
+04:41:32.236  tiens alt
+04:41:32.245  glisse 48,48 16,16
+04:41:32.586    ✗ Refusé : un trait vient d'être relâché sur la toile. Fais « souris regarde » avant de dessiner à nouveau (SPEC 3.4).
+04:41:43.060  clic =outil-selrect
+04:41:43.575  attends 200
+04:41:43.782  glisse 32,32 63,63
+04:41:44.088    ✗ Refusé : un trait vient d'être relâché sur la toile. Fais « souris regarde » avant de dessiner à nouveau (SPEC 3.4).
+04:41:47.906  regarde
+04:41:49.010  clic =outil-selrect
+04:41:49.514  attends 200
+04:41:49.717  glisse 32,32 63,63
+04:41:50.541  regarde
+04:41:51.541  clic =outil-deplace
+04:41:52.058  attends 200
+04:41:52.259  tiens alt
+04:41:52.262  glisse 48,48 16,16
+04:41:53.081  lache alt
+04:41:53.091  regarde
+04:42:02.971  touche ctrl+z
+04:42:03.210  attends 300
+04:42:03.512  clic =outil-selrect
+04:42:04.044  attends 200
+04:42:04.245  glisse 32,32 63,63
+04:42:05.052  regarde
+04:42:10.448  clic =outil-deplace
+04:42:10.970  attends 200
+04:42:11.176  tiens alt
+04:42:11.179  glisse 48,48 16,16
+04:42:11.993  lache alt
+04:42:12.002  regarde
+04:42:21.135  tiens alt
+04:42:21.141  glisse 16,16 48,16
+04:42:21.598  lache alt
+04:42:21.600  regarde
+04:42:22.628  tiens alt
+04:42:22.631  glisse 48,16 80,16
+04:42:23.142  lache alt
+04:42:23.144  regarde
+04:42:24.079  tiens alt
+04:42:24.083  glisse 80,16 80,48
+04:42:24.560  lache alt
+04:42:24.572  regarde
+04:42:25.524  tiens alt
+04:42:25.532  glisse 80,48 80,80
+04:42:25.997  lache alt
+04:42:25.999  regarde
+04:42:26.964  tiens alt
+04:42:26.968  glisse 80,80 48,80
+04:42:27.442  lache alt
+04:42:27.444  regarde
+04:42:28.395  tiens alt
+04:42:28.399  glisse 48,80 16,80
+04:42:28.841  lache alt
+04:42:28.843  regarde
+04:42:29.907  tiens alt
+04:42:29.909  glisse 16,80 16,48
+04:42:30.409  lache alt
+04:42:30.418  regarde
+04:42:31.415  tiens alt
+04:42:31.424  glisse 16,48 112,48
+04:42:32.043  lache alt
+04:42:32.051  regarde
+04:42:32.956  tiens alt
+04:42:32.960  glisse 112,48 112,16
+04:42:33.482  lache alt
+04:42:33.490  regarde
+04:42:34.447  tiens alt
+04:42:34.452  glisse 112,16 144,16
+04:42:34.903  lache alt
+04:42:34.909  regarde
+04:42:35.910  tiens alt
+04:42:35.916  glisse 144,16 144,48
+04:42:36.391  lache alt
+04:42:36.400  regarde
+04:42:37.334  touche ctrl+d
+04:42:42.298  touche ctrl+d
+04:42:42.505  clic =outil-crayon
+04:42:43.070  attends 200
+04:42:43.276  clic =opt-symX
+04:42:43.811  attends 200
+04:42:44.086  cibles opt-
+04:43:38.318  cibles opt-axe
+04:43:43.674  clic =opt-axeX2
+04:43:44.082  touche ctrl+a
+04:43:44.168  tape "48"
+04:43:44.203  touche tab
+04:43:44.334  clic =outil-gomme
+04:43:44.969  trace 0,0 47,0
+04:43:47.041  regarde
+04:43:48.082  trace 0,1 47,1
+04:43:50.036  regarde
+04:43:51.104  trace 0,2 47,2
+04:43:53.135  regarde
+04:43:54.147  trace 0,3 47,3
+04:43:56.050  regarde
+04:43:56.994  trace 0,16 0,95
+04:43:59.978  regarde
+04:44:00.948  trace 1,16 1,95
+04:44:04.016  regarde
+04:44:04.956  trace 0,92 47,92
+04:44:06.750  regarde
+04:44:07.710  trace 0,93 47,93
+04:44:09.667  regarde
+04:44:10.679  trace 0,94 47,94
+04:44:12.602  regarde
+04:44:13.635  trace 0,95 47,95
+04:44:15.618  regarde
+04:44:16.721  clic =outil-crayon
+04:44:17.254  clic =couleur-c1
+04:44:17.762  defile =hex
+04:44:17.765  clic =hex
+04:44:18.307  touche ctrl+a
+04:44:18.383  tape "#e0ef7a"
+04:44:18.513  touche entree
+04:44:18.586  clic =selecteur-c1
+04:44:19.058  trace 3,4 47,4
+04:44:21.051  regarde
+04:44:22.071  clic =couleur-c1
+04:44:22.596  defile =hex
+04:44:22.603  clic =hex
+04:44:23.143  touche ctrl+a
+04:44:23.224  tape "#a9d455"
+04:44:23.343  touche entree
+04:44:23.417  clic =selecteur-c1
+04:44:23.847  trace 2,5 47,5
+04:44:25.872  regarde
+04:44:26.836  trace 1,6 47,6
+04:44:28.699  regarde
+04:44:29.643  clic =couleur-c1
+04:44:30.143  defile =hex
+04:44:30.151  clic =hex
+04:44:30.696  touche ctrl+a
+04:44:30.769  tape "#6fae45"
+04:44:30.886  touche entree
+04:44:30.959  clic =selecteur-c1
+04:44:31.402  trace 1,7 47,7
+04:44:33.436  regarde
+04:44:34.339  trace 1,8 47,8
+04:44:36.213  regarde
+04:44:37.332  trace 1,9 47,9
+04:44:39.201  regarde
+04:44:40.103  trace 1,10 47,10
+04:44:41.986  regarde
+04:44:42.996  trace 0,8 0,13
+04:44:43.491  regarde
+04:44:44.455  clic =couleur-c1
+04:44:44.950  defile =hex
+04:44:44.953  clic =hex
+04:44:45.472  touche ctrl+a
+04:44:45.546  tape "#3f7a3c"
+04:44:45.662  touche entree
+04:44:45.736  clic =selecteur-c1
+04:44:46.181  trace 1,11 47,11
+04:44:48.232  regarde
+04:44:49.266  trace 1,12 47,12
+04:44:51.155  regarde
+04:44:52.152  trace 0,14 0,15
+04:44:52.523  regarde
+04:44:53.527  trace 1,13 1,15
+04:44:53.793  regarde
+04:44:54.830  trace 2,13 2,14
+04:44:55.048  regarde
+04:44:56.157  trace 3,13 3,15
+04:44:56.426  regarde
+04:44:57.462  trace 4,13 4,14
+04:44:57.668  regarde
+04:44:58.661  clic 9,13
+04:44:58.921  regarde
+04:44:59.895  trace 13,13 13,15
+04:45:00.160  regarde
+04:45:01.091  trace 14,13 14,16
+04:45:01.391  regarde
+04:45:02.526  trace 15,13 15,15
+04:45:02.808  regarde
+04:45:03.824  clic 16,13
+04:45:04.045  regarde
+04:45:05.019  trace 22,13 22,14
+04:45:05.299  regarde
+04:45:06.280  trace 23,13 23,14
+04:45:06.482  regarde
+04:45:07.529  clic 27,13
+04:45:07.782  regarde
+04:45:08.862  trace 28,13 28,15
+04:45:09.133  regarde
+04:45:10.103  trace 29,13 29,14
+04:45:10.317  regarde
+04:45:11.336  trace 34,13 34,14
+04:45:11.566  regarde
+04:45:12.563  trace 35,13 35,15
+04:45:12.825  regarde
+04:45:13.766  trace 36,13 36,14
+04:45:13.982  regarde
+04:45:14.988  clic 41,13
+04:45:15.232  regarde
+04:45:16.270  trace 45,13 45,15
+04:45:16.558  regarde
+04:45:17.491  trace 46,13 46,16
+04:45:17.805  regarde
+04:45:18.816  trace 47,13 47,15
+04:45:19.079  regarde
+04:45:20.104  clic =couleur-c1
+04:45:20.592  defile =hex
+04:45:20.597  clic =hex
+04:45:21.155  touche ctrl+a
+04:45:21.262  tape "#2e1c2c"
+04:45:21.378  touche entree
+04:45:21.451  clic =selecteur-c1
+04:45:21.900  clic 2,15
+04:45:22.405  regarde
+04:45:23.447  clic 3,16
+04:45:23.653  regarde
+04:45:24.609  clic 4,15
+04:45:24.812  regarde
+04:45:25.732  clic 5,13
+04:45:25.946  regarde
+04:45:26.892  clic 6,13
+04:45:27.089  regarde
+04:45:28.041  clic 7,13
+04:45:28.245  regarde
+04:45:29.158  clic 8,13
+04:45:29.391  regarde
+04:45:30.415  clic 9,14
+04:45:30.620  regarde
+04:45:31.564  clic 10,13
+04:45:31.761  regarde
+04:45:32.735  clic 11,13
+04:45:32.950  regarde
+04:45:33.912  clic 12,13
+04:45:34.109  regarde
+04:45:35.086  clic 13,16
+04:45:35.319  regarde
+04:45:36.264  clic 14,17
+04:45:36.467  regarde
+04:45:37.440  clic 15,16
+04:45:37.643  regarde
+04:45:38.583  clic 16,14
+04:45:38.826  regarde
+04:45:39.761  clic 17,13
+04:45:39.962  regarde
+04:45:40.904  clic 18,13
+04:45:41.110  regarde
+04:45:42.038  clic 19,13
+04:45:42.238  regarde
+04:45:43.246  clic 20,13
+04:45:43.444  regarde
+04:45:44.401  clic 21,13
+04:45:44.615  regarde
+04:45:45.607  clic 22,15
+04:45:45.835  regarde
+04:45:46.801  clic 23,15
+04:45:47.009  regarde
+04:45:47.940  clic 24,13
+04:45:48.174  regarde
+04:45:49.234  clic 25,13
+04:45:49.446  regarde
+04:45:50.405  clic 26,13
+04:45:50.609  regarde
+04:45:51.620  clic 27,14
+04:45:51.827  regarde
+04:45:52.866  clic 28,16
+04:45:53.103  regarde
+04:45:54.090  clic 29,15
+04:45:54.304  regarde
+04:45:55.208  clic 30,13
+04:45:55.434  regarde
+04:45:56.434  clic 31,13
+04:45:56.642  regarde
+04:45:57.700  clic 32,13
+04:45:57.908  regarde
+04:45:58.903  clic 33,13
+04:45:59.119  regarde
+04:46:00.052  clic 34,15
+04:46:00.270  regarde
+04:46:01.231  clic 35,16
+04:46:01.424  regarde
+04:46:02.365  clic 36,15
+04:46:02.567  regarde
+04:46:03.599  clic 37,13
+04:46:03.824  regarde
+04:46:04.740  clic 38,13
+04:46:04.946  regarde
+04:46:05.944  clic 39,13
+04:46:06.156  regarde
+04:46:07.085  clic 40,13
+04:46:07.298  regarde
+04:46:08.346  clic 41,14
+04:46:08.543  regarde
+04:46:09.545  clic 42,13
+04:46:09.751  regarde
+04:46:10.744  clic 43,13
+04:46:10.941  regarde
+04:46:11.925  clic 44,13
+04:46:12.134  regarde
+04:46:13.168  clic 45,16
+04:46:13.402  regarde
+04:46:14.404  clic 46,17
+04:46:14.604  regarde
+04:46:15.611  clic 47,16
+04:46:15.818  regarde
+04:46:16.791  clic =couleur-c1
+04:46:17.280  defile =hex
+04:46:17.284  clic =hex
+04:46:17.835  touche ctrl+a
+04:46:17.910  tape "#4a2a3a"
+04:46:18.042  touche entree
+04:46:18.115  clic =selecteur-c1
+04:46:18.599  clic 2,16
+04:46:19.120  regarde
+04:46:20.163  clic 3,17
+04:46:20.367  regarde
+04:46:21.341  clic 4,16
+04:46:21.540  regarde
+04:46:22.588  clic 5,14
+04:46:22.808  regarde
+04:46:23.702  clic 6,14
+04:46:23.906  regarde
+04:46:24.835  clic 7,14
+04:46:25.037  regarde
+04:46:26.000  clic 8,14
+04:46:26.233  regarde
+04:46:27.213  clic 9,15
+04:46:27.419  regarde
+04:46:28.379  clic 10,14
+04:46:28.586  regarde
+04:46:29.601  clic 11,14
+04:46:29.814  regarde
+04:46:30.784  clic 12,14
+04:46:30.992  regarde
+04:46:31.874  clic 13,17
+04:46:32.089  regarde
+04:46:33.190  clic 14,18
+04:46:33.391  regarde
+04:46:34.481  clic 15,17
+04:46:34.691  regarde
+04:46:35.655  clic 16,15
+04:46:35.880  regarde
+04:46:36.920  clic 17,14
+04:46:37.124  regarde
+04:46:38.037  clic 18,14
+04:46:38.239  regarde
+04:46:39.141  clic 19,14
+04:46:39.340  regarde
+04:46:40.285  clic 20,14
+04:46:40.514  regarde
+04:46:41.561  clic 21,14
+04:46:41.775  regarde
+04:46:42.838  clic 22,16
+04:46:43.063  regarde
+04:46:44.118  clic 23,16
+04:46:44.322  regarde
+04:46:45.209  clic 24,14
+04:46:45.426  regarde
+04:46:46.358  clic 25,14
+04:46:46.565  regarde
+04:46:47.503  clic 26,14
+04:46:47.706  regarde
+04:46:48.711  clic 27,15
+04:46:48.926  regarde
+04:46:49.901  clic 28,17
+04:46:50.126  regarde
+04:46:51.212  clic 29,16
+04:46:51.441  regarde
+04:46:52.509  clic 30,14
+04:46:52.731  regarde
+04:46:53.791  clic 31,14
+04:46:53.998  regarde
+04:46:55.052  clic 32,14
+04:46:55.266  regarde
+04:46:56.254  clic 33,14
+04:46:56.459  regarde
+04:46:57.524  clic 34,16
+04:46:57.750  regarde
+04:46:58.790  clic 35,17
+04:46:59.006  regarde
+04:47:00.069  clic 36,16
+04:47:00.294  regarde
+04:47:01.451  clic 37,14
+04:47:01.678  regarde
+04:47:02.816  clic 38,14
+04:47:03.022  regarde
+04:47:04.053  clic 39,14
+04:47:04.257  regarde
+04:47:05.299  clic 40,14
+04:47:05.506  regarde
+04:47:06.480  clic 41,15
+04:47:06.694  regarde
+04:47:07.694  clic 42,14
+04:47:07.906  regarde
+04:47:08.968  clic 43,14
+04:47:09.179  regarde
+04:47:10.141  clic 44,14
+04:47:10.350  regarde
+04:47:11.350  clic 45,17
+04:47:11.580  regarde
+04:47:12.629  clic 46,18
+04:47:12.847  regarde
+04:47:13.772  clic 47,17
+04:47:13.975  regarde
+04:47:14.932  clic =couleur-c1
+04:47:15.419  defile =hex
+04:47:15.423  clic =hex
+04:47:15.969  touche ctrl+a
+04:47:16.043  tape "#3f7a3c"
+04:47:16.171  touche entree
+04:47:16.247  clic =selecteur-c1
+04:47:16.719  trace 3,8 3,10
+04:47:17.269  regarde
+04:47:18.204  trace 11,8 11,10
+04:47:18.576  regarde
+04:47:19.562  trace 20,8 20,10
+04:47:19.873  regarde
+04:47:20.836  trace 29,8 29,10
+04:47:21.136  regarde
+04:47:22.040  trace 35,8 35,10
+04:47:22.355  regarde
+04:47:23.341  trace 43,8 43,10
+04:47:23.636  regarde
+04:47:24.630  clic =couleur-c1
+04:47:25.123  defile =hex
+04:47:25.126  clic =hex
+04:47:25.653  touche ctrl+a
+04:47:25.729  tape "#a9d455"
+04:47:25.853  touche entree
+04:47:25.928  clic =selecteur-c1
+04:47:26.368  clic 8,7
+04:47:26.901  regarde
+04:47:27.860  clic 15,7
+04:47:28.126  regarde
+04:47:29.080  clic 27,7
+04:47:29.366  regarde
+04:47:30.442  clic 40,7
+04:47:30.737  regarde
+04:47:31.679  clic 47,7
+04:47:31.945  regarde
+04:47:32.946  clic =couleur-c1
+04:47:33.456  defile =hex
+04:47:33.460  clic =hex
+04:47:33.982  touche ctrl+a
+04:47:34.056  tape "#e0ef7a"
+04:47:34.173  touche entree
+04:47:34.245  clic =selecteur-c1
+04:47:34.679  clic 5,3
+04:47:35.203  regarde
+04:47:36.252  clic =couleur-c1
+04:47:36.742  defile =hex
+04:47:36.747  clic =hex
+04:47:37.286  touche ctrl+a
+04:47:37.361  tape "#a9d455"
+04:47:37.479  touche entree
+04:47:37.552  clic =selecteur-c1
+04:47:37.987  clic 6,3
+04:47:38.518  regarde
+04:47:39.524  clic =couleur-c1
+04:47:40.008  defile =hex
+04:47:40.011  clic =hex
+04:47:40.532  touche ctrl+a
+04:47:40.611  tape "#e0ef7a"
+04:47:40.739  touche entree
+04:47:40.812  clic =selecteur-c1
+04:47:41.259  clic 6,2
+04:47:41.807  regarde
+04:47:42.925  clic =couleur-c1
+04:47:43.409  defile =hex
+04:47:43.413  clic =hex
+04:47:43.949  touche ctrl+a
+04:47:44.026  tape "#a9d455"
+04:47:44.143  touche entree
+04:47:44.216  clic =selecteur-c1
+04:47:44.655  clic =couleur-c1
+04:47:45.169  defile =hex
+04:47:45.175  clic =hex
+04:47:45.737  touche ctrl+a
+04:47:45.811  tape "#e0ef7a"
+04:47:45.934  touche entree
+04:47:46.008  clic =selecteur-c1
+04:47:46.446  clic 7,3
+04:47:46.969  regarde
+04:47:47.993  clic =couleur-c1
+04:47:48.491  defile =hex
+04:47:48.496  clic =hex
+04:47:49.034  touche ctrl+a
+04:47:49.108  tape "#a9d455"
+04:47:49.228  touche entree
+04:47:49.301  clic =selecteur-c1
+04:47:49.758  clic =couleur-c1
+04:47:50.270  defile =hex
+04:47:50.272  clic =hex
+04:47:50.800  touche ctrl+a
+04:47:50.875  tape "#e0ef7a"
+04:47:50.989  touche entree
+04:47:51.066  clic =selecteur-c1
+04:47:51.506  clic 18,3
+04:47:52.016  regarde
+04:47:53.069  clic =couleur-c1
+04:47:53.608  defile =hex
+04:47:53.611  clic =hex
+04:47:54.149  touche ctrl+a
+04:47:54.223  tape "#a9d455"
+04:47:54.350  touche entree
+04:47:54.424  clic =selecteur-c1
+04:47:54.861  clic =couleur-c1
+04:47:55.387  defile =hex
+04:47:55.393  clic =hex
+04:47:55.931  touche ctrl+a
+04:47:56.007  tape "#e0ef7a"
+04:47:56.119  touche entree
+04:47:56.192  clic =selecteur-c1
+04:47:56.646  clic 19,3
+04:47:57.150  regarde
+04:47:58.147  clic =couleur-c1
+04:47:58.642  defile =hex
+04:47:58.645  clic =hex
+04:47:59.168  touche ctrl+a
+04:47:59.244  tape "#a9d455"
+04:47:59.369  touche entree
+04:47:59.445  clic =selecteur-c1
+04:47:59.891  clic 24,3
+04:48:00.381  regarde
+04:48:01.320  clic =couleur-c1
+04:48:01.804  defile =hex
+04:48:01.808  clic =hex
+04:48:02.335  touche ctrl+a
+04:48:02.412  tape "#e0ef7a"
+04:48:02.527  touche entree
+04:48:02.599  clic =selecteur-c1
+04:48:03.046  clic 24,2
+04:48:03.548  regarde
+04:48:04.522  clic =couleur-c1
+04:48:05.007  defile =hex
+04:48:05.010  clic =hex
+04:48:05.531  touche ctrl+a
+04:48:05.607  tape "#a9d455"
+04:48:05.722  touche entree
+04:48:05.795  clic =selecteur-c1
+04:48:06.241  trace 25,2 25,3
+04:48:06.737  regarde
+04:48:07.704  clic =couleur-c1
+04:48:08.188  defile =hex
+04:48:08.191  clic =hex
+04:48:08.718  touche ctrl+a
+04:48:08.792  tape "#e0ef7a"
+04:48:08.906  touche entree
+04:48:08.979  clic =selecteur-c1
+04:48:09.448  clic 25,1
+04:48:09.950  regarde
+04:48:10.929  clic =couleur-c1
+04:48:11.426  defile =hex
+04:48:11.428  clic =hex
+04:48:11.967  touche ctrl+a
+04:48:12.043  tape "#a9d455"
+04:48:12.171  touche entree
+04:48:12.245  clic =selecteur-c1
+04:48:12.702  clic =couleur-c1
+04:48:13.253  defile =hex
+04:48:13.258  clic =hex
+04:48:13.799  touche ctrl+a
+04:48:13.882  tape "#e0ef7a"
+04:48:14.019  touche entree
+04:48:14.107  clic =selecteur-c1
+04:48:14.562  clic 26,3
+04:48:15.064  regarde
+04:48:16.077  clic =couleur-c1
+04:48:16.569  defile =hex
+04:48:16.576  clic =hex
+04:48:17.102  touche ctrl+a
+04:48:17.176  tape "#a9d455"
+04:48:17.305  touche entree
+04:48:17.382  clic =selecteur-c1
+04:48:17.838  clic =couleur-c1
+04:48:18.351  defile =hex
+04:48:18.354  clic =hex
+04:48:18.913  touche ctrl+a
+04:48:18.989  tape "#e0ef7a"
+04:48:19.107  touche entree
+04:48:19.180  clic =selecteur-c1
+04:48:19.645  clic 37,3
+04:48:20.156  regarde
+04:48:21.231  clic =couleur-c1
+04:48:21.719  defile =hex
+04:48:21.722  clic =hex
+04:48:22.247  touche ctrl+a
+04:48:22.322  tape "#a9d455"
+04:48:22.437  touche entree
+04:48:22.510  clic =selecteur-c1
+04:48:22.937  clic 38,3
+04:48:23.433  regarde
+04:48:24.400  clic =couleur-c1
+04:48:24.902  defile =hex
+04:48:24.905  clic =hex
+04:48:25.435  touche ctrl+a
+04:48:25.511  tape "#e0ef7a"
+04:48:25.640  touche entree
+04:48:25.714  clic =selecteur-c1
+04:48:26.163  clic 38,2
+04:48:26.671  regarde
+04:48:27.693  clic =couleur-c1
+04:48:28.203  defile =hex
+04:48:28.208  clic =hex
+04:48:28.747  touche ctrl+a
+04:48:28.825  tape "#a9d455"
+04:48:28.938  touche entree
+04:48:29.014  clic =selecteur-c1
+04:48:29.456  clic =couleur-c1
+04:48:29.971  defile =hex
+04:48:29.977  clic =hex
+04:48:30.530  touche ctrl+a
+04:48:30.604  tape "#e0ef7a"
+04:48:30.716  touche entree
+04:48:30.795  clic =selecteur-c1
+04:48:31.258  clic 39,3
+04:48:31.746  regarde
+04:48:32.714  clic 2,5
+04:48:33.080  regarde
+04:48:34.032  clic 1,6
+04:48:34.243  regarde
+04:48:35.225  clic =couleur-c1
+04:48:35.723  defile =hex
+04:48:35.727  clic =hex
+04:48:36.250  touche ctrl+a
+04:48:36.329  tape "#2e1c2c"
+04:48:36.452  touche entree
+04:48:36.524  clic =selecteur-c1
+04:48:36.969  trace 2,17 2,88
+04:48:39.838  regarde
+04:48:40.769  clic =couleur-c1
+04:48:41.225  defile =hex
+04:48:41.228  clic =hex
+04:48:41.766  touche ctrl+a
+04:48:41.840  tape "#4a2a3a"
+04:48:41.965  touche entree
+04:48:42.039  clic =selecteur-c1
+04:48:42.519  trace 3,16 3,88
+04:48:45.422  regarde
+04:48:46.441  clic =couleur-c1
+04:48:46.890  defile =hex
+04:48:46.894  clic =hex
+04:48:47.429  touche ctrl+a
+04:48:47.504  tape "#6e3d45"
+04:48:47.628  touche entree
+04:48:47.705  clic =selecteur-c1
+04:48:48.167  trace 4,17 4,87
+04:48:51.027  regarde
+04:48:52.021  clic =couleur-c1
+04:48:52.468  defile =hex
+04:48:52.470  clic =hex
+04:48:53.002  touche ctrl+a
+04:48:53.077  tape "#2e1c2c"
+04:48:53.199  touche entree
+04:48:53.274  clic =selecteur-c1
+04:48:53.735  trace 3,30 6,30
+04:48:54.332  regarde
+04:48:55.298  clic =couleur-c1
+04:48:55.787  defile =hex
+04:48:55.792  clic =hex
+04:48:56.324  touche ctrl+a
+04:48:56.399  tape "#a9765a"
+04:48:56.515  touche entree
+04:48:56.592  clic =selecteur-c1
+04:48:57.042  trace 4,29 5,29
+04:48:57.548  regarde
+04:48:58.557  clic =couleur-c1
+04:48:59.032  defile =hex
+04:48:59.035  clic =hex
+04:48:59.563  touche ctrl+a
+04:48:59.640  tape "#2e1c2c"
+04:48:59.765  touche entree
+04:48:59.838  clic =selecteur-c1
+04:49:00.274  trace 3,52 6,52
+04:49:00.852  regarde
+04:49:01.853  clic =couleur-c1
+04:49:02.339  defile =hex
+04:49:02.341  clic =hex
+04:49:02.864  touche ctrl+a
+04:49:02.939  tape "#a9765a"
+04:49:03.057  touche entree
+04:49:03.131  clic =selecteur-c1
+04:49:03.596  trace 4,51 5,51
+04:49:04.100  regarde
+04:49:05.073  clic =couleur-c1
+04:49:05.554  defile =hex
+04:49:05.557  clic =hex
+04:49:06.095  touche ctrl+a
+04:49:06.171  tape "#2e1c2c"
+04:49:06.287  touche entree
+04:49:06.366  clic =selecteur-c1
+04:49:06.814  trace 3,70 6,70
+04:49:07.399  regarde
+04:49:08.488  clic =couleur-c1
+04:49:08.950  defile =hex
+04:49:08.957  clic =hex
+04:49:09.482  touche ctrl+a
+04:49:09.559  tape "#a9765a"
+04:49:09.681  touche entree
+04:49:09.756  clic =selecteur-c1
+04:49:10.197  trace 4,69 5,69
+04:49:10.699  regarde
+04:49:11.758  clic =couleur-c1
+04:49:12.255  defile =hex
+04:49:12.259  clic =hex
+04:49:12.797  touche ctrl+a
+04:49:12.872  tape "#2e1c2c"
+04:49:13.000  touche entree
+04:49:13.076  clic =selecteur-c1
+04:49:13.546  clic 4,91
+04:49:14.048  regarde
+04:49:15.112  clic 5,91
+04:49:15.315  regarde
+04:49:16.323  clic 6,91
+04:49:16.522  regarde
+04:49:17.606  clic 7,91
+04:49:17.815  regarde
+04:49:18.959  clic 8,91
+04:49:19.219  regarde
+04:49:20.324  clic 9,91
+04:49:20.524  regarde
+04:49:21.547  clic 10,91
+04:49:21.758  regarde
+04:49:22.871  clic 11,91
+04:49:23.076  regarde
+04:49:24.086  clic 12,91
+04:49:24.294  regarde
+04:49:25.273  clic 13,91
+04:49:25.480  regarde
+04:49:26.434  clic 14,90
+04:49:26.670  regarde
+04:49:27.683  clic 15,90
+04:49:27.885  regarde
+04:49:28.846  clic 16,90
+04:49:29.044  regarde
+04:49:30.062  clic 17,90
+04:49:30.275  regarde
+04:49:31.300  clic 18,90
+04:49:31.494  regarde
+04:49:32.451  clic 19,91
+04:49:32.662  regarde
+04:49:33.597  clic 20,91
+04:49:33.800  regarde
+04:49:34.778  clic 21,91
+04:49:34.989  regarde
+04:49:35.982  clic 22,91
+04:49:36.197  regarde
+04:49:37.174  clic 23,91
+04:49:37.395  regarde
+04:49:38.527  clic 24,91
+04:49:38.741  regarde
+04:49:39.842  clic 25,91
+04:49:40.047  regarde
+04:49:41.094  clic 26,91
+04:49:41.302  regarde
+04:49:42.491  clic 27,91
+04:49:42.701  regarde
+04:49:43.689  clic 28,91
+04:49:43.898  regarde
+04:49:44.896  clic 29,91
+04:49:45.096  regarde
+04:49:46.144  clic 30,92
+04:49:46.400  regarde
+04:49:47.440  clic 31,92
+04:49:47.647  regarde
+04:49:48.601  clic 32,92
+04:49:48.807  regarde
+04:49:49.956  clic 33,92
+04:49:50.156  regarde
+04:49:51.238  clic 34,92
+04:49:51.438  regarde
+04:49:52.444  clic 35,91
+04:49:52.654  regarde
+04:49:53.654  clic 36,91
+04:49:53.850  regarde
+04:49:54.841  clic 37,91
+04:49:55.046  regarde
+04:49:55.985  clic 38,91
+04:49:56.212  regarde
+04:49:57.173  clic 39,91
+04:49:57.387  regarde
+04:49:58.378  clic 40,91
+04:49:58.579  regarde
+04:49:59.617  clic 41,91
+04:49:59.822  regarde
+04:50:00.783  clic 42,91
+04:50:01.000  regarde
+04:50:02.027  clic 43,91
+04:50:02.247  regarde
+04:50:03.205  clic 44,91
+04:50:03.410  regarde
+04:50:04.439  clic 45,91
+04:50:04.632  regarde
+04:50:05.684  clic 46,91
+04:50:05.896  regarde
+04:50:06.901  clic 47,91
+04:50:07.103  regarde
+04:50:08.069  clic =couleur-c1
+04:50:08.565  defile =hex
+04:50:08.569  clic =hex
+04:50:09.093  touche ctrl+a
+04:50:09.178  tape "#4a2a3a"
+04:50:09.300  touche entree
+04:50:09.375  clic =selecteur-c1
+04:50:09.817  clic 4,90
+04:50:10.309  regarde
+04:50:11.241  clic 5,90
+04:50:11.455  regarde
+04:50:12.440  clic 6,90
+04:50:12.648  regarde
+04:50:13.618  clic 7,90
+04:50:13.811  regarde
+04:50:14.783  clic 8,90
+04:50:14.982  regarde
+04:50:15.922  clic 9,90
+04:50:16.117  regarde
+04:50:17.109  clic 10,90
+04:50:17.311  regarde
+04:50:18.258  clic 11,90
+04:50:18.462  regarde
+04:50:19.407  clic 12,90
+04:50:19.622  regarde
+04:50:20.637  clic 13,90
+04:50:20.850  regarde
+04:50:21.798  clic 14,89
+04:50:22.026  regarde
+04:50:22.998  clic 15,89
+04:50:23.205  regarde
+04:50:24.194  clic 16,89
+04:50:24.401  regarde
+04:50:25.396  clic 17,89
+04:50:25.613  regarde
+04:50:26.641  clic 18,89
+04:50:26.844  regarde
+04:50:27.741  clic 19,90
+04:50:27.950  regarde
+04:50:28.943  clic 20,90
+04:50:29.150  regarde
+04:50:30.088  clic 21,90
+04:50:30.291  regarde
+04:50:31.295  clic 22,90
+04:50:31.502  regarde
+04:50:32.538  clic 23,90
+04:50:32.759  regarde
+04:50:33.735  clic 24,90
+04:50:33.937  regarde
+04:50:34.970  clic 25,90
+04:50:35.168  regarde
+04:50:36.193  clic 26,90
+04:50:36.406  regarde
+04:50:37.411  clic 27,90
+04:50:37.615  regarde
+04:50:38.801  clic 28,90
+04:50:39.010  regarde
+04:50:40.031  clic 29,90
+04:50:40.246  regarde
+04:50:41.333  clic 30,91
+04:50:41.530  regarde
+04:50:42.593  clic 31,91
+04:50:42.801  regarde
+04:50:43.778  clic 32,91
+04:50:44.026  regarde
+04:50:45.050  clic 33,91
+04:50:45.262  regarde
+04:50:46.322  clic 34,91
+04:50:46.550  regarde
+04:50:47.521  clic 35,90
+04:50:47.712  regarde
+04:50:48.764  clic 36,90
+04:50:48.978  regarde
+04:50:49.972  clic 37,90
+04:50:50.190  regarde
+04:50:51.139  clic 38,90
+04:50:51.347  regarde
+04:50:52.339  clic 39,90
+04:50:52.543  regarde
+04:50:53.563  clic 40,90
+04:50:53.781  regarde
+04:50:54.818  clic 41,90
+04:50:55.013  regarde
+04:50:56.043  clic 42,90
+04:50:56.258  regarde
+04:50:57.266  clic 43,90
+04:50:57.478  regarde
+04:50:58.516  clic 44,90
+04:50:58.712  regarde
+04:50:59.758  clic 45,90
+04:50:59.969  regarde
+04:51:00.917  clic 46,90
+04:51:01.123  regarde
+04:51:02.140  clic 47,90
+04:51:02.386  regarde
+04:51:03.495  clic =outil-gomme
+04:51:04.038  clic 14,91
+04:51:04.494  regarde
+04:51:05.533  clic 15,91
+04:51:05.761  regarde
+04:51:06.845  clic 16,91
+04:51:07.043  regarde
+04:51:08.054  clic 17,91
+04:51:08.257  regarde
+04:51:09.391  clic 18,91
+04:51:09.603  regarde
+04:51:10.579  clic 2,89
+04:51:10.874  regarde
+04:51:11.985  clic 3,90
+04:51:12.184  regarde
+04:51:13.253  clic 2,90
+04:51:13.462  regarde
+04:51:14.611  clic 3,91
+04:51:14.808  regarde
+04:51:15.901  clic 2,91
+04:51:16.117  regarde
+04:51:17.233  clic =outil-crayon
+04:51:17.733  clic =couleur-c1
+04:51:18.235  defile =hex
+04:51:18.239  clic =hex
+04:51:18.808  touche ctrl+a
+04:51:18.897  tape "#2e1c2c"
+04:51:19.015  touche entree
+04:51:19.093  clic =selecteur-c1
+04:51:19.536  clic 3,89
+04:51:20.048  regarde
+04:51:21.168  clic 4,90
+04:51:21.374  regarde
+04:51:22.445  clic =couleur-c1
+04:51:22.925  defile =hex
+04:51:22.932  clic =hex
+04:51:23.458  touche ctrl+a
+04:51:23.533  tape "#4a2a3a"
+04:51:23.650  touche entree
+04:51:23.727  clic =selecteur-c1
+04:51:24.166  trace 10,92 10,94
+04:51:24.730  regarde
+04:51:25.754  trace 27,92 27,93
+04:51:26.062  regarde
+04:51:27.085  trace 40,92 40,95
+04:51:27.490  regarde
+04:51:28.530  clic =couleur-c1
+04:51:29.001  defile =hex
+04:51:29.004  clic =hex
+04:51:29.540  touche ctrl+a
+04:51:29.615  tape "#2e1c2c"
+04:51:29.729  touche entree
+04:51:29.802  clic =selecteur-c1
+04:51:30.234  trace 8,84 8,89
+04:51:30.859  regarde
+04:51:31.869  clic =couleur-c1
+04:51:32.311  defile =hex
+04:51:32.313  clic =hex
+04:51:32.841  touche ctrl+a
+04:51:32.915  tape "#a9765a"
+04:51:33.031  touche entree
+04:51:33.104  clic =selecteur-c1
+04:51:33.547  trace 9,84 9,85
+04:51:34.029  regarde
+04:51:35.010  clic =couleur-c1
+04:51:35.460  defile =hex
+04:51:35.462  clic =hex
+04:51:35.988  touche ctrl+a
+04:51:36.064  tape "#2e1c2c"
+04:51:36.179  touche entree
+04:51:36.252  clic =selecteur-c1
+04:51:36.686  trace 22,86 22,89
+04:51:37.257  regarde
+04:51:38.221  clic =couleur-c1
+04:51:38.698  defile =hex
+04:51:38.702  clic =hex
+04:51:39.243  touche ctrl+a
+04:51:39.322  tape "#a9765a"
+04:51:39.453  touche entree
+04:51:39.531  clic =selecteur-c1
+04:51:39.967  trace 23,86 23,87
+04:51:40.480  regarde
+04:51:41.493  clic =couleur-c1
+04:51:41.959  defile =hex
+04:51:41.968  clic =hex
+04:51:42.505  touche ctrl+a
+04:51:42.583  tape "#2e1c2c"
+04:51:42.704  touche entree
+04:51:42.786  clic =selecteur-c1
+04:51:43.236  trace 38,83 38,89
+04:51:43.892  regarde
+04:51:44.934  clic =couleur-c1
+04:51:45.412  defile =hex
+04:51:45.416  clic =hex
+04:51:45.948  touche ctrl+a
+04:51:46.023  tape "#a9765a"
+04:51:46.146  touche entree
+04:51:46.221  clic =selecteur-c1
+04:51:46.678  trace 39,83 39,84
+04:51:47.141  regarde
+04:52:20.394  clic =menu-fichier
+04:52:20.878  clic =fichier-exporter
+04:52:21.287  attends 500
+04:52:21.793  clic =export-png1
+04:52:22.159  # fichier enregistré : fichiers/tileset-foret.png
+04:52:22.250  attends 800
+04:52:23.051  clic @866 630
+04:52:23.472  attends 300
+04:52:54.480  clic =outil-crayon
+04:52:55.055  clic =couleur-c1
+04:52:55.578  defile =hex
+04:52:55.586  clic =hex
+04:52:56.146  touche ctrl+a
+04:52:56.225  tape "#4a2a3a"
+04:52:56.345  touche entree
+04:52:56.419  clic =selecteur-c1
+04:52:56.894  clic 3,29
+04:52:57.441  regarde
+04:52:58.623  clic =couleur-c1
+04:52:59.131  defile =hex
+04:52:59.141  clic =hex
+04:52:59.695  touche ctrl+a
+04:52:59.770  tape "#6e3d45"
+04:52:59.890  touche entree
+04:52:59.963  clic =selecteur-c1
+04:53:00.403  clic 4,29
+04:53:00.903  regarde
+04:53:02.131  clic =couleur-c1
+04:53:02.608  defile =hex
+04:53:02.616  clic =hex
+04:53:03.152  touche ctrl+a
+04:53:03.231  tape "#8e5a4a"
+04:53:03.359  touche entree
+04:53:03.432  clic =selecteur-c1
+04:53:03.898  trace 5,29 6,29
+04:53:04.390  regarde
+04:53:05.327  clic =couleur-c1
+04:53:05.829  defile =hex
+04:53:05.833  clic =hex
+04:53:06.371  touche ctrl+a
+04:53:06.447  tape "#4a2a3a"
+04:53:06.562  touche entree
+04:53:06.639  clic =selecteur-c1
+04:53:07.081  clic 3,30
+04:53:07.590  regarde
+04:53:08.540  clic =couleur-c1
+04:53:09.025  defile =hex
+04:53:09.032  clic =hex
+04:53:09.575  touche ctrl+a
+04:53:09.650  tape "#6e3d45"
+04:53:09.775  touche entree
+04:53:09.854  clic =selecteur-c1
+04:53:10.304  clic 4,30
+04:53:10.805  regarde
+04:53:11.808  clic =couleur-c1
+04:53:12.292  defile =hex
+04:53:12.297  clic =hex
+04:53:12.819  touche ctrl+a
+04:53:12.893  tape "#8e5a4a"
+04:53:13.011  touche entree
+04:53:13.085  clic =selecteur-c1
+04:53:13.544  trace 5,30 6,30
+04:53:14.024  regarde
+04:53:14.950  clic =couleur-c1
+04:53:15.439  defile =hex
+04:53:15.442  clic =hex
+04:53:15.970  touche ctrl+a
+04:53:16.043  tape "#4a2a3a"
+04:53:16.158  touche entree
+04:53:16.233  clic =selecteur-c1
+04:53:16.692  clic 3,52
+04:53:17.186  regarde
+04:53:18.211  clic =couleur-c1
+04:53:18.682  defile =hex
+04:53:18.692  clic =hex
+04:53:19.221  touche ctrl+a
+04:53:19.300  tape "#6e3d45"
+04:53:19.425  touche entree
+04:53:19.498  clic =selecteur-c1
+04:53:19.957  clic 4,52
+04:53:20.470  regarde
+04:53:21.577  clic =couleur-c1
+04:53:22.074  defile =hex
+04:53:22.077  clic =hex
+04:53:22.605  touche ctrl+a
+04:53:22.680  tape "#8e5a4a"
+04:53:22.810  touche entree
+04:53:22.883  clic =selecteur-c1
+04:53:23.353  trace 5,52 6,52
+04:53:23.857  regarde
+04:53:24.937  clic =couleur-c1
+04:53:25.414  defile =hex
+04:53:25.417  clic =hex
+04:53:25.962  touche ctrl+a
+04:53:26.036  tape "#4a2a3a"
+04:53:26.166  touche entree
+04:53:26.243  clic =selecteur-c1
+04:53:26.680  clic 3,51
+04:53:27.179  regarde
+04:53:28.063  clic =couleur-c1
+04:53:28.525  defile =hex
+04:53:28.528  clic =hex
+04:53:29.052  touche ctrl+a
+04:53:29.127  tape "#6e3d45"
+04:53:29.246  touche entree
+04:53:29.318  clic =selecteur-c1
+04:53:29.765  clic 4,51
+04:53:30.270  regarde
+04:53:31.256  clic =couleur-c1
+04:53:31.728  defile =hex
+04:53:31.733  clic =hex
+04:53:32.275  touche ctrl+a
+04:53:32.351  tape "#8e5a4a"
+04:53:32.473  touche entree
+04:53:32.548  clic =selecteur-c1
+04:53:33.005  trace 5,51 6,51
+04:53:33.486  regarde
+04:53:34.435  clic =couleur-c1
+04:53:34.905  defile =hex
+04:53:34.909  clic =hex
+04:53:35.452  touche ctrl+a
+04:53:35.530  tape "#4a2a3a"
+04:53:35.658  touche entree
+04:53:35.732  clic =selecteur-c1
+04:53:36.182  clic 3,70
+04:53:36.698  regarde
+04:53:37.665  clic =couleur-c1
+04:53:38.140  defile =hex
+04:53:38.146  clic =hex
+04:53:38.671  touche ctrl+a
+04:53:38.750  tape "#6e3d45"
+04:53:38.872  touche entree
+04:53:38.945  clic =selecteur-c1
+04:53:39.378  clic 4,70
+04:53:39.870  regarde
+04:53:40.861  clic =couleur-c1
+04:53:41.326  defile =hex
+04:53:41.329  clic =hex
+04:53:41.854  touche ctrl+a
+04:53:41.929  tape "#8e5a4a"
+04:53:42.047  touche entree
+04:53:42.120  clic =selecteur-c1
+04:53:42.582  trace 5,70 6,70
+04:53:43.072  regarde
+04:53:44.026  clic =couleur-c1
+04:53:44.488  defile =hex
+04:53:44.491  clic =hex
+04:53:45.020  touche ctrl+a
+04:53:45.101  tape "#4a2a3a"
+04:53:45.225  touche entree
+04:53:45.298  clic =selecteur-c1
+04:53:45.749  clic 3,69
+04:53:46.251  regarde
+04:53:47.332  clic =couleur-c1
+04:53:47.807  defile =hex
+04:53:47.811  clic =hex
+04:53:48.336  touche ctrl+a
+04:53:48.410  tape "#6e3d45"
+04:53:48.542  touche entree
+04:53:48.617  clic =selecteur-c1
+04:53:49.059  clic 4,69
+04:53:49.562  regarde
+04:53:50.653  clic =couleur-c1
+04:53:51.121  defile =hex
+04:53:51.124  clic =hex
+04:53:51.651  touche ctrl+a
+04:53:51.725  tape "#8e5a4a"
+04:53:51.847  touche entree
+04:53:51.923  clic =selecteur-c1
+04:53:52.362  trace 5,69 6,69
+04:53:52.836  regarde
+04:53:53.744  clic =outil-gomme
+04:53:54.209  trace 2,27 2,29
+04:53:54.670  regarde
+04:53:55.665  trace 2,58 2,61
+04:53:56.069  regarde
+04:53:57.028  clic 3,28
+04:53:57.378  regarde
+04:53:58.351  clic 3,59
+04:53:58.687  regarde
+04:53:59.591  clic 3,60
+04:53:59.798  regarde
+04:54:00.734  clic =outil-crayon
+04:54:01.237  clic =couleur-c1
+04:54:01.739  defile =hex
+04:54:01.748  clic =hex
+04:54:02.284  touche ctrl+a
+04:54:02.359  tape "#2e1c2c"
+04:54:02.480  touche entree
+04:54:02.554  clic =selecteur-c1
+04:54:02.999  clic 3,27
+04:54:03.500  regarde
+04:54:04.470  clic 4,28
+04:54:04.675  regarde
+04:54:05.670  clic 3,29
+04:54:05.874  regarde
+04:54:06.915  clic 3,58
+04:54:07.251  regarde
+04:54:08.209  trace 4,59 4,60
+04:54:08.429  regarde
+04:54:09.386  clic 3,61
+04:54:09.590  regarde
+04:54:10.606  clic =couleur-c1
+04:54:11.088  defile =hex
+04:54:11.091  clic =hex
+04:54:11.622  touche ctrl+a
+04:54:11.697  tape "#8e5a4a"
+04:54:11.820  touche entree
+04:54:11.893  clic =selecteur-c1
+04:54:12.327  trace 8,84 8,89
+04:54:12.985  regarde
+04:54:13.933  trace 9,84 9,85
+04:54:14.170  regarde
+04:54:15.221  trace 22,86 22,89
+04:54:15.570  regarde
+04:54:16.581  trace 23,86 23,87
+04:54:16.808  regarde
+04:54:17.842  trace 38,83 38,89
+04:54:18.336  regarde
+04:54:19.396  trace 39,83 39,84
+04:54:19.645  regarde
+04:54:20.618  clic =outil-gomme
+04:54:21.132  trace 10,92 10,94
+04:54:21.618  regarde
+04:54:22.658  trace 27,92 27,93
+04:54:22.953  regarde
+04:54:23.937  trace 40,92 40,95
+04:54:24.305  regarde
+04:54:25.294  clic =outil-crayon
+04:54:25.799  clic =couleur-c1
+04:54:26.303  defile =hex
+04:54:26.306  clic =hex
+04:54:26.834  touche ctrl+a
+04:54:26.912  tape "#4a2a3a"
+04:54:27.023  touche entree
+04:54:27.099  clic =selecteur-c1
+04:54:27.538  clic 11,92
+04:54:28.048  regarde
+04:54:29.033  clic 11,93
+04:54:29.238  regarde
+04:54:30.290  clic 12,94
+04:54:30.509  regarde
+04:54:31.532  clic 39,92
+04:54:31.871  regarde
+04:54:32.912  clic 39,93
+04:54:33.132  regarde
+04:54:34.110  clic 38,94
+04:54:34.302  regarde
+04:54:35.236  clic 38,95
+04:54:35.437  regarde
+04:54:36.474  clic =opt-symX
+04:54:36.999  clic =outil-selrect
+04:54:37.554  attends 200
+04:54:37.756  glisse 2,84 93,89
+04:54:38.620  regarde
+04:54:39.568  clic =couleur-c1
+04:54:40.053  defile =hex
+04:54:40.056  clic =hex
+04:54:40.586  touche ctrl+a
+04:54:40.665  tape "#6e3d45"
+04:54:40.787  touche entree
+04:54:40.861  clic =selecteur-c1
+04:54:41.294  clic =outil-remplace
+04:54:41.840  clic 20,86
+04:54:42.275  regarde
+04:54:43.274  clic =couleur-c1
+04:54:43.719  defile =hex
+04:54:43.722  clic =hex
+04:54:44.254  touche ctrl+a
+04:54:44.332  tape "#4b4f66"
+04:54:44.460  touche entree
+04:54:44.536  clic =selecteur-c1
+04:54:54.528  clic =menu-fichier
+04:54:55.056  clic =fichier-exporter
+04:54:55.468  attends 500
+04:54:55.970  clic =export-png1
+04:54:56.337  # fichier enregistré : fichiers/tileset-foret.png
+04:54:56.422  attends 800
+04:54:57.224  clic @866 630
+04:54:57.658  attends 300
+04:55:07.611  clic =couleur-c1
+04:55:08.146  defile =hex
+04:55:08.154  clic =hex
+04:55:08.684  touche ctrl+a
+04:55:08.757  tape "#6e3d45"
+04:55:08.909  touche entree
+04:55:08.985  clic =selecteur-c1
+04:55:09.460  clic =outil-remplace
+04:55:10.086  clic 8,84
+04:55:10.530  regarde
+04:55:11.656  clic =couleur-c1
+04:55:12.103  defile =hex
+04:55:12.105  clic =hex
+04:55:12.631  touche ctrl+a
+04:55:12.714  tape "#4b4f66"
+04:55:12.844  touche entree
+04:55:12.917  clic =selecteur-c1
+04:55:13.450  touche ctrl+d
+04:55:13.651  clic =menu-fichier
+04:55:14.179  clic =fichier-exporter
+04:55:14.604  attends 500
+04:55:15.110  clic =export-png1
+04:55:15.474  # fichier enregistré : fichiers/tileset-foret.png
+04:55:15.559  attends 800
+04:55:16.363  clic @866 630
+04:55:16.804  attends 300
+04:55:28.271  cibles opt-symX
+04:55:28.346  clic =opt-symX
+04:55:28.352    ✗ Aucun élément visible « opt-symX ». Essaie : souris cibles opt-
+04:55:36.036  clic =outil-crayon
+04:55:36.606  clic =opt-symX
+04:55:37.294  clic =couleur-c1
+04:55:37.822  defile =hex
+04:55:37.827  clic =hex
+04:55:38.434  touche ctrl+a
+04:55:38.514  tape "#6e3d45"
+04:55:38.644  touche entree
+04:55:38.720  clic =selecteur-c1
+04:55:39.160  trace 6,83 9,83
+04:55:39.767  regarde
+04:55:40.822  trace 7,82 8,82
+04:55:41.065  regarde
+04:55:42.193  trace 17,83 20,83
+04:55:42.567  regarde
+04:55:43.608  trace 29,83 31,83
+04:55:43.955  regarde
+04:55:45.022  clic 30,82
+04:55:45.238  regarde
+04:55:46.333  trace 40,83 44,83
+04:55:46.742  regarde
+04:55:47.795  trace 41,82 43,82
+04:55:48.075  regarde
+04:56:08.403  clic =opt-axeX2
+04:56:08.883  touche ctrl+a
+04:56:08.968  tape "128"
+04:56:09.017  touche tab
+04:56:09.206  clic =outil-gomme
+04:56:09.776  trace 126,28 126,35
+04:56:10.466  regarde
+04:56:11.598  trace 127,28 127,35
+04:56:12.130  regarde
+04:56:13.107  clic =outil-crayon
+04:56:13.652  clic =couleur-c1
+04:56:14.154  defile =hex
+04:56:14.157  clic =hex
+04:56:14.734  touche ctrl+a
+04:56:14.810  tape "#6e3d45"
+04:56:14.934  touche entree
+04:56:15.008  clic =selecteur-c1
+04:56:15.465  trace 120,24 127,24
+04:56:16.130  regarde
+04:56:17.102  trace 120,25 127,25
+04:56:17.549  regarde
+04:56:18.582  clic =couleur-c1
+04:56:19.089  defile =hex
+04:56:19.092  clic =hex
+04:56:19.627  touche ctrl+a
+04:56:19.703  tape "#4a2a3a"
+04:56:19.825  touche entree
+04:56:19.898  clic =selecteur-c1
+04:56:20.343  trace 122,26 127,26
+04:56:20.968  regarde
+04:56:21.929  clic =couleur-c1
+04:56:22.438  defile =hex
+04:56:22.441  clic =hex
+04:56:22.966  touche ctrl+a
+04:56:23.042  tape "#2e1c2c"
+04:56:23.164  touche entree
+04:56:23.243  clic =selecteur-c1
+04:56:23.694  trace 124,27 127,27
+04:56:24.234  regarde
+04:56:25.294  trace 125,28 125,35
+04:56:25.747  regarde
+04:56:26.729  clic =couleur-c1
+04:56:27.273  defile =hex
+04:56:27.276  clic =hex
+04:56:27.816  touche ctrl+a
+04:56:27.890  tape "#4a2a3a"
+04:56:28.017  touche entree
+04:56:28.092  clic =selecteur-c1
+04:56:28.549  trace 124,28 124,35
+04:56:29.230  regarde
+04:56:30.238  clic =couleur-c1
+04:56:30.740  defile =hex
+04:56:30.743  clic =hex
+04:56:31.282  touche ctrl+a
+04:56:31.357  tape "#6e3d45"
+04:56:31.485  touche entree
+04:56:31.559  clic =selecteur-c1
+04:56:32.010  trace 123,29 123,35
+04:56:32.662  regarde
+04:56:33.620  clic =couleur-c1
+04:56:34.123  defile =hex
+04:56:34.127  clic =hex
+04:56:34.670  touche ctrl+a
+04:56:34.745  tape "#e0ef7a"
+04:56:34.875  touche entree
+04:56:34.948  clic =selecteur-c1
+04:56:35.392  trace 122,36 127,36
+04:56:35.995  regarde
+04:56:36.935  clic =couleur-c1
+04:56:37.443  defile =hex
+04:56:37.450  clic =hex
+04:56:37.980  touche ctrl+a
+04:56:38.055  tape "#a9d455"
+04:56:38.172  touche entree
+04:56:38.245  clic =selecteur-c1
+04:56:38.702  trace 121,37 127,37
+04:56:39.363  regarde
+04:56:40.520  trace 121,38 127,38
+04:56:40.963  regarde
+04:56:42.040  clic =couleur-c1
+04:56:42.572  defile =hex
+04:56:42.577  clic =hex
+04:56:43.127  touche ctrl+a
+04:56:43.203  tape "#6fae45"
+04:56:43.327  touche entree
+04:56:43.409  clic =selecteur-c1
+04:56:43.882  trace 121,39 127,39
+04:56:44.605  regarde
+04:56:45.662  trace 121,40 127,40
+04:56:46.116  regarde
+04:56:47.196  trace 121,41 127,41
+04:56:47.662  regarde
+04:56:48.739  trace 121,42 127,42
+04:56:49.185  regarde
+04:56:50.232  clic =couleur-c1
+04:56:50.742  defile =hex
+04:56:50.747  clic =hex
+04:56:51.281  touche ctrl+a
+04:56:51.356  tape "#3f7a3c"
+04:56:51.474  touche entree
+04:56:51.550  clic =selecteur-c1
+04:56:52.003  trace 121,43 127,43
+04:56:52.668  regarde
+04:56:53.644  trace 121,44 127,44
+04:56:54.083  regarde
+04:56:55.048  trace 123,45 123,46
+04:56:55.313  regarde
+04:56:56.320  clic 125,45
+04:56:56.539  regarde
+04:56:57.584  clic =couleur-c1
+04:56:58.081  defile =hex
+04:56:58.086  clic =hex
+04:56:58.611  touche ctrl+a
+04:56:58.691  tape "#2e1c2c"
+04:56:58.818  touche entree
+04:56:58.891  clic =selecteur-c1
+04:56:59.347  clic 121,45
+04:56:59.819  regarde
+04:57:00.898  clic 122,45
+04:57:01.105  regarde
+04:57:02.165  clic 124,45
+04:57:02.410  regarde
+04:57:03.358  clic 126,45
+04:57:03.565  regarde
+04:57:04.561  clic 127,45
+04:57:04.777  regarde
+04:57:05.760  clic 123,47
+04:57:06.010  regarde
+04:57:07.045  clic 125,46
+04:57:07.289  regarde
+04:57:08.485  clic =couleur-c1
+04:57:08.983  defile =hex
+04:57:08.989  clic =hex
+04:57:09.516  touche ctrl+a
+04:57:09.591  tape "#4a2a3a"
+04:57:09.716  touche entree
+04:57:09.795  clic =selecteur-c1
+04:57:10.262  clic 121,46
+04:57:10.747  regarde
+04:57:11.819  clic 122,46
+04:57:12.013  regarde
+04:57:13.059  clic 124,46
+04:57:13.270  regarde
+04:57:14.387  clic 126,46
+04:57:14.600  regarde
+04:57:15.644  clic 127,46
+04:57:15.850  regarde
+04:57:16.944  clic 123,48
+04:57:17.214  regarde
+04:57:18.336  clic 125,47
+04:57:18.549  regarde
+04:57:19.492  clic =couleur-c1
+04:57:20.014  defile =hex
+04:57:20.017  clic =hex
+04:57:20.559  touche ctrl+a
+04:57:20.634  tape "#a9d455"
+04:57:20.765  touche entree
+04:57:20.843  clic =selecteur-c1
+04:57:21.294  trace 127,34 127,35
+04:57:21.766  regarde
+04:57:22.779  clic =couleur-c1
+04:57:23.302  defile =hex
+04:57:23.306  clic =hex
+04:57:23.827  touche ctrl+a
+04:57:23.904  tape "#e0ef7a"
+04:57:24.028  touche entree
+04:57:24.105  clic =selecteur-c1
+04:57:24.554  clic 127,33
+04:57:25.013  regarde
+04:57:26.093  va 128,36
+04:57:26.168  regarde
+04:57:39.772  clic =onglet-tuiles
+04:57:40.234  attends 400
+04:57:40.718  defile =carte
+04:57:40.787  cibles carte
+04:57:40.868  va @200 300
+04:57:41.226  regarde
+04:57:42.460  cibles carte
+04:58:07.446  clic =menu-fichier
+04:58:07.880  clic =fichier-exporter
+04:58:08.280  attends 500
+04:58:08.785  clic =export-png1
+04:58:09.228  # fichier enregistré : fichiers/tileset-foret.png
+04:58:09.310  attends 800
+04:58:10.113  clic @866 630
+04:58:10.550  attends 300
+04:58:11.103  touche ctrl+d
+04:58:11.270  clic =outil-remplace
+04:58:11.865  clic =couleur-c1
+04:58:12.363  defile =hex
+04:58:12.366  clic =hex
+04:58:13.007  touche ctrl+a
+04:58:13.084  tape "#5a4a5c"
+04:58:13.210  touche entree
+04:58:13.285  clic =selecteur-c1
+04:58:13.744  clic 100,8
+04:58:14.250  regarde
+04:58:15.549  clic =couleur-c1
+04:58:16.063  defile =hex
+04:58:16.068  clic =hex
+04:58:16.607  touche ctrl+a
+04:58:16.684  tape "#82737f"
+04:58:16.804  touche entree
+04:58:16.877  clic =selecteur-c1
+04:58:17.366  clic 107,6
+04:58:17.861  regarde
+04:58:18.899  clic =couleur-c1
+04:58:19.398  defile =hex
+04:58:19.404  clic =hex
+04:58:19.946  touche ctrl+a
+04:58:20.020  tape "#b0a3a6"
+04:58:20.148  touche entree
+04:58:20.224  clic =selecteur-c1
+04:58:20.667  clic 103,5
+04:58:21.144  regarde
+04:58:22.217  clic =onglet-tuiles
+04:58:22.714  attends 400
+04:58:23.180  defile =carte
+04:58:23.244  cibles carte
+04:58:23.312  va @200 300
+04:58:23.708  regarde
+04:58:33.429  clic =onglet-tuiles
+04:58:33.950  attends 500
+04:58:34.535  defile =carte
+04:58:34.598  cibles carte
+04:58:34.686  va @200 300
+04:58:35.089  regarde
+04:58:57.199  clic =onglet-methode
+04:58:57.789  attends 400
+04:58:58.277  defile =justifie-L
+04:58:58.352  cibles justifie-L
+04:58:58.429  clic =justifie-L
+04:58:58.842  tape "Les « L » signalés sont les escaliers du bas des pierres rondes et des bords de strates : des bords de formes pleines dans une texture de terrain, pas des traits de 1 px."
+04:59:01.935  touche tab
+04:59:02.126  attends 250
+04:59:02.442  defile =coche-bords.croute
+04:59:02.505  cibles coche-bords.croute
+04:59:02.589  clic =coche-bords.croute
+04:59:03.025  attends 200
+04:59:03.318  defile =coche-bords.coins
+04:59:03.402  cibles coche-bords.coins
+04:59:03.480  clic =coche-bords.coins
+04:59:03.810  attends 200
+04:59:04.083  defile =coche-bords.carte
+04:59:04.158  cibles coche-bords.carte
+04:59:04.243  clic =coche-bords.carte
+04:59:04.586  attends 200
+04:59:04.860  va @200 300
+04:59:05.206  regarde
+04:59:17.932  defile =justifie-L
+04:59:17.936    ✗ Aucun élément « justifie-L ».
+04:59:17.995  cibles justifie-L
+04:59:18.073  va @200 300
+04:59:18.092  regarde
+04:59:19.191  defile =etape-valide
+04:59:19.264  cibles etape-valide
+04:59:19.354  clic =etape-valide
+04:59:19.942  attends 400
+04:59:20.356  va @200 300
+04:59:20.724  regarde
+04:59:35.655  clic =onglet-lumiere
+04:59:36.212  attends 400
+04:59:36.617  defile =lum-h
+04:59:36.621  clic =lum-h
+04:59:37.108  attends 200
+04:59:37.310  clic =lum-haute
+04:59:37.734  attends 200
+04:59:37.940  clic =vue-toile-notan
+04:59:38.340  attends 300
+04:59:38.641  va @200 300
+04:59:39.012  regarde
+04:59:40.104  clic =vue-toile-couleur
+04:59:55.006  clic =onglet-methode
+04:59:55.542  attends 400
+04:59:56.012  defile =coche-lumiere.haut
+04:59:56.093  cibles coche-lumiere.haut
+04:59:56.194  clic =coche-lumiere.haut
+04:59:56.759  attends 200
+04:59:57.153  defile =coche-lumiere.clusters
+04:59:57.212  cibles coche-lumiere.clusters
+04:59:57.286  clic =coche-lumiere.clusters
+04:59:57.646  attends 200
+04:59:57.948  defile =etape-valide
+04:59:58.027  cibles etape-valide
+04:59:58.121  clic =etape-valide
+04:59:58.543  attends 400
+04:59:58.952  va @200 300
+04:59:59.304  regarde
+05:04:00.094  clic =menu-fichier
+05:04:00.545  clic =fichier-enregistrer
+05:04:00.879  # fichier enregistré : fichiers/tileset-foret.claude-pixel.json
+05:04:00.954  attends 800
+05:04:01.755  fin
+05:04:28.117  # fin
