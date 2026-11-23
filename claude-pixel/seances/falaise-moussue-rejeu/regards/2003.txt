@@ -1,0 +1,11 @@
+regard 2003
+case 36,35 · couleur #2e1d2cff (exportée : #2e1d2cff) · écran 369,295
+outil crayon · taille 1 · c1 #2e1d2cff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 7 · Micro-détails : chaque élément comme un dessin entier (0-AE)
+porte : Carnet : 8 « Détail » de plus : chaque élément retravaillé à la loupe laisse une ligne (0-AE). | Passe à la loupe : 16 zone(s) sur 16 à retravailler et marquer (zones de 8 px). | Case non cochée : « Chaque zone regardée à la loupe et retravaillée » | Case non cochée : « Chaque élément a sa silhouette, sa lumière et 2 ou 3 tons » | Case non cochée : « Vu de loin, le détail ne fait pas de bruit »
+défauts : Pixels doublés en « L » [erreur] 28 px (dont 34,33 près du curseur) ; L'ombrage ne suit pas la lumière [attention] 200 px (dont 34,36 34,37 34,38 35,38 36,38 près du curseur) ; Tirets dans la texture [conseil] 56 px (dont 37,35 38,35 39,35 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord 0.26 · familles 0.04 · inversions 8 % · étendue 0.18
+carnet : 23 idée(s), 1 barrée(s) · dernière : [passe] Passe 6, éclats : un liseré très clair de 1 px sur l'arête haute de chaque pierre, plus lo
+messages : aucun
+images : seances/falaise-moussue-rejeu/regards/2003-{ecran,loupe,dessin}.png

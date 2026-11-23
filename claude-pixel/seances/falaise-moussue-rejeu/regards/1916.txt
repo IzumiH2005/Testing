@@ -1,0 +1,11 @@
+regard 1916
+case 47,46 · couleur #a9a2b3ff (exportée : #a9a2b3ff) · écran 402,328
+outil crayon · taille 1 · c1 #a9a2b3ff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 6 · Tuile centrale : six passes de rendu (F2-A · F2-F · 0-AF)
+porte : Pixels orphelins (A5-10) : 1 px. Corrige, ou justifie-le. | Carnet : 2 « Passe de rendu » de plus (les six passes de 0-AF, une ligne chacune). | Case non cochée : « Grandes masses, puis clusters moyens, puis petits » | Case non cochée : « Aucun gros sujet au centre, poids égal » | Case non cochée : « Décalée d'une demi-tuile, la tuile ne montre aucune couture »
+défauts : Pixels doublés en « L » [erreur] 24 px (dont 45,43 45,44 48,44 près du curseur) ; Pixels orphelins [attention] 1 px ; L'ombrage ne suit pas la lumière [attention] 200 px ; Tramage en damier [conseil] 14 px (dont 49,49 50,49 49,50 50,50 près du curseur) ; Tirets dans la texture [conseil] 25 px (dont 43,46 44,46 45,46 46,46 47,46 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord 0.26 · familles 0.04 · inversions 8 % · étendue 0.18
+carnet : 21 idée(s), 1 barrée(s) · dernière : [structure] Référence (géologie des falaises, OpenLearn, Geikie) : une falaise se casse en blocs entre
+messages : aucun
+images : seances/falaise-moussue-rejeu/regards/1916-{ecran,loupe,dessin}.png

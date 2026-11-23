@@ -1,0 +1,11 @@
+regard 1732
+case 49,51 · couleur #57506aff (exportée : #57506aff) · écran 408,343
+outil crayon · taille 1 · c1 #57506aff · c2 #00000000
+calque 1/5 · image 1/1 · dessin 160×128 « Falaise moussue » (decor)
+étape 6 · Tuile centrale : six passes de rendu (F2-A · F2-F · 0-AF)
+porte : Pixels orphelins (A5-10) : 4 px. Corrige, ou justifie-le. | Carnet : 3 « Passe de rendu » de plus (les six passes de 0-AF, une ligne chacune). | Case non cochée : « Grandes masses, puis clusters moyens, puis petits » | Case non cochée : « Aucun gros sujet au centre, poids égal » | Case non cochée : « Décalée d'une demi-tuile, la tuile ne montre aucune couture »
+défauts : Pixels doublés en « L » [erreur] 11 px ; Pixels orphelins [attention] 4 px ; Lumière et ombre se confondent [attention] 200 px ; Tramage en damier [conseil] 8 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord 0.36 · familles 0.05 · inversions 4 % · étendue 0.16
+carnet : 17 idée(s), 1 barrée(s) · dernière : [passe] Passe 3, matière secondaire et usure : mousse olive en quatre tons sur le dessus de trois 
+messages : aucun
+images : seances/falaise-moussue-rejeu/regards/1732-{ecran,loupe,dessin}.png
