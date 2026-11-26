@@ -1,0 +1,11 @@
+regard 196
+case 47,59 · couleur transparent (exportée : transparent) · écran 592,545
+outil gomme · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 8/8 · image 1/1 · dessin 64×64 « Fauteuil club » (objet)
+étape 8 · Trait final (0-AB-A · A5-6 · 0-E)
+porte : Case non cochée : « Vue miroir regardée : aucune pente fausse » | Case non cochée : « Courbes tendues, aucune bosse molle »
+défauts : Pixels orphelins [attention] 4 px (dont 47,60 49,60 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 25 idée(s), 15 barrée(s) · dernière : [logique] Esquisse : le flanc du dossier (x18) doublait le bord intérieur du bras (x19) de y17 à 29 
+messages : aucun
+images : seances/fauteuil-v2b/regards/196-{ecran,loupe,dessin}.png

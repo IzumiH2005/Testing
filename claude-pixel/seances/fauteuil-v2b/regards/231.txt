@@ -1,0 +1,11 @@
+regard 231
+case -52,60 (hors du dessin) · couleur (hors toile) · écran 1002,553
+outil crayon · taille 1 · c1 #6e5c74ff · c2 #00000000
+calque 9/9 · image 1/1 · dessin 64×64 « Fauteuil club » (objet)
+étape 10 · Validation du dessin (avant la couleur) (0-AB-C · 0-AA-E)
+porte : Le dessin est noté 21/30 : il faut 22 au moins. Reviens au rough ou à l'esquisse. | Case non cochée : « Trait regardé à ×1, ×2, retourné et en silhouette » | Case non cochée : « Écart avec l'œuvre visée écrit au carnet » | Case non cochée : « Dessin montré à l'humain avant la couleur »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 27 idée(s), 15 barrée(s) · dernière : [logique] Polish : calque « trait » dupliqué en « polish », l'original baissé à 30 % et masqué. Poid
+messages : aucun
+images : seances/fauteuil-v2b/regards/231-{ecran,loupe,dessin}.png

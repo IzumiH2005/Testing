@@ -1,0 +1,11 @@
+regard 156
+case 16,57 · couleur #2a1a2e99 (exportée : transparent) · écran 406,533
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 7/7 · image 1/1 · dessin 64×64 « Fauteuil club » (objet)
+étape 7 · Esquisse nettoyée (0-AB-A · 0-AB-B)
+porte : Case non cochée : « Toile retournée : aucune pente ni proportion fausse » | Case non cochée : « Seuls les traits qui comptent sont gardés »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 24 idée(s), 15 barrée(s) · dernière : [structure] Construction : axe x31, sol y61, dossier-cylindre 28 px de large, bras-rouleaux 11 px, cou
+messages : aucun
+images : seances/fauteuil-v2b/regards/156-{ecran,loupe,dessin}.png
