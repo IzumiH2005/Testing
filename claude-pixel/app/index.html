@@ -4715,6 +4715,14 @@ function rendCouleurs(c) {
     dessineSV(sv, hsv); dessineTeinte(te, hsv);
     const x = hsvVersHex(hsv); apercu.style.background = x; if (document.activeElement !== hexIn) hexIn.value = x;
     const t = c.querySelector('h3:nth-of-type(2) .mono'); if (t) t.textContent = x + '  ·  T' + Math.round(hsv[0]) + ' S' + Math.round(hsv[1] * 100) + ' V' + Math.round(hsv[2] * 100);
+    peinsGen();
+  };
+  /* Le générateur suit le sélecteur : l'aperçu est repeint à chaque changement, et la rampe
+   * ajoutée est calculée au clic depuis la couleur courante, jamais depuis celle du dernier rendu. */
+  const genApercu = h('div.rampe', { style: { margin: '8px 0' }, 'data-cible': 'rampe-apercu' });
+  const genActuel = () => AP.genereRampe(hsvVersHex(hsv), rampeN, rampeDecal);
+  const peinsGen = () => {
+    genApercu.replaceChildren(...genActuel().map(x => h('button', { style: { background: x }, title: x, tabIndex: -1 })));
   };
   glisse(sv, (x, y) => { hsv = [hsv[0], x, 1 - y]; peins(); });
   glisse(te, (x, y) => { hsv = [y * 360, hsv[1], hsv[2]]; peins(); });
@@ -4748,18 +4756,17 @@ function rendCouleurs(c) {
   });
 
   /* Générateur */
-  const base = hsvVersHex(hsv);
-  const gen = AP.genereRampe(base, rampeN, rampeDecal);
+  peinsGen();
   const nomR = champ('text', '', { placeholder: 'Nom de la matière (peau, métal…)', label: 'Nom de la rampe', cible: 'rampe-nom' });
   c.appendChild(h('div.etape-carte', { style: { marginTop: '8px' } },
     h('b', 'Générer depuis la couleur du sélecteur'),
-    h('div.rampe', { style: { margin: '8px 0' } }, gen.map(x => h('button', { style: { background: x }, title: x, tabIndex: -1 }))),
+    genApercu,
     h('div.ligne',
       h('label.aide-txt', 'Tons ', champ('select', String(rampeN), { options: ['3', '4', '5', '6', '7', '8'], cible: 'rampe-n', label: 'Nombre de tons', change: v => { rampeN = +v; rendu(true); } })),
       h('label.aide-txt', { style: { flex: '1', display: 'flex', gap: '6px', alignItems: 'center' } }, 'Décalage ',
         champ('range', String(rampeDecal), { min: 0, max: 40, step: 1, label: 'Décalage de teinte', cible: 'rampe-decal', change: v => { rampeDecal = +v; rendu(true); } }),
         h('span.mono', rampeDecal + '°'))),
-    h('div.ligne', nomR, btn('Ajouter la rampe', { cls: '.prim', cible: 'rampe-ajoute', click: () => act('rampe.ajoute', { nom: nomR.value.trim() || undefined, couleurs: gen }) })),
+    h('div.ligne', nomR, btn('Ajouter la rampe', { cls: '.prim', cible: 'rampe-ajoute', click: () => act('rampe.ajoute', { nom: nomR.value.trim() || undefined, couleurs: genActuel() }) })),
     h('p.aide-txt', 'Ombres vers le froid, lumières vers le chaud. Ajuste ensuite chaque ton à l\'œil.')));
 }
 
