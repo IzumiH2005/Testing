@@ -102,7 +102,7 @@ seule s'écrit telle quelle.
 | `etat [porte]` | l'état complet en JSON : curseur, boutons, outil, couleurs, calque, étape, porte |
 | `cibles [filtre]` | les éléments cliquables visibles et leur position à l'écran |
 | `attends ms` | attend, au plus 5 000 ms |
-| `fin` | ferme la séance et enregistre la vidéo |
+| `fin` | ferme la séance et enregistre la vidéo ; refuse si le projet n'est pas enregistré depuis le dernier geste (`fin sans-fichier` pour passer outre) |
 
 ## La règle : regarder avant le trait suivant
 

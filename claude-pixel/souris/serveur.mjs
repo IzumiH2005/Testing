@@ -83,9 +83,17 @@ await ctx.addInitScript(HUD);
 const page = await ctx.newPage();
 const erreurs = [];
 page.on('pageerror', e => erreurs.push(e.message));
+/* Le projet doit être enregistré avant « fin » : sans lui, le dessin est perdu avec la page
+ * (la séance fauteuil-v2b n'a laissé que ses images). Tout geste qui peut changer le dessin
+ * remet ce drapeau à faux ; l'enregistrement d'un .claude-pixel.json le remet à vrai. */
+let projetAJour = true;
+const SANS_EFFET = new Set(['va', 'pas', 'survole', 'defile', 'molette', 'regarde', 'etat', 'cibles', 'attends', 'fin']);
 page.on('download', async d => {
   const nom = d.suggestedFilename().replace(/[^\w.\-]+/g, '_');
-  try { await d.saveAs(path.join(FICHIERS, nom)); journal('# fichier enregistré : fichiers/' + nom); } catch (e) { erreurs.push('téléchargement : ' + e.message); }
+  try {
+    await d.saveAs(path.join(FICHIERS, nom)); journal('# fichier enregistré : fichiers/' + nom);
+    if (/\.claude-pixel\.json$/.test(nom)) projetAJour = true;
+  } catch (e) { erreurs.push('téléchargement : ' + e.message); }
 });
 await page.goto('file://' + PAGE + (HUMAIN ? '' : '#claude'), { waitUntil: 'domcontentloaded' });
 await page.waitForFunction(() => window.claudePixel && document.getElementById('toile'), null, { timeout: 15000 });
@@ -397,7 +405,12 @@ async function execute(ligne) {
       return L.filter(c => c.nom.includes(f)).map(c => c.nom + ' @' + Math.round(c.cx) + ',' + Math.round(c.cy)).join('\n') || 'aucune';
     }
     case 'attends': { const ms = Math.min(5000, Number(args[0]) || 500); await pause(ms); return 'attendu ' + ms + ' ms'; }
-    case 'fin': return null;
+    case 'fin': {
+      await pause(400); // laisse finir un enregistrement en cours
+      if (!projetAJour && args[0] !== 'sans-fichier')
+        throw new Error('Le projet n\'est pas enregistré depuis le dernier geste : Fichier, « Enregistrer le projet » (ou touche ctrl+s), puis fin. Pour finir sans fichier : fin sans-fichier.');
+      return null;
+    }
     default: throw new Error('Commande inconnue « ' + cmd + ' ». Commandes : va, pas, choisis, defile, appuie, relache, clic, double, trace, glisse, molette, tiens, lache, touche, tape, survole, regarde, etat, cibles, attends, fin.');
   }
 }
@@ -431,6 +444,7 @@ const serveur = http.createServer((req, res) => {
         journal(l);
         try { await page.evaluate(t => window.__sourisBandeau && window.__sourisBandeau(t), 'souris ' + l); } catch (e) { /* page fermée */ }
         try {
+          if (!SANS_EFFET.has(l.split(/\s+/)[0])) projetAJour = false;
           const r = await execute(l);
           if (r === null) { const m = await fin(); repond(200, { ok: true, msg: sorties.concat(m).join('\n'), fin: true }); setTimeout(() => process.exit(0), 100); return; }
           sorties.push(r);
