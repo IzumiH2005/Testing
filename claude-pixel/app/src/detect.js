@@ -285,7 +285,7 @@ function detecte(doc, f = 0) {
   if (C.pts.length) ajoute('coussin', 'erreur', 'Ombrage coussin / flash', 'A5-8 · règle 25', C.pts,
     'La clarté suit la distance au bord (r = ' + C.cd.toFixed(2) + ') et non la lumière ' + nomLum + ' (r = ' + C.cl.toFixed(2) + '). L\'ombre va du côté opposé à la source.');
   if (VO) {
-    const M = VO.mesure(px, w, h, lumDoc);
+    const M = VO.mesure(px, w, h, lumDoc, doc.rampes);
     if (M.accord !== null && M.accord < 0.3) ajoute('lumiere', 'attention', 'L\'ombrage ne suit pas la lumière', '0-C · règle 50', M.fautifs,
       'Accord clarté / volume r = ' + M.accord.toFixed(2) + ' (il faut 0,30 au moins, 0,50 pour un rendu pro). Lumière ' + nomLum + ' : ouvre l\'onglet Lumière, affiche le guide et ' +
       'regarde où passe le terminateur. Les pixels marqués sont du mauvais côté : clairs dans l\'ombre ou sombres dans la lumière.');

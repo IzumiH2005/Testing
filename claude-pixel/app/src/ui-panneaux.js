@@ -712,7 +712,7 @@ function rendLumiere(c) {
   c.appendChild(leg);
 
   /* Mesure */
-  const px = AP.compose(d, A.s.image, 'export'), M = VO.mesure(px, d.w, d.h, L);
+  const px = AP.compose(d, A.s.image, 'export'), M = VO.mesure(px, d.w, d.h, L, d.rampes);
   const f2 = x => x === null ? '—' : x.toFixed(2);
   const ligne = (nom, val, ok, aide) => h('div.mesure' + (ok === null ? '' : ok ? '.ok' : '.ko'), h('b', nom), h('span.mono', val), h('small.aide-txt', aide));
   c.appendChild(titre('Le dessin suit-il la lumière ?', h('span.aide-txt', 'image ' + (A.s.image + 1))));

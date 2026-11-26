@@ -69,3 +69,18 @@ test('notan : deux valeurs seulement', () => {
   const n = V.notan(px(hautGauche)), s = new Set([...n].filter(c => c >>> 24));
   assert.equal(s.size, 2);
 });
+
+test('mesure : une rampe à teinte décalée reste une seule matière quand on donne les rampes du document', () => {
+  // ombre violacée (teinte 335°), lumière rouge (350°) : deux paquets de teinte différents
+  const R = [{ nom: 'velours', couleurs: ['#6f2846', '#963f4e'] }];
+  const d = disque((dx, dy) => (dx + dy > 0 ? 0 : 1));
+  const map = { [rampe[0]]: '#6f2846', [rampe[1]]: '#963f4e' };
+  const p = []; const c = AP.compose(d, 0, 'export');
+  for (let i = 0; i < c.length; i++) if (c[i]) p.push([i % W, (i / W) | 0, map[AP.hex(c[i]).slice(0, 7)]]);
+  const d2 = doc(W, W, p), L = { az: 135, el: 40, forme: 'gonfle', posee: true };
+  const sans = V.mesure(px(d2), W, W, L), avec = V.mesure(px(d2), W, W, L, R);
+  assert.equal(sans.accord, null, 'sans les rampes, chaque ton est un aplat d\'une matière à part');
+  assert.ok(avec.accord > 0.5, 'avec les rampes, ombre et lumière du velours sont mesurées ensemble : ' + avec.accord);
+  assert.ok(avec.ecart > 0.05, 'écart des deux familles : ' + avec.ecart);
+  assert.equal(V.matiere(AP.parseHex('#6f2846'), R), V.matiere(AP.parseHex('#963f4e'), R));
+});

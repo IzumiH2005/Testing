@@ -837,7 +837,7 @@ const lectureSeule = Object.freeze({
   /* Lumière et volume (0-C) : réglage, mesure, et trois images en lignes (valeurs, notan, guide). */
   volume() {
     const d = U.at.doc, f = U.at.s.image, VO = AP.VOLUME, L = VO.lumiereDe(d), px = AP.compose(d, f, 'export');
-    const M = VO.mesure(px, d.w, d.h, L), g = VO.guide(px, d.w, d.h, L), gr = AP.VUES.gris(px), nt = VO.notan(px);
+    const M = VO.mesure(px, d.w, d.h, L, d.rampes), g = VO.guide(px, d.w, d.h, L), gr = AP.VUES.gris(px), nt = VO.notan(px);
     const lignes = src => { const out = []; for (let y = 0; y < d.h; y++) { const r = []; for (let x = 0; x < d.w; x++) { const c = src(y * d.w + x); r.push(c); } out.push(r); } return out; };
     const hx = c => c >>> 24 ? AP.hex(c, true) : null;
     return {

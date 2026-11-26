@@ -1990,19 +1990,27 @@ function guide(px, w, h, lum = LUMIERE_DEFAUT) {
  *   accord   : corrélation clarté / n·l, moyenne pondérée sur les matières ombrées ;
  *   ecart    : clarté moyenne de la famille lumière − famille ombre (deux familles nettes) ;
  *   inverses : part des pixels côté lumière plus sombres que la moyenne côté ombre ;
- *   etendue  : écart de clarté (5e à 95e centile) sur tout l'objet. */
-function matiere(c) {
+ *   etendue  : écart de clarté (5e à 95e centile) sur tout l'objet.
+ * rampes (facultatif) : les rampes du document, pour reconnaître une matière à teinte décalée. */
+/* Avec les rampes du document, une couleur rangée dans une rampe appartient à cette rampe :
+ * une rampe à teinte décalée (ombre vers le violet, lumière vers l'orangé) reste UNE matière.
+ * Sans rampe, on groupe par teinte. */
+function matiere(c, rampes) {
+  if (rampes && rampes.length) {
+    const hx = AP.hex(c).slice(0, 7).toLowerCase();
+    for (let k = 0; k < rampes.length; k++) if ((rampes[k].couleurs || []).some(x => String(x).toLowerCase() === hx)) return 'rampe' + k;
+  }
   const [r, g, b] = AP.unpack(c), [hh, s, v] = AP.rgb2hsv(r, g, b);
   if (s < 0.18 || v < 0.12) return 'neutre';
   return 'h' + Math.round(hh / 40) % 9;
 }
-function mesure(px, w, h, lum = LUMIERE_DEFAUT) {
+function mesure(px, w, h, lum = LUMIERE_DEFAUT, rampes = null) {
   const g = guide(px, w, h, lum), d = distance(g.masque, w, h);
   const groupes = {}; const tous = [];
   for (let i = 0; i < w * h; i++) {
     if (!g.masque[i] || d[i] < 1.9) continue;   // le contour n'entre pas dans la mesure
     const l = AP.lum(px[i]); tous.push(l);
-    const k = matiere(px[i]); (groupes[k] = groupes[k] || { L: [], N: [], I: [] });
+    const k = matiere(px[i], rampes); (groupes[k] = groupes[k] || { L: [], N: [], I: [] });
     groupes[k].L.push(l); groupes[k].N.push(g.ndl[i]); groupes[k].I.push(i);
   }
   const res = { n: tous.length, accord: null, ecart: null, inverses: null, etendue: 0, matieres: 0, fautifs: [] };
@@ -2344,7 +2352,7 @@ function detecte(doc, f = 0) {
   if (C.pts.length) ajoute('coussin', 'erreur', 'Ombrage coussin / flash', 'A5-8 · règle 25', C.pts,
     'La clarté suit la distance au bord (r = ' + C.cd.toFixed(2) + ') et non la lumière ' + nomLum + ' (r = ' + C.cl.toFixed(2) + '). L\'ombre va du côté opposé à la source.');
   if (VO) {
-    const M = VO.mesure(px, w, h, lumDoc);
+    const M = VO.mesure(px, w, h, lumDoc, doc.rampes);
     if (M.accord !== null && M.accord < 0.3) ajoute('lumiere', 'attention', 'L\'ombrage ne suit pas la lumière', '0-C · règle 50', M.fautifs,
       'Accord clarté / volume r = ' + M.accord.toFixed(2) + ' (il faut 0,30 au moins, 0,50 pour un rendu pro). Lumière ' + nomLum + ' : ouvre l\'onglet Lumière, affiche le guide et ' +
       'regarde où passe le terminateur. Les pixels marqués sont du mauvais côté : clairs dans l\'ombre ou sombres dans la lumière.');
@@ -3015,7 +3023,7 @@ function porte(id, at, cache) {
     case 'lumierePosee': return (doc.lumiere && doc.lumiere.posee) ? null : 'Pose la lumière dans l\'onglet Lumière (direction et hauteur), puis regarde le guide.';
     case 'volume': {
       if (m.justifs.volume) return null;
-      const M = AP.VOLUME.mesure(AP.compose(doc, f, 'export'), doc.w, doc.h, AP.VOLUME.lumiereDe(doc));
+      const M = AP.VOLUME.mesure(AP.compose(doc, f, 'export'), doc.w, doc.h, AP.VOLUME.lumiereDe(doc), doc.rampes);
       if (M.accord === null) return 'Aucune matière ombrée à mesurer : pose les deux familles (lumière, ombre) dans chaque matière.';
       const manque = [];
       if (M.accord < 0.5) manque.push('accord clarté/volume ' + M.accord.toFixed(2) + ' < 0,50');
@@ -5261,7 +5269,7 @@ function rendLumiere(c) {
   c.appendChild(leg);
 
   /* Mesure */
-  const px = AP.compose(d, A.s.image, 'export'), M = VO.mesure(px, d.w, d.h, L);
+  const px = AP.compose(d, A.s.image, 'export'), M = VO.mesure(px, d.w, d.h, L, d.rampes);
   const f2 = x => x === null ? '—' : x.toFixed(2);
   const ligne = (nom, val, ok, aide) => h('div.mesure' + (ok === null ? '' : ok ? '.ok' : '.ko'), h('b', nom), h('span.mono', val), h('small.aide-txt', aide));
   c.appendChild(titre('Le dessin suit-il la lumière ?', h('span.aide-txt', 'image ' + (A.s.image + 1))));
@@ -6151,7 +6159,7 @@ const lectureSeule = Object.freeze({
   /* Lumière et volume (0-C) : réglage, mesure, et trois images en lignes (valeurs, notan, guide). */
   volume() {
     const d = U.at.doc, f = U.at.s.image, VO = AP.VOLUME, L = VO.lumiereDe(d), px = AP.compose(d, f, 'export');
-    const M = VO.mesure(px, d.w, d.h, L), g = VO.guide(px, d.w, d.h, L), gr = AP.VUES.gris(px), nt = VO.notan(px);
+    const M = VO.mesure(px, d.w, d.h, L, d.rampes), g = VO.guide(px, d.w, d.h, L), gr = AP.VUES.gris(px), nt = VO.notan(px);
     const lignes = src => { const out = []; for (let y = 0; y < d.h; y++) { const r = []; for (let x = 0; x < d.w; x++) { const c = src(y * d.w + x); r.push(c); } out.push(r); } return out; };
     const hx = c => c >>> 24 ? AP.hex(c, true) : null;
     return {

@@ -609,7 +609,7 @@ function porte(id, at, cache) {
     case 'lumierePosee': return (doc.lumiere && doc.lumiere.posee) ? null : 'Pose la lumière dans l\'onglet Lumière (direction et hauteur), puis regarde le guide.';
     case 'volume': {
       if (m.justifs.volume) return null;
-      const M = AP.VOLUME.mesure(AP.compose(doc, f, 'export'), doc.w, doc.h, AP.VOLUME.lumiereDe(doc));
+      const M = AP.VOLUME.mesure(AP.compose(doc, f, 'export'), doc.w, doc.h, AP.VOLUME.lumiereDe(doc), doc.rampes);
       if (M.accord === null) return 'Aucune matière ombrée à mesurer : pose les deux familles (lumière, ombre) dans chaque matière.';
       const manque = [];
       if (M.accord < 0.5) manque.push('accord clarté/volume ' + M.accord.toFixed(2) + ' < 0,50');

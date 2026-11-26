@@ -160,19 +160,27 @@ function guide(px, w, h, lum = LUMIERE_DEFAUT) {
  *   accord   : corrélation clarté / n·l, moyenne pondérée sur les matières ombrées ;
  *   ecart    : clarté moyenne de la famille lumière − famille ombre (deux familles nettes) ;
  *   inverses : part des pixels côté lumière plus sombres que la moyenne côté ombre ;
- *   etendue  : écart de clarté (5e à 95e centile) sur tout l'objet. */
-function matiere(c) {
+ *   etendue  : écart de clarté (5e à 95e centile) sur tout l'objet.
+ * rampes (facultatif) : les rampes du document, pour reconnaître une matière à teinte décalée. */
+/* Avec les rampes du document, une couleur rangée dans une rampe appartient à cette rampe :
+ * une rampe à teinte décalée (ombre vers le violet, lumière vers l'orangé) reste UNE matière.
+ * Sans rampe, on groupe par teinte. */
+function matiere(c, rampes) {
+  if (rampes && rampes.length) {
+    const hx = AP.hex(c).slice(0, 7).toLowerCase();
+    for (let k = 0; k < rampes.length; k++) if ((rampes[k].couleurs || []).some(x => String(x).toLowerCase() === hx)) return 'rampe' + k;
+  }
   const [r, g, b] = AP.unpack(c), [hh, s, v] = AP.rgb2hsv(r, g, b);
   if (s < 0.18 || v < 0.12) return 'neutre';
   return 'h' + Math.round(hh / 40) % 9;
 }
-function mesure(px, w, h, lum = LUMIERE_DEFAUT) {
+function mesure(px, w, h, lum = LUMIERE_DEFAUT, rampes = null) {
   const g = guide(px, w, h, lum), d = distance(g.masque, w, h);
   const groupes = {}; const tous = [];
   for (let i = 0; i < w * h; i++) {
     if (!g.masque[i] || d[i] < 1.9) continue;   // le contour n'entre pas dans la mesure
     const l = AP.lum(px[i]); tous.push(l);
-    const k = matiere(px[i]); (groupes[k] = groupes[k] || { L: [], N: [], I: [] });
+    const k = matiere(px[i], rampes); (groupes[k] = groupes[k] || { L: [], N: [], I: [] });
     groupes[k].L.push(l); groupes[k].N.push(g.ndl[i]); groupes[k].I.push(i);
   }
   const res = { n: tous.length, accord: null, ecart: null, inverses: null, etendue: 0, matieres: 0, fautifs: [] };
