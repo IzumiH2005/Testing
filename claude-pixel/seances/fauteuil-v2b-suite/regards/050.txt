@@ -1,0 +1,11 @@
+regard 050
+case 33,59 · couleur #2a1a2e99 (exportée : transparent) · écran 508,545
+outil rect · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 2/2 · image 1/1 · dessin 64×64 « Fauteuil club » (objet)
+étape 3 · Essais : silhouettes, critique, choix (0-AA-D · 0-AA-E · 0-N)
+porte : Carnet : 6 ligne(s) « Essai » de plus (6 silhouettes au moins), 6 « Critique » notée(s) de plus, un « Choix retenu », au moins 3 idées barrées au total. | Case non cochée : « Au moins 6 silhouettes dans 3 familles différentes » | Case non cochée : « La silhouette choisie ne se confond pas avec une potion générique » | Case non cochée : « La silhouette choisie se lit à ×1 et en miroir »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 9 idée(s), 2 barrée(s) · dernière : [formes] style (0-Y) : contour d'une seule teinte sombre, dessus plus clairs que les faces, ombre p
+messages : aucun
+images : seances/fauteuil-v2b-suite/regards/050-{ecran,loupe,dessin}.png

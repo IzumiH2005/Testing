@@ -1,0 +1,11 @@
+regard 111
+case 20,55 · couleur #2a1a2e99 (exportée : transparent) · écran 430,521
+outil crayon · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 5/5 · image 1/1 · dessin 64×64 « Fauteuil club » (objet)
+étape 5 · Rough : le geste et les grandes masses (0-AB-A · 0-Q)
+porte : Case non cochée : « Une ligne de flux traverse l'objet » | Case non cochée : « Les grandes masses sont posées, rien de fini »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 23 idée(s), 15 barrée(s) · dernière : [choix] Pièces : R2 (rouleau en disque à anneau et point) + J2 (épaule de 8 px, assise calée contr
+messages : aucun
+images : seances/fauteuil-v2b-suite/regards/111-{ecran,loupe,dessin}.png

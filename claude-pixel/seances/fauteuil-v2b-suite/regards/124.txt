@@ -1,0 +1,11 @@
+regard 124
+case 54,33 · couleur #2a1a2ebd (exportée : transparent) · écran 634,389
+outil rect · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 6/6 · image 1/1 · dessin 64×64 « Fauteuil club » (objet)
+étape 6 · Construction sur le rough (0-B · 0-F · B2)
+porte : Case non cochée : « Chaque volume est dessiné entier, partie cachée comprise » | Case non cochée : « Les ellipses s'ouvrent à mesure qu'elles s'éloignent du niveau de l'œil » | Case non cochée : « Proportions comparées à la référence ou au guide grand/moyen/petit »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 23 idée(s), 15 barrée(s) · dernière : [choix] Pièces : R2 (rouleau en disque à anneau et point) + J2 (épaule de 8 px, assise calée contr
+messages : aucun
+images : seances/fauteuil-v2b-suite/regards/124-{ecran,loupe,dessin}.png

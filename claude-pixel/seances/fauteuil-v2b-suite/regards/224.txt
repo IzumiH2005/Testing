@@ -1,0 +1,11 @@
+regard 224
+case 1090,240 (hors du dessin) · couleur (hors toile) · écran 6850,1631
+outil crayon · taille 1 · c1 #6e5c74ff · c2 #00000000
+calque 9/9 · image 1/1 · dessin 64×64 « Fauteuil club » (objet)
+étape 9 · Polish du trait (0-AB-A · A5-6 · A8 · 0-H)
+porte : Case non cochée : « Contour plus fort que les traits intérieurs » | Case non cochée : « Chaque jonction est nette et dessinée »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 27 idée(s), 15 barrée(s) · dernière : [logique] Polish : calque « trait » dupliqué en « polish », l'original baissé à 30 % et masqué. Poid
+messages : aucun
+images : seances/fauteuil-v2b-suite/regards/224-{ecran,loupe,dessin}.png
