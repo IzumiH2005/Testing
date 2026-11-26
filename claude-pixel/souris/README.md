@@ -89,6 +89,7 @@ La souris bouge comme une main, pas comme une téléportation :
 | `tape "texte"` | tape le texte dans le champ qui a le focus |
 | `tiens k` / `lache k` | garde enfoncée ou relâche `maj`, `ctrl`, `alt` ou `cmd` (ligne droite, angle contraint…) |
 | `choisis =nom "option"` | ouvre la liste déroulante d'un clic, descend aux flèches jusqu'à l'option, valide par Entrée |
+| `fichier chemin` | prépare le choix dans la boîte « Ouvrir » du système : la prochaine boîte ouverte par un clic reçoit ce fichier. Le chemin part de `claude-pixel/` et doit être un fichier d'une séance (`seances/…`) |
 
 Noms de touches : `ctrl`, `maj`, `alt`, `cmd`, `echap`, `entree`, `espace`, `suppr`,
 `retour`, `tab`, `haut`, `bas`, `gauche`, `droite`, `debut`, `fin`, `pgup`, `pgdn`. Une lettre

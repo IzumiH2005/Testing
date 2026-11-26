@@ -1,0 +1,134 @@
+02:29:53.254  # séance fauteuil-v2c-ombres · claude · 1280×800
+02:29:53.449  cibles
+02:29:56.558  cibles modale
+02:29:56.694  cibles nouveau
+02:30:01.334  touche echap
+02:30:01.415  attends 300
+02:30:01.718  fichier seances/fauteuil-v2b-lumiere/fichiers/fauteuil-club.claude-pixel.json
+02:30:01.720  clic =menu-fichier
+02:30:02.196  clic =fichier-ouvrir
+02:30:02.201    ✗ Aucun élément visible « fichier-ouvrir ». Essaie : souris cibles fich
+02:30:05.426  cibles modale
+02:30:05.598  cibles fich
+02:30:09.780  clic =modale-oui
+02:30:10.322  attends 500
+02:30:10.824  clic =menu-fichier
+02:30:11.362  clic =fichier-ouvrir
+02:30:11.699  # fichier choisi : seances/fauteuil-v2b-lumiere/fichiers/fauteuil-club.claude-pixel.json
+02:30:11.744  attends 1500
+02:30:13.498  regarde
+02:30:23.519  clic =onglet-calques
+02:30:24.036  attends 300
+02:30:24.460  cibles calque
+02:30:29.816  clic =calque-choisit-8
+02:30:30.286  clic =onglet-couleurs
+02:30:30.825  attends 300
+02:30:31.252  cibles
+02:30:35.019  clic =hex
+02:30:35.495  touche ctrl+a
+02:30:35.569  tape "#52193f"
+02:30:35.703  touche entree
+02:30:35.785  clic =selecteur-c1
+02:30:36.211  clic =opt-verrouAlpha
+02:30:36.705  attends 200
+02:30:37.023  etat
+02:31:32.438  clic =opt-taille
+02:31:32.943  touche ctrl+a
+02:31:33.019  tape "3"
+02:31:33.044  touche entree
+02:31:33.155  trace 51,17 51,30
+02:31:34.112  regarde
+02:31:43.591  trace 41,16 41,39
+02:31:44.717  regarde
+02:31:50.691  trace 41,43 42,43 42,44 41,44
+02:31:51.072  regarde
+02:31:55.789  trace 20,48 42,48 42,51 20,51 20,54 42,54
+02:31:58.604  regarde
+02:32:03.364  trace 50,42 50,54
+02:32:04.088  regarde
+02:32:49.288  clic =opt-taille
+02:32:49.790  touche ctrl+a
+02:32:49.868  tape "1"
+02:32:49.908  touche entree
+02:32:50.030  trace 51,32 51,40
+02:32:50.778  regarde
+02:32:57.010  trace 52,32 52,39
+02:32:57.577  regarde
+02:33:03.723  trace 36,8 39,8
+02:33:04.240  regarde
+02:33:13.579  trace 37,9 40,9
+02:33:13.906  regarde
+02:33:18.126  trace 38,10 41,10
+02:33:18.452  regarde
+02:33:22.564  trace 39,11 41,11
+02:33:22.852  regarde
+02:33:28.169  clic =opt-taille
+02:33:28.635  touche ctrl+a
+02:33:28.715  tape "3"
+02:33:28.737  touche entree
+02:33:28.856  trace 41,13 41,13
+02:33:29.258  regarde
+02:34:09.238  clic =opt-taille
+02:34:09.681  touche ctrl+a
+02:34:09.756  tape "1"
+02:34:09.778  touche entree
+02:34:09.891  trace 50,34 50,35
+02:34:10.352  regarde
+02:34:56.984  trace 50,39 50,40 49,40 48,41
+02:34:57.318  regarde
+02:35:16.846  clic 50,40
+02:35:17.091  regarde
+02:35:24.602  clic 49,15
+02:35:24.989  regarde
+02:35:33.401  clic 43,34
+02:35:33.747  regarde
+02:35:39.869  clic 43,40
+02:35:40.163  regarde
+02:35:49.827  clic =onglet-couleurs
+02:35:50.333  clic =hex
+02:35:50.820  touche ctrl+a
+02:35:50.901  tape "#441c18"
+02:35:51.022  touche entree
+02:35:51.099  clic =selecteur-c1
+02:35:51.516  trace 15,57 15,59
+02:35:52.063  regarde
+02:35:56.170  trace 49,57 49,59
+02:35:56.612  regarde
+02:36:02.490  clic =onglet-lumiere
+02:36:03.015  clic =vue-toile-notan
+02:36:03.507  regarde
+02:38:03.762  cibles justif
+02:38:03.926  cibles coche
+02:38:04.101  cibles valid
+02:38:06.154  cibles
+02:38:49.279  clic =onglet-methode
+02:38:49.949  attends 300
+02:38:50.372  cibles justif
+02:38:50.538  cibles coche
+02:38:50.669  cibles porte
+02:38:55.461  clic =justifie-volume
+02:38:55.970  tape "Le guide gonfle traite tout le fauteuil comme un seul ballon : il met cote lumiere la bande d'ombre droite du dossier (x40-42, cachee derriere l'accoudoir droit, donc tournee loin de la source) et compte les contours interieurs (x19, x43) comme de la lumiere trop sombre. L'ombrage suit les volumes reels ; 15,1 % pour 15 % autorises."
+02:39:01.994  touche tab
+02:39:02.133  attends 300
+02:39:02.546  cibles porte-volume
+02:39:02.726  regarde
+02:39:09.078  clic =justifie-volume
+02:39:09.086    ✗ Aucun élément visible « justifie-volume ». Essaie : souris cibles just
+02:39:09.194  etat
+02:39:21.963  defile =coche-lumiere.notan
+02:39:21.970  clic =coche-lumiere.notan
+02:39:22.380  defile =coche-lumiere.cote
+02:39:22.383  clic =coche-lumiere.cote
+02:39:22.721  attends 300
+02:39:23.166  etat
+02:39:23.321  cibles valid
+02:39:23.504  cibles etape
+02:39:26.612  clic =etape-valide
+02:39:26.987  attends 500
+02:39:27.489  regarde
+02:39:27.973  clic =menu-fichier
+02:39:28.492  clic =fichier-enregistrer
+02:39:28.832  # fichier enregistré : fichiers/fauteuil-club.claude-pixel.json
+02:39:28.909  attends 1500
+02:39:34.569  fin
+02:39:36.183  # fin

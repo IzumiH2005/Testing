@@ -1,0 +1,11 @@
+regard 015
+case 48,41 · couleur #52193fff (exportée : #52193fff) · écran 598,437
+outil crayon · taille 1 · c1 #52193fff · c2 #00000000
+calque 9/10 · image 1/1 · dessin 64×64 « Fauteuil club » (objet)
+étape 12 · Placer la lumière, deux familles (0-C · 0-D)
+porte : Volume (0-C) : 15 % de la lumière plus sombre que l'ombre. Affiche le guide (onglet Lumière), corrige, ou justifie. | Case non cochée : « Vue Notan : deux masses claires, frontière qui suit la forme » | Case non cochée : « L'ombre est du côté opposé à la source, partout »
+défauts : Pixels doublés en « L » [erreur] 4 px (dont 49,38 près du curseur) ; Tramage en damier [conseil] 117 px (dont 46,37 47,37 46,38 47,38 48,37 48,38 47,39 48,39 44,39 44,40 45,40 44,41 45,41 46,41 45,42 46,42 50,41 51,41 50,42 51,42 près du curseur)
+volume : lumière haut gauche (az 135°, él 40°, gonfle) · accord 0.57 · familles 0.12 · inversions 15 % · étendue 0.18
+carnet : 30 idée(s), 15 barrée(s) · dernière : [critique] Note 20/30, grille 0-AA-E : lisibilité 4 (à ×1, un fauteuil en une seconde), originalité 3
+messages : aucun
+images : seances/fauteuil-v2c-ombres/regards/015-{ecran,loupe,dessin}.png

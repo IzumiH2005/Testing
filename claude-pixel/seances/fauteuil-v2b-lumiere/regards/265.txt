@@ -1,0 +1,11 @@
+regard 265
+case 14,49 · couleur #963f4eff (exportée : #963f4eff) · écran 394,485
+outil seau · taille 1 · c1 #963f4eff · c2 #00000000
+calque 9/10 · image 1/1 · dessin 64×64 « Fauteuil club » (objet)
+étape 11 · Couleur locale à plat (B6-A · A5-7 · 0-G)
+porte : Case non cochée : « Les matières se séparent en gris »
+défauts : Pixels doublés en « L » [erreur] 4 px ; L'ombrage ne suit pas la lumière [attention] 42 px ; Tramage en damier [conseil] 131 px
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord 0.08 · familles 0.08 · inversions 46 % · étendue 0.25
+carnet : 30 idée(s), 15 barrée(s) · dernière : [critique] Note 20/30, grille 0-AA-E : lisibilité 4 (à ×1, un fauteuil en une seconde), originalité 3
+messages : aucun
+images : seances/fauteuil-v2b-lumiere/regards/265-{ecran,loupe,dessin}.png

@@ -87,7 +87,17 @@ page.on('pageerror', e => erreurs.push(e.message));
  * (la séance fauteuil-v2b n'a laissé que ses images). Tout geste qui peut changer le dessin
  * remet ce drapeau à faux ; l'enregistrement d'un .claude-pixel.json le remet à vrai. */
 let projetAJour = true;
-const SANS_EFFET = new Set(['va', 'pas', 'survole', 'defile', 'molette', 'regarde', 'etat', 'cibles', 'attends', 'fin']);
+const SANS_EFFET = new Set(['va', 'pas', 'survole', 'defile', 'molette', 'regarde', 'etat', 'cibles', 'attends', 'fin', 'fichier']);
+/* La boîte « Ouvrir un fichier » du système : une main y choisit un fichier. `fichier chemin`
+ * prépare ce choix ; la prochaine boîte ouverte par un clic le reçoit. Seuls les fichiers des
+ * séances (seances/…) peuvent être choisis. Sans fichier prévu, la boîte reste sans réponse. */
+let fichierPrevu = null;
+page.on('filechooser', async fc => {
+  if (!fichierPrevu) { journal('# boîte de fichier ouverte, aucun fichier prévu'); return; }
+  const f = fichierPrevu; fichierPrevu = null;
+  try { await fc.setFiles(f); journal('# fichier choisi : ' + path.relative(RACINE, f)); }
+  catch (e) { erreurs.push('choix de fichier : ' + e.message); }
+});
 page.on('download', async d => {
   const nom = d.suggestedFilename().replace(/[^\w.\-]+/g, '_');
   try {
@@ -394,6 +404,12 @@ async function execute(ligne) {
       await page.keyboard.press('Enter'); await pause(100);
       return 'choisi « ' + info.o[j] + ' »';
     }
+    case 'fichier': {
+      const rel = args.join(' ').replace(/^"|"$/g, ''), abs = path.resolve(RACINE, rel), seances = path.join(RACINE, 'seances') + path.sep;
+      if (!rel || !abs.startsWith(seances) || !fs.existsSync(abs) || !fs.statSync(abs).isFile())
+        throw new Error('fichier seances/<séance>/fichiers/<nom> : un fichier existant d\'une séance.');
+      fichierPrevu = abs; return 'fichier prévu pour la prochaine boîte « ouvrir » : ' + path.relative(RACINE, abs);
+    }
     case 'regarde': return regarde();
     case 'etat': {
       const [et, ver] = await Promise.all([lit('etat'), lit('verifie')]);
@@ -411,7 +427,7 @@ async function execute(ligne) {
         throw new Error('Le projet n\'est pas enregistré depuis le dernier geste : Fichier, « Enregistrer le projet » (ou touche ctrl+s), puis fin. Pour finir sans fichier : fin sans-fichier.');
       return null;
     }
-    default: throw new Error('Commande inconnue « ' + cmd + ' ». Commandes : va, pas, choisis, defile, appuie, relache, clic, double, trace, glisse, molette, tiens, lache, touche, tape, survole, regarde, etat, cibles, attends, fin.');
+    default: throw new Error('Commande inconnue « ' + cmd + ' ». Commandes : va, pas, choisis, defile, appuie, relache, clic, double, trace, glisse, molette, tiens, lache, touche, tape, survole, fichier, regarde, etat, cibles, attends, fin.');
   }
 }
 

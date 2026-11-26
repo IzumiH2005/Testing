@@ -1,0 +1,11 @@
+regard 103
+case 116,92 (hors du dessin) · couleur (hors toile) · écran 1004,745
+outil rect · taille 1 · c1 #2a1a2eff · c2 #00000000
+calque 4/4 · image 1/1 · dessin 64×64 « Fauteuil club » (objet)
+étape 4 · Design des pièces : bouchon, jonctions, pied (0-AA-B · 0-AA-D)
+porte : Case non cochée : « Un motif répété à trois échelles » | Case non cochée : « Proportions franches, jamais 1:1 » | Case non cochée : « Chaque jonction est dessinée (épaule, bague, lèvre, tige) » | Case non cochée : « Le bouchon se lit à ×1 et porte le motif »
+défauts : aucun
+volume : lumière haut gauche (az 135°, él 40°, gonfle) NON POSÉE · accord — · familles — · inversions — · étendue 0.00
+carnet : 23 idée(s), 15 barrée(s) · dernière : [choix] Pièces : R2 (rouleau en disque à anneau et point) + J2 (épaule de 8 px, assise calée contr
+messages : aucun
+images : seances/fauteuil-v2b-lumiere/regards/103-{ecran,loupe,dessin}.png

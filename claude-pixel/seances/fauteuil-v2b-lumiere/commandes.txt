@@ -1,0 +1,1603 @@
+02:08:32.344  # séance fauteuil-v2b-lumiere · claude · 1280×800
+02:08:44.135  clic =nouveau-type-objet
+02:08:44.610  clic =nouveau-taille-64
+02:08:45.051  clic =nouveau-nom
+02:08:45.509  touche ctrl+a
+02:08:45.591  tape "Fauteuil club"
+02:08:45.876  clic =modale-oui
+02:08:46.297  attends 500
+02:08:46.800  clic =onglet-methode
+02:08:47.267  defile =fiche-quoi
+02:08:47.667  clic =fiche-quoi
+02:08:47.830  tape "fauteuil club charnu en velours : accoudoirs roulés, dossier capitonné en losanges, coussin d'assise bombé, petits pieds tournés ; vu en 3/4 de dessus"
+02:08:50.470  defile =fiche-usage
+02:08:50.474  clic =fiche-usage
+02:08:50.813  tape "meuble de décor 64×64 pour un salon de jeu en vue de dessus 3/4 : on doit voir le creux de l'assise, là où l'on s'assoit"
+02:08:52.891  defile =fiche-couleurs
+02:08:52.895  clic =fiche-couleurs
+02:08:53.225  touche ctrl+a
+02:08:53.303  tape "16"
+02:08:53.349  defile =fiche-projection
+02:08:53.354  choisis =fiche-projection "3/4 de dessus"
+02:08:54.003  defile =fiche-lumiere
+02:08:54.103  choisis =fiche-lumiere "haut gauche"
+02:08:54.768  defile =fiche-matiere
+02:08:54.772  clic =fiche-matiere
+02:08:55.109  tape "velours capitonné (dossier, accoudoirs, coussin), bois tourné sombre pour les pieds"
+02:08:56.559  defile =fiche-accent
+02:08:56.589  clic =fiche-accent
+02:08:56.928  tape "le dessus clair du coussin d'assise, la surface où l'on s'assoit ; le reste du velours plus sourd"
+02:08:58.713  defile =fiche-vise
+02:08:58.718  clic =fiche-vise
+02:08:59.043  tape "les meubles d'Eastward (Pixpil), en 3/4 de dessus : volumes charnus, contour sombre d'une seule teinte, dessus des surfaces plus clair que les faces"
+02:09:01.727  defile =porte-fiche
+02:09:01.837  regarde
+02:09:02.348  touche tab
+02:09:02.425  clic =regles-ouvre
+02:09:02.951  attends 400
+02:09:03.355  regarde
+02:09:03.793  clic =regles-lues
+02:09:04.177  defile =etape-valide
+02:09:05.842  clic =etape-valide
+02:09:06.010  attends 300
+02:09:06.311  regarde
+02:09:06.722  defile =carnet-rub-vision
+02:09:07.089  clic =carnet-rub-vision
+02:09:07.278  defile =carnet-texte
+02:09:07.286  clic =carnet-texte
+02:09:07.709  tape "un fauteuil club trapu et charnu : on doit voir le creux où l'on s'assoit, un coussin clair encadré par deux gros bras roulés et un dossier épais, comme une baignoire de velours"
+02:09:10.803  clic =carnet-ajoute
+02:09:11.161  defile =carnet-rub-vision
+02:09:11.172  clic =carnet-rub-vision
+02:09:11.537  defile =carnet-texte
+02:09:11.892  clic =carnet-texte
+02:09:12.061  tape "angle de face, comme la v1 : on ne voit que la façade"
+02:09:12.990  clic =carnet-ajoute
+02:09:13.346  defile =carnet-raison-1
+02:09:13.354  clic =carnet-raison-1
+02:09:13.776  tape "de face le dessus de l'assise devient un trait : le creux disparaît, on lit un buffet ou une chaise, pas un siège ; et un décor de jeu en 3/4 de dessus ne peut pas accueillir un meuble vu de face"
+02:09:17.134  defile =carnet-barre-1
+02:09:17.137  clic =carnet-barre-1
+02:09:17.509  defile =carnet-rub-vision
+02:09:17.518  clic =carnet-rub-vision
+02:09:17.950  defile =carnet-texte
+02:09:17.955  clic =carnet-texte
+02:09:18.374  tape "angle oblique, 3/4 de côté : on voit un flanc et la profondeur, très lisible en illustration"
+02:09:19.916  clic =carnet-ajoute
+02:09:20.275  defile =carnet-raison-2
+02:09:20.281  clic =carnet-raison-2
+02:09:20.700  tape "le 3/4 de dessus de jeu (B0b, C10-G) ne montre pas les flancs et garde verticales et horizontales droites ; l'oblique casse la grille du décor et coûte le double de pixels pour la même lecture"
+02:09:24.009  defile =carnet-barre-2
+02:09:24.015  clic =carnet-barre-2
+02:09:24.377  defile =carnet-rub-vision
+02:09:24.386  clic =carnet-rub-vision
+02:09:24.841  defile =carnet-texte
+02:09:25.167  clic =carnet-texte
+02:09:25.369  tape "angle retenu, 3/4 de dessus comme Eastward : on voit le dessus (coussin, haut des bras, tranche du dossier) et la face avant ; profondeur raccourcie de moitié ; pieds avant sur une rangée, ombre au sol. À vérifier en vignettes contre la vue de face"
+02:09:29.818  clic =carnet-ajoute
+02:09:30.176  defile =carnet-rub-structure
+02:09:30.180  clic =carnet-rub-structure
+02:09:30.547  defile =carnet-texte
+02:09:30.551  clic =carnet-texte
+02:09:30.977  tape "documentation (West Elm Sebastian, Cotswold Nancy, dimensions.com) : 70 à 90 cm de large, 82 à 88 de haut, assise à 45-46 cm, bras à 55-59 cm, assise profonde de 55-57 ; le bras dépasse l'assise d'environ 10 cm, le dossier monte de 30 cm au-dessus"
+02:09:35.500  clic =carnet-ajoute
+02:09:35.846  defile =carnet-rub-structure
+02:09:35.851  clic =carnet-rub-structure
+02:09:36.216  defile =carnet-texte
+02:09:36.567  clic =carnet-texte
+02:09:36.757  tape "quatre masses : dossier pleine largeur derrière, deux bras en blocs, coussin entre les bras, socle sur quatre petits pieds ; à 0,45 px/cm : 41 px de large, assise vers 20 px au-dessus du sol"
+02:09:40.211  clic =carnet-ajoute
+02:09:40.561  defile =carnet-rub-formes
+02:09:40.567  clic =carnet-rub-formes
+02:09:40.902  defile =carnet-texte
+02:09:40.905  clic =carnet-texte
+02:09:41.313  tape "chaque masse est une boîte arrondie vue en 3/4 de dessus : un dessus raccourci et une face avant ; bras = boîte finie par un rouleau (cylindre couché) ; coussin = boîte bombée ; pieds = petits cylindres"
+02:09:44.825  clic =carnet-ajoute
+02:09:45.175  defile =carnet-rub-unique
+02:09:45.183  clic =carnet-rub-unique
+02:09:45.548  defile =carnet-texte
+02:09:45.883  clic =carnet-texte
+02:09:46.041  tape "le rouleau des bras : sa face avant ronde, cousue en spirale ; ce rond revient en petit dans les boutons du capiton et dans les pieds tournés : un motif rond à trois échelles"
+02:09:49.158  clic =carnet-ajoute
+02:09:49.507  defile =carnet-rub-logique
+02:09:49.512  clic =carnet-rub-logique
+02:09:49.801  defile =carnet-texte
+02:09:49.804  clic =carnet-texte
+02:09:50.189  tape "il tient : quatre pieds sous le socle, le coussin posé sur le socle et calé par les bras, le dossier relie les bras ; les boutons du capiton tirent le velours, d'où les losanges"
+02:09:53.248  clic =carnet-ajoute
+02:09:53.596  defile =carnet-rub-variante
+02:09:53.602  clic =carnet-rub-variante
+02:09:53.869  defile =carnet-texte
+02:09:54.249  clic =carnet-texte
+02:09:54.439  tape "SCAMPER et tableau : dossier (droit, cintré, à oreilles) × bras (roulé, carré, absent) × pieds (boule, tourné, socle plein) ; trois familles à essayer : club, bergère à oreilles, crapaud bas et rond"
+02:09:57.852  clic =carnet-ajoute
+02:09:58.210  defile =carnet-rub-formes
+02:09:58.213  clic =carnet-rub-formes
+02:09:58.553  defile =carnet-texte
+02:09:58.561  clic =carnet-texte
+02:09:58.957  tape "style (0-Y) : contour d'une seule teinte sombre, dessus plus clairs que les faces, ombre portée au sol vers le bas à droite, 16 couleurs au plus"
+02:10:01.510  clic =carnet-ajoute
+02:10:01.856  regarde
+02:10:02.389  defile =etape-valide
+02:10:02.766  clic =etape-valide
+02:10:03.062  attends 300
+02:10:03.368  regarde
+02:10:03.815  clic =onglet-calques
+02:10:04.270  clic =calque-ajoute-construction
+02:10:04.658  attends 200
+02:10:04.864  clic =calque-nom
+02:10:05.275  touche ctrl+a
+02:10:05.351  tape "vignettes"
+02:10:05.520  touche tab
+02:10:05.601  clic =outil-rect
+02:10:06.142  regarde
+02:10:06.616  clic =outil-ellipse
+02:10:06.906  clic =opt-rempli
+02:10:07.322  va 2,1
+02:10:07.574  appuie
+02:10:07.582  va 18,9
+02:10:07.780  relache
+02:10:07.788  regarde
+02:10:08.242  va 0,7
+02:10:08.459  appuie
+02:10:08.465  va 5,24
+02:10:08.660  relache
+02:10:08.665  regarde
+02:10:09.114  va 15,7
+02:10:09.323  appuie
+02:10:09.332  va 20,24
+02:10:09.561  relache
+02:10:09.566  regarde
+02:10:10.035  clic =outil-rect
+02:10:10.506  clic =opt-rempli
+02:10:10.922  va 3,4
+02:10:11.177  appuie
+02:10:11.182  va 17,12
+02:10:11.375  relache
+02:10:11.377  regarde
+02:10:11.852  va 5,10
+02:10:12.032  appuie
+02:10:12.040  va 15,20
+02:10:12.227  relache
+02:10:12.231  regarde
+02:10:12.657  va 1,19
+02:10:12.841  appuie
+02:10:12.848  va 19,26
+02:10:13.058  relache
+02:10:13.064  regarde
+02:10:13.600  va 2,27
+02:10:13.793  appuie
+02:10:13.798  va 3,28
+02:10:13.865  relache
+02:10:13.874  regarde
+02:10:14.300  va 17,27
+02:10:14.489  appuie
+02:10:14.498  va 18,28
+02:10:14.564  relache
+02:10:14.568  regarde
+02:10:15.024  clic =opt-rempli
+02:10:15.472  va 3,4
+02:10:15.724  appuie
+02:10:15.732  va 17,12
+02:10:15.958  relache
+02:10:15.961  regarde
+02:10:16.441  va 5,10
+02:10:16.611  appuie
+02:10:16.616  va 15,20
+02:10:16.811  relache
+02:10:16.814  regarde
+02:10:17.272  va 1,19
+02:10:17.459  appuie
+02:10:17.483  va 19,26
+02:10:17.713  relache
+02:10:17.716  regarde
+02:10:18.145  clic =outil-ellipse
+02:10:18.593  va 25,0
+02:10:18.897  appuie
+02:10:18.908  va 39,6
+02:10:19.093  relache
+02:10:19.095  regarde
+02:10:19.541  va 22,3
+02:10:19.742  appuie
+02:10:19.747  va 26,16
+02:10:19.959  relache
+02:10:19.962  regarde
+02:10:20.365  va 37,3
+02:10:20.557  appuie
+02:10:20.562  va 41,16
+02:10:20.743  relache
+02:10:20.747  regarde
+02:10:21.242  clic =outil-rect
+02:10:21.704  va 25,3
+02:10:22.017  appuie
+02:10:22.025  va 39,13
+02:10:22.226  relache
+02:10:22.229  regarde
+02:10:22.688  va 23,12
+02:10:22.890  appuie
+02:10:22.899  va 25,22
+02:10:23.074  relache
+02:10:23.078  regarde
+02:10:23.564  va 38,12
+02:10:23.784  appuie
+02:10:23.792  va 40,22
+02:10:23.964  relache
+02:10:23.966  regarde
+02:10:24.398  va 26,12
+02:10:24.591  appuie
+02:10:24.598  va 37,20
+02:10:24.800  relache
+02:10:24.802  regarde
+02:10:25.230  va 23,20
+02:10:25.419  appuie
+02:10:25.424  va 40,24
+02:10:25.629  relache
+02:10:25.632  regarde
+02:10:26.100  va 24,25
+02:10:26.305  appuie
+02:10:26.315  va 24,29
+02:10:26.427  relache
+02:10:26.430  regarde
+02:10:26.890  va 39,25
+02:10:27.078  appuie
+02:10:27.091  va 39,29
+02:10:27.198  relache
+02:10:27.203  regarde
+02:10:27.663  clic =outil-ellipse
+02:10:28.142  va 43,6
+02:10:28.458  appuie
+02:10:28.465  va 63,27
+02:10:28.724  relache
+02:10:28.727  regarde
+02:10:29.167  va 45,2
+02:10:29.411  appuie
+02:10:29.416  va 61,14
+02:10:29.626  relache
+02:10:29.634  regarde
+02:10:30.054  clic =outil-rect
+02:10:30.537  va 46,27
+02:10:30.875  appuie
+02:10:30.886  va 47,28
+02:10:30.979  relache
+02:10:30.982  regarde
+02:10:31.455  va 59,27
+02:10:31.631  appuie
+02:10:31.636  va 60,28
+02:10:31.707  relache
+02:10:31.710  regarde
+02:10:32.237  clic =outil-ellipse
+02:10:32.723  va 3,33
+02:10:33.005  appuie
+02:10:33.015  va 17,41
+02:10:33.213  relache
+02:10:33.216  regarde
+02:10:33.637  va 0,44
+02:10:33.839  appuie
+02:10:33.844  va 5,56
+02:10:34.052  relache
+02:10:34.056  regarde
+02:10:34.496  va 15,44
+02:10:34.700  appuie
+02:10:34.706  va 20,56
+02:10:34.991  relache
+02:10:35.002  regarde
+02:10:35.429  va 23,33
+02:10:35.642  appuie
+02:10:35.653  va 33,39
+02:10:35.850  relache
+02:10:35.853  regarde
+02:10:36.337  va 22,37
+02:10:36.510  appuie
+02:10:36.516  va 26,50
+02:10:36.694  relache
+02:10:36.700  regarde
+02:10:37.145  va 43,40
+02:10:37.349  appuie
+02:10:37.354  va 63,58
+02:10:37.602  relache
+02:10:37.605  regarde
+02:10:38.066  va 43,34
+02:10:38.302  appuie
+02:10:38.315  va 57,48
+02:10:38.642  relache
+02:10:38.646  regarde
+02:10:39.070  clic =outil-rect
+02:10:39.557  va 3,37
+02:10:39.858  appuie
+02:10:39.863  va 17,48
+02:10:40.124  relache
+02:10:40.130  regarde
+02:10:40.569  va 5,48
+02:10:40.738  appuie
+02:10:40.744  va 15,51
+02:10:40.907  relache
+02:10:40.911  regarde
+02:10:41.387  va 1,51
+02:10:41.580  appuie
+02:10:41.590  va 19,58
+02:10:41.793  relache
+02:10:41.812  regarde
+02:10:42.225  va 2,59
+02:10:42.421  appuie
+02:10:42.431  va 3,60
+02:10:42.510  relache
+02:10:42.513  regarde
+02:10:42.976  va 17,59
+02:10:43.160  appuie
+02:10:43.165  va 18,60
+02:10:43.241  relache
+02:10:43.243  regarde
+02:10:43.732  va 23,36
+02:10:43.956  appuie
+02:10:43.960  va 33,48
+02:10:44.144  relache
+02:10:44.147  regarde
+02:10:44.589  va 30,46
+02:10:44.693  appuie
+02:10:44.712  va 41,49
+02:10:44.912  relache
+02:10:44.914  regarde
+02:10:45.348  va 27,47
+02:10:45.546  appuie
+02:10:45.560  va 39,52
+02:10:45.756  relache
+02:10:45.758  regarde
+02:10:46.250  va 24,52
+02:10:46.437  appuie
+02:10:46.442  va 40,55
+02:10:46.643  relache
+02:10:46.646  regarde
+02:10:47.078  va 25,56
+02:10:47.277  appuie
+02:10:47.292  va 25,60
+02:10:47.427  relache
+02:10:47.439  regarde
+02:10:47.874  va 39,56
+02:10:48.061  appuie
+02:10:48.073  va 39,60
+02:10:48.182  relache
+02:10:48.185  regarde
+02:10:48.630  va 33,56
+02:10:48.766  appuie
+02:10:48.773  va 33,59
+02:10:48.881  relache
+02:10:48.883  regarde
+02:10:49.315  va 45,58
+02:10:49.483  appuie
+02:10:49.492  va 46,59
+02:10:49.563  relache
+02:10:49.568  regarde
+02:10:50.074  va 58,58
+02:10:50.243  appuie
+02:10:50.247  va 59,59
+02:10:50.313  relache
+02:10:50.317  regarde
+02:10:50.744  clic =calque-ajoute-construction
+02:10:51.207  attends 200
+02:10:51.411  clic =calque-nom
+02:10:51.820  touche ctrl+a
+02:10:51.897  tape "vignettes 2"
+02:10:52.083  touche tab
+02:10:52.157  clic =calque-oeil-1
+02:10:52.587  regarde
+02:10:53.044  clic =outil-ellipse
+02:10:53.558  va 8,8
+02:10:53.837  appuie
+02:10:53.842  va 23,16
+02:10:54.043  relache
+02:10:54.050  regarde
+02:10:54.500  va 1,18
+02:10:54.739  appuie
+02:10:54.747  va 10,40
+02:10:55.025  relache
+02:10:55.028  regarde
+02:10:55.440  va 21,18
+02:10:55.658  appuie
+02:10:55.668  va 30,40
+02:10:55.906  relache
+02:10:55.909  regarde
+02:10:56.333  va 51,8
+02:10:56.594  appuie
+02:10:56.598  va 59,14
+02:10:56.772  relache
+02:10:56.775  regarde
+02:10:57.221  va 36,22
+02:10:57.439  appuie
+02:10:57.445  va 46,30
+02:10:57.622  relache
+02:10:57.626  regarde
+02:10:58.100  clic =outil-rect
+02:10:58.601  va 8,12
+02:10:58.939  appuie
+02:10:58.944  va 23,26
+02:10:59.208  relache
+02:10:59.220  regarde
+02:10:59.653  va 9,24
+02:10:59.837  appuie
+02:10:59.844  va 22,36
+02:11:00.061  relache
+02:11:00.063  regarde
+02:11:00.497  va 3,36
+02:11:00.696  appuie
+02:11:00.704  va 28,42
+02:11:00.949  relache
+02:11:00.953  regarde
+02:11:01.388  va 4,43
+02:11:01.624  appuie
+02:11:01.630  va 5,45
+02:11:01.726  relache
+02:11:01.733  regarde
+02:11:02.166  va 26,43
+02:11:02.379  appuie
+02:11:02.384  va 27,45
+02:11:02.475  relache
+02:11:02.482  regarde
+02:11:02.972  va 52,10
+02:11:03.239  appuie
+02:11:03.248  va 58,34
+02:11:03.480  relache
+02:11:03.482  regarde
+02:11:03.946  va 38,24
+02:11:04.176  appuie
+02:11:04.183  va 56,34
+02:11:04.406  relache
+02:11:04.409  regarde
+02:11:04.849  va 37,34
+02:11:05.058  appuie
+02:11:05.062  va 58,42
+02:11:05.324  relache
+02:11:05.326  regarde
+02:11:05.734  va 38,43
+02:11:05.946  appuie
+02:11:05.951  va 39,46
+02:11:06.048  relache
+02:11:06.052  regarde
+02:11:06.490  va 56,43
+02:11:06.687  appuie
+02:11:06.696  va 57,46
+02:11:06.791  relache
+02:11:06.793  regarde
+02:11:07.208  clic =onglet-methode
+02:11:07.704  defile =carnet-rub-essai
+02:11:08.098  clic =carnet-rub-essai
+02:11:08.379  defile =carnet-texte
+02:11:08.383  clic =carnet-texte
+02:11:08.740  tape "A1 club, 3/4 de dessus (calque vignettes, haut gauche) : dossier large arrondi, bras roulés fins le long du dossier, base pleine, deux pieds"
+02:11:11.169  clic =carnet-ajoute
+02:11:11.521  defile =carnet-rub-critique
+02:11:11.524  clic =carnet-rub-critique
+02:11:11.764  defile =carnet-texte
+02:11:11.767  clic =carnet-texte
+02:11:12.140  tape "A1 : lisibilité 2, originalité 2, appeal 2, cohérence 4, rythme 2, crédibilité 3 = 15/30. En noir c'est une cloche : bras aussi hauts que le dossier, aucune épaule, le creux de l'assise disparaît"
+02:11:15.559  clic =carnet-ajoute
+02:11:15.904  defile =carnet-rub-essai
+02:11:16.301  clic =carnet-rub-essai
+02:11:16.486  defile =carnet-texte
+02:11:16.491  clic =carnet-texte
+02:11:16.854  tape "A2 club, de face (bas gauche) : même fauteuil vu à hauteur d'œil, dossier, bras, devant du coussin, base"
+02:11:18.631  clic =carnet-ajoute
+02:11:18.970  defile =carnet-rub-critique
+02:11:18.978  clic =carnet-rub-critique
+02:11:19.201  defile =carnet-texte
+02:11:19.205  clic =carnet-texte
+02:11:19.569  tape "A2 : lisibilité 2, originalité 2, appeal 2, cohérence 2, rythme 2, crédibilité 3 = 13/30. Toujours un bloc, et de face on ne voit plus l'assise : faux pour un salon vu de dessus"
+02:11:22.725  clic =carnet-ajoute
+02:11:23.069  defile =carnet-rub-essai
+02:11:23.485  clic =carnet-rub-essai
+02:11:23.668  defile =carnet-texte
+02:11:23.671  clic =carnet-texte
+02:11:24.036  tape "B1 bergère à oreilles, 3/4 de dessus (haut milieu) : dossier haut, deux oreilles, bras fins, pieds hauts"
+02:11:25.889  clic =carnet-ajoute
+02:11:26.237  defile =carnet-rub-critique
+02:11:26.241  clic =carnet-rub-critique
+02:11:26.485  defile =carnet-texte
+02:11:26.490  clic =carnet-texte
+02:11:26.853  tape "B1 : lisibilité 3, originalité 2, appeal 3, cohérence 4, rythme 3, crédibilité 4 = 19/30. Les oreilles font des épaules, mais les pieds d'un pixel disparaissent à x1 et c'est la bergère de tous les jeux"
+02:11:30.376  clic =carnet-ajoute
+02:11:30.723  defile =carnet-rub-essai
+02:11:31.132  clic =carnet-rub-essai
+02:11:31.318  defile =carnet-texte
+02:11:31.323  clic =carnet-texte
+02:11:31.691  tape "B2 bergère, oblique tournée vers la droite (bas milieu) : dossier et oreille à gauche, bras et assise en fuite à droite, trois pieds"
+02:11:33.980  clic =carnet-ajoute
+02:11:34.318  defile =carnet-rub-critique
+02:11:34.322  clic =carnet-rub-critique
+02:11:34.545  defile =carnet-texte
+02:11:34.549  clic =carnet-texte
+02:11:34.901  tape "B2 : lisibilité 4, originalité 3, appeal 3, cohérence 2, rythme 4, crédibilité 4 = 20/30. La meilleure lecture de siège de la grille (marche dossier/assise, pieds séparés), ce qui remet mon angle en question"
+02:11:38.494  clic =carnet-ajoute
+02:11:38.836  defile =carnet-rub-essai
+02:11:39.250  clic =carnet-rub-essai
+02:11:39.437  defile =carnet-texte
+02:11:39.442  clic =carnet-texte
+02:11:39.804  tape "C1 crapaud, 3/4 de dessus (haut droite) : grosse panse ronde, dossier en arc, pieds minuscules"
+02:11:41.459  clic =carnet-ajoute
+02:11:41.803  defile =carnet-rub-critique
+02:11:41.808  clic =carnet-rub-critique
+02:11:42.032  defile =carnet-texte
+02:11:42.035  clic =carnet-texte
+02:11:42.402  tape "C1 : lisibilité 2, originalité 3, appeal 3, cohérence 4, rythme 2, crédibilité 3 = 17/30. Se lit comme un pouf ou une boule, aucune marche entre dossier et bras"
+02:11:45.137  clic =carnet-ajoute
+02:11:45.490  defile =carnet-rub-essai
+02:11:45.895  clic =carnet-rub-essai
+02:11:46.088  defile =carnet-texte
+02:11:46.091  clic =carnet-texte
+02:11:46.451  tape "C2 crapaud, oblique (bas droite) : panse ronde décalée, dossier en arc à gauche"
+02:11:47.836  clic =carnet-ajoute
+02:11:48.187  defile =carnet-rub-critique
+02:11:48.190  clic =carnet-rub-critique
+02:11:48.466  defile =carnet-texte
+02:11:48.471  clic =carnet-texte
+02:11:48.838  tape "C2 : lisibilité 2, originalité 3, appeal 3, cohérence 2, rythme 2, crédibilité 3 = 15/30. Une goutte : l'oblique n'aide pas une forme qui n'a pas d'angles"
+02:11:51.597  clic =carnet-ajoute
+02:11:51.936  defile =carnet-rub-essai
+02:11:51.941  clic =carnet-rub-essai
+02:11:52.349  defile =carnet-texte
+02:11:52.744  clic =carnet-texte
+02:11:52.919  tape "A3 club redessiné, 3/4 de dessus (calque vignettes 2, gauche) : dossier étroit et haut (16 px), bras roulés bas et larges qui débordent de 7 px de chaque côté, base, pieds écartés"
+02:11:56.090  clic =carnet-ajoute
+02:11:56.438  defile =carnet-rub-critique
+02:11:56.441  clic =carnet-rub-critique
+02:11:56.727  defile =carnet-texte
+02:11:56.731  clic =carnet-texte
+02:11:57.085  tape "A3 : lisibilité 4, originalité 3, appeal 4, cohérence 5, rythme 4, crédibilité 4 = 24/30. Les épaules marquées par la marche dossier/bras (10 px) font lire un fauteuil même en noir, contraste petit dossier / gros bras. Reste à faire : creux de l'assise et spirale du rouleau, qui ne vivent qu'à l'intérieur"
+02:12:02.508  clic =carnet-ajoute
+02:12:02.854  defile =carnet-rub-essai
+02:12:02.858  clic =carnet-rub-essai
+02:12:03.246  defile =carnet-texte
+02:12:03.626  clic =carnet-texte
+02:12:03.804  tape "A4 club de profil (calque vignettes 2, droite) : dossier haut à droite, rouleau du bras en avant, base, deux pieds"
+02:12:05.777  clic =carnet-ajoute
+02:12:06.124  defile =carnet-rub-critique
+02:12:06.130  clic =carnet-rub-critique
+02:12:06.348  defile =carnet-texte
+02:12:06.353  clic =carnet-texte
+02:12:06.722  tape "A4 : lisibilité 4, originalité 3, appeal 3, cohérence 4, rythme 3, crédibilité 4 = 21/30. Se lit bien et garde les axes du 3/4 de dessus, mais cache la face en spirale du rouleau et le creux de l'assise"
+02:12:10.199  clic =carnet-ajoute
+02:12:10.551  defile =carnet-raison-11
+02:12:11.292  clic =carnet-raison-11
+02:12:11.636  tape "15/30 : cloche sans épaules, corrigé par A3"
+02:12:12.397  defile =carnet-barre-11
+02:12:12.400  clic =carnet-barre-11
+02:12:12.772  defile =carnet-raison-13
+02:12:12.784  clic =carnet-raison-13
+02:12:13.222  tape "13/30 : de face l'assise disparaît, contraire à la fiche"
+02:12:14.202  defile =carnet-barre-13
+02:12:14.205  clic =carnet-barre-13
+02:12:14.570  defile =carnet-raison-15
+02:12:14.944  clic =carnet-raison-15
+02:12:15.225  tape "19/30 : pieds illisibles à x1, bergère générique"
+02:12:16.075  defile =carnet-barre-15
+02:12:16.081  clic =carnet-barre-15
+02:12:16.454  defile =carnet-raison-17
+02:12:16.778  clic =carnet-raison-17
+02:12:16.939  tape "lit mieux mais l'oblique casse les axes de la projection 3/4 de dessus (Eastward : meubles alignés sur la grille) ; je garde sa leçon (marche nette dossier/assise, pieds séparés) pour A3"
+02:12:20.164  defile =carnet-barre-17
+02:12:20.169  clic =carnet-barre-17
+02:12:20.536  defile =carnet-raison-19
+02:12:20.861  clic =carnet-raison-19
+02:12:21.021  tape "17/30 : pouf, pas un fauteuil"
+02:12:21.528  defile =carnet-barre-19
+02:12:21.533  clic =carnet-barre-19
+02:12:21.903  defile =carnet-raison-21
+02:12:21.911  clic =carnet-raison-21
+02:12:22.352  tape "15/30 : goutte sans structure"
+02:12:22.866  defile =carnet-barre-21
+02:12:22.873  clic =carnet-barre-21
+02:12:23.239  defile =carnet-raison-25
+02:12:23.729  clic =carnet-raison-25
+02:12:23.965  tape "21/30 mais cache la spirale (le motif unique) et le creux demandé par la fiche ; à garder pour une variante tournée du même meuble"
+02:12:26.240  defile =carnet-barre-25
+02:12:26.242  clic =carnet-barre-25
+02:12:26.602  defile =carnet-rub-choix
+02:12:26.844  clic =carnet-rub-choix
+02:12:27.044  defile =carnet-texte
+02:12:27.050  clic =carnet-texte
+02:12:27.402  tape "A3 : club en 3/4 de dessus face caméra, dossier étroit et haut, bras roulés bas et larges qui débordent, base pleine et pieds écartés. Silhouette en W tronqué (petite tour entre deux tonneaux). Le creux de l'assise et la spirale du rouleau se joueront en formes intérieures, pas dans la silhouette"
+02:12:32.803  clic =carnet-ajoute
+02:12:33.151  regarde
+02:12:33.608  defile =coche-essais.familles
+02:12:33.926  clic =coche-essais.familles
+02:12:34.218  defile =coche-essais.generique
+02:12:34.373  clic =coche-essais.generique
+02:12:34.667  defile =coche-essais.lisible
+02:12:34.670  clic =coche-essais.lisible
+02:12:34.969  defile =etape-valide
+02:12:34.972  clic =etape-valide
+02:12:35.285  regarde
+02:12:35.769  clic =onglet-calques
+02:12:36.242  clic =calque-ajoute-construction
+02:12:36.685  attends 200
+02:12:36.886  clic =calque-nom
+02:12:37.301  touche ctrl+a
+02:12:37.376  tape "pièces"
+02:12:37.487  touche tab
+02:12:37.561  clic =calque-oeil-2
+02:12:38.018  clic =outil-rect
+02:12:38.539  clic =opt-rempli
+02:12:38.950  regarde
+02:12:39.357  va 6,3
+02:12:39.600  appuie
+02:12:39.606  va 14,12
+02:12:39.776  relache
+02:12:39.780  regarde
+02:12:40.230  va 28,3
+02:12:40.436  appuie
+02:12:40.441  va 36,12
+02:12:40.618  relache
+02:12:40.627  regarde
+02:12:41.113  va 50,3
+02:12:41.321  appuie
+02:12:41.327  va 58,12
+02:12:41.505  relache
+02:12:41.516  regarde
+02:12:41.960  va 50,10
+02:12:42.106  appuie
+02:12:42.111  va 58,18
+02:12:42.286  relache
+02:12:42.320  regarde
+02:12:42.765  clic =outil-ellipse
+02:12:43.257  va 6,10
+02:12:43.552  appuie
+02:12:43.557  va 14,18
+02:12:43.722  relache
+02:12:43.730  regarde
+02:12:44.179  va 28,10
+02:12:44.394  appuie
+02:12:44.400  va 36,18
+02:12:44.572  relache
+02:12:44.575  regarde
+02:12:44.998  va 30,12
+02:12:45.150  appuie
+02:12:45.156  va 34,16
+02:12:45.284  relache
+02:12:45.286  regarde
+02:12:45.725  clic =outil-rect
+02:12:46.192  va 32,14
+02:12:46.519  appuie
+02:12:46.526  va 32,14
+02:12:46.553  relache
+02:12:46.556  regarde
+02:12:46.988  va 8,22
+02:12:47.241  appuie
+02:12:47.248  va 20,38
+02:12:47.473  relache
+02:12:47.475  regarde
+02:12:47.947  va 2,22
+02:12:48.174  appuie
+02:12:48.179  va 8,42
+02:12:48.403  relache
+02:12:48.405  regarde
+02:12:48.883  va 30,22
+02:12:49.134  appuie
+02:12:49.141  va 42,38
+02:12:49.383  relache
+02:12:49.386  regarde
+02:12:49.847  va 24,30
+02:12:50.052  appuie
+02:12:50.062  va 31,42
+02:12:50.256  relache
+02:12:50.260  regarde
+02:12:50.721  va 31,34
+02:12:50.866  appuie
+02:12:50.873  va 42,42
+02:12:51.087  relache
+02:12:51.090  regarde
+02:12:51.518  va 33,25
+02:12:51.735  appuie
+02:12:51.746  va 33,25
+02:12:51.772  relache
+02:12:51.775  regarde
+02:12:52.200  va 39,25
+02:12:52.332  appuie
+02:12:52.337  va 39,25
+02:12:52.352  relache
+02:12:52.355  regarde
+02:12:52.815  va 36,28
+02:12:52.934  appuie
+02:12:52.947  va 36,28
+02:12:52.967  relache
+02:12:52.969  regarde
+02:12:53.420  va 33,31
+02:12:53.533  appuie
+02:12:53.541  va 33,31
+02:12:53.553  relache
+02:12:53.555  regarde
+02:12:53.980  va 39,31
+02:12:54.120  appuie
+02:12:54.125  va 39,31
+02:12:54.146  relache
+02:12:54.150  regarde
+02:12:54.560  va 54,22
+02:12:54.771  appuie
+02:12:54.777  va 63,34
+02:12:55.001  relache
+02:12:55.003  regarde
+02:12:55.442  va 46,34
+02:12:55.635  appuie
+02:12:55.652  va 52,42
+02:12:55.834  relache
+02:12:55.836  regarde
+02:12:56.288  clic =outil-ellipse
+02:12:56.765  va 46,24
+02:12:57.088  appuie
+02:12:57.095  va 62,42
+02:12:57.324  relache
+02:12:57.336  regarde
+02:12:57.770  clic =outil-rect
+02:12:58.249  va 4,46
+02:12:58.545  appuie
+02:12:58.563  va 18,52
+02:12:58.779  relache
+02:12:58.781  regarde
+02:12:59.229  va 26,46
+02:12:59.400  appuie
+02:12:59.409  va 40,52
+02:12:59.601  relache
+02:12:59.605  regarde
+02:13:00.033  va 48,46
+02:13:00.199  appuie
+02:13:00.203  va 62,52
+02:13:00.389  relache
+02:13:00.393  regarde
+02:13:00.813  clic =outil-ellipse
+02:13:01.298  va 5,53
+02:13:01.594  appuie
+02:13:01.599  va 8,56
+02:13:01.739  relache
+02:13:01.742  regarde
+02:13:02.189  va 14,53
+02:13:02.321  appuie
+02:13:02.327  va 17,56
+02:13:02.450  relache
+02:13:02.454  regarde
+02:13:02.893  va 27,53
+02:13:03.054  appuie
+02:13:03.059  va 30,55
+02:13:03.169  relache
+02:13:03.172  regarde
+02:13:03.622  va 36,53
+02:13:03.751  appuie
+02:13:03.760  va 39,55
+02:13:03.886  relache
+02:13:03.888  regarde
+02:13:04.346  clic =outil-rect
+02:13:04.832  va 28,56
+02:13:05.151  appuie
+02:13:05.156  va 29,58
+02:13:05.236  relache
+02:13:05.238  regarde
+02:13:05.681  va 37,56
+02:13:05.834  appuie
+02:13:05.839  va 38,58
+02:13:05.922  relache
+02:13:05.925  regarde
+02:13:06.360  va 48,53
+02:13:06.522  appuie
+02:13:06.528  va 62,58
+02:13:06.717  relache
+02:13:06.720  regarde
+02:13:07.215  clic =onglet-methode
+02:13:07.715  defile =carnet-rub-piece
+02:13:07.720  clic =carnet-rub-piece
+02:13:08.102  defile =carnet-texte
+02:13:08.105  clic =carnet-texte
+02:13:08.436  tape "bouchon R1 (calque pièces, haut gauche) : rouleau du bras terminé par un disque plein de 8 px, sans détail"
+02:13:10.299  clic =carnet-ajoute
+02:13:10.648  defile =carnet-rub-piece
+02:13:10.653  clic =carnet-rub-piece
+02:13:10.958  defile =carnet-texte
+02:13:10.967  clic =carnet-texte
+02:13:11.299  tape "bouchon R2 (haut milieu) : même disque avec un anneau intérieur et un point au centre, pour la spirale du rouleau"
+02:13:13.278  clic =carnet-ajoute
+02:13:13.615  defile =carnet-rub-piece
+02:13:13.619  clic =carnet-rub-piece
+02:13:13.909  defile =carnet-texte
+02:13:13.914  clic =carnet-texte
+02:13:14.252  tape "bouchon R3 (haut droite) : bras carré type « track arm », face plate"
+02:13:15.412  clic =carnet-ajoute
+02:13:15.767  defile =carnet-rub-piece
+02:13:15.775  clic =carnet-rub-piece
+02:13:16.047  defile =carnet-texte
+02:13:16.056  clic =carnet-texte
+02:13:16.393  tape "jonction J1 (milieu gauche) : bras aussi haut que le dossier, épaule à plat"
+02:13:17.699  clic =carnet-ajoute
+02:13:18.050  defile =carnet-rub-piece
+02:13:18.442  clic =carnet-rub-piece
+02:13:18.646  defile =carnet-texte
+02:13:18.650  clic =carnet-texte
+02:13:18.982  tape "jonction J2 (milieu) : bras 8 px plus bas que le dossier (vraie épaule), assise qui s'appuie contre le bras (trait vertical x31), capiton en losange de 5 boutons d'un pixel sur le dossier"
+02:13:22.233  clic =carnet-ajoute
+02:13:22.585  defile =carnet-rub-piece
+02:13:22.588  clic =carnet-rub-piece
+02:13:22.927  defile =carnet-texte
+02:13:22.931  clic =carnet-texte
+02:13:23.265  tape "jonction J3 (milieu droite) : dossier en tonneau qui descend en courbe dans le bras"
+02:13:24.706  clic =carnet-ajoute
+02:13:25.055  defile =carnet-rub-piece
+02:13:25.474  clic =carnet-rub-piece
+02:13:25.652  defile =carnet-texte
+02:13:25.659  clic =carnet-texte
+02:13:26.009  tape "pied P1 (bas gauche) : boule de 4 px sous la base"
+02:13:26.861  clic =carnet-ajoute
+02:13:27.214  defile =carnet-rub-piece
+02:13:27.222  clic =carnet-rub-piece
+02:13:27.496  defile =carnet-texte
+02:13:27.500  clic =carnet-texte
+02:13:27.836  tape "pied P2 (bas milieu) : pied tourné, boule de 4x3 puis col de 2 px, la base respire au-dessus du sol"
+02:13:29.577  clic =carnet-ajoute
+02:13:29.935  defile =carnet-rub-piece
+02:13:29.938  clic =carnet-rub-piece
+02:13:30.226  defile =carnet-texte
+02:13:30.610  clic =carnet-texte
+02:13:30.766  tape "pied P3 (bas droite) : jupe de tissu jusqu'au sol, pas de pied"
+02:13:31.821  clic =carnet-ajoute
+02:13:32.166  defile =carnet-raison-28
+02:13:32.658  clic =carnet-raison-28
+02:13:32.823  tape "disque nu : rond mais muet, rien ne dit rouleau"
+02:13:33.628  defile =carnet-barre-28
+02:13:33.633  clic =carnet-barre-28
+02:13:34.004  defile =carnet-raison-30
+02:13:34.009  clic =carnet-raison-30
+02:13:34.431  tape "carré : casse le langage rond (rouleau, boutons, pieds)"
+02:13:35.401  defile =carnet-barre-30
+02:13:35.405  clic =carnet-barre-30
+02:13:35.765  defile =carnet-raison-31
+02:13:36.156  clic =carnet-raison-31
+02:13:36.319  tape "pas d'épaule : on retombe sur la cloche de A1"
+02:13:37.077  defile =carnet-barre-31
+02:13:37.080  clic =carnet-barre-31
+02:13:37.451  defile =carnet-raison-33
+02:13:37.775  clic =carnet-raison-33
+02:13:37.931  tape "la courbe lit comme une roue posée sur le bras, illisible en 3/4"
+02:13:39.052  defile =carnet-barre-33
+02:13:39.057  clic =carnet-barre-33
+02:13:39.416  defile =carnet-raison-34
+02:13:39.419  clic =carnet-raison-34
+02:13:39.799  tape "boule 4x4 trop lourde, se lit comme un godet ; P2 garde la boule et ajoute un col"
+02:13:41.227  defile =carnet-barre-34
+02:13:41.230  clic =carnet-barre-34
+02:13:41.598  defile =carnet-raison-36
+02:13:41.940  clic =carnet-raison-36
+02:13:42.099  tape "jupe : boîte sans pieds, perd le motif rond au sol et l'air sous la base"
+02:13:43.342  defile =carnet-barre-36
+02:13:43.345  clic =carnet-barre-36
+02:13:43.715  defile =carnet-rub-choix
+02:13:43.718  clic =carnet-rub-choix
+02:13:44.127  defile =carnet-texte
+02:13:44.130  clic =carnet-texte
+02:13:44.482  tape "Pièces : R2 (rouleau en disque à anneau et point) + J2 (épaule de 8 px, assise calée contre les bras, capiton en losange) + P2 (pied tourné). Motif rond à trois échelles : rouleau 8 px, pied 4 px, bouton 1 px. Proportions dossier 13 : bras 7 : pied 4. Réserve honnête : à x1, R2 se lit comme une cible ronde, pas encore comme une spirale ; au trait, essayer un anneau ouvert sur le bas avec le point décalé vers l'intérieur"
+02:13:51.838  clic =carnet-ajoute
+02:13:52.193  regarde
+02:13:52.663  defile =coche-pieces.motif
+02:13:53.150  clic =coche-pieces.motif
+02:13:53.316  defile =coche-pieces.proportions
+02:13:53.319  clic =coche-pieces.proportions
+02:13:53.601  defile =coche-pieces.jonctions
+02:13:53.606  clic =coche-pieces.jonctions
+02:13:53.883  defile =coche-pieces.bouchon
+02:13:53.887  clic =coche-pieces.bouchon
+02:13:54.185  defile =etape-valide
+02:13:54.189  clic =etape-valide
+02:13:54.500  regarde
+02:13:54.932  clic =onglet-calques
+02:13:55.414  clic =calque-oeil-3
+02:13:55.782  clic =calque-ajoute-construction
+02:13:56.184  attends 200
+02:13:56.387  clic =calque-nom
+02:13:56.798  touche ctrl+a
+02:13:56.872  tape "rough"
+02:13:56.954  touche tab
+02:13:57.028  defile =calque-teinte-rouge
+02:13:57.423  clic =calque-teinte-rouge
+02:13:57.848  clic =outil-crayon
+02:13:58.382  regarde
+02:13:58.817  trace 13,54 12,38 13,24 18,13 25,7 31,5 38,7 45,13 50,24 51,38 50,54
+02:14:03.636  regarde
+02:14:04.069  trace 19,29 18,14 21,8 27,5 36,5 42,8 45,14 44,29
+02:14:07.054  regarde
+02:14:07.474  trace 10,16 18,15 19,33 19,56 10,56 9,33 10,16
+02:14:11.286  regarde
+02:14:11.717  trace 45,15 53,16 54,33 53,56 45,56 44,33 45,15
+02:14:15.672  regarde
+02:14:16.086  trace 20,30 31,28 43,30 44,40 31,42 20,40 20,30
+02:14:18.990  regarde
+02:14:19.422  trace 20,42 43,42 43,55 20,55
+02:14:21.702  regarde
+02:14:22.152  trace 14,32 17,34 17,38 14,40 11,38 11,34 14,32
+02:14:23.347  regarde
+02:14:23.802  trace 49,32 52,34 52,38 49,40 46,38 46,34 49,32
+02:14:25.055  regarde
+02:14:25.468  trace 12,57 12,61
+02:14:25.999  regarde
+02:14:26.423  trace 51,57 51,61
+02:14:26.971  regarde
+02:14:27.383  clic =onglet-methode
+02:14:27.896  defile =coche-rough.flux
+02:14:29.515  clic =coche-rough.flux
+02:14:29.955  clic =coche-rough.masses
+02:14:30.227  defile =etape-valide
+02:14:30.231  clic =etape-valide
+02:14:30.550  regarde
+02:14:30.993  clic =onglet-calques
+02:14:31.385  defile =calque-opacite
+02:14:31.390  clic =calque-opacite
+02:14:31.848  touche home
+02:14:31.929  touche droite
+02:14:32.005  touche droite
+02:14:32.082  touche droite
+02:14:32.156  touche droite
+02:14:32.233  touche droite
+02:14:32.307  touche droite
+02:14:32.392  touche droite
+02:14:32.473  touche tab
+02:14:32.552  clic =calque-ajoute-construction
+02:14:32.979  attends 200
+02:14:33.181  clic =calque-nom
+02:14:33.596  touche ctrl+a
+02:14:33.672  tape "volumes"
+02:14:33.803  touche tab
+02:14:33.884  defile =calque-teinte-bleu
+02:14:34.171  clic =calque-teinte-bleu
+02:14:34.600  clic =outil-ligne
+02:14:35.131  regarde
+02:14:35.574  va 31,2
+02:14:35.907  appuie
+02:14:35.912  va 31,62
+02:14:36.237  relache
+02:14:36.239  regarde
+02:14:36.663  va 2,61
+02:14:36.903  appuie
+02:14:36.913  va 61,61
+02:14:37.198  relache
+02:14:37.201  regarde
+02:14:37.675  clic =outil-ellipse
+02:14:38.178  va 18,3
+02:14:38.480  appuie
+02:14:38.493  va 45,13
+02:14:38.730  relache
+02:14:38.737  regarde
+02:14:39.155  clic =outil-ligne
+02:14:39.652  va 18,8
+02:14:39.963  appuie
+02:14:39.973  va 18,29
+02:14:40.232  relache
+02:14:40.236  regarde
+02:14:40.695  va 45,8
+02:14:40.947  appuie
+02:14:40.953  va 45,29
+02:14:41.233  relache
+02:14:41.236  regarde
+02:14:41.719  clic =outil-rect
+02:14:42.212  va 9,14
+02:14:42.509  appuie
+02:14:42.515  va 19,33
+02:14:42.747  relache
+02:14:42.750  regarde
+02:14:43.235  va 44,14
+02:14:43.478  appuie
+02:14:43.487  va 54,33
+02:14:43.705  relache
+02:14:43.711  regarde
+02:14:44.133  clic =outil-ellipse
+02:14:44.613  va 9,30
+02:14:44.895  appuie
+02:14:44.904  va 19,43
+02:14:45.097  relache
+02:14:45.101  regarde
+02:14:45.522  va 44,30
+02:14:45.753  appuie
+02:14:45.763  va 54,43
+02:14:46.013  relache
+02:14:46.029  regarde
+02:14:46.459  clic =outil-rect
+02:14:46.973  va 9,37
+02:14:47.259  appuie
+02:14:47.264  va 19,56
+02:14:47.490  relache
+02:14:47.493  regarde
+02:14:47.931  va 44,37
+02:14:48.184  appuie
+02:14:48.191  va 54,56
+02:14:48.430  relache
+02:14:48.434  regarde
+02:14:48.881  va 20,29
+02:14:49.144  appuie
+02:14:49.155  va 43,41
+02:14:49.383  relache
+02:14:49.386  regarde
+02:14:49.878  va 20,41
+02:14:50.099  appuie
+02:14:50.107  va 43,46
+02:14:50.356  relache
+02:14:50.367  regarde
+02:14:50.777  va 20,46
+02:14:51.013  appuie
+02:14:51.023  va 43,56
+02:14:51.284  relache
+02:14:51.291  regarde
+02:14:51.703  va 11,56
+02:14:51.947  appuie
+02:14:51.955  va 14,61
+02:14:52.125  relache
+02:14:52.128  regarde
+02:14:52.547  va 49,56
+02:14:52.794  appuie
+02:14:52.802  va 52,61
+02:14:52.930  relache
+02:14:52.933  regarde
+02:14:53.358  clic =outil-ligne
+02:14:53.848  va 9,46
+02:14:54.161  appuie
+02:14:54.175  va 54,46
+02:14:54.446  relache
+02:14:54.450  regarde
+02:14:54.848  va 18,29
+02:14:55.111  appuie
+02:14:55.116  va 18,46
+02:14:55.313  relache
+02:14:55.322  regarde
+02:14:55.740  va 45,29
+02:14:56.000  appuie
+02:14:56.004  va 45,46
+02:14:56.197  relache
+02:14:56.199  regarde
+02:14:56.669  va 9,42
+02:14:56.915  appuie
+02:14:56.919  va 54,42
+02:14:57.180  relache
+02:14:57.182  regarde
+02:14:57.602  clic =outil-rect
+02:14:58.084  va 11,37
+02:14:58.380  appuie
+02:14:58.385  va 14,42
+02:14:58.515  relache
+02:14:58.520  regarde
+02:14:58.940  va 49,37
+02:14:59.199  appuie
+02:14:59.204  va 52,42
+02:14:59.331  relache
+02:14:59.335  regarde
+02:14:59.768  clic =outil-ellipse
+02:15:00.244  va 18,4
+02:15:00.559  appuie
+02:15:00.566  va 45,8
+02:15:00.813  relache
+02:15:00.816  regarde
+02:15:01.226  va 10,55
+02:15:01.512  appuie
+02:15:01.518  va 15,58
+02:15:01.647  relache
+02:15:01.649  regarde
+02:15:02.130  va 48,55
+02:15:02.378  appuie
+02:15:02.384  va 53,58
+02:15:02.512  relache
+02:15:02.514  regarde
+02:15:02.956  clic =onglet-methode
+02:15:03.451  defile =carnet-rub-structure
+02:15:05.256  clic =carnet-rub-structure
+02:15:05.691  defile =carnet-texte
+02:15:06.075  clic =carnet-texte
+02:15:06.511  tape "Construction : axe x31, sol y61, dossier-cylindre 28 px de large, bras-rouleaux 11 px, coussin 24x12, base 10. Cachés tracés : base qui passe sous les bras (y46), dossier qui descend derrière le coussin jusqu'à y46, pieds arrière à y37-42 derrière les bras, bord arrière au sol y42. Ellipses horizontales : haut du dossier 27x4 (proche de l'œil, fermée), dessus des pieds 5x3 (bas, plus ouverte). Proportions : dossier 13 : bras 7 : pied 4, comme la Sebastian de West Elm (dossier nettement plus haut que les bras). Réserve : vue quasi oblique, les fuyantes restent verticales, pas de vraie convergence."
+02:15:16.877  clic =carnet-ajoute
+02:15:17.230  defile =coche-construction.entier
+02:15:19.144  clic =coche-construction.entier
+02:15:19.310  clic =coche-construction.ellipses
+02:15:19.613  clic =coche-construction.proportions
+02:15:19.911  defile =etape-valide
+02:15:19.919  clic =etape-valide
+02:15:20.261  regarde
+02:15:20.724  clic =onglet-calques
+02:15:21.202  defile =calque-opacite
+02:15:21.206  clic =calque-opacite
+02:15:21.670  touche home
+02:15:21.753  touche droite
+02:15:21.830  touche droite
+02:15:21.905  touche droite
+02:15:21.979  touche droite
+02:15:22.054  touche droite
+02:15:22.128  touche tab
+02:15:22.204  clic =calque-ajoute-construction
+02:15:22.633  attends 200
+02:15:22.836  clic =calque-nom
+02:15:23.267  touche ctrl+a
+02:15:23.344  tape "esquisse"
+02:15:23.505  touche tab
+02:15:23.587  defile =calque-teinte-vert
+02:15:23.869  clic =calque-teinte-vert
+02:15:24.307  clic =outil-crayon
+02:15:24.862  regarde
+02:15:25.319  trace 18,29 18,13 19,9 21,7 24,5 28,4 34,4 38,5 41,7 43,9 44,13 44,29
+02:15:28.216  regarde
+02:15:28.647  trace 19,11 23,8 28,7 34,7 39,8 43,11
+02:15:29.956  regarde
+02:15:30.489  trace 19,30 19,18 17,15 14,14 11,15 9,18 9,32
+02:15:32.316  regarde
+02:15:32.753  trace 43,30 43,18 45,15 48,14 51,15 53,18 53,32
+02:15:34.639  regarde
+02:15:35.054  trace 14,31 17,32 19,35 19,39 17,42 14,43 11,42 9,39 9,35 11,32 14,31
+02:15:36.950  regarde
+02:15:37.375  trace 48,31 45,32 43,35 43,39 45,42 48,43 51,42 53,39 53,35 51,32 48,31
+02:15:39.310  regarde
+02:15:39.730  trace 10,43 10,56 18,56 18,43
+02:15:41.293  regarde
+02:15:41.702  trace 52,43 52,56 44,56 44,43
+02:15:43.217  regarde
+02:15:43.647  trace 19,40 25,41 31,41 37,41 43,40
+02:15:44.851  regarde
+02:15:45.249  trace 19,46 43,46
+02:15:46.381  regarde
+02:15:46.812  trace 19,55 43,55
+02:15:47.960  regarde
+02:15:48.355  trace 12,57 12,59 13,61 15,61 16,59 16,57
+02:15:49.143  regarde
+02:15:49.535  trace 50,57 50,59 49,61 47,61 46,59 46,57
+02:15:50.341  regarde
+02:15:50.741  defile =calque-oeil-4
+02:15:51.167  clic =calque-oeil-4
+02:15:51.492  defile =calque-oeil-5
+02:15:51.498  clic =calque-oeil-5
+02:15:51.815  regarde
+02:15:52.269  clic =outil-gomme
+02:15:52.777  trace 18,17 18,29
+02:15:53.595  regarde
+02:15:54.025  trace 44,17 44,29
+02:15:54.793  regarde
+02:15:55.187  clic =onglet-lumiere
+02:15:55.690  defile =retourne
+02:15:55.695  clic =retourne
+02:15:56.162  regarde
+02:15:56.632  clic =retourne
+02:15:56.893  regarde
+02:15:57.328  clic =onglet-methode
+02:15:57.804  defile =carnet-rub-logique
+02:15:59.711  clic =carnet-rub-logique
+02:16:00.089  defile =carnet-texte
+02:16:00.094  clic =carnet-texte
+02:16:00.481  tape "Esquisse : le flanc du dossier (x18) doublait le bord intérieur du bras (x19) de y17 à 29 : trait de 2 px qui ne compte pas. Gommé (2 traits) plutôt que redessiné : entorse à la règle, assumée. Les bras passent devant le dossier. Toile retournée : symétrie tenue, pas de pente fausse. Défaut vu : le sommet du dossier est un peu en ogive (marches 3-2-2-1), à détendre au trait."
+02:16:07.006  clic =carnet-ajoute
+02:16:07.366  defile =coche-esquisse.retourne
+02:16:09.273  clic =coche-esquisse.retourne
+02:16:09.626  clic =coche-esquisse.choisis
+02:16:09.940  defile =etape-valide
+02:16:09.947  clic =etape-valide
+02:16:10.261  regarde
+02:16:10.711  clic =onglet-calques
+02:16:11.150  defile =calque-choisit-6
+02:16:11.157  clic =calque-choisit-6
+02:16:11.530  defile =calque-opacite
+02:16:11.888  clic =calque-opacite
+02:16:12.262  touche home
+02:16:12.339  touche droite
+02:16:12.418  touche droite
+02:16:12.491  touche droite
+02:16:12.569  touche droite
+02:16:12.652  touche droite
+02:16:12.731  touche droite
+02:16:12.805  touche tab
+02:16:12.882  defile =calque-ajoute
+02:16:12.886  clic =calque-ajoute
+02:16:13.311  clic =calque-nom
+02:16:13.742  touche ctrl+a
+02:16:13.818  tape "trait"
+02:16:13.907  touche tab
+02:16:13.984  clic =outil-crayon
+02:16:14.508  regarde
+02:16:14.952  trace 31,4 30,4 29,4 28,5 27,5 26,5 25,6 24,6 23,7 22,8 21,9 20,10 20,11 19,12 19,13 19,14 19,15 19,16 19,17 19,18 19,19 19,20 19,21 19,22 19,23 19,24 19,25 19,26 19,27 19,28 19,29 19,30 19,31 19,32 19,33
+02:16:16.630  regarde
+02:16:17.117  trace 43,33 43,32 43,31 43,30 43,29 43,28 43,27 43,26 43,25 43,24 43,23 43,22 43,21 43,20 43,19 43,18 43,17 43,16 43,15 43,14 43,13 43,12 42,11 42,10 41,9 40,8 39,7 38,6 37,6 36,5 35,5 34,5 33,4 32,4 31,4
+02:16:18.708  regarde
+02:16:19.164  trace 31,7 30,7 29,7 28,8 27,8 26,9 25,10 24,11 23,12 23,13 23,14
+02:16:19.760  regarde
+02:16:20.216  trace 39,14 39,13 39,12 38,11 37,10 36,9 35,8 34,8 33,7 32,7 31,7
+02:16:20.963  regarde
+02:16:21.379  trace 9,33 9,32 9,31 9,30 9,29 9,28 9,27 9,26 9,25 9,24 9,23 9,22 9,21 9,20 9,19 9,18 9,17 10,16 11,15 12,15 13,14 14,14 15,14 16,15 17,15 18,16
+02:16:22.692  regarde
+02:16:23.114  trace 44,16 45,15 46,15 47,14 48,14 49,14 50,15 51,15 52,16 53,17 53,18 53,19 53,20 53,21 53,22 53,23 53,24 53,25 53,26 53,27 53,28 53,29 53,30 53,31 53,32 53,33
+02:16:24.450  regarde
+02:16:24.893  trace 10,34 11,33 12,32 13,32 14,32 15,32 16,32 17,33 18,34 19,35 19,36 19,37 19,38 19,39 18,40 17,41 16,42 15,42 14,42 13,42 12,42 11,41 10,40 9,39 9,38 9,37 9,36 9,35
+02:16:26.334  regarde
+02:16:26.756  trace 53,35 53,36 53,37 53,38 53,39 52,40 51,41 50,42 49,42 48,42 47,42 46,42 45,41 44,40 43,39 43,38 43,37 43,36 43,35 44,34 45,33 46,32 47,32 48,32 49,32 50,32 51,33 52,34
+02:16:28.230  etat
+02:17:01.682  regarde
+02:17:02.155  trace 16,37 16,36 15,35 14,35 13,35 12,36 12,37 12,38 13,39 14,39 15,38 14,37
+02:17:03.057  regarde
+02:17:03.529  trace 48,37 47,38 48,39 49,39 50,38 50,37 50,36 49,35 48,35 47,35 46,36 46,37
+02:17:04.497  regarde
+02:17:04.956  trace 10,42 10,43 10,44 10,45 10,46 10,47 10,48 10,49 10,50 10,51 10,52 10,53 10,54 10,55 10,56
+02:17:06.039  regarde
+02:17:06.497  trace 52,56 52,55 52,54 52,53 52,52 52,51 52,50 52,49 52,48 52,47 52,46 52,45 52,44 52,43 52,42
+02:17:07.416  regarde
+02:17:07.858  trace 18,42 18,43 18,44 18,45 18,46 18,47 18,48 18,49 18,50 18,51 18,52 18,53 18,54 18,55 18,56
+02:17:08.807  regarde
+02:17:09.269  trace 44,56 44,55 44,54 44,53 44,52 44,51 44,50 44,49 44,48 44,47 44,46 44,45 44,44 44,43 44,42
+02:17:10.179  regarde
+02:17:10.649  trace 12,57 12,58 13,59 13,60 14,61 15,60 15,59 16,58 16,57
+02:17:11.484  regarde
+02:17:12.022  trace 46,57 46,58 47,59 47,60 48,61 49,60 49,59 50,58 50,57
+02:17:12.857  regarde
+02:17:13.340  trace 20,29 21,29 22,29 23,29 24,29 25,29 26,29 27,29 28,29 29,29 30,29 31,29 32,29 33,29 34,29 35,29 36,29 37,29 38,29 39,29 40,29 41,29 42,29
+02:17:14.674  regarde
+02:17:15.170  trace 19,40 20,41 21,41 22,41 23,41 24,41 25,41 26,41 27,41 28,41 29,41 30,41 31,41 32,41 33,41 34,41 35,41 36,41 37,41 38,41 39,41 40,41 41,41 42,41 43,40
+02:17:16.437  regarde
+02:17:16.938  trace 19,46 20,46 21,46 22,46 23,46 24,46 25,46 26,46 27,46 28,46 29,46 30,46 31,46 32,46 33,46 34,46 35,46 36,46 37,46 38,46 39,46 40,46 41,46 42,46 43,46
+02:17:18.183  regarde
+02:17:18.604  trace 10,56 11,56 12,56 13,56 14,56 15,56 16,56 17,56 18,56 19,56 20,56 21,56 22,56 23,56 24,56 25,56 26,56 27,56 28,56 29,56 30,56 31,56 32,56 33,56 34,56 35,56 36,56 37,56 38,56 39,56 40,56 41,56 42,56 43,56 44,56 45,56 46,56 47,56 48,56 49,56 50,56 51,56 52,56
+02:17:20.465  regarde
+02:17:20.908  clic =outil-gomme
+02:17:21.442  clic =outil-gomme
+02:17:21.613  va 19,40
+02:17:21.922  clic
+02:17:22.086  regarde
+02:17:22.566  va 43,40
+02:17:22.790  clic
+02:17:22.951  regarde
+02:17:23.443  clic =outil-crayon
+02:17:23.946  va 19,41
+02:17:24.279  clic
+02:17:24.425  regarde
+02:17:24.851  va 43,41
+02:17:25.083  clic
+02:17:25.245  regarde
+02:17:25.796  va 50,20
+02:17:26.022  regarde
+02:17:26.432  va 41,44
+02:17:26.655  regarde
+02:17:27.060  clic =outil-gomme
+02:17:27.557  va 13,59
+02:17:27.881  clic
+02:17:28.039  regarde
+02:17:28.498  va 14,61
+02:17:28.589  clic
+02:17:28.739  regarde
+02:17:29.255  va 15,59
+02:17:29.344  clic
+02:17:29.495  regarde
+02:17:30.019  va 49,59
+02:17:30.293  clic
+02:17:30.443  regarde
+02:17:30.947  va 48,61
+02:17:31.029  clic
+02:17:31.175  regarde
+02:17:31.704  va 47,59
+02:17:31.804  clic
+02:17:31.958  regarde
+02:17:32.439  clic =outil-crayon
+02:17:32.980  va 12,59
+02:17:33.378  clic
+02:17:33.524  regarde
+02:17:33.986  va 14,60
+02:17:34.080  clic
+02:17:34.228  regarde
+02:17:34.722  va 16,59
+02:17:34.820  clic
+02:17:34.979  regarde
+02:17:35.526  va 50,59
+02:17:35.772  clic
+02:17:35.923  regarde
+02:17:36.420  va 48,60
+02:17:36.518  clic
+02:17:36.679  regarde
+02:17:37.213  va 46,59
+02:17:37.295  clic
+02:17:37.443  regarde
+02:17:37.924  va 31,50
+02:17:38.139  regarde
+02:17:38.586  clic =onglet-lumiere
+02:17:39.093  defile =retourne
+02:17:39.099  clic =retourne
+02:17:39.582  regarde
+02:17:40.015  clic =retourne
+02:17:40.276  regarde
+02:17:40.729  clic =onglet-methode
+02:17:41.206  defile =carnet-rub-logique
+02:17:43.212  clic =carnet-rub-logique
+02:17:43.596  defile =carnet-texte
+02:17:43.602  clic =carnet-texte
+02:17:44.009  tape "Trait : esquisse baissée à 30 %, calque « trait » neuf, courbes posées d'après un plan ASCII (sommet du dossier en marches 5-3-2-1-1-1 : l'ogive de l'esquisse est détendue). Deux reprises : 1) un « L » à la jonction coussin / disque de volute (19,40 et 43,40), vu deux traits trop tard : pixel déplacé en 19,41 / 43,41, la jonction passe en diagonale ; 2) les pieds en V se lisaient comme des pointes de crayon : refaits en pieds courts à fond plat (3 px gommés par pied, entorse assumée). Le détecteur « bruit » s'est allumé pendant les volutes : faux positif, il compte chaque pas diagonal d'un trait d'1 px comme isolé ; il s'éteint une fois les droites posées. Toile retournée : symétrie tenue, aucune pente fausse ; arche et dessus des bras tendus. Réserve : la spirale de volute (5×5) reste un peu chargée à ×1."
+02:17:58.994  clic =carnet-ajoute
+02:17:59.349  defile =coche-forme.miroir
+02:18:01.373  clic =coche-forme.miroir
+02:18:01.545  defile =coche-forme.tendu
+02:18:01.548  clic =coche-forme.tendu
+02:18:01.833  defile =etape-valide
+02:18:01.837  clic =etape-valide
+02:18:02.167  regarde
+02:18:02.597  clic =onglet-calques
+02:18:03.062  clic =onglet-couleurs
+02:18:03.400  clic =onglet-calques
+02:18:03.729  defile =calque-choisit-7
+02:18:04.135  clic =calque-choisit-7
+02:18:04.532  defile =calque-duplique
+02:18:04.536  clic =calque-duplique
+02:18:05.011  defile =calque-nom
+02:18:05.399  clic =calque-nom
+02:18:05.770  touche ctrl+a
+02:18:05.847  tape "polish"
+02:18:05.960  touche tab
+02:18:06.066  defile =calque-choisit-7
+02:18:06.397  clic =calque-choisit-7
+02:18:06.758  defile =calque-opacite
+02:18:07.083  clic =calque-opacite
+02:18:07.526  touche home
+02:18:07.605  touche droite
+02:18:07.686  touche droite
+02:18:07.773  touche droite
+02:18:07.855  touche droite
+02:18:07.935  touche droite
+02:18:08.014  touche droite
+02:18:08.100  touche tab
+02:18:08.177  defile =calque-oeil-7
+02:18:08.563  clic =calque-oeil-7
+02:18:08.960  defile =calque-choisit-8
+02:18:08.968  clic =calque-choisit-8
+02:18:09.345  clic =onglet-couleurs
+02:18:09.748  defile =hex
+02:18:09.751  clic =hex
+02:18:10.234  touche ctrl+a
+02:18:10.313  tape "#6e5c74"
+02:18:10.443  touche entree
+02:18:10.519  clic =onglet-calques
+02:18:11.012  regarde
+02:18:11.464  clic =onglet-couleurs
+02:18:11.794  defile =hex
+02:18:11.798  clic =hex
+02:18:12.253  touche ctrl+a
+02:18:12.329  tape "#6e5c74"
+02:18:12.447  touche tab
+02:18:12.526  defile =selecteur-c1
+02:18:12.531  clic =selecteur-c1
+02:18:12.930  regarde
+02:18:13.440  clic =onglet-calques
+02:18:13.909  trace 31,7 30,7 29,7 28,8 27,8 26,9 25,10 24,11 23,12 23,13 23,14
+02:18:14.822  regarde
+02:18:15.266  trace 39,14 39,13 39,12 38,11 37,10 36,9 35,8 34,8 33,7 32,7 31,7
+02:18:15.987  regarde
+02:18:16.473  trace 16,37 16,36 15,35 14,35 13,35 12,36 12,37 12,38 13,39 14,39 15,38 14,37
+02:18:17.348  regarde
+02:18:17.767  trace 48,37 47,38 48,39 49,39 50,38 50,37 50,36 49,35 48,35 47,35 46,36 46,37
+02:18:18.655  regarde
+02:18:19.122  trace 20,29 42,29
+02:18:20.210  regarde
+02:18:20.670  trace 19,41 43,41
+02:18:21.848  regarde
+02:18:22.286  trace 19,46 43,46
+02:18:23.395  regarde
+02:18:23.850  trace 18,42 18,55
+02:18:24.668  regarde
+02:18:25.069  trace 44,42 44,55
+02:18:25.874  regarde
+02:18:26.276  va 31,62
+02:18:26.458  regarde
+02:18:26.902  clic =onglet-lumiere
+02:18:27.427  defile =retourne
+02:18:27.430  clic =retourne
+02:18:27.892  regarde
+02:18:28.369  clic =retourne
+02:18:28.637  regarde
+02:18:29.074  clic =onglet-methode
+02:18:29.550  defile =carnet-rub-logique
+02:18:31.640  clic =carnet-rub-logique
+02:18:32.029  defile =carnet-texte
+02:18:32.033  clic =carnet-texte
+02:18:32.421  tape "Polish : calque « trait » dupliqué en « polish », l'original baissé à 30 % et masqué. Poids du trait en trois niveaux : silhouette sombre (#2a1a2e) ; chevauchements de volumes gardés sombres aussi (bras devant le dossier en x19/x43, disques de volute devant le bras), parce qu'ils disent quelle forme passe devant ; coutures et bords de coussin, bande capitonnée du dossier et spirales d'un ton plus clair (#6e5c74). Jonctions vérifiées à la loupe : chaque trait clair finit en diagonale ou en T sur un trait sombre, sans « L » ni doublon. Retourné et regardé à ×1 : se lit comme un fauteuil club vu un peu de dessus. Pas de couleur, pas de bouton de capiton (ils viendront avec la matière)."
+02:18:44.495  clic =carnet-ajoute
+02:18:44.864  defile =coche-polish.poids
+02:18:46.861  clic =coche-polish.poids
+02:18:47.339  regarde
+02:18:47.812  clic =onglet-methode
+02:18:48.203  regarde
+02:18:48.602  va 1090,450
+02:18:49.135  molette -3
+02:18:49.255  regarde
+02:18:49.658  va 1090,240
+02:18:50.052  molette -4
+02:18:50.172  regarde
+02:18:50.591  clic =coche-polish.jonctions
+02:18:51.255  touche shift+tab
+02:18:51.333  touche espace
+02:18:51.407  regarde
+02:18:51.829  defile =carnet-texte
+02:18:53.881  defile =coche-polish.jonctions
+02:18:55.897  defile =porte-nonVide
+02:18:56.226  clic =coche-polish.poids
+02:18:56.621  regarde
+02:18:57.036  defile =carnet-41
+02:18:59.084  regarde
+02:18:59.474  defile =etape-valide
+02:19:01.373  clic =etape-valide
+02:19:01.809  regarde
+02:19:02.240  clic =onglet-methode
+02:19:02.618  defile =porte-nonVide
+02:19:03.012  clic =etape-valide
+02:19:03.425  regarde
+02:19:03.905  clic =onglet-controle
+02:19:04.394  clic =vue-silhouette
+02:19:04.836  regarde
+02:19:05.308  clic =onglet-lumiere
+02:19:05.740  defile =retourne
+02:19:05.746  clic =retourne
+02:19:06.222  regarde
+02:19:06.701  clic =retourne
+02:19:06.974  regarde
+02:19:07.425  clic =onglet-methode
+02:19:07.904  defile =carnet-rub-critique
+02:19:10.105  clic =carnet-rub-critique
+02:19:10.539  defile =carnet-texte
+02:19:10.913  clic =carnet-texte
+02:19:11.335  tape "Écart avec l'œuvre visée (West Elm Sebastian pour la forme, les meubles d'Eastward pour l'angle). La Sebastian a des accoudoirs roulés bas, nettement sous le haut du dossier, et une assise large et profonde. Les miens montent presque aux 4/5 du dossier : l'assise paraît étroite et le fauteuil tire vers la bergère. Chez Eastward, les meubles montrent franchement leurs dessus (assise, accoudoirs) en plan incliné, chaque face séparée par la valeur. Mon dessin reste presque de face : on voit la face avant du coussin (bande de 5 px), pas son dessus. Ce qui est proche : contour sombre continu, traits intérieurs plus clairs, volutes lisibles à ×2, langage rond tenu."
+02:19:23.367  clic =carnet-ajoute
+02:19:23.754  regarde
+02:19:24.261  defile =carnet-texte
+02:19:24.660  clic =carnet-texte
+02:19:25.086  tape "Validation du trait, grille 0-AA-E. Lisibilité 4 : à ×1 on lit un fauteuil en une seconde. Originalité 3 : fauteuil club assez générique, seules signatures le dossier en arc et les volutes. Appeal 3 : propre et symétrique mais raide, sans souffle. Cohérence 4 : langage rond tenu à trois échelles (arc du dossier, têtes d'accoudoir, volutes) et pieds courts. Rythme 3 : accoudoirs trop hauts, pas de long-court-long franc entre dossier, bras et assise. Crédibilité 3 : il tient debout, mais la profondeur de l'assise ne se lit pas. Silhouette : sur un dessin au trait, la vue Silhouette ne montre que le contour ; elle tient, mais ce n'est pas un vrai test en noir plein. Total 20/30 : sous 22, le dessin ne passe pas. À reprendre au rough, pas au trait : baisser les accoudoirs, ouvrir le dessus de l'assise et des bras pour un vrai 3/4 de dessus, envisager l'angle oblique B2 qui se lisait mieux en vignettes."
+02:19:41.148  clic =carnet-ajoute
+02:19:41.521  regarde
+02:19:41.999  defile =carnet-rub-critique
+02:19:42.396  clic =carnet-rub-critique
+02:19:42.820  defile =carnet-texte
+02:19:42.826  clic =carnet-texte
+02:19:43.183  tape "Note 20/30, grille 0-AA-E : lisibilité 4 (à ×1, un fauteuil en une seconde), originalité 3 (club générique, seuls le dossier en arc et les volutes signent), appeal 3 (propre mais raide), cohérence 4 (rond tenu à trois échelles : arc, têtes de bras, volutes), rythme 3 (bras trop hauts, pas de long-court-long), crédibilité 3 (tient debout, mais l'assise n'a pas de profondeur). Silhouette : au trait, la vue ne montre que le contour, pas un vrai test en noir plein. Sous 22 : ça ne passe pas. Reprendre au rough : baisser les bras, ouvrir le dessus de l'assise, essayer l'oblique B2."
+02:19:53.370  clic =carnet-ajoute
+02:19:53.725  regarde
+02:19:54.180  defile =porte-critiqueDessin
+02:19:56.471  clic =coche-validation.planche
+02:19:56.839  clic =coche-validation.reference
+02:19:57.147  regarde
+02:19:57.575  clic =coche-validation.montre
+02:19:57.858  regarde
+02:19:58.294  regarde
+02:19:58.687  clic =menu-fichier
+02:19:59.192  regarde
+02:19:59.655  clic =fichier-enregistrer
+02:19:59.968  # fichier enregistré : fichiers/fauteuil-club.claude-pixel.json
+02:20:00.049  regarde
+02:20:00.484  clic =justifie-critiqueDessin
+02:20:00.966  tape "L'humain a vu le dessin (note 20/30, fauteuil en 3/4 de dessus) et le valide tel quel : il a demandé de passer à l'étape suivante, la couleur. La note du carnet reste 20/30."
+02:20:04.077  regarde
+02:20:04.511  va 1180,165
+02:20:05.050  clic
+02:20:05.202  regarde
+02:20:05.611  clic =etape-valide
+02:20:06.306  regarde
+02:20:06.749  clic =onglet-couleurs
+02:20:07.206  regarde
+02:20:07.661  defile =hex
+02:20:07.665  clic =hex
+02:20:08.135  touche ctrl+a
+02:20:08.214  tape "#963f4e"
+02:20:08.359  touche tab
+02:20:08.446  defile =rampe-nom
+02:20:08.807  clic =rampe-nom
+02:20:09.241  tape "velours"
+02:20:09.360  clic =rampe-ajoute
+02:20:09.761  regarde
+02:20:10.212  defile =rampe-retire-0
+02:20:10.218  clic =rampe-retire-0
+02:20:10.614  defile =rampe-nom
+02:20:10.995  clic =rampe-nom
+02:20:11.443  tape "velours"
+02:20:11.574  defile =rampe-ajoute
+02:20:11.579  clic =rampe-ajoute
+02:20:11.955  regarde
+02:20:12.393  defile =hex
+02:20:12.396  clic =hex
+02:20:12.849  touche ctrl+a
+02:20:12.926  tape "#5c3826"
+02:20:13.067  touche tab
+02:20:13.145  defile =rampe-n
+02:20:13.152  choisis =rampe-n 3
+02:20:13.912  defile =rampe-nom
+02:20:14.292  clic =rampe-nom
+02:20:14.719  tape "bois"
+02:20:14.793  defile =rampe-ajoute
+02:20:14.796  clic =rampe-ajoute
+02:20:15.178  regarde
+02:20:15.644  clic =onglet-calques
+02:20:16.151  defile =calque-oeil-6
+02:20:16.157  clic =calque-oeil-6
+02:20:16.587  defile =calque-ajoute
+02:20:16.591  clic =calque-ajoute
+02:20:17.036  defile =calque-descend
+02:20:17.425  clic =calque-descend
+02:20:17.759  defile =calque-nom
+02:20:17.771  clic =calque-nom
+02:20:18.133  touche ctrl+a
+02:20:18.211  tape "aplats"
+02:20:18.326  touche tab
+02:20:18.435  regarde
+02:20:18.871  clic =outil-seau
+02:20:19.402  clic =onglet-couleurs
+02:20:19.920  defile =rampe-0-2
+02:20:19.923  clic =rampe-0-2
+02:20:20.373  regarde
+02:20:20.827  clic =opt-tousCalques
+02:20:21.334  va 31,20
+02:20:21.604  clic
+02:20:21.758  regarde
+02:20:22.217  va 14,24
+02:20:22.422  clic
+02:20:22.571  regarde
+02:20:23.087  va 48,24
+02:20:23.335  clic
+02:20:23.481  regarde
+02:20:23.968  va 31,35
+02:20:24.181  clic
+02:20:24.345  regarde
+02:20:24.902  va 11,36
+02:20:25.110  clic
+02:20:25.267  regarde
+02:20:25.748  va 51,36
+02:20:26.015  clic
+02:20:26.167  regarde
+02:20:26.637  va 14,36
+02:20:26.889  clic
+02:20:27.049  regarde
+02:20:27.502  va 48,36
+02:20:27.748  clic
+02:20:27.908  regarde
+02:20:28.352  clic =onglet-methode
+02:20:28.870  regarde
+02:20:29.326  clic =porte-montre-L
+02:20:29.694  regarde
+02:20:30.131  touche escape
+02:20:30.209  defile =justifie-L
+02:20:30.221  clic =justifie-L
+02:20:30.564  tape "Faux positif : ce sont les 4 px d'aplat velours dans le creux des deux spirales (entre le trait et le point central), pas un trait doublé. Le coin vient de la courbe de la volute, voulue."
+02:20:35.955  touche tab
+02:20:36.029  regarde
+02:20:36.431  touche '
+02:20:36.506  va 1100,400
+02:20:37.031  molette -2
+02:20:37.151  va @1100 400
+02:20:37.668  molette -2
+02:20:37.784  clic =justifie-L
+02:20:38.081  regarde
+02:20:38.512  tape "Faux positif : ce sont les 4 px d'aplat velours dans le creux des deux spirales (entre le trait et le point central), pas un trait doublé. Le coin vient de la courbe de la volute, voulue."
+02:20:41.770  touche tab
+02:20:41.883  regarde
+02:20:42.281  touche g
+02:20:42.361  clic 18,41
+02:20:42.890  regarde
+02:20:43.375  clic 44,41
+02:20:43.760  regarde
+02:20:44.222  clic 14,49
+02:20:44.597  regarde
+02:20:45.029  clic 48,49
+02:20:45.435  regarde
+02:20:45.879  clic 31,44
+02:20:46.235  regarde
+02:20:46.769  clic 31,51
+02:20:47.047  regarde
+02:20:47.476  clic =onglet-couleurs
+02:20:47.975  defile =rampe-1-1
+02:20:47.980  clic =rampe-1-1
+02:20:48.454  regarde
+02:20:48.903  clic 14,58
+02:20:49.398  regarde
+02:20:49.886  clic 48,58
+02:20:50.307  regarde
+02:20:50.817  clic =onglet-methode
+02:20:51.341  clic =coche-aplats.gris
+02:20:51.797  regarde
+02:20:52.285  clic =etape-valide
+02:20:52.617  regarde
+02:20:53.080  clic =menu-fichier
+02:20:53.600  clic =fichier-enregistrer
+02:20:53.954  # fichier enregistré : fichiers/fauteuil-club.claude-pixel.json
+02:20:54.009  regarde
+02:21:10.262  cibles onglet
+02:21:12.751  clic =onglet-lumiere
+02:21:13.385  cibles
+02:21:16.996  clic =lum-hg
+02:21:17.463  clic =lum-moyenne
+02:21:17.883  clic =lum-forme-gonfle
+02:21:18.266  clic =guide
+02:21:18.655  regarde
+02:28:41.087  clic =menu-fichier
+02:28:41.656  clic =fichier-enregistrer
+02:28:42.042  # fichier enregistré : fichiers/fauteuil-club.claude-pixel.json
+02:28:42.111  attends 1200
+02:28:50.457  fin
+02:29:34.395  # fin
