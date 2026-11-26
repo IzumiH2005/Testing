@@ -24,7 +24,9 @@ function requete(methode, corps) {
     const r = http.request({ host: '127.0.0.1', port: PORT, path: methode === 'GET' ? '/sante' : '/', method: methode, headers: { 'content-type': 'text/plain; charset=utf-8' } }, res => {
       let t = ''; res.setEncoding('utf8'); res.on('data', c => { t += c; }); res.on('end', () => { try { ok(JSON.parse(t)); } catch (e) { ko(new Error(t)); } });
     });
-    r.on('error', ko); r.setTimeout(120000, () => r.destroy(new Error('délai dépassé')));
+    r.on('error', ko);
+    // Un lot de gestes peut durer plusieurs minutes : on attend plus longtemps qu'une simple lecture.
+    r.setTimeout(methode === 'GET' ? 120000 : 900000, () => r.destroy(new Error('délai dépassé')));
     if (corps) r.write(corps); r.end();
   });
 }
