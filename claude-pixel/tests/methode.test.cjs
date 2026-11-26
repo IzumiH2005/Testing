@@ -119,6 +119,12 @@ test('v22 : le sketching d\'illustrateur, calque par calque, puis la validation 
   assert.match(porte('validation').find(p => p.id === 'critiqueDessin').manque, /note du dessin/);
   at.act('carnet.ajoute', { rubrique: 'critique', texte: 'Dessin : 19/30, col trop long' });
   assert.match(porte('validation').find(p => p.id === 'critiqueDessin').manque, /19\/30/);
+  // l'humain peut valider le dessin malgré la note : la porte s'ouvre, la note ne bouge pas
+  at.act('justifie', { cle: 'critiqueDessin', texte: 'Validé par l\'humain malgré 19/30' });
+  assert.equal(porte('validation').find(p => p.id === 'critiqueDessin').manque, null);
+  assert.match(d.meta.carnet.filter(e => e.rubrique === 'critique').pop().texte, /19\/30/);
+  at.act('justifie', { cle: 'critiqueDessin', texte: '' });
+  assert.match(porte('validation').find(p => p.id === 'critiqueDessin').manque, /19\/30/);
   at.act('carnet.ajoute', { rubrique: 'critique', texte: 'Dessin repris : 23/30' });
   assert.equal(porte('validation').find(p => p.id === 'critiqueDessin').manque, null);
 });

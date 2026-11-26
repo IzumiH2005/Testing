@@ -355,6 +355,8 @@ LEGERS.calques = c => {
  * MÉTHODE
  * ==================================================================== */
 const DETECTEURS = new Set(['L', 'jaggies', 'orphelins', 'bandes', 'coussin', 'bruit', 'trame', 'superpixels', 'budget', 'noirPur', 'rampesGris', 'raccords', 'alpha', 'lumiere', 'volume']);
+// Portes qu'on peut lever par une phrase : les détecteurs (ils peuvent se tromper) et la note du dessin (validation humaine).
+const JUSTIFIABLES = new Set([...DETECTEURS, 'critiqueDessin']);
 let reglesOuvertes = false;
 
 /* Carnet de conception (0-N) : chaque idée reste, une idée abandonnée est barrée avec sa raison. */
@@ -431,7 +433,7 @@ function rendMethode(c) {
     const portes = h('div.portes', { 'data-cible': 'portes' });
     for (const p of st.portes) {
       const just = m.justifs && m.justifs[p.id];
-      const ok = !p.manque || (DETECTEURS.has(p.id) && just);
+      const ok = !p.manque || (JUSTIFIABLES.has(p.id) && just);
       const ligne = h('div.porte' + (ok ? '.ok' : '.non'), { 'data-cible': 'porte-' + p.id },
         h('span.i', ok ? '✓' : '!'),
         h('div', h('span', p.nom), p.manque ? h('small', p.manque) : null, just ? h('small', 'Justifié : « ' + just + ' »') : null));
@@ -442,6 +444,12 @@ function rendMethode(c) {
         for (const x of restants) portes.appendChild(h('div', { style: { gridColumn: '1 / -1', margin: '0 0 6px 26px' } },
           h('small', x.titre), champ('textarea', '', { rows: 2, cible: 'justifie-' + x.id, label: 'Justifier ' + x.titre,
             placeholder: 'Si le détecteur se trompe, écris pourquoi (12 caractères au moins).', change: v => act('justifie', { cle: x.id, texte: v }) })));
+      }
+      if (p.manque && p.id === 'critiqueDessin' && /\/30/.test(p.manque)) {
+        portes.appendChild(h('div', { style: { gridColumn: '1 / -1', margin: '0 0 6px 26px' } },
+          champ('textarea', just || '', { rows: 2, cible: 'justifie-' + p.id, label: 'Validation humaine',
+            placeholder: 'Seulement si l\'humain a vu le dessin et le valide malgré la note : écris-le (12 caractères au moins). La note reste celle du carnet.',
+            change: v => act('justifie', { cle: p.id, texte: v }) })));
       }
       if (p.manque && DETECTEURS.has(p.id)) {
         const zone = champ('textarea', just || '', { rows: 2, cible: 'justifie-' + p.id, label: 'Justifier ' + p.nom,

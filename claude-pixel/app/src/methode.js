@@ -541,7 +541,7 @@ const ETAPES_V22 = Object.assign({}, ETAPES_V21);
     'Planche du trait : ×1, ×2, retourné, silhouette (onglet Contrôle).',
     'Note la forme avec la grille 0-AA-E et écris-la au carnet (rubrique « Critique », « xx/30 ») : 22 au moins.',
     'Compare avec l\'œuvre visée et écris l\'écart.',
-    'Arrête-toi et montre le dessin à l\'humain. Sous 22/30, reviens au rough ou à l\'esquisse, pas au trait.'
+    'Arrête-toi et montre le dessin à l\'humain. Sous 22/30, reviens au rough ou à l\'esquisse, pas au trait, sauf si l\'humain valide le dessin tel quel : écris-le dans la justification de la porte, sans changer la note.'
   ], { pasEncore: 'Aucune couleur tant que le dessin n\'est pas validé.', portes: ['critiqueDessin', 'L', 'jaggies'],
     coches: [C('planche', 'Trait regardé à ×1, ×2, retourné et en silhouette'), C('reference', 'Écart avec l\'œuvre visée écrit au carnet'), C('montre', 'Dessin montré à l\'humain avant la couleur')] });
   const L = [];
@@ -655,7 +655,10 @@ function porte(id, at, cache) {
       const note = der && /(\d+(?:[.,]\d+)?)\s*\/\s*30/.exec(der.texte);
       if (!note) return 'Écris au carnet la note du dessin (rubrique « Critique », sous la forme « 23/30 »).';
       const v = parseFloat(note[1].replace(',', '.'));
-      return v >= 22 ? null : 'Le dessin est noté ' + v + '/30 : il faut 22 au moins. Reviens au rough ou à l\'esquisse.';
+      if (v >= 22) return null;
+      // L'humain a vu le dessin et le valide malgré la note : seule exception, écrite dans la justification.
+      if (m.justifs.critiqueDessin) return null;
+      return 'Le dessin est noté ' + v + '/30 : il faut 22 au moins. Reviens au rough ou à l\'esquisse, ou écris ici que l\'humain le valide tel quel.';
     }
     case 'carnetPieces': {
       const c = m.carnet || [], n = c.filter(e => e.rubrique === 'piece').length;

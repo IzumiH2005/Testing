@@ -326,7 +326,8 @@ Chaque règle est un ordre. Le détail et le « pourquoi » sont dans la section
 84. **Redessiner plutôt que gommer, retourner la toile souvent** ; on choisit les traits qui
     comptent et on ne décalque pas en aveugle (0-AB-B).
 85. **Le dessin se juge à la fin du sketching, avant la couleur** : 22/30 au moins à la grille,
-    et on s'arrête pour le montrer ; sinon on revient au rough ou à l'esquisse (0-AB-C).
+    et on s'arrête pour le montrer ; sinon on revient au rough ou à l'esquisse (0-AB-C). Seule
+    exception : l'humain a vu le dessin et le valide tel quel. On l'écrit, la note ne change pas.
 
 ---
 
@@ -1191,7 +1192,8 @@ ne la sauvera pas (0-AA).
 - Le **trait** est-il régulier (aucun L, aucun jaggy), avec le bon poids ?
 - **Retournée**, l'image tient-elle encore ?
 - La note de la grille est-elle d'au moins **22/30** ? Sinon, on revient au rough ou à
-  l'esquisse, pas au trait.
+  l'esquisse, pas au trait, sauf si l'humain valide le dessin tel quel : on écrit sa décision
+  dans la justification de la porte, et la note reste celle du carnet.
 
 ---
 
